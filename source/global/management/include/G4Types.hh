@@ -80,8 +80,9 @@
 // Typedefs to decouple from library classes
 // Typedefs for numeric types
 //
-using G4double  = double;
-using G4float   = float;
+#include "easyAD.hpp"
+using G4double  = Forward;
+using G4float   = Forward;
 using G4int     = int;
 using G4bool    = bool;
 using G4long    = long;
