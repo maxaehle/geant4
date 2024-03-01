@@ -57,7 +57,7 @@
 #ifndef G4Log_hh
 #define G4Log_hh 1
 
-#ifdef WIN32
+#if 1
 
 #  define G4Log std::log
 

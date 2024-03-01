@@ -57,7 +57,7 @@
 #ifndef G4Exp_hh
 #define G4Exp_hh 1
 
-#ifdef WIN32
+#if 1
 
 #  define G4Exp std::exp
 
