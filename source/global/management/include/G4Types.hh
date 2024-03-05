@@ -81,8 +81,8 @@
 // Typedefs for numeric types
 //
 //#include "easyAD.hpp"
-template<typename T>
-T ForwardIfPossible(T x){ return x; }
+//template<typename T>
+//T ForwardIfPossible(T x){ return x; }
 using G4double  = double;
 using G4float   = float;
 using G4int     = int;
