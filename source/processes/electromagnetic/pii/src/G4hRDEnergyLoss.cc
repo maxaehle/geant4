@@ -819,7 +819,7 @@ void G4hRDEnergyLoss::BuildRangeCoeffATable( const G4ParticleDefinition& )
 	    Rim = 0. ;
 	  else
 	    {
-	      // ---- MGP ---- Modified to avoid a floating point exception
+	      // ---- MGP ---- Modified to avoid a G4floating point exception
 	      // The correction is just a temporary patch, the whole class should be redesigned 
 	      // Original: Tim = Ti/RTable  results in 0./0. 
 	      if (RTable != 0.)

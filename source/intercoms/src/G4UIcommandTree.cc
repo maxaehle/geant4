@@ -606,7 +606,7 @@ void G4UIcommandTree::CreateHTML(G4String sideBar)
       display:block; \
       position:relative; \
       position:sticky; \
-      float:left; \
+      G4float:left; \
       -webkit-box-sizing:border-box; \
       -moz-box-sizing:border-box; \
       -ms-box-sizing:border-box; \

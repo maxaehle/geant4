@@ -59,7 +59,7 @@ Special symbols for undefined elements.
 
 struct ZAMass {
     char const *symbol;
-    double mass;
+    G4double mass;
 };
 
 /* Most of the mass data from Ame2003 */
@@ -912,10 +912,10 @@ static struct ZAMass ZAMasses[] = {
 /*
 ========================================================================
 */
-double PoPs_particleMass_AMU( statusMessageReporting *smr, const char *name ) {
+G4double PoPs_particleMass_AMU( statusMessageReporting *smr, const char *name ) {
 
     int i, n = sizeof( ZAMasses ) / sizeof( ZAMasses[0] );
-    double mass = -1.;
+    G4double mass = -1.;
 
     for( i = 0; i < n; i++ ) {
         if( !strcmp( ZAMasses[i].symbol, name ) ) {

@@ -53,7 +53,7 @@ class Par04OnnxInference : public Par04InferenceInterface
   /// @param[in] aGenVector Input latent space and conditions
   /// @param[out] aEnergies Model output = generated shower energies
   /// @param[in] aSize Size of the output
-  void RunInference(vector<float> aGenVector, std::vector<G4double>& aEnergies, int aSize);
+  void RunInference(vector<G4float> aGenVector, std::vector<G4double>& aEnergies, int aSize);
 
  private:
   /// Pointer to the ONNX enviroment

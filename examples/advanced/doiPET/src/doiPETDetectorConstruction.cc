@@ -239,7 +239,7 @@ G4VPhysicalVolume* doiPETDetectorConstruction::Construct()
     for(G4int i = 0; i<numberOfDetector_perRing; i++)
     {
       //The azimuthal angle to arrange the detectors in a ring
-      thetaDetector = (double)(i*twopi/numberOfDetector_perRing);
+      thetaDetector = (G4double)(i*twopi/numberOfDetector_perRing);
 
       //The radius of the scanner is measured from opposing crystal (scintillator) faces. It does not include the Aluminum thickness cover.
       detectorPositionX = (scannerRadius + sizeOfBlockDetector_DOI/2 - AluminumCoverThickness/2)*std::cos(thetaDetector);

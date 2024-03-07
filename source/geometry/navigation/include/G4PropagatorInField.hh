@@ -171,7 +171,7 @@ class G4PropagatorInField
      //   their sagitta is small than delta-chord parameter.
      // The Set method increases the value of delta-chord temporarily,
      //   doubling it once the number of iterations substeps reach
-     //   value of 'IncreaseChordDistanceThreshold'.  It is also doubled
+     //   value of 'IncreaseChordDistanceThreshold'.  It is also G4doubled
      //   again every time the iteration count reaches a multiple of this
      //   value.
      // Note: delta-chord is reset to its original value at the end of

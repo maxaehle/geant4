@@ -153,12 +153,12 @@ void SoTrap::generatePrimitives(SoAction *action) {
 			   3,0,4,7, SO_END_FACE_INDEX}; //x right.
 
   // points for the eight vertices
-  float TthetaCphi = FTAN(pTheta.getValue())*FCOS(pPhi.getValue());
-  float TthetaSphi = FTAN(pTheta.getValue())*FSIN(pPhi.getValue());
-  float Talp1 = FTAN(pAlp1.getValue()); 
-  float Talp2 = FTAN(pAlp2.getValue());
+  G4float TthetaCphi = FTAN(pTheta.getValue())*FCOS(pPhi.getValue());
+  G4float TthetaSphi = FTAN(pTheta.getValue())*FSIN(pPhi.getValue());
+  G4float Talp1 = FTAN(pAlp1.getValue()); 
+  G4float Talp2 = FTAN(pAlp2.getValue());
 
-  float points[NPOINTS][3];
+  G4float points[NPOINTS][3];
   points[0][0] =  pDx2.getValue()+pDy1.getValue()*Talp1;
   points[0][1] =  pDy1.getValue();
   points[0][2] = -pDz.getValue();
@@ -214,7 +214,7 @@ void SoTrap::generatePrimitives(SoAction *action) {
     normals[nf].normalize();
   }
 
-  float x,y,z;
+  G4float x,y,z;
   int   index;
   for (nf=0;nf<NFACES;nf++) {
     beginShape(action,TRIANGLE_FAN);
@@ -250,16 +250,16 @@ SoChildList *SoTrap::getChildren() const {
 
 // computeBBox
 void SoTrap::computeBBox(SoAction *, SbBox3f &box, SbVec3f &center ){
-  float pDx= pDx1.getValue(),pDy=pDy1.getValue();
+  G4float pDx= pDx1.getValue(),pDy=pDy1.getValue();
   
   if (pDx2.getValue() > pDx) pDx = pDx2.getValue(); 
   if (pDx3.getValue() > pDx) pDx = pDx3.getValue(); 
   if (pDx4.getValue() > pDx) pDx = pDx4.getValue(); 
   if (pDy2.getValue() > pDy) pDy = pDy2.getValue(); 
-  float TthetaCphi = FTAN(pTheta.getValue())*FCOS(pPhi.getValue());
-  float TthetaSphi = FTAN(pTheta.getValue())*FSIN(pPhi.getValue());
-  float Xalp = FFABS(std::tan(pAlp1.getValue())*pDy1.getValue());
-  float Xalp2 = FFABS(std::tan(pAlp2.getValue())*pDy2.getValue());
+  G4float TthetaCphi = FTAN(pTheta.getValue())*FCOS(pPhi.getValue());
+  G4float TthetaSphi = FTAN(pTheta.getValue())*FSIN(pPhi.getValue());
+  G4float Xalp = FFABS(std::tan(pAlp1.getValue())*pDy1.getValue());
+  G4float Xalp2 = FFABS(std::tan(pAlp2.getValue())*pDy2.getValue());
   if (Xalp< Xalp2) Xalp=Xalp2;
   pDx += FFABS(TthetaCphi*pDz.getValue());
   pDx += Xalp;
@@ -288,7 +288,7 @@ void SoTrap::updateChildren() {
   SoIndexedFaceSet  *theFaceSet         = (SoIndexedFaceSet *)   ( sep->getChild(3));
 
   const int NPOINTS=8, NFACES=6, NINDICES = NFACES*5;
-  float points[NPOINTS][3];
+  G4float points[NPOINTS][3];
   // Indices for the eight faces
 #ifdef INVENTOR2_0
   static long  
@@ -304,10 +304,10 @@ void SoTrap::updateChildren() {
 
   
   // points for the eight vertices
-  float TthetaCphi = FTAN(pTheta.getValue())*FCOS(pPhi.getValue());
-  float TthetaSphi = FTAN(pTheta.getValue())*FSIN(pPhi.getValue());
-  float Talp1 = FTAN(pAlp1.getValue()); 
-  float Talp2 = FTAN(pAlp2.getValue());
+  G4float TthetaCphi = FTAN(pTheta.getValue())*FCOS(pPhi.getValue());
+  G4float TthetaSphi = FTAN(pTheta.getValue())*FSIN(pPhi.getValue());
+  G4float Talp1 = FTAN(pAlp1.getValue()); 
+  G4float Talp2 = FTAN(pAlp2.getValue());
 
   points[0][0] =  pDx2.getValue()+pDy1.getValue()*Talp1;
   points[0][1] =  pDy1.getValue();

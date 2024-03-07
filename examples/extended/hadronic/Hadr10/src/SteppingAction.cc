@@ -519,51 +519,51 @@ void SteppingAction::UserSteppingAction( const G4Step* theStep ) {
                                             overestimated_rDeltaPos );
     //--- End extra checks ---
 
-    // Check numerical errors due to the use of  float  instead of  double : try out
+    // Check numerical errors due to the use of  G4float  instead of  G4double : try out
     // several, equivalent computations, taking the one with the largest numerical error.
-    const G4float float_xPos =
+    const G4float G4float_xPos =
       static_cast< G4float >( theStep->GetPostStepPoint()->GetPosition().x() );
-    const G4float float_yPos =
+    const G4float G4float_yPos =
       static_cast< G4float >( theStep->GetPostStepPoint()->GetPosition().y() );
-    const G4float float_zPos =
+    const G4float G4float_zPos =
       static_cast< G4float >( theStep->GetPostStepPoint()->GetPosition().z() );
-    const G4float float_rPos =
-      std::sqrt( float_xPos*float_xPos + float_yPos*float_yPos + float_zPos*float_zPos );
-    const G4float float_tPos =
+    const G4float G4float_rPos =
+      std::sqrt( G4float_xPos*G4float_xPos + G4float_yPos*G4float_yPos + G4float_zPos*G4float_zPos );
+    const G4float G4float_tPos =
       static_cast< G4float >( theStep->GetPostStepPoint()->GetLocalTime() );
-    const G4float float_initialBeta1 = static_cast< G4float >( fPrimaryParticleInitialBeta );
-    const G4float float_initialBeta2 =
+    const G4float G4float_initialBeta1 = static_cast< G4float >( fPrimaryParticleInitialBeta );
+    const G4float G4float_initialBeta2 =
       static_cast< G4float >( fPrimaryParticleInitialMomentum ) /
       static_cast< G4float >( fPrimaryParticleInitialTotalEnergy );
-    const G4float float_initialGamma = static_cast< G4float >( fPrimaryParticleInitialGamma );
-    const G4float float_initialBeta3 =
-      std::sqrt( float_initialGamma*float_initialGamma - 1.0 ) / float_initialGamma;
-    const G4float float_c_light = static_cast< G4float >( CLHEP::c_light );
-    const G4float float_mc_truth_rPos1 = float_tPos * float_initialBeta1 * float_c_light;
-    const G4float float_mc_truth_rPos2 = float_tPos * float_initialBeta2 * float_c_light;
-    const G4float float_mc_truth_rPos3 = float_tPos * float_initialBeta3 * float_c_light;
-    const G4float float_rDeltaPos_0 = static_cast< G4float >( rDeltaPos );
-    const G4float float_rDeltaPos_1 = float_mc_truth_rPos1 - float_rPos;
-    const G4float float_rDeltaPos_2 = float_mc_truth_rPos2 - float_rPos;
-    const G4float float_rDeltaPos_3 = float_mc_truth_rPos3 - float_rPos;
-    const G4float float_rDeltaPos_4 = static_cast< G4float >( mc_truth_rPos ) - float_rPos;    
-    const G4float float_rDeltaPos_5 = float_mc_truth_rPos1 - static_cast< G4float >( rPos );
-    const G4float float_rDeltaPos_6 = float_mc_truth_rPos2 - static_cast< G4float >( rPos );
-    const G4float float_rDeltaPos_7 = float_mc_truth_rPos3 - static_cast< G4float >( rPos );
-    G4double rDeltaPos_deltaMax = std::max( std::abs( float_rDeltaPos_0 - rDeltaPos ),
-                                            std::abs( float_rDeltaPos_1 - rDeltaPos ) );
+    const G4float G4float_initialGamma = static_cast< G4float >( fPrimaryParticleInitialGamma );
+    const G4float G4float_initialBeta3 =
+      std::sqrt( G4float_initialGamma*G4float_initialGamma - 1.0 ) / G4float_initialGamma;
+    const G4float G4float_c_light = static_cast< G4float >( CLHEP::c_light );
+    const G4float G4float_mc_truth_rPos1 = G4float_tPos * G4float_initialBeta1 * G4float_c_light;
+    const G4float G4float_mc_truth_rPos2 = G4float_tPos * G4float_initialBeta2 * G4float_c_light;
+    const G4float G4float_mc_truth_rPos3 = G4float_tPos * G4float_initialBeta3 * G4float_c_light;
+    const G4float G4float_rDeltaPos_0 = static_cast< G4float >( rDeltaPos );
+    const G4float G4float_rDeltaPos_1 = G4float_mc_truth_rPos1 - G4float_rPos;
+    const G4float G4float_rDeltaPos_2 = G4float_mc_truth_rPos2 - G4float_rPos;
+    const G4float G4float_rDeltaPos_3 = G4float_mc_truth_rPos3 - G4float_rPos;
+    const G4float G4float_rDeltaPos_4 = static_cast< G4float >( mc_truth_rPos ) - G4float_rPos;    
+    const G4float G4float_rDeltaPos_5 = G4float_mc_truth_rPos1 - static_cast< G4float >( rPos );
+    const G4float G4float_rDeltaPos_6 = G4float_mc_truth_rPos2 - static_cast< G4float >( rPos );
+    const G4float G4float_rDeltaPos_7 = G4float_mc_truth_rPos3 - static_cast< G4float >( rPos );
+    G4double rDeltaPos_deltaMax = std::max( std::abs( G4float_rDeltaPos_0 - rDeltaPos ),
+                                            std::abs( G4float_rDeltaPos_1 - rDeltaPos ) );
     rDeltaPos_deltaMax = std::max( rDeltaPos_deltaMax,
-                                   std::abs( float_rDeltaPos_2 - rDeltaPos ) );
+                                   std::abs( G4float_rDeltaPos_2 - rDeltaPos ) );
     rDeltaPos_deltaMax = std::max( rDeltaPos_deltaMax,
-                                   std::abs( float_rDeltaPos_3 - rDeltaPos ) );
+                                   std::abs( G4float_rDeltaPos_3 - rDeltaPos ) );
     rDeltaPos_deltaMax = std::max( rDeltaPos_deltaMax,
-                                   std::abs( float_rDeltaPos_4 - rDeltaPos ) );
+                                   std::abs( G4float_rDeltaPos_4 - rDeltaPos ) );
     rDeltaPos_deltaMax = std::max( rDeltaPos_deltaMax,
-                                   std::abs( float_rDeltaPos_5 - rDeltaPos ) );
+                                   std::abs( G4float_rDeltaPos_5 - rDeltaPos ) );
     rDeltaPos_deltaMax = std::max( rDeltaPos_deltaMax,
-                                   std::abs( float_rDeltaPos_6 - rDeltaPos ) );
+                                   std::abs( G4float_rDeltaPos_6 - rDeltaPos ) );
     rDeltaPos_deltaMax = std::max( rDeltaPos_deltaMax,
-                                   std::abs( float_rDeltaPos_7 - rDeltaPos ) );
+                                   std::abs( G4float_rDeltaPos_7 - rDeltaPos ) );
     //G4cout << std::setprecision(6) << " rDeltaPos_deltaMax[mum]=" 
     //       << rDeltaPos_deltaMax / CLHEP::micrometer << G4endl;
     fMaxFloat_rDeltaPos_deltaMax = std::max( fMaxFloat_rDeltaPos_deltaMax, rDeltaPos_deltaMax );

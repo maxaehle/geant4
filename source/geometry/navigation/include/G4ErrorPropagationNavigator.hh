@@ -27,7 +27,7 @@
 //
 // Class Description:
 //
-// Class for performing double navigation in the detector geometry and
+// Class for performing G4double navigation in the detector geometry and
 // on the target surface for error propagation. It overloads ComputeStep()
 // and ComputeSafety() methods.
 

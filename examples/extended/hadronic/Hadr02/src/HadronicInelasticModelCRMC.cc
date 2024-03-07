@@ -132,15 +132,15 @@ G4HadFinalState * HadronicInelasticModelCRMC::ApplyYourself(const G4HadProjectil
 	//* git input particles parameters
 	int id_proj  = aTrack.GetDefinition()->GetPDGEncoding();
 	int id_targ  = targetNucleus.GetZ_asInt()*10000 +  targetNucleus.GetA_asInt()*10;
-	double p_proj = aTrack.Get4Momentum().pz() / GeV; 
-	double e_proj = aTrack.Get4Momentum().e()  / GeV; 
-	double p_targ = 0.; 
-	double e_targ = G4NucleiProperties::GetNuclearMass(targetNucleus.GetA_asInt(),targetNucleus.GetZ_asInt()) / GeV;
-	double e_initial = e_proj + e_targ;
+	G4double p_proj = aTrack.Get4Momentum().pz() / GeV; 
+	G4double e_proj = aTrack.Get4Momentum().e()  / GeV; 
+	G4double p_targ = 0.; 
+	G4double e_targ = G4NucleiProperties::GetNuclearMass(targetNucleus.GetA_asInt(),targetNucleus.GetZ_asInt()) / GeV;
+	G4double e_initial = e_proj + e_targ;
 	// ... bug fix (March 2, 2020 - momentum per nucleon!)
-	double a_proj = (double)(aTrack.GetDefinition()->GetAtomicMass()); // GetAtomicNumber());
+	G4double a_proj = (G4double)(aTrack.GetDefinition()->GetAtomicMass()); // GetAtomicNumber());
 	if(a_proj<1.0) a_proj = 1.0; // explanation: if particle is not an ion/proton, the GetAtomicMass returns 0
-	double a_targ = (double)(targetNucleus.GetA_asInt());
+	G4double a_targ = (G4double)(targetNucleus.GetA_asInt());
 	
 
 
@@ -167,9 +167,9 @@ G4HadFinalState * HadronicInelasticModelCRMC::ApplyYourself(const G4HadProjectil
 	// sample 1 interaction until the energy 
 	// conservation is fulfilled
 	int resample_attampts = 1;
-	double max_energy_diff = ENERGY_NON_CONSERVATION_EMAX_GEV;
-	double energy_diff_coef =1.;
-	double forbid_energy_corr = false;
+	G4double max_energy_diff = ENERGY_NON_CONSERVATION_EMAX_GEV;
+	G4double energy_diff_coef =1.;
+	G4double forbid_energy_corr = false;
 	while(true){
 		// run one interaction
 		fInterface->crmc_generate(
@@ -189,7 +189,7 @@ G4HadFinalState * HadronicInelasticModelCRMC::ApplyYourself(const G4HadProjectil
 		SplitMultiNeutrons(gCRMC_data);
 
 		// energy check
-		double e_final =0;
+		G4double e_final =0;
 		for(int i=0; i<gCRMC_data.fNParticles;i++){
 			if (gCRMC_data.fPartStatus[i]!=1) continue; // only final state particles
 			G4ParticleDefinition* pdef;
@@ -211,13 +211,13 @@ G4HadFinalState * HadronicInelasticModelCRMC::ApplyYourself(const G4HadProjectil
 				continue;
 			}
 
-			double p2 = std::pow(gCRMC_data.fPartPx[i],2) + std::pow(gCRMC_data.fPartPy[i],2) +  std::pow(gCRMC_data.fPartPz[i],2);
-			double mass  = pdef->GetPDGMass()/GeV;
+			G4double p2 = std::pow(gCRMC_data.fPartPx[i],2) + std::pow(gCRMC_data.fPartPy[i],2) +  std::pow(gCRMC_data.fPartPz[i],2);
+			G4double mass  = pdef->GetPDGMass()/GeV;
 			e_final  += std::sqrt(mass*mass + p2);
 		}
 
 		// Check if we need to resample again...
-		double diff = std::fabs(e_final - e_initial);
+		G4double diff = std::fabs(e_final - e_initial);
 		if(e_final!=0. && e_initial!=0. && USE_ENERGY_CORR) energy_diff_coef = e_final / e_initial;
 		if(fPrintDebug){
 			std::cout<< "# e_initial = " << e_initial << " GeV" << std::endl;
@@ -276,11 +276,11 @@ G4HadFinalState * HadronicInelasticModelCRMC::ApplyYourself(const G4HadProjectil
 	//=================================================
 	
 	// ... for DEBUG messages
-	double totalenergy = 0;
-	double totalz      = 0;
-	double eaftertest0 = 0.;
-	double eaftertest1 = 0.;
-	double eaftertest2 = 0.;
+	G4double totalenergy = 0;
+	G4double totalz      = 0;
+	G4double eaftertest0 = 0.;
+	G4double eaftertest1 = 0.;
+	G4double eaftertest2 = 0.;
 
 	// save secondary particles for outputa
 	for(int i=0; i<gCRMC_data.fNParticles;i++){ 
@@ -322,14 +322,14 @@ G4HadFinalState * HadronicInelasticModelCRMC::ApplyYourself(const G4HadProjectil
 		  }
 		}
 
-		double part_e_corr = 1.;
-		double part_p_corr = 1.;
+		G4double part_e_corr = 1.;
+		G4double part_p_corr = 1.;
 		if(USE_ENERGY_CORR && !forbid_energy_corr && energy_diff_coef!=0){
 			part_e_corr = 1./energy_diff_coef;
-			double pbefore2 = std::pow(gCRMC_data.fPartPx[i],2) + std::pow(gCRMC_data.fPartPy[i],2) +  std::pow(gCRMC_data.fPartPz[i],2);
-			double mass2    = std::pow(pdef->GetPDGMass()/GeV,2);  //std::pow(gCRMC_data.fPartEnergy[i],2) - pbefore2;
-			double ebefore2 = pbefore2 + mass2;
-			double pafter2  = ebefore2 * part_e_corr * part_e_corr - mass2;
+			G4double pbefore2 = std::pow(gCRMC_data.fPartPx[i],2) + std::pow(gCRMC_data.fPartPy[i],2) +  std::pow(gCRMC_data.fPartPz[i],2);
+			G4double mass2    = std::pow(pdef->GetPDGMass()/GeV,2);  //std::pow(gCRMC_data.fPartEnergy[i],2) - pbefore2;
+			G4double ebefore2 = pbefore2 + mass2;
+			G4double pafter2  = ebefore2 * part_e_corr * part_e_corr - mass2;
 			if(pbefore2) part_p_corr = std::sqrt(std::fabs(pafter2/pbefore2));
 			if(fPrintDebug) std::cout<< "part_p_corr="<< part_p_corr << std::endl;
 			eaftertest0 += std::sqrt(mass2 + pbefore2);
@@ -439,8 +439,8 @@ void HadronicInelasticModelCRMC::SplitMultiNeutrons(CRMCdata& CRMC_data){
 		//
 		int NEUTRON_PDG_ID = 2112;
 		G4ParticleDefinition* p_n_def = fParticleTable->FindParticle(NEUTRON_PDG_ID);
-		double m_n   = p_n_def->GetPDGMass()/GeV;
-		double e_n   = CRMC_data.fPartEnergy[i]/A;
+		G4double m_n   = p_n_def->GetPDGMass()/GeV;
+		G4double e_n   = CRMC_data.fPartEnergy[i]/A;
 		int status_n = CRMC_data.fPartStatus[i];
 		if(e_n<m_n){
 			std::cout<<" [HadronicInelasticModelCRMC::SplitMultiNeutrons] WARNING neutron energy " << 
@@ -448,15 +448,15 @@ void HadronicInelasticModelCRMC::SplitMultiNeutrons(CRMCdata& CRMC_data){
 				m_n << " assigning e_n = m_n     " << std::endl;
 			e_n = m_n;
 		}
-		double p_tot_before = std::sqrt(
+		G4double p_tot_before = std::sqrt(
 			CRMC_data.fPartPx[i]*CRMC_data.fPartPx[i] + 
 			CRMC_data.fPartPy[i]*CRMC_data.fPartPy[i] + 
 			CRMC_data.fPartPz[i]*CRMC_data.fPartPz[i] 
 		);
-		double p_tot_after = std::sqrt(e_n*e_n - m_n*m_n);
-		double px_n = 0;
-		double py_n = 0;
-		double pz_n = 0;
+		G4double p_tot_after = std::sqrt(e_n*e_n - m_n*m_n);
+		G4double px_n = 0;
+		G4double py_n = 0;
+		G4double pz_n = 0;
 		if (p_tot_before>0. && p_tot_after>0.){
 			px_n = CRMC_data.fPartPx[i] * p_tot_after / p_tot_before;
 			py_n = CRMC_data.fPartPy[i] * p_tot_after / p_tot_before;

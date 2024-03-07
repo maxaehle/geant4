@@ -206,7 +206,7 @@ void G4OpenGLImmediateSceneHandler::BeginPrimitives
   glPushMatrix();
 
   /*************************** Check matrix.
-  const GLdouble* m = oglt.GetGLMatrix ();
+  const GLG4double* m = oglt.GetGLMatrix ();
   G4cout << "G4OpenGLTransform3D matrix:";
   for (int i = 0; i < 16; i++) {
     if ((i % 4) == 0) G4cout << '\n';

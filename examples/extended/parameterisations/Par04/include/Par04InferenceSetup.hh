@@ -165,9 +165,9 @@ class Par04InferenceSetup
   /// Inference messenger
   Par04InferenceMessenger* fInferenceMessenger;
   /// Maximum particle energy value (in MeV) in the training range
-  float fMaxEnergy = 1024000.0;
+  G4float fMaxEnergy = 1024000.0;
   /// Maximum particle angle (in degrees) in the training range
-  float fMaxAngle = 90.0;
+  G4float fMaxAngle = 90.0;
   /// Name of the inference library
   G4String fInferenceLibrary = "ONNX";
   /// Size of the latent space vector

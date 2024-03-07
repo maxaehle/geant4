@@ -42,7 +42,7 @@ static const G4double kInfinity = 9.0E99;
 
 // Minimum cosine of angle between surface normal & track direction
 // for exiting normal optimisation
-static const double kMinExitingNormalCosine = 1E-3;
+static const G4double kMinExitingNormalCosine = 1E-3;
 
 // Define axes for function params etc.
 // X/Y/ZAxis = Normal Catesian axes

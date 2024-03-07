@@ -29,17 +29,17 @@ static int MCGIDI_energy_parseEvaporationFromTOM( statusMessageReporting *smr, x
 static int MCGIDI_energy_parseWattFromTOM( statusMessageReporting *smr, xDataTOM_element *element, MCGIDI_energy *energy );
 static int MCGIDI_energy_parseSimpleMaxwellianFissionFromTOM( statusMessageReporting *smr, xDataTOM_element *element, MCGIDI_energy *energy );
 static int MCGIDI_energy_parseMadlandNixFromTOM( statusMessageReporting *smr, xDataTOM_element *functional, MCGIDI_energy *energy );
-static nfu_status MCGIDI_energy_parseMadlandNixFromTOM_callback( double x, double *y, void *argList );
-static double MCGIDI_energy_parseMadlandNixFromTOM_callback_g( double Ep, double EFL, double T_M, nfu_status *status );
+static nfu_status MCGIDI_energy_parseMadlandNixFromTOM_callback( G4double x, G4double *y, void *argList );
+static G4double MCGIDI_energy_parseMadlandNixFromTOM_callback_g( G4double Ep, G4double EFL, G4double T_M, nfu_status *status );
 static int MCGIDI_energy_parseNBodyPhaseSpaceFromTOM( statusMessageReporting *smr, xDataTOM_element *functional, MCGIDI_energy *energy,
         MCGIDI_distribution *distribution );
 
-static int MCGIDI_energy_sampleSimpleMaxwellianFission( statusMessageReporting *smr, double e_in_U_theta, MCGIDI_decaySamplingInfo *decaySamplingInfo );
-static int MCGIDI_energy_sampleEvaporation( statusMessageReporting *smr, double e_in_U_theta, MCGIDI_decaySamplingInfo *decaySamplingInfo );
-static int MCGIDI_energy_sampleWatt( statusMessageReporting *smr, double e_in_U, double Watt_a, double Watt_b, MCGIDI_decaySamplingInfo *decaySamplingInfo );
+static int MCGIDI_energy_sampleSimpleMaxwellianFission( statusMessageReporting *smr, G4double e_in_U_theta, MCGIDI_decaySamplingInfo *decaySamplingInfo );
+static int MCGIDI_energy_sampleEvaporation( statusMessageReporting *smr, G4double e_in_U_theta, MCGIDI_decaySamplingInfo *decaySamplingInfo );
+static int MCGIDI_energy_sampleWatt( statusMessageReporting *smr, G4double e_in_U, G4double Watt_a, G4double Watt_b, MCGIDI_decaySamplingInfo *decaySamplingInfo );
 static int MCGIDI_energy_sampleWeightedFunctional( statusMessageReporting *smr, MCGIDI_energy *energy, 
     MCGIDI_quantitiesLookupModes &modes, MCGIDI_decaySamplingInfo *decaySamplingInfo );
-static nfu_status MCGIDI_energy_NBodyPhaseSpacePDF_callback( double x, double *y, void *argList );
+static nfu_status MCGIDI_energy_NBodyPhaseSpacePDF_callback( G4double x, G4double *y, void *argList );
 /*
 ************************************************************
 */
@@ -95,12 +95,12 @@ int MCGIDI_energy_release( statusMessageReporting *smr, MCGIDI_energy *energy ) 
 ************************************************************
 */
 int MCGIDI_energy_parseFromTOM( statusMessageReporting *smr, xDataTOM_element *element, MCGIDI_distribution *distribution, ptwXYPoints *norms,
-        enum MCGIDI_energyType energyType, double gammaEnergy_MeV ) {
+        enum MCGIDI_energyType energyType, G4double gammaEnergy_MeV ) {
 
     MCGIDI_energy *energy = NULL;
     xDataTOM_element *energyElement, *linearElement, *functional, *frameElement;
     char const *nativeData;
-    double projectileMass_MeV, targetMass_MeV;
+    G4double projectileMass_MeV, targetMass_MeV;
 
     if( ( energy = MCGIDI_energy_new( smr ) ) == NULL ) goto err;
 
@@ -209,7 +209,7 @@ err:
 */
 static int MCGIDI_energy_parseGeneralEvaporationFromTOM( statusMessageReporting *smr, xDataTOM_element *element, MCGIDI_energy *energy ) {
 
-    double norm;
+    G4double norm;
     xDataTOM_element *thetaTOM, *gTOM;
     ptwXYPoints *theta = NULL, *g = NULL;
     char const *toUnits[2] = { "MeV", "MeV" };
@@ -310,7 +310,7 @@ err:
 static int MCGIDI_energy_parseMadlandNixFromTOM( statusMessageReporting *smr, xDataTOM_element *functional, MCGIDI_energy *energy ) {
 
     int iE, length, nXs, i1, n;
-    double E, T_M, EFL, EFH, argList[3], xs[] = { 1e-5, 1e-3, 1e-1, 1e1, 1e3, 1e5, 3e7 }, norm;
+    G4double E, T_M, EFL, EFH, argList[3], xs[] = { 1e-5, 1e-3, 1e-1, 1e1, 1e3, 1e5, 3e7 }, norm;
     ptwXYPoints *ptwXY_TM = NULL, *pdfXY = NULL;
     ptwXYPoint *point;
     ptwXPoints *cdfX = NULL;
@@ -344,7 +344,7 @@ static int MCGIDI_energy_parseMadlandNixFromTOM( statusMessageReporting *smr, xD
     length = (int) ptwXY_length( ptwXY_TM );
     dists->interpolationWY = ptwXY_interpolationLinLin;
     dists->interpolationXY = ptwXY_interpolationLinLin;     /* Ignoring what the data says as it is probably wrong. */
-    if( ( dists->Ws = (double *) smr_malloc2( smr, length * sizeof( double ), 1, "dists->Ws" ) ) == NULL ) goto err;
+    if( ( dists->Ws = (G4double *) smr_malloc2( smr, length * sizeof( G4double ), 1, "dists->Ws" ) ) == NULL ) goto err;
     if( ( dists->dist = (MCGIDI_pdfOfX *) smr_malloc2( smr, length * sizeof( MCGIDI_pdfOfX ), 0, "dists->dist" ) ) == NULL ) goto err;
 
     for( iE = 0; iE < length; iE++ ) {
@@ -363,7 +363,7 @@ static int MCGIDI_energy_parseMadlandNixFromTOM( statusMessageReporting *smr, xD
         if( ptwXY_simpleCoalescePoints( pdfXY ) != nfu_Okay ) goto err;
         dist->numberOfXs = n = (int) ptwXY_length( pdfXY );
 
-        if( ( dist->Xs = (double *) smr_malloc2( smr, 3 * n * sizeof( double ), 0, "dist->Xs" ) ) == NULL ) goto err;
+        if( ( dist->Xs = (G4double *) smr_malloc2( smr, 3 * n * sizeof( G4double ), 0, "dist->Xs" ) ) == NULL ) goto err;
         dists->numberOfWs++;
         dist->pdf = &(dist->Xs[n]);
         dist->cdf = &(dist->pdf[n]);
@@ -401,9 +401,9 @@ err:
 /*
 ************************************************************
 */
-static nfu_status MCGIDI_energy_parseMadlandNixFromTOM_callback( double Ep, double *y, void *argList ) {
+static nfu_status MCGIDI_energy_parseMadlandNixFromTOM_callback( G4double Ep, G4double *y, void *argList ) {
 
-    double *parameters = (double *) argList, EFL, EFH, T_M;
+    G4double *parameters = (G4double *) argList, EFL, EFH, T_M;
     nfu_status status = nfu_Okay;
 
     EFL = parameters[0];
@@ -417,9 +417,9 @@ static nfu_status MCGIDI_energy_parseMadlandNixFromTOM_callback( double Ep, doub
 /*
 ************************************************************
 */
-static double MCGIDI_energy_parseMadlandNixFromTOM_callback_g( double Ep, double E_F, double T_M, nfu_status *status ) {
+static G4double MCGIDI_energy_parseMadlandNixFromTOM_callback_g( G4double Ep, G4double E_F, G4double T_M, nfu_status *status ) {
 
-    double u1, u2, E1, E2 = 0., gamma1 = 0., gamma2 = 0., signG = 1;
+    G4double u1, u2, E1, E2 = 0., gamma1 = 0., gamma2 = 0., signG = 1;
 
     u1 = std::sqrt( Ep ) - std::sqrt( E_F );
     u1 *= u1 / T_M;
@@ -447,7 +447,7 @@ static int MCGIDI_energy_parseNBodyPhaseSpaceFromTOM( statusMessageReporting *sm
         MCGIDI_distribution *distribution ) {
 
     int argList[1];
-    double xs[2] = { 0.0, 1.0 }, productMass_MeV, norm;
+    G4double xs[2] = { 0.0, 1.0 }, productMass_MeV, norm;
     ptwXYPoints *pdf = NULL;
     nfu_status status;
     char const *mass;
@@ -483,10 +483,10 @@ err:
 /*
 ************************************************************
 */
-static nfu_status MCGIDI_energy_NBodyPhaseSpacePDF_callback( double x, double *y, void *argList ) {
+static nfu_status MCGIDI_energy_NBodyPhaseSpacePDF_callback( G4double x, G4double *y, void *argList ) {
 
     int numberOfProducts = *((int *) argList);
-    double e = 0.5 * ( 3 * numberOfProducts - 8 );
+    G4double e = 0.5 * ( 3 * numberOfProducts - 8 );
 
     *y = std::sqrt( x ) * G4Pow::GetInstance()->powA( 1.0 - x, e );
     return( nfu_Okay );
@@ -499,7 +499,7 @@ int MCGIDI_energy_sampleEnergy( statusMessageReporting *smr, MCGIDI_energy *ener
 /*
 *   This function must be called before angular sampling as it sets the frame but does not test it.
 */
-    double theta, randomEp, Watt_a, Watt_b, e_in = modes.getProjectileEnergy( );
+    G4double theta, randomEp, Watt_a, Watt_b, e_in = modes.getProjectileEnergy( );
     MCGIDI_pdfsOfXGivenW_sampled sampled;
 
     decaySamplingInfo->frame = energy->frame;
@@ -558,10 +558,10 @@ int MCGIDI_energy_sampleEnergy( statusMessageReporting *smr, MCGIDI_energy *ener
 /*
 ************************************************************
 */
-static int MCGIDI_energy_sampleSimpleMaxwellianFission( statusMessageReporting * /*smr*/, double e_in_U_theta, MCGIDI_decaySamplingInfo *decaySamplingInfo ) {
+static int MCGIDI_energy_sampleSimpleMaxwellianFission( statusMessageReporting * /*smr*/, G4double e_in_U_theta, MCGIDI_decaySamplingInfo *decaySamplingInfo ) {
 
     int i1;
-    double a = e_in_U_theta, b, c, x, norm_a, xMin = 0., xMax = a, sqrt_x, sqrt_pi_2 = std::sqrt( M_PI ) / 2.;
+    G4double a = e_in_U_theta, b, c, x, norm_a, xMin = 0., xMax = a, sqrt_x, sqrt_pi_2 = std::sqrt( M_PI ) / 2.;
 
     sqrt_x = std::sqrt( a );
     norm_a = sqrt_pi_2 * erf( sqrt_x ) - sqrt_x * G4Exp( -a );
@@ -584,10 +584,10 @@ static int MCGIDI_energy_sampleSimpleMaxwellianFission( statusMessageReporting *
 /*
 ************************************************************
 */
-static int MCGIDI_energy_sampleEvaporation( statusMessageReporting * /*smr*/, double e_in_U_theta, MCGIDI_decaySamplingInfo *decaySamplingInfo ) {
+static int MCGIDI_energy_sampleEvaporation( statusMessageReporting * /*smr*/, G4double e_in_U_theta, MCGIDI_decaySamplingInfo *decaySamplingInfo ) {
 
     int i1;
-    double a = e_in_U_theta, b, c, x, norm_a, xMin = 0., xMax = a;
+    G4double a = e_in_U_theta, b, c, x, norm_a, xMin = 0., xMax = a;
 
     norm_a = 1 - ( 1 + a ) * G4Exp( -a );
     b = 1. - norm_a * decaySamplingInfo->rng( decaySamplingInfo->rngState );
@@ -608,11 +608,11 @@ static int MCGIDI_energy_sampleEvaporation( statusMessageReporting * /*smr*/, do
 /*
 ************************************************************
 */
-static int MCGIDI_energy_sampleWatt( statusMessageReporting * /*smr*/, double e_in_U, double Watt_a, double Watt_b, MCGIDI_decaySamplingInfo *decaySamplingInfo ) {
+static int MCGIDI_energy_sampleWatt( statusMessageReporting * /*smr*/, G4double e_in_U, G4double Watt_a, G4double Watt_b, MCGIDI_decaySamplingInfo *decaySamplingInfo ) {
 /*
 *   From MCAPM via Sample Watt Spectrum as in TART ( Kalos algorithm ).
 */
-    double WattMin = 0., WattMax = e_in_U, x, y, z, energyOut = 0., rand1, rand2;
+    G4double WattMin = 0., WattMax = e_in_U, x, y, z, energyOut = 0., rand1, rand2;
 
     x = 1. + ( Watt_b / ( 8. * Watt_a ) );
     y = ( x + std::sqrt( x * x - 1. ) ) / Watt_a;
@@ -644,7 +644,7 @@ static int MCGIDI_energy_sampleWeightedFunctional( statusMessageReporting *smr, 
 c   This routine assumes that the weights sum to 1.
 */
     int iW;
-    double rW = decaySamplingInfo->rng( decaySamplingInfo->rngState ), cumulativeW = 0., weight;
+    G4double rW = decaySamplingInfo->rng( decaySamplingInfo->rngState ), cumulativeW = 0., weight;
     MCGIDI_energyWeightedFunctional *weightedFunctional = NULL;
 
     for( iW = 0; iW < energy->weightedFunctionals.numberOfWeights; iW++ ) {

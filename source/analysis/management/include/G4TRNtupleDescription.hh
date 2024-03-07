@@ -79,8 +79,8 @@ struct G4TRNtupleDescription
 
   // needed for XML
   std::map<NT*, std::vector<int>* >    fIVectorBindingMap;
-  std::map<NT*, std::vector<float>* >  fFVectorBindingMap;
-  std::map<NT*, std::vector<double>* > fDVectorBindingMap;
+  std::map<NT*, std::vector<G4float>* >  fFVectorBindingMap;
+  std::map<NT*, std::vector<G4double>* > fDVectorBindingMap;
   std::map<NT*, std::vector<std::string>* > fSVectorBindingMap;
 };
 

@@ -38,8 +38,8 @@ ZMpvMetric_t HepLorentzVector::getMetric() {
 // minus
 //-********
 
-double HepLorentzVector::plus (const Hep3Vector & ref) const {
-  double r = ref.mag();
+G4double HepLorentzVector::plus (const Hep3Vector & ref) const {
+  G4double r = ref.mag();
   if (r == 0) {
     std::cerr << "HepLorentzVector::plus() - "
       << "A zero vector used as reference to LorentzVector plus-part"
@@ -49,8 +49,8 @@ double HepLorentzVector::plus (const Hep3Vector & ref) const {
   return ee + pp.dot(ref)/r;
 } /* plus */
 
-double HepLorentzVector::minus (const Hep3Vector & ref) const {
-  double r = ref.mag();
+G4double HepLorentzVector::minus (const Hep3Vector & ref) const {
+  G4double r = ref.mag();
   if (r == 0) {
     std::cerr << "HepLorentzVector::minus() - "
       << "A zero vector used as reference to LorentzVector minus-part"
@@ -69,7 +69,7 @@ HepLorentzVector HepLorentzVector::rest4Vector() const {
 // gamma
 //-********
 
-double HepLorentzVector::beta() const {
+G4double HepLorentzVector::beta() const {
   if (ee == 0) {
     if (pp.mag2() == 0) {
       return 0;
@@ -88,9 +88,9 @@ double HepLorentzVector::beta() const {
   return std::sqrt (pp.mag2() / (ee*ee)) ;
 } /* beta */
 
-double HepLorentzVector::gamma() const {
-  double v2 = pp.mag2();
-  double t2 = ee*ee;
+G4double HepLorentzVector::gamma() const {
+  G4double v2 = pp.mag2();
+  G4double t2 = ee*ee;
   if (ee == 0) {
     if (pp.mag2() == 0) {
       return 1;
@@ -122,8 +122,8 @@ double HepLorentzVector::gamma() const {
 // eta
 //-***************
 
-double HepLorentzVector::rapidity() const {
-  double z1 = pp.getZ();
+G4double HepLorentzVector::rapidity() const {
+  G4double z1 = pp.getZ();
 //  if (std::fabs(ee) == std::fabs(z1)) {
 //    std::cerr << "HepLorentzVector::rapidity() - "
 //      << "rapidity for 4-vector with |E| = |Pz| -- infinite result"
@@ -135,21 +135,21 @@ double HepLorentzVector::rapidity() const {
       << std::endl;
     return 0;
   }
-  double q = (ee + z1) / (ee - z1);
+  G4double q = (ee + z1) / (ee - z1);
         //-| This cannot be negative now, since both numerator
         //-| and denominator have the same sign as ee.
   return .5 * std::log(q);
 } /* rapidity */
 
-double HepLorentzVector::rapidity(const Hep3Vector & ref) const {
-  double r = ref.mag2();
+G4double HepLorentzVector::rapidity(const Hep3Vector & ref) const {
+  G4double r = ref.mag2();
   if (r == 0) {
     std::cerr << "HepLorentzVector::rapidity() - "
       << "A zero vector used as reference to LorentzVector rapidity"
       << std::endl;
     return 0;
   }
-  double vdotu = pp.dot(ref)/std::sqrt(r);
+  G4double vdotu = pp.dot(ref)/std::sqrt(r);
 //  if (std::fabs(ee) == std::fabs(vdotu)) {
 //    std::cerr << "HepLorentzVector::rapidity() - "
 //      << "rapidity for 4-vector with |E| = |Pu| -- infinite result"
@@ -161,12 +161,12 @@ double HepLorentzVector::rapidity(const Hep3Vector & ref) const {
       << std::endl;
     return 0;
   }
-  double q = (ee + vdotu) / (ee - vdotu);
+  G4double q = (ee + vdotu) / (ee - vdotu);
   return .5 * std::log(q);
 } /* rapidity(ref) */
 
-double HepLorentzVector::coLinearRapidity() const {
-  double v1 = pp.mag();
+G4double HepLorentzVector::coLinearRapidity() const {
+  G4double v1 = pp.mag();
 //  if (std::fabs(ee) == std::fabs(v1)) {
 //    std::cerr << "HepLorentzVector::coLinearRapidity() - "
 //      << "co-Linear rapidity for 4-vector with |E| = |P| -- infinite result"
@@ -178,7 +178,7 @@ double HepLorentzVector::coLinearRapidity() const {
       << std::endl;
     return 0;
   }
-  double q = (ee + v1) / (ee - v1);
+  G4double q = (ee + v1) / (ee - v1);
   return .5 * std::log(q);
 } /* rapidity */
 
@@ -186,8 +186,8 @@ double HepLorentzVector::coLinearRapidity() const {
 // invariantMass
 //-*************
 
-double HepLorentzVector::invariantMass(const HepLorentzVector & w) const {
-  double m1 = invariantMass2(w);
+G4double HepLorentzVector::invariantMass(const HepLorentzVector & w) const {
+  G4double m1 = invariantMass2(w);
   if (m1 < 0) {
     // We should find out why:
     if ( ee * w.ee < 0 ) {
@@ -222,7 +222,7 @@ Hep3Vector HepLorentzVector::findBoostToCM() const {
 } /* boostToCM() */
 
 Hep3Vector HepLorentzVector::findBoostToCM (const HepLorentzVector & w) const {
-  double t1 = ee + w.ee;
+  G4double t1 = ee + w.ee;
   Hep3Vector v1 = pp + w.pp;
   if (t1 == 0) {
     if (v1.mag2() == 0) {

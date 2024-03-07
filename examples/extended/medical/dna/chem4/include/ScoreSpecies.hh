@@ -61,7 +61,7 @@ public:
   
   /** Add a time at which the number of species should be recorded.
       Default times are set up to 1 microsecond.*/
-  inline void AddTimeToRecord(double time)
+  inline void AddTimeToRecord(G4double time)
   {
     fTimeToRecord.insert(time);
   }
@@ -107,8 +107,8 @@ public:
       return *this;
     }
     int fNumber;
-    double fG;
-    double fG2;
+    G4double fG;
+    G4double fG2;
   };
   
 #ifdef _ScoreSpecies_FOR_ALL_EVENTS
@@ -137,8 +137,8 @@ public:
       return *this;
     }
     std::vector<int> fNumber;
-    std::vector<double> fG;
-    std::vector<double> fG2;
+    std::vector<G4double> fG;
+    std::vector<G4double> fG2;
     std::vector<int> fEventID;
   };
 #endif
@@ -146,19 +146,19 @@ public:
 private:
   typedef const G4MolecularConfiguration Species;
   typedef std::map<Species*, SpeciesInfo>  InnerSpeciesMap;
-  typedef std::map<double, InnerSpeciesMap> SpeciesMap;
+  typedef std::map<G4double, InnerSpeciesMap> SpeciesMap;
   SpeciesMap fSpeciesInfoPerTime;
 
 #ifdef _ScoreSpecies_FOR_ALL_EVENTS
   typedef std::map<Species, SpeciesInfoSOA>  InnerSpeciesMapPerEvent;
-  typedef std::map<double, InnerSpeciesMapPerEvent> SpeciesMapPerEvent;
+  typedef std::map<G4double, InnerSpeciesMapPerEvent> SpeciesMapPerEvent;
   SpeciesMapPerEvent fSpeciesInfoPerEvent;
 #endif
   
   std::set<G4double> fTimeToRecord;
   
   int fNEvent; // number of processed events
-  double fEdep; // total energy deposition
+  G4double fEdep; // total energy deposition
   G4String fOutputType; // output type 
 
 protected:

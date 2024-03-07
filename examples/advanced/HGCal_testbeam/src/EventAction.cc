@@ -103,8 +103,8 @@ void EventAction::EndOfEventAction(const G4Event *event) {
   auto hc = hce->GetHC(collId);
   if (!hc)
     return;
-  double esumHGCAL = 0;
-  double cogzHGCAL = 0;
+  G4double esumHGCAL = 0;
+  G4double cogzHGCAL = 0;
   int NhitsHGCAL = 0;
   for (unsigned int i = 0; i < hc->GetSize(); ++i) {
     auto hit = static_cast<SiliconPixelHit *>(hc->GetHit(i));
@@ -138,8 +138,8 @@ void EventAction::EndOfEventAction(const G4Event *event) {
   hc = hce->GetHC(collId);
   if (!hc)
     return;
-  double esumAHCAL = 0;
-  double cogzAHCAL = 0;
+  G4double esumAHCAL = 0;
+  G4double cogzAHCAL = 0;
   int NhitsAHCAL = 0;
   for (unsigned int i = 0; i < hc->GetSize(); ++i) {
     auto hit = static_cast<SiPMHit *>(hc->GetHit(i));

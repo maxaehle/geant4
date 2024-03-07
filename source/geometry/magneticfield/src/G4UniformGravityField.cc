@@ -43,7 +43,7 @@ G4UniformGravityField::G4UniformGravityField(const G4ThreeVector& FieldVector)
   fFieldComponents[2] = FieldVector.z();
 }
 
-// Construct from a double > default = -9.81 m*s^-2
+// Construct from a G4double > default = -9.81 m*s^-2
 G4UniformGravityField::G4UniformGravityField(const G4double gy)
   : G4Field ( true ) 
 {

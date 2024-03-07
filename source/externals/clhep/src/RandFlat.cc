@@ -22,7 +22,7 @@
 // M Fischler     - put and get to/from streams 12/10/04
 // M Fischler     - save and restore dist to streams 12/20/04
 // M Fischler	      - put/get to/from streams uses pairs of ulongs when
-//			+ storing doubles avoid problems with precision 
+//			+ storing G4doubles avoid problems with precision 
 //			4/14/05
 // =======================================================================
 
@@ -46,28 +46,28 @@ HepRandomEngine & RandFlat::engine() {return *localEngine;}
 RandFlat::~RandFlat() {
 }
 
-double RandFlat::operator()() {
+G4double RandFlat::operator()() {
   return fire( defaultA, defaultB );
 }
 
-double RandFlat::operator()( double w ) {
+G4double RandFlat::operator()( G4double w ) {
   return fire( w );
 }
 
-double RandFlat::operator()( double a, double b ) {
+G4double RandFlat::operator()( G4double a, G4double b ) {
   return fire( a, b );
 }
 
-double RandFlat::shoot() {
+G4double RandFlat::shoot() {
   return HepRandom::getTheEngine()->flat();
 }
 
-void RandFlat::shootArray(const int size, double* vect) {
+void RandFlat::shootArray(const int size, G4double* vect) {
   HepRandom::getTheEngine()->flatArray(size,vect);
 }
 
-void RandFlat::shootArray( const int size, double* vect,
-                           double lx, double dx  )
+void RandFlat::shootArray( const int size, G4double* vect,
+                           G4double lx, G4double dx  )
 {
    int i;
 
@@ -76,8 +76,8 @@ void RandFlat::shootArray( const int size, double* vect,
 }
 
 void RandFlat::shootArray( HepRandomEngine* anEngine,
-                           const int size, double* vect,
-                           double lx, double dx  )
+                           const int size, G4double* vect,
+                           G4double lx, G4double dx  )
 {
    int i;
 
@@ -85,7 +85,7 @@ void RandFlat::shootArray( HepRandomEngine* anEngine,
      vect[i] = shoot(anEngine,lx,dx);
 }
 
-void RandFlat::fireArray( const int size, double* vect)
+void RandFlat::fireArray( const int size, G4double* vect)
 {
    int i;
 
@@ -93,8 +93,8 @@ void RandFlat::fireArray( const int size, double* vect)
      vect[i] = fire( defaultA, defaultB );
 }
 
-void RandFlat::fireArray( const int size, double* vect,
-                          double lx, double dx  )
+void RandFlat::fireArray( const int size, G4double* vect,
+                          G4double lx, G4double dx  )
 {
    int i;
 
@@ -184,9 +184,9 @@ std::istream & RandFlat::get ( std::istream & is ) {
   if (possibleKeywordInput(is, "Uvec", randomInt)) {
     std::vector<unsigned long> t(2);
     is >> randomInt >> firstUnusedBit;
-    is >> defaultWidth >>t[0]>>t[1]; defaultWidth = DoubConv::longs2double(t); 
-    is >> defaultA >> t[0] >> t[1]; defaultA = DoubConv::longs2double(t); 
-    is >> defaultB >> t[0] >> t[1]; defaultB = DoubConv::longs2double(t); 
+    is >> defaultWidth >>t[0]>>t[1]; defaultWidth = DoubConv::longs2G4double(t); 
+    is >> defaultA >> t[0] >> t[1]; defaultA = DoubConv::longs2G4double(t); 
+    is >> defaultB >> t[0] >> t[1]; defaultB = DoubConv::longs2G4double(t); 
     if (!is) {
       is.clear(std::ios::badbit | is.rdstate());
       std::cerr << "\nRandFlat input failed"

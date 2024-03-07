@@ -76,8 +76,8 @@ G4ecpssrBaseKxsModel::G4ecpssrBaseKxsModel()
 
     while(!FK.eof())
     {
-	double x;
-	double y;
+	G4double x;
+	G4double y;
 
 	FK>>x>>y;
 

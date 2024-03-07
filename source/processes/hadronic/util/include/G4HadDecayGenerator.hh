@@ -96,7 +96,7 @@ protected:
   // ownership of _all_ instantiated algorithms, and should delete
   // them in its own dtor.  The subclass dtor must also call
   // UseAlgorithm(0) to set the base algorithm to a null pointer, to
-  // prevent a double-delete error.
+  // prevent a G4double-delete error.
   void UseAlgorithm(G4VHadDecayAlgorithm* alg) { theAlgorithm = alg; }
 
   G4int verboseLevel;

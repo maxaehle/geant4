@@ -146,9 +146,9 @@ void Par03EMShowerModel::DoIt(const G4FastTrack& aFastTrack,
   // Calculate rotation matrix along the particle momentum direction
   // It will rotate the shower axes to match the incoming particle direction
   G4RotationMatrix rotMatrix = G4RotationMatrix();
-  double particleTheta       = particleDirection.theta();
-  double particlePhi         = particleDirection.phi();
-  double epsilon             = 1e-3;
+  G4double particleTheta       = particleDirection.theta();
+  G4double particlePhi         = particleDirection.phi();
+  G4double epsilon             = 1e-3;
   rotMatrix.rotateY(particleTheta);
   // do not use (random) phi if x==y==0
   if(!(std::fabs(particleDirection.x()) < epsilon &&

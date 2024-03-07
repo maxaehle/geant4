@@ -104,7 +104,7 @@ namespace G4ConversionUtils
     return true;
   }
   
-  // Generic double value istringstream conversion.
+  // Generic G4double value istringstream conversion.
   // Return false if conversion failed or if extra characters
   // exist in input.
   template <typename Value> G4bool Convert(const G4String& myInput, Value& value1, 

@@ -57,7 +57,7 @@ G4tgrSolid::G4tgrSolid(const std::vector<G4String>& wl)
   //---------- set solid type
   theType = G4tgrUtils::GetString(wl[2]);
 
-  //---------- create only vector<double> of theSolidParams
+  //---------- create only vector<G4double> of theSolidParams
   FillSolidParams(wl);
 
   G4tgrVolumeMgr::GetInstance()->RegisterMe(this);

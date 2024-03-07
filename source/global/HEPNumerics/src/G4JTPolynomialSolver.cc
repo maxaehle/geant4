@@ -270,7 +270,7 @@ G4int G4JTPolynomialSolver::FindRoots(G4double* op, G4int degr, G4double* zeror,
     //
     for(cnt = 0; cnt < 20; ++cnt)
     {
-      // Quadratic corresponds to a double shift to a
+      // Quadratic corresponds to a G4double shift to a
       // non-real point and its complex conjugate. The point
       // has modulus bnd and amplitude rotated by 94 degrees
       // from the previous shift.
@@ -438,7 +438,7 @@ void G4JTPolynomialSolver::ComputeFixedShiftPolynomial(G4int l2, G4int* nz)
         goto _restore_variables;
       }
 
-      // If linear iteration signals an almost double real
+      // If linear iteration signals an almost G4double real
       // zero attempt quadratic iteration.
       //
       ui = -(xs + xs);
@@ -488,7 +488,7 @@ void G4JTPolynomialSolver::ComputeFixedShiftPolynomial(G4int l2, G4int* nz)
         break;
       }
 
-      // If linear iteration signals an almost double real
+      // If linear iteration signals an almost G4double real
       // zero attempt quadratic iteration.
       //
       ui = -(xs + xs);

@@ -127,7 +127,7 @@ G4bool PrimaryKiller::ProcessHits(G4Step* aStep,G4TouchableHistory*)
 
   //-------------------
 
-  double kineticE = aStep->GetPostStepPoint()->GetKineticEnergy();
+  G4double kineticE = aStep->GetPostStepPoint()->GetKineticEnergy();
 
   G4double eLoss = aStep->GetPreStepPoint()->GetKineticEnergy()
                   - kineticE;

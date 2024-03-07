@@ -38,7 +38,7 @@ err:
 /*
 ************************************************************
 */
-int xDataXML_W_XYsDataToTOM( statusMessageReporting *smr, xDataXML_element *XE, xDataTOM_W_XYs *W_XYs, int index, double value, xDataTOM_axes *axes,
+int xDataXML_W_XYsDataToTOM( statusMessageReporting *smr, xDataXML_element *XE, xDataTOM_W_XYs *W_XYs, int index, G4double value, xDataTOM_axes *axes,
     int axesOffset ) {
 
     int length;
@@ -74,7 +74,7 @@ static int xDataXML_W_XYs_XYsToTOM( statusMessageReporting *smr, xDataXML_elemen
         int axesOffset ) {
 
     int index, length;
-    double accuracy, value;
+    G4double accuracy, value;
 
     if( xDataXML_convertAttributeTo_xDataTOM_Int( smr, XE, "index", &index, 1 ) != 0 ) return( 1 );
     if( xDataXML_convertAttributeTo_xDataTOM_Int( smr, XE, "length", &length, 1 ) != 0 ) return( 1 );

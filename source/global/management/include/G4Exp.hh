@@ -115,7 +115,7 @@ namespace G4ExpConsts
   };
 
   //----------------------------------------------------------------------------
-  // Converts an unsigned long long to a double
+  // Converts an unsigned long long to a G4double
   //
   inline G4double uint642dp(uint64_t ll)
   {
@@ -125,7 +125,7 @@ namespace G4ExpConsts
   }
 
   //----------------------------------------------------------------------------
-  // Converts an int to a float
+  // Converts an int to a G4float
   //
   inline G4float uint322sp(G4int x)
   {
@@ -135,7 +135,7 @@ namespace G4ExpConsts
   }
 
   //----------------------------------------------------------------------------
-  // Converts a float to an int
+  // Converts a G4float to an int
   //
   inline uint32_t sp2uint32(G4float x)
   {
@@ -173,9 +173,9 @@ namespace G4ExpConsts
   }
 }  // namespace G4ExpConsts
 
-// Exp double precision --------------------------------------------------------
+// Exp G4double precision --------------------------------------------------------
 
-/// Exponential Function double precision
+/// Exponential Function G4double precision
 inline G4double G4Exp(G4double initial_x)
 {
   G4double x  = initial_x;
@@ -209,7 +209,7 @@ inline G4double G4Exp(G4double initial_x)
   x = px / (qx - px);
   x = 1.0 + 2.0 * x;
 
-  // Build 2^n in double.
+  // Build 2^n in G4double.
   x *= G4ExpConsts::uint642dp((((uint64_t) n) + 1023) << 52);
 
   if(initial_x > G4ExpConsts::EXP_LIMIT)

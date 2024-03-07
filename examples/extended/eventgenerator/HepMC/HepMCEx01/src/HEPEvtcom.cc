@@ -77,7 +77,7 @@ enum {HEPEVT_EntriesAllocation=4000};
 
 const unsigned int hepevt_bytes_allocation = 
 sizeof(long int) * ( 2 + 4 * HEPEVT_EntriesAllocation )
-  + sizeof(double) * ( 9 * HEPEVT_EntriesAllocation );
+  + sizeof(G4double) * ( 9 * HEPEVT_EntriesAllocation );
 
 extern "C" struct hepevt{
   char data[hepevt_bytes_allocation];

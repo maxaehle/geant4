@@ -44,8 +44,8 @@ public:
   G4CascadeChannel() {}
   virtual ~G4CascadeChannel() {}
 
-  virtual G4double getCrossSection(double ke) const = 0;
-  virtual G4double getCrossSectionSum(double ke) const = 0;
+  virtual G4double getCrossSection(G4double ke) const = 0;
+  virtual G4double getCrossSectionSum(G4double ke) const = 0;
   virtual G4int getMultiplicity(G4double ke) const = 0;
 
   virtual void getOutgoingParticleTypes(std::vector<G4int>& kinds,

@@ -48,7 +48,7 @@
 namespace DNA {
 namespace Penetration {
   
-const double
+const G4double
 Meesungnoen2002::gCoeff[13] =
 { -4.06217193e-08,  3.06848412e-06,  -9.93217814e-05,
   1.80172797e-03,  -2.01135480e-02,   1.42939448e-01,
@@ -57,20 +57,20 @@ Meesungnoen2002::gCoeff[13] =
   -2.34069784e-01 };
 // fit from Meesungnoen, 2002
 
-const double
+const G4double
 Meesungnoen2002_amorphous::gCoeff[7] =
 { 7.3144e-05,	-2.2474e-03,	3.4555e-02,
   -4.3574e-01,	2.8954e+00,	-1.0381e+00,
   1.4300e+00 };
 // fit from Meesungnoen, 2002
 
-const double
+const G4double
 Terrisol1990::gEnergies_T1990[11] =
 { 0.2, 0.5, 1, 2, 3, 4, 5, 6, 7,
   // The two last are not in the dataset
   8, 9}; // eV
 
-const double
+const G4double
 Terrisol1990::gStdDev_T1990[11] =
 { 17.68*CLHEP::angstrom,
   22.3*CLHEP::angstrom,
@@ -92,7 +92,7 @@ Terrisol1990::gStdDev_T1990[11] =
 
 //----------------------------------------------------------------------------
 
-double Meesungnoen2002::GetRmean(double k){
+G4double Meesungnoen2002::GetRmean(G4double k){
   G4double k_eV = k/eV;
 
   if(k_eV>0.1){ // data until 0.2 eV
@@ -106,7 +106,7 @@ double Meesungnoen2002::GetRmean(double k){
   return 0;
 }
 
-double Meesungnoen2002_amorphous::GetRmean(double k){
+G4double Meesungnoen2002_amorphous::GetRmean(G4double k){
   G4double k_eV = k/eV;
 
   if(k_eV>0.1){ // data until 0.2 eV
@@ -131,11 +131,11 @@ void GetGaussianPenetrationFromRmean3D(G4double r_mean,
     return;
   }
   
-  static constexpr double convertRmean3DToSigma1D = 0.62665706865775006;
+  static constexpr G4double convertRmean3DToSigma1D = 0.62665706865775006;
   // = sqrt(CLHEP::pi)/pow(2,3./2.)
     
   // Use r_mean to build a 3D gaussian
-  const double sigma1D = r_mean * convertRmean3DToSigma1D;
+  const G4double sigma1D = r_mean * convertRmean3DToSigma1D;
   displacement = G4ThreeVector(G4RandGauss::shoot(0, sigma1D),
                                G4RandGauss::shoot(0, sigma1D),
                                G4RandGauss::shoot(0, sigma1D));
@@ -167,7 +167,7 @@ void Kreipl2009::GetPenetration(G4double k,
 	return;
   }
 
-  double r = G4RandGamma::shoot(2,2);
+  G4double r = G4RandGamma::shoot(2,2);
 
   displacement = G4RandomDirection() * r * r_mean;
 }
@@ -182,7 +182,7 @@ void Ritchie1994::GetPenetration(G4double k,
 
 //----------------------------------------------------------------------------
 
-double Terrisol1990::Get3DStdDeviation(double energy){
+G4double Terrisol1990::Get3DStdDeviation(G4double energy){
   G4double k_eV = energy/eV;
   if(k_eV < 0.2){
     // rare events:
@@ -215,33 +215,33 @@ double Terrisol1990::Get3DStdDeviation(double energy){
     upBin = lowBin+1;
   }
 
-  double lowE = gEnergies_T1990[lowBin];
-  double upE = gEnergies_T1990[upBin];
+  G4double lowE = gEnergies_T1990[lowBin];
+  G4double upE = gEnergies_T1990[upBin];
 
-  double lowS = gStdDev_T1990[lowBin];
-  double upS = gStdDev_T1990[upBin];
+  G4double lowS = gStdDev_T1990[lowBin];
+  G4double upS = gStdDev_T1990[upBin];
 
-  double tanA = (lowS-upS)/(lowE-upE);
-  double sigma3D = lowS + (k_eV-lowE)*tanA;
+  G4double tanA = (lowS-upS)/(lowE-upE);
+  G4double sigma3D = lowS + (k_eV-lowE)*tanA;
   return sigma3D;
 }
 
-double Terrisol1990::GetRmean(double energy){
-  double sigma3D=Get3DStdDeviation(energy);
+G4double Terrisol1990::GetRmean(G4double energy){
+  G4double sigma3D=Get3DStdDeviation(energy);
 
-  static constexpr double s2r=1.595769121605731; // = pow(2,3./2.)/sqrt(CLHEP::pi)
+  static constexpr G4double s2r=1.595769121605731; // = pow(2,3./2.)/sqrt(CLHEP::pi)
 
-  double r_mean=sigma3D*s2r;
+  G4double r_mean=sigma3D*s2r;
   return r_mean;
 }
 
 void Terrisol1990::GetPenetration(G4double energy,
                                   G4ThreeVector& displacement){
-  double sigma3D = Get3DStdDeviation(energy);
+  G4double sigma3D = Get3DStdDeviation(energy);
 
-  static constexpr double factor = 2.20496999539; // = 1./(3. - 8./CLHEP::pi);
+  static constexpr G4double factor = 2.20496999539; // = 1./(3. - 8./CLHEP::pi);
 
-  double sigma1D = std::sqrt(std::pow(sigma3D, 2.)*factor);
+  G4double sigma1D = std::sqrt(std::pow(sigma3D, 2.)*factor);
 
   displacement = G4ThreeVector(G4RandGauss::shoot(0, sigma1D),
                                G4RandGauss::shoot(0, sigma1D),

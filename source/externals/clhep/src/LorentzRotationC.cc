@@ -34,64 +34,64 @@ HepLorentzRotation & HepLorentzRotation::set (const HepLorentzVector & ccol1,
     return *this;
   }
 /*
-  double u1u1 = ccol1.dot(ccol1);
-  double f11  = std::fabs(u1u1 + 1.0);
+  G4double u1u1 = ccol1.dot(ccol1);
+  G4double f11  = std::fabs(u1u1 + 1.0);
   if ( f11 > Hep4RotationInterface::tolerance ) {
     std::cerr << "HepLorentzRotation::set() - "
       << "column 1 supplied for HepLorentzRotation has w*w != -1" << std::endl;
   }
-  double u2u2 = ccol2.dot(ccol2);
-  double f22  = std::fabs(u2u2 + 1.0);
+  G4double u2u2 = ccol2.dot(ccol2);
+  G4double f22  = std::fabs(u2u2 + 1.0);
   if ( f22 > Hep4RotationInterface::tolerance ) {
     std::cerr << "HepLorentzRotation::set() - "
       << "column 2 supplied for HepLorentzRotation has w*w != -1" << std::endl;
   }
-  double u3u3 = ccol3.dot(ccol3);
-  double f33  = std::fabs(u3u3 + 1.0);
+  G4double u3u3 = ccol3.dot(ccol3);
+  G4double f33  = std::fabs(u3u3 + 1.0);
   if ( f33 > Hep4RotationInterface::tolerance ) {
     std::cerr << "HepLorentzRotation::set() - "
       << "column 3 supplied for HepLorentzRotation has w*w != -1" << std::endl;
   }
-  double u4u4 = ccol4.dot(ccol4);
-  double f44  = std::fabs(u4u4 - 1.0);
+  G4double u4u4 = ccol4.dot(ccol4);
+  G4double f44  = std::fabs(u4u4 - 1.0);
   if ( f44 > Hep4RotationInterface::tolerance ) {
     std::cerr << "HepLorentzRotation::set() - "
       << "column 4 supplied for HepLorentzRotation has w*w != +1" << std::endl;
   }
 
-  double u1u2 = ccol1.dot(ccol2);
-  double f12  = std::fabs(u1u2);
+  G4double u1u2 = ccol1.dot(ccol2);
+  G4double f12  = std::fabs(u1u2);
   if ( f12 > Hep4RotationInterface::tolerance ) {
     std::cerr << "HepLorentzRotation::set() - "
       << "columns 1 and 2 supplied for HepLorentzRotation have non-zero dot" << std::endl;
   }
-  double u1u3 = ccol1.dot(ccol3);
-  double f13  = std::fabs(u1u3);
+  G4double u1u3 = ccol1.dot(ccol3);
+  G4double f13  = std::fabs(u1u3);
 
   if ( f13 > Hep4RotationInterface::tolerance ) {
     std::cerr << "HepLorentzRotation::set() - "
       << "columns 1 and 3 supplied for HepLorentzRotation have non-zero dot" << std::endl;
   }
-  double u1u4 = ccol1.dot(ccol4);
-  double f14  = std::fabs(u1u4);
+  G4double u1u4 = ccol1.dot(ccol4);
+  G4double f14  = std::fabs(u1u4);
   if ( f14 > Hep4RotationInterface::tolerance ) {
     std::cerr << "HepLorentzRotation::set() - "
       << "columns 1 and 4 supplied for HepLorentzRotation have non-zero dot" << std::endl;
   }
-  double u2u3 = ccol2.dot(ccol3);
-  double f23  = std::fabs(u2u3);
+  G4double u2u3 = ccol2.dot(ccol3);
+  G4double f23  = std::fabs(u2u3);
   if ( f23 > Hep4RotationInterface::tolerance ) {
     std::cerr << "HepLorentzRotation::set() - "
       << "columns 2 and 3 supplied for HepLorentzRotation have non-zero dot" << std::endl;
   }
-  double u2u4 = ccol2.dot(ccol4);
-  double f24  = std::fabs(u2u4);
+  G4double u2u4 = ccol2.dot(ccol4);
+  G4double f24  = std::fabs(u2u4);
   if ( f24 > Hep4RotationInterface::tolerance ) {
     std::cerr << "HepLorentzRotation::set() - "
       << "columns 2 and 4 supplied for HepLorentzRotation have non-zero dot" << std::endl;
   }
-  double u3u4 = ccol3.dot(ccol4);
-  double f34  = std::fabs(u3u4);
+  G4double u3u4 = ccol3.dot(ccol4);
+  G4double f34  = std::fabs(u3u4);
   if ( f34 > Hep4RotationInterface::tolerance ) {
     std::cerr << "HepLorentzRotation::set() - "
       << "columns 3 and 4 supplied for HepLorentzRotation have non-zero dot" << std::endl;
@@ -107,7 +107,7 @@ HepLorentzRotation & HepLorentzRotation::set (const HepLorentzVector & ccol1,
 
   HepLorentzVector a, b, c, d;
   bool isLorentzTransformation = true;
-  double norm;
+  G4double norm;
 
   d = ccol4;
   norm = d.dot(d);
@@ -182,7 +182,7 @@ HepLorentzRotation & HepLorentzRotation::setRows
   // Set based on using those rows as columns:
   set (rrow1, rrow2, rrow3, rrow4);
   // Now transpose in place:
-  double q1, q2, q3;
+  G4double q1, q2, q3;
   q1  = mxy;  q2  = mxz;  q3  = mxt;
   mxy = myx;  mxz = mzx;  mxt = mtx;
   myx = q1;   mzx = q2;   mtx = q3;

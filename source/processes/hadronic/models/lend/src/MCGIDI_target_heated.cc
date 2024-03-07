@@ -22,7 +22,7 @@ static int MCGIDI_target_heated_parsePOPs( statusMessageReporting *smr, MCGIDI_t
 static int MCGIDI_target_heated_parseParticle( statusMessageReporting *smr, MCGIDI_target_heated *target, xDataTOM_element *element,
     xDataTOM_element *particleAliases );
 static int MCGIDI_target_heated_parseParticleLevel( statusMessageReporting *smr, MCGIDI_target_heated *target, xDataTOM_element *element, MCGIDI_POP *parent,
-    double mass_MeV, xDataTOM_element *particleAliases );
+    G4double mass_MeV, xDataTOM_element *particleAliases );
 static int MCGIDI_target_heated_parseParticleGammas( statusMessageReporting *smr, MCGIDI_target_heated *target, xDataTOM_element *element, char const *name );
 static int MCGIDI_target_heated_parseReaction( statusMessageReporting *smr, xDataTOM_element *child, MCGIDI_target_heated *target, 
     MCGIDI_POPs *pops, MCGIDI_reaction *reaction );
@@ -100,7 +100,7 @@ int MCGIDI_target_heated_read( statusMessageReporting *smr, MCGIDI_target_heated
     char const *name, *version, *temperatureStr;
     char *e1;
     MCGIDI_reaction *reaction;
-    double crossSectionInit[4] = { 0., 0., 0., 0., };
+    G4double crossSectionInit[4] = { 0., 0., 0., 0., };
     nfu_status status;
     ptwXYPoints *crossSection;
 int subtag1_Notice = 0;
@@ -156,7 +156,7 @@ int subtag1_Notice = 0;
             if( strcmp( child->name, "summedReaction" ) == 0 ) continue;
             if( strcmp( child->name, "fissionComponent" ) == 0 ) continue;
             if( strcmp( child->name, "reaction" ) == 0 ) {
-                double EMin, EMax;
+                G4double EMin, EMax;
 
                 reaction =  &(target->reactions[ir]);
                 if( MCGIDI_target_heated_parseReaction( smr, child, target, &(target->pops), reaction ) ) goto err;
@@ -262,7 +262,7 @@ static int MCGIDI_target_heated_parseParticle( statusMessageReporting *smr, MCGI
 */
     int globalParticle = 1;
     char const *name = NULL, *mass = NULL;      /* Do not free name or mass, do not own them. */
-    double mass_MeV;
+    G4double mass_MeV;
     xDataTOM_element *child;
     MCGIDI_POP *pop;
 
@@ -294,11 +294,11 @@ err:
 ************************************************************
 */
 static int MCGIDI_target_heated_parseParticleLevel( statusMessageReporting *smr, MCGIDI_target_heated *target, xDataTOM_element *element, MCGIDI_POP *parent,
-    double mass_MeV, xDataTOM_element *particleAliases ) {
+    G4double mass_MeV, xDataTOM_element *particleAliases ) {
 
     int globalParticle = 0;
     char const *name, *level, *aliasValue;     /* Do not free any of these as they are owned by called routine. */
-    double level_MeV = 0.;
+    G4double level_MeV = 0.;
     xDataTOM_element *alias;
 
     if( ( name = xDataTOM_getAttributesValueInElement( element, "name" ) ) == NULL ) {
@@ -335,7 +335,7 @@ static int MCGIDI_target_heated_parseParticleGammas( statusMessageReporting *smr
     xDataTOM_element *child;
     MCGIDI_GammaBranching *gammas = NULL;
     char const *finalLevelString;
-    double probability;
+    G4double probability;
 
     for( child = xDataTOME_getFirstElement( element ); child != NULL; child = xDataTOME_getNextElement( child ) ) {
         if( strcmp( child->name, "gamma" ) ) {
@@ -444,34 +444,34 @@ MCGIDI_POP *MCGIDI_target_heated_getPOPForTarget( statusMessageReporting * /*smr
 /*
 ************************************************************
 */
-double MCGIDI_target_heated_getProjectileMass_MeV( statusMessageReporting * /*smr*/, MCGIDI_target_heated *target ) {
+G4double MCGIDI_target_heated_getProjectileMass_MeV( statusMessageReporting * /*smr*/, MCGIDI_target_heated *target ) {
 
     return( MCGIDI_POP_getMass_MeV( target->projectilePOP ) );
 }
 /*
 ************************************************************
 */
-double MCGIDI_target_heated_getTargetMass_MeV( statusMessageReporting * /*smr*/, MCGIDI_target_heated *target ) {
+G4double MCGIDI_target_heated_getTargetMass_MeV( statusMessageReporting * /*smr*/, MCGIDI_target_heated *target ) {
 
     return( MCGIDI_POP_getMass_MeV( target->targetPOP ) );
 }
 /*
 ************************************************************
 */
-double MCGIDI_target_heated_getTotalCrossSectionAtE( statusMessageReporting *smr, MCGIDI_target_heated *target, 
+G4double MCGIDI_target_heated_getTotalCrossSectionAtE( statusMessageReporting *smr, MCGIDI_target_heated *target, 
         MCGIDI_quantitiesLookupModes &modes, bool sampling ) {
 
-    double xsec;
+    G4double xsec;
 
     if( modes.getCrossSectionMode( ) == MCGIDI_quantityLookupMode_pointwise ) {
-        double e_in = modes.getProjectileEnergy( );
+        G4double e_in = modes.getProjectileEnergy( );
 
         if( e_in < target->EMin ) e_in = target->EMin;
         if( e_in > target->EMax ) e_in = target->EMax;
         ptwXY_getValueAtX( target->crossSection, e_in, &xsec ); }
     else if( modes.getCrossSectionMode( ) == MCGIDI_quantityLookupMode_grouped ) {
         int index = modes.getGroupIndex( );
-        double *xSecP;
+        G4double *xSecP;
 
         if( sampling ) {
             xSecP = ptwX_getPointAtIndex( target->crossSectionGroupedForSampling, index ); }
@@ -493,10 +493,10 @@ double MCGIDI_target_heated_getTotalCrossSectionAtE( statusMessageReporting *smr
 /*
 ************************************************************
 */
-double MCGIDI_target_heated_getIndexReactionCrossSectionAtE( statusMessageReporting *smr, MCGIDI_target_heated *target, int index, 
+G4double MCGIDI_target_heated_getIndexReactionCrossSectionAtE( statusMessageReporting *smr, MCGIDI_target_heated *target, int index, 
         MCGIDI_quantitiesLookupModes &modes, bool sampling ) {
 
-    double xsec = 0.;
+    G4double xsec = 0.;
     MCGIDI_reaction *reaction = MCGIDI_target_heated_getReactionAtIndex_smr( smr, target, index );
 
     if( reaction != NULL ) xsec = MCGIDI_reaction_getCrossSectionAtE( smr, reaction, modes, sampling );
@@ -517,7 +517,7 @@ int MCGIDI_target_heated_sampleIndexReactionProductsAtE( statusMessageReporting 
 /*
 ************************************************************
 */
-double MCGIDI_target_heated_getReactionsThreshold( statusMessageReporting * /*smr*/, MCGIDI_target_heated *target, int index ) {
+G4double MCGIDI_target_heated_getReactionsThreshold( statusMessageReporting * /*smr*/, MCGIDI_target_heated *target, int index ) {
 
     MCGIDI_reaction *reaction = MCGIDI_target_heated_getReactionAtIndex( target, index );
 
@@ -527,7 +527,7 @@ double MCGIDI_target_heated_getReactionsThreshold( statusMessageReporting * /*sm
 /*
 ************************************************************
 */
-int MCGIDI_target_heated_getReactionsDomain( statusMessageReporting * /*smr*/, MCGIDI_target_heated *target, int index, double *EMin, double *EMax ) {
+int MCGIDI_target_heated_getReactionsDomain( statusMessageReporting * /*smr*/, MCGIDI_target_heated *target, int index, G4double *EMin, G4double *EMax ) {
 
     MCGIDI_reaction *reaction = MCGIDI_target_heated_getReactionAtIndex( target, index );
 
@@ -539,7 +539,7 @@ int MCGIDI_target_heated_getReactionsDomain( statusMessageReporting * /*smr*/, M
 /*
 ************************************************************
 */
-double MCGIDI_target_heated_getIndexReactionFinalQ( statusMessageReporting *smr, MCGIDI_target_heated *target, int index, 
+G4double MCGIDI_target_heated_getIndexReactionFinalQ( statusMessageReporting *smr, MCGIDI_target_heated *target, int index, 
         MCGIDI_quantitiesLookupModes &modes ) {
 
     MCGIDI_reaction *reaction = MCGIDI_target_heated_getReactionAtIndex_smr( smr, target, index );
@@ -593,7 +593,7 @@ int MCGIDI_target_heated_recast( statusMessageReporting *smr, MCGIDI_target_heat
             int index = target->reactions[ir].thresholdGroupIndex;
 
             if( index > -1 ) {
-                double xSec = target->reactions[ir].thresholdGroupedDeltaCrossSection +
+                G4double xSec = target->reactions[ir].thresholdGroupedDeltaCrossSection +
                         ptwX_getPointAtIndex_Unsafely( target->crossSectionGroupedForSampling, index );
 
                 ptwX_setPointAtIndex( target->crossSectionGroupedForSampling, index, xSec );

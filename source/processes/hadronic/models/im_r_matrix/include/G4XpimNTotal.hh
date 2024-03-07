@@ -42,6 +42,6 @@ public:
   virtual G4String Name() const {return "G4XpimNTotal";}
 private:
   G4XPDGTotal thePDGData;
-  std::vector<std::pair<double,double> > theLowEData;
+  std::vector<std::pair<G4double,G4double> > theLowEData;
 };
 #endif

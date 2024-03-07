@@ -210,7 +210,7 @@ ComputeTransformation(const G4int copyNo, G4VPhysicalVolume* physVol) const
     // Position of voxels.
     // x and y positions are already defined in DetectorConstruction by using
     // replicated volume. Here only we need to define is z positions of voxels.
-    physVol->SetTranslation(G4ThreeVector(0.,0.,(2.*static_cast<double>(copyNo)
+    physVol->SetTranslation(G4ThreeVector(0.,0.,(2.*static_cast<G4double>(copyNo)
                                                 +1.)*fdZ - fdZ*fnZ));
 }
 

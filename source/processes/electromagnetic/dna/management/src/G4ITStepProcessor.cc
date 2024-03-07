@@ -600,7 +600,7 @@ void G4ITStepProcessor::GetAtRestIL()
 }
 
 //_________________________________________________________________________
-G4double G4ITStepProcessor::ComputeInteractionLength(double previousTimeStep)
+G4double G4ITStepProcessor::ComputeInteractionLength(G4double previousTimeStep)
 {
   G4TrackManyList* mainList = fpTrackContainer->GetMainList();
   G4TrackManyList::iterator it = mainList ->begin();
@@ -985,7 +985,7 @@ void G4ITStepProcessor::DoDefinePhysicalStepLength()
   fpState->fPhysicalStep = DBL_MAX; // Initialize by a huge number
   fPhysIntLength = DBL_MAX; // Initialize by a huge number
 
-  double proposedTimeStep = DBL_MAX;
+  G4double proposedTimeStep = DBL_MAX;
   G4VProcess* processWithPostStepGivenByTimeStep(0);
 
   // GPIL for PostStep

@@ -36,29 +36,29 @@ class GIDI_settings_group {
 
     private:
         std::string mLabel;
-        std::vector<double> mBoundaries;
+        std::vector<G4double> mBoundaries;
 
     public:
         GIDI_settings_group( std::string const &label = "empty", int size = 0 );
-        GIDI_settings_group( std::string const &label, int length, double const *values );
-        GIDI_settings_group( std::string const &label, std::vector<double> const &boundaries );
+        GIDI_settings_group( std::string const &label, int length, G4double const *values );
+        GIDI_settings_group( std::string const &label, std::vector<G4double> const &boundaries );
         GIDI_settings_group( GIDI_settings_group const &group );
         GIDI_settings_group& operator=( const GIDI_settings_group &group );
         ~GIDI_settings_group( );
 
-        inline double operator[]( int const index ) const { return( mBoundaries[index] ); }
+        inline G4double operator[]( int const index ) const { return( mBoundaries[index] ); }
         inline int size( void ) const { return( (int) mBoundaries.size( ) ); }
         inline int getNumberOfGroups( void ) const { return( (int) ( mBoundaries.size( ) - 1 ) ); }
-        inline double const *pointer( void ) const { return( &(mBoundaries[0]) ); }
+        inline G4double const *pointer( void ) const { return( &(mBoundaries[0]) ); }
 
-        void setFromCDoubleArray( int length, double *values );
+        void setFromCDoubleArray( int length, G4double *values );
         inline std::string getLabel( ) const { return( mLabel ); }
-        int getGroupIndexFromEnergy( double energy, bool encloseOutOfRange ) const;
+        int getGroupIndexFromEnergy( G4double energy, bool encloseOutOfRange ) const;
         inline bool isLabel( std::string &label ) const { return( label == mLabel ); }
         void print( bool outline = false, int valuesPerLine = 10 ) const;
 
     private:
-        void initialize( std::string const &label, int size, int length, double const *values );
+        void initialize( std::string const &label, int size, int length, G4double const *values );
 };
 
 #if GIDI_USE_BDFLS
@@ -93,42 +93,42 @@ class GIDI_settings_flux_order {
 
     private:
         int mOrder;                 /**< The Legendre order of the flux. */
-        std::vector<double> mEnergies;   /**< List of flux energies. */
-        std::vector<double> mFluxes;     /**< List of flux values - one for each element of mEnergies. */
+        std::vector<G4double> mEnergies;   /**< List of flux energies. */
+        std::vector<G4double> mFluxes;     /**< List of flux values - one for each element of mEnergies. */
 
     public:
         GIDI_settings_flux_order( int order     /**< The Legendre order for this flux data. */ );
         GIDI_settings_flux_order( int           order       /**< The Legendre order for this flux data. */,
                                   int           length      /**< The number or values in energies and fluxes. */,
-                                  double const  *energies   /**< List of energies where flux is given. */,
-                                  double const  *fluxes     /**< List of flux value for each energies value. */ );
+                                  G4double const  *energies   /**< List of energies where flux is given. */,
+                                  G4double const  *fluxes     /**< List of flux value for each energies value. */ );
         GIDI_settings_flux_order( int                   order       /**< The Legendre order for this flux data. */,
-                                  std::vector<double> const  &energies   /**< List of energies where flux is given. */,
-                                  std::vector<double> const  &fluxes     /**< List of flux value for each energies value. */ );
+                                  std::vector<G4double> const  &energies   /**< List of energies where flux is given. */,
+                                  std::vector<G4double> const  &fluxes     /**< List of flux value for each energies value. */ );
         GIDI_settings_flux_order( GIDI_settings_flux_order const &fluxOrder /**< Legendre flux order to copy. */ );
         GIDI_settings_flux_order& operator=( const GIDI_settings_flux_order &fluxOrder );
         ~GIDI_settings_flux_order( );
 
         inline int getOrder( void ) const { return( mOrder ); }
         inline int size( void ) const { return( (int) mEnergies.size( ) ); }
-        inline double const *getEnergies( void ) const { return( &(mEnergies[0]) ); }
-        inline double const *getFluxes( void ) const { return( &(mFluxes[0]) ); }
+        inline G4double const *getEnergies( void ) const { return( &(mEnergies[0]) ); }
+        inline G4double const *getFluxes( void ) const { return( &(mFluxes[0]) ); }
         void print( int valuesPerLine = 10 ) const;
 
     private:
-        void initialize( int order, int length, double const *energies, double const *fluxes );
+        void initialize( int order, int length, G4double const *energies, G4double const *fluxes );
 };
 
 class GIDI_settings_flux {
 
     private:
         std::string mLabel;                                  /**< Label for the flux. */
-        double mTemperature;
+        G4double mTemperature;
         std::vector<GIDI_settings_flux_order> mFluxOrders;   /**< List of fluxes for each Legendre order, l, sorted by Legendre order starting with l = 0. */
 
     public:
-        GIDI_settings_flux( std::string const &label, double temperature_MeV );
-        GIDI_settings_flux( char const *label, double temperature_MeV );
+        GIDI_settings_flux( std::string const &label, G4double temperature_MeV );
+        GIDI_settings_flux( char const *label, G4double temperature_MeV );
         GIDI_settings_flux( GIDI_settings_flux const &flux );
         GIDI_settings_flux& operator=( const GIDI_settings_flux &flux );
         ~GIDI_settings_flux( );
@@ -140,7 +140,7 @@ class GIDI_settings_flux {
         inline std::string getLabel( ) const { return( mLabel ); }
         inline bool isLabel( std::string const &label ) const { return( label == mLabel ); }
         inline bool isLabel( char const *label ) const { return( label == mLabel ); }
-        inline double getTemperature( ) const { return( mTemperature ); }
+        inline G4double getTemperature( ) const { return( mTemperature ); }
         void addFluxOrder( GIDI_settings_flux_order const &fluxOrder );
         void print( bool outline = true, int valuesPerLine = 10 ) const;
 };
@@ -152,9 +152,9 @@ class GIDI_settings_fluxes_from_bdfls {
         std::vector<GIDI_settings_flux> mFluxes;
 
     public:
-        GIDI_settings_fluxes_from_bdfls( std::string const &fileName, double temperature_MeV );
-        GIDI_settings_fluxes_from_bdfls( char const *fileName, double temperature_MeV );
-        GIDI_settings_fluxes_from_bdfls( cbdfls_file const *bdfls, double temperature_MeV );
+        GIDI_settings_fluxes_from_bdfls( std::string const &fileName, G4double temperature_MeV );
+        GIDI_settings_fluxes_from_bdfls( char const *fileName, G4double temperature_MeV );
+        GIDI_settings_fluxes_from_bdfls( cbdfls_file const *bdfls, G4double temperature_MeV );
         ~GIDI_settings_fluxes_from_bdfls( );
 
         GIDI_settings_flux getViaFID( int fid );
@@ -163,8 +163,8 @@ class GIDI_settings_fluxes_from_bdfls {
         void print( bool outline = true, int valuesPerLine = 10 );
 
     private:
-        void initialize( char const *fileName, double temperature_MeV );
-        void initialize2( cbdfls_file const *bdfls, double temperature_MeV );
+        void initialize( char const *fileName, G4double temperature_MeV );
+        void initialize2( cbdfls_file const *bdfls, G4double temperature_MeV );
 };
 #endif
 
@@ -181,7 +181,7 @@ class GIDI_settings_processedFlux {
         GIDI_settings_processedFlux& operator=( const GIDI_settings_processedFlux &flux );
         ~GIDI_settings_processedFlux( );
 
-        inline double getTemperature( ) const { return( mFlux.getTemperature( ) ); }
+        inline G4double getTemperature( ) const { return( mFlux.getTemperature( ) ); }
         GIDI::ptwXPoints *groupFunction( GIDI::statusMessageReporting *smr, GIDI::ptwXPoints *groupX, GIDI::ptwXYPoints *ptwXY1, int order ) const;
 };
 
@@ -202,15 +202,15 @@ class GIDI_settings_particle {
         ~GIDI_settings_particle( );
 
         int addFlux( GIDI::statusMessageReporting *smr, GIDI_settings_flux const &flux );
-        GIDI_settings_processedFlux const *nearestFluxToTemperature( double temperature ) const;
-        inline int getGroupIndexFromEnergy( double e_in, bool encloseOutOfRange ) const { return( mGroup.getGroupIndexFromEnergy( e_in, encloseOutOfRange ) ); };
+        GIDI_settings_processedFlux const *nearestFluxToTemperature( G4double temperature ) const;
+        inline int getGroupIndexFromEnergy( G4double e_in, bool encloseOutOfRange ) const { return( mGroup.getGroupIndexFromEnergy( e_in, encloseOutOfRange ) ); };
         inline int getNumberOfGroups( void ) const { return( mGroup.getNumberOfGroups( ) ); };
         inline int getPoPId( void ) const { return( mPoPId ); }
         inline int getEnergyMode( void ) const { return( mEnergyMode ); }
         inline bool getTransporting( void ) const { return( mTransporting ); }
         inline GIDI_settings_group getGroup( void ) const { return( mGroup ); }
-        GIDI_settings_flux const *getFlux( double temperature ) const;
-        GIDI::ptwXPoints *groupFunction( GIDI::statusMessageReporting *smr, GIDI::ptwXYPoints *ptwXY1, double temperature, int order ) const;
+        GIDI_settings_flux const *getFlux( G4double temperature ) const;
+        GIDI::ptwXPoints *groupFunction( GIDI::statusMessageReporting *smr, GIDI::ptwXYPoints *ptwXY1, G4double temperature, int order ) const;
         void setGroup( GIDI_settings_group const &group );
 
         inline bool isEnergyMode_continuous( void ) const { return( this->mEnergyMode & GIDI_settings_projectileEnergyMode_continuousEnergy ); }
@@ -218,7 +218,7 @@ class GIDI_settings_particle {
         inline bool isEnergyMode_fixedGrid( void ) const { return( this->mEnergyMode & GIDI_settings_projectileEnergyMode_fixedGrid ); }
 
     private:
-        GIDI_settings_flux const *getProcessedFlux( double temperature ) const;
+        GIDI_settings_flux const *getProcessedFlux( G4double temperature ) const;
 };
 
 class GIDI_settings {

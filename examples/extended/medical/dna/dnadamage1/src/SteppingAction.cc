@@ -40,7 +40,7 @@
 
 
 using MapOfDelayedLists = 
-std::map<double, std::map<int, G4TrackList*> >;
+std::map<G4double, std::map<int, G4TrackList*> >;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 

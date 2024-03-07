@@ -487,7 +487,7 @@ G4EmBiasingManager::ApplySplitting(std::vector<G4DynamicParticle*>& vd,
 
   G4int nsplit = nBremSplitting[index];
 
-  // double splitting is suppressed 
+  // G4double splitting is suppressed 
   if(1 < nsplit && trackWeight>w) {
 
     weight = w;
@@ -534,7 +534,7 @@ G4EmBiasingManager::ApplyDirectionalSplitting(
   G4double trackWeight = track.GetWeight();
   G4int nsplit = nBremSplitting[index];
 
-  // double splitting is suppressed
+  // G4double splitting is suppressed
   if(1 < nsplit && trackWeight>w) {
 
     weight = w;
@@ -661,7 +661,7 @@ G4EmBiasingManager::ApplyDirectionalSplitting(
   G4double trackWeight = track.GetWeight();
   G4int nsplit = nBremSplitting[index];
 
-  // double splitting is suppressed
+  // G4double splitting is suppressed
   if(1 < nsplit && trackWeight>w) {
 
     weight = w;

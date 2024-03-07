@@ -61,7 +61,7 @@ ChromosomeParameterisation::ChromosomeParameterisation(const char* filename):
 
   while (!f.eof())
   {
-    double x, y, z, rot;
+    G4double x, y, z, rot;
     f >> x >> y >> z >> rot;
     fPositions.push_back(new G4ThreeVector(x * nanometer,
                                            y * nanometer,

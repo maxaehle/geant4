@@ -37,7 +37,7 @@
 //
 // Modified:
 //
-//  12.07.10  S.Burdin (changed the magnetic and electric charge variables from integer to double)
+//  12.07.10  S.Burdin (changed the magnetic and electric charge variables from integer to G4double)
 //----------------------------------------------------------------------------
 //
 

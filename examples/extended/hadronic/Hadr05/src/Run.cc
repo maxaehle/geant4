@@ -281,7 +281,7 @@ void Run::EndOfRun()
   //remove all contents in fProcCounter
   fProcCounter.clear();
     
-  G4cout.setf(mode,std::ios::floatfield);
+  G4cout.setf(mode,std::ios::G4floatfield);
   G4cout.precision(prec);
 }
 

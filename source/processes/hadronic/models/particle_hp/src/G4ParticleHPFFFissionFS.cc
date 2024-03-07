@@ -97,7 +97,7 @@ void G4ParticleHPFFFissionFS::Init (G4double A, G4double Z, G4int M, G4String & 
 
    hasFSData = true; 
       //          MT              Energy            FPS    Yield
-      //std::map< int , std::map< double , std::map< int , double >* >* > FisionProductYieldData; 
+      //std::map< int , std::map< G4double , std::map< int , G4double >* >* > FisionProductYieldData; 
    while ( theData.good() ) // Loop checking, 11.05.2015, T. Koi
    {
       G4int iMT, iMF;

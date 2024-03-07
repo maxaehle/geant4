@@ -331,7 +331,7 @@ void Run::EndOfRun()
 
   //transmission coefficients
   //
-  G4double dNofEvents = double(numberOfEvent);
+  G4double dNofEvents = G4double(numberOfEvent);
   G4double absorbed  = 100.*fStatus[0]/dNofEvents;
   G4double transmit  = 100.*fStatus[1]/dNofEvents;
   G4double reflected = 100.*fStatus[2]/dNofEvents;  

@@ -14,7 +14,7 @@
 //                  operator() with mean: 16th Feb 1998
 // M Fischler      - put and get to/from streams 12/15/04
 // M Fischler	      - put/get to/from streams uses pairs of ulongs when
-//			+ storing doubles avoid problems with precision 
+//			+ storing G4doubles avoid problems with precision 
 //			4/14/05
 // =======================================================================
 
@@ -33,46 +33,46 @@ HepRandomEngine & RandExponential::engine() {return *localEngine;}
 RandExponential::~RandExponential() {
 }
 
-double RandExponential::operator()() {
+G4double RandExponential::operator()() {
   return fire( defaultMean );
 }
 
-double RandExponential::operator()( double mean ) {
+G4double RandExponential::operator()( G4double mean ) {
   return fire( mean );
 }
 
-double RandExponential::shoot() {
+G4double RandExponential::shoot() {
   return -std::log(HepRandom::getTheEngine()->flat());
 }
 
-double RandExponential::shoot(double mean) {
+G4double RandExponential::shoot(G4double mean) {
   return -std::log(HepRandom::getTheEngine()->flat())*mean;
 }
 
-void RandExponential::shootArray( const int size, double* vect,
-                                  double mean )
+void RandExponential::shootArray( const int size, G4double* vect,
+                                  G4double mean )
 {
-  for( double* v = vect; v != vect+size; ++v )
+  for( G4double* v = vect; v != vect+size; ++v )
     *v = shoot(mean);
 }
 
 void RandExponential::shootArray(HepRandomEngine* anEngine, const int size,
-                                   double* vect, double mean )
+                                   G4double* vect, G4double mean )
 {
-  for( double* v = vect; v != vect+size; ++v )
+  for( G4double* v = vect; v != vect+size; ++v )
     *v = shoot(anEngine, mean);
 }
 
-void RandExponential::fireArray( const int size, double* vect)
+void RandExponential::fireArray( const int size, G4double* vect)
 {
-  for( double* v = vect; v != vect+size; ++v )
+  for( G4double* v = vect; v != vect+size; ++v )
     *v = fire( defaultMean );
 }
 
-void RandExponential::fireArray( const int size, double* vect,
-                                 double mean )
+void RandExponential::fireArray( const int size, G4double* vect,
+                                 G4double mean )
 {
-  for( double* v = vect; v != vect+size; ++v )
+  for( G4double* v = vect; v != vect+size; ++v )
     *v = fire( mean );
 }
 
@@ -100,7 +100,7 @@ std::istream & RandExponential::get ( std::istream & is ) {
   }
   if (possibleKeywordInput(is, "Uvec", defaultMean)) {
     std::vector<unsigned long> t(2);
-    is >> defaultMean >> t[0] >> t[1]; defaultMean = DoubConv::longs2double(t); 
+    is >> defaultMean >> t[0] >> t[1]; defaultMean = DoubConv::longs2G4double(t); 
     return is;
   }
   // is >> defaultMean encompassed by possibleKeywordInput

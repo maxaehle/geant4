@@ -87,7 +87,7 @@ private:
   G4VPhysicalVolume* ConstructWorld();
   G4VPhysicalVolume* DefineVolumes(G4String filename,unsigned short int option);
 
-  void AtomisticView(G4LogicalVolume*,Molecule *,double atomSizeFactor);
+  void AtomisticView(G4LogicalVolume*,Molecule *,G4double atomSizeFactor);
   void BarycenterView(G4LogicalVolume* ,Barycenter *);
   void ResiduesView(G4LogicalVolume* ,Barycenter *);
   void DrawBoundingVolume(G4LogicalVolume* ,Molecule *);

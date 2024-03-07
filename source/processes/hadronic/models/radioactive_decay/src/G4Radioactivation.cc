@@ -631,10 +631,10 @@ CalculateChainsFromParent(const G4ParticleDefinition& theParentNucleus)
             // they are in two parts, first the less than n ones
             // Eq 4.24 of the TN
             Acoeffs.clear();
-            long double ta1,ta2;
-            ta2 = (long double)TaoPlus;
+            long G4double ta1,ta2;
+            ta2 = (long G4double)TaoPlus;
             for (k = 0; k < RP.size(); k++){
-              ta1 = (long double)TP[k];    // loop over lifetimes of all previous generations
+              ta1 = (long G4double)TP[k];    // loop over lifetimes of all previous generations
               if (ta1 == ta2) {
                 theRate = 1.e100;
               } else {
@@ -648,16 +648,16 @@ CalculateChainsFromParent(const G4ParticleDefinition& theParentNucleus)
             // Eq 4.25 of the TN.  Note Yn+1 is zero apart from Y1 which is -1
             // as treated at line 1013 
             theRate = 0.;
-            long double aRate, aRate1;
+            long G4double aRate, aRate1;
             aRate1 = 0.L;
             for (k = 0; k < RP.size(); k++){
-              ta1 = (long double)TP[k];
+              ta1 = (long G4double)TP[k];
               if (ta1 == ta2 ) {
                 aRate = 1.e100;
               } else {
                 aRate = ta2/(ta1-ta2);
               }
-              aRate = aRate * (long double)(theBR * RP[k]);
+              aRate = aRate * (long G4double)(theBR * RP[k]);
               aRate1 += aRate;
             }
             theRate = -aRate1;
@@ -912,7 +912,7 @@ G4Radioactivation::DecayIt(const G4Track& theTrack, const G4Step&)
       std::vector<G4double> PT;
       std::vector<G4double> PR;
       G4double taotime;
-      long double decayRate;
+      long G4double decayRate;
 
       size_t i;
       G4int numberOfSecondaries;
@@ -1004,7 +1004,7 @@ G4Radioactivation::DecayIt(const G4Track& theTrack, const G4Step&)
           decayRate = 0.L;
           for (G4int j = 0; j < G4int(PT.size() ); j++) {
             taotime = ConvolveSourceTimeProfile(theDecayTime,PT[j]);
-            decayRate -= PR[j] * (long double)taotime;  // PRs are Acoeffs, taotime is inverse time
+            decayRate -= PR[j] * (long G4double)taotime;  // PRs are Acoeffs, taotime is inverse time
             // Eq.4.23 of of the TN
             // note the negative here is required as the rate in the
             // equation is defined to be negative, 
@@ -1122,8 +1122,8 @@ G4Radioactivation::DecayIt(const G4Track& theTrack, const G4Step&)
 void 
 G4Radioactivation::AddDeexcitationSpectrumForBiasMode(G4ParticleDefinition* apartDef,
                                         G4double weight,G4double currentTime,
-                                        std::vector<double>& weights_v,
-                                        std::vector<double>& times_v,
+                                        std::vector<G4double>& weights_v,
+                                        std::vector<G4double>& times_v,
                                         std::vector<G4DynamicParticle*>& secondaries_v)
 {
   G4double elevel=((const G4Ions*)(apartDef))->GetExcitationEnergy();

@@ -4,7 +4,7 @@
 */
 
 #include <cmath>
-#include <float.h>
+#include <G4float.h>
 
 #include "ptwXY.h"
 
@@ -13,16 +13,16 @@ namespace GIDI {
 using namespace GIDI;
 #endif
 
-static double ptwXY_mod2( double v, double m, int pythonMod );
-static nfu_status ptwXY_mul2_s_ptwXY( ptwXYPoints *n, ptwXYPoints *ptwXY1, ptwXYPoints *ptwXY2, double x1, double y1, double x2, double y2, int level );
-static nfu_status ptwXY_div_s_ptwXY( ptwXYPoints *n, ptwXYPoints *ptwXY1, ptwXYPoints *ptwXY2, double x1, double y1, double x2, double y2, 
+static G4double ptwXY_mod2( G4double v, G4double m, int pythonMod );
+static nfu_status ptwXY_mul2_s_ptwXY( ptwXYPoints *n, ptwXYPoints *ptwXY1, ptwXYPoints *ptwXY2, G4double x1, G4double y1, G4double x2, G4double y2, int level );
+static nfu_status ptwXY_div_s_ptwXY( ptwXYPoints *n, ptwXYPoints *ptwXY1, ptwXYPoints *ptwXY2, G4double x1, G4double y1, G4double x2, G4double y2, 
     int level, int isNAN1, int isNAN2 );
 static ptwXYPoints *ptwXY_div_ptwXY_forFlats( ptwXYPoints *ptwXY1, ptwXYPoints *ptwXY2, nfu_status *status, int safeDivide );
-static nfu_status ptwXY_getValueAtX_ignore_XOutsideDomainError( ptwXYPoints *ptwXY1, double x, double *y );
+static nfu_status ptwXY_getValueAtX_ignore_XOutsideDomainError( ptwXYPoints *ptwXY1, G4double x, G4double *y );
 /*
 ************************************************************
 */
-nfu_status ptwXY_slopeOffset( ptwXYPoints *ptwXY, double slope, double offset ) { 
+nfu_status ptwXY_slopeOffset( ptwXYPoints *ptwXY, G4double slope, G4double offset ) { 
 
     int64_t i, nonOverflowLength = ptwXY_getNonOverflowLength( ptwXY );
     ptwXYPoint *p;
@@ -37,11 +37,11 @@ nfu_status ptwXY_slopeOffset( ptwXYPoints *ptwXY, double slope, double offset ) 
 /*
 ************************************************************
 */
-nfu_status ptwXY_add_double( ptwXYPoints *ptwXY, double value ) { return( ptwXY_slopeOffset( ptwXY, 1., value ) ); }
-nfu_status ptwXY_sub_doubleFrom( ptwXYPoints *ptwXY, double value ) { return( ptwXY_slopeOffset( ptwXY,  1., -value ) ); }
-nfu_status ptwXY_sub_fromDouble( ptwXYPoints *ptwXY, double value ) { return( ptwXY_slopeOffset( ptwXY, -1.,  value ) ); }
-nfu_status ptwXY_mul_double( ptwXYPoints *ptwXY, double value ) { return( ptwXY_slopeOffset( ptwXY, value, 0. ) ); }
-nfu_status ptwXY_div_doubleFrom( ptwXYPoints *ptwXY, double value ) { 
+nfu_status ptwXY_add_G4double( ptwXYPoints *ptwXY, G4double value ) { return( ptwXY_slopeOffset( ptwXY, 1., value ) ); }
+nfu_status ptwXY_sub_G4doubleFrom( ptwXYPoints *ptwXY, G4double value ) { return( ptwXY_slopeOffset( ptwXY,  1., -value ) ); }
+nfu_status ptwXY_sub_fromDouble( ptwXYPoints *ptwXY, G4double value ) { return( ptwXY_slopeOffset( ptwXY, -1.,  value ) ); }
+nfu_status ptwXY_mul_G4double( ptwXYPoints *ptwXY, G4double value ) { return( ptwXY_slopeOffset( ptwXY, value, 0. ) ); }
+nfu_status ptwXY_div_G4doubleFrom( ptwXYPoints *ptwXY, G4double value ) { 
 
     if( value == 0. ) {
         ptwXY->status = nfu_divByZero; }
@@ -50,7 +50,7 @@ nfu_status ptwXY_div_doubleFrom( ptwXYPoints *ptwXY, double value ) {
     }
     return( ptwXY->status );
 }
-nfu_status ptwXY_div_fromDouble( ptwXYPoints *ptwXY, double value ) {
+nfu_status ptwXY_div_fromDouble( ptwXYPoints *ptwXY, G4double value ) {
 /*
 *   This does not do any infilling and it should?????????
 */
@@ -73,7 +73,7 @@ nfu_status ptwXY_div_fromDouble( ptwXYPoints *ptwXY, double value ) {
 /*
 ************************************************************
 */
-nfu_status ptwXY_mod( ptwXYPoints *ptwXY, double m, int pythonMod ) { 
+nfu_status ptwXY_mod( ptwXYPoints *ptwXY, G4double m, int pythonMod ) { 
 
     int64_t i, nonOverflowLength = ptwXY_getNonOverflowLength( ptwXY );
     ptwXYPoint *p;
@@ -89,9 +89,9 @@ nfu_status ptwXY_mod( ptwXYPoints *ptwXY, double m, int pythonMod ) {
 /*
 ************************************************************
 */
-static double ptwXY_mod2( double v, double m, int pythonMod ) {
+static G4double ptwXY_mod2( G4double v, G4double m, int pythonMod ) {
 
-    double r = std::fmod( std::fabs( v ), std::fabs( m ) );
+    G4double r = std::fmod( std::fabs( v ), std::fabs( m ) );
 
     if( pythonMod ) {
         if( ( v * m ) < 0. ) r = std::fabs( m ) - std::fabs( r );
@@ -105,11 +105,11 @@ static double ptwXY_mod2( double v, double m, int pythonMod ) {
 /*
 ************************************************************
 */
-ptwXYPoints *ptwXY_binary_ptwXY( ptwXYPoints *ptwXY1, ptwXYPoints *ptwXY2, double v1, double v2, double v1v2, nfu_status *status ) {
+ptwXYPoints *ptwXY_binary_ptwXY( ptwXYPoints *ptwXY1, ptwXYPoints *ptwXY2, G4double v1, G4double v2, G4double v1v2, nfu_status *status ) {
 
     int64_t i;
     int unionOptions = ptwXY_union_fill | ptwXY_union_mergeClosePoints;
-    double y;
+    G4double y;
     ptwXYPoints *n;
     ptwXYPoint *p;
 
@@ -189,7 +189,7 @@ ptwXYPoints *ptwXY_mul2_ptwXY( ptwXYPoints *ptwXY1, ptwXYPoints *ptwXY2, nfu_sta
     int64_t i, length;
     ptwXYPoints *n = NULL;
     int found;
-    double x1, y1, x2, y2, u1, u2, v1, v2, xz1 = 0, xz2 = 0, x;
+    G4double x1, y1, x2, y2, u1, u2, v1, v2, xz1 = 0, xz2 = 0, x;
 
     *status = nfu_otherInterpolation;
     if( ptwXY1->interpolation == ptwXY_interpolationOther ) return( NULL );
@@ -237,7 +237,7 @@ ptwXYPoints *ptwXY_mul2_ptwXY( ptwXYPoints *ptwXY1, ptwXYPoints *ptwXY2, nfu_sta
             x2 = x1;
             y2 = y1;
         }
-        ptwXY_update_biSectionMax( n, (double) length );
+        ptwXY_update_biSectionMax( n, (G4double) length );
     }
     return( n );
 
@@ -248,10 +248,10 @@ Err:
 /*
 ************************************************************
 */
-static nfu_status ptwXY_mul2_s_ptwXY( ptwXYPoints *n, ptwXYPoints *ptwXY1, ptwXYPoints *ptwXY2, double x1, double y1, double x2, double y2, int level ) {
+static nfu_status ptwXY_mul2_s_ptwXY( ptwXYPoints *n, ptwXYPoints *ptwXY1, ptwXYPoints *ptwXY2, G4double x1, G4double y1, G4double x2, G4double y2, int level ) {
 
     nfu_status status;
-    double u1, u2, v1, v2, x, y, yp, dx, a1, a2;
+    G4double u1, u2, v1, v2, x, y, yp, dx, a1, a2;
 
     if( ( x2 - x1 ) < ClosestAllowXFactor * DBL_EPSILON * ( std::fabs( x1 ) + std::fabs( x2 ) ) ) return( nfu_Okay );
     if( level >= n->biSectionMax ) return( nfu_Okay );
@@ -289,7 +289,7 @@ ptwXYPoints *ptwXY_div_ptwXY( ptwXYPoints *ptwXY1, ptwXYPoints *ptwXY2, nfu_stat
 
     int isNAN1, isNAN2;
     int64_t i, j, k, zeros = 0, length, iYs;
-    double x1, x2, y1, y2, u1, u2, v1, v2, y, xz, nan = nfu_getNAN( ), s1, s2;
+    G4double x1, x2, y1, y2, u1, u2, v1, v2, y, xz, nan = nfu_getNAN( ), s1, s2;
     ptwXYPoints *n = NULL;
     ptwXYPoint *p;
 
@@ -390,7 +390,7 @@ ptwXYPoints *ptwXY_div_ptwXY( ptwXYPoints *ptwXY1, ptwXYPoints *ptwXY2, nfu_stat
                 y2 = y1;
                 isNAN2 = isNAN1;
             }
-            ptwXY_update_biSectionMax( n, (double) length );
+            ptwXY_update_biSectionMax( n, (G4double) length );
             if( zeros ) {
                 if( ( *status = ptwXY_simpleCoalescePoints( n ) ) != nfu_Okay ) goto Err;
                 for( i = 0; i < n->length; i++ ) if( !nfu_isNAN( n->points[i].y ) ) break;
@@ -429,11 +429,11 @@ Err:
 /*
 ************************************************************
 */
-static nfu_status ptwXY_div_s_ptwXY( ptwXYPoints *n, ptwXYPoints *ptwXY1, ptwXYPoints *ptwXY2, double x1, double y1, double x2, double y2, 
+static nfu_status ptwXY_div_s_ptwXY( ptwXYPoints *n, ptwXYPoints *ptwXY1, ptwXYPoints *ptwXY2, G4double x1, G4double y1, G4double x2, G4double y2, 
         int level, int isNAN1, int isNAN2 ) {
 
     nfu_status status;
-    double u1, u2, v1, v2, v, x, y, yp, dx, a1, a2;
+    G4double u1, u2, v1, v2, v, x, y, yp, dx, a1, a2;
 
     if( ( x2 - x1 ) < ClosestAllowXFactor * DBL_EPSILON * ( std::fabs( x1 ) + std::fabs( x2 ) ) ) return( nfu_Okay );
     if( level >= n->biSectionMax ) return( nfu_Okay );
@@ -482,7 +482,7 @@ static ptwXYPoints *ptwXY_div_ptwXY_forFlats( ptwXYPoints *ptwXY1, ptwXYPoints *
     int64_t i;
     ptwXYPoints *n = NULL;
     ptwXYPoint *p;
-    double y;
+    G4double y;
 
     *status = nfu_invalidInterpolation;
     if( ptwXY1->interpolation != ptwXY_interpolationFlat ) return( NULL );
@@ -509,7 +509,7 @@ Err:
 /*
 ************************************************************
 */
-static nfu_status ptwXY_getValueAtX_ignore_XOutsideDomainError( ptwXYPoints *ptwXY1, double x, double *y ) {
+static nfu_status ptwXY_getValueAtX_ignore_XOutsideDomainError( ptwXYPoints *ptwXY1, G4double x, G4double *y ) {
 
     nfu_status status = ptwXY_getValueAtX( ptwXY1, x, y );
 

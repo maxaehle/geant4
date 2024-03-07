@@ -225,7 +225,7 @@ void G4QMDMeanField::Cal2BodyQuantities()
          G4int jcharge = system->GetParticipant(j)->GetChargeInUnitOfEplus();
 
          G4double xerf = 0.0;
-         // T. K. add this protection. 5.8 is good enough for double
+         // T. K. add this protection. 5.8 is good enough for G4double
          if ( rrs*c0sw < 5.8 ) {
             //erf = G4RandStat::erf ( rrs*c0sw );
             //Restore to CLHEP for avoiding compilation error in MT
@@ -357,7 +357,7 @@ void G4QMDMeanField::Cal2BodyQuantities( G4int i )
       G4int jcharge = system->GetParticipant(j)->GetChargeInUnitOfEplus();
 
       G4double xerf = 0.0;
-      // T. K. add this protection. 5.8 is good enough for double
+      // T. K. add this protection. 5.8 is good enough for G4double
       if ( rrs*c0sw < 5.8 ) {
          //xerf = G4RandStat::erf ( rrs*c0sw );
          //Use cmath 

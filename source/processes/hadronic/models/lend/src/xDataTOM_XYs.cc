@@ -39,7 +39,7 @@ int xDataTOM_XYs_release( xDataTOM_XYs *XYs ) {
 /*
 ************************************************************
 */
-int xDataTOM_XYs_getData( xDataTOM_XYs *XYs, double **data ) {
+int xDataTOM_XYs_getData( xDataTOM_XYs *XYs, G4double **data ) {
 
     *data = XYs->data;
     return( XYs->length );
@@ -47,7 +47,7 @@ int xDataTOM_XYs_getData( xDataTOM_XYs *XYs, double **data ) {
 /*
 ************************************************************
 */
-int xDataTOM_XYs_getDataFromXDataInfo( xDataTOM_xDataInfo *xDI, double **data ) {
+int xDataTOM_XYs_getDataFromXDataInfo( xDataTOM_xDataInfo *xDI, G4double **data ) {
 
     return( xDataTOM_XYs_getData( (xDataTOM_XYs *) xDI->data, data ) );
 }

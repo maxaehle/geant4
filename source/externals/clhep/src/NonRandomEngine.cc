@@ -40,13 +40,13 @@ NonRandomEngine::NonRandomEngine() : nextHasBeenSet(false),
 NonRandomEngine::~NonRandomEngine() { }
 
 
-void NonRandomEngine::setNextRandom(double r) {
+void NonRandomEngine::setNextRandom(G4double r) {
   nextRandom = r;
   nextHasBeenSet=true;
   return;
 }
 
-void NonRandomEngine::setRandomSequence(double* s, int n) {
+void NonRandomEngine::setRandomSequence(G4double* s, int n) {
   sequence.clear();
   for (int i=0; i<n; i++) sequence.push_back(*s++);
   assert (sequence.size() == (unsigned int)n);
@@ -56,16 +56,16 @@ void NonRandomEngine::setRandomSequence(double* s, int n) {
   return;
 }
 
-void NonRandomEngine::setRandomInterval(double x) {
+void NonRandomEngine::setRandomInterval(G4double x) {
   randomInterval = x;
   intervalHasBeenSet=true;
   return;
 }
 
-double NonRandomEngine::flat() {
+G4double NonRandomEngine::flat() {
 
   if (sequenceHasBeenSet) {
-    double v = sequence[nInSeq++];
+    G4double v = sequence[nInSeq++];
     if (nInSeq >= sequence.size() ) sequenceHasBeenSet = false;
     return v;
   }
@@ -76,7 +76,7 @@ double NonRandomEngine::flat() {
     exit(1);
   }
 
-  double a = nextRandom;
+  G4double a = nextRandom;
   nextHasBeenSet = false;
 
   if (intervalHasBeenSet) {
@@ -89,7 +89,7 @@ double NonRandomEngine::flat() {
 }
 
 
-void NonRandomEngine::flatArray(const int size, double* vect) {
+void NonRandomEngine::flatArray(const int size, G4double* vect) {
   for (int i = 0; i < size; ++i) {
     vect[i] = flat();
   }
@@ -184,7 +184,7 @@ std::istream & NonRandomEngine::getState (std::istream & is) {
   unsigned int seqSize;
   is >> seqSize;
   sequence.clear();
-  double x;
+  G4double x;
   for (unsigned int i = 0; i < seqSize; ++i) {
     is >> x;
     sequence.push_back(x);
@@ -221,13 +221,13 @@ bool NonRandomEngine::getState (const std::vector<unsigned long> & v) {
   nextHasBeenSet     = (v[1]!=0);
   sequenceHasBeenSet = (v[2]!=0);
   intervalHasBeenSet = (v[3]!=0);
-  t[0] = v[4]; t[1] = v[5]; nextRandom = DoubConv::longs2double(t);
+  t[0] = v[4]; t[1] = v[5]; nextRandom = DoubConv::longs2G4double(t);
   nInSeq = v[6];
-  t[0] = v[7]; t[1] = v[8]; randomInterval = DoubConv::longs2double(t);
+  t[0] = v[7]; t[1] = v[8]; randomInterval = DoubConv::longs2G4double(t);
   sequence.clear();
   for (unsigned int i=0; i<seqSize; ++i) {
     t[0] = v[2*i+10]; t[1] = v[2*i+11];
-    sequence.push_back(DoubConv::longs2double(t));
+    sequence.push_back(DoubConv::longs2G4double(t));
   }
   return true;
 }

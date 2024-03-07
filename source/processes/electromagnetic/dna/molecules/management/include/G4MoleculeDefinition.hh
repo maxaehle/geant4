@@ -120,7 +120,7 @@ public:
   G4MolecularConfiguration*
   NewConfigurationWithElectronOccupancy(const G4String& excitedStateLabel,
                                         const G4ElectronOccupancy&,
-                                        double decayTime = 0.);
+                                        G4double decayTime = 0.);
 
   G4MolecularConfiguration*
   GetConfigurationWithLabel(const G4String& molecularConfLabel);

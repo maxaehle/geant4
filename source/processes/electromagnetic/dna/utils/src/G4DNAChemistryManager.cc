@@ -134,7 +134,7 @@ G4DNAChemistryManager* G4DNAChemistryManager::Instance()
     if (fgInstance == nullptr)
     {
         G4AutoLock lock(&chemManExistence);
-        if (fgInstance == nullptr) // MT : double check at initialisation
+        if (fgInstance == nullptr) // MT : G4double check at initialisation
         {
             fgInstance = new G4DNAChemistryManager();
         }
@@ -680,7 +680,7 @@ void G4DNAChemistryManager::CreateSolvatedElectron(const G4Track* pIncomingTrack
 //------------------------------------------------------------------------------
 
 void G4DNAChemistryManager::PushMolecule(std::unique_ptr<G4Molecule> pMolecule,
-                                         double time,
+                                         G4double time,
                                          const G4ThreeVector& position,
                                          int parentID)
 {

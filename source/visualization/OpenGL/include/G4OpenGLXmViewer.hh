@@ -316,7 +316,7 @@ public:
   static void rotate_in_phi (XtPointer clientData,
 			     XtIntervalId* timer_id);
   
-  static void get_double_value_callback (Widget w, 
+  static void get_G4double_value_callback (Widget w, 
 					 XtPointer clientData, 
 					 XtPointer callData); 
   

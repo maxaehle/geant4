@@ -104,8 +104,8 @@ G4bool G4GoudsmitSaundersonTable::gIsInitialised = false;
 std::vector<G4GoudsmitSaundersonTable::GSMSCAngularDtr*> G4GoudsmitSaundersonTable::gGSMSCAngularDistributions1;
 std::vector<G4GoudsmitSaundersonTable::GSMSCAngularDtr*> G4GoudsmitSaundersonTable::gGSMSCAngularDistributions2;
 //
-std::vector<double> G4GoudsmitSaundersonTable::gMoliereBc;
-std::vector<double> G4GoudsmitSaundersonTable::gMoliereXc2;
+std::vector<G4double> G4GoudsmitSaundersonTable::gMoliereBc;
+std::vector<G4double> G4GoudsmitSaundersonTable::gMoliereXc2;
 
 
 G4GoudsmitSaundersonTable::G4GoudsmitSaundersonTable(G4bool iselectron) {
@@ -493,7 +493,7 @@ void G4GoudsmitSaundersonTable::LoadMSCData() {
         gsd->fUValues = new G4double[gsd->fNumData]();
         gsd->fParamA  = new G4double[gsd->fNumData]();
         gsd->fParamB  = new G4double[gsd->fNumData]();
-        double ddummy;
+        G4double ddummy;
         infile >> ddummy; infile >> ddummy;
         for (G4int i=0; i<gsd->fNumData; ++i) {
           infile >> gsd->fUValues[i];

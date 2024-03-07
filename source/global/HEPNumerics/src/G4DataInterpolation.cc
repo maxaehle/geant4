@@ -433,7 +433,7 @@ void G4DataInterpolation::CorrelatedSearch(G4double pX, G4int& index) const
       while((pX >= fArgument[kHigh]) == ascend)
       {
         index = kHigh;
-        Increment += Increment;  // double the Increment
+        Increment += Increment;  // G4double the Increment
         kHigh = index + Increment;
         if(kHigh > (fNumber - 1))
         {
@@ -453,7 +453,7 @@ void G4DataInterpolation::CorrelatedSearch(G4double pX, G4int& index) const
       while((pX < fArgument[index]) == ascend)
       {
         kHigh = index;
-        Increment <<= 1;  // double the Increment
+        Increment <<= 1;  // G4double the Increment
         if(Increment >= kHigh)
         {
           index = -1;

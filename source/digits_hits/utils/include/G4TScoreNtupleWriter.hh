@@ -52,7 +52,7 @@ class G4HCofThisEvent;
 // An ntuple with three columns is created for each primitive scorer:
 // int column - eventNumber
 // int column - copyNumber
-// double column - scored value
+// G4double column - scored value
 
 template <typename T>
 class G4TScoreNtupleWriter : public G4VScoreNtupleWriter

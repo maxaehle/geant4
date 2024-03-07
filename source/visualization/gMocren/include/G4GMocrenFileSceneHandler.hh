@@ -130,14 +130,14 @@ private:
   G4GMocrenMessenger & kMessenger;
   G4GMocrenIO * kgMocrenIO;
 
-  std::map<G4int, float> kModality;
+  std::map<G4int, G4float> kModality;
   G4int kModalitySize[3];
-  //std::map<G4ThreeVector, float> kModalityDensities; // key: position, val: density
+  //std::map<G4ThreeVector, G4float> kModalityDensities; // key: position, val: density
   G4bool kbSetModalityVoxelSize;
   G4bool kbModelingTrajectory;
 
   static G4int	kSceneIdCount;
-  //std::vector<float *> fTrajectories;
+  //std::vector<G4float *> fTrajectories;
   //std::vector<unsigned char *> fTrajectoryColors;
   G4Transform3D kVolumeTrans3D;
 
@@ -174,7 +174,7 @@ private:
     // Index3D& operator = (const Index3D&);
   };
 
-  std::map<Index3D, float> kNestedModality;
+  std::map<Index3D, G4float> kNestedModality;
   //std::map<Index3D, G4double> * fTempNestedHits;
   std::map<G4String, std::map<Index3D, G4double> > kNestedHitsList;
   //std::map<G4String, G4String> kNestedHitsUnit;

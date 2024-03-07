@@ -44,7 +44,7 @@ class G4VReactionType
 public:
     G4VReactionType() = default;
     virtual ~G4VReactionType() = default;
-    virtual double GetTimeToEncounter(const G4Track&, const G4Track&) = 0;
+    virtual G4double GetTimeToEncounter(const G4Track&, const G4Track&) = 0;
     virtual bool GeminateRecombinationProbability(const G4MolecularConfiguration*,
                                                   const G4MolecularConfiguration*) = 0;
 };

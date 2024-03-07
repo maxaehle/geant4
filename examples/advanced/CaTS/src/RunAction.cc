@@ -98,8 +98,8 @@ void RunAction::BeginOfRunAction(const G4Run*) {
             G4cout << "sensor_placements.size():  " << sensor_placements.size()
                     << G4endl;
             for (unsigned i = 0; i < sensor_placements.size(); i++) {
-                float efficiency_1 = 0.5f;
-                float efficiency_2 = 1.0f;
+                G4float efficiency_1 = 0.5f;
+                G4float efficiency_2 = 1.0f;
                 int sensor_cat = -1; // -1:means no angular info
                 int sensor_identifier =
                         0xc0ffee + i; // mockup a detector specific identifier

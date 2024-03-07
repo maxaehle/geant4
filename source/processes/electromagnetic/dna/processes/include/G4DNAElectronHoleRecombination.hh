@@ -100,8 +100,8 @@ private:
     G4bool FindReactant(const G4Track& track);
     void MakeReaction(const G4Track& track);
 
-    const std::vector<double>* fpMoleculeDensity;
+    const std::vector<G4double>* fpMoleculeDensity;
     G4ParticleChange fParticleChange;
     G4bool fIsInitialized;
-    std::map<int, std::pair<double, G4double> > fOnsagerRadiusPerMaterial;
+    std::map<int, std::pair<G4double, G4double> > fOnsagerRadiusPerMaterial;
 };

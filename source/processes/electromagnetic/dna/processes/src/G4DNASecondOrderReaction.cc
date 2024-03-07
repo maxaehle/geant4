@@ -112,7 +112,7 @@ G4DNASecondOrderReaction::StartTracking(G4Track* track)
 
 void
 G4DNASecondOrderReaction::SetReaction(const G4MolecularConfiguration* molConf,
-                                      const G4Material* mat, double reactionRate)
+                                      const G4Material* mat, G4double reactionRate)
 {
   if(fIsInitialized)
   {

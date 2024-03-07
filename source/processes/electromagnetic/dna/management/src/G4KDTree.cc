@@ -166,7 +166,7 @@ G4KDTreeResultHandle G4KDTree::Nearest(G4KDNode_Base* node)
   }
 
   std::vector<G4KDNode_Base* > result;
-  double dist_sq = DBL_MAX;
+  G4double dist_sq = DBL_MAX;
 
   /* Duplicate the bounding hyperrectangle, we will work on the copy */
   HyperRect *newrect = new HyperRect(*fRect);
@@ -200,14 +200,14 @@ G4KDTreeResultHandle G4KDTree::Nearest(G4KDNode_Base* node)
 }
 
 G4KDTreeResultHandle G4KDTree::NearestInRange(G4KDNode_Base* node,
-                                              const double& range)
+                                              const G4double& range)
 {
   if (!node) return 0;
   int ret(-1);
 
   G4KDTreeResult *rset = new G4KDTreeResult(this);
 
-  const double range_sq = sqr(range);
+  const G4double range_sq = sqr(range);
 
   if ((ret = __NearestInRange(fRoot, *node, range_sq, range, *rset, 0, node)) == -1)
   {

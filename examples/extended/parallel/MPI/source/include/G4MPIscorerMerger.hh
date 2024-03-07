@@ -76,8 +76,8 @@ protected:
   void UnPackAndMerge(G4VScoringMesh* );
 
   //! Pack a single score map
-  //void Pack(const HitMap*);//Used When hits are <double>
-  void Pack(const HitStatDoubleMap*);//Used when hits are statdouble
+  //void Pack(const HitMap*);//Used When hits are <G4double>
+  void Pack(const HitStatDoubleMap*);//Used when hits are statG4double
   //HitMap* UnPackHitMap(const G4String& detName, const G4String& colName);
   HitStatDoubleMap* UnPackHitStatDoubleMap(const G4String& detName, const G4String& colName);
 

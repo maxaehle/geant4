@@ -94,9 +94,9 @@ G4VPhysicalVolume* DetectorConstruction::ConstructDetector()
 
   // WORLD VOLUME
 
-  double worldSizeX  = 2.*micrometer;
-  double worldSizeY  = worldSizeX;
-  double worldSizeZ  = worldSizeX;
+  G4double worldSizeX  = 2.*micrometer;
+  G4double worldSizeY  = worldSizeX;
+  G4double worldSizeZ  = worldSizeX;
 
   G4Box* solidWorld = new G4Box("World", //its name
       worldSizeX/2,worldSizeY/2,worldSizeZ/2);  //its size

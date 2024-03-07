@@ -198,7 +198,7 @@ public:
   void PrepareLeadingTracks();
 
   //___________________________________
-  G4double ComputeInteractionLength(double previousTimeStep);
+  G4double ComputeInteractionLength(G4double previousTimeStep);
   void DefinePhysicalStepLength(G4Track*);
   G4double GetILTimeStep()
   {
@@ -207,13 +207,13 @@ public:
 
   //___________________________________
   // DoIt
-  void DoIt(double timeStep);
+  void DoIt(G4double timeStep);
   void ExtractDoItData();
-  void Stepping(G4Track*, const double&);
+  void Stepping(G4Track*, const G4double&);
   void FindTransportationStep();
   //___________________________________
 
-  inline double GetInteractionTime();
+  inline G4double GetInteractionTime();
   inline const G4Track* GetTrack() const;
   inline void CleanProcessor();
 
@@ -488,7 +488,7 @@ inline void G4ITStepProcessor::CleanProcessor()
 
 //______________________________________________________________________________
 
-inline double G4ITStepProcessor::GetInteractionTime()
+inline G4double G4ITStepProcessor::GetInteractionTime()
 {
   return fTimeStep;
 }

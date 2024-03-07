@@ -163,7 +163,7 @@ template  < typename  BasePhysics, template  < typename > class  StudiedPhysics,
 void  CexmcPhysicsList< BasePhysics, StudiedPhysics, ProductionModel >::
                 CalculateBasicMaxIL( const G4ThreeVector &  direction )
 {
-    /* basicMaxIL is double distance from the point (0, 0, 0) to the edge of the
+    /* basicMaxIL is G4double distance from the point (0, 0, 0) to the edge of the
      * target solid along the specified direction */
     basicMaxIL = targetSolid->DistanceToOut( G4ThreeVector(),
                             targetTransform.TransformAxis( direction ) ) * 2;

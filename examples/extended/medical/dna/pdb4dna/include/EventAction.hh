@@ -95,7 +95,7 @@ private:
   std::map<G4int,G4double>  fEdepStrand2;
   // Min energy to consider single strand break
   G4double fThresEdepForSSB;
-  // Max distance to consider double strand break
+  // Max distance to consider G4double strand break
   G4int fThresDistForDSB;
 
   EventActionMessenger*     fpEventMessenger;

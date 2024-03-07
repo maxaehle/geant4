@@ -56,7 +56,7 @@
 #ifdef DNADEV_TEST
 #include "TRandom.h"
 TRandom root_random;
-double G4UniformRand()
+G4double G4UniformRand()
 {
   return root_random.Rndm();
 }
@@ -70,48 +70,48 @@ double G4UniformRand()
 class G4DNASmoluchowskiDiffusion
 {
 public:
-  G4DNASmoluchowskiDiffusion(double epsilon = 1e-5);
+  G4DNASmoluchowskiDiffusion(G4double epsilon = 1e-5);
   virtual ~G4DNASmoluchowskiDiffusion();
 
-  static double ComputeS(double r, double D, double t)
+  static G4double ComputeS(G4double r, G4double D, G4double t)
   {
-    double sTransform = r / (2. * std::sqrt(D * t));
+    G4double sTransform = r / (2. * std::sqrt(D * t));
     return sTransform;
   }
 
-  static double ComputeDistance(double sTransform, double D, double t)
+  static G4double ComputeDistance(G4double sTransform, G4double D, G4double t)
   {
     return sTransform * 2. * std::sqrt(D * t);
   }
 
-  static double ComputeTime(double sTransform, double D, double r)
+  static G4double ComputeTime(G4double sTransform, G4double D, G4double r)
   {
     return std::pow(r / sTransform, 2.) / (4. * D);
   }
 
   //====================================================
 
-  double GetRandomDistance(double _time, double D)
+  G4double GetRandomDistance(G4double _time, G4double D)
   {
-    double proba = G4UniformRand();
+    G4double proba = G4UniformRand();
 //    G4cout << "proba = " << proba << G4endl;
-    double sTransform = GetInverseProbability(proba);
+    G4double sTransform = GetInverseProbability(proba);
 //    G4cout << "sTransform = " << sTransform << G4endl;
     return ComputeDistance(sTransform, D, _time);
   }
 
-  double GetRandomTime(double distance, double D)
+  G4double GetRandomTime(G4double distance, G4double D)
   {
-    double proba = G4UniformRand();
-    double sTransform = GetInverseProbability(proba);
+    G4double proba = G4UniformRand();
+    G4double sTransform = GetInverseProbability(proba);
     return ComputeTime(sTransform, D, distance);
   }
 
-  double EstimateCrossingTime(double proba,
-                              double distance,
-                              double D)
+  G4double EstimateCrossingTime(G4double proba,
+                              G4double distance,
+                              G4double D)
   {
-    double sTransform = GetInverseProbability(proba);
+    G4double sTransform = GetInverseProbability(proba);
     return ComputeTime(sTransform, D, distance);
   }
 
@@ -120,16 +120,16 @@ public:
 
   // WARNING : this is NOT the differential probability
   // this is the derivative of the function GetCumulativeProbability
-  static double GetDifferential(double sTransform)
+  static G4double GetDifferential(G4double sTransform)
   {
-    static double constant = -4./std::sqrt(3.141592653589793);
+    static G4double constant = -4./std::sqrt(3.141592653589793);
     return sTransform*sTransform*G4Exp(-sTransform*sTransform)*constant; // -4*sTransform*sTransform*exp(-sTransform*sTransform)/sqrt(3.141592653589793)
   }
 
-  static double GetDensityProbability(double r, double _time, double D)
+  static G4double GetDensityProbability(G4double r, G4double _time, G4double D)
   {
-    static double my_pi = 3.141592653589793;
-    static double constant = 4.*my_pi/std::pow(4.*my_pi, 1.5);
+    static G4double my_pi = 3.141592653589793;
+    static G4double constant = 4.*my_pi/std::pow(4.*my_pi, 1.5);
     return r*r/std::pow(D * _time,1.5)*G4Exp(-r*r/(4. * D * _time))*constant;
   }
 
@@ -137,13 +137,13 @@ public:
   // BOUNDING BOX
   struct BoundingBox
   {
-    double fXmax;
-    double fXmin;
-    double fXmaxDef;
-    double fXminDef;
-    double fToleranceY;
-    double fSum;
-    double    fIncreasingCumulativeFunction;
+    G4double fXmax;
+    G4double fXmin;
+    G4double fXmaxDef;
+    G4double fXminDef;
+    G4double fToleranceY;
+    G4double fSum;
+    G4double    fIncreasingCumulativeFunction;
 
     enum PreviousAction
     {
@@ -154,16 +154,16 @@ public:
 
     PreviousAction fPreviousAction;
 
-    BoundingBox(double xmin,
-                double xmax,
-                double toleranceY) :
+    BoundingBox(G4double xmin,
+                G4double xmax,
+                G4double toleranceY) :
      fXmax(xmax), fXmin(xmin),
      fToleranceY(toleranceY),
      fSum(0)
     {
       if(fXmax < fXmin)
       {
-        double tmp = fXmin;
+        G4double tmp = fXmin;
         fXmin = fXmax;
         fXmax = tmp;
       }
@@ -179,10 +179,10 @@ public:
       G4cout << "fXmin: " << fXmin << " | fXmax: " << fXmax << G4endl;
     }
 
-    bool Propose(double proposedXValue,
-                 double proposedProba,
-                 double nextProba,
-                 double& returnedValue)
+    bool Propose(G4double proposedXValue,
+                 G4double proposedProba,
+                 G4double nextProba,
+                 G4double& returnedValue)
     {
 //      G4cout << "---------------------------" << G4endl;
 //      G4cout << "Proposed x value: " << proposedXValue
@@ -260,12 +260,12 @@ public:
   // END OF BOUNDING BOX
   //==============================
   
-  void PrepareReverseTable(double xmin, double xmax)
+  void PrepareReverseTable(G4double xmin, G4double xmax)
   {
-    double x = xmax;
+    G4double x = xmax;
     int index = 0;
-    double nextProba = fEpsilon;
-    double proposedX;
+    G4double nextProba = fEpsilon;
+    G4double proposedX;
 
     BoundingBox boundingBox(xmin, xmax, fEpsilon*1e-5);
 
@@ -275,7 +275,7 @@ public:
     {
       nextProba = fEpsilon*index;
 
-      double newProba = GetCumulativeProbability(x);
+      G4double newProba = GetCumulativeProbability(x);
 
       if(boundingBox.Propose(x, newProba, nextProba, proposedX))
       {
@@ -297,17 +297,17 @@ public:
     }
     
     fInverse[fNbins+1] = 0; // P(1) = 0, because we want it exact !
-    // Tips to improve the exactness: get an better value of pi, get better approximation of erf and exp, use long double instead of double
+    // Tips to improve the exactness: get an better value of pi, get better approximation of erf and exp, use long G4double instead of G4double
 //    boundingBox.Print();
   }
 
-  static double GetCumulativeProbability(double sTransform)
+  static G4double GetCumulativeProbability(G4double sTransform)
   {
-    static double constant = 2./std::sqrt(3.141592653589793);
+    static G4double constant = 2./std::sqrt(3.141592653589793);
     return erfc(sTransform) + constant*sTransform*G4Exp(-sTransform*sTransform);
   }
 
-  double GetInverseProbability(double proba) // returns sTransform
+  G4double GetInverseProbability(G4double proba) // returns sTransform
   {
     size_t index_low = (size_t) trunc(proba/fEpsilon);
     
@@ -315,22 +315,22 @@ public:
     {
       index_low = 1;
       size_t index_up = 2;
-      double low_y = fInverse[index_low];
-      double up_y = fInverse[index_up];
-      double low_x = index_low*fEpsilon;
-      double up_x = proba+fEpsilon;
-      double tangente = (low_y-up_y)/(low_x - up_x); // ou utiliser GetDifferential(proba) ?
-      // double tangente = GetDifferential(proba);
+      G4double low_y = fInverse[index_low];
+      G4double up_y = fInverse[index_up];
+      G4double low_x = index_low*fEpsilon;
+      G4double up_x = proba+fEpsilon;
+      G4double tangente = (low_y-up_y)/(low_x - up_x); // ou utiliser GetDifferential(proba) ?
+      // G4double tangente = GetDifferential(proba);
       return low_y + tangente*(proba-low_x);
     }
 
     size_t index_up = index_low+1;
     if(index_low > fInverse.size()) return fInverse.back();
-    double low_y = fInverse[index_low];
-    double up_y = fInverse[index_up];
+    G4double low_y = fInverse[index_low];
+    G4double up_y = fInverse[index_up];
 
-    double low_x = index_low*fEpsilon;
-    double up_x = low_x+fEpsilon;
+    G4double low_x = index_low*fEpsilon;
+    G4double up_x = low_x+fEpsilon;
 
     if(up_x > 1) // P(1) = 0
     {
@@ -338,23 +338,23 @@ public:
       up_y = 0; // more general : fInverse.back()
     }
 
-    double tangente = (low_y-up_y)/(low_x - up_x);
+    G4double tangente = (low_y-up_y)/(low_x - up_x);
 
     return low_y + tangente*(proba-low_x);
   }
 
-  double PlotInverse(double* x, double* )
+  G4double PlotInverse(G4double* x, G4double* )
   {
     return GetInverseProbability(x[0]);
   }
 
-  double Plot(double* x, double* )
+  G4double Plot(G4double* x, G4double* )
   {
     return GetDifferential(x[0]);
   }
 
 
-  void InitialiseInverseProbability(double xmax = 3e28)
+  void InitialiseInverseProbability(G4double xmax = 3e28)
   {
     // x > x'
     // P'(x) = p(x') = lim(x->x') (P(x') - P(x))/(x'-x)
@@ -367,9 +367,9 @@ public:
     PrepareReverseTable(0,xmax);
   }
 
-  std::vector<double> fInverse;
+  std::vector<G4double> fInverse;
   int fNbins;
-  double fEpsilon;
+  G4double fEpsilon;
 };
 
 #endif /* SOURCE_PROCESSES_ELECTROMAGNETIC_DNA_MODELS_G4DNASMOLUCHOWSKIDIFFUSION_HH_ */

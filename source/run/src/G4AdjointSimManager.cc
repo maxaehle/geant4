@@ -501,7 +501,7 @@ void G4AdjointSimManager::RegisterAtEndOfAdjointTrack()
   last_ekin_nuc = last_ekin;
   if(aPartDef->GetParticleType() == "adjoint_nucleus")
   {
-    nb_nuc = double(aPartDef->GetBaryonNumber());
+    nb_nuc = G4double(aPartDef->GetBaryonNumber());
     last_ekin_nuc /= nb_nuc;
   }
 

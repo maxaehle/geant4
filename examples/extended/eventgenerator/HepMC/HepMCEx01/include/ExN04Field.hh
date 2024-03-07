@@ -39,7 +39,7 @@ public:
   ExN04Field();
   ~ExN04Field();
 
-  virtual void GetFieldValue( const  double Point[3], double *Bfield ) const;
+  virtual void GetFieldValue( const  G4double Point[3], G4double *Bfield ) const;
 
 private:
   G4double fBz;

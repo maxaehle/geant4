@@ -38,7 +38,7 @@
 #define G4ABLARANDOM_HH
 
 namespace G4AblaRandom {
-  double flat();
+  G4double flat();
 }
 
 #endif

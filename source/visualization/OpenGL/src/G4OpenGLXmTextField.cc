@@ -162,7 +162,7 @@ void G4OpenGLXmTextField::AddYourselfTo (G4OpenGLXmVWidgetContainer* container)
   if (!text) {
     XtAddCallback (text_field, 
 		   XmNvalueChangedCallback,
-		   G4OpenGLXmViewer::get_double_value_callback,
+		   G4OpenGLXmViewer::get_G4double_value_callback,
 		   value);
   } else {
     XtAddCallback (text_field, 

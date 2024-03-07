@@ -35,21 +35,21 @@ DicomBeamControlPoint::DicomBeamControlPoint(DRTControlPointSequence::Item cpIte
 {
   OFString fstr;
   Sint32 fint;
-  Float64 ffloat;
-  Float32 ffloat32;
-  OFVector<Float64> fvfloat;
+  Float64 fG4float;
+  Float32 fG4float32;
+  OFVector<Float64> fvG4float;
   
   cpItem.getControlPointIndex(fint);
   G4cout << "  @ DicomBeamControlPoint: " << fint << G4endl;
   G4cout << "   " << " ControlPointIndex " << fint << G4endl;
   SetIndex( fint );
-  if( cpItem.getNominalBeamEnergy(ffloat) != EC_Normal ) {
-    if( point0 ) ffloat = point0->GetNominalBeamEnergy();
+  if( cpItem.getNominalBeamEnergy(fG4float) != EC_Normal ) {
+    if( point0 ) fG4float = point0->GetNominalBeamEnergy();
   }
-  G4cout << "   " << " NominalBeamEnergy " << ffloat << G4endl;
-  SetNominalBeamEnergy(ffloat);
-  cpItem.getDoseRateSet(ffloat); // != EC_Normal ) {
-  G4cout << "   " << " DoseRateSet " << ffloat << G4endl;
+  G4cout << "   " << " NominalBeamEnergy " << fG4float << G4endl;
+  SetNominalBeamEnergy(fG4float);
+  cpItem.getDoseRateSet(fG4float); // != EC_Normal ) {
+  G4cout << "   " << " DoseRateSet " << fG4float << G4endl;
   
   DRTBeamLimitingDevicePositionSequence beamLDPS = cpItem.getBeamLimitingDevicePositionSequence();
   G4cout << "  @ NUMBER OF BeamLimitingDevicePositionSequence " << beamLDPS.getNumberOfItems()
@@ -63,36 +63,36 @@ DicomBeamControlPoint::DicomBeamControlPoint(DRTControlPointSequence::Item cpIte
     beamLDPS.gotoNextItem();
   }
   
-  cpItem.getGantryAngle(ffloat);
-  G4cout << "   " << " GantryAngle " << ffloat << G4endl;
+  cpItem.getGantryAngle(fG4float);
+  G4cout << "   " << " GantryAngle " << fG4float << G4endl;
 
   cpItem.getGantryRotationDirection(fstr); //**
   G4cout << "   " << " GantryRotationDirection " << fstr << G4endl;
   if( fstr == "CC" ) { // counter-clockwise
-    SetGantryAngle(-ffloat);
+    SetGantryAngle(-fG4float);
   } else if( fstr == "CW" || fstr == "NONE" || fstr == "") { // clockwise
-    SetGantryAngle(ffloat);
+    SetGantryAngle(fG4float);
   }
-  if( cpItem.getBeamLimitingDeviceAngle(ffloat) != EC_Normal ) {
-    if( point0 ) ffloat = point0->GetBeamLimitingDeviceAngle();
+  if( cpItem.getBeamLimitingDeviceAngle(fG4float) != EC_Normal ) {
+    if( point0 ) fG4float = point0->GetBeamLimitingDeviceAngle();
   }
-  G4cout << "   " << " BeamLimitingDeviceAngle " << ffloat << G4endl;
+  G4cout << "   " << " BeamLimitingDeviceAngle " << fG4float << G4endl;
 
   if( cpItem.getBeamLimitingDeviceRotationDirection(fstr) != EC_Normal ) {
     if( point0 ) fstr = point0->GetBeamLimitingDeviceRotationDirection();
   }
   if( fstr == "CC" ) { // counter-clockwise
-    SetBeamLimitingDeviceAngle(-ffloat);
+    SetBeamLimitingDeviceAngle(-fG4float);
   } else if( fstr == "CW" || fstr == "NONE" || fstr == "") { // clockwise
-    SetBeamLimitingDeviceAngle(ffloat);
+    SetBeamLimitingDeviceAngle(fG4float);
   }   
   G4cout << "   " << " BeamLimitingDeviceRotationDirection " << fstr << G4endl;
   SetBeamLimitingDeviceRotationDirection(fstr);
 
-  if( cpItem.getPatientSupportAngle(ffloat) != EC_Normal ) {
+  if( cpItem.getPatientSupportAngle(fG4float) != EC_Normal ) {
     if( point0 ) fstr = point0->GetPatientSupportAngle();
   }
-  G4cout << "   " << " PatientSupportAngle " << ffloat << G4endl;
+  G4cout << "   " << " PatientSupportAngle " << fG4float << G4endl;
 
   if( cpItem.getPatientSupportRotationDirection(fstr) != EC_Normal ) {
     if( point0 ) fstr = point0->GetPatientSupportRotationDirection();
@@ -100,113 +100,113 @@ DicomBeamControlPoint::DicomBeamControlPoint(DRTControlPointSequence::Item cpIte
   G4cout << "   " << " PatientSupportRotationDirection " << fstr << G4endl;
   SetPatientSupportRotationDirection(fstr);
   if( fstr == "CC" ) { // counter-clockwise
-    SetPatientSupportAngle(-ffloat);
+    SetPatientSupportAngle(-fG4float);
   } else if( fstr == "CW" || fstr == "NONE" || fstr == "") { // clockwise
-    SetPatientSupportAngle(ffloat);
+    SetPatientSupportAngle(fG4float);
   }
 
-  if( cpItem.getTableTopEccentricAngle(ffloat) != EC_Normal ) {
-    if( point0 ) ffloat = point0->GetTableTopEccentricAngle();
+  if( cpItem.getTableTopEccentricAngle(fG4float) != EC_Normal ) {
+    if( point0 ) fG4float = point0->GetTableTopEccentricAngle();
   }
-  G4cout << "   " << " TableTopEccentricAngle " << ffloat << G4endl;
+  G4cout << "   " << " TableTopEccentricAngle " << fG4float << G4endl;
 
   if( cpItem.getTableTopEccentricRotationDirection(fstr) != EC_Normal ) {
     if( point0 ) fstr = point0->GetTableTopEccentricRotationDirection();
   }
   if( fstr == "CC" ) { // counter-clockwise
-    SetTableTopEccentricAngle(-ffloat);
+    SetTableTopEccentricAngle(-fG4float);
   } else if( fstr == "CW" || fstr == "NONE" || fstr == "") { // clockwise
-    SetTableTopEccentricAngle(ffloat);
+    SetTableTopEccentricAngle(fG4float);
   }
   G4cout << "   " << " TableTopEccentricRotationDirection " << fstr << G4endl;
   SetTableTopEccentricRotationDirection(fstr);
 
   G4ThreeVector isoCenter;
-  if( cpItem.getIsocenterPosition(fvfloat) != EC_Normal ) {
+  if( cpItem.getIsocenterPosition(fvG4float) != EC_Normal ) {
     if( point0 ) isoCenter = point0->GetIsocenterPosition();
   } else {
-    isoCenter = G4ThreeVector(fvfloat[0],fvfloat[1],fvfloat[2]);
+    isoCenter = G4ThreeVector(fvG4float[0],fvG4float[1],fvG4float[2]);
   }
   G4cout << "   " << " IsocenterPosition " << isoCenter << G4endl;
   SetIsocenterPosition(isoCenter);
 
-  if( cpItem.getSourceToSurfaceDistance(ffloat) != EC_Normal ) {
-    if( point0 ) ffloat = point0->GetSourceToSurfaceDistance();
+  if( cpItem.getSourceToSurfaceDistance(fG4float) != EC_Normal ) {
+    if( point0 ) fG4float = point0->GetSourceToSurfaceDistance();
   }
-  G4cout << "   " << " SourceToSurfaceDistance " << ffloat << G4endl;
-  SetSourceToSurfaceDistance(ffloat);
+  G4cout << "   " << " SourceToSurfaceDistance " << fG4float << G4endl;
+  SetSourceToSurfaceDistance(fG4float);
 
-  cpItem.getCumulativeMetersetWeight(ffloat);
-  G4cout << "   " << " CumulativeMetersetWeight " << ffloat << G4endl;
-  SetCumulativeMetersetWeight(ffloat);
+  cpItem.getCumulativeMetersetWeight(fG4float);
+  G4cout << "   " << " CumulativeMetersetWeight " << fG4float << G4endl;
+  SetCumulativeMetersetWeight(fG4float);
   
-  if( cpItem.getGantryPitchAngle(ffloat32) != EC_Normal ) {
-    if( point0 ) ffloat32 = point0->GetGantryPitchAngle();
+  if( cpItem.getGantryPitchAngle(fG4float32) != EC_Normal ) {
+    if( point0 ) fG4float32 = point0->GetGantryPitchAngle();
   }
-  G4cout << "   " << " GantryPitchAngle " << ffloat32 << G4endl;
-  SetGantryPitchAngle(ffloat32);
+  G4cout << "   " << " GantryPitchAngle " << fG4float32 << G4endl;
+  SetGantryPitchAngle(fG4float32);
 
-  if( cpItem.getSurfaceEntryPoint(ffloat) != EC_Normal ) {
-    if( point0 ) ffloat = point0->GetSurfaceEntryPoint();
+  if( cpItem.getSurfaceEntryPoint(fG4float) != EC_Normal ) {
+    if( point0 ) fG4float = point0->GetSurfaceEntryPoint();
   }
-  G4cout << "   " << " SurfaceEntryPoint " << ffloat << G4endl;
-  SetSurfaceEntryPoint(ffloat);
+  G4cout << "   " << " SurfaceEntryPoint " << fG4float << G4endl;
+  SetSurfaceEntryPoint(fG4float);
 
-  if( cpItem.getTableTopEccentricAxisDistance(ffloat) != EC_Normal ) {
-    if( point0 ) ffloat = point0->GetTableTopEccentricAxisDistance();
+  if( cpItem.getTableTopEccentricAxisDistance(fG4float) != EC_Normal ) {
+    if( point0 ) fG4float = point0->GetTableTopEccentricAxisDistance();
   }
-  G4cout << "   " << " TableTopEccentricAxisDistance " << ffloat << G4endl;
-  SetTableTopEccentricAxisDistance(ffloat);
+  G4cout << "   " << " TableTopEccentricAxisDistance " << fG4float << G4endl;
+  SetTableTopEccentricAxisDistance(fG4float);
 
-  if( cpItem.getTableTopLateralPosition(ffloat) != EC_Normal ) {
-    if( point0 ) ffloat = point0->GetTableTopLateralPosition();
+  if( cpItem.getTableTopLateralPosition(fG4float) != EC_Normal ) {
+    if( point0 ) fG4float = point0->GetTableTopLateralPosition();
   }
-  G4cout << "   " << " TableTopLateralPosition " << ffloat << G4endl;
-  SetTableTopLateralPosition(ffloat);
+  G4cout << "   " << " TableTopLateralPosition " << fG4float << G4endl;
+  SetTableTopLateralPosition(fG4float);
 
-  if( cpItem.getTableTopLongitudinalPosition(ffloat) != EC_Normal ) {
-    if( point0 ) ffloat = point0->GetTableTopLongitudinalPosition();
+  if( cpItem.getTableTopLongitudinalPosition(fG4float) != EC_Normal ) {
+    if( point0 ) fG4float = point0->GetTableTopLongitudinalPosition();
   }
-  G4cout << "   " << " TableTopLongitudinalPosition " << ffloat << G4endl;
-  SetTableTopLongitudinalPosition(ffloat);
+  G4cout << "   " << " TableTopLongitudinalPosition " << fG4float << G4endl;
+  SetTableTopLongitudinalPosition(fG4float);
 
-  if( cpItem.getTableTopPitchAngle(ffloat32) != EC_Normal ) {
-    if( point0 ) ffloat32 = point0->GetTableTopPitchAngle();
+  if( cpItem.getTableTopPitchAngle(fG4float32) != EC_Normal ) {
+    if( point0 ) fG4float32 = point0->GetTableTopPitchAngle();
   }
-  G4cout << "   " << " TableTopPitchAngle " << ffloat32 << G4endl;
+  G4cout << "   " << " TableTopPitchAngle " << fG4float32 << G4endl;
 
   if( cpItem.getTableTopPitchRotationDirection(fstr) != EC_Normal ) {
     if( point0 ) fstr = point0->GetTableTopPitchRotationDirection();
   }
   if( fstr == "CC" ) { // counter-clockwise
-    SetTableTopPitchAngle(-ffloat32);
+    SetTableTopPitchAngle(-fG4float32);
   } else if( fstr == "CW" || fstr == "NONE" || fstr == "") { // clockwise
-    SetTableTopPitchAngle(ffloat32);
+    SetTableTopPitchAngle(fG4float32);
   }
   G4cout << "   " << " TableTopPitchRotationDirection " << fstr << G4endl;
   SetTableTopPitchRotationDirection(fstr);
 
-  if( cpItem.getTableTopRollAngle(ffloat32) != EC_Normal ) {
-    if( point0 ) ffloat32 = point0->GetTableTopRollAngle();
+  if( cpItem.getTableTopRollAngle(fG4float32) != EC_Normal ) {
+    if( point0 ) fG4float32 = point0->GetTableTopRollAngle();
   }
-  G4cout << "   " << " TableTopRollAngle " << ffloat32 << G4endl;
+  G4cout << "   " << " TableTopRollAngle " << fG4float32 << G4endl;
 
   if( cpItem.getTableTopRollRotationDirection(fstr) != EC_Normal ) {
     if( point0 ) fstr = point0->GetTableTopRollRotationDirection();
   }
   if( fstr == "CC" ) { // counter-clockwise
-    SetTableTopRollAngle(-ffloat32);
+    SetTableTopRollAngle(-fG4float32);
   } else if( fstr == "CW" || fstr == "NONE" || fstr == "") { // clockwise
-    SetTableTopRollAngle(ffloat32);
+    SetTableTopRollAngle(fG4float32);
   }
   G4cout << "   " << " TableTopRollRotationDirection " << fstr << G4endl;
   SetTableTopRollRotationDirection(fstr);
 
-  if( cpItem.getTableTopVerticalPosition(ffloat) != EC_Normal ) {
-    if( point0 ) ffloat = point0->GetTableTopVerticalPosition();
+  if( cpItem.getTableTopVerticalPosition(fG4float) != EC_Normal ) {
+    if( point0 ) fG4float = point0->GetTableTopVerticalPosition();
   }
-  G4cout << "   " << " TableTopVerticalPosition " << ffloat << G4endl;
-  SetTableTopVerticalPosition(ffloat);
+  G4cout << "   " << " TableTopVerticalPosition " << fG4float << G4endl;
+  SetTableTopVerticalPosition(fG4float);
   
   // --- get DICOM sequence attributes ---
   //t        DRTWedgePositionSequence &getWedgePositionSequence()

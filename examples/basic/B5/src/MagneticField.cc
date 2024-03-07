@@ -51,7 +51,7 @@ MagneticField::~MagneticField()
   delete fMessenger;
 }
 
-void MagneticField::GetFieldValue(const G4double [4],double *bField) const
+void MagneticField::GetFieldValue(const G4double [4],G4double *bField) const
 {
   bField[0] = 0.;
   bField[1] = fBy;

@@ -166,10 +166,10 @@ G4double G4SampleResonance::SampleMass(const G4double poleMass,
 	}
 	else
 	{
-		//double fmin = BrWigInt0(minMass, gamma, poleMass);
-		double fmin = BrWigInt0(protectedMinMass, gamma, poleMass);
-		double fmax = BrWigInt0(maxMass, gamma, poleMass);
-		double f = fmin + (fmax-fmin)*G4UniformRand();
+		//G4double fmin = BrWigInt0(minMass, gamma, poleMass);
+		G4double fmin = BrWigInt0(protectedMinMass, gamma, poleMass);
+		G4double fmax = BrWigInt0(maxMass, gamma, poleMass);
+		G4double f = fmin + (fmax-fmin)*G4UniformRand();
 		returnMass = BrWigInv(f, gamma, poleMass);
 	}
 

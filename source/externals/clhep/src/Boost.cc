@@ -17,14 +17,14 @@ namespace CLHEP  {
 
 // ----------  Constructors and Assignment:
 
-HepBoost & HepBoost::set (double bx, double by, double bz) {
-  double bp2 = bx*bx + by*by + bz*bz;
+HepBoost & HepBoost::set (G4double bx, G4double by, G4double bz) {
+  G4double bp2 = bx*bx + by*by + bz*bz;
 //  if (bp2 >= 1) {
 //    std::cerr << "HepBoost::set() - "
 //      << "Boost Vector supplied to set HepBoost represents speed >= c." << std::endl;
 //  }    
-  double ggamma = 1.0 / std::sqrt(1.0 - bp2);
-  double bgamma = ggamma * ggamma / (1.0 + ggamma);
+  G4double ggamma = 1.0 / std::sqrt(1.0 - bp2);
+  G4double bgamma = ggamma * ggamma / (1.0 + ggamma);
   rep_.xx_ = 1.0 + bgamma * bx * bx;
   rep_.yy_ = 1.0 + bgamma * by * by;
   rep_.zz_ = 1.0 + bgamma * bz * bz;
@@ -43,8 +43,8 @@ HepBoost & HepBoost::set (const HepRep4x4Symmetric & m1) {
   return *this;
 }
 
-HepBoost & HepBoost::set (Hep3Vector ddirection, double bbeta) {
-  double length = ddirection.mag();
+HepBoost & HepBoost::set (Hep3Vector ddirection, G4double bbeta) {
+  G4double length = ddirection.mag();
   if (length <= 0) {				// Nan-proofing
     std::cerr << "HepBoost::set() - "
       << "Direction supplied to set HepBoost is zero." << std::endl;
@@ -91,53 +91,53 @@ void HepBoost::decompose (Hep3Vector & boost, HepAxisAngle & rotation) const {
 
 // ----------  Comparisons:
 
-double HepBoost::distance2( const HepRotation & r ) const {
-  double db2 = norm2();
-  double dr2  = r.norm2();
+G4double HepBoost::distance2( const HepRotation & r ) const {
+  G4double db2 = norm2();
+  G4double dr2  = r.norm2();
   return (db2 + dr2);
 }
 
-double HepBoost::distance2( const HepLorentzRotation & lt ) const {
+G4double HepBoost::distance2( const HepLorentzRotation & lt ) const {
   HepBoost b1;
   HepRotation r1;
   lt.decompose(b1,r1);
-  double db2 = distance2(b1);
-  double dr2  = r1.norm2();
+  G4double db2 = distance2(b1);
+  G4double dr2  = r1.norm2();
   return (db2 + dr2);
 }
 
-double HepBoost::howNear ( const HepRotation & r  ) const {
+G4double HepBoost::howNear ( const HepRotation & r  ) const {
   return std::sqrt(distance2(r));
 }
 
-double HepBoost::howNear ( const HepLorentzRotation & lt  ) const {
+G4double HepBoost::howNear ( const HepLorentzRotation & lt  ) const {
   return std::sqrt(distance2(lt));
 }
 
-bool HepBoost::isNear (const HepRotation & r, double epsilon) const {
-  double db2 = norm2();
+bool HepBoost::isNear (const HepRotation & r, G4double epsilon) const {
+  G4double db2 = norm2();
   if (db2 > epsilon*epsilon) return false;
-  double dr2  = r.norm2();
+  G4double dr2  = r.norm2();
   return (db2+dr2 <= epsilon*epsilon);
 }
 
 bool HepBoost::isNear (const HepLorentzRotation & lt, 
-			           double epsilon) const {
+			           G4double epsilon) const {
   HepBoost b1;
   HepRotation r1;
-  double db2 = distance2(b1);
+  G4double db2 = distance2(b1);
   lt.decompose(b1,r1);
   if (db2 > epsilon*epsilon) return false;
-  double dr2  = r1.norm2();
+  G4double dr2  = r1.norm2();
   return (db2 + dr2);
 }
 
 // ----------  Properties:
 
-double HepBoost::norm2() const {
-  double bgx = rep_.xt_;
-  double bgy = rep_.yt_;
-  double bgz = rep_.zt_;
+G4double HepBoost::norm2() const {
+  G4double bgx = rep_.xt_;
+  G4double bgy = rep_.yt_;
+  G4double bgz = rep_.zt_;
   return bgx*bgx+bgy*bgy+bgz*bgz;
 }
 
@@ -157,7 +157,7 @@ void HepBoost::rectify() {
   // but if that happens, we ZMthrow and (if continuing) just rescale, which
   // will change the sign of the last column when computing the boost.
 
-  double gam = tt();
+  G4double gam = tt();
   if (gam <= 0) {				    // 4/12/01 mf 
     std::cerr << "HepBoost::rectify() - "
       << "Attempt to rectify a boost with non-positive gamma." << std::endl;
@@ -246,7 +246,7 @@ std::ostream & HepBoost::print( std::ostream & os ) const {
   if ( rep_.tt_ <= 1 ) {
     os << "Lorentz Boost( IDENTITY )";
   } else {
-    double norm = boostVector().mag();
+    G4double norm = boostVector().mag();
     os << "\nLorentz Boost " << boostVector()/norm <<
           "\n{beta = " << beta() << " gamma = " << gamma() << "}\n";
   }

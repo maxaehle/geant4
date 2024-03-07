@@ -12,15 +12,15 @@ using namespace GIDI;
 
 struct nf_Legendre_from_ptwXY_callback_s {
     int l;
-    double mu1, mu2, f1, f2;
+    G4double mu1, mu2, f1, f2;
 };
 
-static nfu_status nf_Legendre_to_ptwXY2( double mu, double *P, void *argList );
-static nfu_status nf_Legendre_from_ptwXY_callback( double mu, double *f, void *argList );
+static nfu_status nf_Legendre_to_ptwXY2( G4double mu, G4double *P, void *argList );
+static nfu_status nf_Legendre_from_ptwXY_callback( G4double mu, G4double *f, void *argList );
 /*
 ************************************************************
 */
-nf_Legendre *nf_Legendre_new( int initialSize, int maxOrder, double *Cls, nfu_status *status ) {
+nf_Legendre *nf_Legendre_new( int initialSize, int maxOrder, G4double *Cls, nfu_status *status ) {
 
     int l;
     nf_Legendre *Legendre = (nf_Legendre *) nfu_malloc( sizeof( nf_Legendre ) );
@@ -82,11 +82,11 @@ nfu_status nf_Legendre_reallocateCls( nf_Legendre *Legendre, int size, int force
     if( size > ( nf_Legendre_maxMaxOrder + 1 ) ) size = nf_Legendre_maxMaxOrder + 1;
     if( size != Legendre->allocated ) {
         if( size > Legendre->allocated ) {
-            Legendre->Cls = (double *) nfu_realloc( size * sizeof( double ), Legendre->Cls ); }
+            Legendre->Cls = (G4double *) nfu_realloc( size * sizeof( G4double ), Legendre->Cls ); }
         else {
             if( size < ( Legendre->maxOrder + 1 ) ) size = Legendre->maxOrder + 1;
             if( ( Legendre->allocated > 2 * size ) || forceSmallerResize ) {
-                    Legendre->Cls = (double *) nfu_realloc( size * sizeof( double ), Legendre->Cls ); } 
+                    Legendre->Cls = (G4double *) nfu_realloc( size * sizeof( G4double ), Legendre->Cls ); } 
             else {
                 size = Legendre->allocated;
             }
@@ -116,7 +116,7 @@ int nf_Legendre_allocated( nf_Legendre *Legendre ) {
 /*
 ************************************************************
 */
-double nf_Legendre_getCl( nf_Legendre *Legendre, int l, nfu_status *status ) {
+G4double nf_Legendre_getCl( nf_Legendre *Legendre, int l, nfu_status *status ) {
 
     *status = nfu_Okay;
     if( ( l < 0 ) || ( l > Legendre->maxOrder ) ) {
@@ -128,7 +128,7 @@ double nf_Legendre_getCl( nf_Legendre *Legendre, int l, nfu_status *status ) {
 /*
 ************************************************************
 */
-nfu_status nf_Legendre_setCl( nf_Legendre *Legendre, int l, double Cl ) {
+nfu_status nf_Legendre_setCl( nf_Legendre *Legendre, int l, G4double Cl ) {
 
     nfu_status status;
 
@@ -146,7 +146,7 @@ nfu_status nf_Legendre_setCl( nf_Legendre *Legendre, int l, double Cl ) {
 nfu_status nf_Legendre_normalize( nf_Legendre *Legendre ) {
 
     int l;
-    double norm;
+    G4double norm;
 
     if( Legendre->maxOrder >= 0 ) {
         if( ( norm = Legendre->Cls[0] ) == 0 ) return( nfu_divByZero );
@@ -157,10 +157,10 @@ nfu_status nf_Legendre_normalize( nf_Legendre *Legendre ) {
 /*
 ************************************************************
 */
-double nf_Legendre_evauluateAtMu( nf_Legendre *Legendre, double mu, nfu_status *status ) {
+G4double nf_Legendre_evauluateAtMu( nf_Legendre *Legendre, G4double mu, nfu_status *status ) {
 
     int l;
-    double P = 0.;
+    G4double P = 0.;
 
     *status = nfu_XOutsideDomain;
     if( ( mu >= -1. ) && ( mu <= 1. ) ) {
@@ -172,10 +172,10 @@ double nf_Legendre_evauluateAtMu( nf_Legendre *Legendre, double mu, nfu_status *
 /*
 ************************************************************
 */
-double nf_Legendre_PofL_atMu( int l, double mu ) {
+G4double nf_Legendre_PofL_atMu( int l, G4double mu ) {
 
     int l_, twoL_plus1;
-    double Pl_minus1, Pl, Pl_plus1;
+    G4double Pl_minus1, Pl, Pl_plus1;
 
     if( l == 0 ) {
         return( 1. ); }
@@ -183,7 +183,7 @@ double nf_Legendre_PofL_atMu( int l, double mu ) {
         return( mu ); }
 /*
     else if( l <= 9 ) {
-        double mu2 = mu * mu;
+        G4double mu2 = mu * mu;
         if ( l == 2 ) {
             return(                1.5 * mu2 - 0.5 ); }
         else if( l == 3 ) {
@@ -216,10 +216,10 @@ double nf_Legendre_PofL_atMu( int l, double mu ) {
 /*
 ************************************************************
 */
-ptwXYPoints *nf_Legendre_to_ptwXY( nf_Legendre *Legendre, double accuracy, int biSectionMax, int checkForRoots, nfu_status *status ) {
+ptwXYPoints *nf_Legendre_to_ptwXY( nf_Legendre *Legendre, G4double accuracy, int biSectionMax, int checkForRoots, nfu_status *status ) {
 
     int i, n = 1;
-    double dx, xs[1000];
+    G4double dx, xs[1000];
     void *argList = (void *) Legendre;
 
     *status = nfu_Okay;
@@ -237,7 +237,7 @@ ptwXYPoints *nf_Legendre_to_ptwXY( nf_Legendre *Legendre, double accuracy, int b
 /*
 ************************************************************
 */
-static nfu_status nf_Legendre_to_ptwXY2( double mu, double *P, void *argList ) {
+static nfu_status nf_Legendre_to_ptwXY2( G4double mu, G4double *P, void *argList ) {
 
     nfu_status status;      /* Set by nf_Legendre_evauluateAtMu. */
 
@@ -251,7 +251,7 @@ nf_Legendre *nf_Legendre_from_ptwXY( ptwXYPoints *ptwXY, int maxOrder, nfu_statu
 
     int l, i, n = (int) ptwXY_length( ptwXY );
     nf_Legendre *Legendre;
-    double mu1, mu2, f1, f2, Cl, Cls[1] = { 0 }, integral;
+    G4double mu1, mu2, f1, f2, Cl, Cls[1] = { 0 }, integral;
     struct nf_Legendre_from_ptwXY_callback_s argList;
 
     if( ( *status = ptwXY_getStatus( ptwXY ) ) != nfu_Okay ) return( NULL );
@@ -297,7 +297,7 @@ err:
 /*
 ************************************************************
 */
-static nfu_status nf_Legendre_from_ptwXY_callback( double mu, double *f, void *argList ) {
+static nfu_status nf_Legendre_from_ptwXY_callback( G4double mu, G4double *f, void *argList ) {
 
     struct nf_Legendre_from_ptwXY_callback_s *args = (struct nf_Legendre_from_ptwXY_callback_s *) argList;
 

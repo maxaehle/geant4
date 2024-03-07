@@ -28,7 +28,7 @@
 // Class description:
 //
 // A concrete class of G4UIcommand. The command defined by this class
-// takes a double value.
+// takes a G4double value.
 // General information of G4UIcommand is given in G4UIcommand.hh
 
 // Author: M.Asai, 1998
@@ -47,14 +47,14 @@ class G4UIcmdWithADouble : public G4UIcommand
       // and the pointer to the messenger must be given
 
     static G4double GetNewDoubleValue(const char* paramString);
-      // Convert string which represents a double value to a double
+      // Convert string which represents a G4double value to a G4double
 
     void SetParameterName(const char* theName, G4bool omittable,
                           G4bool currentAsDefault = false);
       // Set the parameter name. The name is used by the range checking.
       // If "omittable" is set as true, the user of this command can omit
       // the value when the command is applied. If "omittable" is false,
-      // the user must supply a double value.
+      // the user must supply a G4double value.
       // "currentAsDefault" flag is valid only if "omittable" is true. If this
       // flag is true, the current value is used as the default value when the
       // user omits the parameter. If this flag is false, the value given by

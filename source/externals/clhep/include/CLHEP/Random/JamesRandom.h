@@ -51,11 +51,11 @@ public:
   virtual ~HepJamesRandom();
   // Constructor and destructor.
 
-  double flat();
+  G4double flat();
   // Returns a pseudo random number between 0 and 1 
   // (excluding the end points)
 
-  void flatArray (const int size, double* vect);
+  void flatArray (const int size, G4double* vect);
   // Fills the array "vect" of specified size with flat random values.
 
   void setSeed(long seed, int dum=0);
@@ -75,12 +75,12 @@ public:
   void showStatus() const;
   // Dumps the engine status on the screen.
 
-  operator double();
+  operator G4double();
   // Returns same as flat()
-  operator float();
+  operator G4float();
   // less precise flat, faster if possible
   operator unsigned int();
-  // 32-bit flat, but slower than double or float.
+  // 32-bit flat, but slower than G4double or G4float.
 
   virtual std::ostream & put (std::ostream & os) const;
   virtual std::istream & get (std::istream & is);
@@ -99,8 +99,8 @@ public:
 private:
 
   // Members defining the current status of the generator.
-  double u[97];
-  double c, cd, cm;
+  G4double u[97];
+  G4double c, cd, cm;
   int i97, j97;
 };
 

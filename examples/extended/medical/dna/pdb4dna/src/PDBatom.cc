@@ -42,9 +42,9 @@
 
 Atom::Atom(int s, const std::string& n,
            const std::string& rN,int numInRes,int rS,
-           double xInit,double yInit,double zInit,
-           double radius,
-           double o, double tF, const std::string& e)
+           G4double xInit,G4double yInit,G4double zInit,
+           G4double radius,
+           G4double o, G4double tF, const std::string& e)
 {
   fSerial=s;
   fName=n;//!< Atom name
@@ -70,21 +70,21 @@ Atom *Atom::GetNext()
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-double Atom::GetX()
+G4double Atom::GetX()
 {
   return fX;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-double Atom::GetY()
+G4double Atom::GetY()
 {
   return fY;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-double Atom::GetZ()
+G4double Atom::GetZ()
 {
   return fZ;
 }
@@ -112,7 +112,7 @@ const std::string& Atom::GetElementName()
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-double Atom::GetVanDerWaalsRadius()
+G4double Atom::GetVanDerWaalsRadius()
 {
   return fVdwRadius;
 }

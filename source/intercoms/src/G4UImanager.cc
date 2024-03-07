@@ -49,7 +49,7 @@
 #include <sstream>
 #include <fstream>
 
-G4bool G4UImanager::doublePrecisionStr = false;
+G4bool G4UImanager::G4doublePrecisionStr = false;
 G4int G4UImanager::igThreadID = -1;
 
 // --------------------------------------------------------------------
@@ -151,13 +151,13 @@ G4UImanager::~G4UImanager()
 // --------------------------------------------------------------------
 void G4UImanager::UseDoublePrecisionStr(G4bool val)
 {
-  doublePrecisionStr = val;
+  G4doublePrecisionStr = val;
 }
 
 // --------------------------------------------------------------------
 G4bool G4UImanager::DoublePrecisionStr()
 {
-  return doublePrecisionStr;
+  return G4doublePrecisionStr;
 }
 
 // --------------------------------------------------------------------
@@ -505,7 +505,7 @@ G4int G4UImanager::ApplyCommand(const char* aCmd)
     commandString = aCommand;
   }
 
-  // remove doubled slash
+  // remove G4doubled slash
   G4int len = commandString.length();
   G4int ll  = 0;
   G4String a1;

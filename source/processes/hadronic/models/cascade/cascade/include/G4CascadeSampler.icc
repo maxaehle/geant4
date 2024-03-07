@@ -43,7 +43,7 @@
 
 template <int NBINS, int NMULT> inline
 G4double G4CascadeSampler<NBINS,NMULT>::
-findCrossSection(double ke,
+findCrossSection(G4double ke,
 		 const G4double (&xsec)[energyBins]) const {
   return interpolator.interpolate(ke, xsec);
 }

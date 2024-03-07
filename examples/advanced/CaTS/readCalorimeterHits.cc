@@ -77,8 +77,8 @@ int main(int argc, char** argv)
   TBranch* fevtbranch = Tevt->GetBranch("event.");
   Int_t nevent        = fevtbranch->GetEntries();
   std::cout << " Nr. of Events:  " << nevent << std::endl;
-  double max                 = 0.;
-  double min                 = 1000000;
+  G4double max                 = 0.;
+  G4double min                 = 1000000;
   std::string CollectionName = argv[3];
   CollectionName             = CollectionName + "_Calorimeter_HC";
   for(Int_t i = 0; i < nevent; i++)
@@ -95,7 +95,7 @@ int main(int argc, char** argv)
         {
           CalorimeterHit* drcaloHit =
             dynamic_cast<CalorimeterHit*>(hits.at(ii));
-          const double ed = drcaloHit->GetEdep();
+          const G4double ed = drcaloHit->GetEdep();
           if(ed > max)
             max = ed;
           if(ed < min)

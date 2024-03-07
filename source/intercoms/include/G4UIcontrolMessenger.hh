@@ -93,7 +93,7 @@ class G4UIcontrolMessenger : public G4UImessenger
     G4UIcmdWithAString* ExecuteCommand = nullptr;
     G4UIcmdWithAnInteger* suppressAbortionCommand = nullptr;
     G4UIcmdWithAnInteger* verboseCommand = nullptr;
-    G4UIcmdWithABool* doublePrecCommand = nullptr;
+    G4UIcmdWithABool* G4doublePrecCommand = nullptr;
     G4UIcmdWithAString* historyCommand = nullptr;
     G4UIcmdWithoutParameter* stopStoreHistoryCommand = nullptr;
     G4UIcommand* aliasCommand = nullptr;

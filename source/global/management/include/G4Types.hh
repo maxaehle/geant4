@@ -83,8 +83,8 @@
 //#include "easyAD.hpp"
 //template<typename T>
 //T ForwardIfPossible(T x){ return x; }
-using G4double  = double;
-using G4float   = float;
+using G4double  = G4double;
+using G4float   = G4float;
 using G4int     = int;
 using G4bool    = bool;
 using G4long    = long;

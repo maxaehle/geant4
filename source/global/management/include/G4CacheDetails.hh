@@ -109,7 +109,7 @@ class G4CacheReference<VALTYPE*>
   static cache_container*& cache();
 };
 
-// Template specialization for probably the most used case: double
+// Template specialization for probably the most used case: G4double
 // Be more efficient avoiding unnecessary "new/delete"
 //
 template <>
@@ -277,7 +277,7 @@ typename G4CacheReference<V*>::cache_container*& G4CacheReference<V*>::cache()
   return _instance;
 }
 
-//======= Implementation: G4CacheReference<double>
+//======= Implementation: G4CacheReference<G4double>
 //============================================
 
 void G4CacheReference<G4double>::Initialize(unsigned int id)

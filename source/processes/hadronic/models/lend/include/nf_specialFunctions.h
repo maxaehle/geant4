@@ -7,7 +7,7 @@
 #define specialFunctions_h_included
 
 #include <math.h>
-#include <float.h>
+#include <G4float.h>
 #include <nf_utilities.h>
 
 #ifdef WIN32
@@ -21,24 +21,24 @@
     namespace GIDI {
 #endif
 
-double nf_polevl( double x, double coef[], int N );
-double nf_p1evl( double x, double coef[], int N );
-double nf_exponentialIntegral( int n, double x, nfu_status *status );
-double nf_gammaFunction( double x, nfu_status *status );
-double nf_logGammaFunction( double x, nfu_status *status );
-double nf_incompleteGammaFunction( double a, double x, nfu_status *status );
-double nf_incompleteGammaFunctionComplementary( double a, double x, nfu_status *status );
+G4double nf_polevl( G4double x, G4double coef[], int N );
+G4double nf_p1evl( G4double x, G4double coef[], int N );
+G4double nf_exponentialIntegral( int n, G4double x, nfu_status *status );
+G4double nf_gammaFunction( G4double x, nfu_status *status );
+G4double nf_logGammaFunction( G4double x, nfu_status *status );
+G4double nf_incompleteGammaFunction( G4double a, G4double x, nfu_status *status );
+G4double nf_incompleteGammaFunctionComplementary( G4double a, G4double x, nfu_status *status );
 
-double  nf_amc_log_factorial( int );
-double  nf_amc_factorial( int );
-double  nf_amc_wigner_3j( int, int, int, int, int, int );
-double  nf_amc_wigner_6j( int, int, int, int, int, int );
-double  nf_amc_wigner_9j( int, int, int, int, int, int, int, int, int );
-double  nf_amc_racah( int, int, int, int, int, int );
-double  nf_amc_clebsh_gordan( int, int, int, int, int );
-double  nf_amc_z_coefficient( int, int, int, int, int, int );
-double  nf_amc_zbar_coefficient( int, int, int, int, int, int );
-double  nf_amc_reduced_matrix_element( int, int, int, int, int, int, int );
+G4double  nf_amc_log_factorial( int );
+G4double  nf_amc_factorial( int );
+G4double  nf_amc_wigner_3j( int, int, int, int, int, int );
+G4double  nf_amc_wigner_6j( int, int, int, int, int, int );
+G4double  nf_amc_wigner_9j( int, int, int, int, int, int, int, int, int );
+G4double  nf_amc_racah( int, int, int, int, int, int );
+G4double  nf_amc_clebsh_gordan( int, int, int, int, int );
+G4double  nf_amc_z_coefficient( int, int, int, int, int, int );
+G4double  nf_amc_zbar_coefficient( int, int, int, int, int, int );
+G4double  nf_amc_reduced_matrix_element( int, int, int, int, int, int, int );
 
 #if defined __cplusplus
     }

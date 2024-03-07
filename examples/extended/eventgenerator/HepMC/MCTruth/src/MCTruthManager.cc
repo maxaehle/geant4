@@ -294,8 +294,8 @@ void MCTruthManager::PrintTree(HepMC::GenParticle* particle, G4String offset)
   {
     G4String deltaoffset = "";
 
-    G4int curr = std::fmod(double((*it)->barcode()),10000000.);
-    G4int part = std::fmod(double(particle->barcode()),10000000.);
+    G4int curr = std::fmod(G4double((*it)->barcode()),10000000.);
+    G4int part = std::fmod(G4double(particle->barcode()),10000000.);
     if( curr != part )
       {
         deltaoffset = " | ";

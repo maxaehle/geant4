@@ -38,43 +38,43 @@ class RandGaussZiggurat : public RandGauss {
 
 public:
 
-  inline RandGaussZiggurat ( HepRandomEngine& anEngine, double mean=0.0, double stdDev=1.0 );
-  inline RandGaussZiggurat ( HepRandomEngine* anEngine, double mean=0.0, double stdDev=1.0 );
+  inline RandGaussZiggurat ( HepRandomEngine& anEngine, G4double mean=0.0, G4double stdDev=1.0 );
+  inline RandGaussZiggurat ( HepRandomEngine* anEngine, G4double mean=0.0, G4double stdDev=1.0 );
 
   // Destructor
   virtual ~RandGaussZiggurat();
 
   // Static methods to shoot random values using the static generator
   
-  static inline float shoot() {return ziggurat_RNOR(HepRandom::getTheEngine());}
-  static inline float shoot( float mean, float stdDev ) {return shoot()*stdDev + mean;}
+  static inline G4float shoot() {return ziggurat_RNOR(HepRandom::getTheEngine());}
+  static inline G4float shoot( G4float mean, G4float stdDev ) {return shoot()*stdDev + mean;}
 
-  static void shootArray ( const int size, float* vect, float mean=0.0, float stdDev=1.0 );
-  static void shootArray ( const int size, double* vect, double mean=0.0, double stdDev=1.0 );
+  static void shootArray ( const int size, G4float* vect, G4float mean=0.0, G4float stdDev=1.0 );
+  static void shootArray ( const int size, G4double* vect, G4double mean=0.0, G4double stdDev=1.0 );
 
   //  Static methods to shoot random values using a given engine
   //  by-passing the static generator.
 
-  static inline float shoot( HepRandomEngine* anotherEngine ) {return ziggurat_RNOR(anotherEngine);}
-  static inline float shoot( HepRandomEngine* anotherEngine, float mean, float stdDev ) {return shoot(anotherEngine)*stdDev + mean;}
+  static inline G4float shoot( HepRandomEngine* anotherEngine ) {return ziggurat_RNOR(anotherEngine);}
+  static inline G4float shoot( HepRandomEngine* anotherEngine, G4float mean, G4float stdDev ) {return shoot(anotherEngine)*stdDev + mean;}
 
-  static void shootArray ( HepRandomEngine* anotherEngine, const int size, float* vect, float mean=0.0, float stdDev=1.0 );
-  static void shootArray ( HepRandomEngine* anotherEngine, const int size, double* vect, double mean=0.0, double stdDev=1.0 );
+  static void shootArray ( HepRandomEngine* anotherEngine, const int size, G4float* vect, G4float mean=0.0, G4float stdDev=1.0 );
+  static void shootArray ( HepRandomEngine* anotherEngine, const int size, G4double* vect, G4double mean=0.0, G4double stdDev=1.0 );
 
   //  Instance methods using the localEngine to instead of the static 
   //  generator, and the default mean and stdDev established at construction
 
-  inline float fire() {return float(ziggurat_RNOR(localEngine.get()) * defaultStdDev + defaultMean);}
+  inline G4float fire() {return G4float(ziggurat_RNOR(localEngine.get()) * defaultStdDev + defaultMean);}
 
-  inline float fire ( float mean, float stdDev ) {return ziggurat_RNOR(localEngine.get()) * stdDev + mean;}
+  inline G4float fire ( G4float mean, G4float stdDev ) {return ziggurat_RNOR(localEngine.get()) * stdDev + mean;}
   
-  void fireArray  ( const int size, float* vect);
-  void fireArray  ( const int size, double* vect);
-  void fireArray  ( const int size, float* vect, float mean, float stdDev );
-  void fireArray  ( const int size, double* vect, double mean, double stdDev );
+  void fireArray  ( const int size, G4float* vect);
+  void fireArray  ( const int size, G4double* vect);
+  void fireArray  ( const int size, G4float* vect, G4float mean, G4float stdDev );
+  void fireArray  ( const int size, G4double* vect, G4double mean, G4double stdDev );
 
-  virtual double operator()();
-  virtual double operator()( double mean, double stdDev );
+  virtual G4double operator()();
+  virtual G4double operator()( G4double mean, G4double stdDev );
 
   // Save and restore to/from streams
   
@@ -100,25 +100,25 @@ protected:
   //
   //static long hz;
   //static unsigned long iz, kn[128], ke[256];
-  //static float wn[128],fn[128], we[256],fe[256];
+  //static G4float wn[128],fn[128], we[256],fe[256];
   //
   //#define RNOR (hz=SHR3, iz=hz&127, (fabs(hz)<kn[iz])? hz*wn[iz] : nfix())
   //#define REXP (jz=SHR3, iz=jz&255, (    jz <ke[iz])? jz*we[iz] : efix())
 
   static CLHEP_THREAD_LOCAL unsigned long kn[128], ke[256];
-  static CLHEP_THREAD_LOCAL float wn[128],fn[128], we[256],fe[256];
+  static CLHEP_THREAD_LOCAL G4float wn[128],fn[128], we[256],fe[256];
 
   static CLHEP_THREAD_LOCAL bool ziggurat_is_init;
   
   static inline unsigned long ziggurat_SHR3(HepRandomEngine* anEngine) {return (unsigned int)(*anEngine);}
-  static inline float ziggurat_UNI(HepRandomEngine* anEngine) {return float(anEngine->flat());}
-  static inline float ziggurat_RNOR(HepRandomEngine* anEngine) {
+  static inline G4float ziggurat_UNI(HepRandomEngine* anEngine) {return G4float(anEngine->flat());}
+  static inline G4float ziggurat_RNOR(HepRandomEngine* anEngine) {
     if(!ziggurat_is_init) ziggurat_init();
     long hz=(signed)ziggurat_SHR3(anEngine);
     unsigned long iz=hz&127;
     return ((unsigned long)std::abs(hz)<kn[iz]) ? hz*wn[iz] : ziggurat_nfix(hz,anEngine);
   }
-  static float ziggurat_nfix(long hz,HepRandomEngine* anEngine);
+  static G4float ziggurat_nfix(long hz,HepRandomEngine* anEngine);
   
 private:
 
@@ -134,11 +134,11 @@ private:
 
 namespace CLHEP {
 
-RandGaussZiggurat::RandGaussZiggurat(HepRandomEngine & anEngine, double mean,double stdDev ): RandGauss(anEngine, mean, stdDev) 
+RandGaussZiggurat::RandGaussZiggurat(HepRandomEngine & anEngine, G4double mean,G4double stdDev ): RandGauss(anEngine, mean, stdDev) 
 {
 }
 
-RandGaussZiggurat::RandGaussZiggurat(HepRandomEngine * anEngine, double mean,double stdDev ): RandGauss(anEngine, mean, stdDev) 
+RandGaussZiggurat::RandGaussZiggurat(HepRandomEngine * anEngine, G4double mean,G4double stdDev ): RandGauss(anEngine, mean, stdDev) 
 {
 }
 

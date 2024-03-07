@@ -18,7 +18,7 @@ namespace GIDI {
 using namespace GIDI;
 #endif
 
-static double PoPs_getBDFLS_mass( char const *name, PoP *pop, double mass );
+static G4double PoPs_getBDFLS_mass( char const *name, PoP *pop, G4double mass );
 
 #if defined __cplusplus
     }
@@ -97,12 +97,12 @@ static void *BDFLS_Data = NULL;
 /*
 ========================================================================
 */
-static double PoPs_getBDFLS_mass( char const * /*name*/, PoP * /*pop*/, double mass ) {
+static G4double PoPs_getBDFLS_mass( char const * /*name*/, PoP * /*pop*/, G4double mass ) {
 
 #ifdef POPS_BDFLS
 
     int ZA = 1000 * pop->Z + pop->A;
-    double mass_ = -1;
+    G4double mass_ = -1;
 
     if( BDFLS_Data == NULL ) return( mass );
     if( ZA > 0 ) {

@@ -24,39 +24,39 @@ HepRandomEngine & RandGaussQ::engine() {return RandGauss::engine();}
 RandGaussQ::~RandGaussQ() {
 }
 
-double RandGaussQ::operator()() {
+G4double RandGaussQ::operator()() {
   return transformQuick(localEngine->flat()) * defaultStdDev + defaultMean;
 }
 
-double RandGaussQ::operator()( double mean, double stdDev ) {
+G4double RandGaussQ::operator()( G4double mean, G4double stdDev ) {
   return transformQuick(localEngine->flat()) * stdDev + mean;
 }
 
-void RandGaussQ::shootArray( const int size, double* vect,
-                            double mean, double stdDev )
+void RandGaussQ::shootArray( const int size, G4double* vect,
+                            G4double mean, G4double stdDev )
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( G4double* v = vect; v != vect + size; ++v )
     *v = shoot(mean,stdDev);
 }
 
 void RandGaussQ::shootArray( HepRandomEngine* anEngine,
-                            const int size, double* vect,
-                            double mean, double stdDev )
+                            const int size, G4double* vect,
+                            G4double mean, G4double stdDev )
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( G4double* v = vect; v != vect + size; ++v )
     *v = shoot(anEngine,mean,stdDev);
 }
 
-void RandGaussQ::fireArray( const int size, double* vect)
+void RandGaussQ::fireArray( const int size, G4double* vect)
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( G4double* v = vect; v != vect + size; ++v )
     *v = fire( defaultMean, defaultStdDev );
 }
 
-void RandGaussQ::fireArray( const int size, double* vect,
-                           double mean, double stdDev )
+void RandGaussQ::fireArray( const int size, G4double* vect,
+                           G4double mean, G4double stdDev )
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( G4double* v = vect; v != vect + size; ++v )
     *v = fire( mean, stdDev );
 }
 
@@ -84,12 +84,12 @@ void RandGaussQ::fireArray( const int size, double* vect,
 
   // Here comes the big (5K bytes) table, kept in a file ---
 
-static const float gaussTables [TableSize] = {
+static const G4float gaussTables [TableSize] = {
 #include "CLHEP/Random/gaussQTables.cdat"
 };
 
-double RandGaussQ::transformQuick (double r) {
-  double sign = +1.0;	// We always compute a negative number of 
+G4double RandGaussQ::transformQuick (G4double r) {
+  G4double sign = +1.0;	// We always compute a negative number of 
 				// sigmas.  For r > 0 we will multiply by
 				// sign = -1 to return a positive number.
   if ( r > .5 ) {
@@ -98,7 +98,7 @@ double RandGaussQ::transformQuick (double r) {
   } 
 
   int index;
-  double  dx;
+  G4double  dx;
 
   if ( r >= Table1step ) { 
     index = int((Table1size<<1) * r);	// 1 to Table1size
@@ -106,7 +106,7 @@ double RandGaussQ::transformQuick (double r) {
     dx = (Table1size<<1) * r - index; 		// fraction of way to next bin
     index += Table1offset-1;	
   } else if ( r > Table0step ) {
-    double rr = r * Table0scale;
+    G4double rr = r * Table0scale;
     index = int(Table0size * rr);		// 1 to Table0size
     dx = Table0size * rr - index; 		// fraction of way to next bin
     index += Table0offset-1;	
@@ -114,14 +114,14 @@ double RandGaussQ::transformQuick (double r) {
     return sign*transformSmall(r);	
   }				
 
-  double y0 = gaussTables [index++];
-  double y1 = gaussTables [index];
+  G4double y0 = gaussTables [index++];
+  G4double y1 = gaussTables [index];
   
-  return (float) (sign * ( y1 * dx + y0 * (1.0-dx) ));
+  return (G4float) (sign * ( y1 * dx + y0 * (1.0-dx) ));
 
 } // transformQuick()
 
-double RandGaussQ::transformSmall (double r) {
+G4double RandGaussQ::transformSmall (G4double r) {
 
   // Solve for -v in the asymtotic formula 
   //
@@ -131,7 +131,7 @@ double RandGaussQ::transformSmall (double r) {
 
   // The value of r (=errInt(-v)) supplied is going to less than 2.0E-13,
   // which is such that v < -7.25.  Since the value of r is meaningful only
-  // to an absolute error of 1E-16 (double precision accuracy for a number 
+  // to an absolute error of 1E-16 (G4double precision accuracy for a number 
   // which on the high side could be of the form 1-epsilon), computing
   // v to more than 3-4 digits of accuracy is suspect; however, to ensure 
   // smoothness with the table generator (which uses quite a few terms) we
@@ -142,13 +142,13 @@ double RandGaussQ::transformSmall (double r) {
   // speed is of no concern.  As a matter of technique, we terminate the
   // iterations in case they would be infinite, but this should not happen.
 
-  double eps = 1.0e-7;
-  double guess = 7.5;
-  double v;
+  G4double eps = 1.0e-7;
+  G4double guess = 7.5;
+  G4double v;
   
   for ( int i = 1; i < 50; i++ ) {
-    double vn2 = 1.0/(guess*guess);
-    double s1 = -13*11*9*7*5*3 * vn2*vn2*vn2*vn2*vn2*vn2*vn2;
+    G4double vn2 = 1.0/(guess*guess);
+    G4double s1 = -13*11*9*7*5*3 * vn2*vn2*vn2*vn2*vn2*vn2*vn2;
             s1 +=    11*9*7*5*3 * vn2*vn2*vn2*vn2*vn2*vn2;
             s1 +=      -9*7*5*3 * vn2*vn2*vn2*vn2*vn2;
             s1 +=         7*5*3 * vn2*vn2*vn2*vn2;

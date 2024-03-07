@@ -105,7 +105,7 @@ public:
   std::string saveRefCoordsFileName;
   Widget saveRefCoordsWidget;
 
-  Widget createScale(Widget, char *, int, float);
+  Widget createScale(Widget, char *, int, G4float);
   void addEscapeCallback(void (*cb)(void *), void *);
   bool abbrOutputFlag;
   bool pickRefPathFlag;
@@ -128,7 +128,7 @@ protected:
   virtual void createViewerButtons (Widget parent, SbPList * buttonlist);
   // Overloaded for catching various keyboard events  
   virtual SbBool processSoEvent(const SoEvent * const event);
-  void moveCamera(float dist = 0, bool lookdown = false);
+  void moveCamera(G4float dist = 0, bool lookdown = false);
   std::string curEltName;
   SbVec3f camUpVec;
   SbVec3f camDir;
@@ -193,7 +193,7 @@ private:
   void animateRefParticle();
   void saveCurCamera();
   void restoreCamera();
-  double animateBtwPtsPeriod, speedStep;
+  G4double animateBtwPtsPeriod, speedStep;
   void incSpeed();
   void decSpeed();
   
@@ -221,8 +221,8 @@ private:
   void findAndSetRefPath();
   SoCoordinate3* getCoordsNode(SoFullPath *path);
   void getSceneElements(); // reads elements from the scene graph
-  float sqrlen(const SbVec3f&);
-  void distanceToTrajectory(const SbVec3f&, float&, SbVec3f&, int&);
+  G4float sqrlen(const SbVec3f&);
+  void distanceToTrajectory(const SbVec3f&, G4float&, SbVec3f&, int&);
   void sortElements();
   void createElementsList(Widget);
   static void closeMainWindowCB(Widget, XtPointer, XtPointer);
@@ -255,12 +255,12 @@ private:
 	  int viewportMapping;
 	  SbVec3f position;
 	  SbRotation orientation;
-	  float	aspectRatio;
-	  float nearDistance;
-	  float	farDistance;
-	  float	focalDistance;
+	  G4float	aspectRatio;
+	  G4float nearDistance;
+	  G4float	farDistance;
+	  G4float	focalDistance;
 	  CameraType camType;
-	  float	height;
+	  G4float	height;
   };
 
    // FWJ removed unneeded assignment operator
@@ -268,14 +268,14 @@ private:
       std::string name;
       SoFullPath* path;
       SbVec3f center;
-      float closestPointZCoord;
+      G4float closestPointZCoord;
    };
 
    struct elementForSorting {
-      float closestPointZCoord;
+      G4float closestPointZCoord;
       SbVec3f closestPoint;
-      float smallestDistance;
-      float distanceToBeamlineStart;
+      G4float smallestDistance;
+      G4float distanceToBeamlineStart;
       std::string name;
 
       G4bool operator<(elementForSorting const &other) const
@@ -314,11 +314,11 @@ private:
   // For storing coordinate points of the reference particle
   std::vector<SbVec3f> refParticleTrajectory;
   // For displaying distance during anim and beamline modes
-  std::vector<float> refZPositions;
+  std::vector<G4float> refZPositions;
 
   int refParticleIdx;
   int prevRefIdx;
-  float distance;
+  G4float distance;
   State currentState, prevState, beforePausing;
   char* curViewPtName;
   
@@ -332,7 +332,7 @@ private:
   bool returnToAnim;
   SoCamera* myCam;
   void setStartingPtForAnimation(); 
-  float left_right, up_down;    
+  G4float left_right, up_down;    
   SbVec3f rotAxis; // For 90 degree rotations
   int rotCnt;  // # of steps rotation is split into
 
@@ -382,12 +382,12 @@ private:
   virtual void actualRedraw(void);
   void updateSpeedIndicator(void);
 
-  float maxSpeed; 
+  G4float maxSpeed; 
   ////////////////////////ANIM_SPEED_INDICATOR///////////////////////
 
   // FWJ added for Ortho camera
-  float defaultHeight;
-  float defaultHeightAngle;
+  G4float defaultHeight;
+  G4float defaultHeightAngle;
   // FWJ add look-ahead for animation tracking on curves
   G4int pathLookahead;
   

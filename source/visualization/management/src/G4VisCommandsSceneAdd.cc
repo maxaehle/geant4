@@ -1900,7 +1900,7 @@ G4VisCommandSceneAddLogo::G4Logo::G4Logo
   /* Experiment with creating own polyhedron...
   int nNodes = 4;
   int nFaces = 4;
-  double xyz[][3] = {{0,0,0},{1*m,0,0},{0,1*m,0},{0,0,1*m}};
+  G4double xyz[][3] = {{0,0,0},{1*m,0,0},{0,1*m,0},{0,0,1*m}};
   int faces[][4] = {{1,3,2,0},{1,2,4,0},{1,4,3,0},{2,3,4,0}};
   fp4 = new G4Polyhedron();
   fp4->createPolyhedron(nNodes,nFaces,xyz,faces);

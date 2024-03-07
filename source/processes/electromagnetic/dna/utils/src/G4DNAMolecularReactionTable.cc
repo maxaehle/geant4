@@ -317,9 +317,9 @@ void G4DNAMolecularReactionData::AddProduct(const G4String& molecule)
     fProducts.push_back(G4MoleculeTable::Instance()->GetConfiguration(molecule));
 }
 
-double G4DNAMolecularReactionData::PolynomialParam(double temp_K, std::vector<double> P)
+G4double G4DNAMolecularReactionData::PolynomialParam(G4double temp_K, std::vector<G4double> P)
 {
-    double inv_temp = 1. / temp_K;
+    G4double inv_temp = 1. / temp_K;
 
     return pow(10,
                P[0] + P[1] * inv_temp + P[2] * pow(inv_temp, 2)
@@ -327,18 +327,18 @@ double G4DNAMolecularReactionData::PolynomialParam(double temp_K, std::vector<do
         * (1e-3 * CLHEP::m3 / (CLHEP::mole * CLHEP::s));
 }
 
-double G4DNAMolecularReactionData::ArrehniusParam(double temp_K, std::vector<double> P)
+G4double G4DNAMolecularReactionData::ArrehniusParam(G4double temp_K, std::vector<G4double> P)
 {
     return P[0] * G4Exp(P[1] / temp_K)*
         (1e-3 * CLHEP::m3 / (CLHEP::mole * CLHEP::s));
 }
 
-double G4DNAMolecularReactionData::ScaledParameterization(double temp_K,
-                                                          double temp_init,
-                                                          double rateCste_init)
+G4double G4DNAMolecularReactionData::ScaledParameterization(G4double temp_K,
+                                                          G4double temp_init,
+                                                          G4double rateCste_init)
 {
-    double D0 = G4MolecularConfiguration::DiffCoeffWater(temp_init);
-    double Df = G4MolecularConfiguration::DiffCoeffWater(temp_K);
+    G4double D0 = G4MolecularConfiguration::DiffCoeffWater(temp_init);
+    G4double Df = G4MolecularConfiguration::DiffCoeffWater(temp_K);
     return Df * rateCste_init / D0;
 }
 
@@ -767,24 +767,24 @@ G4DNAMolecularReactionTable::Data* G4DNAMolecularReactionTable::GetReactionData(
 //______________________________________________________________________________
 
 void
-G4DNAMolecularReactionData::SetPolynomialParameterization(const std::vector<double>& P)
+G4DNAMolecularReactionData::SetPolynomialParameterization(const std::vector<G4double>& P)
 {
     fRateParam = std::bind(PolynomialParam, std::placeholders::_1, P);
 }
 
 //______________________________________________________________________________
 
-void G4DNAMolecularReactionData::SetArrehniusParameterization(double A0,
-                                                              double E_R)
+void G4DNAMolecularReactionData::SetArrehniusParameterization(G4double A0,
+                                                              G4double E_R)
 {
-    std::vector<double> P = { A0, E_R };
+    std::vector<G4double> P = { A0, E_R };
     fRateParam = std::bind(ArrehniusParam, std::placeholders::_1, P);
 }
 
 //______________________________________________________________________________
 
-void G4DNAMolecularReactionData::SetScaledParameterization(double temperature_K,
-                                                           double rateCste)
+void G4DNAMolecularReactionData::SetScaledParameterization(G4double temperature_K,
+                                                           G4double rateCste)
 {
     fRateParam = std::bind(ScaledParameterization,
                            std::placeholders::_1,
@@ -794,7 +794,7 @@ void G4DNAMolecularReactionData::SetScaledParameterization(double temperature_K,
 
 //______________________________________________________________________________
 
-void G4DNAMolecularReactionTable::ScaleReactionRateForNewTemperature(double temp_K)
+void G4DNAMolecularReactionTable::ScaleReactionRateForNewTemperature(G4double temp_K)
 {
     for (const auto& pData : fVectorOfReactionData)
     {
@@ -804,7 +804,7 @@ void G4DNAMolecularReactionTable::ScaleReactionRateForNewTemperature(double temp
 
 //______________________________________________________________________________
 
-void G4DNAMolecularReactionData::ScaleForNewTemperature(double temp_K)
+void G4DNAMolecularReactionData::ScaleForNewTemperature(G4double temp_K)
 {
     if (fRateParam)
     {

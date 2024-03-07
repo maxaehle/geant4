@@ -100,7 +100,7 @@ G4VPhysicalVolume* DetectorConstruction::ConstructDetector()
 
   // WORLD VOLUME = an G4ORB FULL OF LIQUID WATER
 
-  double worldRadius = 0.3*micrometer;
+  G4double worldRadius = 0.3*micrometer;
 
   G4Orb* solidWorld = new G4Orb("World", worldRadius);
 

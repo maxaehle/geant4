@@ -39,15 +39,15 @@ class RandGeneral : public HepRandom {
 
 public:
 
-  RandGeneral ( const double* aProbFunc, 
+  RandGeneral ( const G4double* aProbFunc, 
 		int theProbSize, 
 		int IntType=0 );
   RandGeneral ( HepRandomEngine& anEngine,
-                const double* aProbFunc, 
+                const G4double* aProbFunc, 
 		int theProbSize, 
 		int IntType=0 );
   RandGeneral ( HepRandomEngine* anEngine, 
-                const double* aProbFunc, 
+                const G4double* aProbFunc, 
 		int theProbSize, 
 		int IntType=0 );
   // These constructors should be used to instantiate a RandGeneral
@@ -88,30 +88,30 @@ public:
 	//
 	// The above N.B. is telling users that the shoot() methods in this
 	// class are NOT STATIC.  You cannot do 
-	//	double x = RandGeneral::shoot();
+	//	G4double x = RandGeneral::shoot();
 	// It would not make sense to provide a static shoot -- what would 
 	// the default probability function look like?
 
-  inline double shoot();
+  inline G4double shoot();
 
-  inline void shootArray ( const int size, double* vect);
+  inline void shootArray ( const int size, G4double* vect);
 
   //  Methods to shoot random values using a given engine
   //  by-passing the static generator.
 
-  double shoot( HepRandomEngine* anEngine );
+  G4double shoot( HepRandomEngine* anEngine );
 
   void shootArray ( HepRandomEngine* anEngine, const int size,
-                    double* vect );
+                    G4double* vect );
 			    
   //  Methods using the localEngine to shoot random values, by-passing
   //  the static generator.
 
-  double fire();
+  G4double fire();
 
-  void fireArray ( const int size, double* vect);
+  void fireArray ( const int size, G4double* vect);
 
-  double operator()();
+  G4double operator()();
 
   // Save and restore to/from streams
   
@@ -128,15 +128,15 @@ public:
 private:
 
   std::shared_ptr<HepRandomEngine> localEngine;
-  std::vector<double> theIntegralPdf;
+  std::vector<G4double> theIntegralPdf;
   int nBins;
-  double oneOverNbins;
+  G4double oneOverNbins;
   int InterpolationType;
 
   // Private methods to factor out replicated implementation sections
-  void prepareTable(const double* aProbFunc);
+  void prepareTable(const G4double* aProbFunc);
   void useFlatDistribution();
-  double mapRandom(double rand) const;
+  G4double mapRandom(G4double rand) const;
 
 };
 

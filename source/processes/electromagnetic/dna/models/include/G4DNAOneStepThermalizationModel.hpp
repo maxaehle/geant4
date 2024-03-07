@@ -149,7 +149,7 @@ CrossSectionPerVolume(const G4Material* material,
 
 //------------------------------------------------------------------------------
 template<typename MODEL>
-double G4TDNAOneStepThermalizationModel<MODEL>::GetRmean(double k){
+G4double G4TDNAOneStepThermalizationModel<MODEL>::GetRmean(G4double k){
   return MODEL::GetRmean(k);
 }
 
@@ -199,16 +199,16 @@ SampleSecondaries(std::vector<G4DynamicParticle*>*,
                                  GetVolume(theIncomingTrack->GetTouchable()->
                                            GetHistoryDepth()));
       
-      double displacementMag = displacement.mag();
-      double safety = DBL_MAX;
+      G4double displacementMag = displacement.mag();
+      G4double safety = DBL_MAX;
       G4ThreeVector direction = displacement/displacementMag;
       
       //--
       // 6/09/16 - recupere de molecular dissocation
-      double mag_displacement = displacement.mag();
+      G4double mag_displacement = displacement.mag();
       G4ThreeVector displacement_direction = displacement/mag_displacement;
       
-      //     double step = DBL_MAX;
+      //     G4double step = DBL_MAX;
       //     step = fNavigator->CheckNextStep(theIncomingTrack->GetPosition(),
       //                                     displacement_direction,
       //                                     mag_displacement,

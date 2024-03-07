@@ -38,7 +38,7 @@ int xDataXML_polynomialToTOM( statusMessageReporting *smr, xDataXML_element *XE,
                 goto err;
             }
             dataProcessed = 1;
-            if( xDataXML_stringToDoubles( smr, XE, XMLChild->text.text, length, (double *) polynomial->coefficients ) != 0 ) goto err;
+            if( xDataXML_stringToDoubles( smr, XE, XMLChild->text.text, length, (G4double *) polynomial->coefficients ) != 0 ) goto err;
         }
     }
     if( dataProcessed == 0 ) {

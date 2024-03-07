@@ -73,7 +73,7 @@ G4tgrVolume::G4tgrVolume(const std::vector<G4String>& wl)
     //---------- set material name
     theMaterialName = G4tgrUtils::GetString(wl[wl.size() - 1]);
 
-    //---------- create only vector<double> of theSolidParams
+    //---------- create only vector<G4double> of theSolidParams
     theSolid = G4tgrVolumeMgr::GetInstance()->CreateSolid(wl, 1);
 
 #ifdef G4VERBOSE

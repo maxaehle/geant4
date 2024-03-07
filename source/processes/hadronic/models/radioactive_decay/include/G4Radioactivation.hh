@@ -143,8 +143,8 @@ class G4Radioactivation : public G4RadioactiveDecay
     void AddDeexcitationSpectrumForBiasMode(G4ParticleDefinition* apartDef,
                                             G4double weight,
                                             G4double currenTime,
-                                            std::vector<double>& weights_v,
-                                            std::vector<double>& times_v,
+                                            std::vector<G4double>& weights_v,
+                                            std::vector<G4double>& times_v,
                                             std::vector<G4DynamicParticle*>& secondaries_v);
 
     G4RadioactivationMessenger* theRadioactivationMessenger;

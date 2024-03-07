@@ -68,7 +68,7 @@ G4AntiNeutron* G4AntiNeutron::Definition()
   //             stable         lifetime    decay table
   //             shortlived      subType    anti_encoding
    // use constants in CLHEP
-  // static const double  neutron_mass_c2 = 939.56563 * MeV;
+  // static const G4double  neutron_mass_c2 = 939.56563 * MeV;
 
   anInstance = new G4ParticleDefinition(
                  name, neutron_mass_c2, 7.478e-28*GeV,         0.0, 

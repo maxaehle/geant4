@@ -41,7 +41,7 @@ using namespace GIDI;
 
 struct ZAMass {
     char const *symbol;
-    double mass;
+    G4double mass;
 };
 
 static struct ZAMass ZAMasses[] = {
@@ -872,10 +872,10 @@ static struct ZAMass ZAMasses[] = {
 /*
 ***************************************************************
 */
-double G4GIDI_targetMass( const char *targetSymbol ) {
+G4double G4GIDI_targetMass( const char *targetSymbol ) {
 
     int i, n = sizeof( ZAMasses ) / sizeof( ZAMasses[0] );
-    double mass = -1.0;
+    G4double mass = -1.0;
 
     for( i = 0; i < n; i++ ) {
         if( !strcmp( ZAMasses[i].symbol, targetSymbol ) ) {
@@ -888,10 +888,10 @@ double G4GIDI_targetMass( const char *targetSymbol ) {
 /*
 ***************************************************************
 */
-double G4GIDI_Z_AMass( int iZ, int iA ) {
+G4double G4GIDI_Z_AMass( int iZ, int iA ) {
 
     char *name = G4GIDI_Misc_Z_A_m_ToName( iZ, iA );
-    double mass;
+    G4double mass;
 
     if( name == NULL ) return( -1.0 );
     mass = G4GIDI_targetMass( name );

@@ -148,7 +148,7 @@ void Run::EndOfRun()
   // normalize histograms
   //
   G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();  
-  G4double fac = 1./(double(numberOfEvent));
+  G4double fac = 1./(G4double(numberOfEvent));
   analysisManager->ScaleH1(1,fac);
   analysisManager->ScaleH1(2,fac);
   analysisManager->ScaleH1(3,fac);
@@ -256,7 +256,7 @@ void Run::PrintFluence(G4int TotEvents)
   std::ofstream File(fileName, std::ios::out);
   
   std::ios::fmtflags mode = File.flags();  
-  File.setf( std::ios::scientific, std::ios::floatfield );
+  File.setf( std::ios::scientific, std::ios::G4floatfield );
   G4int prec = File.precision(3);
       
   File << "  Fluence density distribution \n " 
@@ -269,13 +269,13 @@ void Run::PrintFluence(G4int TotEvents)
      G4double error = 0.;
      if (fluence1[bin] > 0.) error =  100*fluence2[bin]/fluence1[bin];
      File << "  " << bin << "\t " << rmean/mm << "\t " << fNbEntries[bin]
-          << "\t " << fluence[bin]/double(TotEvents) << "\t " << fluence1[bin] 
+          << "\t " << fluence[bin]/G4double(TotEvents) << "\t " << fluence1[bin] 
           << "\t " << error
           << G4endl;          
   }
     
   // restaure default formats
-  File.setf(mode,std::ios::floatfield);
+  File.setf(mode,std::ios::G4floatfield);
   File.precision(prec);         
 }
 

@@ -239,7 +239,7 @@ public:
     /** Returns the diffusion coefficient D.
      */
     G4double GetDiffusionCoefficient(const G4Material*,
-                                     double temperature) const;
+                                     G4double temperature) const;
 
     /** Set the decay time of the molecule.
      */

@@ -76,7 +76,7 @@ TabulatedField3D::TabulatedField3D(G4float gr1, G4float gr2, G4float gr3, G4floa
 
   const char * filename ="OM50.grid";
   
-  double lenUnit= mm;
+  G4double lenUnit= mm;
   G4cout << "\n-----------------------------------------------------------"
 	 << "\n      3D Magnetic field from OPERA software "
 	 << "\n-----------------------------------------------------------";
@@ -110,8 +110,8 @@ TabulatedField3D::TabulatedField3D(G4float gr1, G4float gr2, G4float gr3, G4floa
   }
   
   // Read in the data
-  double xval,yval,zval,bx,by,bz;
-  double permeability; // Not used in this example.
+  G4double xval,yval,zval,bx,by,bz;
+  G4double permeability; // Not used in this example.
   for (ix=0; ix<fNx; ix++) 
   {
     for (iy=0; iy<fNy; iy++) 
@@ -184,8 +184,8 @@ TabulatedField3D::TabulatedField3D(G4float gr1, G4float gr2, G4float gr3, G4floa
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 
-void TabulatedField3D::GetFieldValue(const double point[4],
-				      double *Bfield ) const
+void TabulatedField3D::GetFieldValue(const G4double point[4],
+				      G4double *Bfield ) const
 { 
   //G4cout << fGradient1 << G4endl;
   //G4cout << fGradient2 << G4endl;
@@ -212,9 +212,9 @@ if (fModel==2)
   Bfield[4] = 0.0;
   Bfield[5] = 0.0;
 
-  double x = point[0];
-  double y = point[1];
-  double z = point[2]; 
+  G4double x = point[0];
+  G4double y = point[1];
+  G4double z = point[2]; 
 
   G4int quad;
   G4double gradient[5];
@@ -244,19 +244,19 @@ if (fModel==2)
   {
     // Position of given point within region, normalized to the range
     // [0,1]
-    double xfraction = (x - fMinix) / fDx;
-    double yfraction = (y - fMiniy) / fDy; 
-    double zfraction = (z - fMiniz) / fDz;
+    G4double xfraction = (x - fMinix) / fDx;
+    G4double yfraction = (y - fMiniy) / fDy; 
+    G4double zfraction = (z - fMiniz) / fDz;
 
     // Need addresses of these to pass to modf below.
     // modf uses its second argument as an OUTPUT argument.
-    double xdindex, ydindex, zdindex;
+    G4double xdindex, ydindex, zdindex;
     
     // Position of the point within the cuboid defined by the
     // nearest surrounding tabulated points
-    double xlocal = ( std::modf(xfraction*(fNx-1), &xdindex));
-    double ylocal = ( std::modf(yfraction*(fNy-1), &ydindex));
-    double zlocal = ( std::modf(zfraction*(fNz-1), &zdindex));
+    G4double xlocal = ( std::modf(xfraction*(fNx-1), &xdindex));
+    G4double ylocal = ( std::modf(yfraction*(fNy-1), &ydindex));
+    G4double zlocal = ( std::modf(zfraction*(fNz-1), &zdindex));
     
     // The indices of the nearest tabulated point whose coordinates
     // are all less than those of the given point
@@ -383,9 +383,9 @@ if (fModel==3)
   Bfield[4] = 0.0;
   Bfield[5] = 0.0;
 
-  double x = point[0];
-  double y = point[1];
-  double z = point[2]; 
+  G4double x = point[0];
+  G4double y = point[1];
+  G4double z = point[2]; 
 
   if ( (z>=-3900*mm && z<-3470*mm)  || (z>=-490*mm && z<100*mm) )
   {

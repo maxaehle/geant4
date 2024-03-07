@@ -39,7 +39,7 @@
 //                       the spin value is being used.
 //                     - Add function to obtain raw CG coeffients
 //                     - Speed up Wigner 3j evaluation by removing 
-//                       reallocation of vector<double>'s on every call
+//                       reallocation of vector<G4double>'s on every call
 //                     - Use G4Pow instead of internal logs variable
 //                     - Add functions for Wigner 6j and 9j symbols, 
 //                       Racah coefficients, and d-Matrices

@@ -286,14 +286,14 @@ void G4OpenGLViewer::SetView () {
   // to user interaction via visualization system's GUI.)
   
   // Lighting.
-  GLfloat lightPosition [4];
+  GLG4float lightPosition [4];
   lightPosition [0] = fVP.GetActualLightpointDirection().x();
   lightPosition [1] = fVP.GetActualLightpointDirection().y();
   lightPosition [2] = fVP.GetActualLightpointDirection().z();
   lightPosition [3] = 0.;
   // Light position is "true" light direction, so must come after gluLookAt.
-  GLfloat ambient [] = { 0.2f, 0.2f, 0.2f, 1.f};
-  GLfloat diffuse [] = { 0.8f, 0.8f, 0.8f, 1.f};
+  GLG4float ambient [] = { 0.2f, 0.2f, 0.2f, 1.f};
+  GLG4float diffuse [] = { 0.8f, 0.8f, 0.8f, 1.f};
   glEnable (GL_LIGHT0);
   glLightfv (GL_LIGHT0, GL_AMBIENT, ambient);
   glLightfv (GL_LIGHT0, GL_DIFFUSE, diffuse);
@@ -317,12 +317,12 @@ void G4OpenGLViewer::SetView () {
   const G4double cameraDistance = fVP.GetCameraDistance (radius);
   const G4Point3D cameraPosition =
     targetPoint + cameraDistance * fVP.GetViewpointDirection().unit();
-  const GLdouble pnear  = fVP.GetNearDistance (cameraDistance, radius);
-  const GLdouble pfar   = fVP.GetFarDistance  (cameraDistance, pnear, radius);
-  const GLdouble right  = fVP.GetFrontHalfHeight (pnear, radius) * ratioY;
-  const GLdouble left   = -right;
-  const GLdouble top    = fVP.GetFrontHalfHeight (pnear, radius) * ratioX;
-  const GLdouble bottom = -top;
+  const GLG4double pnear  = fVP.GetNearDistance (cameraDistance, radius);
+  const GLG4double pfar   = fVP.GetFarDistance  (cameraDistance, pnear, radius);
+  const GLG4double right  = fVP.GetFrontHalfHeight (pnear, radius) * ratioY;
+  const GLG4double left   = -right;
+  const GLG4double top    = fVP.GetFrontHalfHeight (pnear, radius) * ratioX;
+  const GLG4double bottom = -top;
   
   // FIXME
   ResizeGLView();
@@ -368,7 +368,7 @@ void G4OpenGLViewer::SetView () {
   // { return G4VSceneHandler::CreateSectionSolid(); }
 //  if (fVP.IsSection () ) {  // pair of back to back clip planes.
 //    const G4Plane3D& sp = fVP.GetSectionPlane ();
-//    double sArray[4];
+//    G4double sArray[4];
 //    sArray[0] = sp.a();
 //    sArray[1] = sp.b();
 //    sArray[2] = sp.c();
@@ -395,7 +395,7 @@ void G4OpenGLViewer::SetView () {
   if (fVP.IsCutaway() &&
       fVP.GetCutawayMode() == G4ViewParameters::cutawayIntersection &&
       nPlanes > 0) {
-    double a[4];
+    G4double a[4];
     a[0] = cutaways[0].a();
     a[1] = cutaways[0].b();
     a[2] = cutaways[0].c();
@@ -469,7 +469,7 @@ void G4OpenGLViewer::HaloingSecondPass () {
 
 }
 
-G4String G4OpenGLViewer::Pick(GLdouble x, GLdouble y)
+G4String G4OpenGLViewer::Pick(GLG4double x, GLG4double y)
 {
   const std::vector < G4OpenGLViewerPickMap* > & pickMap = GetPickDetails(x,y);
   G4String txt = "";
@@ -485,7 +485,7 @@ G4String G4OpenGLViewer::Pick(GLdouble x, GLdouble y)
   return txt;
 }
 
-const std::vector < G4OpenGLViewerPickMap* > & G4OpenGLViewer::GetPickDetails(GLdouble x, GLdouble y)
+const std::vector < G4OpenGLViewerPickMap* > & G4OpenGLViewer::GetPickDetails(GLG4double x, GLG4double y)
 {
   static std::vector < G4OpenGLViewerPickMap* > pickMapVector;
   for (auto pickMap: pickMapVector) {
@@ -1076,7 +1076,7 @@ std::string G4OpenGLViewer::getRealPrintFilename() {
   return temp;
 }
 
-GLdouble G4OpenGLViewer::getSceneNearWidth()
+GLG4double G4OpenGLViewer::getSceneNearWidth()
 {
   if (!fSceneHandler.GetScene()) {
     return 0;
@@ -1087,11 +1087,11 @@ GLdouble G4OpenGLViewer::getSceneNearWidth()
   G4double radius = fSceneHandler.GetScene()->GetExtent().GetExtentRadius();
   if(radius<=0.) radius = 1.;
   const G4double cameraDistance = fVP.GetCameraDistance (radius);
-  const GLdouble pnear   = fVP.GetNearDistance (cameraDistance, radius);
+  const GLG4double pnear   = fVP.GetNearDistance (cameraDistance, radius);
   return 2 * fVP.GetFrontHalfHeight (pnear, radius);
 }
 
-GLdouble G4OpenGLViewer::getSceneFarWidth()
+GLG4double G4OpenGLViewer::getSceneFarWidth()
 {
   if (!fSceneHandler.GetScene()) {
     return 0;
@@ -1102,13 +1102,13 @@ GLdouble G4OpenGLViewer::getSceneFarWidth()
   G4double radius = fSceneHandler.GetScene()->GetExtent().GetExtentRadius();
   if(radius<=0.) radius = 1.;
   const G4double cameraDistance = fVP.GetCameraDistance (radius);
-  const GLdouble pnear   = fVP.GetNearDistance (cameraDistance, radius);
-  const GLdouble pfar    = fVP.GetFarDistance  (cameraDistance, pnear, radius);
+  const GLG4double pnear   = fVP.GetNearDistance (cameraDistance, radius);
+  const GLG4double pfar    = fVP.GetFarDistance  (cameraDistance, pnear, radius);
   return 2 * fVP.GetFrontHalfHeight (pfar, radius);
 }
 
 
-GLdouble G4OpenGLViewer::getSceneDepth()
+GLG4double G4OpenGLViewer::getSceneDepth()
 {
   if (!fSceneHandler.GetScene()) {
     return 0;
@@ -1119,7 +1119,7 @@ GLdouble G4OpenGLViewer::getSceneDepth()
   G4double radius = fSceneHandler.GetScene()->GetExtent().GetExtentRadius();
   if(radius<=0.) radius = 1.;
   const G4double cameraDistance = fVP.GetCameraDistance (radius);
-  const GLdouble pnear   = fVP.GetNearDistance (cameraDistance, radius);
+  const GLG4double pnear   = fVP.GetNearDistance (cameraDistance, radius);
   return fVP.GetFarDistance  (cameraDistance, pnear, radius)- pnear;
 }
 
@@ -1320,12 +1320,12 @@ bool G4OpenGLViewer::setExportImageFormat(std::string format, bool quiet) {
 // From MESA implementation :
 // http://www.techques.com/question/1-8660454/gluPickMatrix-code-from-Mesa
 
-void G4OpenGLViewer::g4GluPickMatrix(GLdouble x, GLdouble y, GLdouble width, GLdouble height,
+void G4OpenGLViewer::g4GluPickMatrix(GLG4double x, GLG4double y, GLG4double width, GLG4double height,
                      GLint viewport[4])
   {
-    GLdouble mat[16];
-    GLdouble sx, sy;
-    GLdouble tx, ty;
+    GLG4double mat[16];
+    GLG4double sx, sy;
+    GLG4double tx, ty;
     
     sx = viewport[2] / width;
     sy = viewport[3] / height;
@@ -1362,14 +1362,14 @@ void G4OpenGLViewer::g4GluPickMatrix(GLdouble x, GLdouble y, GLdouble width, GLd
 // https://github.com/jlamarche/iOS-OpenGLES-Stuff/blob/master/Wavefront%20OBJ%20Loader/Classes/gluLookAt.m
 // or http://www.daniweb.com/software-development/game-development/threads/308901/lookat-matrix-source-code
 
-void G4OpenGLViewer::g4GluLookAt( GLdouble eyex, GLdouble eyey, GLdouble eyez,
-                        GLdouble centerx, GLdouble centery, GLdouble
+void G4OpenGLViewer::g4GluLookAt( GLG4double eyex, GLG4double eyey, GLG4double eyez,
+                        GLG4double centerx, GLG4double centery, GLG4double
                         centerz,
-                        GLdouble upx, GLdouble upy, GLdouble upz )
+                        GLG4double upx, GLG4double upy, GLG4double upz )
 {
-	GLdouble mat[16];
-	GLdouble x[3], y[3], z[3];
-	GLdouble mag;
+	GLG4double mat[16];
+	GLG4double x[3], y[3], z[3];
+	GLG4double mag;
   
 	/* Make rotation matrix */
   
@@ -1442,18 +1442,18 @@ void G4OpenGLViewer::g4GluLookAt( GLdouble eyex, GLdouble eyey, GLdouble eyez,
 	glTranslated(-eyex, -eyey, -eyez);
 }
 
-void G4OpenGLViewer::g4GlOrtho (GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar) {
+void G4OpenGLViewer::g4GlOrtho (GLG4double left, GLG4double right, GLG4double bottom, GLG4double top, GLG4double zNear, GLG4double zFar) {
   //  glOrtho (left, right, bottom, top, near, far);
   
-  GLdouble a = 2.0 / (right - left);
-  GLdouble b = 2.0 / (top - bottom);
-  GLdouble c = -2.0 / (zFar - zNear);
+  GLG4double a = 2.0 / (right - left);
+  GLG4double b = 2.0 / (top - bottom);
+  GLG4double c = -2.0 / (zFar - zNear);
   
-  GLdouble tx = - (right + left)/(right - left);
-  GLdouble ty = - (top + bottom)/(top - bottom);
-  GLdouble tz = - (zFar + zNear)/(zFar - zNear);
+  GLG4double tx = - (right + left)/(right - left);
+  GLG4double ty = - (top + bottom)/(top - bottom);
+  GLG4double tz = - (zFar + zNear)/(zFar - zNear);
   
-  GLdouble ortho[16] = {
+  GLG4double ortho[16] = {
     a, 0, 0, 0,
     0, b, 0, 0,
     0, 0, c, 0,
@@ -1464,21 +1464,21 @@ void G4OpenGLViewer::g4GlOrtho (GLdouble left, GLdouble right, GLdouble bottom, 
 }
 
 
-void G4OpenGLViewer::g4GlFrustum (GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar) {
+void G4OpenGLViewer::g4GlFrustum (GLG4double left, GLG4double right, GLG4double bottom, GLG4double top, GLG4double zNear, GLG4double zFar) {
   //  glFrustum (left, right, bottom, top, near, far);
   
-  GLdouble deltaX = right - left;
-  GLdouble deltaY = top - bottom;
-  GLdouble deltaZ = zFar - zNear;
+  GLG4double deltaX = right - left;
+  GLG4double deltaY = top - bottom;
+  GLG4double deltaZ = zFar - zNear;
   
-  GLdouble a = 2.0f * zNear / deltaX;
-  GLdouble b = 2.0f * zNear / deltaY;
-  GLdouble c = (right + left) / deltaX;
-  GLdouble d = (top + bottom) / deltaY;
-  GLdouble e = -(zFar + zNear) / (zFar - zNear);
-  GLdouble f = -2.0f * zFar * zNear / deltaZ;
+  GLG4double a = 2.0f * zNear / deltaX;
+  GLG4double b = 2.0f * zNear / deltaY;
+  GLG4double c = (right + left) / deltaX;
+  GLG4double d = (top + bottom) / deltaY;
+  GLG4double e = -(zFar + zNear) / (zFar - zNear);
+  GLG4double f = -2.0f * zFar * zNear / deltaZ;
   
-  GLdouble proj[16] = {
+  GLG4double proj[16] = {
     a, 0, 0, 0,
     0, b, 0, 0,
     c, d, e, -1.0f,

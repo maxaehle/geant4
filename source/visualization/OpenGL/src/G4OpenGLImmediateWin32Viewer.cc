@@ -53,7 +53,7 @@ void G4OpenGLImmediateWin32Viewer::Initialise () {
   CreateMainWindow ();
   CreateFontLists ();
 
-  // If a double buffer context has been forced upon us, ignore the
+  // If a G4double buffer context has been forced upon us, ignore the
   // back buffer for this OpenGLImmediate view.
   glDrawBuffer (GL_FRONT);
 
@@ -67,7 +67,7 @@ void G4OpenGLImmediateWin32Viewer::Initialise () {
 
 void G4OpenGLImmediateWin32Viewer::DrawView () {
 
-  // If a double buffer context has been forced upon us, ignore the
+  // If a G4double buffer context has been forced upon us, ignore the
   // back buffer for this OpenGLImmediate view.
   glDrawBuffer (GL_FRONT);
 

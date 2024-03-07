@@ -64,7 +64,7 @@ G4int G4fissionEvent::G4SmpSpNugDistData(G4int isotope) {
 /*
   Description
     Sample Number of Photons from spontaneous fission in 
-    (a) Cf-252 using the double Poisson model from Brunson;
+    (a) Cf-252 using the G4double Poisson model from Brunson;
     (b) Th-232, 
         U-232, U-233, U-234, U-235, U-236, U-238*,
         Np-237, 

@@ -28,7 +28,7 @@
 // Class description:
 //
 // Class for realisation of simple numerical methodes for integration of
-// functions with signature: double f(double). The methods based mainly on
+// functions with signature: G4double f(G4double). The methods based mainly on
 // algorithms given in the book:
 //   An introduction to NUMERICAL METHODS IN C++,
 //   B.H. Flowers, Claredon Press, Oxford, 1995.
@@ -56,7 +56,7 @@ class G4SimpleIntegration
   // Private copy constructor and assignment operator.
 
   // Simple integration methods:
-  // Trapezoidal, MidPoint, Gauss and Simpson(double a,double b,int n)
+  // Trapezoidal, MidPoint, Gauss and Simpson(G4double a,G4double b,int n)
   // - integrate function pointed by fFunction from a to b by n iterations,
   //   i.e. with Step (b-a)/n according to the correspondent method.
 

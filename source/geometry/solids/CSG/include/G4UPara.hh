@@ -78,7 +78,7 @@ class G4UPara : public G4UAdapter<vecgeom::UnplacedParallelepiped>
     void SetZHalfLength(G4double val);
     void SetAlpha(G4double alpha);
     void SetTanAlpha(G4double val);
-    void SetThetaAndPhi(double pTheta, double pPhi);
+    void SetThetaAndPhi(G4double pTheta, G4double pPhi);
 
     void SetAllParameters(G4double pDx, G4double pDy, G4double pDz,
                           G4double pAlpha, G4double pTheta, G4double pPhi);

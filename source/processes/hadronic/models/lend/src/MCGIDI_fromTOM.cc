@@ -19,7 +19,7 @@ namespace GIDI {
 using namespace GIDI;
 #endif
 
-static int MCGIDI_fromTOM_pdfOfXGivenW( statusMessageReporting *smr, ptwXYPoints *pdfXY, MCGIDI_pdfsOfXGivenW *dists, int i, double *norm );
+static int MCGIDI_fromTOM_pdfOfXGivenW( statusMessageReporting *smr, ptwXYPoints *pdfXY, MCGIDI_pdfsOfXGivenW *dists, int i, G4double *norm );
 /*
 ************************************************************
 */
@@ -27,7 +27,7 @@ int MCGIDI_fromTOM_pdfsOfXGivenW( statusMessageReporting *smr, xDataTOM_element 
     char const *toUnits[3] ) {
 
     int i;
-    double norm, wUnitFactor;
+    G4double norm, wUnitFactor;
     char const *wFromUnit, *toUnitsXY[2] = { toUnits[1], toUnits[2] };
     xDataTOM_XYs *XYs;
     xDataTOM_W_XYs *W_XYs; 
@@ -51,7 +51,7 @@ int MCGIDI_fromTOM_pdfsOfXGivenW( statusMessageReporting *smr, xDataTOM_element 
     }
 
     W_XYs = (xDataTOM_W_XYs *) xDataTOME_getXDataIfID( smr, element, "W_XYs" );
-    if( ( dists->Ws = (double *) smr_malloc2( smr, W_XYs->length * sizeof( double ), 1, "dists->Ws" ) ) == NULL ) goto err;
+    if( ( dists->Ws = (G4double *) smr_malloc2( smr, W_XYs->length * sizeof( G4double ), 1, "dists->Ws" ) ) == NULL ) goto err;
     if( ( dists->dist = (MCGIDI_pdfOfX *) smr_malloc2( smr, W_XYs->length * sizeof( MCGIDI_pdfOfX ), 0, "dists->dist" ) ) == NULL ) goto err;
 
     for( i = 0; i < W_XYs->length; i++ ) { 
@@ -78,7 +78,7 @@ err:
 /*
 ************************************************************
 */
-static int MCGIDI_fromTOM_pdfOfXGivenW( statusMessageReporting *smr, ptwXYPoints *pdfXY, MCGIDI_pdfsOfXGivenW *dists, int i, double *norm ) {
+static int MCGIDI_fromTOM_pdfOfXGivenW( statusMessageReporting *smr, ptwXYPoints *pdfXY, MCGIDI_pdfsOfXGivenW *dists, int i, G4double *norm ) {
 
     if( MCGIDI_fromTOM_pdfOfX( smr, pdfXY, &(dists->dist[i]), norm ) ) return( 1 );
     dists->numberOfWs++;
@@ -87,7 +87,7 @@ static int MCGIDI_fromTOM_pdfOfXGivenW( statusMessageReporting *smr, ptwXYPoints
 /*
 ************************************************************
 */
-int MCGIDI_fromTOM_pdfOfX( statusMessageReporting *smr, ptwXYPoints *pdfXY, MCGIDI_pdfOfX *dist, double *norm ) {
+int MCGIDI_fromTOM_pdfOfX( statusMessageReporting *smr, ptwXYPoints *pdfXY, MCGIDI_pdfOfX *dist, G4double *norm ) {
 
     int j1, n1 = (int) ptwXY_length( pdfXY );
     nfu_status status; 
@@ -98,7 +98,7 @@ int MCGIDI_fromTOM_pdfOfX( statusMessageReporting *smr, ptwXYPoints *pdfXY, MCGI
     dist->Xs = NULL;
     if( ptwXY_simpleCoalescePoints( pdfXY ) != nfu_Okay ) goto err;
 
-    if( ( dist->Xs = (double *) smr_malloc2( smr, 3 * n1 * sizeof( double ), 0, "dist->Xs" ) ) == NULL ) goto err;
+    if( ( dist->Xs = (G4double *) smr_malloc2( smr, 3 * n1 * sizeof( G4double ), 0, "dist->Xs" ) ) == NULL ) goto err;
     dist->pdf = &(dist->Xs[n1]);
     dist->cdf = &(dist->pdf[n1]);
 
@@ -114,7 +114,7 @@ int MCGIDI_fromTOM_pdfOfX( statusMessageReporting *smr, ptwXYPoints *pdfXY, MCGI
     }
     *norm = ptwX_getPointAtIndex_Unsafely( cdfX, n1 - 1 );
     if( *norm == 0. ) {             /* Should only happend for gammas. */
-        double inv_norm, sum = 0;
+        G4double inv_norm, sum = 0;
 
         inv_norm = 1.0 / ( dist->Xs[n1-1] - dist->Xs[0] );
         for( j1 = 0; j1 < n1; ++j1 ) {

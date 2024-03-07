@@ -4,7 +4,7 @@
 
 #define _USE_MATH_DEFINES
 #include <iostream>
-#include <cfloat>
+#include <cG4float>
 #include <cmath>
 #include <fstream>
 #include <string>
@@ -42,20 +42,20 @@ int main(){
 	cout<<"============Axial Sensitivity Analysis =========================="<<endl;
 
 	int eventID0, blockID0, crystalID_axial0, crystalID_tangential0, DOI_ID0; 
-	double timeStamp0, totalEdep0;
+	G4double timeStamp0, totalEdep0;
     int eventID1, blockID1, crystalID_axial1, crystalID_tangential1, DOI_ID1;
-	double timeStamp1, totalEdep1;
-	double  spositionX, spositionY, spositionZ; //source position
+	G4double timeStamp1, totalEdep1;
+	G4double  spositionX, spositionY, spositionZ; //source position
 
-	double z_offset = 0.0;//Axial offset position where the plane is located
-	double planeWidth = 3;// (mm)
+	G4double z_offset = 0.0;//Axial offset position where the plane is located
+	G4double planeWidth = 3;// (mm)
 	int planeNumber;
 
-	float total_sensitivity = 0.0;
+	G4float total_sensitivity = 0.0;
 
 	int numberOfSlices = int (AxialLength/planeWidth);
 	cout<<"Number of axial planes (slices) are: " <<numberOfSlices<<endl;
-	double Counts_per_plane[numberOfSlices];
+	G4double Counts_per_plane[numberOfSlices];
 
 	ofstream OutFile("axial_sensitivity.csv");
 	string filename = "resultCoincidence.data";

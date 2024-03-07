@@ -34,14 +34,14 @@ char str[] = "1e-5 20.43634 2e-5 20.43634 5e-5 20.43634 1e-4 20.43633 2e-4 20.43
 int main( int argc, char **argv ) {
 
     int64_t i1, numberConverted;
-    double *doublePtr;
+    G4double *G4doublePtr;
     nfu_status status;
     char *endCharacter;
 
-    status = nfu_stringToListOfDoubles( str, &numberConverted, &doublePtr, &endCharacter );
-    if( doublePtr != NULL ) {
-        for( i1 = 0; i1 < numberConverted; i1++ ) printf( "%6d %14.7e\n", (int) i1, doublePtr[i1] );
-        nfu_free( doublePtr );
+    status = nfu_stringToListOfDoubles( str, &numberConverted, &G4doublePtr, &endCharacter );
+    if( G4doublePtr != NULL ) {
+        for( i1 = 0; i1 < numberConverted; i1++ ) printf( "%6d %14.7e\n", (int) i1, G4doublePtr[i1] );
+        nfu_free( G4doublePtr );
     }
     printf( "No converted = <%s>\n", endCharacter );
     printf( "%8d  %d\n", (int) numberConverted, status );

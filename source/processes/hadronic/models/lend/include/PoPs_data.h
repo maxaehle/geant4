@@ -180,7 +180,7 @@ struct PoPDatas {
     char const *name;
     enum PoPs_genre genre;
     int Z, N, nuclearLevel;
-    double mass;
+    G4double mass;
 };
 
 /* Most of the mass data from Ame2003 */

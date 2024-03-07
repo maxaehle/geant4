@@ -103,7 +103,7 @@ void TSRunAction::EndOfRunAction(const G4Run* aRun)
     std::vector<G4String> unitstr{ "keV", "steps" };
 
     //----------------------------------------------------------------------//
-    // lambda to print double value
+    // lambda to print G4double value
     auto print = [](std::ostream& fout, G4int first, G4double second,
                     G4double unit1, G4double unit2, G4String unit2str) {
       if(fout)

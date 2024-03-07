@@ -270,7 +270,7 @@ void G4ProductionCutsTable::UpdateCoupleTable(G4VPhysicalVolume* /*currWorld*/)
     G4cout << timer << G4endl;
   }
 
-  // resize Range/Energy cuts double vectors if new couple is made
+  // resize Range/Energy cuts G4double vectors if new couple is made
   if(newCoupleAppears)
   {
     for(std::size_t ix=0; ix<NumberOfG4CutIndex; ++ix)
@@ -284,7 +284,7 @@ void G4ProductionCutsTable::UpdateCoupleTable(G4VPhysicalVolume* /*currWorld*/)
     }
   }
 
-  // Update Range/Energy cuts double vectors
+  // Update Range/Energy cuts G4double vectors
   for(std::size_t ix=0; ix<NumberOfG4CutIndex; ++ix)
   {
     for(std::size_t ixx=0; ixx<(*(rangeCutTable[ix])).size(); ++ixx)

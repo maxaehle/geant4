@@ -24,8 +24,8 @@
 // turn and the upper half on another; second, the red ball's spin is 
 // incremented by a counter of the number of random numbers produced.
 //
-// The result is scaled to a double precision floating point number to which
-// is added another random double further scaled 2^(53-32) places to the
+// The result is scaled to a G4double precision G4floating point number to which
+// is added another random G4double further scaled 2^(53-32) places to the
 // right in order to ensure that the remaining bits of the result are not 
 // left empty due to the mere 32 bits representation used internally.
 
@@ -59,10 +59,10 @@ public:
     virtual ~RanshiEngine();
     // Constructors and destructor
 
-    double flat();
+    G4double flat();
     // Returns a pseudo random number between 0 and 1
 
-    void flatArray(const int size, double* vect);
+    void flatArray(const int size, G4double* vect);
     // Fills the array "vect" of specified size with flat random values
 
     void setSeed(long seed, int);
@@ -82,8 +82,8 @@ public:
     void showStatus() const;
     // Dumps the engine status on the screen
 
-    operator double();       // Returns same as flat()
-    operator float();        // flat value, without worrying about filling bits
+    operator G4double();       // Returns same as flat()
+    operator G4float();        // flat value, without worrying about filling bits
     operator unsigned int(); // 32-bit flat value, quickest of all
 
     virtual std::ostream & put (std::ostream & os) const;

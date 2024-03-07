@@ -92,8 +92,8 @@ class G4UIcommand
     static G4String ConvertToString(G4bool boolVal);
     static G4String ConvertToString(G4int intValue);
     static G4String ConvertToString(G4long longValue);
-    static G4String ConvertToString(G4double doubleValue);
-    static G4String ConvertToString(G4double doubleValue, const char* unitName);
+    static G4String ConvertToString(G4double G4doubleValue);
+    static G4String ConvertToString(G4double G4doubleValue, const char* unitName);
     static G4String ConvertToString(G4ThreeVector vec);
     static G4String ConvertToString(G4ThreeVector vec, const char* unitName);
       // Static methods for conversion from value(s) to a string.

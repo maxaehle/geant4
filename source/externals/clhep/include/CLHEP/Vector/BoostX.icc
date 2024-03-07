@@ -25,19 +25,19 @@ inline HepBoostX & HepBoostX::operator = (const HepBoostX & b) {
   return *this;
 }
 
-inline HepBoostX::HepBoostX(double bbeta) { set(bbeta); }
+inline HepBoostX::HepBoostX(G4double bbeta) { set(bbeta); }
 
 // - Protected method:
-inline HepBoostX::HepBoostX( double bbeta, double ggamma ) :
+inline HepBoostX::HepBoostX( G4double bbeta, G4double ggamma ) :
                                         beta_(bbeta), gamma_(ggamma) {}
 
 // ----------  Accessors:
 
-inline double  HepBoostX::beta() const {   
+inline G4double  HepBoostX::beta() const {   
   return beta_;
 }
 
-inline double  HepBoostX::gamma() const {
+inline G4double  HepBoostX::gamma() const {
   return gamma_;
 }
 
@@ -49,22 +49,22 @@ inline Hep3Vector HepBoostX::getDirection() const {
   return  Hep3Vector(1.0, 0.0, 0.0);
 }
 
-inline double HepBoostX::xx() const { return gamma();}
-inline double HepBoostX::xy() const { return 0.0;}
-inline double HepBoostX::xz() const { return 0.0;}
-inline double HepBoostX::xt() const { return beta()*gamma();}
-inline double HepBoostX::yx() const { return 0.0;}
-inline double HepBoostX::yy() const { return 1.0;}
-inline double HepBoostX::yz() const { return 0.0;}
-inline double HepBoostX::yt() const { return 0.0;}
-inline double HepBoostX::zx() const { return 0.0;}
-inline double HepBoostX::zy() const { return 0.0;}
-inline double HepBoostX::zz() const { return 1.0;}
-inline double HepBoostX::zt() const { return 0.0;}
-inline double HepBoostX::tx() const { return beta()*gamma();}
-inline double HepBoostX::ty() const { return 0.0;}
-inline double HepBoostX::tz() const { return 0.0;}
-inline double HepBoostX::tt() const { return gamma();}
+inline G4double HepBoostX::xx() const { return gamma();}
+inline G4double HepBoostX::xy() const { return 0.0;}
+inline G4double HepBoostX::xz() const { return 0.0;}
+inline G4double HepBoostX::xt() const { return beta()*gamma();}
+inline G4double HepBoostX::yx() const { return 0.0;}
+inline G4double HepBoostX::yy() const { return 1.0;}
+inline G4double HepBoostX::yz() const { return 0.0;}
+inline G4double HepBoostX::yt() const { return 0.0;}
+inline G4double HepBoostX::zx() const { return 0.0;}
+inline G4double HepBoostX::zy() const { return 0.0;}
+inline G4double HepBoostX::zz() const { return 1.0;}
+inline G4double HepBoostX::zt() const { return 0.0;}
+inline G4double HepBoostX::tx() const { return beta()*gamma();}
+inline G4double HepBoostX::ty() const { return 0.0;}
+inline G4double HepBoostX::tz() const { return 0.0;}
+inline G4double HepBoostX::tt() const { return gamma();}
 
 inline HepLorentzVector HepBoostX::col1() const {
   return HepLorentzVector ( gamma(), 0, 0, beta()*gamma() );
@@ -127,33 +127,33 @@ inline bool HepBoostX::isIdentity() const {
   return ( beta() == 0 );
 }
 
-inline double HepBoostX::distance2( const HepBoostX & b ) const {
-  double d = beta()*gamma() - b.beta()*b.gamma();
+inline G4double HepBoostX::distance2( const HepBoostX & b ) const {
+  G4double d = beta()*gamma() - b.beta()*b.gamma();
   return d*d;
 }
 
-inline double HepBoostX::howNear(const HepBoostX & b) const {
+inline G4double HepBoostX::howNear(const HepBoostX & b) const {
   return std::sqrt(distance2(b)); }
-inline double HepBoostX::howNear(const HepBoost  & b) const {
+inline G4double HepBoostX::howNear(const HepBoost  & b) const {
   return std::sqrt(distance2(b)); }
-inline double HepBoostX::howNear(const HepRotation & r) const {
+inline G4double HepBoostX::howNear(const HepRotation & r) const {
   return std::sqrt(distance2(r)); }
-inline double HepBoostX::howNear(const HepLorentzRotation & lt) const {
+inline G4double HepBoostX::howNear(const HepLorentzRotation & lt) const {
   return std::sqrt(distance2(lt)); }
 
 inline bool HepBoostX::isNear(const HepBoostX & b, 
-					double epsilon) const {
+					G4double epsilon) const {
   return (distance2(b) <= epsilon*epsilon);
 }
 inline bool HepBoostX::isNear(const HepBoost & b, 
-					double epsilon) const {
+					G4double epsilon) const {
   return (distance2(b) <= epsilon*epsilon);
 }
 
 // ----------  Properties:
 
-inline double HepBoostX::norm2() const {
-  double bg = beta_*gamma_;
+inline G4double HepBoostX::norm2() const {
+  G4double bg = beta_*gamma_;
   return bg*bg;
 }
 
@@ -161,7 +161,7 @@ inline double HepBoostX::norm2() const {
 
 inline HepLorentzVector
 HepBoostX::operator * (const HepLorentzVector & p) const {
-  double bg = beta_*gamma_;
+  G4double bg = beta_*gamma_;
   return HepLorentzVector(gamma_*p.x() + bg*p.t(),
 				 p.y(),
 				 p.z(),
@@ -190,10 +190,10 @@ inline HepBoostX & HepBoostX::invert() {
 
 // ---------- Tolerance:
 
-inline double HepBoostX::getTolerance() {
+inline G4double HepBoostX::getTolerance() {
   return Hep4RotationInterface::tolerance;
 }
-inline double HepBoostX::setTolerance(double tol) {
+inline G4double HepBoostX::setTolerance(G4double tol) {
   return Hep4RotationInterface::setTolerance(tol);
 }
 

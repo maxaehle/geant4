@@ -47,7 +47,7 @@
 #include "TMath.h"
 #endif
 
-G4DNASmoluchowskiDiffusion::G4DNASmoluchowskiDiffusion(double epsilon) :  fEpsilon(epsilon)
+G4DNASmoluchowskiDiffusion::G4DNASmoluchowskiDiffusion(G4double epsilon) :  fEpsilon(epsilon)
 {
   fNbins = (int) trunc(1/fEpsilon);
   // std::cout << "fNbins: " << fNbins << std::endl;
@@ -69,17 +69,17 @@ G4DNASmoluchowskiDiffusion::~G4DNASmoluchowskiDiffusion()
 
 static G4DNASmoluchowskiDiffusion gDiff;
 
-double time_test = 1e-6 /*s*/;
-double D = 4.9e-9 /*m2/s*/;
-double test_distance = 1e-9; // m
+G4double time_test = 1e-6 /*s*/;
+G4double D = 4.9e-9 /*m2/s*/;
+G4double test_distance = 1e-9; // m
 
-double Plot(double* x, double* )
+G4double Plot(G4double* x, G4double* )
 {
-  double diff = gDiff.GetDensityProbability(x[0], time_test, D);
+  G4double diff = gDiff.GetDensityProbability(x[0], time_test, D);
   return diff;
 }
 
-static double InvErfc(double x)
+static G4double InvErfc(G4double x)
 {
   return TMath::ErfcInverse(x);
 }
@@ -101,7 +101,7 @@ int main(int argc, char **argv)
   gDiff.InitialiseInverseProbability();
 //  srand (time(NULL));
   TRint* root = new TRint("G4DNASmoluchowskiDiffusion",&argc, argv);
-  double interval = 1e-5;
+  G4double interval = 1e-5;
   G4DNASmoluchowskiDiffusion* diff = new G4DNASmoluchowskiDiffusion(interval);
   diff->InitialiseInverseProbability();
 
@@ -123,7 +123,7 @@ int main(int argc, char **argv)
 //
 //  canvas = new TCanvas();
   TH1D* h1 = new TH1D("h1", "h1", 100, 0., 1e-6);
-  double distance = -1;
+  G4double distance = -1;
 
   int N = 100000;
 
@@ -134,7 +134,7 @@ int main(int argc, char **argv)
     //std::cout << distance << std::endl;
   }
 
-  double scalf;
+  G4double scalf;
 
   {
   int integral_h1 = h1->Integral();
@@ -149,16 +149,16 @@ int main(int argc, char **argv)
 
   for(size_t i = 0 ; i < N ; ++i)
   {
-    double x = std::sqrt(2*D*time_test)*root_random.Gaus();
-    double y = std::sqrt(2*D*time_test)*root_random.Gaus();
-    double z = std::sqrt(2*D*time_test)*root_random.Gaus();
+    G4double x = std::sqrt(2*D*time_test)*root_random.Gaus();
+    G4double y = std::sqrt(2*D*time_test)*root_random.Gaus();
+    G4double z = std::sqrt(2*D*time_test)*root_random.Gaus();
 
     distance = std::sqrt(x*x+y*y+z*z);
     h2->Fill(distance);
     //std::cout << distance << std::endl;
 
-    double proba = root_random.Rndm();
-    double irt_distance = InvErfc(proba)*2*std::sqrt(D*time_test);
+    G4double proba = root_random.Rndm();
+    G4double irt_distance = InvErfc(proba)*2*std::sqrt(D*time_test);
     h_irt_distance->Fill(irt_distance);
   }
 
@@ -185,12 +185,12 @@ int main(int argc, char **argv)
   f2->Draw("SAME");
   h2->Draw("SAME");
   h_irt_distance->Draw("SAME");
-  double integral = f2->Integral(0., 1e-6);
+  G4double integral = f2->Integral(0., 1e-6);
   std::cout << "integral = " << integral << std::endl;
   std::cout << "integral h1 = " << h1->Integral() << std::endl;
   canvas->Draw();
 
-  std::vector<double> rdm(3);
+  std::vector<G4double> rdm(3);
   int nbins = 100;
   Axis_t* bins = BinLogX(nbins, -12, -1);
 
@@ -203,17 +203,17 @@ int main(int argc, char **argv)
     for(size_t j = 0 ; j < 3 ; ++j)
       rdm[j] = root_random.Gaus();
 
-    double denum = 1./(rdm[0]*rdm[0] + rdm[1]*rdm[1] + rdm[2]*rdm[2]);
+    G4double denum = 1./(rdm[0]*rdm[0] + rdm[1]*rdm[1] + rdm[2]*rdm[2]);
 
-    double t = ((test_distance*test_distance)*denum)*1./(2*D);
+    G4double t = ((test_distance*test_distance)*denum)*1./(2*D);
     h3->Fill(t);
 
-    double t_h4 =  diff->GetRandomTime(test_distance,D);
+    G4double t_h4 =  diff->GetRandomTime(test_distance,D);
     h4->Fill(t_h4);
 //    std::cout << t  << " " << t_h4 << std::endl;
 
-    double proba = root_random.Rndm();
-    double t_irt =  1./(4*D)*std::pow((test_distance)/InvErfc(proba),2);
+    G4double proba = root_random.Rndm();
+    G4double t_irt =  1./(4*D)*std::pow((test_distance)/InvErfc(proba),2);
     h_irt ->Fill(t_irt);
   }
 

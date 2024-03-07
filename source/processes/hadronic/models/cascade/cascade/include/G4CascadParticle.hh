@@ -59,7 +59,7 @@ public:
   ~G4CascadParticle() {;}			// No subclasses allowed
 
   // Allow copying of object data (for use with history and elsewhere)
-  // NOTE: history index IS copied (to avoid double counting)
+  // NOTE: history index IS copied (to avoid G4double counting)
   G4CascadParticle(const G4CascadParticle& cpart) { *this = cpart; }
   G4CascadParticle& operator=(const G4CascadParticle& cpart);
 

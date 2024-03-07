@@ -647,8 +647,8 @@ AlongStepGetPhysicalInteractionLength(const G4Track& track,
 
 void G4ITTransportation::ComputeStep(const G4Track& track,
                                      const G4Step& /*step*/,
-                                     const double timeStep,
-                                     double& oPhysicalStep)
+                                     const G4double timeStep,
+                                     G4double& oPhysicalStep)
 {
   PrepareState()
   const G4DynamicParticle* pParticle = track.GetDynamicParticle();
@@ -744,7 +744,7 @@ G4VParticleChange* G4ITTransportation::AlongStepDoIt(const G4Track& track,
     if (track.GetParticleDefinition() == pdefOpticalPhoton)
     {
       // For only Optical Photon, final velocity is used
-      double finalVelocity = track.CalculateVelocityForOpticalPhoton();
+      G4double finalVelocity = track.CalculateVelocityForOpticalPhoton();
       fParticleChange.ProposeVelocity(finalVelocity);
       deltaTime = stepLength / finalVelocity;
     }

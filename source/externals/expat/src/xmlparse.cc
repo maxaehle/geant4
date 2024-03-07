@@ -121,7 +121,7 @@ typedef struct {
 #endif
 
 /* For probing (after a collision) we need a step size relative prime
-   to the hash table size, which is a power of 2. We use double-hashing,
+   to the hash table size, which is a power of 2. We use G4double-hashing,
    since we can calculate a second hash value cheaply by taking those bits
    of the first hash value that were discarded (masked out) when the table
    index was calculated: index = hash & mask, where mask = table->size - 1.

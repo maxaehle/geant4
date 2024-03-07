@@ -64,7 +64,7 @@ G4Positron* G4Positron::Definition()
   //             stable         lifetime    decay table
   //             shortlived      subType    anti_encoding
   // use constants in CLHEP
-  //  static const double electron_mass_c2 = 0.51099906 * MeV;
+  //  static const G4double electron_mass_c2 = 0.51099906 * MeV;
 
    anInstance = new G4ParticleDefinition(
                 name, electron_mass_c2,       0.0*MeV,    +1.*eplus, 

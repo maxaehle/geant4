@@ -97,7 +97,7 @@ G4GenericMessenger::Command& G4GenericMessenger::DeclareProperty(
        var.TypeInfo() == typeid(unsigned int) ||
        var.TypeInfo() == typeid(unsigned long))
     { ptype = 'i'; }
-    else if(var.TypeInfo() == typeid(float) || var.TypeInfo() == typeid(double))
+    else if(var.TypeInfo() == typeid(G4float) || var.TypeInfo() == typeid(G4double))
     { ptype = 'd'; }
     else if(var.TypeInfo() == typeid(bool))
     { ptype = 'b'; }
@@ -116,14 +116,14 @@ G4GenericMessenger::Command& G4GenericMessenger::DeclarePropertyWithUnit(
   const G4String& name, const G4String& defaultUnit, const G4AnyType& var,
   const G4String& doc)
 {
-  if(var.TypeInfo() != typeid(float) && var.TypeInfo() != typeid(double) &&
+  if(var.TypeInfo() != typeid(G4float) && var.TypeInfo() != typeid(G4double) &&
      var.TypeInfo() != typeid(G4ThreeVector))
   {
     return DeclareProperty(name, var, doc);
   }
   G4String fullpath = directory + name;
   G4UIcommand* cmd;
-  if(var.TypeInfo() == typeid(float) || var.TypeInfo() == typeid(double))
+  if(var.TypeInfo() == typeid(G4float) || var.TypeInfo() == typeid(G4double))
   {
     cmd = new G4UIcmdWithADoubleAndUnit(fullpath.c_str(), this);
     (static_cast<G4UIcmdWithADoubleAndUnit*>(cmd))
@@ -159,7 +159,7 @@ G4GenericMessenger::Command& G4GenericMessenger::DeclareMethod(
        tInfo == typeid(unsigned int) ||
        tInfo == typeid(unsigned long))
     { ptype = 'i'; }
-    else if(tInfo == typeid(float) || tInfo == typeid(double))
+    else if(tInfo == typeid(G4float) || tInfo == typeid(G4double))
     { ptype = 'd'; }
     else if(tInfo == typeid(bool))
     { ptype = 'b'; }
@@ -302,7 +302,7 @@ G4GenericMessenger::Command& G4GenericMessenger::Command::SetUnit(
   G4UIcommand tmp((cmdpath + "_tmp").c_str(), messenger);
   delete command;
 
-  if(*type == typeid(float) || *type == typeid(double))
+  if(*type == typeid(G4float) || *type == typeid(G4double))
   {
     G4UIcmdWithADoubleAndUnit* cmd_t =
       new G4UIcmdWithADoubleAndUnit(cmdpath, messenger);
@@ -325,7 +325,7 @@ G4GenericMessenger::Command& G4GenericMessenger::Command::SetUnit(
   }
   else
   {
-    G4cerr << "Only parameters of type <double> or <float> can be associated "
+    G4cerr << "Only parameters of type <G4double> or <G4float> can be associated "
               "with units"
            << G4endl;
     return *this;

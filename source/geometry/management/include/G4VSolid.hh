@@ -199,7 +199,7 @@ class G4VSolid
     // Visualization functions
 
     virtual void DescribeYourselfTo (G4VGraphicsScene& scene) const = 0;
-      // A "double dispatch" function which identifies the solid
+      // A "G4double dispatch" function which identifies the solid
       // to the graphics scene.
     virtual G4VisExtent   GetExtent        () const;
       // Provide extent (bounding box) as possible hint to the graphics view.

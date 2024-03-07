@@ -267,7 +267,7 @@ UpdateIntegrationStep(const G4Track& aTrack,
                       G4double& step){
     
     if(mom.x() != 0.0 || mom.y() != 0.0){
-        double xy2 = mom.x() * mom.x() + mom.y()*mom.y();
+        G4double xy2 = mom.x() * mom.x() + mom.y()*mom.y();
         
         if(xy2!=0.){
             step = std::fabs(fTransverseVariationMax * GetPre(aTrack)->GetKineticEnergy() / std::pow(xy2,0.5));

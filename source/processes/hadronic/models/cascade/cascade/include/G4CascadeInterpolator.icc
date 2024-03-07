@@ -34,7 +34,7 @@
 // optional flag whether to truncate or extrapolate (the default) values
 // beyond the bin boundaries.
 //
-// The interpolation action returns a simple double: the integer part
+// The interpolation action returns a simple G4double: the integer part
 // is the bin index, and the fractional part is, obviously, the
 // fractional part.
 //

@@ -76,7 +76,7 @@ G4double G4PolarizationTransition::F3Coefficient(G4int K, G4int K2, G4int K1,
   if(fCoeff == 0) return 0;
   if((Lprime+K2+K1+1) % 2) fCoeff = -fCoeff;
 
-  //AR-13Jun2017 : apply Jason Detwiler's conversion to double 
+  //AR-13Jun2017 : apply Jason Detwiler's conversion to G4double 
   //               in the argument of sqrt() to avoid integer overflows.
   return fCoeff*std::sqrt(G4double((twoJ1+1)*(twoJ2+1)*(2*LL+1))
 			  *G4double((2*Lprime+1)*(2*K+1)*(2*K1+1)*(2*K2+1)));
@@ -84,7 +84,7 @@ G4double G4PolarizationTransition::F3Coefficient(G4int K, G4int K2, G4int K1,
 
 G4double G4PolarizationTransition::GammaTransFCoefficient(G4int K) const
 {
-  double transFCoeff = FCoefficient(K, fLbar, fLbar, fTwoJ2, fTwoJ1);
+  G4double transFCoeff = FCoefficient(K, fLbar, fLbar, fTwoJ2, fTwoJ1);
   if(fDelta == 0) return transFCoeff;
   transFCoeff += 2.*fDelta*FCoefficient(K, fLbar, fL, fTwoJ2, fTwoJ1);
   transFCoeff += fDelta*fDelta*FCoefficient(K, fL, fL, fTwoJ2, fTwoJ1);
@@ -94,7 +94,7 @@ G4double G4PolarizationTransition::GammaTransFCoefficient(G4int K) const
 G4double G4PolarizationTransition::GammaTransF3Coefficient(G4int K, G4int K2, 
 							   G4int K1) const
 {
-  double transF3Coeff = F3Coefficient(K, K2, K1, fLbar, fLbar, fTwoJ2, fTwoJ1);
+  G4double transF3Coeff = F3Coefficient(K, K2, K1, fLbar, fLbar, fTwoJ2, fTwoJ1);
   if(fDelta == 0) return transF3Coeff;
   transF3Coeff += 2.*fDelta*F3Coefficient(K, K2, K1, fLbar, fL, fTwoJ2, fTwoJ1);
   transF3Coeff += fDelta*fDelta*F3Coefficient(K, K2, K1, fL, fL, fTwoJ2, fTwoJ1);

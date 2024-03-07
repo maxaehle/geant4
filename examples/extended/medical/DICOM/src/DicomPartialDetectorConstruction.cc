@@ -328,7 +328,7 @@ ReadVoxelDensitiesPartial( std::ifstream& fin )
           if( std::fabs(dens1 - mate->GetDensity()/g*cm3 ) < 1.e-9 ) continue;
 
           //--- Build material name with fOriginalMaterials name + density
-          //        float densityBin = densityDiffs[mateID] *
+          //        G4float densityBin = densityDiffs[mateID] *
           //        (G4int(dens1/densityDiffs[mateID])+0.5);
           G4String newMateName = mate->GetName();
 

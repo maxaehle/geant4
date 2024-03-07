@@ -7,7 +7,7 @@
  * SYNOPSIS:
  *
  * int N;
- * double x, y, coef[N+1], nf_polevl[];
+ * G4double x, y, coef[N+1], nf_polevl[];
  *
  * y = nf_polevl( x, coef, N );
  *
@@ -43,11 +43,11 @@ namespace GIDI {
 using namespace GIDI;
 #endif
 
-double nf_polevl( double x, double coef[], int N ) {
+G4double nf_polevl( G4double x, G4double coef[], int N ) {
 
-    double ans;
+    G4double ans;
     int i;
-    double *p;
+    G4double *p;
 
     p = coef;
     ans = *p++;
@@ -64,10 +64,10 @@ double nf_polevl( double x, double coef[], int N ) {
 ************************************************************
 */
 /* Evaluate polynomial when coefficient of x^N  is 1.0.  Otherwise same as polevl.  */
-double nf_p1evl( double x, double coef[], int N ) {
+G4double nf_p1evl( G4double x, G4double coef[], int N ) {
 
-    double ans;
-    double *p;
+    G4double ans;
+    G4double *p;
     int i;
 
     p = coef;

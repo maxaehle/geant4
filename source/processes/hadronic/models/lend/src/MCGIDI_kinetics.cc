@@ -15,10 +15,10 @@ using namespace GIDI;
 /*
 ************************************************************
 */
-int MCGIDI_kinetics_2BodyReaction( statusMessageReporting *smr, MCGIDI_angular *angular, double K, double mu, double phi, 
+int MCGIDI_kinetics_2BodyReaction( statusMessageReporting *smr, MCGIDI_angular *angular, G4double K, G4double mu, G4double phi, 
         MCGIDI_sampledProductsData *outgoingData ) {
 
-    double m1 = angular->projectileMass_MeV, m2 = angular->targetMass_MeV, m3 = angular->productMass_MeV, m4 = angular->residualMass_MeV, mi, mf, Kp, x, beta;
+    G4double m1 = angular->projectileMass_MeV, m2 = angular->targetMass_MeV, m3 = angular->productMass_MeV, m4 = angular->residualMass_MeV, mi, mf, Kp, x, beta;
 
     mi = m1 + m2;
     mf = m3 + m4;
@@ -35,14 +35,14 @@ int MCGIDI_kinetics_2BodyReaction( statusMessageReporting *smr, MCGIDI_angular *
 /*
 ************************************************************
 */
-int MCGIDI_kinetics_COMKineticEnergy2LabEnergyAndMomentum( statusMessageReporting * /*smr*/, double beta, double e_kinetic_com, double mu, double phi, 
-        double m3cc, double m4cc, MCGIDI_sampledProductsData *outgoingData ) {
+int MCGIDI_kinetics_COMKineticEnergy2LabEnergyAndMomentum( statusMessageReporting * /*smr*/, G4double beta, G4double e_kinetic_com, G4double mu, G4double phi, 
+        G4double m3cc, G4double m4cc, MCGIDI_sampledProductsData *outgoingData ) {
 /*
 *   beta            the velocity/speedOflight of the com frame relative to the lab frame.
 *   e_kinetic_com   Total kinetic energy (K1 + K2) in the COM frame.
 *   mu              cos( theta ) in the COM frame.
 */
-    double x, v_p, p, pp3, pp4, px3, py3, pz3, pz4, pz, p_perp2, E3, E4, gamma, m3cc2 = m3cc * m3cc, m4cc2 = m4cc * m4cc;
+    G4double x, v_p, p, pp3, pp4, px3, py3, pz3, pz4, pz, p_perp2, E3, E4, gamma, m3cc2 = m3cc * m3cc, m4cc2 = m4cc * m4cc;
 
     p = std::sqrt( e_kinetic_com * ( e_kinetic_com + 2. * m3cc ) * ( e_kinetic_com + 2. * m4cc )  * ( e_kinetic_com + 2. * ( m3cc + m4cc ) ) ) /
             ( 2. * ( e_kinetic_com + m3cc + m4cc ) );
@@ -102,11 +102,11 @@ int MCGIDI_kinetics_COMKineticEnergy2LabEnergyAndMomentum( statusMessageReportin
 /*
 ************************************************************
 */
-int MCGIDI_kinetics_COM2Lab( statusMessageReporting *smr, MCGIDI_quantitiesLookupModes &modes, MCGIDI_decaySamplingInfo *decaySamplingInfo, double masses[3] ) {
+int MCGIDI_kinetics_COM2Lab( statusMessageReporting *smr, MCGIDI_quantitiesLookupModes &modes, MCGIDI_decaySamplingInfo *decaySamplingInfo, G4double masses[3] ) {
 /*      
 *       massProjectile = masses[0], massTarget = masses[1], massProduct = masses[2];
 */
-    double a = masses[0] + masses[1], b, e_in = modes.getProjectileEnergy( ) * masses[0] * masses[2] / ( a * a ), Ep;
+    G4double a = masses[0] + masses[1], b, e_in = modes.getProjectileEnergy( ) * masses[0] * masses[2] / ( a * a ), Ep;
 
     if( decaySamplingInfo->frame != xDataTOM_frame_centerOfMass ) {
         smr_setReportError2( smr, smr_unknownID, 1, "bad frame = %d for COM to lab conversion of mu/energy", decaySamplingInfo->frame );

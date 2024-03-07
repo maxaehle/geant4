@@ -39,7 +39,7 @@ namespace G4Analysis
 {
 
 using G4ToolsBaseHisto
-  = tools::histo::base_histo<double, unsigned int, unsigned int, double, double>;
+  = tools::histo::base_histo<G4double, unsigned int, unsigned int, G4double, G4double>;
 
 // Access to data parameters
 //

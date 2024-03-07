@@ -885,7 +885,7 @@ void G4ErrorSymMatrix::invertBunchKaufman(G4int& ifail)
   G4int pivrow;
 
   // Establish the two working-space arrays needed:  x and piv are
-  // used as pointers to arrays of doubles and ints respectively, each
+  // used as pointers to arrays of G4doubles and ints respectively, each
   // of length nrow.  We do not want to reallocate each time through
   // unless the size needs to grow.  We do not want to leak memory, even
   // by having a new without a delete that is only done once.
@@ -916,7 +916,7 @@ void G4ErrorSymMatrix::invertBunchKaufman(G4int& ifail)
   G4double lambda, sigma;
   const G4double alpha   = .6404;  // = (1+sqrt(17))/8
   const G4double epsilon = 32 * DBL_EPSILON;
-  // whenever a sum of two doubles is below or equal to epsilon
+  // whenever a sum of two G4doubles is below or equal to epsilon
   // it is set to zero.
   // this constant could be set to zero but then the algorithm
   // doesn't neccessarily detect that a matrix is singular

@@ -80,10 +80,10 @@ class G4ErrorMatrix
   // ** Note that the indexing starts from (1,1). **
 
   G4ErrorMatrix& operator*=(G4double t);
-  // Multiply a G4ErrorMatrix by a floating number.
+  // Multiply a G4ErrorMatrix by a G4floating number.
 
   G4ErrorMatrix& operator/=(G4double t);
-  // Divide a G4ErrorMatrix by a floating number.
+  // Divide a G4ErrorMatrix by a G4floating number.
 
   G4ErrorMatrix& operator+=(const G4ErrorMatrix& m2);
   G4ErrorMatrix& operator+=(const G4ErrorSymMatrix& m2);

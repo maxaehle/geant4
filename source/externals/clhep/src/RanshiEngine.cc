@@ -116,7 +116,7 @@ RanshiEngine::RanshiEngine(int rowIndex, int colIndex)
 
 RanshiEngine::~RanshiEngine() { }
 
-double RanshiEngine::flat() {
+G4double RanshiEngine::flat() {
   unsigned int redAngle = (((numBuff/2) - 1) & redSpin) + halfBuff;
   unsigned int blkSpin     = buffer[redAngle] & 0xffffffff;
   unsigned int boostResult = blkSpin ^ redSpin;
@@ -131,7 +131,7 @@ double RanshiEngine::flat() {
 	   nearlyTwoToMinus_54());  		// non-zero
 }
 
-void RanshiEngine::flatArray(const int size, double* vect) {
+void RanshiEngine::flatArray(const int size, G4double* vect) {
   for (int i = 0; i < size; ++i) {
     vect[i] = flat();
   }
@@ -219,11 +219,11 @@ void RanshiEngine::showStatus() const {
   std::cout << "-------------------------------------------" << std::endl;
 }
 
-RanshiEngine::operator double() {
+RanshiEngine::operator G4double() {
   return flat();
 }
 
-RanshiEngine::operator float() {
+RanshiEngine::operator G4float() {
   unsigned int redAngle = (((numBuff/2) - 1) & redSpin) + halfBuff;
   unsigned int blkSpin  = buffer[redAngle] & 0xffffffff;
   
@@ -232,7 +232,7 @@ RanshiEngine::operator float() {
   redSpin  = (blkSpin + numFlats++) & 0xffffffff;
   halfBuff = numBuff/2 - halfBuff;
   
-  return float(blkSpin * twoToMinus_32());
+  return G4float(blkSpin * twoToMinus_32());
 }
 
 RanshiEngine::operator unsigned int() {

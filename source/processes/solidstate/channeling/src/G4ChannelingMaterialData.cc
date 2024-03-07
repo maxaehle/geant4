@@ -102,14 +102,14 @@ void G4ChannelingMaterialData::SetBR(G4double val){
 void G4ChannelingMaterialData::SetBR(const G4String& filename){
     std::ifstream vFileIn;
     int points;
-    float maximum;
+    G4float maximum;
     vFileIn.open(filename);
     vFileIn >> points >> maximum;
     
     fVectorR = new G4PhysicsLinearVector(0,maximum * CLHEP::millimeter,points);
-    double vTempX;
-    double maximumY = -DBL_MAX;
-    double minimumY = +DBL_MAX;
+    G4double vTempX;
+    G4double maximumY = -DBL_MAX;
+    G4double minimumY = +DBL_MAX;
     for(G4int i0=0;i0<points; i0++){
         vFileIn >> vTempX;
         if(vTempX>maximumY) maximumY = vTempX;

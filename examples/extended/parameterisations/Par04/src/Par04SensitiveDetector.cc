@@ -170,8 +170,8 @@ Par04Hit* Par04SensitiveDetector::RetrieveAndSetupHit(G4ThreeVector aGlobalPosit
   // Calculate rotation matrix along the particle momentum direction
   // It will rotate the shower axes to match the incoming particle direction
   G4RotationMatrix rotMatrix = G4RotationMatrix();
-  double particleTheta       = fEntranceDirection.theta();
-  double particlePhi         = fEntranceDirection.phi();
+  G4double particleTheta       = fEntranceDirection.theta();
+  G4double particlePhi         = fEntranceDirection.phi();
   rotMatrix.rotateZ(-particlePhi);
   rotMatrix.rotateY(-particleTheta);
   G4RotationMatrix rotMatrixInv = CLHEP::inverseOf(rotMatrix);

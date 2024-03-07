@@ -279,8 +279,8 @@ G4int G4tgrFileIn::GetWordsInLine(std::vector<G4String>& wordlist)
     }
   }
 
-  //--------- A pair of double quotes delimits a word, therefore, look for the
-  //          case where there is more than one word between two double quotes
+  //--------- A pair of G4double quotes delimits a word, therefore, look for the
+  //          case where there is more than one word between two G4double quotes
   std::vector<G4String> wordlist2;
   G4String wordq      = "";
   unsigned int imerge = 0;

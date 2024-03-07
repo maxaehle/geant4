@@ -350,7 +350,7 @@ void G4OpenGLStoredQtViewer::paintEvent(QPaintEvent *) {
     // Will really update the widget by calling CGLFlushDrawable
     // The widget's rendering context will become the current context and initializeGL()
     // will be called if it hasn't already been called.
-    // Copies the back buffer of a double-buffered context to the front buffer.
+    // Copies the back buffer of a G4double-buffered context to the front buffer.
     updateGL();
   }
 }
@@ -383,7 +383,7 @@ void G4OpenGLStoredQtViewer::showEvent (QShowEvent *)
 }
 
 /**
- * This function was build in order to make a zoom on double clic event.
+ * This function was build in order to make a zoom on G4double clic event.
  * It was think to build a rubberband on the zoom area, but never work fine
  */
 void G4OpenGLStoredQtViewer::mouseDoubleClickEvent(QMouseEvent *)
@@ -421,7 +421,7 @@ void G4OpenGLStoredQtViewer::updateQWidget() {
   // Will really update the widget by calling CGLFlushDrawable
   // The widget's rendering context will become the current context and initializeGL()
   // will be called if it hasn't already been called.
-  // Copies the back buffer of a double-buffered context to the front buffer.
+  // Copies the back buffer of a G4double-buffered context to the front buffer.
   repaint(); // will read scene tree state
   // updateGL() // From J.Allison picking branch
   updateViewerPropertiesTableWidget();
@@ -443,7 +443,7 @@ void G4OpenGLStoredQtViewer::ShowView (
   //  DrawView();   // Necessary?  JA 29/04/16
   activateWindow();
   //  glFlush(); // NO NEED and as drawView will already cause a flush
-  // that could do a double flush
+  // that could do a G4double flush
   
 }
 

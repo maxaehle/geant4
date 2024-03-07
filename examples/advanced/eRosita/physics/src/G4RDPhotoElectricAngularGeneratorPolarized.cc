@@ -339,7 +339,7 @@ void G4RDPhotoElectricAngularGeneratorPolarized::PhotoElectronGetMajorantSurface
   G4double bMin,bStep;
   G4int indexMax;
   G4int level = shellLevel;    
-  if(shellLevel > 1) level = 1; // protection since only K and L1 polarized double differential cross-sections were implemented
+  if(shellLevel > 1) level = 1; // protection since only K and L1 polarized G4double differential cross-sections were implemented
     
   bMin = betaArray[0];
   bStep = betaArray[1];

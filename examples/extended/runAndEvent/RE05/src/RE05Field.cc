@@ -48,7 +48,7 @@ RE05Field::~RE05Field()
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void RE05Field::GetFieldValue(const double Point[3],double *Bfield) const
+void RE05Field::GetFieldValue(const G4double Point[3],G4double *Bfield) const
 {
   Bfield[0] = 0.;
   Bfield[1] = 0.;

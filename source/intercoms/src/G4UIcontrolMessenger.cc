@@ -121,11 +121,11 @@ G4UIcontrolMessenger::G4UIcontrolMessenger()
   verboseCommand->SetRange("switch >= 0 && switch <=2");
   verboseCommand->SetDefaultValue(2);
 
-  doublePrecCommand = new G4UIcmdWithABool("/control/useDoublePrecision", this);
-  doublePrecCommand->SetGuidance(
-    "Use double precision for printing out the current parameter value(s).");
-  doublePrecCommand->SetParameterName("useDoublePrecision", true);
-  doublePrecCommand->SetDefaultValue(true);
+  G4doublePrecCommand = new G4UIcmdWithABool("/control/useDoublePrecision", this);
+  G4doublePrecCommand->SetGuidance(
+    "Use G4double precision for printing out the current parameter value(s).");
+  G4doublePrecCommand->SetParameterName("useDoublePrecision", true);
+  G4doublePrecCommand->SetDefaultValue(true);
 
   historyCommand = new G4UIcmdWithAString("/control/saveHistory", this);
   historyCommand->SetGuidance("Store command history to a file.");
@@ -144,7 +144,7 @@ G4UIcontrolMessenger::G4UIcontrolMessenger()
   aliasCommand->SetGuidance("String can be aliased by this command.");
   aliasCommand->SetGuidance("The string may contain one or more spaces,");
   aliasCommand->SetGuidance(
-    "the string must be enclosed by double quotes (\").");
+    "the string must be enclosed by G4double quotes (\").");
   aliasCommand->SetGuidance("To use an alias, enclose the alias name with");
   aliasCommand->SetGuidance("parenthesis \"{\" and \"}\".");
   G4UIparameter* aliasNameParam = new G4UIparameter("aliasName", 's', false);
@@ -211,7 +211,7 @@ G4UIcontrolMessenger::G4UIcontrolMessenger()
 
   ifCommand = new G4UIcommand("/control/if", this);
   ifCommand->SetGuidance("Execute a macro file if the expression is true.");
-  ifCommand->SetGuidance(" Syntax : <double> <comp> <double> <macro_file>");
+  ifCommand->SetGuidance(" Syntax : <G4double> <comp> <G4double> <macro_file>");
   G4UIparameter* leftParam = new G4UIparameter("left", 'd', false);
   ifCommand->SetParameter(leftParam);
   G4UIparameter* compParam = new G4UIparameter("comp", 's', false);
@@ -225,7 +225,7 @@ G4UIcontrolMessenger::G4UIcontrolMessenger()
 
   doifCommand = new G4UIcommand("/control/doif", this);
   doifCommand->SetGuidance("Execute a UI command if the expression is true.");
-  doifCommand->SetGuidance(" Syntax : <double> <comp> <double> <UI_command>");
+  doifCommand->SetGuidance(" Syntax : <G4double> <comp> <G4double> <UI_command>");
   G4UIparameter* doleftParam = new G4UIparameter("left", 'd', false);
   doifCommand->SetParameter(doleftParam);
   G4UIparameter* docompParam = new G4UIparameter("comp", 's', false);
@@ -377,7 +377,7 @@ G4UIcontrolMessenger::~G4UIcontrolMessenger()
   delete ExecuteCommand;
   delete suppressAbortionCommand;
   delete verboseCommand;
-  delete doublePrecCommand;
+  delete G4doublePrecCommand;
   delete historyCommand;
   delete stopStoreHistoryCommand;
   delete ManualCommand;
@@ -438,10 +438,10 @@ void G4UIcontrolMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
   {
     UI->SetVerboseLevel(verboseCommand->GetNewIntValue(newValue));
   }
-  if(command == doublePrecCommand)
+  if(command == G4doublePrecCommand)
   {
     G4UImanager::UseDoublePrecisionStr(
-      doublePrecCommand->GetNewBoolValue(newValue));
+      G4doublePrecCommand->GetNewBoolValue(newValue));
   }
   if(command == historyCommand)
   {
@@ -777,10 +777,10 @@ G4String G4UIcontrolMessenger::GetCurrentValue(G4UIcommand* command)
   {
     currentValue = verboseCommand->ConvertToString(UI->GetVerboseLevel());
   }
-  if(command == doublePrecCommand)
+  if(command == G4doublePrecCommand)
   {
     currentValue =
-      doublePrecCommand->ConvertToString(G4UImanager::DoublePrecisionStr());
+      G4doublePrecCommand->ConvertToString(G4UImanager::DoublePrecisionStr());
   }
   if(command == suppressAbortionCommand)
   {

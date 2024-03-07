@@ -6,9 +6,9 @@
 
 namespace HepGeom {
   //--------------------------------------------------------------------------
-  Point3D<float> &
-  Point3D<float>::transform(const Transform3D & m) {
-    double vx = x(), vy = y(), vz = z();
+  Point3D<G4float> &
+  Point3D<G4float>::transform(const Transform3D & m) {
+    G4double vx = x(), vy = y(), vz = z();
     set(m.xx()*vx + m.xy()*vy + m.xz()*vz + m.dx(),
 	m.yx()*vx + m.yy()*vy + m.yz()*vz + m.dy(),
 	m.zx()*vx + m.zy()*vy + m.zz()*vz + m.dz());
@@ -16,19 +16,19 @@ namespace HepGeom {
   }
 
   //--------------------------------------------------------------------------
-  Point3D<float>
-  operator*(const Transform3D & m, const Point3D<float> & v) {
-    double vx = v.x(), vy = v.y(), vz = v.z();
-    return Point3D<float>
+  Point3D<G4float>
+  operator*(const Transform3D & m, const Point3D<G4float> & v) {
+    G4double vx = v.x(), vy = v.y(), vz = v.z();
+    return Point3D<G4float>
       (m.xx()*vx + m.xy()*vy + m.xz()*vz + m.dx(),
        m.yx()*vx + m.yy()*vy + m.yz()*vz + m.dy(),
        m.zx()*vx + m.zy()*vy + m.zz()*vz + m.dz());
   }
 
   //--------------------------------------------------------------------------
-  Point3D<double> &
-  Point3D<double>::transform(const Transform3D & m) {
-    double vx = x(), vy = y(), vz = z();
+  Point3D<G4double> &
+  Point3D<G4double>::transform(const Transform3D & m) {
+    G4double vx = x(), vy = y(), vz = z();
     set(m.xx()*vx + m.xy()*vy + m.xz()*vz + m.dx(),
 	m.yx()*vx + m.yy()*vy + m.yz()*vz + m.dy(),
 	m.zx()*vx + m.zy()*vy + m.zz()*vz + m.dz());
@@ -36,10 +36,10 @@ namespace HepGeom {
   }
 
   //--------------------------------------------------------------------------
-  Point3D<double>
-  operator*(const Transform3D & m, const Point3D<double> & v) {
-    double vx = v.x(), vy = v.y(), vz = v.z();
-    return Point3D<double>
+  Point3D<G4double>
+  operator*(const Transform3D & m, const Point3D<G4double> & v) {
+    G4double vx = v.x(), vy = v.y(), vz = v.z();
+    return Point3D<G4double>
       (m.xx()*vx + m.xy()*vy + m.xz()*vz + m.dx(),
        m.yx()*vx + m.yy()*vy + m.yz()*vz + m.dy(),
        m.zx()*vx + m.zy()*vy + m.zz()*vz + m.dz());

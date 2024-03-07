@@ -30,7 +30,7 @@
 //		flag to use three-body momentum parametrizations
 // 20130703  M. Kelsey -- Add flag for USE_PHASESPACE
 // 20141030  M. Kelsey -- Add flag to enable direct pi-N absorption
-// 20141211  M. Kelsey -- Change PIN_ABSORPTION flag to double, for energy cut
+// 20141211  M. Kelsey -- Change PIN_ABSORPTION flag to G4double, for energy cut
 
 #ifndef G4CascadeParamMessenger_hh
 #define G4CascadeParamMessenger_hh

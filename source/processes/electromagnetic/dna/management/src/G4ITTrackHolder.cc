@@ -286,7 +286,7 @@ G4ITTrackHolder::~G4ITTrackHolder()
  * param time = time of the merged list
  * returned = was there actually merged data ?
  */
-bool G4ITTrackHolder::MergeNextTimeToMainList(double& time)
+bool G4ITTrackHolder::MergeNextTimeToMainList(G4double& time)
 {
 //  G4cout << "G4ITTrackHolder::MergeNextTimeToMainList" << G4endl;
   if (fDelayedList.empty())
@@ -465,7 +465,7 @@ void G4ITTrackHolder::_PushTrack(G4Track* track)
     AddTrackID(track);
   }
 
-  double currentGlobalTime = G4Scheduler::Instance()->GetGlobalTime();
+  G4double currentGlobalTime = G4Scheduler::Instance()->GetGlobalTime();
 
 #ifdef G4VERBOSE
   if (fVerbose)
@@ -551,8 +551,8 @@ void G4ITTrackHolder::_PushTrack(G4Track* track)
   }
   else // Is running
   {
-    double timeDifference = globalTime - currentGlobalTime;
-    double timeTolerance = G4Scheduler::Instance()->GetTimeTolerance();
+    G4double timeDifference = globalTime - currentGlobalTime;
+    G4double timeTolerance = G4Scheduler::Instance()->GetTimeTolerance();
 
     if (timeDifference < -1 * timeTolerance)
     {
@@ -632,7 +632,7 @@ void G4ITTrackHolder::PushDelayed(G4Track* track)
 
   G4double globalTime = track->GetGlobalTime();
 
-  std::map<double, std::map<Key, G4TrackList*> >::iterator it_delayed =
+  std::map<G4double, std::map<Key, G4TrackList*> >::iterator it_delayed =
   fDelayedList.find(globalTime);
 
   if (it_delayed == fDelayedList.end())
@@ -661,10 +661,10 @@ void G4ITTrackHolder::PushDelayed(G4Track* track)
   //  fDelayedList[globalTime][moleculeID]
 
   /*
-   std::map<double,std::map<int, G4TrackList* > >::iterator it_delayed =
+   std::map<G4double,std::map<int, G4TrackList* > >::iterator it_delayed =
    fDelayedList.begin();
 
-   std::map<double,std::map<int, G4TrackList* > >::iterator end_delayed =
+   std::map<G4double,std::map<int, G4TrackList* > >::iterator end_delayed =
    fDelayedList.end();
 
    for(it_delayed != end_delayed ; it_delayed++)
@@ -675,7 +675,7 @@ void G4ITTrackHolder::PushDelayed(G4Track* track)
    }
    */
   /*
-   std::map<double,G4TrackList* > :: iterator
+   std::map<G4double,G4TrackList* > :: iterator
    fDelayedList_i = fDelayedList.find(globalTime) ;
 
    if(fDelayedList_i == fDelayedList.end())

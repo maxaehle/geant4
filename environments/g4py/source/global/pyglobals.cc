@@ -82,7 +82,7 @@ void export_globals()
     .def(vector_indexing_suite<G4intVector>())
     ;
 
-  class_<G4doubleVector> ("G4doubleVector", "double vector")
+  class_<G4doubleVector> ("G4doubleVector", "G4double vector")
     .def(vector_indexing_suite<G4doubleVector>())
     ;
 

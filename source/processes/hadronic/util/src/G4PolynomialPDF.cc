@@ -143,9 +143,9 @@ G4double G4PolynomialPDF::Evaluate(G4double x, G4int ddxPower)
     return 0.0;
   }
 
-  double f = 0.; // return value
-  double xN = 1.; // x to the power N
-  double x1N = 1.; // endpoint x1 to the power N; only used by CDF
+  G4double f = 0.; // return value
+  G4double xN = 1.; // x to the power N
+  G4double x1N = 1.; // endpoint x1 to the power N; only used by CDF
   for(size_t i=0; i<=GetNCoefficients(); ++i) {
     if(ddxPower == -1) { // CDF
       if(i>0) f += GetCoefficient(i-1)*(xN - x1N)/i;
@@ -308,7 +308,7 @@ G4double G4PolynomialPDF::GetX(G4double p, G4double x1, G4double x2,
     }
     if(ddxPower == 1) a *= 3;
     else if(ddxPower == -1) a *= 0.5;
-    double sqrtFactor = b*b - 4.*a*c;
+    G4double sqrtFactor = b*b - 4.*a*c;
     if(sqrtFactor < 0) return x2; // quadratic equation has no solution (p not in range of f)
     sqrtFactor = sqrt(sqrtFactor)/2./fabs(a);
     G4double valueMinus = -b/2./a - sqrtFactor;

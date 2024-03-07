@@ -81,19 +81,19 @@ protected:
 
 private:  
 
-  double BrWigInt0(const double x, const double gamma, const double m0) const
+  G4double BrWigInt0(const G4double x, const G4double gamma, const G4double m0) const
     { return 2.0*gamma*std::atan( 2.0 * (x-m0)/ gamma  ); }
 
   G4double BrWigInt1(const G4double x, const G4double gamma, const G4double m0) const
     { return 0.5*gamma*gamma*G4Log( (x-m0)*(x-m0)+gamma*gamma/4.0 ) + m0*BrWigInt0(x,gamma,m0); }
 
-  double BrWigInv(const double x, const double gamma, const double m0) const
+  G4double BrWigInv(const G4double x, const G4double gamma, const G4double m0) const
     { return 0.5*gamma*std::tan( 0.5*x/gamma )+m0; }
   
-  double SampleResonanceMass(const double poleMass, 
-			     const double width,
-			     const double minMass,
-			     const double maxMass) const;
+  G4double SampleResonanceMass(const G4double poleMass, 
+			     const G4double width,
+			     const G4double minMass,
+			     const G4double maxMass) const;
 private:
 
  G4VAngularDistribution * theAngularDistribution;

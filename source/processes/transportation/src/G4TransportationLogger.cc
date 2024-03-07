@@ -97,7 +97,7 @@ void G4TransportationLogger::ReportLoopingTrack( const G4Track & track,
    ) const
 {
   static std::atomic<unsigned int> numAdviceExcessSteps(0);
-  constexpr double gramPerCm3 = gram / ( centimeter * centimeter * centimeter ) ;
+  constexpr G4double gramPerCm3 = gram / ( centimeter * centimeter * centimeter ) ;
   std::ostringstream msg;
   auto preStepPt= stepData.GetPreStepPoint();
   auto preStepEn= preStepPt ? preStepPt->GetKineticEnergy() / MeV : -1.0 ;

@@ -186,7 +186,7 @@ ComputeDimensions( G4Cons& cons, const G4int copyNo,
   G4double pDz = msol->GetZHalfLength();
 
   G4double d_half_gap = fhgap * pRMax2 / pRMax1;
-  //- already rotated  double pSR = foffset + copyNo*fwidth;
+  //- already rotated  G4double pSR = foffset + copyNo*fwidth;
   G4double pSPhi = msol->GetStartPhiAngle();
   G4double pDPhi = msol->GetDeltaPhiAngle();;
 
@@ -292,7 +292,7 @@ ComputeDimensions( G4Cons& cons, const G4int,
   G4double pRMax2 = msol->GetOuterRadiusPlusZ();
   G4double pDz = msol->GetZHalfLength();
 
-  //- already rotated  double pSPhi = foffset + copyNo*fwidth;
+  //- already rotated  G4double pSPhi = foffset + copyNo*fwidth;
   G4double pSPhi = foffset + msol->GetStartPhiAngle() + fhgap;
   G4double pDPhi = fwidth - 2.*fhgap;
 

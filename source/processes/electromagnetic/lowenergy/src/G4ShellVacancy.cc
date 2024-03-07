@@ -30,7 +30,7 @@
 // History:
 // -----------
 // 21 Sept 2001 Elena Guardincerri     Created
-// 25 Mar  2002  V.Ivanchenko          Change AverageNOfIonisations int->double
+// 25 Mar  2002  V.Ivanchenko          Change AverageNOfIonisations int->G4double
 //
 // -------------------------------------------------------------------
 

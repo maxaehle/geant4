@@ -104,7 +104,7 @@
 //		nuclear recoil.  Improves pi- capture performance.
 // 20141030  M. Kelsey -- Check flag for whether to do pi-N absorption
 // 20141201  M. Kelsey -- Check for null vector return from G4GDecay3
-// 20141211  M. Kelsey -- Change PIN_ABSORPTION flag to double, probability;
+// 20141211  M. Kelsey -- Change PIN_ABSORPTION flag to G4double, probability;
 //		fix handling of boosts for pi-N absorption.
 // 20150608  M. Kelsey -- Label all while loops as terminating.
 
@@ -125,7 +125,7 @@
 #include "G4VTwoBodyAngDst.hh"
 #include "Randomize.hh"
 #include <algorithm>
-#include <cfloat>
+#include <cG4float>
 #include <vector>
 
 using namespace G4InuclParticleNames;

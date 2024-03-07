@@ -17,12 +17,12 @@ namespace CLHEP  {
 //
 //-******************************
 
-double Hep4RotationInterface::tolerance = 
+G4double Hep4RotationInterface::tolerance = 
 			Hep4RotationInterface::ToleranceTicks * 1.0e-08;
 
-double Hep4RotationInterface::getTolerance() {return tolerance;} 
-double Hep4RotationInterface::setTolerance( double tol ) {
-  double t = tolerance; tolerance = tol; return t;
+G4double Hep4RotationInterface::getTolerance() {return tolerance;} 
+G4double Hep4RotationInterface::setTolerance( G4double tol ) {
+  G4double t = tolerance; tolerance = tol; return t;
 }
 
 

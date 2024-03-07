@@ -456,7 +456,7 @@ ThreadPool::destroy_threadpool()
     m_alive_flag->store(false);
 
     auto start   = std::chrono::steady_clock::now();
-    auto elapsed = std::chrono::duration<double>{};
+    auto elapsed = std::chrono::duration<G4double>{};
     // wait maximum of 30 seconds for threads to exit
     while(m_thread_active->load() > 0 && elapsed.count() < 30)
     {
@@ -559,7 +559,7 @@ ThreadPool::execute_thread(VUserTaskQueue* _task_queue)
     // auto        workers    = _task_queue->workers();
 
     auto start   = std::chrono::steady_clock::now();
-    auto elapsed = std::chrono::duration<double>{};
+    auto elapsed = std::chrono::duration<G4double>{};
     // check for updates for 60 seconds max
     while(!_task_queue && elapsed.count() < 60)
     {

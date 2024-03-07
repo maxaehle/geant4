@@ -46,7 +46,7 @@ struct ResNode
 {
 public:
   ResNode():fNode(0),fDistanceSqr(0){;}
-  ResNode(double distsqr, G4KDNode_Base* node):
+  ResNode(G4double distsqr, G4KDNode_Base* node):
   fNode(node),fDistanceSqr(distsqr)
   {;}
   
@@ -70,11 +70,11 @@ public:
   }
   
   G4KDNode_Base* GetNode() { return fNode;}
-  double GetDistanceSqr() { return fDistanceSqr;}
+  G4double GetDistanceSqr() { return fDistanceSqr;}
   
 protected:
   G4KDNode_Base* fNode;
-  double fDistanceSqr;
+  G4double fDistanceSqr;
 };
 
 // comparison
@@ -97,7 +97,7 @@ G4KDTreeResult::~G4KDTreeResult()
     //std::list<ResNode>::erase(begin(),end());
 }
 
-void G4KDTreeResult::Insert(double dis_sq, G4KDNode_Base* node)
+void G4KDTreeResult::Insert(G4double dis_sq, G4KDNode_Base* node)
 {
     //std::list<ResNode>::push_back(ResNode(dis_sq,node));
  KDTR_parent::push_back(ResNode(dis_sq,node));
@@ -144,7 +144,7 @@ void G4KDTreeResult::Next()
     ++fIterator;
 }
 
-double G4KDTreeResult::GetDistanceSqr() const
+G4double G4KDTreeResult::GetDistanceSqr() const
 {
     return (*fIterator).GetDistanceSqr();
 }

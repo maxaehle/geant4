@@ -39,7 +39,7 @@ G4NuclearDecay::G4NuclearDecay(const G4String& channelName,
                                const G4double& excitationE,
                                const G4Ions::G4FloatLevelBase& flb)
  : G4VDecayChannel(channelName), theMode(aMode), daughterEx(excitationE),
-   floatingLevel(flb), halflifeThreshold(nanosecond) 
+   G4floatingLevel(flb), halflifeThreshold(nanosecond) 
 {}
 
 G4NuclearDecay::~G4NuclearDecay()

@@ -43,12 +43,12 @@ class G4VChemistryWorld
     virtual void ConstructChemistryBoundary() = 0;
     virtual void ConstructChemistryComponents() = 0;
 
-    std::map<MolType,double>::iterator begin()
+    std::map<MolType,G4double>::iterator begin()
     {
         return fpChemicalComponent.begin();
     }
 
-    std::map<MolType,double>::iterator end()
+    std::map<MolType,G4double>::iterator end()
     {
       return fpChemicalComponent.end();
     }
@@ -58,12 +58,12 @@ class G4VChemistryWorld
         return fpChemicalComponent.size();
     }
 
-    std::map<MolType,double>::const_iterator begin_const()
+    std::map<MolType,G4double>::const_iterator begin_const()
     {
         return fpChemicalComponent.begin();
     }
 
-    std::map<MolType,double>::const_iterator end_const()
+    std::map<MolType,G4double>::const_iterator end_const()
     {
         return fpChemicalComponent.end();
     }
@@ -74,7 +74,7 @@ class G4VChemistryWorld
     }
    protected:
     std::unique_ptr<G4DNABoundingBox> fpChemistryBoundary;
-    std::map<MolType,double> fpChemicalComponent;
+    std::map<MolType,G4double> fpChemicalComponent;
 };
 
 #endif

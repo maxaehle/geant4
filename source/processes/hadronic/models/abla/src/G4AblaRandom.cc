@@ -45,7 +45,7 @@
 
 namespace G4AblaRandom {
 
-  double flat() {
+  G4double flat() {
 #ifdef ABLAXX_IN_GEANT4_MODE
     return G4UniformRand();
 #else

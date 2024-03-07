@@ -130,7 +130,7 @@ DMXParticleSourceMessenger::DMXParticleSourceMessenger
   ionCmd->SetGuidance("        Z:(int) AtomicNumber");
   ionCmd->SetGuidance("        A:(int) AtomicMass");
   ionCmd->SetGuidance("        Q:(int) Charge of Ion (in unit of e)");
-  ionCmd->SetGuidance("        E:(double) Excitation energy (in keV)");
+  ionCmd->SetGuidance("        E:(G4double) Excitation energy (in keV)");
   
   G4UIparameter* param;
   param = new G4UIparameter("Z",'i',false);

@@ -75,7 +75,7 @@ void G4GIDI_target::init( char const *fileName ) {
     nElasticIndices = nCaptureIndices = nFissionIndices = nOthersIndices = 0;
 
     if( ( n = MCGIDI_target_numberOfReactions( &smr, target ) ) > 0 ) {
-        if( ( p = elasticIndices = (int *) smr_malloc2( &smr, n * sizeof( double ), 1, "elasticIndices" ) ) == NULL ) {
+        if( ( p = elasticIndices = (int *) smr_malloc2( &smr, n * sizeof( G4double ), 1, "elasticIndices" ) ) == NULL ) {
             smr_print( &smr, 1 );
             throw 1;
         }
@@ -169,14 +169,14 @@ int G4GIDI_target::getM( void ) {
 /*
 ***************************************************************
 */
-double G4GIDI_target::getMass( void ) {
+G4double G4GIDI_target::getMass( void ) {
 
     return( mass );
 }
 /*
 ***************************************************************
 */
-int G4GIDI_target::getTemperatures( double *temperatures ) {
+int G4GIDI_target::getTemperatures( G4double *temperatures ) {
 
     return( MCGIDI_target_getTemperatures( &smr, target, temperatures ) );
 }
@@ -261,7 +261,7 @@ vector<channelID> *G4GIDI_target::getProductionChannelIDs( void ) {
 /*
 ***************************************************************
 */
-double G4GIDI_target::getTotalCrossSectionAtE( double e_in, double temperature ) {
+G4double G4GIDI_target::getTotalCrossSectionAtE( G4double e_in, G4double temperature ) {
 
     MCGIDI_quantitiesLookupModes mode( projectilesPOPID );
 
@@ -274,38 +274,38 @@ double G4GIDI_target::getTotalCrossSectionAtE( double e_in, double temperature )
 /*
 ***************************************************************
 */
-double G4GIDI_target::getElasticCrossSectionAtE( double e_in, double temperature ) {
+G4double G4GIDI_target::getElasticCrossSectionAtE( G4double e_in, G4double temperature ) {
 
     return( sumChannelCrossSectionAtE( nElasticIndices, elasticIndices, e_in, temperature ) );
 }
 /*
 ***************************************************************
 */
-double G4GIDI_target::getCaptureCrossSectionAtE( double e_in, double temperature ) {
+G4double G4GIDI_target::getCaptureCrossSectionAtE( G4double e_in, G4double temperature ) {
 
     return( sumChannelCrossSectionAtE( nCaptureIndices, captureIndices, e_in, temperature ) );
 }
 /*
 ***************************************************************
 */
-double G4GIDI_target::getFissionCrossSectionAtE( double e_in, double temperature ) {
+G4double G4GIDI_target::getFissionCrossSectionAtE( G4double e_in, G4double temperature ) {
 
     return( sumChannelCrossSectionAtE( nFissionIndices, fissionIndices, e_in, temperature ) );
 }
 /*
 ***************************************************************
 */
-double G4GIDI_target::getOthersCrossSectionAtE( double e_in, double temperature ) {
+G4double G4GIDI_target::getOthersCrossSectionAtE( G4double e_in, G4double temperature ) {
 
     return( sumChannelCrossSectionAtE( nOthersIndices, othersIndices, e_in, temperature ) );
 }
 /*
 ***************************************************************
 */
-double G4GIDI_target::sumChannelCrossSectionAtE( int nIndices, int *indices, double e_in, double temperature ) {
+G4double G4GIDI_target::sumChannelCrossSectionAtE( int nIndices, int *indices, G4double e_in, G4double temperature ) {
 
     int i;
-    double xsec = 0.;
+    G4double xsec = 0.;
     MCGIDI_quantitiesLookupModes mode( projectilesPOPID );
 
     mode.setProjectileEnergy( e_in );
@@ -319,11 +319,11 @@ double G4GIDI_target::sumChannelCrossSectionAtE( int nIndices, int *indices, dou
 /*
 ***************************************************************
 */
-int G4GIDI_target::sampleChannelCrossSectionAtE( int nIndices, int *indices, double e_in, double temperature,
-        double (*rng)( void * ), void *rngState ) {
+int G4GIDI_target::sampleChannelCrossSectionAtE( int nIndices, int *indices, G4double e_in, G4double temperature,
+        G4double (*rng)( void * ), void *rngState ) {
 
     int i;
-    double xsec = 0., rxsec = sumChannelCrossSectionAtE( nIndices, indices, e_in, temperature ) * rng( rngState );
+    G4double xsec = 0., rxsec = sumChannelCrossSectionAtE( nIndices, indices, e_in, temperature ) * rng( rngState );
     MCGIDI_quantitiesLookupModes mode( projectilesPOPID );
 
     mode.setProjectileEnergy( e_in );
@@ -339,7 +339,7 @@ int G4GIDI_target::sampleChannelCrossSectionAtE( int nIndices, int *indices, dou
 /*
 ***************************************************************
 */
-double G4GIDI_target::getElasticFinalState( double e_in, double temperature, double (*rng)( void * ), void *rngState ) {
+G4double G4GIDI_target::getElasticFinalState( G4double e_in, G4double temperature, G4double (*rng)( void * ), void *rngState ) {
 
     MCGIDI_decaySamplingInfo decaySamplingInfo;
     MCGIDI_reaction *reaction = MCGIDI_target_heated_getReactionAtIndex_smr( &smr, target->baseHeatedTarget, elasticIndices[0] );
@@ -368,29 +368,29 @@ double G4GIDI_target::getElasticFinalState( double e_in, double temperature, dou
 /*
 ***************************************************************
 */
-vector<G4GIDI_Product> *G4GIDI_target::getCaptureFinalState( double e_in, double temperature, double (*rng)( void * ), void *rngState ) {
+vector<G4GIDI_Product> *G4GIDI_target::getCaptureFinalState( G4double e_in, G4double temperature, G4double (*rng)( void * ), void *rngState ) {
 
     return( getFinalState( nCaptureIndices, captureIndices, e_in, temperature, rng, rngState ) );
 }
 /*
 ***************************************************************
 */
-vector<G4GIDI_Product> *G4GIDI_target::getFissionFinalState( double e_in, double temperature, double (*rng)( void * ), void *rngState ) {
+vector<G4GIDI_Product> *G4GIDI_target::getFissionFinalState( G4double e_in, G4double temperature, G4double (*rng)( void * ), void *rngState ) {
 
     return( getFinalState( nFissionIndices, fissionIndices, e_in, temperature, rng, rngState ) );
 }
 /*
 ***************************************************************
 */
-vector<G4GIDI_Product> *G4GIDI_target::getOthersFinalState( double e_in, double temperature, double (*rng)( void * ), void *rngState ) {
+vector<G4GIDI_Product> *G4GIDI_target::getOthersFinalState( G4double e_in, G4double temperature, G4double (*rng)( void * ), void *rngState ) {
 
     return( getFinalState( nOthersIndices, othersIndices, e_in, temperature, rng, rngState ) );
 }
 /*
 ***************************************************************
 */
-vector<G4GIDI_Product> *G4GIDI_target::getFinalState( int nIndices, int *indices, double e_in, double temperature, 
-    double (*rng)( void * ), void *rngState ) {
+vector<G4GIDI_Product> *G4GIDI_target::getFinalState( int nIndices, int *indices, G4double e_in, G4double temperature, 
+    G4double (*rng)( void * ), void *rngState ) {
 
     int index = 0, i, n;
     vector<G4GIDI_Product> *products = NULL;
@@ -451,14 +451,14 @@ vector<G4GIDI_Product> *G4GIDI_target::getFinalState( int nIndices, int *indices
 /*
 ***************************************************************
 */
-double G4GIDI_target::getReactionsThreshold( int index ) {
+G4double G4GIDI_target::getReactionsThreshold( int index ) {
 
     return( MCGIDI_target_heated_getReactionsThreshold( &smr, target->baseHeatedTarget, index ) );
 }
 /*
 ***************************************************************
 */
-double G4GIDI_target::getReactionsDomain( int index, double *EMin, double *EMax ) {
+G4double G4GIDI_target::getReactionsDomain( int index, G4double *EMin, G4double *EMax ) {
 
     return( MCGIDI_target_heated_getReactionsDomain( &smr, target->baseHeatedTarget, index, EMin, EMax ) );
 }

@@ -87,12 +87,12 @@ void G4Qt3DViewer::SetView()
   const G4double cameraDistance = fVP.GetCameraDistance (radius);
   const G4Point3D cameraPosition =
     targetPoint + cameraDistance * fVP.GetViewpointDirection().unit();
-  const GLdouble pnear  = fVP.GetNearDistance (cameraDistance, radius);
-  const GLdouble pfar   = fVP.GetFarDistance  (cameraDistance, pnear, radius);
-  const GLdouble right  = fVP.GetFrontHalfHeight (pnear, radius);
-  const GLdouble left   = -right;
-  const GLdouble top    = fVP.GetFrontHalfHeight (pnear, radius);
-  const GLdouble bottom = -top;
+  const GLG4double pnear  = fVP.GetNearDistance (cameraDistance, radius);
+  const GLG4double pfar   = fVP.GetFarDistance  (cameraDistance, pnear, radius);
+  const GLG4double right  = fVP.GetFrontHalfHeight (pnear, radius);
+  const GLG4double left   = -right;
+  const GLG4double top    = fVP.GetFrontHalfHeight (pnear, radius);
+  const GLG4double bottom = -top;
 
   camera()->setObjectName((fName + " camera").c_str());
   camera()->setViewCenter(G4Qt3DUtils::ConvertToQVector3D(targetPoint));

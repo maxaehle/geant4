@@ -42,7 +42,7 @@
 EMField::EMField() 
 {}
 
-void EMField::GetFieldValue(const double point[4], double *Bfield ) const
+void EMField::GetFieldValue(const G4double point[4], G4double *Bfield ) const
 { 
   // Magnetic field
   Bfield[0] = 0;

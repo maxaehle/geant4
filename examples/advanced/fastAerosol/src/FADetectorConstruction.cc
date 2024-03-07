@@ -369,7 +369,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
 			t = clock() - t;
 
-			G4cout << "\nThis took " << ((float)t)/CLOCKS_PER_SEC << "s\n" << G4endl;
+			G4cout << "\nThis took " << ((G4float)t)/CLOCKS_PER_SEC << "s\n" << G4endl;
 
 			// make filename variables to save data
 			G4String rStr = std::to_string(fDropletR/mm);
@@ -387,7 +387,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 			// save population time
 			std::ofstream file;
 			file.open("popTime_r" + rStr + "mm_n" + nStr + "mm-3.csv");
-			file << ((float)t)/CLOCKS_PER_SEC;
+			file << ((G4float)t)/CLOCKS_PER_SEC;
 			file.close();
 
 			

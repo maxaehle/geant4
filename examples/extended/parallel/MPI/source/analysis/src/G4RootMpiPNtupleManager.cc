@@ -294,14 +294,14 @@ G4bool G4RootMpiPNtupleManager::FillNtupleIColumn(
 G4bool G4RootMpiPNtupleManager::FillNtupleFColumn(
   G4int ntupleId, G4int columnId, G4float value)
 {
-  return FillNtupleTColumn<float>(ntupleId, columnId, value);
+  return FillNtupleTColumn<G4float>(ntupleId, columnId, value);
 }                                         
 
 //_____________________________________________________________________________
 G4bool G4RootMpiPNtupleManager::FillNtupleDColumn(
   G4int ntupleId, G4int columnId, G4double value)
 {
-  return FillNtupleTColumn<double>(ntupleId, columnId, value);
+  return FillNtupleTColumn<G4double>(ntupleId, columnId, value);
 }                                         
 
 //_____________________________________________________________________________

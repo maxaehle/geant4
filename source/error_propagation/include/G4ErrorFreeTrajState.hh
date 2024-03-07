@@ -119,8 +119,8 @@ class G4ErrorFreeTrajState : public G4ErrorTrajState
   G4int PropagateErrorMSC(const G4Track* aTrack);
   // add the error associated to multiple scattering
 
-  void CalculateEffectiveZandA(const G4Material* mate, double& effZ,
-                               double& effA);
+  void CalculateEffectiveZandA(const G4Material* mate, G4double& effZ,
+                               G4double& effA);
   // calculate effective Z and A (needed by PropagateErrorMSC)
 
   G4int PropagateErrorIoni(const G4Track* aTrack);

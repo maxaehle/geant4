@@ -12,7 +12,7 @@
     namespace GIDI {
 #endif
     
-double PoPs_particleMass_AMU( statusMessageReporting *smr, char const *name );
+G4double PoPs_particleMass_AMU( statusMessageReporting *smr, char const *name );
 
 #if defined __cplusplus
     }

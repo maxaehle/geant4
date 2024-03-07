@@ -23,19 +23,19 @@ namespace CLHEP  {
 // Each of these is a shell over a rotate method.
 
 HepLorentzVector rotationXOf
-	(const HepLorentzVector & vec, double phi){
+	(const HepLorentzVector & vec, G4double phi){
   HepLorentzVector vv (vec);
   return vv.rotateX (phi);
 }
 
 HepLorentzVector rotationYOf
-	(const HepLorentzVector & vec, double phi){
+	(const HepLorentzVector & vec, G4double phi){
   HepLorentzVector vv (vec);
   return vv.rotateY (phi);
 }
 
 HepLorentzVector rotationZOf
-	(const HepLorentzVector & vec, double phi){
+	(const HepLorentzVector & vec, G4double phi){
   HepLorentzVector vv (vec);
   return vv.rotateZ (phi);
 }
@@ -45,27 +45,27 @@ HepLorentzVector rotationZOf
 //-********
 
 HepLorentzVector & HepLorentzVector::boost 
-			( const Hep3Vector & aaxis,  double bbeta ) {
+			( const Hep3Vector & aaxis,  G4double bbeta ) {
   if (bbeta==0) {
     return *this; // do nothing for a 0 boost
   }
-  double r2 = aaxis.mag2();
+  G4double r2 = aaxis.mag2();
   if ( r2 == 0 ) {
     std::cerr << "HepLorentzVector::boost() - "
       << "A zero vector used as axis defining a boost -- no boost done"
       << std::endl;
     return *this;
   } 
-  double b2 = bbeta*bbeta;
+  G4double b2 = bbeta*bbeta;
   if (b2 >= 1) {
     std::cerr << "HepLorentzVector::boost() - "
       << "LorentzVector boosted with beta >= 1 (speed of light) -- \n"
       << "no boost done" << std::endl;
   } else {
     Hep3Vector u = aaxis.unit();
-    double ggamma = std::sqrt(1./(1.-b2));
-    double betaDotV = u.dot(pp)*bbeta;
-    double tt = ee;
+    G4double ggamma = std::sqrt(1./(1.-b2));
+    G4double betaDotV = u.dot(pp)*bbeta;
+    G4double tt = ee;
 
     ee = ggamma * (tt + betaDotV);
     pp += ( ((ggamma-1)/b2)*betaDotV*bbeta + ggamma*bbeta*tt ) * u;

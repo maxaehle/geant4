@@ -425,7 +425,7 @@ void G4DNAModelInterface::BuildMaterialMolPerVolTable()
 
             if(materialName == currentMatName)
             {
-                const std::vector<double>* numMolPerVolForMat = G4DNAMolecularMaterial::Instance()->GetNumMolPerVolTableFor(currentMaterial);
+                const std::vector<G4double>* numMolPerVolForMat = G4DNAMolecularMaterial::Instance()->GetNumMolPerVolTableFor(currentMaterial);
                 fMaterialMolPerVol[materialName] = numMolPerVolForMat;
             }
         }

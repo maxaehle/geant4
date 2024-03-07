@@ -44,7 +44,7 @@
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-SingleParticleGun::SingleParticleGun( const G4String& pname, const double pmom )
+SingleParticleGun::SingleParticleGun( const G4String& pname, const G4double pmom )
    : G4VUserPrimaryGeneratorAction(),
      fGun(nullptr),
      fMomentum(pmom)
@@ -57,8 +57,8 @@ SingleParticleGun::SingleParticleGun( const G4String& pname, const double pmom )
    G4ParticleDefinition* pd = pdt->FindParticle( pname );
    fGun->SetParticleDefinition( pd );
    fGun->SetParticlePosition( G4ThreeVector(0.,0.,0.) );
-   double mass = pd->GetPDGMass();
-   double energy = std::sqrt( fMomentum*fMomentum + mass*mass );
+   G4double mass = pd->GetPDGMass();
+   G4double energy = std::sqrt( fMomentum*fMomentum + mass*mass );
    fGun->SetParticleEnergy( energy );
 
    // NOTE: do not set momentum directions 
@@ -84,17 +84,17 @@ void SingleParticleGun::GeneratePrimaries( G4Event* evt )
    {
       G4cout << " ParticleGun is NOT set up; BAIL OUT from this event " << G4endl;
       G4cout << " Check if you are using ctor " 
-             << "SinglePartGun(const G4string& partname, const double pmom ) " 
+             << "SinglePartGun(const G4string& partname, const G4double pmom ) " 
              << G4endl;
       return;
    }
 
-   double phi   = -1. * CLHEP::pi + CLHEP::twopi * G4UniformRand();
-   double theta = CLHEP::pi/4. + CLHEP::halfpi * G4UniformRand();
+   G4double phi   = -1. * CLHEP::pi + CLHEP::twopi * G4UniformRand();
+   G4double theta = CLHEP::pi/4. + CLHEP::halfpi * G4UniformRand();
 
-   double x = std::sin(theta) * std::cos(phi);
-   double y = std::sin(theta) * std::sin(phi);
-   double z = std::cos(theta);
+   G4double x = std::sin(theta) * std::cos(phi);
+   G4double y = std::sin(theta) * std::sin(phi);
+   G4double z = std::cos(theta);
 
    fGun->SetParticleMomentumDirection( G4ThreeVector(x,y,z) );
 

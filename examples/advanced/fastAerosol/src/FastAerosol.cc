@@ -310,7 +310,7 @@ G4double FastAerosol::VoxelOverlap(G4ThreeVector voxelCenter, G4int nStat, G4dou
 		if(in) iInside++;    
 	}
 
-	return (double)iInside/nStat;
+	return (G4double)iInside/nStat;
 }
 
 
@@ -1118,9 +1118,9 @@ void FastAerosol::SaveToFile(const char* filename) {
 		for (auto it2 = voxel.begin(); it2 != voxel.end(); ++it2) {
 			pt = *it2;
 			
-			double x = pt.x();
-			double y = pt.y();
-			double z = pt.z();
+			G4double x = pt.x();
+			G4double y = pt.y();
+			G4double z = pt.z();
 
 			file << std::setprecision(15) << x/mm << "," << y/mm << "," << z/mm << "\n";
 		}

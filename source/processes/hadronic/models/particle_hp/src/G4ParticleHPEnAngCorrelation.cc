@@ -85,7 +85,7 @@ G4ReactionProductVector * G4ParticleHPEnAngCorrelation::Sample(G4double anEnergy
   if(frameFlag==2 
      || frameFlag==3) // Added for particle HP
   {
-    // simplify and double check @
+    // simplify and G4double check @
     G4ThreeVector the3IncidentPart = fCache.Get().theProjectileRP->GetMomentum(); //theProjectileRP has value in LAB
     G4double nEnergy = fCache.Get().theProjectileRP->GetTotalEnergy();
     G4ThreeVector the3Target = fCache.Get().theTarget->GetMomentum();  //theTarget has value in LAB

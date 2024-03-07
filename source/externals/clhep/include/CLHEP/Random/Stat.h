@@ -11,7 +11,7 @@
 // One would never instantiate a HepStat object;
 // usage of any of these methods looks like --
 // 
-// double x = HepStat::erf ( .1 );
+// G4double x = HepStat::erf ( .1 );
 //
 // A user may wish to improve the readability of algortihm code which uses 
 // one method many times by lines like using HepStat::erf
@@ -55,23 +55,23 @@ private:
 
 public:
 
-  static double flatToGaussian (double r);
+  static G4double flatToGaussian (G4double r);
    // This is defined by the satement that if e() provides a uniform random
    // on (0,1) then flatToGaussian(e()) is distributed as a unit normal
    // Gaussian.  That is, flatToGaussian is the inverse of the c.d.f. of
    // a Gaussian.
   	// Footprint:  30 K  		// Time:  150 cycles
 
-  static double inverseErf (double t);
-  static double erf (double x);
+  static G4double inverseErf (G4double t);
+  static G4double erf (G4double x);
         // defined in flatToGaussian.cc
 
-  static double erfQ (double x);
+  static G4double erfQ (G4double x);
   // Quicker, and with less footprint, than erf and gaussianCDF
   // but only accurate to 7 digits.
 	  // Footprint:  0		// Time:  
 
-  static double gammln (double x);
+  static G4double gammln (G4double x);
   // ln (gamma(x))
 
 };

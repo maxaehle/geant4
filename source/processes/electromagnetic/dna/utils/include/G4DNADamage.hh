@@ -65,7 +65,7 @@ public :
     inline const G4Molecule* GetMolecule() {return fpMolecule;}
     inline const G4ThreeVector& GetPosition() {return fPosition;}
     inline const G4String& GetBaseName() {return fBaseName;}
-    inline double GetTime() {return fTime;}
+    inline G4double GetTime() {return fTime;}
 
     void Print();
 
@@ -88,7 +88,7 @@ public:
     virtual void AddIndirectDamage(const G4String& baseName,
                                    const G4Molecule* molecule,
                                    const G4ThreeVector& position, 
-                                   double time);
+                                   G4double time);
 
     inline const std::vector<G4DNAIndirectHit*>* GetIndirectHits();
     inline virtual int GetNIndirectHits() const

@@ -251,8 +251,8 @@ void HGCalTBMaterials::DefineSiWaferAndCells() {
                                    fSiWaferSideLength, fMatAIR);
 
   // Silicon pixel setups
-  double dx = 2 * std::sin(fAlpha) * fSiPixelSideLength;
-  double dy = fSiPixelSideLength * (2. + 2 * std::cos(fAlpha));
+  G4double dx = 2 * std::sin(fAlpha) * fSiPixelSideLength;
+  G4double dy = fSiPixelSideLength * (2. + 2 * std::cos(fAlpha));
   fSiPixelLogical =
       HexagonLogical("SiCell", fSiWaferThickness, fSiPixelSideLength, fMatSi);
 
@@ -505,8 +505,8 @@ void HGCalTBMaterials::DefineAHCALSiPM() {
   fThicknessMap["AHCAL_SiPM_2x2HUB"] = AHCALSiPM2x2HUBthickness;
   fLogicalVolumeMap["AHCAL_SiPM_2x2HUB"] = fAHCALSiPM2x2HUBlogical;
   int copy_counter = 0;
-  for (float _dx = -11.5; _dx <= 11.5; _dx = _dx + 1.)
-    for (float _dy = -11.5; _dy <= 11.5; _dy = _dy + 1.)
+  for (G4float _dx = -11.5; _dx <= 11.5; _dx = _dx + 1.)
+    for (G4float _dy = -11.5; _dy <= 11.5; _dy = _dy + 1.)
       new G4PVPlacement(
           0, G4ThreeVector(_dx * fAHCALSiPMxy, _dy * fAHCALSiPMxy, 0),
           fAHCALSiPMlogical, "AHCAL_SiPM", fAHCALSiPM2x2HUBlogical, false,
@@ -770,8 +770,8 @@ void HGCalTBMaterials::PlaceItemInLogicalVolume(std::string aName,
     aName.resize(aName.find("_DAISY"));
     if (fCopyCounterMap.find(aName) == fCopyCounterMap.end())
       fCopyCounterMap[aName] = 0;
-    double dx_ = 2 * std::sin(fAlpha) * 11 * fSiPixelSideLength;
-    double dy_ = 11 * fSiPixelSideLength * (2. + 2 * std::cos(fAlpha));
+    G4double dx_ = 2 * std::sin(fAlpha) * 11 * fSiPixelSideLength;
+    G4double dy_ = 11 * fSiPixelSideLength * (2. + 2 * std::cos(fAlpha));
     int nRows_[3] = {1, 2, 1};
     for (int nC = 0; nC < 3; nC++) {
       for (int middle_index = 0; middle_index < nRows_[nC]; middle_index++) {
@@ -796,8 +796,8 @@ void HGCalTBMaterials::PlaceItemInLogicalVolume(std::string aName,
     aName.resize(aName.find("_SUMMER2017TRIPLET"));
     if (fCopyCounterMap.find(aName) == fCopyCounterMap.end())
       fCopyCounterMap[aName] = 0;
-    double dx_ = 2 * std::sin(fAlpha) * 11 * fSiPixelSideLength;
-    double dy_ = 11 * fSiPixelSideLength * (2. + 2 * std::cos(fAlpha));
+    G4double dx_ = 2 * std::sin(fAlpha) * 11 * fSiPixelSideLength;
+    G4double dy_ = 11 * fSiPixelSideLength * (2. + 2 * std::cos(fAlpha));
     int nRows_[2] = {1, 2};
     for (int nC = 0; nC < 2; nC++) {
       new G4PVPlacement(0,

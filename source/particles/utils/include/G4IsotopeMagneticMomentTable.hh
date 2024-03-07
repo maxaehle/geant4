@@ -93,7 +93,7 @@ public:
   //   Z: Atomic Number
   //   A: Atomic Mass
   //   E: Excitaion energy
-  //   flb: floating level base (enum defined in G4Ions.hh)
+  //   flb: G4floating level base (enum defined in G4Ions.hh)
   //          -- currently ignored
   //    or
   //    G4int  level: isomer level

@@ -145,8 +145,8 @@ class G4ParticleHPFastLegendre
 
   private:
 
-      G4double regularEvaluate( int l , double x );
-      G4double regularIntegrate( int l , double x );
+      G4double regularEvaluate( int l , G4double x );
+      G4double regularIntegrate( int l , G4double x );
 
   
   inline G4int GetBin(G4int l, G4double costh)

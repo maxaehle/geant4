@@ -98,9 +98,9 @@ namespace std
         notLastFace = ph.GetNextFacet(nEdges, vertex, edgeFlag, normals);
 
         for (int i = 0; i < nEdges; i++) {
-          std::size_t hx = std::hash<double>()(vertex[i].x());
-          std::size_t hy = std::hash<double>()(vertex[i].y());
-          std::size_t hz = std::hash<double>()(vertex[i].z());
+          std::size_t hx = std::hash<G4double>()(vertex[i].x());
+          std::size_t hy = std::hash<G4double>()(vertex[i].y());
+          std::size_t hz = std::hash<G4double>()(vertex[i].z());
           std::hash_combine(h,hx);
           std::hash_combine(h,hy);
           std::hash_combine(h,hz);
@@ -239,9 +239,9 @@ void G4VtkSceneHandler::AddPrimitive(const G4Text& text) {
   // G4double xOffset           = text.GetXOffset();
   // G4double yOffset           = text.GetYOffset();
 
-  double x = text.GetPosition().x();
-  double y = text.GetPosition().y();
-  double z = text.GetPosition().z();
+  G4double x = text.GetPosition().x();
+  G4double y = text.GetPosition().y();
+  G4double z = text.GetPosition().z();
 
 #ifdef G4VTKDEBUG
   G4cout << "=================================" << G4endl;
@@ -567,10 +567,10 @@ void G4VtkSceneHandler::AddPrimitiveTensorGlyph(const G4Polyhedron& polyhedron) 
 
   polyhedronPolyDataCountMap[hash]++;
 
-  double red   = colour.GetRed();
-  double green = colour.GetGreen();
-  double blue  = colour.GetBlue();
-  double alpha = colour.GetAlpha();
+  G4double red   = colour.GetRed();
+  G4double green = colour.GetGreen();
+  G4double blue  = colour.GetBlue();
+  G4double alpha = colour.GetAlpha();
 
   instanceColoursMap[hash]->InsertNextTuple4(red, green, blue, alpha);
 

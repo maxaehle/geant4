@@ -119,11 +119,11 @@ public:
     vtkCamera   *cam = ren->GetActiveCamera();
     if(!cam) return;
 
-    double      *pos     = cam->GetPosition();
-    double      *foc     = cam->GetFocalPoint();
-    double viewAngle     = cam->GetViewAngle();
-    double distance      = cam->GetDistance();
-    double parallelScale = cam->GetParallelScale();
+    G4double      *pos     = cam->GetPosition();
+    G4double      *foc     = cam->GetFocalPoint();
+    G4double viewAngle     = cam->GetViewAngle();
+    G4double distance      = cam->GetDistance();
+    G4double parallelScale = cam->GetParallelScale();
 
     if(!pos) return;
 
@@ -131,9 +131,9 @@ public:
     t2 = std::chrono::steady_clock::now();
 
     // Frame rate calculation
-    std::chrono::duration<double> tdiff = t2-t1;
+    std::chrono::duration<G4double> tdiff = t2-t1;
     t1 = t2;
-    float fps = 1.0/tdiff.count();
+    G4float fps = 1.0/tdiff.count();
 
     // String for display
     sprintf(this->TextBuff,"camera position    : %.1f %.1f %.1f \n"

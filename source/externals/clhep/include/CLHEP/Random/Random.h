@@ -23,7 +23,7 @@
 // =======================================================================
 // Gabriele Cosmo - Created: 5th Sep 1995
 //                - Minor update: 17th May 1996
-//                - Poisson now operates on doubles : 31st Oct 1996
+//                - Poisson now operates on G4doubles : 31st Oct 1996
 //                - Added methods for engine status: 19th Nov 1996
 //                - Fixed default values to setTheSeed() and
 //                  setTheSeeds() static methods: 16th Oct 1997
@@ -65,21 +65,21 @@ public:
   
   // implicitly allow compiler-generated copy functions 
 
-  double flat();
+  G4double flat();
   // Returns the flat value ( interval ]0...1[ ).
 
-  void flatArray(const int size, double* vect);
+  void flatArray(const int size, G4double* vect);
   // Fills "vect" array of flat random values, given the size.
 
-  inline double flat (HepRandomEngine* theNewEngine);
+  inline G4double flat (HepRandomEngine* theNewEngine);
   // Returns a flat value, given a defined Random Engine.
 
   inline void flatArray(HepRandomEngine* theNewEngine, 
-                        const int size, double* vect);
+                        const int size, G4double* vect);
   // Fills "vect" array of flat random values, given the size
   // and a defined Random Engine.
 
-  virtual double operator()();
+  virtual G4double operator()();
   // To get a flat random number using the operator ().
 
   virtual std::string name() const;

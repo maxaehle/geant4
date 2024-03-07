@@ -568,7 +568,7 @@ void G4LowEPPolarizedComptonModel::SampleSecondaries(std::vector<G4DynamicPartic
     // Trigs
     cosPhiE = (var_C - var_B*cosThetaE)*(ivar_A*iSinThetaE);
     // End of calculation of ejection Compton electron direction
-    //Fix for floating point errors
+    //Fix for G4floating point errors
   } while ( (iteration <= maxDopplerIterations) && (abs(cosPhiE) > 1));
 
   // Revert to original if maximum number of iterations threshold has been reached     

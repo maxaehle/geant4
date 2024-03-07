@@ -588,9 +588,9 @@ void G4OpenGLSceneHandler::AddPrimitive (const G4Polyhedron& polyhedron) {
   //  list, it is the colour _at the time of_ creation of the display list, so
   //  even if the colour is changed, for example, by interaction with a Qt
   //  window, current_colour does not change.
-  GLfloat* painting_colour;
-  GLfloat clear_colour[4];
-  GLfloat current_colour[4];
+  GLG4float* painting_colour;
+  GLG4float clear_colour[4];
+  GLG4float current_colour[4];
   glGetFloatv (GL_CURRENT_COLOR, current_colour);
   
   G4bool isTransparent = false;
@@ -1144,7 +1144,7 @@ void G4OpenGLSceneHandler::OptimizeVBOForTrd(){
   /* HOW IT IS BUILD (as we receive it from fOglVertex : 
    */
 
-   std::vector<double> vertices;
+   std::vector<G4double> vertices;
   vertices.insert (vertices.end(),fOglVertex.begin(),fOglVertex.begin()+6*6); // ABCDEF
   vertices.insert (vertices.end(),fOglVertex.begin()+9*6,fOglVertex.begin()+9*6+6); // G
   vertices.insert (vertices.end(),fOglVertex.begin()+13*6,fOglVertex.begin()+13*6+6); // H
@@ -1183,7 +1183,7 @@ void G4OpenGLSceneHandler::OptimizeVBOForCons(G4int aNoFaces){
          1
    */
   // First, faces
-  std::vector<double> vertices;
+  std::vector<G4double> vertices;
 
   // Add bottom and top vertex
   // aNoFaces*4*6+6 : nb Faces * 4 points per face * 6 vertex by point + 1 point offset
@@ -1251,11 +1251,11 @@ void G4OpenGLSceneHandler::glEndVBO()  {
   if (fOglIndices.size() == 0) {
 
 
-    std::vector<double> vertices;
+    std::vector<G4double> vertices;
     // check if it is a GL_QUADS emulation
     if (fEmulate_GL_QUADS == true) {
       fEmulate_GL_QUADS = false;
-      // A point has 6 double : Vx Vy Vz Nx Ny Nz
+      // A point has 6 G4double : Vx Vy Vz Nx Ny Nz
       // A QUAD should be like this
       /*
            0   3/4  7/8   ..
@@ -1315,7 +1315,7 @@ void G4OpenGLSceneHandler::glEndVBO()  {
     int sizeV = fOglVertex.size();
     // FIXME : perhaps a problem withBufferData in OpenGL other than WebGL ?
 //    void glBufferData(	GLenum target, GLsizeiptr size, const GLvoid * data, GLenum usage);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(double)*sizeV, &fOglVertex[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(G4double)*sizeV, &fOglVertex[0], GL_STATIC_DRAW);
 
     // Bind IBO
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, fIndicesBufferObject);
@@ -1337,7 +1337,7 @@ void G4OpenGLSceneHandler::glEndVBO()  {
 
       glVertexAttribPointer(pGLViewer->fVertexPositionAttribute,
                             3,     // size: Every vertex has an X, Y anc Z component
-                            GL_FLOAT, // type: They are floats
+                            GL_FLOAT, // type: They are G4floats
                             GL_FALSE, // normalized: Please, do NOT normalize the vertices
                             2*3*4, // stride: The first byte of the next vertex is located this
                             //         amount of bytes further. The format of the VBO is
@@ -1361,7 +1361,7 @@ void G4OpenGLSceneHandler::glEndVBO()  {
   }
 }
           
-void G4OpenGLSceneHandler::drawVBOArray(std::vector<double> vertices)  {
+void G4OpenGLSceneHandler::drawVBOArray(std::vector<G4double> vertices)  {
   glGenBuffers(1,&fVertexBufferObject);
   glGenBuffers(1,&fIndicesBufferObject);
 
@@ -1369,7 +1369,7 @@ void G4OpenGLSceneHandler::drawVBOArray(std::vector<double> vertices)  {
   glBindBuffer(GL_ARRAY_BUFFER, fVertexBufferObject);
   // Load oglData into VBO
   int s = vertices.size();
-  glBufferData(GL_ARRAY_BUFFER, sizeof(double)*s, &vertices[0], GL_STATIC_DRAW);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(G4double)*s, &vertices[0], GL_STATIC_DRAW);
 
   //----------------------------
   // Draw VBO
@@ -1387,13 +1387,13 @@ void G4OpenGLSceneHandler::drawVBOArray(std::vector<double> vertices)  {
  GL_DOUBLE
  Warning: This section describes legacy OpenGL APIs that have been removed from core OpenGL 3.1 and above (they are only deprecated in OpenGL 3.0). It is recommended that you not use this functionality in your programs.
  
- glLoadMatrixd, glRotated and any other function that have to do with the double type. Most GPUs don't support GL_DOUBLE (double) so the driver will convert the data to GL_FLOAT (float) and send to the GPU. If you put GL_DOUBLE data in a VBO, the performance might even be much worst than immediate mode (immediate mode means glBegin, glVertex, glEnd). GL doesn't offer any better way to know what the GPU prefers.
+ glLoadMatrixd, glRotated and any other function that have to do with the G4double type. Most GPUs don't support GL_DOUBLE (G4double) so the driver will convert the data to GL_FLOAT (G4float) and send to the GPU. If you put GL_DOUBLE data in a VBO, the performance might even be much worst than immediate mode (immediate mode means glBegin, glVertex, glEnd). GL doesn't offer any better way to know what the GPU prefers.
  */
     glVertexAttribPointer(pGLViewer->fVertexPositionAttribute,
                           3,     // size: Every vertex has an X, Y anc Z component
-                          GL_DOUBLE, // type: They are double
+                          GL_DOUBLE, // type: They are G4double
                           GL_FALSE, // normalized: Please, do NOT normalize the vertices
-                          6*sizeof(double), // stride: The first byte of the next vertex is located this
+                          6*sizeof(G4double), // stride: The first byte of the next vertex is located this
                           //         amount of bytes further. The format of the VBO is
                           //         vx, vy, vz, nx, ny, nz and every element is a
                           //         Float32, hence 4 bytes large

@@ -41,7 +41,7 @@
 // 20100622  M. Kelsey -- Use local "bindingEnergy()" to call through.
 // 20100623  M. Kelsey -- Undo G4NucleiModel change from 0617.  Does not work
 //		properly across multiple interactions.
-// 20100627  M. Kelsey -- Protect recoil nucleus energy from floating roundoff
+// 20100627  M. Kelsey -- Protect recoil nucleus energy from G4floating roundoff
 //		by setting small +ve or -ve values to zero.
 // 20100701  M. Kelsey -- Let excitation energy be handled by G4InuclNuclei,
 //		allow for ground-state recoil (goodCase == true for Eex==0.)

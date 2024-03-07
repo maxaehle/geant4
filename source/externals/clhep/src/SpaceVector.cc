@@ -29,9 +29,9 @@ namespace CLHEP  {
 //-*****************************
 
 void Hep3Vector::setSpherical (
-		double r1,
-                double theta1,
-                double phi1) {
+		G4double r1,
+                G4double theta1,
+                G4double phi1) {
 //  if ( r1 < 0 ) {
 //    std::cerr << "Hep3Vector::setSpherical() - "
 //      << "Spherical coordinates set with negative   R" << std::endl;
@@ -42,7 +42,7 @@ void Hep3Vector::setSpherical (
 //      << "Spherical coordinates set with theta not in [0, PI]" << std::endl;
 //	// No special return needed if warning is ignored.
 //  }
-  double rho1 ( r1*std::sin(theta1));
+  G4double rho1 ( r1*std::sin(theta1));
   setZ(r1 * std::cos(theta1));
   setY(rho1 * std::sin (phi1));
   setX(rho1 * std::cos (phi1));
@@ -50,9 +50,9 @@ void Hep3Vector::setSpherical (
 } /* setSpherical (r, theta1, phi1) */
 
 void Hep3Vector::setCylindrical (
- 		double rho1,
-                double phi1,
-                double z1) {
+ 		G4double rho1,
+                G4double phi1,
+                G4double z1) {
 //  if ( rho1 < 0 ) {
 //    std::cerr << "Hep3Vector::setCylindrical() - "
 //      << "Cylindrical coordinates supplied with negative Rho" << std::endl;
@@ -65,9 +65,9 @@ void Hep3Vector::setCylindrical (
 } /* setCylindrical (r, phi, z) */
 
 void Hep3Vector::setRhoPhiTheta (
- 		double rho1,
-                double phi1,
-                double theta1) {
+ 		G4double rho1,
+                G4double phi1,
+                G4double theta1) {
   if (rho1 == 0) {
     std::cerr << "Hep3Vector::setRhoPhiTheta() - "
       << "Attempt set vector components rho, phi, theta with zero rho -- "
@@ -92,9 +92,9 @@ void Hep3Vector::setRhoPhiTheta (
 } /* setCyl (rho, phi, theta) */
 
 void Hep3Vector::setRhoPhiEta (
- 		double rho1,
-                double phi1,
-                double eta1 ) {
+ 		G4double rho1,
+                G4double phi1,
+                G4double eta1 ) {
   if (rho1 == 0) {
     std::cerr << "Hep3Vector::setRhoPhiEta() - "
       << "Attempt set vector components rho, phi, eta with zero rho -- "
@@ -102,7 +102,7 @@ void Hep3Vector::setRhoPhiEta (
     set(0.0, 0.0, 0.0);
     return;
   }
-  double theta1 (2 * std::atan ( std::exp (-eta1) ));
+  G4double theta1 (2 * std::atan ( std::exp (-eta1) ));
   setZ(rho1 / std::tan (theta1));
   setY(rho1 * std::sin (phi1));
   setX(rho1 * std::cos (phi1));
@@ -161,15 +161,15 @@ bool Hep3Vector::operator<= (const Hep3Vector & v) const {
 //
 // IsNear, HowNear, and DeltaR are found in ThreeVector.cc
 
-double Hep3Vector::howParallel (const Hep3Vector & v) const {
+G4double Hep3Vector::howParallel (const Hep3Vector & v) const {
   // | V1 x V2 | / | V1 dot V2 |
-  double v1v2 = std::fabs(dot(v));
+  G4double v1v2 = std::fabs(dot(v));
   if ( v1v2 == 0 ) {
     // Zero is parallel to no other vector except for zero.
     return ( (mag2() == 0) && (v.mag2() == 0) ) ? 0 : 1;
   }
   Hep3Vector v1Xv2 ( cross(v) );
-  double abscross = v1Xv2.mag();
+  G4double abscross = v1Xv2.mag();
   if ( abscross >= v1v2 ) {
     return 1;
   } else {
@@ -178,13 +178,13 @@ double Hep3Vector::howParallel (const Hep3Vector & v) const {
 } /* howParallel() */
 
 bool Hep3Vector::isParallel (const Hep3Vector & v,
-                              double epsilon) const {
+                              G4double epsilon) const {
   // | V1 x V2 | **2  <= epsilon **2 | V1 dot V2 | **2
   // V1 is *this, V2 is v
 
-  static const double TOOBIG = std::pow(2.0,507);
-  static const double SCALE  = std::pow(2.0,-507);
-  double v1v2 = std::fabs(dot(v));
+  static const G4double TOOBIG = std::pow(2.0,507);
+  static const G4double SCALE  = std::pow(2.0,-507);
+  G4double v1v2 = std::fabs(dot(v));
   if ( v1v2 == 0 ) {
     return ( (mag2() == 0) && (v.mag2() == 0) );
   }
@@ -192,8 +192,8 @@ bool Hep3Vector::isParallel (const Hep3Vector & v,
     Hep3Vector sv1 ( *this * SCALE );
     Hep3Vector sv2 ( v * SCALE );
     Hep3Vector sv1Xsv2 = sv1.cross(sv2);
-    double x2 = sv1Xsv2.mag2();
-    double limit = v1v2*SCALE*SCALE;
+    G4double x2 = sv1Xsv2.mag2();
+    G4double limit = v1v2*SCALE*SCALE;
     limit = epsilon*epsilon*limit*limit;
     return ( x2 <= limit );
   }
@@ -212,16 +212,16 @@ bool Hep3Vector::isParallel (const Hep3Vector & v,
 } /* isParallel() */
 
 
-double Hep3Vector::howOrthogonal (const Hep3Vector & v) const {
+G4double Hep3Vector::howOrthogonal (const Hep3Vector & v) const {
   // | V1 dot V2 | / | V1 x V2 | 
 
-  double v1v2 = std::fabs(dot(v));
+  G4double v1v2 = std::fabs(dot(v));
 	//-| Safe because both v1 and v2 can be squared
   if ( v1v2 == 0 ) {
     return 0;	// Even if one or both are 0, they are considered orthogonal
   }
   Hep3Vector v1Xv2 ( cross(v) );
-  double abscross = v1Xv2.mag();
+  G4double abscross = v1Xv2.mag();
   if ( v1v2 >= abscross ) {
     return 1;
   } else {
@@ -231,21 +231,21 @@ double Hep3Vector::howOrthogonal (const Hep3Vector & v) const {
 } /* howOrthogonal() */
 
 bool Hep3Vector::isOrthogonal (const Hep3Vector & v,
-			     double epsilon) const {
+			     G4double epsilon) const {
 // | V1 x V2 | **2  <= epsilon **2 | V1 dot V2 | **2
 // V1 is *this, V2 is v
 
-  static const double TOOBIG = std::pow(2.0,507);
-  static const double SCALE = std::pow(2.0,-507);
-  double v1v2 = std::fabs(dot(v));
+  static const G4double TOOBIG = std::pow(2.0,507);
+  static const G4double SCALE = std::pow(2.0,-507);
+  G4double v1v2 = std::fabs(dot(v));
         //-| Safe because both v1 and v2 can be squared
   if ( v1v2 >= TOOBIG ) {
     Hep3Vector sv1 ( *this * SCALE );
     Hep3Vector sv2 ( v * SCALE );
     Hep3Vector sv1Xsv2 = sv1.cross(sv2);
-    double x2 = sv1Xsv2.mag2();
-    double limit = epsilon*epsilon*x2;
-    double y2 = v1v2*SCALE*SCALE;
+    G4double x2 = sv1Xsv2.mag2();
+    G4double limit = epsilon*epsilon*x2;
+    G4double y2 = v1v2*SCALE*SCALE;
     return ( y2*y2 <= limit );
   }
 
@@ -264,9 +264,9 @@ bool Hep3Vector::isOrthogonal (const Hep3Vector & v,
 
 } /* isOrthogonal() */
 
-double Hep3Vector::setTolerance (double tol) {
+G4double Hep3Vector::setTolerance (G4double tol) {
 // Set the tolerance for Hep3Vectors to be considered near one another
-  double oldTolerance (tolerance);
+  G4double oldTolerance (tolerance);
   tolerance = tol;
   return oldTolerance;
 }
@@ -276,11 +276,11 @@ double Hep3Vector::setTolerance (double tol) {
 //	negativeInfinity()
 //-***********************
 
-double Hep3Vector::negativeInfinity() const {
+G4double Hep3Vector::negativeInfinity() const {
   // A byte-order-independent way to return -Infinity
   struct Dib {
     union {
-      double d;
+      G4double d;
       unsigned char i[8];
     } u;
   };

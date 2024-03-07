@@ -4,7 +4,7 @@
 */
 
 #include <cmath>
-#include <float.h>
+#include <G4float.h>
 
 #include "ptwXY.h"
 
@@ -16,18 +16,18 @@ namespace GIDI {
 using namespace GIDI;
 #endif
 
-typedef nfu_status (*interpolation_func)( ptwXYPoints *desc, double x1, double y1, double x2, double y2, int depth );
+typedef nfu_status (*interpolation_func)( ptwXYPoints *desc, G4double x1, G4double y1, G4double x2, G4double y2, int depth );
 
-static double ptwXY_flatInterpolationToLinear_eps( double px, double eps );
+static G4double ptwXY_flatInterpolationToLinear_eps( G4double px, G4double eps );
 static nfu_status ptwXY_toOtherInterpolation2( ptwXYPoints *desc, ptwXYPoints *src, interpolation_func func );
-static nfu_status ptwXY_LogLogToLinLin( ptwXYPoints *desc, double x1, double y1, double x2, double y2, int depth );
-static nfu_status ptwXY_LinLogToLinLin( ptwXYPoints *desc, double x1, double y1, double x2, double y2, int depth );
-static nfu_status ptwXY_LogLinToLinLin( ptwXYPoints *desc, double x1, double y1, double x2, double y2, int depth );
-static nfu_status ptwXY_otherToLinLin( ptwXYPoints *desc, double x1, double y1, double x2, double y2, int depth );
+static nfu_status ptwXY_LogLogToLinLin( ptwXYPoints *desc, G4double x1, G4double y1, G4double x2, G4double y2, int depth );
+static nfu_status ptwXY_LinLogToLinLin( ptwXYPoints *desc, G4double x1, G4double y1, G4double x2, G4double y2, int depth );
+static nfu_status ptwXY_LogLinToLinLin( ptwXYPoints *desc, G4double x1, G4double y1, G4double x2, G4double y2, int depth );
+static nfu_status ptwXY_otherToLinLin( ptwXYPoints *desc, G4double x1, G4double y1, G4double x2, G4double y2, int depth );
 /*
 ************************************************************
 */
-nfu_status ptwXY_interpolatePoint( ptwXY_interpolation interpolation, double x, double *y, double x1, double y1, double x2, double y2 ) {
+nfu_status ptwXY_interpolatePoint( ptwXY_interpolation interpolation, G4double x, G4double *y, G4double x1, G4double y1, G4double x2, G4double y2 ) {
 
     nfu_status status = nfu_Okay;
 
@@ -71,10 +71,10 @@ nfu_status ptwXY_interpolatePoint( ptwXY_interpolation interpolation, double x, 
 /*
 ************************************************************
 */
-ptwXYPoints *ptwXY_flatInterpolationToLinear( ptwXYPoints *ptwXY, double lowerEps, double upperEps, nfu_status *status ) {
+ptwXYPoints *ptwXY_flatInterpolationToLinear( ptwXYPoints *ptwXY, G4double lowerEps, G4double upperEps, nfu_status *status ) {
 
     int64_t i, length;
-    double x;
+    G4double x;
     ptwXYPoints *n;
     ptwXYPoint *p1 = NULL, *p2 = NULL, *p3;
 
@@ -134,9 +134,9 @@ Err:
 /*
 ************************************************************
 */
-static double ptwXY_flatInterpolationToLinear_eps( double px, double eps ) {
+static G4double ptwXY_flatInterpolationToLinear_eps( G4double px, G4double eps ) {
 
-    double x;
+    G4double x;
 
     if( px < 0 ) {
         x = ( 1 - eps ) * px; }
@@ -150,7 +150,7 @@ static double ptwXY_flatInterpolationToLinear_eps( double px, double eps ) {
 /*
 ************************************************************
 */
-ptwXYPoints *ptwXY_toOtherInterpolation( ptwXYPoints *ptwXY, ptwXY_interpolation interpolationTo, double accuracy, nfu_status *status ) {
+ptwXYPoints *ptwXY_toOtherInterpolation( ptwXYPoints *ptwXY, ptwXY_interpolation interpolationTo, G4double accuracy, nfu_status *status ) {
 /*
 *   This function only works when 'ptwXY->interpolation == interpolationTo' or when interpolationTo is ptwXY_interpolationLinLin.
 */
@@ -202,7 +202,7 @@ static nfu_status ptwXY_toOtherInterpolation2( ptwXYPoints *desc, ptwXYPoints *s
 
     nfu_status status;
     int64_t i;
-    double x1, y1, x2, y2;
+    G4double x1, y1, x2, y2;
 
     if( ( status = ptwXY_simpleCoalescePoints( src ) ) != nfu_Okay ) return( status );
 
@@ -222,10 +222,10 @@ static nfu_status ptwXY_toOtherInterpolation2( ptwXYPoints *desc, ptwXYPoints *s
 /*
 ************************************************************
 */
-static nfu_status ptwXY_LogLogToLinLin( ptwXYPoints *desc, double x1, double y1, double x2, double y2, int depth ) {
+static nfu_status ptwXY_LogLogToLinLin( ptwXYPoints *desc, G4double x1, G4double y1, G4double x2, G4double y2, int depth ) {
 
     nfu_status status = nfu_Okay;
-    double x, y, u, u2 = x2 / x1, v2 = y2 / y1, logYXs, logXs = G4Log( u2 ), logYs = G4Log( v2 ), vLin, vLog, w;
+    G4double x, y, u, u2 = x2 / x1, v2 = y2 / y1, logYXs, logXs = G4Log( u2 ), logYs = G4Log( v2 ), vLin, vLog, w;
 
     logYXs = logYs / logXs;
 
@@ -249,10 +249,10 @@ static nfu_status ptwXY_LogLogToLinLin( ptwXYPoints *desc, double x1, double y1,
 /*
 ************************************************************
 */
-static nfu_status ptwXY_LinLogToLinLin( ptwXYPoints *desc, double x1, double y1, double x2, double y2, int depth ) {
+static nfu_status ptwXY_LinLogToLinLin( ptwXYPoints *desc, G4double x1, G4double y1, G4double x2, G4double y2, int depth ) {
 
     nfu_status status = nfu_Okay;
-    double x, y, logYs = G4Log( y2 / y1 ), yLinLin;
+    G4double x, y, logYs = G4Log( y2 / y1 ), yLinLin;
 
     if( depth > 16 ) return( nfu_Okay );
     x = ( x2 - x1 ) / ( y2 - y1 ) * ( ( y2 - y1 ) / logYs - y1 ) + x1;
@@ -266,10 +266,10 @@ static nfu_status ptwXY_LinLogToLinLin( ptwXYPoints *desc, double x1, double y1,
 /*
 ************************************************************
 */
-static nfu_status ptwXY_LogLinToLinLin( ptwXYPoints *desc, double x1, double y1, double x2, double y2, int depth ) {
+static nfu_status ptwXY_LogLinToLinLin( ptwXYPoints *desc, G4double x1, G4double y1, G4double x2, G4double y2, int depth ) {
 
     nfu_status status = nfu_Okay;
-    double x = std::sqrt( x2 * x1 ), y, logXs = G4Log( x2 / x1 ), yLinLin;
+    G4double x = std::sqrt( x2 * x1 ), y, logXs = G4Log( x2 / x1 ), yLinLin;
 
     if( depth > 16 ) return( nfu_Okay );
 #if 0 /* The next line is very unstable at determineing x. Initial x must be chosen better. */
@@ -285,10 +285,10 @@ static nfu_status ptwXY_LogLinToLinLin( ptwXYPoints *desc, double x1, double y1,
 /*
 ************************************************************
 */
-static nfu_status ptwXY_otherToLinLin( ptwXYPoints *desc, double x1, double y1, double x2, double y2, int depth ) {
+static nfu_status ptwXY_otherToLinLin( ptwXYPoints *desc, G4double x1, G4double y1, G4double x2, G4double y2, int depth ) {
 
     nfu_status status;
-    double x = 0.5 * ( x1 + x2 ), y, yLinLin;
+    G4double x = 0.5 * ( x1 + x2 ), y, yLinLin;
     ptwXY_getValue_callback getValueFunc = desc->interpolationOtherInfo.getValueFunc;
     void *argList = desc->interpolationOtherInfo.argList;
 
@@ -308,7 +308,7 @@ ptwXYPoints *ptwXY_toUnitbase( ptwXYPoints *ptwXY, nfu_status *status ) {
     int64_t i;
     ptwXYPoints *n;
     ptwXYPoint *p;
-    double xMin, xMax, dx, inverseDx;
+    G4double xMin, xMax, dx, inverseDx;
 
     *status = nfu_tooFewPoints;
     if( ptwXY->length < 2 ) return( NULL );
@@ -328,12 +328,12 @@ ptwXYPoints *ptwXY_toUnitbase( ptwXYPoints *ptwXY, nfu_status *status ) {
 /*
 ************************************************************
 */
-ptwXYPoints *ptwXY_fromUnitbase( ptwXYPoints *ptwXY, double xMin, double xMax, nfu_status *status ) {
+ptwXYPoints *ptwXY_fromUnitbase( ptwXYPoints *ptwXY, G4double xMin, G4double xMax, nfu_status *status ) {
 
     int64_t i, length;
     ptwXYPoints *n;
     ptwXYPoint *p, *p2;
-    double dx, inverseDx, xLast = 0.;
+    G4double dx, inverseDx, xLast = 0.;
 
     *status = nfu_tooFewPoints;
     if( ptwXY->length < 2 ) return( NULL );
@@ -360,14 +360,14 @@ ptwXYPoints *ptwXY_fromUnitbase( ptwXYPoints *ptwXY, double xMin, double xMax, n
 /*
 ************************************************************
 */
-ptwXYPoints *ptwXY_unitbaseInterpolate( double w, double w1, ptwXYPoints *ptwXY1, double w2, ptwXYPoints *ptwXY2, nfu_status *status ) {
+ptwXYPoints *ptwXY_unitbaseInterpolate( G4double w, G4double w1, ptwXYPoints *ptwXY1, G4double w2, ptwXYPoints *ptwXY2, nfu_status *status ) {
 /* 
 *   Should we not be checking the interpolation members???????
 */
     int64_t i;
     ptwXYPoints *n1 = NULL, *n2 = NULL, *a = NULL, *r = NULL;
     ptwXYPoint *p;
-    double f, g, xMin, xMax;
+    G4double f, g, xMin, xMax;
 
     *status = nfu_XOutsideDomain;
     if( w <= w1 ) {

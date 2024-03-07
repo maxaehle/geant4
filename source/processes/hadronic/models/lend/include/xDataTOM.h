@@ -79,9 +79,9 @@ struct xDataTOM_subAxes_s {
 
 struct xDataTOM_XYs_s {
     int index, length;
-    double value, accuracy;
+    G4double value, accuracy;
     xDataTOM_subAxes subAxes;
-    double *data;
+    G4double *data;
 };
 
 struct xDataTOM_regionsXYs_s {
@@ -92,7 +92,7 @@ struct xDataTOM_regionsXYs_s {
 
 struct xDataTOM_W_XYs_s {
     int index, length;
-    double value;
+    G4double value;
     xDataTOM_subAxes subAxes;
     xDataTOM_XYs *XYs;
 };
@@ -105,13 +105,13 @@ struct xDataTOM_V_W_XYs_s {
 
 struct xDataTOM_LegendreSeries_s {
     int index, length;
-    double value;
-    double *LegendreSeries;
+    G4double value;
+    G4double *LegendreSeries;
 };
 
 struct xDataTOM_W_XYs_LegendreSeries_s {
     int index, length;
-    double value;
+    G4double value;
     xDataTOM_subAxes subAxes;
     xDataTOM_LegendreSeries *LegendreSeries;
 };
@@ -130,8 +130,8 @@ struct xDataTOM_V_W_XYs_LegendreSeries_s {
 
 struct xDataTOM_KalbachMannCoefficients_s {
     int index, length;
-    double value;
-    double *coefficients;
+    G4double value;
+    G4double *coefficients;
 };
 
 struct xDataTOM_KalbachMann_s {
@@ -144,7 +144,7 @@ struct xDataTOM_KalbachMann_s {
 struct xDataTOM_polynomial_s {
     int length;
     xDataTOM_subAxes subAxes;
-    double *coefficients;
+    G4double *coefficients;
 };
 
 struct xDataTOM_xDataInfo_s {
@@ -216,8 +216,8 @@ int xDataTOME_addAttribute( statusMessageReporting *smr, xDataTOM_element *eleme
 char const *xDataTOM_getAttributesValueInElement( xDataTOM_element *element, char const *name );
 int xDataTOME_copyAttributionList( statusMessageReporting *smr, xDataTOM_attributionList *desc, xDataTOM_element *element );
 int xDataTOME_convertAttributeToInteger( statusMessageReporting *smr, xDataTOM_element *element, char const *name, int *n );
-int xDataTOME_convertAttributeToDouble( statusMessageReporting *smr, xDataTOM_element *element, char const *name, double *d );
-int xDataTOME_convertAttributeToDoubleWithUnit( statusMessageReporting *smr, xDataTOM_element *element, char const *name, double *d, char *unit );
+int xDataTOME_convertAttributeToDouble( statusMessageReporting *smr, xDataTOM_element *element, char const *name, G4double *d );
+int xDataTOME_convertAttributeToDoubleWithUnit( statusMessageReporting *smr, xDataTOM_element *element, char const *name, G4double *d, char *unit );
 int xDataTOME_getInterpolation( statusMessageReporting *smr, xDataTOM_element *element, int index, 
     enum xDataTOM_interpolationFlag *independent, enum xDataTOM_interpolationFlag *dependent, enum xDataTOM_interpolationQualifier *qualifier );
 
@@ -227,7 +227,7 @@ int xDataTOMAL_addAttribute( statusMessageReporting *smr, xDataTOM_attributionLi
 char const *xDataTOMAL_getAttributesValue( xDataTOM_attributionList *attributes, char const *name );
 int xDataTOMAL_copyAttributionList( statusMessageReporting *smr, xDataTOM_attributionList *desc, xDataTOM_attributionList *src );
 int xDataTOMAL_convertAttributeToInteger( statusMessageReporting *smr, xDataTOM_attributionList *attributes, char const *name, int *n );
-int xDataTOMAL_convertAttributeToDouble( statusMessageReporting *smr, xDataTOM_attributionList *attributes, char const *name, double *d );
+int xDataTOMAL_convertAttributeToDouble( statusMessageReporting *smr, xDataTOM_attributionList *attributes, char const *name, G4double *d );
 
 void *xData_initializeData( statusMessageReporting *smr, xDataTOM_element *TE, char const *ID, size_t size );
 int xDataTOM_isXDataID( xDataTOM_element *TE, char const *ID );
@@ -277,8 +277,8 @@ char const *xDataTOM_axis_frameToString( statusMessageReporting *smr, enum xData
 */
 int xDataTOM_XYs_free( xDataTOM_xDataInfo *xDI );
 int xDataTOM_XYs_release( xDataTOM_XYs *XYs );
-int xDataTOM_XYs_getData( xDataTOM_XYs *XYs, double **data );
-int xDataTOM_XYs_getDataFromXDataInfo( xDataTOM_xDataInfo *xDI, double **data );
+int xDataTOM_XYs_getData( xDataTOM_XYs *XYs, G4double **data );
+int xDataTOM_XYs_getDataFromXDataInfo( xDataTOM_xDataInfo *xDI, G4double **data );
 
 /*
 * Stuff in common/xDataTOM_regionsXYs.c
@@ -288,8 +288,8 @@ int xDataTOM_regionsXYs_free( xDataTOM_xDataInfo *xDI );
 /*
 * Stuff in common/xDataTOM_W_XYs.c
 */
-xDataTOM_W_XYs *xDataTOM_W_XYs_new( statusMessageReporting *smr, int index, int length, double value, xDataTOM_axes *axes, int axesOffset );
-int xDataTOM_W_XYs_initialize( statusMessageReporting *smr, xDataTOM_W_XYs *W_XYs, int index, int length, double value, xDataTOM_axes *axes,
+xDataTOM_W_XYs *xDataTOM_W_XYs_new( statusMessageReporting *smr, int index, int length, G4double value, xDataTOM_axes *axes, int axesOffset );
+int xDataTOM_W_XYs_initialize( statusMessageReporting *smr, xDataTOM_W_XYs *W_XYs, int index, int length, G4double value, xDataTOM_axes *axes,
     int axesOffset );
 xDataTOM_W_XYs *xDataTOM_W_XYs_free( xDataTOM_W_XYs *W_XYs );
 int xDataTOM_W_XYs_freeFrom_xDataInfo( xDataTOM_xDataInfo *xDI );
@@ -306,14 +306,14 @@ int xDataTOM_V_W_XYs_free( xDataTOM_xDataInfo *xDI );
 /*
 * Stuff in common/xDataTOM_LegendreSeries.c
 */
-int xDataTOM_LegendreSeries_initialize( statusMessageReporting *smr, xDataTOM_LegendreSeries *LegendreSeries, int index, int length, double value );
+int xDataTOM_LegendreSeries_initialize( statusMessageReporting *smr, xDataTOM_LegendreSeries *LegendreSeries, int index, int length, G4double value );
 int xDataTOM_LegendreSeries_release( xDataTOM_LegendreSeries *LegendreSeries );
 
 /*
 * Stuff in common/xDataTOM_W_XYs_LegendreSeries.c
 */
 int xDataTOM_W_XYs_LegendreSeries_initialize( statusMessageReporting *smr, xDataTOM_W_XYs_LegendreSeries *W_XYs_LegendreSeries, int index, 
-        int length, double value, enum xDataTOM_subAxesType subAxesType, xDataTOM_axes *axes, xDataTOM_interpolation *interpolation );
+        int length, G4double value, enum xDataTOM_subAxesType subAxesType, xDataTOM_axes *axes, xDataTOM_interpolation *interpolation );
 int xDataTOM_W_XYs_LegendreSeries_free( xDataTOM_xDataInfo *xDI );
 int xDataTOM_W_XYs_LegendreSeries_release( xDataTOM_W_XYs_LegendreSeries *W_XYs_LegendreSeries );
 
@@ -345,8 +345,8 @@ int xDataTOM_KalbachMann_release( xDataTOM_KalbachMann *KalbachMann );
 int xDataTOM_polynomial_initialize( statusMessageReporting *smr, xDataTOM_polynomial *polynomial, int length, xDataTOM_axes *axes );
 int xDataTOM_polynomial_free( xDataTOM_xDataInfo *xDI );
 int xDataTOM_polynomial_release( xDataTOM_polynomial *polynomial );
-int xDataTOM_polynomial_getData( xDataTOM_polynomial *polynomial, double **data );
-int xDataTOM_polynomial_getDataFromXDataInfo( xDataTOM_xDataInfo *xDI, double **data );
+int xDataTOM_polynomial_getData( xDataTOM_polynomial *polynomial, G4double **data );
+int xDataTOM_polynomial_getDataFromXDataInfo( xDataTOM_xDataInfo *xDI, G4double **data );
 
 #if defined __cplusplus
     }

@@ -46,9 +46,9 @@
 struct cchijinghiparnt
 {
 
-float hipr1[100];
+G4float hipr1[100];
 G4int ihpr2[50];
-float hint1[100];
+G4float hint1[100];
 G4int ihnt2[50];
 
 };
@@ -63,7 +63,7 @@ G4int ihnt2[50];
 struct cchijinghimain1
 {
 G4int natt;
-float eatt;
+G4float eatt;
 G4int jatt, nt, np,n0,n01,n10,n11;
 };
 //-----------
@@ -72,7 +72,7 @@ G4int jatt, nt, np,n0,n01,n10,n11;
 struct cchijinghimain2
 {
 G4int katt[4][130000];
-float patt[4][130000];
+G4float patt[4][130000];
 };
 //--------
 // HIJJET1-> information about produced partons which 
@@ -81,11 +81,11 @@ float patt[4][130000];
 struct cchijinghijjet1
 {
 G4int npj[300], kfpj[500][300];
-float pjpx[500][300],pjpy[500][300], pjpz[500][300],pjpe[500][300];
-float pjpm[500][300];
+G4float pjpx[500][300],pjpy[500][300], pjpz[500][300],pjpe[500][300];
+G4float pjpm[500][300];
 G4int   ntj[300], kftj[500][300];
-float pjtx[500][300], pjty[500][300], pjtz[500][300];
-float pjte[500][300], pjtm[500][300];
+G4float pjtx[500][300], pjty[500][300], pjtz[500][300];
+G4float pjte[500][300], pjtm[500][300];
 };
 //--------
 // HIJJET1-> information about produced partons which 
@@ -96,8 +96,8 @@ struct cchijinghijjet2
 {
 G4int nsg, njsg[900], iasg[3][900], k1sg[100][900];
 G4int k2sg[100][900];
-float pxsg[100][900], pysg[100][900], pzsg[100][900];
-float pesg[100][900], pmsg[100][900];
+G4float pxsg[100][900], pysg[100][900], pzsg[100][900];
+G4float pesg[100][900], pmsg[100][900];
 };
 
 //------
@@ -107,9 +107,9 @@ float pesg[100][900], pmsg[100][900];
 struct cchijinghistrng
 {
 G4int nfp[15][300];
-float pp[15][300];
+G4float pp[15][300];
 G4int nft[15][300];
-float pt[15][300];
+G4float pt[15][300];
 };
 //****************************************************************************
 // third: 2-COMMON BLOCKS which contain specific information
@@ -118,12 +118,12 @@ float pt[15][300];
 struct cchijinghijjet4
 {
 G4int ndr, iadr[2][900], kfdr[900];
-float pdr[5][900];
+G4float pdr[5][900];
 };
 
 struct cchijinghijcrdn
 {
-float yp[300][3], yt[300][3];
+G4float yp[300][3], yt[300][3];
 };
 //---------------------------------------------------------
 // fourth: 5-Other common blocks
@@ -132,7 +132,7 @@ float yp[300][3], yt[300][3];
 
 struct cchijingbveg1
 {
-float xl, xu, acc;
+G4float xl, xu, acc;
 G4int ndim, ncall, itmx, nprn;
 };
 
@@ -148,21 +148,21 @@ G4int num1;
 
 struct cchijingranseed
 {
-float nseed;
+G4float nseed;
 };
 
 
 
 struct cchijinghijdat
 {
-float hidat0[10][10],hidat[10];
+G4float hidat0[10][10],hidat[10];
 };
 
 
 struct cchijinghipyint
 {
 G4int mint4, mint5;
-float atco[20][200], atxs[200+1];
+G4float atco[20][200], atxs[200+1];
 };
 
 // hijing
@@ -172,20 +172,20 @@ extern "C"
 // initialize HIJING for specified event type, 
 // collision frame and energy 
 
-//extern void hijset_ (float*,
+//extern void hijset_ (G4float*,
 ////                     const char*, const char*,const char*,
 //                     G4int*, G4int*, G4int*, G4int*);
 
-extern void hijset_ (float*);
+extern void hijset_ (G4float*);
 
 // to generate a complete event as specified by sybroutine HIJSET
 
 //extern void hijing_ (const char*,
-//                    float*, float*);
+//                    G4float*, G4float*);
 
-extern void hijing_ (float*,float*);
+extern void hijing_ (G4float*,G4float*);
 
-extern float ulmass_ (G4int*);
+extern G4float ulmass_ (G4int*);
 
 
 
@@ -245,11 +245,11 @@ extern void hijcsc_ (G4int*, G4int*);
 
 // three parameter Wood-Sax distribution
 
-extern void hijwds_ (G4int*, G4int*, float*);
+extern void hijwds_ (G4int*, G4int*, G4float*);
 
 // gives profile function of 2 colliding nuclei at a given impact parameter
 
-extern float profile_ (float*);
+extern G4float profile_ (G4float*);
 
 // transform the produced particles from c.m to lab frame
 

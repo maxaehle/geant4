@@ -69,7 +69,7 @@ SoTubs::SoTubs() {
   SO_NODE_ADD_FIELD(pRMax,               (1));
   SO_NODE_ADD_FIELD(pDz,                 (10));
   SO_NODE_ADD_FIELD(pSPhi,               (0));
-  SO_NODE_ADD_FIELD(pDPhi,               ((float)(2*M_PI)));
+  SO_NODE_ADD_FIELD(pDPhi,               ((G4float)(2*M_PI)));
   SO_NODE_ADD_FIELD(alternateRep,        (NULL));
   children = new SoChildList(this);
 }
@@ -122,13 +122,13 @@ void SoTubs::generatePrimitives(SoAction *action) {
   ///////////////////////////////////////////////////////
   //-----------------------------------------------------
 #define GEN_VERTEX(pv,x,y,z,s,t,nx,ny,nz)               \
-  point.setValue((float)(x),(float)(y),(float)(z));     \
-  normal.setValue((float)(nx),(float)(ny),(float)(nz)); \
+  point.setValue((G4float)(x),(G4float)(y),(G4float)(z));     \
+  normal.setValue((G4float)(nx),(G4float)(ny),(G4float)(nz)); \
   if (useTexFunction) {                                 \
     texCoord=tce->get(point,normal);                    \
   } else {                                              \
-    texCoord[0]=(float)(s);                             \
-    texCoord[1]=(float)(t);                             \
+    texCoord[0]=(G4float)(s);                             \
+    texCoord[1]=(G4float)(t);                             \
   }                                                     \
   pv.setPoint(point);                                   \
   pv.setNormal(normal);                                 \
@@ -138,17 +138,17 @@ void SoTubs::generatePrimitives(SoAction *action) {
   ///////////////////////////////////////////////////////
 
   int NPHI = (int)(2+22*std::fabs(pDPhi.getValue()/(2.0*M_PI)));
-  double deltaPhi = pDPhi.getValue()/NPHI, phi0 = pSPhi.getValue(),phi1=phi0+pDPhi.getValue();
-  double rMax=pRMax.getValue(),rMin=pRMin.getValue();
-  double zMax=pDz.getValue(),zMin=-zMax;
-  double cosPhi0=std::cos(phi0), sinPhi0=std::sin(phi0);
-  double cosPhi1=std::cos(phi1), sinPhi1=std::sin(phi1);
-  double cosDeltaPhi=std::cos(deltaPhi),sinDeltaPhi=std::sin(deltaPhi);
+  G4double deltaPhi = pDPhi.getValue()/NPHI, phi0 = pSPhi.getValue(),phi1=phi0+pDPhi.getValue();
+  G4double rMax=pRMax.getValue(),rMin=pRMin.getValue();
+  G4double zMax=pDz.getValue(),zMin=-zMax;
+  G4double cosPhi0=std::cos(phi0), sinPhi0=std::sin(phi0);
+  G4double cosPhi1=std::cos(phi1), sinPhi1=std::sin(phi1);
+  G4double cosDeltaPhi=std::cos(deltaPhi),sinDeltaPhi=std::sin(deltaPhi);
   //
   // The outer surface!
   //
   int i;
-  double sinPhi,cosPhi;
+  G4double sinPhi,cosPhi;
   beginShape(action,TRIANGLE_STRIP);
   sinPhi=sinPhi0;
   cosPhi=cosPhi0;
@@ -275,7 +275,7 @@ void SoTubs::updateChildren() {
   
   
   const int NPHI=24, NPOINTS=2*(2*NPHI+2), NFACES=4*NPHI+2, NINDICES = NFACES*5;
-  float points[NPOINTS][3],normals[NFACES][3];
+  G4float points[NPOINTS][3],normals[NFACES][3];
 #ifdef INVENTOR2_0
   static long     indices[NINDICES];
 #else
@@ -283,7 +283,7 @@ void SoTubs::updateChildren() {
 #endif
     
   static int init=0;
-  double phi, pp, DeltaPhi;
+  G4double phi, pp, DeltaPhi;
     
   // Indices need to be generated once! This is here to keep it close to the point
   // generation, since otherwise it will be confusing.

@@ -14,13 +14,13 @@ using namespace GIDI;
 /*
 ************************************************************
 */
-int xDataTOM_LegendreSeries_initialize( statusMessageReporting *smr, xDataTOM_LegendreSeries *LegendreSeries, int index, int length, double value ) {
+int xDataTOM_LegendreSeries_initialize( statusMessageReporting *smr, xDataTOM_LegendreSeries *LegendreSeries, int index, int length, G4double value ) {
 
     LegendreSeries->LegendreSeries = NULL;
     LegendreSeries->index = index;
     LegendreSeries->length = length;
     LegendreSeries->value = value;
-    if( ( LegendreSeries->LegendreSeries = (double *) smr_malloc2( smr, length * sizeof( double ), 0, "LegendreSeries->LegendreSeries" ) ) == NULL ) return( 1 );
+    if( ( LegendreSeries->LegendreSeries = (G4double *) smr_malloc2( smr, length * sizeof( G4double ), 0, "LegendreSeries->LegendreSeries" ) ) == NULL ) return( 1 );
 
     return( 0 );
 }

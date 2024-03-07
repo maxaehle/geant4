@@ -36,7 +36,7 @@ std::istream & operator>>( std::istream & is,       HepAxisAngle & aa );
 class HepAxisAngle {
 
 public:
-  typedef double Scalar;
+  typedef G4double Scalar;
 
 protected:
   typedef HepAxisAngle AA;         // just an abbreviation
@@ -58,8 +58,8 @@ public:
   inline Hep3Vector            axis() const;
   inline AA &                  setAxis( const Hep3Vector axis );
 
-  inline double             getDelta() const;
-  inline double             delta() const ;
+  inline G4double             getDelta() const;
+  inline G4double             delta() const ;
   inline AA &                  setDelta( Scalar delta );
 
   inline AA & set( const Hep3Vector axis, Scalar delta );
@@ -77,15 +77,15 @@ public:
   inline bool operator>=( const AA & aa ) const;
 
   //   relative comparison:
-  inline static double getTolerance();
-  inline static double setTolerance( Scalar tol );
+  inline static G4double getTolerance();
+  inline static G4double setTolerance( Scalar tol );
 
 protected:
-    double distance( const HepAxisAngle & aa ) const;
+    G4double distance( const HepAxisAngle & aa ) const;
 public:
 
   bool isNear ( const AA & aa, Scalar epsilon = tolerance ) const;
-  double  howNear( const AA & aa ) const;
+  G4double  howNear( const AA & aa ) const;
 
   // ----------  I/O:
 
@@ -94,7 +94,7 @@ public:
 
 private:
   Hep3Vector axis_;  // Note:  After construction, this is always of mag 1
-  double  delta_;
+  G4double  delta_;
 
 };  // HepAxisAngle
 

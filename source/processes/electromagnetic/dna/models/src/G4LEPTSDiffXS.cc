@@ -54,7 +54,7 @@ G4LEPTSDiffXS::G4LEPTSDiffXS(string file) {
 void G4LEPTSDiffXS::readDXS( ) {
 
   FILE   *fp;
-  float data, data2;
+  G4float data, data2;
 
   if ((fp=fopen(fileName.c_str(), "r"))==NULL){
     //G4cout << "Error reading " << fileName << G4endl;

@@ -62,7 +62,7 @@ G4SchedulerMessenger::G4SchedulerMessenger(G4Scheduler * stepMgr) :
   fTimeTolerance = new G4UIcmdWithADoubleAndUnit("/scheduler/timeTolerance",
                                                  this);
   fTimeTolerance->SetGuidance("This command aims at resolving issues related to"
-      " floating points. If two time events are separated by less than the "
+      " G4floating points. If two time events are separated by less than the "
       "selected tolerance, they are assumed to belong to the same time step.");
   fTimeTolerance->AvailableForStates(G4State_PreInit, G4State_Idle);
   fTimeTolerance->SetUnitCategory("Time");

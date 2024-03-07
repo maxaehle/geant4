@@ -114,7 +114,7 @@ void G4ChannelingECHARM::ReadFromECHARM(const G4String& filename,
             fVectorEC2D->PutY(i1,i1*stepY);
         }
         for(G4int i0=0;i0<fPoints[0]; i0++){
-        double vTempX;
+        G4double vTempX;
         vFileIn >> vTempX;
 
         vTempX *= vConversion;

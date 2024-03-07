@@ -192,11 +192,11 @@ void GMocrenDataPrimitive<T>::getSize(int _size[3]) {
   for(int i = 0; i < 3; i++) _size[i] = kSize[i];
 }
 template <typename T> 
-void GMocrenDataPrimitive<T>::setScale(double & _scale) {
+void GMocrenDataPrimitive<T>::setScale(G4double & _scale) {
   kScale = _scale;
 }
 template <typename T> 
-double GMocrenDataPrimitive<T>::getScale() {
+G4double GMocrenDataPrimitive<T>::getScale() {
   return kScale;
 }
 template <typename T> 
@@ -226,11 +226,11 @@ T * GMocrenDataPrimitive<T>::getImage(int _z) {
   return kImage[_z];
 }
 template <typename T> 
-void GMocrenDataPrimitive<T>::setCenterPosition(float _center[3]) {
+void GMocrenDataPrimitive<T>::setCenterPosition(G4float _center[3]) {
   for(int i = 0; i < 3; i++) kCenter[i] = _center[i];
 }
 template <typename T> 
-void GMocrenDataPrimitive<T>::getCenterPosition(float _center[3]) {
+void GMocrenDataPrimitive<T>::getCenterPosition(G4float _center[3]) {
   for(int i = 0; i < 3; i++) _center[i] = kCenter[i];
 }
 template <typename T> 
@@ -251,8 +251,8 @@ GMocrenTrack::GMocrenTrack() {
     for(int i = 0; i < 3; i++) kColor[i] = 0;
 }
 
-void GMocrenTrack::addStep(float _startx, float _starty, float _startz,
-			   float _endx, float _endy, float _endz) {
+void GMocrenTrack::addStep(G4float _startx, G4float _starty, G4float _startz,
+			   G4float _endx, G4float _endy, G4float _endz) {
   struct Step step;
   step.startPoint[0] = _startx;
   step.startPoint[1] = _starty;
@@ -262,8 +262,8 @@ void GMocrenTrack::addStep(float _startx, float _starty, float _startz,
   step.endPoint[2] = _endz;
   kTrack.push_back(step);
 }
-void GMocrenTrack::getStep(float & _startx, float & _starty, float & _startz,
-			   float & _endx, float & _endy, float & _endz,
+void GMocrenTrack::getStep(G4float & _startx, G4float & _starty, G4float & _startz,
+			   G4float & _endx, G4float & _endy, G4float & _endz,
 			   int _num) {
   if(_num >= (int)kTrack.size()) {
     if (G4VisManager::GetVerbosity() >= G4VisManager::errors)
@@ -279,7 +279,7 @@ void GMocrenTrack::getStep(float & _startx, float & _starty, float & _startz,
   _endy = kTrack[_num].endPoint[1];
   _endz = kTrack[_num].endPoint[2];
 }
-void GMocrenTrack::translate(std::vector<float> & _translate) {
+void GMocrenTrack::translate(std::vector<G4float> & _translate) {
   std::vector<struct Step>::iterator itr = kTrack.begin();
   for(; itr != kTrack.end(); itr++) {
     for(int i = 0; i < 3; i++ ) {
@@ -302,8 +302,8 @@ GMocrenDetector::GMocrenDetector() {
     for(int i = 0; i < 3; i++) kColor[i] = 0;
 }
 
-void GMocrenDetector::addEdge(float _startx, float _starty, float _startz,
-			      float _endx, float _endy, float _endz) {
+void GMocrenDetector::addEdge(G4float _startx, G4float _starty, G4float _startz,
+			      G4float _endx, G4float _endy, G4float _endz) {
   struct Edge edge;
   edge.startPoint[0] = _startx;
   edge.startPoint[1] = _starty;
@@ -313,8 +313,8 @@ void GMocrenDetector::addEdge(float _startx, float _starty, float _startz,
   edge.endPoint[2] = _endz;
   kDetector.push_back(edge);
 }
-void GMocrenDetector::getEdge(float & _startx, float & _starty, float & _startz,
-			   float & _endx, float & _endy, float & _endz,
+void GMocrenDetector::getEdge(G4float & _startx, G4float & _starty, G4float & _startz,
+			   G4float & _endx, G4float & _endy, G4float & _endz,
 			   int _num) {
   if(_num >= (int)kDetector.size()) {
     if (G4VisManager::GetVerbosity() >= G4VisManager::errors)
@@ -330,7 +330,7 @@ void GMocrenDetector::getEdge(float & _startx, float & _starty, float & _startz,
   _endy = kDetector[_num].endPoint[1];
   _endz = kDetector[_num].endPoint[2];
 }
-void GMocrenDetector::translate(std::vector<float> & _translate) {
+void GMocrenDetector::translate(std::vector<G4float> & _translate) {
   std::vector<struct Edge>::iterator itr = kDetector.begin();
   for(; itr != kDetector.end(); itr++) {
     for(int i = 0; i < 3; i++) {
@@ -371,20 +371,20 @@ unsigned int G4GMocrenIO::kPointerToTrackData = 0;
 unsigned int G4GMocrenIO::kPointerToDetectorData = 0;
 
 // modality
-float G4GMocrenIO::kVoxelSpacing[3] = {0., 0., 0.};
+G4float G4GMocrenIO::kVoxelSpacing[3] = {0., 0., 0.};
 class GMocrenDataPrimitive<short>  G4GMocrenIO::kModality;
-std::vector<float> G4GMocrenIO::kModalityImageDensityMap;
+std::vector<G4float> G4GMocrenIO::kModalityImageDensityMap;
 std::string G4GMocrenIO::kModalityUnit = "g/cm3       "; // 12 Bytes
 
 // dose
-std::vector<class GMocrenDataPrimitive<double> > G4GMocrenIO::kDose;
+std::vector<class GMocrenDataPrimitive<G4double> > G4GMocrenIO::kDose;
 std::string G4GMocrenIO::kDoseUnit = "keV         "; // 12 Bytes
 
 // ROI
 std::vector<class GMocrenDataPrimitive<short> > G4GMocrenIO::kRoi;
 
 // track
-std::vector<float *> G4GMocrenIO::kSteps;
+std::vector<G4float *> G4GMocrenIO::kSteps;
 std::vector<unsigned char *> G4GMocrenIO::kStepColors;
 std::vector<class GMocrenTrack> G4GMocrenIO::kTracks;
 
@@ -437,7 +437,7 @@ void G4GMocrenIO::initialize() {
   // ROI
   kRoi.clear();
   // track
-  std::vector<float *>::iterator itr;
+  std::vector<G4float *>::iterator itr;
   for(itr = kSteps.begin(); itr != kSteps.end(); itr++) delete [] *itr;
   kSteps.clear();
   std::vector<unsigned char *>::iterator citr;
@@ -490,7 +490,7 @@ bool G4GMocrenIO::storeData4() {
   }
 
   // for inverting the byte order
-  float ftmp[6];
+  G4float ftmp[6];
   int itmp[6];
   short stmp[6];
 
@@ -601,9 +601,9 @@ bool G4GMocrenIO::storeData4() {
   //----- modality image -----//
 
   int size[3];
-  float scale;
+  G4float scale;
   short minmax[2];
-  float fCenter[3];
+  G4float fCenter[3];
   int iCenter[3];
   // modality image size
   kModality.getSize(size);
@@ -639,7 +639,7 @@ bool G4GMocrenIO::storeData4() {
   ofile.write((char *)munit, 12);
 
   // modality image scale
-  scale = (float)kModality.getScale();
+  scale = (G4float)kModality.getScale();
   if(kLittleEndianOutput) {
     ofile.write((char *)&scale, 4);
   } else {
@@ -675,11 +675,11 @@ bool G4GMocrenIO::storeData4() {
   size_t msize = minmax[1] - minmax[0]+1;
   if(DEBUG || kVerbose > 0) 
     G4cout << "modality image : " << minmax[0] << ", " << minmax[1] << G4endl;
-  float * pdmap = new float[msize];
+  G4float * pdmap = new G4float[msize];
   for(int i = 0; i < (int)msize; i++) pdmap[i] =kModalityImageDensityMap[i]; 
 
   if(kLittleEndianOutput) {
-    ofile.write((char *)pdmap, msize*sizeof(float));
+    ofile.write((char *)pdmap, msize*sizeof(G4float));
   } else {
     for(int j = 0; j < (int)msize; j++) {
       invertByteOrder((char *)&pdmap[j], ftmp[0]);
@@ -740,9 +740,9 @@ bool G4GMocrenIO::storeData4() {
       }
 
       // dose distribution scaling 
-      double dscale;
+      G4double dscale;
       dscale = getDoseDistScale(ndose);
-      scale = float(dscale);
+      scale = G4float(dscale);
       if(kLittleEndianOutput) {
 	ofile.write((char *)&scale, 4);
       } else {
@@ -843,9 +843,9 @@ bool G4GMocrenIO::storeData4() {
     }
 
     // ROI distribution scaling 
-    scale = (float)kRoi[0].getScale();
+    scale = (G4float)kRoi[0].getScale();
     if(kLittleEndianOutput) {
-      ofile.write((char *)&scale, sizeof(float));
+      ofile.write((char *)&scale, sizeof(G4float));
     } else {
       invertByteOrder((char *)&scale, ftmp[0]);
       ofile.write((char *)ftmp, 4);
@@ -926,14 +926,14 @@ bool G4GMocrenIO::storeData4() {
       ofile.write((char *)tcolor, 3);
 
       // steps
-      float stepPoints[6];
+      G4float stepPoints[6];
       for(int isteps = 0; isteps < nsteps; isteps++) {
 	kTracks[nt].getStep(stepPoints[0], stepPoints[1], stepPoints[2],
 			    stepPoints[3], stepPoints[4], stepPoints[5],
 			    isteps);
 
 	if(kLittleEndianOutput) {
-	  ofile.write((char *)stepPoints, sizeof(float)*6);
+	  ofile.write((char *)stepPoints, sizeof(G4float)*6);
 	} else {
 	  for(int j = 0; j < 6; j++)
 	    invertByteOrder((char *)&stepPoints[j], ftmp[j]);
@@ -973,14 +973,14 @@ bool G4GMocrenIO::storeData4() {
       }
 
       // edges
-      float edgePoints[6];
+      G4float edgePoints[6];
       for(int ne = 0; ne < nedges; ne++) {
 	kDetectors[nd].getEdge(edgePoints[0], edgePoints[1], edgePoints[2],
 			       edgePoints[3], edgePoints[4], edgePoints[5],
 			       ne);
 
 	if(kLittleEndianOutput) {
-	  ofile.write((char *)edgePoints, sizeof(float)*6);
+	  ofile.write((char *)edgePoints, sizeof(G4float)*6);
 	} else {
 	  for(int j = 0; j < 6; j++)
 	    invertByteOrder((char *)&edgePoints[j], ftmp[j]);
@@ -1106,9 +1106,9 @@ bool G4GMocrenIO::storeData3() {
   //----- modality image -----//
 
   int size[3];
-  float scale;
+  G4float scale;
   short minmax[2];
-  float fCenter[3];
+  G4float fCenter[3];
   int iCenter[3];
   // modality image size
   kModality.getSize(size);
@@ -1130,7 +1130,7 @@ bool G4GMocrenIO::storeData3() {
   ofile.write((char *)munit, 12);
 
   // modality image scale
-  scale = (float)kModality.getScale();
+  scale = (G4float)kModality.getScale();
   ofile.write((char *)&scale, 4);
   if(DEBUG || kVerbose > 0) {
     G4cout << "Modality image min., max., scale : "
@@ -1152,9 +1152,9 @@ bool G4GMocrenIO::storeData3() {
 
   // modality desity map for CT value
   size_t msize = minmax[1] - minmax[0]+1;
-  float * pdmap = new float[msize];
+  G4float * pdmap = new G4float[msize];
   for(int i = 0; i < (int)msize; i++) pdmap[i] =kModalityImageDensityMap[i]; 
-  ofile.write((char *)pdmap, msize*sizeof(float));
+  ofile.write((char *)pdmap, msize*sizeof(G4float));
   if(DEBUG || kVerbose > 0) {
     G4cout << "density map : " << std::ends;
     for(int i = 0; i < (int)msize; i+=50)
@@ -1193,9 +1193,9 @@ bool G4GMocrenIO::storeData3() {
       }
 
       // dose distribution scaling 
-      double dscale;
+      G4double dscale;
       dscale = getDoseDistScale(ndose);
-      scale = float(dscale);
+      scale = G4float(dscale);
       ofile.write((char *)&scale, 4);
       if(DEBUG || kVerbose > 0) {
 	G4cout << "Dose dist. [" << ndose
@@ -1256,8 +1256,8 @@ bool G4GMocrenIO::storeData3() {
     ofile.write((char *)minmax, sizeof(short)*2);
 
     // ROI distribution scaling 
-    scale = (float)kRoi[0].getScale();
-    ofile.write((char *)&scale, sizeof(float));
+    scale = (G4float)kRoi[0].getScale();
+    ofile.write((char *)&scale, sizeof(G4float));
     if(DEBUG || kVerbose > 0) {
       G4cout << "ROI image min., max., scale : "
 		<< minmax[0] << ", "
@@ -1295,8 +1295,8 @@ bool G4GMocrenIO::storeData3() {
   }
   // track position
   for(int i = 0; i < ntrk; i++) {
-    float * tp = kSteps[i];
-    ofile.write((char *)tp, sizeof(float)*6);
+    G4float * tp = kSteps[i];
+    ofile.write((char *)tp, sizeof(G4float)*6);
   }
   // track color
   int ntcolor = int(kStepColors.size());
@@ -1355,7 +1355,7 @@ bool G4GMocrenIO::storeData2() {
   /*
   // event number
   ofile.write((char *)&numberOfEvents, sizeof(int));
-  float imageSpacing[3]; 
+  G4float imageSpacing[3]; 
   imageSpacing[0] = modalityImageVoxelSpacing[0];
   imageSpacing[1] = modalityImageVoxelSpacing[1];
   imageSpacing[2] = modalityImageVoxelSpacing[2];
@@ -1396,9 +1396,9 @@ bool G4GMocrenIO::storeData2() {
   //----- modality image -----//
 
   int size[3];
-  float scale;
+  G4float scale;
   short minmax[2];
-  float fCenter[3];
+  G4float fCenter[3];
   int iCenter[3];
   // modality image size
   kModality.getSize(size);
@@ -1420,7 +1420,7 @@ bool G4GMocrenIO::storeData2() {
   //ofile.write((char *)&munit, 12);
   
   // modality image scale
-  scale = (float)kModality.getScale();
+  scale = (G4float)kModality.getScale();
   ofile.write((char *)&scale, 4);
   if(DEBUG || kVerbose > 0) {
     G4cout << "Modality image min., max., scale : "
@@ -1442,9 +1442,9 @@ bool G4GMocrenIO::storeData2() {
 
   // modality desity map for CT value
   size_t msize = minmax[1] - minmax[0]+1;
-  float * pdmap = new float[msize];
+  G4float * pdmap = new G4float[msize];
   for(int i = 0; i < (int)msize; i++) pdmap[i] =kModalityImageDensityMap[i]; 
-  ofile.write((char *)pdmap, msize*sizeof(float));
+  ofile.write((char *)pdmap, msize*sizeof(G4float));
   if(DEBUG || kVerbose > 0) {
     G4cout << "density map : " << std::ends;
     for(int i = 0; i < (int)msize; i+=50)
@@ -1475,8 +1475,8 @@ bool G4GMocrenIO::storeData2() {
     ofile.write((char *)minmax, sizeof(short)*2);
 
     // dose distribution scaling 
-    scale = (float)kDose[0].getScale();
-    ofile.write((char *)&scale, sizeof(float));
+    scale = (G4float)kDose[0].getScale();
+    ofile.write((char *)&scale, sizeof(G4float));
     if(DEBUG || kVerbose > 0) {
       G4cout << "Dose dist. image min., max., scale : "
 		<< minmax[0] << ", "
@@ -1534,8 +1534,8 @@ bool G4GMocrenIO::storeData2() {
     ofile.write((char *)minmax, sizeof(short)*2);
 
     // ROI distribution scaling 
-    scale = (float)kRoi[0].getScale();
-    ofile.write((char *)&scale, sizeof(float));
+    scale = (G4float)kRoi[0].getScale();
+    ofile.write((char *)&scale, sizeof(G4float));
     if(DEBUG || kVerbose > 0) {
       G4cout << "ROI image min., max., scale : "
 		<< minmax[0] << ", "
@@ -1573,8 +1573,8 @@ bool G4GMocrenIO::storeData2() {
 	      << ntrk << G4endl;
   }
   for(int i = 0; i < ntrk; i++) {
-    float * tp = kSteps[i];
-    ofile.write((char *)tp, sizeof(float)*6);
+    G4float * tp = kSteps[i];
+    ofile.write((char *)tp, sizeof(G4float)*6);
   }
 
 
@@ -1774,10 +1774,10 @@ bool G4GMocrenIO::retrieveData4() {
   */
 
   int size[3];
-  float scale;
-  double dscale;
+  G4float scale;
+  G4double dscale;
   short minmax[2];
-  float fCenter[3];
+  G4float fCenter[3];
   int iCenter[3];
 
   //----- Modality image -----//
@@ -1797,10 +1797,10 @@ bool G4GMocrenIO::retrieveData4() {
 
   // modality image voxel spacing
   /*
-    ifile.read(ctmp, 3*sizeof(float));
+    ifile.read(ctmp, 3*sizeof(G4float));
     convertEndian(ctmp, modalityImageVoxelSpacing[0]);
-    convertEndian(ctmp+sizeof(float), modalityImageVoxelSpacing[1]);
-    convertEndian(ctmp+2*sizeof(float), modalityImageVoxelSpacing[2]);
+    convertEndian(ctmp+sizeof(G4float), modalityImageVoxelSpacing[1]);
+    convertEndian(ctmp+2*sizeof(G4float), modalityImageVoxelSpacing[2]);
   */
 
   if(kPointerToModalityData != 0) {
@@ -1849,11 +1849,11 @@ bool G4GMocrenIO::retrieveData4() {
     // modality desity map for CT value
     size_t msize = minmax[1]-minmax[0]+1;
     if(DEBUG || kVerbose > 0) G4cout << "msize: " << msize << G4endl;
-    char * pdmap = new char[msize*sizeof(float)];
-    ifile.read((char *)pdmap, msize*sizeof(float));
-    float ftmp;
+    char * pdmap = new char[msize*sizeof(G4float)];
+    ifile.read((char *)pdmap, msize*sizeof(G4float));
+    G4float ftmp;
     for(int i = 0; i < (int)msize; i++) {
-      convertEndian(pdmap+i*sizeof(float), ftmp);
+      convertEndian(pdmap+i*sizeof(G4float), ftmp);
       kModalityImageDensityMap.push_back(ftmp); 
     }
     delete [] pdmap;
@@ -1908,11 +1908,11 @@ bool G4GMocrenIO::retrieveData4() {
     }
 
     // dose distribution scaling 
-    ifile.read((char *)ctmp, 4); // sizeof(float)
+    ifile.read((char *)ctmp, 4); // sizeof(G4float)
     convertEndian(ctmp, scale);
     kDose[ndose].setScale(dscale = scale);
 
-    double dminmax[2];
+    G4double dminmax[2];
     for(int i = 0; i < 2; i++) dminmax[i] = minmax[i]*dscale;
     kDose[ndose].setMinMax(dminmax);
 
@@ -1930,7 +1930,7 @@ bool G4GMocrenIO::retrieveData4() {
     short * shimage = new short[dsize];
     for(int z = 0; z < size[2]; z++) {
       ifile.read((char *)di, dsize*sizeof(short));
-      double * dimage = new double[dsize];
+      G4double * dimage = new G4double[dsize];
       for(int xy = 0; xy < dsize; xy++) {
 	convertEndian(di+xy*sizeof(short), shimage[xy]);
 	dimage[xy] = shimage[xy]*dscale;
@@ -1955,7 +1955,7 @@ bool G4GMocrenIO::retrieveData4() {
     convertEndian(ctmp, iCenter[0]);
     convertEndian(ctmp+4, iCenter[1]);
     convertEndian(ctmp+8, iCenter[2]);
-    for(int i = 0; i < 3; i++) fCenter[i] = (float)iCenter[i];
+    for(int i = 0; i < 3; i++) fCenter[i] = (G4float)iCenter[i];
     kDose[ndose].setCenterPosition(fCenter);
 
     if(DEBUG || kVerbose > 0) {
@@ -2003,7 +2003,7 @@ bool G4GMocrenIO::retrieveData4() {
     kRoi[0].setMinMax(minmax);
 
     // ROI distribution scaling 
-    ifile.read((char *)ctmp, sizeof(float));
+    ifile.read((char *)ctmp, sizeof(G4float));
     convertEndian(ctmp, scale);
     kRoi[0].setScale(dscale = scale);
     if(DEBUG || kVerbose > 0) {
@@ -2067,15 +2067,15 @@ bool G4GMocrenIO::retrieveData4() {
       // track color
       ifile.read((char *)rgb, 3);
 
-      std::vector<float *> steps;
+      std::vector<G4float *> steps;
       // steps
       for(int j = 0; j < nsteps; j++) {
 
-	float * steppoint = new float[6];
-	ifile.read((char *)ctmp, sizeof(float)*6);
+	G4float * steppoint = new G4float[6];
+	ifile.read((char *)ctmp, sizeof(G4float)*6);
 
 	for(int k = 0; k < 6; k++) {
-	  convertEndian(ctmp+k*sizeof(float), steppoint[k]);
+	  convertEndian(ctmp+k*sizeof(G4float), steppoint[k]);
 	}
 	
 	steps.push_back(steppoint);
@@ -2126,13 +2126,13 @@ bool G4GMocrenIO::retrieveData4() {
       }
 
       // edges
-      std::vector<float *> detector;
+      std::vector<G4float *> detector;
       char cftmp[24];
       for(int ne = 0; ne < nedges; ne++) {
       
-	ifile.read((char *)cftmp, sizeof(float)*6);
-	float * edgePoints = new float[6];
-	for(int j = 0; j < 6; j++) convertEndian(&cftmp[sizeof(float)*j], edgePoints[j]);
+	ifile.read((char *)cftmp, sizeof(G4float)*6);
+	G4float * edgePoints = new G4float[6];
+	for(int j = 0; j < 6; j++) convertEndian(&cftmp[sizeof(G4float)*j], edgePoints[j]);
 	detector.push_back(edgePoints);
 
       }
@@ -2297,10 +2297,10 @@ bool G4GMocrenIO::retrieveData3() {
   */
 
   int size[3];
-  float scale;
-  double dscale;
+  G4float scale;
+  G4double dscale;
   short minmax[2];
-  float fCenter[3];
+  G4float fCenter[3];
   int iCenter[3];
 
   //----- Modality image -----//
@@ -2320,10 +2320,10 @@ bool G4GMocrenIO::retrieveData3() {
 
   // modality image voxel spacing
   /*
-    ifile.read(ctmp, 3*sizeof(float));
+    ifile.read(ctmp, 3*sizeof(G4float));
     convertEndian(ctmp, modalityImageVoxelSpacing[0]);
-    convertEndian(ctmp+sizeof(float), modalityImageVoxelSpacing[1]);
-    convertEndian(ctmp+2*sizeof(float), modalityImageVoxelSpacing[2]);
+    convertEndian(ctmp+sizeof(G4float), modalityImageVoxelSpacing[1]);
+    convertEndian(ctmp+2*sizeof(G4float), modalityImageVoxelSpacing[2]);
   */
 
   if(kPointerToModalityData != 0) {
@@ -2371,11 +2371,11 @@ bool G4GMocrenIO::retrieveData3() {
     // modality desity map for CT value
     size_t msize = minmax[1]-minmax[0]+1;
     if(DEBUG || kVerbose > 0) G4cout << "msize: " << msize << G4endl;
-    char * pdmap = new char[msize*sizeof(float)];
-    ifile.read((char *)pdmap, msize*sizeof(float));
-    float ftmp;
+    char * pdmap = new char[msize*sizeof(G4float)];
+    ifile.read((char *)pdmap, msize*sizeof(G4float));
+    G4float ftmp;
     for(int i = 0; i < (int)msize; i++) {
-      convertEndian(pdmap+i*sizeof(float), ftmp);
+      convertEndian(pdmap+i*sizeof(G4float), ftmp);
       kModalityImageDensityMap.push_back(ftmp); 
     }
     delete [] pdmap;
@@ -2428,11 +2428,11 @@ bool G4GMocrenIO::retrieveData3() {
     }
 
     // dose distribution scaling 
-    ifile.read((char *)ctmp, 4); // sizeof(float)
+    ifile.read((char *)ctmp, 4); // sizeof(G4float)
     convertEndian(ctmp, scale);
     kDose[ndose].setScale(dscale = scale);
 
-    double dminmax[2];
+    G4double dminmax[2];
     for(int i = 0; i < 2; i++) dminmax[i] = minmax[i]*dscale;
     kDose[ndose].setMinMax(dminmax);
 
@@ -2450,7 +2450,7 @@ bool G4GMocrenIO::retrieveData3() {
     short * shimage = new short[dsize];
     for(int z = 0; z < size[2]; z++) {
       ifile.read((char *)di, dsize*sizeof(short));
-      double * dimage = new double[dsize];
+      G4double * dimage = new G4double[dsize];
       for(int xy = 0; xy < dsize; xy++) {
 	convertEndian(di+xy*sizeof(short), shimage[xy]);
 	dimage[xy] = shimage[xy]*dscale;
@@ -2475,7 +2475,7 @@ bool G4GMocrenIO::retrieveData3() {
     convertEndian(ctmp, iCenter[0]);
     convertEndian(ctmp+4, iCenter[1]);
     convertEndian(ctmp+8, iCenter[2]);
-    for(int i = 0; i < 3; i++) fCenter[i] = (float)iCenter[i];
+    for(int i = 0; i < 3; i++) fCenter[i] = (G4float)iCenter[i];
     kDose[ndose].setCenterPosition(fCenter);
 
     if(DEBUG || kVerbose > 0) {
@@ -2514,7 +2514,7 @@ bool G4GMocrenIO::retrieveData3() {
     kRoi[0].setMinMax(minmax);
 
     // ROI distribution scaling 
-    ifile.read((char *)ctmp, sizeof(float));
+    ifile.read((char *)ctmp, sizeof(G4float));
     convertEndian(ctmp, scale);
     kRoi[0].setScale(dscale = scale);
     if(DEBUG || kVerbose > 0) {
@@ -2566,22 +2566,22 @@ bool G4GMocrenIO::retrieveData3() {
     }
 
     // v4
-    std::vector<float *> trkv4;
+    std::vector<G4float *> trkv4;
 
     // track position
     for(int i = 0; i < ntrk; i++) {
-      float * tp = new float[6];
+      G4float * tp = new G4float[6];
 
-      ifile.read((char *)ctmp, sizeof(float)*3);
+      ifile.read((char *)ctmp, sizeof(G4float)*3);
       if(DEBUG || kVerbose > 0) if(i < 10) G4cout << i << ": " ;
       for(int j = 0; j < 3; j++) {
-	convertEndian(ctmp+j*sizeof(float), tp[j]);
+	convertEndian(ctmp+j*sizeof(G4float), tp[j]);
 	if(DEBUG || kVerbose > 0) if(i < 10) G4cout << tp[j] << ", ";
       }
 
-      ifile.read((char *)ctmp, sizeof(float)*3);
+      ifile.read((char *)ctmp, sizeof(G4float)*3);
       for(int j = 0; j < 3; j++) {
-	convertEndian(ctmp+j*sizeof(float), tp[j+3]);
+	convertEndian(ctmp+j*sizeof(G4float), tp[j+3]);
 	if(DEBUG || kVerbose > 0) if(i < 10) G4cout << tp[j+3] << ", ";
       }
       addTrack(tp);
@@ -2602,7 +2602,7 @@ bool G4GMocrenIO::retrieveData3() {
 
       // v4
       for(int j = 0; j < 3; j++) trkcolorv4[j] = rgb[j];
-      std::vector<float *> trk;
+      std::vector<G4float *> trk;
       trk.push_back(trkv4[i]);
       addTrack(trk, trkcolorv4);
 
@@ -2721,10 +2721,10 @@ bool G4GMocrenIO::retrieveData2() {
   */
 
   int size[3];
-  float scale;
-  double dscale;
+  G4float scale;
+  G4double dscale;
   short minmax[2];
-  float fCenter[3];
+  G4float fCenter[3];
   int iCenter[3];
 
   //----- Modality image -----//
@@ -2744,10 +2744,10 @@ bool G4GMocrenIO::retrieveData2() {
 
   // modality image voxel spacing
   /*
-    ifile.read(ctmp, 3*sizeof(float));
+    ifile.read(ctmp, 3*sizeof(G4float));
     convertEndian(ctmp, modalityImageVoxelSpacing[0]);
-    convertEndian(ctmp+sizeof(float), modalityImageVoxelSpacing[1]);
-    convertEndian(ctmp+2*sizeof(float), modalityImageVoxelSpacing[2]);
+    convertEndian(ctmp+sizeof(G4float), modalityImageVoxelSpacing[1]);
+    convertEndian(ctmp+2*sizeof(G4float), modalityImageVoxelSpacing[2]);
   */
 
   if(kPointerToModalityData != 0) {
@@ -2789,11 +2789,11 @@ bool G4GMocrenIO::retrieveData2() {
     // modality desity map for CT value
     size_t msize = minmax[1]-minmax[0]+1;
     if(DEBUG || kVerbose > 0) G4cout << "msize: " << msize << G4endl;
-    char * pdmap = new char[msize*sizeof(float)];
-    ifile.read((char *)pdmap, msize*sizeof(float));
-    float ftmp;
+    char * pdmap = new char[msize*sizeof(G4float)];
+    ifile.read((char *)pdmap, msize*sizeof(G4float));
+    G4float ftmp;
     for(int i = 0; i < (int)msize; i++) {
-      convertEndian(pdmap+i*sizeof(float), ftmp);
+      convertEndian(pdmap+i*sizeof(G4float), ftmp);
       kModalityImageDensityMap.push_back(ftmp); 
     }
     delete [] pdmap;
@@ -2836,11 +2836,11 @@ bool G4GMocrenIO::retrieveData2() {
     convertEndian(ctmp, minmax[0]);
     convertEndian(ctmp+2, minmax[1]);
     // dose distribution scaling 
-    ifile.read((char *)ctmp, sizeof(float));
+    ifile.read((char *)ctmp, sizeof(G4float));
     convertEndian(ctmp, scale);
     kDose[0].setScale(dscale = scale);
 
-    double dminmax[2];
+    G4double dminmax[2];
     for(int i = 0; i < 2; i++) dminmax[i] = minmax[i]*dscale;
     kDose[0].setMinMax(dminmax);
 
@@ -2858,7 +2858,7 @@ bool G4GMocrenIO::retrieveData2() {
     short * shimage = new short[dsize];
     for(int z = 0; z < size[2]; z++) {
       ifile.read((char *)di, dsize*sizeof(short));
-      double * dimage = new double[dsize];
+      G4double * dimage = new G4double[dsize];
       for(int xy = 0; xy < dsize; xy++) {
 	convertEndian(di+xy*sizeof(short), shimage[xy]);
 	dimage[xy] = shimage[xy]*dscale;
@@ -2880,23 +2880,23 @@ bool G4GMocrenIO::retrieveData2() {
     if(DEBUG || kVerbose > 0) G4cout << G4endl;
 
     /* ver 1
-       float doseDist;
+       G4float doseDist;
        int dosePid;
-       double * doseData = new double[numDoseImageVoxels];
+       G4double * doseData = new G4double[numDoseImageVoxels];
        for(int i = 0; i < numDose; i++) {
        ifile.read(ctmp, sizeof(int));
        convertEndian(ctmp, dosePid);
        for(int j = 0; j < numDoseImageVoxels; j++) {
-       ifile.read(ctmp, sizeof(float));
+       ifile.read(ctmp, sizeof(G4float));
        convertEndian(ctmp, doseDist);
        doseData[j] = doseDist;
        }
        setDose(dosePid, doseData);
        }
        delete [] doseData;
-       if(totalDose == NULL) totalDose = new double[numDoseImageVoxels];
+       if(totalDose == NULL) totalDose = new G4double[numDoseImageVoxels];
        for(int i = 0; i < numDoseImageVoxels; i++) {
-       ifile.read(ctmp, sizeof(float));
+       ifile.read(ctmp, sizeof(G4float));
        convertEndian(ctmp, doseDist);
        totalDose[i] = doseDist;
        }
@@ -2904,20 +2904,20 @@ bool G4GMocrenIO::retrieveData2() {
 
     /* ver 1
     // relative location between the two images
-    ifile.read(ctmp, 3*sizeof(float));
+    ifile.read(ctmp, 3*sizeof(G4float));
     convertEndian(ctmp, relativeLocation[0]);
-    convertEndian(ctmp+sizeof(float), relativeLocation[1]);
-    convertEndian(ctmp+2*sizeof(float), relativeLocation[2]);
+    convertEndian(ctmp+sizeof(G4float), relativeLocation[1]);
+    convertEndian(ctmp+2*sizeof(G4float), relativeLocation[2]);
     */
 
     // relative location of the dose distribution image for 
     // the modality image
-    //ofile.write((char *)relativeLocation, 3*sizeof(float));
+    //ofile.write((char *)relativeLocation, 3*sizeof(G4float));
     ifile.read((char *)ctmp, 3*sizeof(int));
     convertEndian(ctmp, iCenter[0]);
     convertEndian(ctmp+sizeof(int), iCenter[1]);
     convertEndian(ctmp+2*sizeof(int), iCenter[2]);
-    for(int i = 0; i < 3; i++) fCenter[i] = (float)iCenter[i];
+    for(int i = 0; i < 3; i++) fCenter[i] = (G4float)iCenter[i];
     kDose[0].setCenterPosition(fCenter);
 
     if(DEBUG || kVerbose > 0) {
@@ -2956,7 +2956,7 @@ bool G4GMocrenIO::retrieveData2() {
     kRoi[0].setMinMax(minmax);
 
     // ROI distribution scaling 
-    ifile.read((char *)ctmp, sizeof(float));
+    ifile.read((char *)ctmp, sizeof(G4float));
     convertEndian(ctmp, scale);
     kRoi[0].setScale(dscale = scale);
     if(DEBUG || kVerbose > 0) {
@@ -3011,20 +3011,20 @@ bool G4GMocrenIO::retrieveData2() {
     unsigned char trkcolorv4[3] = {255, 0, 0};
 
     for(int i = 0; i < ntrk; i++) {
-      float * tp = new float[6];
+      G4float * tp = new G4float[6];
       // v4
-      std::vector<float *> trkv4;
+      std::vector<G4float *> trkv4;
 
-      ifile.read((char *)ctmp, sizeof(float)*3);
+      ifile.read((char *)ctmp, sizeof(G4float)*3);
       if(DEBUG || kVerbose > 0) if(i < 10) G4cout << i << ": " ;
       for(int j = 0; j < 3; j++) {
-	convertEndian(ctmp+j*sizeof(float), tp[j]);
+	convertEndian(ctmp+j*sizeof(G4float), tp[j]);
 	if(DEBUG || kVerbose > 0) if(i < 10) G4cout << tp[j] << ", ";
       }
 
-      ifile.read((char *)ctmp, sizeof(float)*3);
+      ifile.read((char *)ctmp, sizeof(G4float)*3);
       for(int j = 0; j < 3; j++) {
-	convertEndian(ctmp+j*sizeof(float), tp[j+3]);
+	convertEndian(ctmp+j*sizeof(G4float), tp[j+3]);
 	if(DEBUG || kVerbose > 0) if(i < 10) G4cout << tp[j+3] << ", ";
       }
 
@@ -3044,10 +3044,10 @@ bool G4GMocrenIO::retrieveData2() {
   ifile.read(ctmp, sizeof(int));
   convertEndian(ctmp, ntracks);
   // track displacement
-  ifile.read(ctmp, 3*sizeof(float));
+  ifile.read(ctmp, 3*sizeof(G4float));
   convertEndian(ctmp, trackDisplacement[0]);
-  convertEndian(ctmp+sizeof(float), trackDisplacement[2]); // exchanged with [1]
-  convertEndian(ctmp+2*sizeof(float), trackDisplacement[1]);
+  convertEndian(ctmp+sizeof(G4float), trackDisplacement[2]); // exchanged with [1]
+  convertEndian(ctmp+2*sizeof(G4float), trackDisplacement[1]);
   //
   //for(int i = 0; i < ntracks && i < 100; i++) {
   for(int i = 0; i < ntracks; i++) {
@@ -3066,13 +3066,13 @@ bool G4GMocrenIO::retrieveData2() {
   ifile.read(ctmp, sizeof(int));
   convertEndian(ctmp, npoints);
   for(int i = 0; i < npoints; i++) {
-  ifile.read(ctmp, 3*sizeof(float));
+  ifile.read(ctmp, 3*sizeof(G4float));
   // storing only start and end points
   //if(i == 0 || i == npoints - 1) {
-  float * point = new float[3];
+  G4float * point = new G4float[3];
   convertEndian(ctmp, point[0]);
-  convertEndian(ctmp+sizeof(float), point[1]);
-  convertEndian(ctmp+2*sizeof(float), point[2]);
+  convertEndian(ctmp+sizeof(G4float), point[1]);
+  convertEndian(ctmp+2*sizeof(G4float), point[2]);
   trk.addPoint(point);
   //}
   }
@@ -3125,10 +3125,10 @@ void G4GMocrenIO::setLittleEndianInput(bool _little) {kLittleEndianInput = _litt
 void G4GMocrenIO::setLittleEndianOutput(bool _little) {kLittleEndianOutput = _little;}
 
 // voxel spacing
-void G4GMocrenIO::setVoxelSpacing(float _spacing[3]) {
+void G4GMocrenIO::setVoxelSpacing(G4float _spacing[3]) {
   for(int i = 0; i < 3; i++) kVoxelSpacing[i] = _spacing[i];
 }
-void G4GMocrenIO::getVoxelSpacing(float _spacing[3]) {
+void G4GMocrenIO::getVoxelSpacing(G4float _spacing[3]) {
   for(int i = 0; i < 3; i++) _spacing[i] = kVoxelSpacing[i];
 }
 
@@ -3230,7 +3230,7 @@ void G4GMocrenIO::calcPointers4() {
     pointer += 4; // # of tracks
     for(int nt = 0; nt < ntrk; nt++) {
       int nsteps = kTracks[nt].getNumberOfSteps();
-      pointer += 4 + 3 + nsteps*(4*6); // # of steps + color + steps(float*6)
+      pointer += 4 + 3 + nsteps*(4*6); // # of steps + color + steps(G4float*6)
     }
   } else {
     unsigned int pointer0 = 0;
@@ -3369,11 +3369,11 @@ void G4GMocrenIO::setModalityImageSize(int _size[3]) {
 }
 
 // get & set the modality image size
-void G4GMocrenIO::setModalityImageScale(double & _scale) {
+void G4GMocrenIO::setModalityImageScale(G4double & _scale) {
 
   kModality.setScale(_scale);
 }
-double G4GMocrenIO::getModalityImageScale() {
+G4double G4GMocrenIO::getModalityImageScale() {
 
   return kModality.getScale();
 }
@@ -3392,10 +3392,10 @@ void G4GMocrenIO::clearModalityImage() {
   kModality.clearImage();
 }
 // set/get the modality image density map
-void G4GMocrenIO::setModalityImageDensityMap(std::vector<float> & _map) {
+void G4GMocrenIO::setModalityImageDensityMap(std::vector<G4float> & _map) {
   kModalityImageDensityMap = _map;
 }
-std::vector<float> & G4GMocrenIO::getModalityImageDensityMap() {
+std::vector<G4float> & G4GMocrenIO::getModalityImageDensityMap() {
   return kModalityImageDensityMap;
 }
 // set the modality image min./max.
@@ -3423,11 +3423,11 @@ short G4GMocrenIO::getModalityImageMin() {
   return minmax[0];
 }
 // set/get position of the modality image center
-void G4GMocrenIO::setModalityCenterPosition(float _center[3]) {
+void G4GMocrenIO::setModalityCenterPosition(G4float _center[3]) {
 
   kModality.setCenterPosition(_center);
 }
-void G4GMocrenIO::getModalityCenterPosition(float _center[3]) {
+void G4GMocrenIO::getModalityCenterPosition(G4float _center[3]) {
 
   if(isROIEmpty())
     for(int i = 0; i < 3; i++) _center[i] = 0;
@@ -3442,7 +3442,7 @@ void G4GMocrenIO::setModalityImageUnit(std::string & _unit) {
   kModalityUnit = _unit;
 }
 //
-short G4GMocrenIO::convertDensityToHU(float & _dens) {
+short G4GMocrenIO::convertDensityToHU(G4float & _dens) {
   short rval = -1024; // default: air
   int nmap = (int)kModalityImageDensityMap.size();
   if(nmap != 0) {
@@ -3464,7 +3464,7 @@ short G4GMocrenIO::convertDensityToHU(float & _dens) {
 //----- Dose distribution -----//
 //
 void G4GMocrenIO::newDoseDist() {
-  GMocrenDataPrimitive<double> doseData;
+  GMocrenDataPrimitive<G4double> doseData;
   kDose.push_back(doseData);
 }
 int G4GMocrenIO::getNumDoseDist() {
@@ -3503,9 +3503,9 @@ void G4GMocrenIO::setDoseDistSize(int _size[3], int _num) {
 
 void G4GMocrenIO::setDoseDistMinMax(short _minmax[2], int _num) {
 
-  double minmax[2];
-  double scale = kDose[_num].getScale();
-  for(int i = 0; i < 2; i++) minmax[i] = (double)_minmax[i]*scale;
+  G4double minmax[2];
+  G4double scale = kDose[_num].getScale();
+  for(int i = 0; i < 2; i++) minmax[i] = (G4double)_minmax[i]*scale;
   kDose[_num].setMinMax(minmax);
 }  
 void G4GMocrenIO::getDoseDistMinMax(short _minmax[2], int _num) {
@@ -3513,17 +3513,17 @@ void G4GMocrenIO::getDoseDistMinMax(short _minmax[2], int _num) {
   if(isDoseEmpty())
     for(int i = 0; i < 2; i++) _minmax[i] = 0;
   else {
-    double minmax[2];
+    G4double minmax[2];
     kDose[_num].getMinMax(minmax);
-    double scale = kDose[_num].getScale();
+    G4double scale = kDose[_num].getScale();
     for(int i = 0; i < 2; i++) _minmax[i] = (short)(minmax[i]/scale+0.5);
   }
 }  
-void G4GMocrenIO::setDoseDistMinMax(double _minmax[2], int _num) {
+void G4GMocrenIO::setDoseDistMinMax(G4double _minmax[2], int _num) {
 
   kDose[_num].setMinMax(_minmax);
 }  
-void G4GMocrenIO::getDoseDistMinMax(double _minmax[2], int _num) {
+void G4GMocrenIO::getDoseDistMinMax(G4double _minmax[2], int _num) {
 
   if(isDoseEmpty())
     for(int i = 0; i < 2; i++) _minmax[i] = 0.;
@@ -3532,11 +3532,11 @@ void G4GMocrenIO::getDoseDistMinMax(double _minmax[2], int _num) {
 }  
 
 // get & set the dose distribution image scale
-void G4GMocrenIO::setDoseDistScale(double & _scale, int _num) {
+void G4GMocrenIO::setDoseDistScale(G4double & _scale, int _num) {
 
   kDose[_num].setScale(_scale);
 }
-double G4GMocrenIO::getDoseDistScale(int _num) {
+G4double G4GMocrenIO::getDoseDistScale(int _num) {
 
   if(isDoseEmpty())
     return 0.;
@@ -3558,9 +3558,9 @@ void G4GMocrenIO::setShortDoseDist(short * _image, int _num) {
   int size[3];
   kDose[_num].getSize(size);
   int dsize = size[0]*size[1];
-  double * ddata = new double[dsize];
-  double scale = kDose[_num].getScale();
-  double minmax[2];
+  G4double * ddata = new G4double[dsize];
+  G4double scale = kDose[_num].getScale();
+  G4double minmax[2];
   kDose[_num].getMinMax(minmax);
   for(int xy = 0; xy < dsize; xy++) {
     ddata[xy] = _image[xy]*scale;
@@ -3589,27 +3589,27 @@ void G4GMocrenIO::getShortDoseDist(short * _data, int _z, int _num) {
   int size[3];
   kDose[_num].getSize(size);
   //short * shdata = new short[size[0]*size[1]];
-  double * ddata = kDose[_num].getImage(_z);
-  double scale = kDose[_num].getScale();
+  G4double * ddata = kDose[_num].getImage(_z);
+  G4double scale = kDose[_num].getScale();
   for(int xy = 0; xy < size[0]*size[1]; xy++) {
     _data[xy] = (short)(ddata[xy]/scale+0.5); //there is never negative value
   }
 }
 void G4GMocrenIO::getShortDoseDistMinMax(short _minmax[2], int _num) {
-  double scale = kDose[_num].getScale();
-  double minmax[2];
+  G4double scale = kDose[_num].getScale();
+  G4double minmax[2];
   kDose[_num].getMinMax(minmax);
   for(int i = 0; i < 2; i++)
     _minmax[i] = (short)(minmax[i]/scale+0.5);
 }
 //
-void G4GMocrenIO::setDoseDist(double * _image, int _num) {
+void G4GMocrenIO::setDoseDist(G4double * _image, int _num) {
 
   kDose[_num].addImage(_image);
 }
-double * G4GMocrenIO::getDoseDist(int _z, int _num) {
+G4double * G4GMocrenIO::getDoseDist(int _z, int _num) {
 
-  double * image;
+  G4double * image;
   if(isDoseEmpty()) {
     image = 0;
   } else {
@@ -3618,7 +3618,7 @@ double * G4GMocrenIO::getDoseDist(int _z, int _num) {
   return image;
 }
 /*
-  void G4GMocrenIO::getDoseDist(double * & _image, int _z, int _num) {
+  void G4GMocrenIO::getDoseDist(G4double * & _image, int _z, int _num) {
 
   G4cout << " <" << (void*)_image << "> ";
   if(isDoseEmpty()) {
@@ -3630,11 +3630,11 @@ double * G4GMocrenIO::getDoseDist(int _z, int _num) {
   }
   }
 */
-bool G4GMocrenIO::addDoseDist(std::vector<double *> & _image, int _num) {
+bool G4GMocrenIO::addDoseDist(std::vector<G4double *> & _image, int _num) {
 
   int size[3];
   getDoseDistSize(size, _num);
-  std::vector<double *> dosedist = kDose[_num].getImage();
+  std::vector<G4double *> dosedist = kDose[_num].getImage();
 
   int nimg = size[0]*size[1];
   for(int z = 0; z < size[2]; z++) {
@@ -3645,13 +3645,13 @@ bool G4GMocrenIO::addDoseDist(std::vector<double *> & _image, int _num) {
 
   return true;
 }
-//void setDoseDistDensityMap(float * _map) {doseImageDensityMap = _map;};
+//void setDoseDistDensityMap(G4float * _map) {doseImageDensityMap = _map;};
 // set the dose distribution image displacement
-void G4GMocrenIO::setDoseDistCenterPosition(float _center[3], int _num) {
+void G4GMocrenIO::setDoseDistCenterPosition(G4float _center[3], int _num) {
 
   kDose[_num].setCenterPosition(_center);
 }
-void G4GMocrenIO::getDoseDistCenterPosition(float _center[3], int _num) {
+void G4GMocrenIO::getDoseDistCenterPosition(G4float _center[3], int _num) {
 
   if(isDoseEmpty())
     for(int i = 0; i < 3; i++) _center[i] = 0;
@@ -3672,14 +3672,14 @@ std::string G4GMocrenIO::getDoseDistName(int _num) {
     return kDose[_num].getName();
 }
 // copy dose distributions
-void G4GMocrenIO::copyDoseDist(std::vector<class GMocrenDataPrimitive<double> > & _dose) {
-  std::vector<class GMocrenDataPrimitive<double> >::iterator itr;
+void G4GMocrenIO::copyDoseDist(std::vector<class GMocrenDataPrimitive<G4double> > & _dose) {
+  std::vector<class GMocrenDataPrimitive<G4double> >::iterator itr;
   for(itr = kDose.begin(); itr != kDose.end(); itr++) {
     _dose.push_back(*itr);
   }
 }
 // merge two dose distributions
-bool G4GMocrenIO::mergeDoseDist(std::vector<class GMocrenDataPrimitive<double> > & _dose) {
+bool G4GMocrenIO::mergeDoseDist(std::vector<class GMocrenDataPrimitive<G4double> > & _dose) {
   if(kDose.size() != _dose.size()) {
     if (G4VisManager::GetVerbosity() >= G4VisManager::errors) {
       G4cout << "G4GMocrenIO::mergeDoseDist() : Error" << G4endl; 
@@ -3690,8 +3690,8 @@ bool G4GMocrenIO::mergeDoseDist(std::vector<class GMocrenDataPrimitive<double> >
   }
 
   int num = kDose.size();
-  std::vector<class GMocrenDataPrimitive<double> >::iterator itr1 = kDose.begin();
-  std::vector<class GMocrenDataPrimitive<double> >::iterator itr2 = _dose.begin();
+  std::vector<class GMocrenDataPrimitive<G4double> >::iterator itr1 = kDose.begin();
+  std::vector<class GMocrenDataPrimitive<G4double> >::iterator itr2 = _dose.begin();
   for(int i = 0; i < num; i++, itr1++, itr2++) {
     if (G4VisManager::GetVerbosity() >= G4VisManager::errors)
       if(kVerbose > 0)
@@ -3725,8 +3725,8 @@ bool G4GMocrenIO::isDoseEmpty() {
 //
 void G4GMocrenIO::calcDoseDistScale() {
 
-  double scale;
-  double minmax[2];
+  G4double scale;
+  G4double minmax[2];
 
   for(int i = 0; i < (int)kDose.size(); i++) {
     kDose[i].getMinMax(minmax);
@@ -3748,11 +3748,11 @@ int G4GMocrenIO::getNumROI() {
 }
 
 // set/get the ROI image scale
-void G4GMocrenIO::setROIScale(double & _scale, int _num) {
+void G4GMocrenIO::setROIScale(G4double & _scale, int _num) {
 
   kRoi[_num].setScale(_scale);
 }
-double G4GMocrenIO::getROIScale(int _num) {
+G4double G4GMocrenIO::getROIScale(int _num) {
 
   if(isROIEmpty())
     return 0.;
@@ -3796,11 +3796,11 @@ void G4GMocrenIO::getROIMinMax(short _minmax[2], int _num) {
     kRoi[_num].getMinMax(_minmax);
 }
 // set/get the ROI image displacement
-void G4GMocrenIO::setROICenterPosition(float _center[3], int _num) {
+void G4GMocrenIO::setROICenterPosition(G4float _center[3], int _num) {
 
   kRoi[_num].setCenterPosition(_center);
 }
-void G4GMocrenIO::getROICenterPosition(float _center[3], int _num) {
+void G4GMocrenIO::getROICenterPosition(G4float _center[3], int _num) {
 
   if(isROIEmpty())
     for(int i = 0; i < 3; i++) _center[i] = 0;
@@ -3838,13 +3838,13 @@ int  G4GMocrenIO::getNumTracks() {
 int  G4GMocrenIO::getNumTracks4() {
   return (int)kTracks.size();
 }
-void G4GMocrenIO::addTrack(float * _tracks) {
+void G4GMocrenIO::addTrack(G4float * _tracks) {
   kSteps.push_back(_tracks);
 }
-void G4GMocrenIO::setTracks(std::vector<float *> & _tracks) {
+void G4GMocrenIO::setTracks(std::vector<G4float *> & _tracks) {
   kSteps = _tracks;
 }
-std::vector<float *> & G4GMocrenIO::getTracks() {
+std::vector<G4float *> & G4GMocrenIO::getTracks() {
   return kSteps;
 }
 void G4GMocrenIO::addTrackColor(unsigned char * _colors) {
@@ -3856,11 +3856,11 @@ void G4GMocrenIO::setTrackColors(std::vector<unsigned char *> & _trackColors) {
 std::vector<unsigned char *> & G4GMocrenIO::getTrackColors() {
   return kStepColors;
 }
-void G4GMocrenIO::copyTracks(std::vector<float *> & _tracks,
+void G4GMocrenIO::copyTracks(std::vector<G4float *> & _tracks,
 			       std::vector<unsigned char *> & _colors) {
-  std::vector<float *>::iterator titr;
+  std::vector<G4float *>::iterator titr;
   for(titr = kSteps.begin(); titr != kSteps.end(); titr++) {
-    float * pts = new float[6];
+    G4float * pts = new G4float[6];
     for(int i = 0; i < 6; i++) {
       pts[i] = (*titr)[i];
     }
@@ -3876,9 +3876,9 @@ void G4GMocrenIO::copyTracks(std::vector<float *> & _tracks,
     _colors.push_back(pts);
   }
 }
-void G4GMocrenIO::mergeTracks(std::vector<float *> & _tracks,
+void G4GMocrenIO::mergeTracks(std::vector<G4float *> & _tracks,
 				std::vector<unsigned char *> & _colors) {
-  std::vector<float *>::iterator titr;
+  std::vector<G4float *>::iterator titr;
   for(titr = _tracks.begin(); titr != _tracks.end(); titr++) {
     addTrack(*titr);
   }
@@ -3888,9 +3888,9 @@ void G4GMocrenIO::mergeTracks(std::vector<float *> & _tracks,
     addTrackColor(*citr);
   }
 }
-void G4GMocrenIO::addTrack(std::vector<float *> & _steps, unsigned char _color[3]) {
+void G4GMocrenIO::addTrack(std::vector<G4float *> & _steps, unsigned char _color[3]) {
 
-  std::vector<float *>::iterator itr = _steps.begin();
+  std::vector<G4float *>::iterator itr = _steps.begin();
     std::vector<struct GMocrenTrack::Step> steps;
     for(; itr != _steps.end(); itr++) {
       struct GMocrenTrack::Step step;
@@ -3906,7 +3906,7 @@ void G4GMocrenIO::addTrack(std::vector<float *> & _steps, unsigned char _color[3
     kTracks.push_back(track);
     
 }
-void G4GMocrenIO::getTrack(int _num, std::vector<float *> & _steps,
+void G4GMocrenIO::getTrack(int _num, std::vector<G4float *> & _steps,
 			     std::vector<unsigned char *> & _color) {
 
   if(_num > (int)kTracks.size()) {
@@ -3923,7 +3923,7 @@ void G4GMocrenIO::getTrack(int _num, std::vector<float *> & _steps,
   // steps
   int nsteps = kTracks[_num].getNumberOfSteps();
   for(int isteps = 0; isteps < nsteps; isteps++) {
-    float * stepPoints = new float[6];
+    G4float * stepPoints = new G4float[6];
     kTracks[_num].getStep(stepPoints[0], stepPoints[1], stepPoints[2],
 			  stepPoints[3], stepPoints[4], stepPoints[5],
 			  isteps);
@@ -3931,7 +3931,7 @@ void G4GMocrenIO::getTrack(int _num, std::vector<float *> & _steps,
   }
 }
 
-void G4GMocrenIO::translateTracks(std::vector<float> & _translate) {
+void G4GMocrenIO::translateTracks(std::vector<G4float> & _translate) {
   std::vector<class GMocrenTrack>::iterator itr = kTracks.begin();
   for(; itr != kTracks.end(); itr++) {
     itr->translate(_translate);
@@ -3946,10 +3946,10 @@ int  G4GMocrenIO::getNumberOfDetectors() {
   return (int)kDetectors.size();
 }
 void G4GMocrenIO::addDetector(std::string & _name,
-				std::vector<float *> & _det, 
+				std::vector<G4float *> & _det, 
 				unsigned char _color[3]) {
 
-    std::vector<float *>::iterator itr = _det.begin();
+    std::vector<G4float *>::iterator itr = _det.begin();
     std::vector<struct GMocrenDetector::Edge> edges;
     for(; itr != _det.end(); itr++) {
       struct GMocrenDetector::Edge edge;
@@ -3967,7 +3967,7 @@ void G4GMocrenIO::addDetector(std::string & _name,
     
 }
 
-void G4GMocrenIO::getDetector(int _num, std::vector<float *> & _edges,
+void G4GMocrenIO::getDetector(int _num, std::vector<G4float *> & _edges,
 				std::vector<unsigned char *> & _color,
 				std::string & _detName) {
 
@@ -3989,7 +3989,7 @@ void G4GMocrenIO::getDetector(int _num, std::vector<float *> & _edges,
   // edges
   int nedges = kDetectors[_num].getNumberOfEdges();
   for(int ne = 0; ne < nedges; ne++) {
-    float * edgePoints = new float[6];
+    G4float * edgePoints = new G4float[6];
     kDetectors[_num].getEdge(edgePoints[0], edgePoints[1], edgePoints[2],
 			     edgePoints[3], edgePoints[4], edgePoints[5],
 			     ne);
@@ -3997,7 +3997,7 @@ void G4GMocrenIO::getDetector(int _num, std::vector<float *> & _edges,
   }
 }
 
-void G4GMocrenIO::translateDetector(std::vector<float> & _translate) {
+void G4GMocrenIO::translateDetector(std::vector<G4float> & _translate) {
   std::vector<class GMocrenDetector>::iterator itr = kDetectors.begin();
   for(; itr != kDetectors.end(); itr++) {
     itr->translate(_translate);

@@ -201,8 +201,8 @@
 #define GL2PS_TEXT_TL 8
 #define GL2PS_TEXT_TR 9
 
-typedef GLfloat GL2PSrgba[4];
-typedef GLfloat GL2PSxyz[3];
+typedef GLG4float GL2PSrgba[4];
+typedef GLG4float GL2PSxyz[3];
 
 typedef struct {
   GL2PSxyz xyz;
@@ -240,13 +240,13 @@ GL2PSDLL_API GLint gl2psEndViewport(void);
 GL2PSDLL_API GLint gl2psText(const char *str, const char *fontname,
                              GLshort fontsize);
 GL2PSDLL_API GLint gl2psTextOpt(const char *str, const char *fontname,
-                                GLshort fontsize, GLint align, GLfloat angle);
+                                GLshort fontsize, GLint align, GLG4float angle);
 GL2PSDLL_API GLint gl2psTextOptColor(const char *str, const char *fontname,
-                                     GLshort fontsize, GLint align, GLfloat angle,
+                                     GLshort fontsize, GLint align, GLG4float angle,
                                      GL2PSrgba color);
 GL2PSDLL_API GLint gl2psTextOptColorBL(const char *str, const char *fontname,
-                                       GLshort fontsize, GLint align, GLfloat angle,
-                                       GL2PSrgba color, GLfloat blx, GLfloat bly);
+                                       GLshort fontsize, GLint align, GLG4float angle,
+                                       GL2PSrgba color, GLG4float blx, GLG4float bly);
 GL2PSDLL_API GLint gl2psSpecial(GLint format, const char *str);
 GL2PSDLL_API GLint gl2psSpecialColor(GLint format, const char *str, GL2PSrgba rgba);
 GL2PSDLL_API GLint gl2psDrawPixels(GLsizei width, GLsizei height,
@@ -254,10 +254,10 @@ GL2PSDLL_API GLint gl2psDrawPixels(GLsizei width, GLsizei height,
                                    GLenum format, GLenum type, const void *pixels);
 GL2PSDLL_API GLint gl2psEnable(GLint mode);
 GL2PSDLL_API GLint gl2psDisable(GLint mode);
-GL2PSDLL_API GLint gl2psPointSize(GLfloat value);
+GL2PSDLL_API GLint gl2psPointSize(GLG4float value);
 GL2PSDLL_API GLint gl2psLineCap(GLint value);
 GL2PSDLL_API GLint gl2psLineJoin(GLint value);
-GL2PSDLL_API GLint gl2psLineWidth(GLfloat value);
+GL2PSDLL_API GLint gl2psLineWidth(GLG4float value);
 GL2PSDLL_API GLint gl2psBlendFunc(GLenum sfactor, GLenum dfactor);
 GL2PSDLL_API GLint gl2psSorting(GLint mode);
 
@@ -265,19 +265,19 @@ GL2PSDLL_API GLint gl2psSorting(GLint mode);
 GL2PSDLL_API GLint gl2psForceRasterPos(GL2PSvertex *vert);
 GL2PSDLL_API void gl2psAddPolyPrimitive(GLshort type, GLshort numverts,
                                         GL2PSvertex *verts, GLint offset,
-                                        GLfloat ofactor, GLfloat ounits,
+                                        GLG4float ofactor, GLG4float ounits,
                                         GLushort pattern, GLint factor,
-                                        GLfloat width, GLint linecap,
+                                        GLG4float width, GLint linecap,
                                         GLint linejoin, char boundary);
 
 /* undocumented */
 GL2PSDLL_API GLint gl2psDrawImageMap(GLsizei width, GLsizei height,
-                                     const GLfloat position[3],
+                                     const GLG4float position[3],
                                      const unsigned char *imagemap);
 GL2PSDLL_API const char *gl2psGetFileExtension(GLint format);
 GL2PSDLL_API const char *gl2psGetFormatDescription(GLint format);
 GL2PSDLL_API GLint gl2psGetFileFormat();
-GL2PSDLL_API GLint gl2psSetTexScaling(GLfloat scaling);
+GL2PSDLL_API GLint gl2psSetTexScaling(GLG4float scaling);
 
 #if defined(__cplusplus)
 }

@@ -54,7 +54,7 @@ inline G4double G4Text::GetYOffset () const
         return fYOffset ;
 }
 
-inline void G4Text::SetOffset ( double x_offset,  double y_offset ) 
+inline void G4Text::SetOffset ( G4double x_offset,  G4double y_offset ) 
 {
         fXOffset = x_offset ;
         fYOffset = y_offset ;

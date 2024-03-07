@@ -32,8 +32,8 @@ class RandPoissonQ : public RandPoisson {
 
 public:
 
-  inline RandPoissonQ ( HepRandomEngine& anEngine, double b1=1.0 );
-  inline RandPoissonQ ( HepRandomEngine* anEngine, double b1=1.0 );
+  inline RandPoissonQ ( HepRandomEngine& anEngine, G4double b1=1.0 );
+  inline RandPoissonQ ( HepRandomEngine* anEngine, G4double b1=1.0 );
   // These constructors should be used to instantiate a RandPoissonQ
   // distribution object defining a local engine for it.
   // The static generator will be skipped using the non-static methods
@@ -71,29 +71,29 @@ public:
 
   // Static methods to shoot random values using the static generator
 
-  static  long shoot( double mean=1.0 );
+  static  long shoot( G4double mean=1.0 );
 
-  static  void shootArray ( const int size, long* vect, double mean=1.0 );
+  static  void shootArray ( const int size, long* vect, G4double mean=1.0 );
 
   //  Static methods to shoot random values using a given engine
   //  by-passing the static generator.
 
-  static  long shoot( HepRandomEngine* anEngine, double mean=1.0 );
+  static  long shoot( HepRandomEngine* anEngine, G4double mean=1.0 );
 
   static  void shootArray ( HepRandomEngine* anEngine,
-                            const int size, long* vect, double mean=1.0 );
+                            const int size, long* vect, G4double mean=1.0 );
 
   //  Methods using the localEngine to shoot random values, by-passing
   //  the static generator.
 
   long  fire();
-  long  fire( double mean );
+  long  fire( G4double mean );
 
   void fireArray ( const int size, long* vect );
-  void fireArray ( const int size, long* vect, double mean);
+  void fireArray ( const int size, long* vect, G4double mean);
 
-  double operator()();
-  double operator()( double mean );
+  G4double operator()();
+  G4double operator()( G4double mean );
 
   std::string name() const;
   HepRandomEngine & engine();
@@ -105,7 +105,7 @@ public:
   // static constants of possible interest to users:
 
   // RandPoisson will never return a deviate greater than this value:
-  static const double MAXIMUM_POISSON_DEVIATE; // Will be 2.0E9
+  static const G4double MAXIMUM_POISSON_DEVIATE; // Will be 2.0E9
 
   static inline int tableBoundary();
 
@@ -115,19 +115,19 @@ private:
   void setupForDefaultMu();
 
   // algorithm helper methods - all static since the shoot methods mayneed them
-  static long poissonDeviateSmall ( HepRandomEngine * e, double mean );
-  static long poissonDeviateQuick ( HepRandomEngine * e, double mean );
+  static long poissonDeviateSmall ( HepRandomEngine * e, G4double mean );
+  static long poissonDeviateQuick ( HepRandomEngine * e, G4double mean );
   static long poissonDeviateQuick ( HepRandomEngine * e, 
-		double A0, double A1, double A2, double sig );
+		G4double A0, G4double A1, G4double A2, G4double sig );
 
   // All the engine info, and the default mean, are in the 
   // RandPoisson base class.
 
   // quantities for approximate Poisson by corrected Gaussian
-  double a0;      
-  double a1;	    	
-  double a2;	
-  double sigma;  
+  G4double a0;      
+  G4double a1;	    	
+  G4double a2;	
+  G4double sigma;  
 
   // static data - constants only, so that saveEngineStatus works properly!
 
@@ -139,9 +139,9 @@ private:
 
   // (These statics are given values near the start of the .cc file) 
 
-  static const double FIRST_MU;  // lowest mu value in table
-  static const double LAST_MU;   // highest mu value
-  static const double S;         // Spacing between mu values
+  static const G4double FIRST_MU;  // lowest mu value in table
+  static const G4double LAST_MU;   // highest mu value
+  static const G4double S;         // Spacing between mu values
   static const int BELOW;        // Starting point for N is at mu - BELOW
   static const int ENTRIES;      // Number of entries in each mu row
 

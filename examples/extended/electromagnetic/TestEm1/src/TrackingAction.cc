@@ -106,7 +106,7 @@ void TrackingAction::PostUserTrackingAction(const G4Track* aTrack)
     
     G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
     analysisManager->FillH1(1,Trleng);
-    analysisManager->FillH1(2,(float)nbSteps);        
+    analysisManager->FillH1(2,(G4float)nbSteps);        
   }
 /*
   //debug  

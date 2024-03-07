@@ -335,7 +335,7 @@ void G4OpenGLXmViewer::Add_set_field (char* w_name,
 
   XtAddCallback (*wid, 
 		 XmNvalueChangedCallback,
-		 get_double_value_callback,
+		 get_G4double_value_callback,
 		 val);
 
   /* Not actually used - comment out to prevent compiler warnings.
@@ -497,7 +497,7 @@ void G4OpenGLXmViewer::Add_slider_box (char* label_string,
 
 }
 
-void G4OpenGLXmViewer::get_double_value_callback (Widget w, 
+void G4OpenGLXmViewer::get_G4double_value_callback (Widget w, 
 						XtPointer clientData, 
 						XtPointer) 
 {

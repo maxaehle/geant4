@@ -39,7 +39,7 @@ using namespace boost::python;
 namespace pyG4RandomDirection {
 
 G4ThreeVector(*G4RandomDirection_1)() = G4RandomDirection;
-G4ThreeVector(*G4RandomDirection_2)(double) = G4RandomDirection;
+G4ThreeVector(*G4RandomDirection_2)(G4double) = G4RandomDirection;
 
 }
 

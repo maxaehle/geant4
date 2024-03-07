@@ -93,7 +93,7 @@ class G4TwistTrapFlatSide : public G4VTwistSurface
    virtual void SetCorners();
    virtual void SetBoundaries();
 
-   inline double xAxisMax(G4double u, G4double fTanAlpha) const;
+   inline G4double xAxisMax(G4double u, G4double fTanAlpha) const;
  
   private:
   

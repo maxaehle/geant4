@@ -189,7 +189,7 @@ public:
   void SetIsPrintedFlag(G4bool val);
   G4bool IsPrintLocked() const;
 
-  // double parameters with values
+  // G4double parameters with values
   void SetMinEnergy(G4double val);
   G4double MinKinEnergy() const;
 

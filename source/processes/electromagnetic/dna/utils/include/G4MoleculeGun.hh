@@ -139,7 +139,7 @@ public:
    */
   void AddMolecule(const G4String& moleculeName,
                    const G4ThreeVector& position,
-                   double time = 0);
+                   G4double time = 0);
 
   /*
    * Create N molecules at a single point
@@ -151,7 +151,7 @@ public:
   void AddNMolecules(size_t n,
                      const G4String& moleculeName,
                      const G4ThreeVector& position,
-                     double time = 0);
+                     G4double time = 0);
 
   /*
    * Create N molecules in a box
@@ -165,7 +165,7 @@ public:
                                        const G4String& moleculeName,
                                        const G4ThreeVector& boxCenter,
                                        const G4ThreeVector& boxExtension,
-                                       double time = 0);
+                                       G4double time = 0);
 
   /*
    * Create N molecules as component of the continuous medium in a box
@@ -179,11 +179,11 @@ public:
 //                                     const G4String& moleculeName,
 //                                     const G4ThreeVector& boxCenter,
 //                                     const G4ThreeVector& boxExtension,
-//                                     double time = 0);
+//                                     G4double time = 0);
 
   void AddMoleculeInCMRepresentation(size_t n,
                                      const G4String& moleculeName,
-                                     double time = 0);
+                                     G4double time = 0);
 
   const std::vector<G4shared_ptr<G4MoleculeShoot> >&
       GetMoleculeShoot() {
@@ -199,7 +199,7 @@ public:
 protected:
   void BuildAndPushTrack(const G4String& name,
                          const G4ThreeVector& position,
-                         double time = 0);
+                         G4double time = 0);
   G4MoleculeGunMessenger* fpMessenger;
 
   std::vector<G4shared_ptr<G4MoleculeShoot> > fShoots;

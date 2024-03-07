@@ -40,7 +40,7 @@
 //                          cross sections to a separate class. Use a different method to 
 //                          get normalized shell cross sections
 // 07 Oct 2013   L. Pandola Migration to MT      
-// 23 Jun 2015   L. Pandola Keep track of the PIXE flag, to avoid double-production of 
+// 23 Jun 2015   L. Pandola Keep track of the PIXE flag, to avoid G4double-production of 
 //                           atomic de-excitation (bug #1761)                  
 // 29 Aug 2018   L. Pandola Fix bug causing energy non-conservation
 //

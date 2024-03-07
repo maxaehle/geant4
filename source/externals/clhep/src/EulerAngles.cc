@@ -34,18 +34,18 @@ namespace CLHEP  {
 // static consts
 //-*************
 
-double HepEulerAngles::tolerance = Hep3Vector::ToleranceTicks * 1.0e-8;
+G4double HepEulerAngles::tolerance = Hep3Vector::ToleranceTicks * 1.0e-8;
 
 //-*******************
 // measure of distance
 //-*******************
 
 
-static void ZMpvEulerAnglesRep ( const HepEulerAngles & ex, double array[] ) {
+static void ZMpvEulerAnglesRep ( const HepEulerAngles & ex, G4double array[] ) {
 
-  double sinPhi   = std::sin( ex.phi() )  , cosPhi   = std::cos( ex.phi() );
-  double sinTheta = std::sin( ex.theta() ), cosTheta = std::cos( ex.theta() );
-  double sinPsi   = std::sin( ex.psi() )  , cosPsi   = std::cos( ex.psi() );
+  G4double sinPhi   = std::sin( ex.phi() )  , cosPhi   = std::cos( ex.phi() );
+  G4double sinTheta = std::sin( ex.theta() ), cosTheta = std::cos( ex.theta() );
+  G4double sinPsi   = std::sin( ex.psi() )  , cosPsi   = std::cos( ex.psi() );
 
   array[0] =   cosPsi * cosPhi   - sinPsi * cosTheta * sinPhi;
   array[1] =   cosPsi * sinPhi   + sinPsi * cosTheta * cosPhi;
@@ -62,33 +62,33 @@ static void ZMpvEulerAnglesRep ( const HepEulerAngles & ex, double array[] ) {
 } // ZMpvEulerAnglesRep
 
 
-double HepEulerAngles::distance( const EA & ex ) const  {
+G4double HepEulerAngles::distance( const EA & ex ) const  {
 
-  double thisRep[9];
-  double exRep[9];
+  G4double thisRep[9];
+  G4double exRep[9];
 
   ZMpvEulerAnglesRep ( *this, thisRep );
   ZMpvEulerAnglesRep ( ex,    exRep );
 
-  double sum = 0.0;
+  G4double sum = 0.0;
   for (int i = 0; i < 9; i++)  {
     sum += thisRep[i] * exRep[i];
   }
 
-  double d = 3.0 - sum;		// NaN-proofing: 
+  G4double d = 3.0 - sum;		// NaN-proofing: 
   return  (d >= 0) ? d : 0;		// sqrt(distance) is used in howNear()
 
 }  // HepEulerAngles::distance()
 
 
-bool HepEulerAngles::isNear( const EA & ex, double epsilon ) const  {
+bool HepEulerAngles::isNear( const EA & ex, G4double epsilon ) const  {
 
   return  distance( ex ) <= epsilon*epsilon ;
 
 }  // HepEulerAngles::isNear()
 
 
-double HepEulerAngles::howNear( const EA & ex ) const  {
+G4double HepEulerAngles::howNear( const EA & ex ) const  {
 
   return  std::sqrt( distance( ex ) );
 
@@ -104,14 +104,14 @@ std::ostream & operator<<(std::ostream & os, const HepEulerAngles & ea)
   return  os;
 }  // operator<<()
 
-void ZMinput3doubles ( std::istream & is, const char * type,
-                       double & x, double & y, double & z );
+void ZMinput3G4doubles ( std::istream & is, const char * type,
+                       G4double & x, G4double & y, G4double & z );
 
 std::istream & operator>>(std::istream & is, HepEulerAngles & ea) {
-  double thePhi;
-  double theTheta;
-  double thePsi;
-  ZMinput3doubles ( is, "HepEulerAngle", thePhi , theTheta , thePsi );
+  G4double thePhi;
+  G4double theTheta;
+  G4double thePsi;
+  ZMinput3G4doubles ( is, "HepEulerAngle", thePhi , theTheta , thePsi );
   ea.set ( thePhi , theTheta , thePsi );
   return  is;
 }  // operator>>()

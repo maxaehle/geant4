@@ -80,7 +80,7 @@ void G4SBBremTable::Initialize(const G4double lowe, const G4double highe)
 }
 
 // run-time method that samples energy transferred to the emitted gamma photon
-double G4SBBremTable::SampleEnergyTransfer(const G4double eekin,
+G4double G4SBBremTable::SampleEnergyTransfer(const G4double eekin,
                                            const G4double leekin,
                                            const G4double gcut,
                                            const G4double dielSupConst,
@@ -162,7 +162,7 @@ double G4SBBremTable::SampleEnergyTransfer(const G4double eekin,
       // instead of binary search because it's faster in our case
       const G4int cumLIndx = LinSearch(pVect, fNumKappa, cumRV)-1;
 //      const G4int cumLIndx = std::lower_bound( pVect.begin(), pVect.end(), cumRV,
-//                                    [](const STPoint& p, const double& cumV) {
+//                                    [](const STPoint& p, const G4double& cumV) {
 //                                    return p.fCum<cumV; } ) - pVect.begin() -1;
       const STPoint& stPL  = pVect[cumLIndx];
       const G4double pA    = stPL.fParA;
@@ -239,7 +239,7 @@ void G4SBBremTable::BuildSamplingTables() {
       }
       // add current gamma cut to the list of this element data (only if this
       // cut value is still not tehre)
-      const std::vector<double> &cVect = fSBSamplingTables[izet]->fGammaECuts;
+      const std::vector<G4double> &cVect = fSBSamplingTables[izet]->fGammaECuts;
       size_t indx = std::find(cVect.begin(), cVect.end(), gamCut)-cVect.begin();
       if (indx==cVect.size()) {
         vtmp[0] = imc;

@@ -106,7 +106,7 @@
 // pythia6 functions
 extern "C" {
   int  type_of_call pycomp(int *kf);
-  void type_of_call py1ent(int&, int&, double&, double&, double&);
+  void type_of_call py1ent(int&, int&, G4double&, G4double&, G4double&);
   void*  pythia6_common_address(const char*);
 }
 
@@ -189,7 +189,7 @@ int Pythia6::Pycomp(int kf)
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void Pythia6::Py1ent(int ip, int kf, double pe, double theta, double phi)
+void Pythia6::Py1ent(int ip, int kf, G4double pe, G4double theta, G4double phi)
 {
 /// Add one entry to the event record, i.e. either a parton or a
 /// particle. 

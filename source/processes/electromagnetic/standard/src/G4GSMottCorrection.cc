@@ -119,7 +119,7 @@ void G4GSMottCorrection::GetMottCorrectionFactors(G4double logekin, G4double bet
 
 
 // accept cost if rndm [0,1] < return value
-double G4GSMottCorrection::GetMottRejectionValue(G4double logekin, G4double beta2, G4double q1, G4double cost,
+G4double G4GSMottCorrection::GetMottRejectionValue(G4double logekin, G4double beta2, G4double q1, G4double cost,
                                                  G4int matindx, G4int &ekindx, G4int &deltindx) {
   G4double val   = 1.0;
   G4double delta = q1/(0.5+q1);
@@ -510,7 +510,7 @@ void G4GSMottCorrection::AllocateDataPerMaterial(DataPerMaterial *data) {
     perEkin->fDataPerDelta = new DataPerDelta*[gNumDelta]();
     for (G4int idel=0; idel<gNumDelta; ++idel) {
       DataPerDelta *perDelta       = new DataPerDelta();
-      perDelta->fRejFuntion        = new double[gNumAngle]();
+      perDelta->fRejFuntion        = new G4double[gNumAngle]();
       perEkin->fDataPerDelta[idel] = perDelta;
     }
     data->fDataPerEkin[iek] = perEkin;

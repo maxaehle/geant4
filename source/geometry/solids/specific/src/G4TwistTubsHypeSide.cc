@@ -449,7 +449,7 @@ G4int G4TwistTubsHypeSide::DistanceToSurface(const G4ThreeVector& gp,
          vout = 0;
       }
    }
-   else if (D > DBL_MIN)          // double solutions
+   else if (D > DBL_MIN)          // G4double solutions
    {
       D = std::sqrt(D);
       G4double      factor = 0.5/a;

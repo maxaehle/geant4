@@ -33,8 +33,8 @@ DicomBeamBlock::DicomBeamBlock(DRTBlockSequenceInRTBeamsModule::Item bblItem)
 {
   OFString fstr;
   Sint32 fint;
-  Float64 ffloat;
-  OFVector<Float64> fvfloat;
+  Float64 fG4float;
+  OFVector<Float64> fvG4float;
   OFCondition cond; 
   G4cout << " DicomBeamBlock::DicomBeamBlock " << G4endl;
 
@@ -46,17 +46,17 @@ DicomBeamBlock::DicomBeamBlock(DRTBlockSequenceInRTBeamsModule::Item bblItem)
   bblItem.getBlockTrayID(fstr);
   bblItem.getMaterialID(fstr);
   bblItem.getBlockNumberOfPoints(fint);
-  bblItem.getBlockData(fvfloat);
+  bblItem.getBlockData(fvG4float);
   
-  bblItem.getSourceToBlockTrayDistance(ffloat);
-  theSourceToBlockTrayDistance = ffloat;
+  bblItem.getSourceToBlockTrayDistance(fG4float);
+  theSourceToBlockTrayDistance = fG4float;
 
   bblItem.getBlockMountingPosition(fstr);
   theBlockMountingPosition = fstr;
   
   bblItem.getBlockDivergence(fstr);
-  bblItem.getBlockThickness(ffloat);
-  bblItem.getBlockTransmission(ffloat);
+  bblItem.getBlockThickness(fG4float);
+  bblItem.getBlockTransmission(fG4float);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

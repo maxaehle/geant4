@@ -39,13 +39,13 @@ class HepEulerAngles {
 
 protected:
   typedef HepEulerAngles EA;       // just an abbreviation
-  static double tolerance;      // to determine relative nearness
+  static G4double tolerance;      // to determine relative nearness
 
 public:
 
   // ----------  Constructors:
   inline HepEulerAngles();
-  inline HepEulerAngles( double phi, double theta, double psi );
+  inline HepEulerAngles( G4double phi, G4double theta, G4double psi );
 
   // ----------  Destructor, copy constructor, assignment:
   // use C++ defaults
@@ -53,19 +53,19 @@ public:
   // ----------  Accessors:
 
 public:
-  inline  double  getPhi() const;
-  inline  double  phi()    const;
-  inline  EA &       setPhi( double phi );
+  inline  G4double  getPhi() const;
+  inline  G4double  phi()    const;
+  inline  EA &       setPhi( G4double phi );
 
-  inline  double  getTheta() const;
-  inline  double  theta()    const;
-  inline  EA &       setTheta( double theta );
+  inline  G4double  getTheta() const;
+  inline  G4double  theta()    const;
+  inline  EA &       setTheta( G4double theta );
 
-  inline  double  getPsi() const;
-  inline  double  psi()    const;
-  inline  EA &       setPsi( double psi );
+  inline  G4double  getPsi() const;
+  inline  G4double  psi()    const;
+  inline  EA &       setPsi( G4double psi );
 
-  inline EA & set( double phi, double theta, double psi );
+  inline EA & set( G4double phi, G4double theta, G4double psi );
 
   // ----------  Operations:
 
@@ -80,11 +80,11 @@ public:
   inline bool operator>=( const EA & ea ) const;
 
   //   relative comparison:
-  inline static double getTolerance();
-  inline static double setTolerance( double tol );
+  inline static G4double getTolerance();
+  inline static G4double setTolerance( G4double tol );
 
-  bool isNear ( const EA & ea, double epsilon = tolerance ) const;
-  double  howNear( const EA & ea ) const;
+  bool isNear ( const EA & ea, G4double epsilon = tolerance ) const;
+  G4double  howNear( const EA & ea ) const;
 
   // ----------  I/O:
 
@@ -94,13 +94,13 @@ public:
   // ---------- Helper methods:
 
 protected:
-    double distance( const HepEulerAngles & ex ) const;
+    G4double distance( const HepEulerAngles & ex ) const;
 
   // ----------  Data members:
 protected:
-  double phi_;
-  double theta_;
-  double psi_;
+  G4double phi_;
+  G4double theta_;
+  G4double psi_;
 
 };  // HepEulerAngles
 

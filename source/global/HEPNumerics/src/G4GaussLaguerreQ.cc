@@ -110,7 +110,7 @@ G4GaussLaguerreQ::G4GaussLaguerreQ(function pFunction, G4double alpha,
 // std::pow(x,alpha)*std::exp(-x)*pFunction(x)
 // from zero up to infinity. pFunction is evaluated in fNumber points
 // for which fAbscissa[i] and fWeight[i] arrays were created in
-// G4VGaussianQuadrature(double,int) constructor
+// G4VGaussianQuadrature(G4double,int) constructor
 
 G4double G4GaussLaguerreQ::Integral() const
 {

@@ -1127,7 +1127,7 @@ G4double G4VXTRenergyLoss::GetPlateZmuProduct(G4double omega, G4double gamma,
 void G4VXTRenergyLoss::GetPlateZmuProduct()
 {
   std::ofstream outPlate("plateZmu.dat", std::ios::out);
-  outPlate.setf(std::ios::scientific, std::ios::floatfield);
+  outPlate.setf(std::ios::scientific, std::ios::G4floatfield);
 
   G4int i;
   G4double omega, varAngle, gamma;
@@ -1164,7 +1164,7 @@ G4double G4VXTRenergyLoss::GetGasZmuProduct(G4double omega, G4double gamma,
 void G4VXTRenergyLoss::GetGasZmuProduct()
 {
   std::ofstream outGas("gasZmu.dat", std::ios::out);
-  outGas.setf(std::ios::scientific, std::ios::floatfield);
+  outGas.setf(std::ios::scientific, std::ios::G4floatfield);
   G4int i;
   G4double omega, varAngle, gamma;
   gamma    = 10000.;
@@ -1357,10 +1357,10 @@ void G4VXTRenergyLoss::GetNumberOfPhotons()
   G4double gamma, numberE;
 
   std::ofstream outEn("numberE.dat", std::ios::out);
-  outEn.setf(std::ios::scientific, std::ios::floatfield);
+  outEn.setf(std::ios::scientific, std::ios::G4floatfield);
 
   std::ofstream outAng("numberAng.dat", std::ios::out);
-  outAng.setf(std::ios::scientific, std::ios::floatfield);
+  outAng.setf(std::ios::scientific, std::ios::G4floatfield);
 
   for(iTkin = 0; iTkin < fTotBin; ++iTkin)  // Lorentz factor loop
   {

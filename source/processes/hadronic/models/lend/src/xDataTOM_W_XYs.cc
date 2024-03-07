@@ -16,7 +16,7 @@ char const *xDataTOM_W_XYs_ID = "W_XYs";
 /*
 ************************************************************
 */
-xDataTOM_W_XYs *xDataTOM_W_XYs_new( statusMessageReporting *smr, int index, int length, double value, xDataTOM_axes *axes, int axesOffset ) {
+xDataTOM_W_XYs *xDataTOM_W_XYs_new( statusMessageReporting *smr, int index, int length, G4double value, xDataTOM_axes *axes, int axesOffset ) {
 
     xDataTOM_W_XYs *W_XYs;
 
@@ -27,7 +27,7 @@ xDataTOM_W_XYs *xDataTOM_W_XYs_new( statusMessageReporting *smr, int index, int 
 /*
 ************************************************************
 */
-int xDataTOM_W_XYs_initialize( statusMessageReporting *smr, xDataTOM_W_XYs *W_XYs, int index, int length, double value, xDataTOM_axes *axes,
+int xDataTOM_W_XYs_initialize( statusMessageReporting *smr, xDataTOM_W_XYs *W_XYs, int index, int length, G4double value, xDataTOM_axes *axes,
     int axesOffset ) {
 
     W_XYs->XYs = NULL;

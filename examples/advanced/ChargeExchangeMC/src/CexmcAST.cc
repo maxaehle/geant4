@@ -117,10 +117,10 @@ namespace  CexmcAST
         {
             const Constant *  constant( boost::get< Constant >( leaf ) );
             const int *       intConstant( boost::get< int >( constant ) );
-            const double *    doubleConstant( boost::get< double >(
+            const G4double *    G4doubleConstant( boost::get< G4double >(
                                                                 constant ) );
 
-            value << ( intConstant ? *intConstant : *doubleConstant );
+            value << ( intConstant ? *intConstant : *G4doubleConstant );
         }
 
         std::stringstream  format;
@@ -138,14 +138,14 @@ namespace  CexmcAST
     {
         ScalarValueType  retval( GetScalarValue( ast ) );
         int *            intRetval( NULL );
-        double *         doubleRetval( NULL );
+        G4double *         G4doubleRetval( NULL );
 
         intRetval = boost::get< int >( &retval );
 
         if ( ! intRetval )
-            doubleRetval = boost::get< double >( &retval );
+            G4doubleRetval = boost::get< G4double >( &retval );
 
-        return doubleRetval ? bool( *doubleRetval ) : bool( *intRetval );
+        return G4doubleRetval ? bool( *G4doubleRetval ) : bool( *intRetval );
     }
 
 
@@ -162,9 +162,9 @@ namespace  CexmcAST
                 ScalarValueType           left( 0 );
                 ScalarValueType           right( 0 );
                 int *                     intLeft( NULL );
-                double *                  doubleLeft( NULL );
+                G4double *                  G4doubleLeft( NULL );
                 int *                     intRight( NULL );
-                double *                  doubleRight( NULL );
+                G4double *                  G4doubleRight( NULL );
                 bool                      isDoubleRetval( false );
 
                 if ( ast->children.size() > 0 )
@@ -173,8 +173,8 @@ namespace  CexmcAST
                     intLeft = boost::get< int >( &left );
                     if ( ! intLeft )
                     {
-                        doubleLeft = boost::get< double >( &left );
-                        if ( ! doubleLeft )
+                        G4doubleLeft = boost::get< G4double >( &left );
+                        if ( ! G4doubleLeft )
                             throw CexmcException( CexmcCFUnexpectedContext );
                     }
                 }
@@ -191,13 +191,13 @@ namespace  CexmcAST
                         intRight = boost::get< int >( &right );
                         if ( ! intRight )
                         {
-                            doubleRight = boost::get< double >( &right );
-                            if ( ! doubleRight )
+                            G4doubleRight = boost::get< G4double >( &right );
+                            if ( ! G4doubleRight )
                                 throw CexmcException(
                                                 CexmcCFUnexpectedContext );
                         }
                     }
-                    isDoubleRetval = doubleLeft || doubleRight;
+                    isDoubleRetval = G4doubleLeft || G4doubleRight;
                     break;
                 }
 
@@ -208,79 +208,79 @@ namespace  CexmcAST
                 case Top :
                     return left;
                 case UMinus :
-                    if ( doubleLeft )
-                        return - *doubleLeft;
+                    if ( G4doubleLeft )
+                        return - *G4doubleLeft;
                     else
                         return - *intLeft;
                 case Not :
-                    if ( doubleLeft )
-                        return ! *doubleLeft;
+                    if ( G4doubleLeft )
+                        return ! *G4doubleLeft;
                     else
                         return ! *intLeft;
                 case Mult :
                     if ( isDoubleRetval )
-                        return ( doubleLeft ? *doubleLeft : *intLeft ) *
-                               ( doubleRight ? *doubleRight : *intRight );
+                        return ( G4doubleLeft ? *G4doubleLeft : *intLeft ) *
+                               ( G4doubleRight ? *G4doubleRight : *intRight );
                     else
                         return *intLeft * *intRight;
                 case Div :
                     if ( isDoubleRetval )
-                        return ( doubleLeft ? *doubleLeft : *intLeft ) /
-                               ( doubleRight ? *doubleRight : *intRight );
+                        return ( G4doubleLeft ? *G4doubleLeft : *intLeft ) /
+                               ( G4doubleRight ? *G4doubleRight : *intRight );
                     else
                         return *intLeft / *intRight;
                 case Plus :
                     if ( isDoubleRetval )
-                        return ( doubleLeft ? *doubleLeft : *intLeft ) +
-                               ( doubleRight ? *doubleRight : *intRight );
+                        return ( G4doubleLeft ? *G4doubleLeft : *intLeft ) +
+                               ( G4doubleRight ? *G4doubleRight : *intRight );
                     else
                         return *intLeft + *intRight;
                 case Minus :
                     if ( isDoubleRetval )
-                        return ( doubleLeft ? *doubleLeft : *intLeft ) -
-                               ( doubleRight ? *doubleRight : *intRight );
+                        return ( G4doubleLeft ? *G4doubleLeft : *intLeft ) -
+                               ( G4doubleRight ? *G4doubleRight : *intRight );
                     else
                         return *intLeft - *intRight;
                 case Less :
                     if ( isDoubleRetval )
-                        return ( doubleLeft ? *doubleLeft : *intLeft ) <
-                               ( doubleRight ? *doubleRight : *intRight );
+                        return ( G4doubleLeft ? *G4doubleLeft : *intLeft ) <
+                               ( G4doubleRight ? *G4doubleRight : *intRight );
                     else
                         return *intLeft < *intRight;
                 case LessEq :
                     if ( isDoubleRetval )
-                        return ( doubleLeft ? *doubleLeft : *intLeft ) <=
-                               ( doubleRight ? *doubleRight : *intRight );
+                        return ( G4doubleLeft ? *G4doubleLeft : *intLeft ) <=
+                               ( G4doubleRight ? *G4doubleRight : *intRight );
                     else
                         return *intLeft <= *intRight;
                 case More :
                     if ( isDoubleRetval )
-                        return ( doubleLeft ? *doubleLeft : *intLeft ) >
-                               ( doubleRight ? *doubleRight : *intRight );
+                        return ( G4doubleLeft ? *G4doubleLeft : *intLeft ) >
+                               ( G4doubleRight ? *G4doubleRight : *intRight );
                     else
                         return *intLeft > *intRight;
                 case MoreEq :
                     if ( isDoubleRetval )
-                        return ( doubleLeft ? *doubleLeft : *intLeft ) >=
-                               ( doubleRight ? *doubleRight : *intRight );
+                        return ( G4doubleLeft ? *G4doubleLeft : *intLeft ) >=
+                               ( G4doubleRight ? *G4doubleRight : *intRight );
                     else
                         return *intLeft >= *intRight;
                 case Eq :
                     if ( isDoubleRetval )
-                        return ( doubleLeft ? *doubleLeft : *intLeft ) ==
-                               ( doubleRight ? *doubleRight : *intRight );
+                        return ( G4doubleLeft ? *G4doubleLeft : *intLeft ) ==
+                               ( G4doubleRight ? *G4doubleRight : *intRight );
                     else
                         return *intLeft == *intRight;
                 case NotEq :
                     if ( isDoubleRetval )
-                        return ( doubleLeft ? *doubleLeft : *intLeft ) !=
-                               ( doubleRight ? *doubleRight : *intRight );
+                        return ( G4doubleLeft ? *G4doubleLeft : *intLeft ) !=
+                               ( G4doubleRight ? *G4doubleRight : *intRight );
                     else
                         return *intLeft != *intRight;
                 case And :
-                    if ( doubleLeft )
+                    if ( G4doubleLeft )
                     {
-                        if ( ! *doubleLeft )
+                        if ( ! *G4doubleLeft )
                             return 0;
                     }
                     else
@@ -292,13 +292,13 @@ namespace  CexmcAST
                     intRight = boost::get< int >( &right );
                     if ( ! intRight )
                     {
-                        doubleRight = boost::get< double >( &right );
-                        if ( ! doubleRight )
+                        G4doubleRight = boost::get< G4double >( &right );
+                        if ( ! G4doubleRight )
                             throw CexmcException( CexmcCFUnexpectedContext );
                     }
-                    if ( doubleRight )
+                    if ( G4doubleRight )
                     {
-                        if ( *doubleRight )
+                        if ( *G4doubleRight )
                             return 1;
                     }
                     else
@@ -308,9 +308,9 @@ namespace  CexmcAST
                     }
                     return 0;
                 case Or :
-                    if ( doubleLeft )
+                    if ( G4doubleLeft )
                     {
-                        if ( *doubleLeft )
+                        if ( *G4doubleLeft )
                             return 1;
                     }
                     else
@@ -322,13 +322,13 @@ namespace  CexmcAST
                     intRight = boost::get< int >( &right );
                     if ( ! intRight )
                     {
-                        doubleRight = boost::get< double >( &right );
-                        if ( ! doubleRight )
+                        G4doubleRight = boost::get< G4double >( &right );
+                        if ( ! G4doubleRight )
                             throw CexmcException( CexmcCFUnexpectedContext );
                     }
-                    if ( doubleRight )
+                    if ( G4doubleRight )
                     {
-                        if ( *doubleRight )
+                        if ( *G4doubleRight )
                             return 1;
                     }
                     else
@@ -399,23 +399,23 @@ namespace  CexmcAST
 
         ScalarValueType   arg( GetScalarValue( ast.children[ 0 ] ) );
         int *             intArg( NULL );
-        double *          doubleArg( NULL );
+        G4double *          G4doubleArg( NULL );
 
         intArg = boost::get< int >( &arg );
         if ( ! intArg )
-            doubleArg = boost::get< double >( &arg );
+            G4doubleArg = boost::get< G4double >( &arg );
 
         if ( fun == "Sqr" )
         {
-            if ( doubleArg )
-                return *doubleArg * *doubleArg;
+            if ( G4doubleArg )
+                return *G4doubleArg * *G4doubleArg;
             else
                 return *intArg * *intArg;
         }
         if ( fun == "Sqrt" )
         {
-            if ( doubleArg )
-                return std::sqrt( *doubleArg );
+            if ( G4doubleArg )
+                return std::sqrt( *G4doubleArg );
             else
                 return std::sqrt( *intArg );
         }

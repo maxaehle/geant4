@@ -78,10 +78,10 @@ public:
 
     virtual G4bool TestReactibility(const G4Track&,
                                     const G4Track&,
-                                    double /*currentStepTime*/,
+                                    G4double /*currentStepTime*/,
                                     bool /*reachedUserStepTimeLimit*/) = 0;
 
-    virtual std::vector<std::unique_ptr<G4ITReactionChange>> FindReaction(G4ITReactionSet*, const double, const double, const bool)=0;
+    virtual std::vector<std::unique_ptr<G4ITReactionChange>> FindReaction(G4ITReactionSet*, const G4double, const G4double, const bool)=0;
     virtual std::unique_ptr<G4ITReactionChange> MakeReaction(const G4Track&, const G4Track&) = 0;
 
     virtual void SetReactionTable(const G4ITReactionTable*);

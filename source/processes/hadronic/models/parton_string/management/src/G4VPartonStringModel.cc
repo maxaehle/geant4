@@ -355,8 +355,8 @@ G4KineticTrackVector * G4VPartonStringModel::Scatter(const G4Nucleus &theNucleus
     // The projectile residual can be a hypernucleus or anti-hypernucleus:
     // only the following combinations are currently allowed in Geant4:
     // p-n-lambda (hypertriton), p-n-n-lambda (hyperH4), p-p-n-lambda (hyperAlpha),
-    // p-p-n-n-lambda (hyperHe5), n-n-lambda-lambda (doublehyperdoubleneutron),
-    // p-n-lambda-lambda (doubleHyperH4)
+    // p-p-n-n-lambda (hyperHe5), n-n-lambda-lambda (G4doublehyperG4doubleneutron),
+    // p-n-lambda-lambda (G4doubleHyperH4)
     if ( ( numberProtonProjectileResidual > 3   &&  numberNeutronProjectileResidual == 0 ) ||
          ( numberProtonProjectileResidual == 0  &&  numberNeutronProjectileResidual > 1  &&
 	   numberLambdaProjectileResidual == 0 ) ||

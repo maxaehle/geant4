@@ -158,7 +158,7 @@ void G4QMDNucleus::CalEnergyAndAngularMomentumInCM()
       pcm0 += pcm[i];
    }
 
-   pcm0 = pcm0 / double ( n );
+   pcm0 = pcm0 / G4double ( n );
 
    //G4cout << "pcm0 " << pcm0 << G4endl;
 

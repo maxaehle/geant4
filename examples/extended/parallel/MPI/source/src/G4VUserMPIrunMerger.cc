@@ -185,8 +185,8 @@ void G4VUserMPIrunMerger::Merge()
   if ( verbose > 0 && myrank == destinationRank ) {
       //Collect from ranks how much data was sent around
       G4cout<<"G4VUserMPIrunMerger::Merge() - data transfer performances: "
-                  <<double(total)/1000./elapsed<<" kB/s"
-                  <<" (Total Data Transfer= "<<double(total)/1000<<" kB in "
+                  <<G4double(total)/1000./elapsed<<" kB/s"
+                  <<" (Total Data Transfer= "<<G4double(total)/1000<<" kB in "
                   <<elapsed<<" s)."<<G4endl;
   }
 

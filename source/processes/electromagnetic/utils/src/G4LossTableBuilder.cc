@@ -355,7 +355,7 @@ void G4LossTableBuilder::InitialiseBaseMaterials(const G4PhysicsTable* table)
 	    (*theDensityIdx)[i] = j;
 	    (*theFlag)[i] = false;
 
-	    // ensure that there will no double initialisation
+	    // ensure that there will no G4double initialisation
 	    (*theDensityFactor)[j] = 1.0;
 	    (*theDensityIdx)[j] = j;
 	    (*theFlag)[j] = true;

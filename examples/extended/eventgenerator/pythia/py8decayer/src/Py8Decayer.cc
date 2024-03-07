@@ -125,7 +125,7 @@ G4DecayProducts* Py8Decayer::ImportDecayProducts(const G4Track& track)
 
    // specify polarization, if any
    
-   // NOTE: while in Py8 polarization is a double variable , 
+   // NOTE: while in Py8 polarization is a G4double variable , 
    //       in reality it's expected to be -1, 0., or 1 in case of "external" tau's, 
    //       similar to LHA SPINUP; see Particle Decays, Hadron and Tau Decays in docs at
    //       https://pythia.org/manuals/pythia8305/Welcome.html

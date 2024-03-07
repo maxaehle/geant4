@@ -47,7 +47,7 @@ class SingleParticleGun : public G4VUserPrimaryGeneratorAction
    public:
 
       //ctor & dtor
-      SingleParticleGun( const G4String&, const double );
+      SingleParticleGun( const G4String&, const G4double );
       ~SingleParticleGun();
 
       // methods/functions
@@ -57,7 +57,7 @@ class SingleParticleGun : public G4VUserPrimaryGeneratorAction
 
       // data members
       G4ParticleGun* fGun;
-      double         fMomentum;
+      G4double         fMomentum;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

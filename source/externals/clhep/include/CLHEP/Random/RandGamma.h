@@ -37,10 +37,10 @@ class RandGamma : public HepRandom {
 
 public:
 
-  inline RandGamma ( HepRandomEngine& anEngine, double k=1.0,
-                                                double lambda=1.0 );
-  inline RandGamma ( HepRandomEngine* anEngine, double k=1.0, 
-                                                double lambda=1.0 );
+  inline RandGamma ( HepRandomEngine& anEngine, G4double k=1.0,
+                                                G4double lambda=1.0 );
+  inline RandGamma ( HepRandomEngine* anEngine, G4double k=1.0, 
+                                                G4double lambda=1.0 );
   // These constructors should be used to instantiate a RandGamma
   // distribution object defining a local engine for it.
   // The static generator will be skipped using the non-static methods
@@ -55,37 +55,37 @@ public:
 
   // Static methods to shoot random values using the static generator
 
-  static inline double shoot();
+  static inline G4double shoot();
 
-  static double shoot( double k, double lambda );
+  static G4double shoot( G4double k, G4double lambda );
 
-  static void shootArray ( const int size, double* vect,
-                            double k=1.0, double lambda=1.0 );
+  static void shootArray ( const int size, G4double* vect,
+                            G4double k=1.0, G4double lambda=1.0 );
 
   //  Static methods to shoot random values using a given engine
   //  by-passing the static generator.
 
-  static inline double shoot( HepRandomEngine* anEngine );
+  static inline G4double shoot( HepRandomEngine* anEngine );
 
-  static double shoot( HepRandomEngine* anEngine, 
-                                  double k, double lambda );
+  static G4double shoot( HepRandomEngine* anEngine, 
+                                  G4double k, G4double lambda );
 
   static void shootArray ( HepRandomEngine* anEngine, const int size,
-                            double* vect, double k=1.0,
-                            double lambda=1.0 );
+                            G4double* vect, G4double k=1.0,
+                            G4double lambda=1.0 );
 
   //  Methods using the localEngine to shoot random values, by-passing
   //  the static generator.
 
-  inline double fire();
+  inline G4double fire();
 
-  double fire( double k, double lambda );
+  G4double fire( G4double k, G4double lambda );
   
-  void fireArray ( const int size, double* vect);
-  void fireArray ( const int size, double* vect,
-                   double k, double lambda );
-  inline double operator()();
-  inline double operator()( double k, double lambda );
+  void fireArray ( const int size, G4double* vect);
+  void fireArray ( const int size, G4double* vect,
+                   G4double k, G4double lambda );
+  inline G4double operator()();
+  inline G4double operator()( G4double k, G4double lambda );
 
   // Save and restore to/from streams
   
@@ -101,12 +101,12 @@ public:
 
 private:
 
-  static double genGamma( HepRandomEngine *anEngine, double k,
-                                                        double lambda );
+  static G4double genGamma( HepRandomEngine *anEngine, G4double k,
+                                                        G4double lambda );
 
   std::shared_ptr<HepRandomEngine> localEngine;
-  double defaultK;
-  double defaultLambda;
+  G4double defaultK;
+  G4double defaultLambda;
 
 };
 

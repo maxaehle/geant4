@@ -108,7 +108,7 @@ class G4Para : public G4CSGSolid
     inline void SetZHalfLength(G4double val);
     inline void SetAlpha(G4double alpha);
     inline void SetTanAlpha(G4double val);
-    inline void SetThetaAndPhi(double pTheta, double pPhi);
+    inline void SetThetaAndPhi(G4double pTheta, G4double pPhi);
    
     void SetAllParameters(G4double pDx, G4double pDy, G4double pDz,
                           G4double pAlpha, G4double pTheta, G4double pPhi);

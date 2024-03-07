@@ -10,7 +10,7 @@
     namespace GIDI {
 #endif
     
-double MCGIDI_particleMass_AMU( statusMessageReporting *smr, const char *name );
+G4double MCGIDI_particleMass_AMU( statusMessageReporting *smr, const char *name );
 
 #if defined __cplusplus
     }

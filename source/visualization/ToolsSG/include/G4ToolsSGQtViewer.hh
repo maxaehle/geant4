@@ -114,7 +114,7 @@ public:
         //  With Qt/Cocoa, the received size in
         // tools::sg::glarea::resizeGL is twice the QWidget::[width(),height()]!
         //  In general it does not pose problem, except when rendering 2D texts.
-        // In order to have similar sizes than other platforms, we have to double
+        // In order to have similar sizes than other platforms, we have to G4double
         // their pixel heights.
         fVP.SetGlobalMarkerScale(2);
       }

@@ -63,7 +63,7 @@ class G4InuclParticle;
 
 class G4CascadeCheckBalance : public G4VCascadeCollider {
 public:
-  static const G4double tolerance;	// Don't do floating zero!
+  static const G4double tolerance;	// Don't do G4floating zero!
 
   explicit G4CascadeCheckBalance(const G4String& owner="G4CascadeCheckBalance");
 

@@ -77,8 +77,8 @@ public:
 protected:
     struct ModelInfo
     {
-        double fStartingTime;
-        double fEndTime;
+        G4double fStartingTime;
+        G4double fEndTime;
         std::unique_ptr<G4VITStepModel> fpModel;
     };
 

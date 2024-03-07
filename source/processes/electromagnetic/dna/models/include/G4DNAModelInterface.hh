@@ -135,7 +135,7 @@ private:
     typedef std::map<const G4String ,std::map<const G4String , std::vector<G4VDNAModel*> > > MaterialParticleModelTable;
     MaterialParticleModelTable fMaterialParticleModelTable; ///< map: [materialName][particleName] = vector of models
 
-    std::map<G4String, const std::vector<double>* > fMaterialMolPerVol;
+    std::map<G4String, const std::vector<G4double>* > fMaterialMolPerVol;
 
     /*!
      * \brief BuildMaterialParticleModelTable

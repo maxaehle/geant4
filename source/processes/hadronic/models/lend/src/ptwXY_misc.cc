@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <cmath>
-#include <float.h>
+#include <G4float.h>
 
 #include "ptwXY.h"
 
@@ -17,18 +17,18 @@ namespace GIDI {
 using namespace GIDI;
 #endif
 
-static nfu_status ptwXY_createFromFunctionBisect( ptwXYPoints *ptwXY, double x1, double y1, double x2, double y2, ptwXY_createFromFunction_callback func,
-        void *argList, int level, int checkForRoots, double eps );
-static nfu_status ptwXY_createFromFunctionZeroCrossing( ptwXYPoints *ptwXY, double x1, double y1, double x2, double y2, 
-        ptwXY_createFromFunction_callback func, void *argList, double eps );
-static nfu_status ptwXY_applyFunction2( ptwXYPoints *ptwXY1, double y1, double y2, ptwXYPoint *p1, ptwXYPoint *p2, ptwXY_applyFunction_callback func, 
+static nfu_status ptwXY_createFromFunctionBisect( ptwXYPoints *ptwXY, G4double x1, G4double y1, G4double x2, G4double y2, ptwXY_createFromFunction_callback func,
+        void *argList, int level, int checkForRoots, G4double eps );
+static nfu_status ptwXY_createFromFunctionZeroCrossing( ptwXYPoints *ptwXY, G4double x1, G4double y1, G4double x2, G4double y2, 
+        ptwXY_createFromFunction_callback func, void *argList, G4double eps );
+static nfu_status ptwXY_applyFunction2( ptwXYPoints *ptwXY1, G4double y1, G4double y2, ptwXYPoint *p1, ptwXYPoint *p2, ptwXY_applyFunction_callback func, 
     void *argList, int level, int checkForRoots );
-static nfu_status ptwXY_applyFunctionZeroCrossing( ptwXYPoints *ptwXY1, double y1, double y2, ptwXYPoint *p1, ptwXYPoint *p2, 
+static nfu_status ptwXY_applyFunctionZeroCrossing( ptwXYPoints *ptwXY1, G4double y1, G4double y2, ptwXYPoint *p1, ptwXYPoint *p2, 
     ptwXY_applyFunction_callback func, void *argList );
 /*
 ************************************************************
 */
-void ptwXY_update_biSectionMax( ptwXYPoints *ptwXY1, double oldLength ) {
+void ptwXY_update_biSectionMax( ptwXYPoints *ptwXY1, G4double oldLength ) {
 
     ptwXY1->biSectionMax = ptwXY1->biSectionMax - 1.442695 * G4Log( ptwXY1->length / oldLength ); /* 1.442695 = 1 / std::log( 2. ) */
     if( ptwXY1->biSectionMax < 0 ) ptwXY1->biSectionMax = 0;
@@ -37,11 +37,11 @@ void ptwXY_update_biSectionMax( ptwXYPoints *ptwXY1, double oldLength ) {
 /*
 ************************************************************
 */
-ptwXYPoints *ptwXY_createFromFunction( int n, double *xs, ptwXY_createFromFunction_callback func, void *argList, double accuracy, int checkForRoots, 
+ptwXYPoints *ptwXY_createFromFunction( int n, G4double *xs, ptwXY_createFromFunction_callback func, void *argList, G4double accuracy, int checkForRoots, 
     int biSectionMax, nfu_status *status ) {
 
     int64_t i;
-    double x1, y1, x2 = 0., y2, eps = ClosestAllowXFactor * DBL_EPSILON;
+    G4double x1, y1, x2 = 0., y2, eps = ClosestAllowXFactor * DBL_EPSILON;
     ptwXYPoints *ptwXY;
     ptwXYPoint *p1, *p2;
 
@@ -86,7 +86,7 @@ err:
 /*
 ************************************************************
 */
-ptwXYPoints *ptwXY_createFromFunction2( ptwXPoints *xs, ptwXY_createFromFunction_callback func, void *argList, double accuracy, int checkForRoots, 
+ptwXYPoints *ptwXY_createFromFunction2( ptwXPoints *xs, ptwXY_createFromFunction_callback func, void *argList, G4double accuracy, int checkForRoots, 
     int biSectionMax, nfu_status *status ) {
 
     return( ptwXY_createFromFunction( (int) xs->length, xs->points, func, argList, accuracy, checkForRoots, biSectionMax, status ) );
@@ -94,11 +94,11 @@ ptwXYPoints *ptwXY_createFromFunction2( ptwXPoints *xs, ptwXY_createFromFunction
 /*
 ************************************************************
 */
-static nfu_status ptwXY_createFromFunctionBisect( ptwXYPoints *ptwXY, double x1, double y1, double x2, double y2, ptwXY_createFromFunction_callback func,
-        void *argList, int level, int checkForRoots, double eps ) {
+static nfu_status ptwXY_createFromFunctionBisect( ptwXYPoints *ptwXY, G4double x1, G4double y1, G4double x2, G4double y2, ptwXY_createFromFunction_callback func,
+        void *argList, int level, int checkForRoots, G4double eps ) {
 
     nfu_status status;
-    double x, y, f;
+    G4double x, y, f;
 
     if( ( x2 - x1 ) < ClosestAllowXFactor * DBL_EPSILON * ( std::fabs( x1 ) + std::fabs( x2 ) ) ) return( nfu_Okay );
     if( level >= ptwXY->biSectionMax ) return( nfu_Okay );
@@ -113,14 +113,14 @@ static nfu_status ptwXY_createFromFunctionBisect( ptwXYPoints *ptwXY, double x1,
 /*
 ************************************************************
 */
-static nfu_status ptwXY_createFromFunctionZeroCrossing( ptwXYPoints *ptwXY, double x1, double y1, double x2, double y2, 
-        ptwXY_createFromFunction_callback func, void *argList, double eps ) {
+static nfu_status ptwXY_createFromFunctionZeroCrossing( ptwXYPoints *ptwXY, G4double x1, G4double y1, G4double x2, G4double y2, 
+        ptwXY_createFromFunction_callback func, void *argList, G4double eps ) {
 
     //For coverity #63077
     if ( y2 == y1 ) return ( nfu_badInput );
 
     int i;
-    double x, y;
+    G4double x, y;
     nfu_status status;
 
     for( i = 0; i < 16; i++ ) {
@@ -146,7 +146,7 @@ static nfu_status ptwXY_createFromFunctionZeroCrossing( ptwXYPoints *ptwXY, doub
 nfu_status ptwXY_applyFunction( ptwXYPoints *ptwXY1, ptwXY_applyFunction_callback func, void *argList, int checkForRoots ) {
 
     int64_t i, originalLength = ptwXY1->length, notFirstPass = 0;
-    double y1, y2 = 0;
+    G4double y1, y2 = 0;
     nfu_status status;
     ptwXYPoint p1, p2;
 
@@ -166,16 +166,16 @@ nfu_status ptwXY_applyFunction( ptwXYPoints *ptwXY1, ptwXY_applyFunction_callbac
         p2 = p1;
         y2 = y1;
     }
-    ptwXY_update_biSectionMax( ptwXY1, (double) originalLength );
+    ptwXY_update_biSectionMax( ptwXY1, (G4double) originalLength );
     return( status );
 }
 /*
 ************************************************************
 */
-static nfu_status ptwXY_applyFunction2( ptwXYPoints *ptwXY1, double y1, double y2, ptwXYPoint *p1, ptwXYPoint *p2, ptwXY_applyFunction_callback func, 
+static nfu_status ptwXY_applyFunction2( ptwXYPoints *ptwXY1, G4double y1, G4double y2, ptwXYPoint *p1, ptwXYPoint *p2, ptwXY_applyFunction_callback func, 
         void *argList, int level, int checkForRoots ) {
 
-    double y;
+    G4double y;
     ptwXYPoint p;
     nfu_status status;
 
@@ -198,11 +198,11 @@ checkForZeroCrossing:
 /*
 ************************************************************
 */
-static nfu_status ptwXY_applyFunctionZeroCrossing( ptwXYPoints *ptwXY1, double y1, double y2, ptwXYPoint *p1, ptwXYPoint *p2, 
+static nfu_status ptwXY_applyFunctionZeroCrossing( ptwXYPoints *ptwXY1, G4double y1, G4double y2, ptwXYPoint *p1, ptwXYPoint *p2, 
         ptwXY_applyFunction_callback func, void *argList ) {
 
     int i;
-    double y, x1 = p1->x, x2 = p2->x, nY1 = p1->y, nY2 = p2->y, refY = 0.5 * ( std::fabs( p1->y ) + std::fabs( p2->y ) );
+    G4double y, x1 = p1->x, x2 = p2->x, nY1 = p1->y, nY2 = p2->y, refY = 0.5 * ( std::fabs( p1->y ) + std::fabs( p2->y ) );
     ptwXYPoint p;
     nfu_status status;
 
@@ -234,17 +234,17 @@ static nfu_status ptwXY_applyFunctionZeroCrossing( ptwXYPoints *ptwXY1, double y
 ************************************************************
 */
 ptwXYPoints *ptwXY_fromString( char const *str, ptwXY_interpolation interpolation, ptwXY_interpolationOtherInfo const *interpolationOtherInfo,
-    double biSectionMax, double accuracy, char **endCharacter, nfu_status *status ) {
+    G4double biSectionMax, G4double accuracy, char **endCharacter, nfu_status *status ) {
 
     int64_t numberConverted;
-    double  *doublePtr;
+    G4double  *G4doublePtr;
     ptwXYPoints *ptwXY = NULL;
 
-    if( ( *status = nfu_stringToListOfDoubles( str, &numberConverted, &doublePtr, endCharacter ) ) != nfu_Okay ) return( NULL );
+    if( ( *status = nfu_stringToListOfDoubles( str, &numberConverted, &G4doublePtr, endCharacter ) ) != nfu_Okay ) return( NULL );
     *status = nfu_oddNumberOfValues;
     if( ( numberConverted % 2 ) == 0 )
-        ptwXY = ptwXY_create( interpolation, interpolationOtherInfo, biSectionMax, accuracy, numberConverted, 10, numberConverted / 2, doublePtr, status, 0 );
-    nfu_free( doublePtr );
+        ptwXY = ptwXY_create( interpolation, interpolationOtherInfo, biSectionMax, accuracy, numberConverted, 10, numberConverted / 2, G4doublePtr, status, 0 );
+    nfu_free( G4doublePtr );
     return( ptwXY );
 }
 /*

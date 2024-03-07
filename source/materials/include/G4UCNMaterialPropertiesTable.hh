@@ -61,10 +61,10 @@ public:
   // returns the pointer to the mr-transmission table
   G4double* GetMicroRoughnessTransTable();
 
-  // Assigns double-array to the table-pointers, currently not used
+  // Assigns G4double-array to the table-pointers, currently not used
   void LoadMicroRoughnessTables(G4double*, G4double*, G4double*, G4double*);
 
-  // Creates new double arrays and assigns them to the table pointers
+  // Creates new G4double arrays and assigns them to the table pointers
   void InitMicroRoughnessTables();
 
   // Reads the MR-parameters from the corresponding fields and starts

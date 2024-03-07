@@ -204,7 +204,7 @@ void G4JAEAElasticScatteringModel::ReadData(size_t Z, const char* path)
     ES_Data[Z] = new G4DataVector();
    
   G4float buffer_var;
-  while (ES_Data_Buffer.read(reinterpret_cast<char*>(&buffer_var),sizeof(float)))
+  while (ES_Data_Buffer.read(reinterpret_cast<char*>(&buffer_var),sizeof(G4float)))
     {
       ES_Data[Z]->push_back(buffer_var);
     }

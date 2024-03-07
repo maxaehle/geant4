@@ -15,29 +15,29 @@
 
 namespace CLHEP {
 
-inline double RandGeneral::fire()
+inline G4double RandGeneral::fire()
 {
-  double rand = localEngine->flat();
+  G4double rand = localEngine->flat();
   return mapRandom(rand);
 }
 
-inline double RandGeneral::shoot()
+inline G4double RandGeneral::shoot()
 {
   return fire();
 }
 
-inline double RandGeneral::operator() ()
+inline G4double RandGeneral::operator() ()
 {
   return fire();
 }
 
-inline double RandGeneral::shoot( HepRandomEngine* anEngine )
+inline G4double RandGeneral::shoot( HepRandomEngine* anEngine )
 { 
-  double rand = anEngine->flat();
+  G4double rand = anEngine->flat();
   return mapRandom(rand);
 }
 
-inline void RandGeneral::shootArray( const int size, double* vect )
+inline void RandGeneral::shootArray( const int size, G4double* vect )
 {
   fireArray(size, vect);
 }

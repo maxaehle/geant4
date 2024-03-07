@@ -204,12 +204,12 @@ G4VParticleChange* G4DNAMolecularDissociation::DecayIt(const G4Track& track,
                 auto pProduct = new G4Molecule(pDecayChannel->GetProduct(j));
 
                 G4ThreeVector displacement = motherMoleculeDisplacement + productsDisplacement[j];
-                double mag_displacement = displacement.mag();
+                G4double mag_displacement = displacement.mag();
                 G4ThreeVector displacement_direction = displacement / (mag_displacement + 1e-30);
 
-                double prNewSafety = DBL_MAX;
+                G4double prNewSafety = DBL_MAX;
 
-                //double step =
+                //G4double step =
                 pNavigator->CheckNextStep(track.GetPosition(),
                                          displacement_direction,
                                          mag_displacement,

@@ -102,7 +102,7 @@ namespace  CexmcAST
 
         int                                     index2;
 
-        variant< const int *, const double * >  addr;
+        variant< const int *, const G4double * >  addr;
     };
 
 
@@ -110,7 +110,7 @@ namespace  CexmcAST
 
     typedef std::string                    Function;
 
-    typedef variant< int, double >         Constant;
+    typedef variant< int, G4double >         Constant;
 
     typedef variant< Variable, Constant >  Leaf;
 
@@ -141,7 +141,7 @@ namespace  CexmcAST
     class  BasicEval
     {
         protected:
-            typedef variant< int, double >  ScalarValueType;
+            typedef variant< int, G4double >  ScalarValueType;
 
         protected:
             virtual ~BasicEval();

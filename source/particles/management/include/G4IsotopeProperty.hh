@@ -83,7 +83,7 @@ class G4IsotopeProperty
     inline G4Ions::G4FloatLevelBase GetFloatLevelBase() const;
     inline void SetFloatLevelBase(G4Ions::G4FloatLevelBase flb);
     inline void SetFloatLevelBase(G4int flbIndex);
-      // Set/Get floating level base
+      // Set/Get G4floating level base
 
     inline G4double GetLifeTime() const;
     inline void     SetLifeTime(G4double T);
@@ -106,7 +106,7 @@ class G4IsotopeProperty
     G4DecayTable* fDecayTable = nullptr;      // decay Table
     G4double      fMagneticMoment = 0.0;      // magnetic moment 
     G4int         fIsomerLevel = -1;          // isomer level 
-    G4Ions::G4FloatLevelBase fFloatLevelBase; // floating level base
+    G4Ions::G4FloatLevelBase fFloatLevelBase; // G4floating level base
 };
 
 // ------------------------

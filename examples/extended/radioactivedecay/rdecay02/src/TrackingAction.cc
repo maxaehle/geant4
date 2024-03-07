@@ -85,9 +85,9 @@ void TrackingAction::PreUserTrackingAction(const G4Track* track)
   if (processType == fRadioactiveDecay) {
     //fill ntuple id = 3
     G4int id = 3;
-    analysisManager->FillNtupleDColumn(id,0, double(pid));
-    analysisManager->FillNtupleDColumn(id,1, double(Z));
-    analysisManager->FillNtupleDColumn(id,2, double(A));
+    analysisManager->FillNtupleDColumn(id,0, G4double(pid));
+    analysisManager->FillNtupleDColumn(id,1, G4double(Z));
+    analysisManager->FillNtupleDColumn(id,2, G4double(A));
     analysisManager->FillNtupleDColumn(id,3, energy);
     analysisManager->FillNtupleDColumn(id,4, time/s);
     analysisManager->FillNtupleDColumn(id,5, weight);
@@ -96,7 +96,7 @@ void TrackingAction::PreUserTrackingAction(const G4Track* track)
     if (charge < 3.) {   
       //fill ntuple id = 0
       id = 0;
-      analysisManager->FillNtupleDColumn(id,0, double(pid));
+      analysisManager->FillNtupleDColumn(id,0, G4double(pid));
       analysisManager->FillNtupleDColumn(id,1, energy);
       analysisManager->FillNtupleDColumn(id,2, time/s);
       analysisManager->FillNtupleDColumn(id,3, weight);
@@ -113,7 +113,7 @@ void TrackingAction::PreUserTrackingAction(const G4Track* track)
   if ((unstableIon) && (iVol == 1)) {
     //fill ntuple id = 1
     G4int id = 1;
-    analysisManager->FillNtupleDColumn(id,0, double(pid));
+    analysisManager->FillNtupleDColumn(id,0, G4double(pid));
     analysisManager->FillNtupleDColumn(id,1, time/s);
     analysisManager->FillNtupleDColumn(id,2, weight);
     analysisManager->AddNtupleRow(id);  

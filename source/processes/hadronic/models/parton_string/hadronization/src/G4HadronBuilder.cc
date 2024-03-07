@@ -43,8 +43,8 @@
 //#define debug_heavyHadrons
 
 G4HadronBuilder::G4HadronBuilder(G4double mesonMix, G4double barionMix,
-		                 std::vector<double> scalarMesonMix,
-		                 std::vector<double> vectorMesonMix,
+		                 std::vector<G4double> scalarMesonMix,
+		                 std::vector<G4double> vectorMesonMix,
                                  G4double Eta_cProb, G4double Eta_bProb)
 {
 	mesonSpinMix       = mesonMix;	     

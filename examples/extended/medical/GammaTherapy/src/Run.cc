@@ -405,7 +405,7 @@ void Run::AddPhantomStep(G4double edep, G4double r1, G4double z1, G4double r2,
     {
       bin = fNBinsR - 1;
     }
-    double w = edep * fVolumeR[bin];
+    G4double w = edep * fVolumeR[bin];
     fEdep[bin] += w;
 
     if(fAnalysisManager)

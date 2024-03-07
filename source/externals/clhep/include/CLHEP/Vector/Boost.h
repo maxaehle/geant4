@@ -52,16 +52,16 @@ public:
   inline HepBoost & operator = (HepBoost && m) = default;
   // Copy and move assignment operators.
 
-         HepBoost & set (double betaX, double betaY, double betaZ);
-  inline HepBoost       (double betaX, double betaY, double betaZ);
+         HepBoost & set (G4double betaX, G4double betaY, G4double betaZ);
+  inline HepBoost       (G4double betaX, G4double betaY, G4double betaZ);
   // Constructor from three components of beta vector
 
          HepBoost & set (const HepRep4x4Symmetric & m);
   inline HepBoost       (const HepRep4x4Symmetric & m);
   // Constructor from symmetric HepRep4x4
 
-         HepBoost & set (Hep3Vector direction, double beta);
-  inline HepBoost       (Hep3Vector direction, double beta);
+         HepBoost & set (Hep3Vector direction, G4double beta);
+  inline HepBoost       (Hep3Vector direction, G4double beta);
   // Constructor from a three vector direction and the magnitude of beta
 
          HepBoost & set (const Hep3Vector & boost);
@@ -77,28 +77,28 @@ public:
 
   // ----------  Accessors:
 
-  inline double  beta()  const;
-  inline double  gamma() const;
+  inline G4double  beta()  const;
+  inline G4double  gamma() const;
   inline Hep3Vector boostVector() const;
   inline Hep3Vector getDirection() const;
   inline Hep3Vector direction() const;
 
-  inline double xx() const;
-  inline double xy() const;
-  inline double xz() const;
-  inline double xt() const;
-  inline double yx() const;
-  inline double yy() const;
-  inline double yz() const;
-  inline double yt() const;
-  inline double zx() const;
-  inline double zy() const;
-  inline double zz() const;
-  inline double zt() const;
-  inline double tx() const;
-  inline double ty() const;
-  inline double tz() const;
-  inline double tt() const;
+  inline G4double xx() const;
+  inline G4double xy() const;
+  inline G4double xz() const;
+  inline G4double xt() const;
+  inline G4double yx() const;
+  inline G4double yy() const;
+  inline G4double yz() const;
+  inline G4double yt() const;
+  inline G4double zx() const;
+  inline G4double zy() const;
+  inline G4double zz() const;
+  inline G4double zt() const;
+  inline G4double tx() const;
+  inline G4double ty() const;
+  inline G4double tz() const;
+  inline G4double tt() const;
   // Elements of the matrix.
 
   inline HepLorentzVector col1() const;
@@ -146,31 +146,31 @@ public:
   inline bool isIdentity() const;
   // Returns true if a null boost.
 
-  inline  double distance2( const HepBoost  & b  ) const;
-  inline  double distance2( const HepBoostX & bx ) const;
-  inline  double distance2( const HepBoostY & by ) const;
-  inline  double distance2( const HepBoostZ & bz ) const;
+  inline  G4double distance2( const HepBoost  & b  ) const;
+  inline  G4double distance2( const HepBoostX & bx ) const;
+  inline  G4double distance2( const HepBoostY & by ) const;
+  inline  G4double distance2( const HepBoostZ & bz ) const;
   // Defined as the distance2 between the vectors (gamma*betaVector)
 
-  double distance2( const HepRotation & r  ) const;
-  double distance2( const HepLorentzRotation & lt  ) const;
+  G4double distance2( const HepRotation & r  ) const;
+  G4double distance2( const HepLorentzRotation & lt  ) const;
   // Distance between this and other sorts of transformations
 
-  inline double howNear(   const HepBoost & b ) const;
+  inline G4double howNear(   const HepBoost & b ) const;
   inline bool isNear(   const HepBoost & b,
-             double epsilon=Hep4RotationInterface::tolerance) const;
+             G4double epsilon=Hep4RotationInterface::tolerance) const;
 
-  double howNear( const HepRotation & r  ) const;
-  double howNear( const HepLorentzRotation & lt  ) const;
+  G4double howNear( const HepRotation & r  ) const;
+  G4double howNear( const HepLorentzRotation & lt  ) const;
 
   bool isNear( const HepRotation & r, 
-             double epsilon=Hep4RotationInterface::tolerance) const;
+             G4double epsilon=Hep4RotationInterface::tolerance) const;
   bool isNear( const HepLorentzRotation & lt, 
-             double epsilon=Hep4RotationInterface::tolerance) const;
+             G4double epsilon=Hep4RotationInterface::tolerance) const;
 
   // ----------  Properties:
 
-  double norm2() const;
+  G4double norm2() const;
   // (beta*gamma)^2
 
   void rectify();
@@ -208,8 +208,8 @@ public:
 
   // ---------- Tolerance              
 
-  static inline double getTolerance();
-  static inline double setTolerance(double tol);
+  static inline G4double getTolerance();
+  static inline G4double setTolerance(G4double tol);
 
 protected:
 
@@ -221,14 +221,14 @@ protected:
   HepLorentzRotation matrixMultiplication (const HepRep4x4Symmetric & m) const;
 
   inline HepBoost
-       (double xx, double xy, double xz, double xt,
-		   double yy, double yz, double yt,
-			      double zz, double zt,
-					 double tt);
+       (G4double xx, G4double xy, G4double xz, G4double xt,
+		   G4double yy, G4double yz, G4double yt,
+			      G4double zz, G4double zt,
+					 G4double tt);
   // Protected constructor.
   // DOES NOT CHECK FOR VALIDITY AS A LORENTZ BOOST.
 
-  inline void setBoost(double bx, double by, double bz);
+  inline void setBoost(G4double bx, G4double by, G4double bz);
 
   HepRep4x4Symmetric rep_;
 

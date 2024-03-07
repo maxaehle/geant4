@@ -35,9 +35,9 @@ inline bool value::assign(value& aThis,const value& aV,std::string& aError){
         new array<int64>(*aV.u.m_array_int64);
 
     } else if(aV.m_type==value::ARRAY_FLOAT) {
-      aThis.u.m_array_float = new array<float>(*aV.u.m_array_float);
+      aThis.u.m_array_G4float = new array<G4float>(*aV.u.m_array_G4float);
     } else if(aV.m_type==value::ARRAY_DOUBLE) {
-      aThis.u.m_array_double = new array<double>(*aV.u.m_array_double);
+      aThis.u.m_array_G4double = new array<G4double>(*aV.u.m_array_G4double);
     } else if(aV.m_type==value::ARRAY_BOOL) {
       aThis.u.m_array_bool = new array<bool>(*aV.u.m_array_bool);
 
@@ -56,13 +56,13 @@ inline bool value::assign(value& aThis,const value& aV,std::string& aError){
     case value::DOUBLE:
       switch(aV.m_type) {
       case value::INT:
-        aThis.u.m_double = aV.u.m_int;
+        aThis.u.m_G4double = aV.u.m_int;
         return true;
       case value::UNSIGNED_SHORT :
-        aThis.u.m_double = aV.u.m_unsigned_short;
+        aThis.u.m_G4double = aV.u.m_unsigned_short;
         return true;
       case value::UNSIGNED_INT:
-        aThis.u.m_double = aV.u.m_unsigned_int;
+        aThis.u.m_G4double = aV.u.m_unsigned_int;
         return true;
       case value::NONE:
       case value::DOUBLE:
@@ -140,10 +140,10 @@ inline bool value::assign(value& aThis,const value& aV,std::string& aError){
     case value::FLOAT:
       switch(aV.m_type) {
       case value::INT:
-        aThis.u.m_float = (float)aV.u.m_int;
+        aThis.u.m_G4float = (G4float)aV.u.m_int;
         return true;
       case value::DOUBLE:
-        aThis.u.m_float = (float)aV.u.m_double;
+        aThis.u.m_G4float = (G4float)aV.u.m_G4double;
         return true;
       case value::NONE:
       case value::VOID_STAR:
@@ -327,7 +327,7 @@ inline bool value::minus(value& aThis,std::string& aError){
     aThis.u.m_int = -aThis.u.m_int;
     return true;
   case value::DOUBLE:
-    aThis.u.m_double = -aThis.u.m_double;
+    aThis.u.m_G4double = -aThis.u.m_G4double;
     return true;
   case value::SHORT:
     aThis.u.m_short = -aThis.u.m_short;
@@ -336,10 +336,10 @@ inline bool value::minus(value& aThis,std::string& aError){
     aThis.u.m_int64 = -aThis.u.m_int64;
     return true;
   case value::FLOAT:
-    aThis.u.m_float = -1.0F * aThis.u.m_float;
+    aThis.u.m_G4float = -1.0F * aThis.u.m_G4float;
     return true;
   case value::ARRAY_DOUBLE:{
-    std::vector<double>& stdv = aThis.u.m_array_double->vector();
+    std::vector<G4double>& stdv = aThis.u.m_array_G4double->vector();
     size_t number = stdv.size();
     for(size_t index=0;index<number;index++) stdv[index] = -stdv[index];
     return true;}
@@ -444,19 +444,19 @@ inline bool value::add(value& aThis,const value& aV,std::string& aError){
       aThis.u.m_int += aV.u.m_int;
       return true;
     case value::FLOAT:{
-      float tmp = aThis.u.m_int + aV.u.m_float;
+      G4float tmp = aThis.u.m_int + aV.u.m_G4float;
       aThis.set(tmp);
       return true;}
     case value::DOUBLE:{
-      double tmp = aThis.u.m_int + aV.u.m_double;
+      G4double tmp = aThis.u.m_int + aV.u.m_G4double;
       aThis.set(tmp);
       return true;}
     case value::ARRAY_DOUBLE:{
       int tmp = aThis.u.m_int;
       //In the below, this becomes a value::ARRAY_DOUBLE.
-      aThis.set(aV.u.m_array_double->orders(),
-                aV.u.m_array_double->vector());
-      aThis.u.m_array_double->add(double(tmp));
+      aThis.set(aV.u.m_array_G4double->orders(),
+                aV.u.m_array_G4double->vector());
+      aThis.u.m_array_G4double->add(G4double(tmp));
       return true;}
     case value::NONE:
     case value::STRING:
@@ -490,29 +490,29 @@ inline bool value::add(value& aThis,const value& aV,std::string& aError){
   case value::FLOAT:
     switch(aV.m_type) {
     case value::UNSIGNED_SHORT :
-      aThis.u.m_float += aV.u.m_unsigned_short;
+      aThis.u.m_G4float += aV.u.m_unsigned_short;
       return true;
     case value::UNSIGNED_INT:
-      aThis.u.m_float += aV.u.m_unsigned_int;
+      aThis.u.m_G4float += aV.u.m_unsigned_int;
       return true;
     case value::SHORT:
-      aThis.u.m_float += aV.u.m_short;
+      aThis.u.m_G4float += aV.u.m_short;
       return true;
     case value::INT:
-      aThis.u.m_float += aV.u.m_int;
+      aThis.u.m_G4float += aV.u.m_int;
       return true;
     case value::FLOAT:
-      aThis.u.m_float += aV.u.m_float;
+      aThis.u.m_G4float += aV.u.m_G4float;
       return true;
     case value::DOUBLE:
-      aThis.u.m_float += (float)aV.u.m_double;
+      aThis.u.m_G4float += (G4float)aV.u.m_G4double;
       return true;
     case value::ARRAY_DOUBLE:{
-      double tmp = aThis.u.m_float;
+      G4double tmp = aThis.u.m_G4float;
       //In the below this becomes a value::ARRAY_DOUBLE.
-      aThis.set(aV.u.m_array_double->orders(),
-                aV.u.m_array_double->vector());
-      aThis.u.m_array_double->add(tmp);
+      aThis.set(aV.u.m_array_G4double->orders(),
+                aV.u.m_array_G4double->vector());
+      aThis.u.m_array_G4double->add(tmp);
       return true;}
     case value::NONE:
     case value::STRING:
@@ -543,29 +543,29 @@ inline bool value::add(value& aThis,const value& aV,std::string& aError){
   case value::DOUBLE:
     switch(aV.m_type) {
     case value::SHORT:
-      aThis.u.m_double += aV.u.m_short;
+      aThis.u.m_G4double += aV.u.m_short;
       return true;
     case value::INT:
-      aThis.u.m_double += aV.u.m_int;
+      aThis.u.m_G4double += aV.u.m_int;
       return true;
     case value::FLOAT:
-      aThis.u.m_double += aV.u.m_float;
+      aThis.u.m_G4double += aV.u.m_G4float;
       return true;
     case value::DOUBLE:
-      aThis.u.m_double += aV.u.m_double;
+      aThis.u.m_G4double += aV.u.m_G4double;
       return true;
     case value::UNSIGNED_SHORT :
-      aThis.u.m_double += aV.u.m_unsigned_short;
+      aThis.u.m_G4double += aV.u.m_unsigned_short;
       return true;
     case value::UNSIGNED_INT:
-      aThis.u.m_double += aV.u.m_unsigned_int;
+      aThis.u.m_G4double += aV.u.m_unsigned_int;
       return true;
     case value::ARRAY_DOUBLE:{
-      double tmp = aThis.u.m_double;
+      G4double tmp = aThis.u.m_G4double;
       //In the below this becomes a value::ARRAY_DOUBLE.
-      aThis.set(aV.u.m_array_double->orders(),
-                aV.u.m_array_double->vector());
-      aThis.u.m_array_double->add(tmp);
+      aThis.set(aV.u.m_array_G4double->orders(),
+                aV.u.m_array_G4double->vector());
+      aThis.u.m_array_G4double->add(tmp);
       return true;}
     case value::NONE:
     case value::STRING:
@@ -603,19 +603,19 @@ inline bool value::add(value& aThis,const value& aV,std::string& aError){
       aThis.set(tmp);
       return true;}
     case value::FLOAT:{
-      float tmp = float(aThis.u.m_unsigned_int) + aV.u.m_float;
+      G4float tmp = G4float(aThis.u.m_unsigned_int) + aV.u.m_G4float;
       aThis.set(tmp);
       return true;}
     case value::DOUBLE:{
-      double tmp = double(aThis.u.m_unsigned_int) + aV.u.m_double;
+      G4double tmp = G4double(aThis.u.m_unsigned_int) + aV.u.m_G4double;
       aThis.set(tmp);
       return true;}
     case value::ARRAY_DOUBLE:{
       unsigned int tmp = aThis.u.m_unsigned_int;
       //In the below this becomes a value::ARRAY_DOUBLE.
-      aThis.set(aV.u.m_array_double->orders(),
-                aV.u.m_array_double->vector());
-      aThis.u.m_array_double->add(double(tmp));
+      aThis.set(aV.u.m_array_G4double->orders(),
+                aV.u.m_array_G4double->vector());
+      aThis.u.m_array_G4double->add(G4double(tmp));
       return true;}
     case value::NONE:
     case value::STRING:
@@ -684,21 +684,21 @@ inline bool value::add(value& aThis,const value& aV,std::string& aError){
   case value::ARRAY_DOUBLE:
     switch(aV.m_type) {
     case value::INT:
-      aThis.u.m_array_double->add(aV.u.m_int);
+      aThis.u.m_array_G4double->add(aV.u.m_int);
       return true;
     case value::UNSIGNED_INT:
-      aThis.u.m_array_double->add(aV.u.m_unsigned_int);
+      aThis.u.m_array_G4double->add(aV.u.m_unsigned_int);
       return true;
     case value::DOUBLE:
-      aThis.u.m_array_double->add(aV.u.m_double);
+      aThis.u.m_array_G4double->add(aV.u.m_G4double);
       return true;
     case value::ARRAY_DOUBLE:
-      if(aThis.u.m_array_double->orders()!=aV.u.m_array_double->orders()) {
+      if(aThis.u.m_array_G4double->orders()!=aV.u.m_array_G4double->orders()) {
         aError = "Value::add : vector orders mismatch.";
         aThis.set_none();
         return false;
       }
-      aThis.u.m_array_double->add(*aV.u.m_array_double);
+      aThis.u.m_array_G4double->add(*aV.u.m_array_G4double);
       return true;
     case value::NONE:
     case value::VOID_STAR:
@@ -771,20 +771,20 @@ inline bool value::subtract(value& aThis,const value& aV,std::string& aError){
       aThis.u.m_int -= aV.u.m_int;
       return true;
     case value::DOUBLE:{
-      double tmp = aThis.u.m_int - aV.u.m_double;
+      G4double tmp = aThis.u.m_int - aV.u.m_G4double;
       aThis.set(tmp);
       return true;}
     case value::FLOAT:{
-      float tmp = aThis.u.m_int - aV.u.m_float;
+      G4float tmp = aThis.u.m_int - aV.u.m_G4float;
       aThis.set(tmp);
       return true;}
     case value::ARRAY_DOUBLE:{
       int tmp = aThis.u.m_int;
       //In the below, this becomes a value::ARRAY_DOUBLE.
-      aThis.set(aV.u.m_array_double->orders(),
-                aV.u.m_array_double->vector());
-      aThis.u.m_array_double->multiply(-1);
-      aThis.u.m_array_double->add(double(tmp));
+      aThis.set(aV.u.m_array_G4double->orders(),
+                aV.u.m_array_G4double->vector());
+      aThis.u.m_array_G4double->multiply(-1);
+      aThis.u.m_array_G4double->add(G4double(tmp));
       return true;}
     case value::NONE:
     case value::VOID_STAR:
@@ -818,39 +818,39 @@ inline bool value::subtract(value& aThis,const value& aV,std::string& aError){
   case value::FLOAT:
     switch(aV.m_type) {
     case value::DOUBLE:{
-      double tmp = double(aThis.u.m_float) - aV.u.m_double;
+      G4double tmp = G4double(aThis.u.m_G4float) - aV.u.m_G4double;
       aThis.set(tmp);
       return true;}
     case value::UNSIGNED_SHORT :
-      aThis.u.m_float -= aV.u.m_unsigned_short;
+      aThis.u.m_G4float -= aV.u.m_unsigned_short;
       return true;
     case value::UNSIGNED_INT:
-      aThis.u.m_float -= aV.u.m_unsigned_int;
+      aThis.u.m_G4float -= aV.u.m_unsigned_int;
       return true;
     case value::INT:
-      aThis.u.m_float -= aV.u.m_int;
+      aThis.u.m_G4float -= aV.u.m_int;
       return true;
     case value::SHORT:
-      aThis.u.m_float -= aV.u.m_short;
+      aThis.u.m_G4float -= aV.u.m_short;
       return true;
     case value::FLOAT:
-      aThis.u.m_float -= aV.u.m_float;
+      aThis.u.m_G4float -= aV.u.m_G4float;
       return true;
     case value::INT64:{
-      double tmp = double(aThis.u.m_float) - aV.u.m_int64;
+      G4double tmp = G4double(aThis.u.m_G4float) - aV.u.m_int64;
       aThis.set(tmp);
       return true;}
     case value::UNSIGNED_INT64:{
-      double tmp = double(aThis.u.m_float) - aV.u.m_unsigned_int64;
+      G4double tmp = G4double(aThis.u.m_G4float) - aV.u.m_unsigned_int64;
       aThis.set(tmp);
       return true;}
     case value::ARRAY_DOUBLE:{
-      double tmp = aThis.u.m_float;
+      G4double tmp = aThis.u.m_G4float;
       //In the below, this becomes a value::ARRAY_DOUBLE.
-      aThis.set(aV.u.m_array_double->orders(),
-                aV.u.m_array_double->vector());
-      aThis.u.m_array_double->multiply(-1);
-      aThis.u.m_array_double->add(tmp);
+      aThis.set(aV.u.m_array_G4double->orders(),
+                aV.u.m_array_G4double->vector());
+      aThis.u.m_array_G4double->multiply(-1);
+      aThis.u.m_array_G4double->add(tmp);
       return true;}
     case value::NONE:
     case value::VOID_STAR:
@@ -879,36 +879,36 @@ inline bool value::subtract(value& aThis,const value& aV,std::string& aError){
   case value::DOUBLE:
     switch(aV.m_type) {
     case value::DOUBLE:
-      aThis.u.m_double -= aV.u.m_double;
+      aThis.u.m_G4double -= aV.u.m_G4double;
       return true;
     case value::UNSIGNED_SHORT :
-      aThis.u.m_double -= aV.u.m_unsigned_short;
+      aThis.u.m_G4double -= aV.u.m_unsigned_short;
       return true;
     case value::UNSIGNED_INT:
-      aThis.u.m_double -= aV.u.m_unsigned_int;
+      aThis.u.m_G4double -= aV.u.m_unsigned_int;
       return true;
     case value::INT:
-      aThis.u.m_double -= aV.u.m_int;
+      aThis.u.m_G4double -= aV.u.m_int;
       return true;
     case value::SHORT:
-      aThis.u.m_double -= aV.u.m_short;
+      aThis.u.m_G4double -= aV.u.m_short;
       return true;
     case value::INT64:
-      aThis.u.m_double -= aV.u.m_int64;
+      aThis.u.m_G4double -= aV.u.m_int64;
       return true;
     case value::FLOAT:
-      aThis.u.m_double -= aV.u.m_float;
+      aThis.u.m_G4double -= aV.u.m_G4float;
       return true;
     case value::UNSIGNED_INT64 :
-      aThis.u.m_double -= aV.u.m_unsigned_int64;
+      aThis.u.m_G4double -= aV.u.m_unsigned_int64;
       return true;
     case value::ARRAY_DOUBLE:{
-      double tmp = aThis.u.m_double;
+      G4double tmp = aThis.u.m_G4double;
       //In the below, this becomes a value::ARRAY_DOUBLE.
-      aThis.set(aV.u.m_array_double->orders(),
-                aV.u.m_array_double->vector());
-      aThis.u.m_array_double->multiply(-1);
-      aThis.u.m_array_double->add(tmp);
+      aThis.set(aV.u.m_array_G4double->orders(),
+                aV.u.m_array_G4double->vector());
+      aThis.u.m_array_G4double->multiply(-1);
+      aThis.u.m_array_G4double->add(tmp);
       return true;}
     case value::NONE:
     case value::VOID_STAR:
@@ -945,11 +945,11 @@ inline bool value::subtract(value& aThis,const value& aV,std::string& aError){
       }
       return true;
     case value::DOUBLE:{
-      double d = double(aThis.u.m_unsigned_int) - aV.u.m_double;
+      G4double d = G4double(aThis.u.m_unsigned_int) - aV.u.m_G4double;
       aThis.set(d);
       return true;}
     case value::FLOAT:{
-      float d = float(aThis.u.m_unsigned_int) - aV.u.m_float;
+      G4float d = G4float(aThis.u.m_unsigned_int) - aV.u.m_G4float;
       aThis.set(d);
       return true;}
     case value::INT:{
@@ -959,10 +959,10 @@ inline bool value::subtract(value& aThis,const value& aV,std::string& aError){
     case value::ARRAY_DOUBLE:{
       unsigned int tmp = aThis.u.m_unsigned_int;
       //In the below, this becomes a value::ARRAY_DOUBLE.
-      aThis.set(aV.u.m_array_double->orders(),
-                aV.u.m_array_double->vector());
-      aThis.u.m_array_double->multiply(-1);
-      aThis.u.m_array_double->add(double(tmp));
+      aThis.set(aV.u.m_array_G4double->orders(),
+                aV.u.m_array_G4double->vector());
+      aThis.u.m_array_G4double->multiply(-1);
+      aThis.u.m_array_G4double->add(G4double(tmp));
       return true;}
     case value::NONE:
     case value::VOID_STAR:
@@ -995,22 +995,22 @@ inline bool value::subtract(value& aThis,const value& aV,std::string& aError){
   case value::ARRAY_DOUBLE:
     switch(aV.m_type) {
     case value::INT:
-      aThis.u.m_array_double->add(-aV.u.m_int);
+      aThis.u.m_array_G4double->add(-aV.u.m_int);
       return true;
     case value::UNSIGNED_INT:
-      aThis.u.m_array_double->add(-((double)aV.u.m_unsigned_int));
+      aThis.u.m_array_G4double->add(-((G4double)aV.u.m_unsigned_int));
       return true;
     case value::DOUBLE:
-      aThis.u.m_array_double->add(-aV.u.m_double);
+      aThis.u.m_array_G4double->add(-aV.u.m_G4double);
       return true;
     case value::ARRAY_DOUBLE:{
-      if(aThis.u.m_array_double->orders()!=aV.u.m_array_double->orders()) {
+      if(aThis.u.m_array_G4double->orders()!=aV.u.m_array_G4double->orders()) {
         aError = "Value::subtract : vector orders mismatch.";
         aThis.set_none();
         return false;
       }
-      std::vector<double>& stdv = aThis.u.m_array_double->vector();
-      const std::vector<double>& stdv2 = aV.u.m_array_double->vector();
+      std::vector<G4double>& stdv = aThis.u.m_array_G4double->vector();
+      const std::vector<G4double>& stdv2 = aV.u.m_array_G4double->vector();
       size_t number = stdv.size();
       for(size_t index=0;index<number;index++) {
         stdv[index] -= stdv2[index];
@@ -1091,17 +1091,17 @@ inline bool value::multiply(value& aThis,const value& aV,std::string& aError){
       aThis.u.m_int *= aV.u.m_unsigned_int;
       return true;
     case value::DOUBLE:
-      aThis.u.m_int *= (int)aV.u.m_double;
+      aThis.u.m_int *= (int)aV.u.m_G4double;
       return true;
     case value::FLOAT:
-      aThis.u.m_int *= (int)aV.u.m_float;
+      aThis.u.m_int *= (int)aV.u.m_G4float;
       return true;
     case value::ARRAY_DOUBLE:{
       int tmp = aThis.u.m_int;
       //In the below, this becomes a value::ARRAY_DOUBLE.
-      aThis.set(aV.u.m_array_double->orders(),
-                aV.u.m_array_double->vector());
-      aThis.u.m_array_double->multiply(double(tmp));
+      aThis.set(aV.u.m_array_G4double->orders(),
+                aV.u.m_array_G4double->vector());
+      aThis.u.m_array_G4double->multiply(G4double(tmp));
       return true;}
     case value::NONE:
     case value::VOID_STAR:
@@ -1134,29 +1134,29 @@ inline bool value::multiply(value& aThis,const value& aV,std::string& aError){
   case value::FLOAT:
     switch(aV.m_type) {
     case value::SHORT:
-      aThis.u.m_float *= aV.u.m_short;
+      aThis.u.m_G4float *= aV.u.m_short;
       return true;
     case value::INT:
-      aThis.u.m_float *= aV.u.m_int;
+      aThis.u.m_G4float *= aV.u.m_int;
       return true;
     case value::FLOAT:
-      aThis.u.m_float *= aV.u.m_float;
+      aThis.u.m_G4float *= aV.u.m_G4float;
       return true;
     case value::DOUBLE:
-      aThis.u.m_float *= (float)aV.u.m_double;
+      aThis.u.m_G4float *= (G4float)aV.u.m_G4double;
       return true;
     case value::UNSIGNED_SHORT :
-      aThis.u.m_float *= aV.u.m_unsigned_short;
+      aThis.u.m_G4float *= aV.u.m_unsigned_short;
       return true;
     case value::UNSIGNED_INT:
-      aThis.u.m_float *= aV.u.m_unsigned_int;
+      aThis.u.m_G4float *= aV.u.m_unsigned_int;
       return true;
     case value::ARRAY_DOUBLE:{
-      double tmp = aThis.u.m_float;
+      G4double tmp = aThis.u.m_G4float;
       //In the below, this becomes a value::ARRAY_DOUBLE.
-      aThis.set(aV.u.m_array_double->orders(),
-                aV.u.m_array_double->vector());
-      aThis.u.m_array_double->multiply(tmp);
+      aThis.set(aV.u.m_array_G4double->orders(),
+                aV.u.m_array_G4double->vector());
+      aThis.u.m_array_G4double->multiply(tmp);
       return true;}
     case value::NONE:
     case value::VOID_STAR:
@@ -1187,32 +1187,32 @@ inline bool value::multiply(value& aThis,const value& aV,std::string& aError){
   case value::DOUBLE:
     switch(aV.m_type) {
     case value::SHORT:
-      aThis.u.m_double *= aV.u.m_short;
+      aThis.u.m_G4double *= aV.u.m_short;
       return true;
     case value::INT:
-      aThis.u.m_double *= aV.u.m_int;
+      aThis.u.m_G4double *= aV.u.m_int;
       return true;
     case value::INT64:
-      aThis.u.m_double *= aV.u.m_int64;
+      aThis.u.m_G4double *= aV.u.m_int64;
       return true;
     case value::FLOAT:
-      aThis.u.m_double *= aV.u.m_float;
+      aThis.u.m_G4double *= aV.u.m_G4float;
       return true;
     case value::DOUBLE:
-      aThis.u.m_double *= aV.u.m_double;
+      aThis.u.m_G4double *= aV.u.m_G4double;
       return true;
     case value::UNSIGNED_SHORT :
-      aThis.u.m_double *= aV.u.m_unsigned_short;
+      aThis.u.m_G4double *= aV.u.m_unsigned_short;
       return true;
     case value::UNSIGNED_INT:
-      aThis.u.m_double *= aV.u.m_unsigned_int;
+      aThis.u.m_G4double *= aV.u.m_unsigned_int;
       return true;
     case value::ARRAY_DOUBLE:{
-      double tmp = aThis.u.m_double;
+      G4double tmp = aThis.u.m_G4double;
       //In the below, this becomes a value::ARRAY_DOUBLE.
-      aThis.set(aV.u.m_array_double->orders(),
-                aV.u.m_array_double->vector());
-      aThis.u.m_array_double->multiply(tmp);
+      aThis.set(aV.u.m_array_G4double->orders(),
+                aV.u.m_array_G4double->vector());
+      aThis.u.m_array_G4double->multiply(tmp);
       return true;}
     case value::NONE:
     case value::VOID_STAR:
@@ -1242,11 +1242,11 @@ inline bool value::multiply(value& aThis,const value& aV,std::string& aError){
   case value::UNSIGNED_INT:
     switch(aV.m_type) {
     case value::FLOAT:{
-      float tmp = aThis.u.m_unsigned_int * aV.u.m_float;
+      G4float tmp = aThis.u.m_unsigned_int * aV.u.m_G4float;
       aThis.set(tmp); //this becomes a value::FLOAT.
       return true;}
     case value::DOUBLE:{
-      double tmp = aThis.u.m_unsigned_int * aV.u.m_double;
+      G4double tmp = aThis.u.m_unsigned_int * aV.u.m_G4double;
       aThis.set(tmp); //this becomes a value::DOUBLE.
       return true;}
     case value::INT:{
@@ -1263,9 +1263,9 @@ inline bool value::multiply(value& aThis,const value& aV,std::string& aError){
     case value::ARRAY_DOUBLE:{
       unsigned int tmp = aThis.u.m_unsigned_int;
       //In the below, this becomes a value::ARRAY_DOUBLE.
-      aThis.set(aV.u.m_array_double->orders(),
-                aV.u.m_array_double->vector());
-      aThis.u.m_array_double->multiply(double(tmp));
+      aThis.set(aV.u.m_array_G4double->orders(),
+                aV.u.m_array_G4double->vector());
+      aThis.u.m_array_G4double->multiply(G4double(tmp));
       return true;}
     case value::NONE:
     case value::VOID_STAR:
@@ -1297,22 +1297,22 @@ inline bool value::multiply(value& aThis,const value& aV,std::string& aError){
   case value::ARRAY_DOUBLE:
     switch(aV.m_type) {
     case value::INT:
-      aThis.u.m_array_double->multiply(aV.u.m_int);
+      aThis.u.m_array_G4double->multiply(aV.u.m_int);
       return true;
     case value::UNSIGNED_INT:
-      aThis.u.m_array_double->multiply(aV.u.m_unsigned_int);
+      aThis.u.m_array_G4double->multiply(aV.u.m_unsigned_int);
       return true;
     case value::DOUBLE:
-      aThis.u.m_array_double->multiply(aV.u.m_double);
+      aThis.u.m_array_G4double->multiply(aV.u.m_G4double);
       return true;
     case value::ARRAY_DOUBLE:{
-      if(aThis.u.m_array_double->orders()!=aV.u.m_array_double->orders()) {
+      if(aThis.u.m_array_G4double->orders()!=aV.u.m_array_G4double->orders()) {
         aError = "Value::multiply : vector orders mismatch.";
         aThis.set_none();
         return false;
       }
-      std::vector<double>& stdv = aThis.u.m_array_double->vector();
-      const std::vector<double>& stdv2 = aV.u.m_array_double->vector();
+      std::vector<G4double>& stdv = aThis.u.m_array_G4double->vector();
+      const std::vector<G4double>& stdv2 = aV.u.m_array_G4double->vector();
       size_t number = stdv.size();
       for(size_t index=0;index<number;index++) {
         stdv[index] *= stdv2[index];
@@ -1397,36 +1397,36 @@ inline bool value::divide(value& aThis,const value& aV,std::string& aError){
         return true;
       }
     case value::FLOAT:
-      if(aV.u.m_float==0.0F) {
+      if(aV.u.m_G4float==0.0F) {
         aError = value::error_div_zero();
         aThis.set_none();
         return false;
       } else {
-        float tmp = float(aThis.u.m_int)/aV.u.m_float;
+        G4float tmp = G4float(aThis.u.m_int)/aV.u.m_G4float;
         aThis.set(tmp);
         return true;
       }
     case value::DOUBLE:
-      if(aV.u.m_double==0) {
+      if(aV.u.m_G4double==0) {
         aError = value::error_div_zero();
         aThis.set_none();
         return false;
       } else {
-        double tmp = double(aThis.u.m_int)/aV.u.m_double;
+        G4double tmp = G4double(aThis.u.m_int)/aV.u.m_G4double;
         aThis.set(tmp);
         return true;
       }
     case value::ARRAY_DOUBLE:{
       int tmp = aThis.u.m_int;
       //In the below, this becomes a value::ARRAY_DOUBLE.
-      aThis.set(aV.u.m_array_double->orders(),
-                aV.u.m_array_double->vector());
-      if(!aThis.u.m_array_double->invert()) {
+      aThis.set(aV.u.m_array_G4double->orders(),
+                aV.u.m_array_G4double->vector());
+      if(!aThis.u.m_array_G4double->invert()) {
         aError = value::error_div_zero();
         aThis.set_none();
         return false;
       }
-      aThis.u.m_array_double->multiply((double)tmp);
+      aThis.u.m_array_G4double->multiply((G4double)tmp);
       return true;}
     case value::NONE:
     case value::VOID_STAR:
@@ -1465,7 +1465,7 @@ inline bool value::divide(value& aThis,const value& aV,std::string& aError){
         aThis.set_none();
         return false;
       } else {
-        aThis.u.m_float /= aV.u.m_int;
+        aThis.u.m_G4float /= aV.u.m_int;
         return true;
       }
     case value::SHORT:
@@ -1474,25 +1474,25 @@ inline bool value::divide(value& aThis,const value& aV,std::string& aError){
         aThis.set_none();
         return false;
       } else {
-        aThis.u.m_float /= aV.u.m_short;
+        aThis.u.m_G4float /= aV.u.m_short;
         return true;
       }
     case value::FLOAT:
-      if(aV.u.m_float==0.0F) {
+      if(aV.u.m_G4float==0.0F) {
         aError = value::error_div_zero();
         aThis.set_none();
         return false;
       } else {
-        aThis.u.m_float /= aV.u.m_float;
+        aThis.u.m_G4float /= aV.u.m_G4float;
         return true;
       }
     case value::DOUBLE:
-      if(aV.u.m_double==0.0F) {
+      if(aV.u.m_G4double==0.0F) {
         aError = value::error_div_zero();
         aThis.set_none();
         return false;
       } else {
-        double tmp = double(aThis.u.m_float)/aV.u.m_double;
+        G4double tmp = G4double(aThis.u.m_G4float)/aV.u.m_G4double;
         aThis.set(tmp);
         return true;
       }
@@ -1502,7 +1502,7 @@ inline bool value::divide(value& aThis,const value& aV,std::string& aError){
         aThis.set_none();
         return false;
       } else {
-        aThis.u.m_float /= aV.u.m_unsigned_int;
+        aThis.u.m_G4float /= aV.u.m_unsigned_int;
         return true;
       }
     case value::UNSIGNED_SHORT:
@@ -1511,7 +1511,7 @@ inline bool value::divide(value& aThis,const value& aV,std::string& aError){
         aThis.set_none();
         return false;
       } else {
-        aThis.u.m_float /= aV.u.m_unsigned_short;
+        aThis.u.m_G4float /= aV.u.m_unsigned_short;
         return true;
       }
     case value::UNSIGNED_INT64:
@@ -1520,7 +1520,7 @@ inline bool value::divide(value& aThis,const value& aV,std::string& aError){
         aThis.set_none();
         return false;
       } else {
-        double tmp = double(aThis.u.m_float)/aV.u.m_unsigned_int64;
+        G4double tmp = G4double(aThis.u.m_G4float)/aV.u.m_unsigned_int64;
         aThis.set(tmp);
         return true;
       }
@@ -1530,21 +1530,21 @@ inline bool value::divide(value& aThis,const value& aV,std::string& aError){
         aThis.set_none();
         return false;
       } else {
-        double tmp = double(aThis.u.m_float)/aV.u.m_int64;
+        G4double tmp = G4double(aThis.u.m_G4float)/aV.u.m_int64;
         aThis.set(tmp);
         return true;
       }
     case value::ARRAY_DOUBLE:{
-      double tmp = aThis.u.m_float;
+      G4double tmp = aThis.u.m_G4float;
       //In the below, this becomes a value::ARRAY_DOUBLE.
-      aThis.set(aV.u.m_array_double->orders(),
-                aV.u.m_array_double->vector());
-      if(!aThis.u.m_array_double->invert()) {
+      aThis.set(aV.u.m_array_G4double->orders(),
+                aV.u.m_array_G4double->vector());
+      if(!aThis.u.m_array_G4double->invert()) {
         aError = value::error_div_zero();
         aThis.set_none();
         return false;
       }
-      aThis.u.m_array_double->multiply(tmp);
+      aThis.u.m_array_G4double->multiply(tmp);
       return true;}
 
     case value::NONE:
@@ -1579,7 +1579,7 @@ inline bool value::divide(value& aThis,const value& aV,std::string& aError){
         aThis.set_none();
         return false;
       } else {
-        aThis.u.m_double /= aV.u.m_short;
+        aThis.u.m_G4double /= aV.u.m_short;
         return true;
       }
     case value::INT:
@@ -1588,7 +1588,7 @@ inline bool value::divide(value& aThis,const value& aV,std::string& aError){
         aThis.set_none();
         return false;
       } else {
-        aThis.u.m_double /= aV.u.m_int;
+        aThis.u.m_G4double /= aV.u.m_int;
         return true;
       }
     case value::INT64:
@@ -1597,25 +1597,25 @@ inline bool value::divide(value& aThis,const value& aV,std::string& aError){
         aThis.set_none();
         return false;
       } else {
-        aThis.u.m_double /= aV.u.m_int64;
+        aThis.u.m_G4double /= aV.u.m_int64;
         return true;
       }
     case value::FLOAT:
-      if(aV.u.m_float==0.0F) {
+      if(aV.u.m_G4float==0.0F) {
         aError = value::error_div_zero();
         aThis.set_none();
         return false;
       } else {
-        aThis.u.m_double /= aV.u.m_float;
+        aThis.u.m_G4double /= aV.u.m_G4float;
         return true;
       }
     case value::DOUBLE:
-      if(aV.u.m_double==0) {
+      if(aV.u.m_G4double==0) {
         aError = value::error_div_zero();
         aThis.set_none();
         return false;
       } else {
-        aThis.u.m_double /= aV.u.m_double;
+        aThis.u.m_G4double /= aV.u.m_G4double;
         return true;
       }
     case value::UNSIGNED_INT:
@@ -1624,7 +1624,7 @@ inline bool value::divide(value& aThis,const value& aV,std::string& aError){
         aThis.set_none();
         return false;
       } else {
-        aThis.u.m_double /= aV.u.m_unsigned_int;
+        aThis.u.m_G4double /= aV.u.m_unsigned_int;
         return true;
       }
     case value::UNSIGNED_SHORT:
@@ -1633,7 +1633,7 @@ inline bool value::divide(value& aThis,const value& aV,std::string& aError){
         aThis.set_none();
         return false;
       } else {
-        aThis.u.m_double /= aV.u.m_unsigned_short;
+        aThis.u.m_G4double /= aV.u.m_unsigned_short;
         return true;
       }
     case value::UNSIGNED_INT64:
@@ -1642,20 +1642,20 @@ inline bool value::divide(value& aThis,const value& aV,std::string& aError){
         aThis.set_none();
         return false;
       } else {
-        aThis.u.m_double /= aV.u.m_unsigned_int64;
+        aThis.u.m_G4double /= aV.u.m_unsigned_int64;
         return true;
       }
     case value::ARRAY_DOUBLE:{
-      double tmp = aThis.u.m_double;
+      G4double tmp = aThis.u.m_G4double;
       //In the below, this becomes a value::ARRAY_DOUBLE.
-      aThis.set(aV.u.m_array_double->orders(),
-                aV.u.m_array_double->vector());
-      if(!aThis.u.m_array_double->invert()) {
+      aThis.set(aV.u.m_array_G4double->orders(),
+                aV.u.m_array_G4double->vector());
+      if(!aThis.u.m_array_G4double->invert()) {
         aError = value::error_div_zero();
         aThis.set_none();
         return false;
       }
-      aThis.u.m_array_double->multiply(tmp);
+      aThis.u.m_array_G4double->multiply(tmp);
       return true;}
 
     case value::NONE:
@@ -1695,36 +1695,36 @@ inline bool value::divide(value& aThis,const value& aV,std::string& aError){
         return true;
       }
     case value::FLOAT:
-      if(aV.u.m_float==0) {
+      if(aV.u.m_G4float==0) {
         aError = value::error_div_zero();
         aThis.set_none();
         return false;
       } else {
-        float d = float(aThis.u.m_unsigned_int)/aV.u.m_float;
+        G4float d = G4float(aThis.u.m_unsigned_int)/aV.u.m_G4float;
         aThis.set(d); //this becomes a value::FLOAT.
         return true;
       }
     case value::DOUBLE:
-      if(aV.u.m_double==0) {
+      if(aV.u.m_G4double==0) {
         aError = value::error_div_zero();
         aThis.set_none();
         return false;
       } else {
-        double d = double(aThis.u.m_unsigned_int)/aV.u.m_double;
+        G4double d = G4double(aThis.u.m_unsigned_int)/aV.u.m_G4double;
         aThis.set(d); //this becomes a value::DOUBLE.
         return true;
       }
     case value::ARRAY_DOUBLE:{
       unsigned int tmp = aThis.u.m_unsigned_int;
       //In the below, this becomes a value::ARRAY_DOUBLE.
-      aThis.set(aV.u.m_array_double->orders(),
-                aV.u.m_array_double->vector());
-      if(!aThis.u.m_array_double->invert()) {
+      aThis.set(aV.u.m_array_G4double->orders(),
+                aV.u.m_array_G4double->vector());
+      if(!aThis.u.m_array_G4double->invert()) {
         aError = value::error_div_zero();
         aThis.set_none();
         return false;
       }
-      aThis.u.m_array_double->multiply(double(tmp));
+      aThis.u.m_array_G4double->multiply(G4double(tmp));
       return true;}
 
     case value::NONE:
@@ -1764,8 +1764,8 @@ inline bool value::divide(value& aThis,const value& aV,std::string& aError){
         aThis.set_none();
         return false;
       } else {
-        double value = 1./aV.u.m_int;
-        aThis.u.m_array_double->multiply(value);
+        G4double value = 1./aV.u.m_int;
+        aThis.u.m_array_G4double->multiply(value);
         return true;
       }
     case value::UNSIGNED_INT:
@@ -1774,27 +1774,27 @@ inline bool value::divide(value& aThis,const value& aV,std::string& aError){
         aThis.set_none();
         return false;
       } else {
-        double value = 1./aV.u.m_unsigned_int;
-        aThis.u.m_array_double->multiply(value);
+        G4double value = 1./aV.u.m_unsigned_int;
+        aThis.u.m_array_G4double->multiply(value);
         return true;
       }
     case value::DOUBLE:
-      if(aV.u.m_double==0) {
+      if(aV.u.m_G4double==0) {
         aError = value::error_div_zero();
         aThis.set_none();
         return false;
       } else {
-        aThis.u.m_array_double->multiply(1./aV.u.m_double);
+        aThis.u.m_array_G4double->multiply(1./aV.u.m_G4double);
         return true;
       }
     case value::ARRAY_DOUBLE:{
-      if(aThis.u.m_array_double->orders()!=aV.u.m_array_double->orders()) {
+      if(aThis.u.m_array_G4double->orders()!=aV.u.m_array_G4double->orders()) {
         aError = value::error_div_zero(); //FIXME : error_mismatch_orders
         aThis.set_none();
         return false;
       }
-      std::vector<double>& stdv = aThis.u.m_array_double->vector();
-      const std::vector<double>& stdv2 = aV.u.m_array_double->vector();
+      std::vector<G4double>& stdv = aThis.u.m_array_G4double->vector();
+      const std::vector<G4double>& stdv2 = aV.u.m_array_G4double->vector();
       bool has_div_zero = false;
       size_t number = stdv.size();
       for(size_t index=0;index<number;index++) {
@@ -1893,10 +1893,10 @@ inline bool value::if_gt(value& aThis,const value& aV,std::string& aError){
       aThis.set((bool)(aThis.u.m_int>aV.u.m_int?true:false));
       return true;
     case value::FLOAT:
-      aThis.set((bool)(aThis.u.m_int>aV.u.m_float?true:false));
+      aThis.set((bool)(aThis.u.m_int>aV.u.m_G4float?true:false));
       return true;
     case value::DOUBLE:
-      aThis.set((bool)(aThis.u.m_int>aV.u.m_double?true:false));
+      aThis.set((bool)(aThis.u.m_int>aV.u.m_G4double?true:false));
       return true;
     case value::UNSIGNED_SHORT :
       aThis.set((bool)(aThis.u.m_int>(int)aV.u.m_unsigned_short?true:false));
@@ -1905,7 +1905,7 @@ inline bool value::if_gt(value& aThis,const value& aV,std::string& aError){
       aThis.set((bool)(aThis.u.m_int>(int)aV.u.m_unsigned_int?true:false));
       return true;
     case value::ARRAY_DOUBLE:{
-      const std::vector<double>& stdv = aV.u.m_array_double->vector();
+      const std::vector<G4double>& stdv = aV.u.m_array_G4double->vector();
       size_t number = stdv.size();
       for(size_t index=0;index<number;index++) {
         if(aThis.u.m_int<=stdv[index]) {
@@ -1946,25 +1946,25 @@ inline bool value::if_gt(value& aThis,const value& aV,std::string& aError){
   case value::DOUBLE:
     switch(aV.m_type) {
     case value::DOUBLE:
-      aThis.set((bool)(aThis.u.m_double>aV.u.m_double?true:false));
+      aThis.set((bool)(aThis.u.m_G4double>aV.u.m_G4double?true:false));
       return true;
     case value::FLOAT:
-      aThis.set((bool)(aThis.u.m_double>aV.u.m_float?true:false));
+      aThis.set((bool)(aThis.u.m_G4double>aV.u.m_G4float?true:false));
       return true;
     case value::INT:
-      aThis.set((bool)(aThis.u.m_double>aV.u.m_int?true:false));
+      aThis.set((bool)(aThis.u.m_G4double>aV.u.m_int?true:false));
       return true;
     case value::UNSIGNED_SHORT :
-      aThis.set((bool)(aThis.u.m_double>aV.u.m_unsigned_short?true:false));
+      aThis.set((bool)(aThis.u.m_G4double>aV.u.m_unsigned_short?true:false));
       return true;
     case value::UNSIGNED_INT:
-      aThis.set((bool)(aThis.u.m_double>aV.u.m_unsigned_int?true:false));
+      aThis.set((bool)(aThis.u.m_G4double>aV.u.m_unsigned_int?true:false));
       return true;
     case value::ARRAY_DOUBLE:{
-      const std::vector<double>& stdv = aV.u.m_array_double->vector();
+      const std::vector<G4double>& stdv = aV.u.m_array_G4double->vector();
       size_t number = stdv.size();
       for(size_t index=0;index<number;index++) {
-        if(aThis.u.m_double<=stdv[index]) {
+        if(aThis.u.m_G4double<=stdv[index]) {
           aThis.set(false);
           return true;
         }
@@ -2002,25 +2002,25 @@ inline bool value::if_gt(value& aThis,const value& aV,std::string& aError){
   case value::FLOAT:
     switch(aV.m_type) {
     case value::DOUBLE:
-      aThis.set((bool)(aThis.u.m_float>aV.u.m_double?true:false));
+      aThis.set((bool)(aThis.u.m_G4float>aV.u.m_G4double?true:false));
       return true;
     case value::FLOAT:
-      aThis.set((bool)(aThis.u.m_float>aV.u.m_float?true:false));
+      aThis.set((bool)(aThis.u.m_G4float>aV.u.m_G4float?true:false));
       return true;
     case value::INT:
-      aThis.set((bool)(aThis.u.m_float>aV.u.m_int?true:false));
+      aThis.set((bool)(aThis.u.m_G4float>aV.u.m_int?true:false));
       return true;
     case value::UNSIGNED_SHORT :
-      aThis.set((bool)(aThis.u.m_float>aV.u.m_unsigned_short?true:false));
+      aThis.set((bool)(aThis.u.m_G4float>aV.u.m_unsigned_short?true:false));
       return true;
     case value::UNSIGNED_INT:
-      aThis.set((bool)(aThis.u.m_float>aV.u.m_unsigned_int?true:false));
+      aThis.set((bool)(aThis.u.m_G4float>aV.u.m_unsigned_int?true:false));
       return true;
     case value::ARRAY_DOUBLE:{
-      const std::vector<double>& stdv = aV.u.m_array_double->vector();
+      const std::vector<G4double>& stdv = aV.u.m_array_G4double->vector();
       size_t number = stdv.size();
       for(size_t index=0;index<number;index++) {
-        if(aThis.u.m_float<=stdv[index]) {
+        if(aThis.u.m_G4float<=stdv[index]) {
           aThis.set(false);
           return true;
         }
@@ -2100,10 +2100,10 @@ inline bool value::if_gt(value& aThis,const value& aV,std::string& aError){
       aThis.set((bool)((int)aThis.u.m_unsigned_int >aV.u.m_int?true:false));
       return true;
     case value::DOUBLE:
-      aThis.set((bool)(double(aThis.u.m_unsigned_int)>aV.u.m_double?true:false));
+      aThis.set((bool)(G4double(aThis.u.m_unsigned_int)>aV.u.m_G4double?true:false));
       return true;
     case value::FLOAT:
-      aThis.set((bool)(float(aThis.u.m_unsigned_int)>aV.u.m_float?true:false));
+      aThis.set((bool)(G4float(aThis.u.m_unsigned_int)>aV.u.m_G4float?true:false));
       return true;
     case value::NONE:
     case value::VOID_STAR:
@@ -2136,7 +2136,7 @@ inline bool value::if_gt(value& aThis,const value& aV,std::string& aError){
   case value::ARRAY_DOUBLE:
     switch(aV.m_type) {
     case value::INT:{
-      const std::vector<double>& stdv = aThis.u.m_array_double->vector();
+      const std::vector<G4double>& stdv = aThis.u.m_array_G4double->vector();
       size_t number = stdv.size();
       for(size_t index=0;index<number;index++) {
         if(stdv[index]<=aV.u.m_int) {
@@ -2148,10 +2148,10 @@ inline bool value::if_gt(value& aThis,const value& aV,std::string& aError){
       return true;
     }
     case value::FLOAT:{
-      const std::vector<double>& stdv = aThis.u.m_array_double->vector();
+      const std::vector<G4double>& stdv = aThis.u.m_array_G4double->vector();
       size_t number = stdv.size();
       for(size_t index=0;index<number;index++) {
-        if(stdv[index]<=aV.u.m_float) {
+        if(stdv[index]<=aV.u.m_G4float) {
           aThis.set(false);
           return true;
         }
@@ -2160,10 +2160,10 @@ inline bool value::if_gt(value& aThis,const value& aV,std::string& aError){
       return true;
     }
     case value::DOUBLE:{
-      const std::vector<double>& stdv = aThis.u.m_array_double->vector();
+      const std::vector<G4double>& stdv = aThis.u.m_array_G4double->vector();
       size_t number = stdv.size();
       for(size_t index=0;index<number;index++) {
-        if(stdv[index]<=aV.u.m_double) {
+        if(stdv[index]<=aV.u.m_G4double) {
           aThis.set(false);
           return true;
         }
@@ -2172,7 +2172,7 @@ inline bool value::if_gt(value& aThis,const value& aV,std::string& aError){
       return true;
     }
     case value::UNSIGNED_INT:{
-      const std::vector<double>& stdv = aThis.u.m_array_double->vector();
+      const std::vector<G4double>& stdv = aThis.u.m_array_G4double->vector();
       size_t number = stdv.size();
       for(size_t index=0;index<number;index++) {
         if(stdv[index]<=aV.u.m_unsigned_int ) {
@@ -2184,8 +2184,8 @@ inline bool value::if_gt(value& aThis,const value& aV,std::string& aError){
       return true;
     }
     case value::ARRAY_DOUBLE:{
-      const std::vector<double>& stdv = aThis.u.m_array_double->vector();
-      const std::vector<double>& stdv2 = aV.u.m_array_double->vector();
+      const std::vector<G4double>& stdv = aThis.u.m_array_G4double->vector();
+      const std::vector<G4double>& stdv2 = aV.u.m_array_G4double->vector();
       if(stdv.size()!=stdv2.size()) break;
       size_t number = stdv.size();
       for(size_t index=0;index<number;index++) {
@@ -2267,10 +2267,10 @@ inline bool value::if_eq(value& aThis,const value& aV,std::string& aError){
       aThis.set((bool)(aThis.u.m_int==aV.u.m_int?true:false));
       return true;
     case value::DOUBLE:
-      aThis.set((bool)(aThis.u.m_int==aV.u.m_double?true:false));
+      aThis.set((bool)(aThis.u.m_int==aV.u.m_G4double?true:false));
       return true;
     case value::FLOAT:
-      aThis.set((bool)(aThis.u.m_int==aV.u.m_float?true:false));
+      aThis.set((bool)(aThis.u.m_int==aV.u.m_G4float?true:false));
       return true;
     case value::UNSIGNED_SHORT :
       aThis.set((bool)(aThis.u.m_int==(int)aV.u.m_unsigned_short?true:false));
@@ -2279,7 +2279,7 @@ inline bool value::if_eq(value& aThis,const value& aV,std::string& aError){
       aThis.set((bool)(aThis.u.m_int==(int)aV.u.m_unsigned_int ?true:false));
       return true;
     case value::ARRAY_DOUBLE:{
-      const std::vector<double>& stdv = aV.u.m_array_double->vector();
+      const std::vector<G4double>& stdv = aV.u.m_array_G4double->vector();
       size_t number = stdv.size();
       for(size_t index=0;index<number;index++) {
         if(aThis.u.m_int!=stdv[index]) {
@@ -2322,25 +2322,25 @@ inline bool value::if_eq(value& aThis,const value& aV,std::string& aError){
   case value::FLOAT:
     switch(aV.m_type) {
     case value::FLOAT:
-      aThis.set((bool)(aThis.u.m_float==aV.u.m_float?true:false));
+      aThis.set((bool)(aThis.u.m_G4float==aV.u.m_G4float?true:false));
       return true;
     case value::DOUBLE:
-      aThis.set((bool)(aThis.u.m_float==aV.u.m_double?true:false));
+      aThis.set((bool)(aThis.u.m_G4float==aV.u.m_G4double?true:false));
       return true;
     case value::INT:
-      aThis.set((bool)(aThis.u.m_float==aV.u.m_int?true:false));
+      aThis.set((bool)(aThis.u.m_G4float==aV.u.m_int?true:false));
       return true;
     case value::UNSIGNED_SHORT :
-      aThis.set((bool)(aThis.u.m_float==aV.u.m_unsigned_short?true:false));
+      aThis.set((bool)(aThis.u.m_G4float==aV.u.m_unsigned_short?true:false));
       return true;
     case value::UNSIGNED_INT:
-      aThis.set((bool)(aThis.u.m_float==aV.u.m_unsigned_int?true:false));
+      aThis.set((bool)(aThis.u.m_G4float==aV.u.m_unsigned_int?true:false));
       return true;
     case value::ARRAY_DOUBLE:{
-      const std::vector<double>& stdv = aV.u.m_array_double->vector();
+      const std::vector<G4double>& stdv = aV.u.m_array_G4double->vector();
       size_t number = stdv.size();
       for(size_t index=0;index<number;index++) {
-        if(aThis.u.m_float!=stdv[index]) {
+        if(aThis.u.m_G4float!=stdv[index]) {
           aThis.set(false);
           return true;
         }
@@ -2378,25 +2378,25 @@ inline bool value::if_eq(value& aThis,const value& aV,std::string& aError){
   case value::DOUBLE:
     switch(aV.m_type) {
     case value::DOUBLE:
-      aThis.set((bool)(aThis.u.m_double==aV.u.m_double?true:false));
+      aThis.set((bool)(aThis.u.m_G4double==aV.u.m_G4double?true:false));
       return true;
     case value::FLOAT:
-      aThis.set((bool)(aThis.u.m_double==aV.u.m_float?true:false));
+      aThis.set((bool)(aThis.u.m_G4double==aV.u.m_G4float?true:false));
       return true;
     case value::INT:
-      aThis.set((bool)(aThis.u.m_double==aV.u.m_int?true:false));
+      aThis.set((bool)(aThis.u.m_G4double==aV.u.m_int?true:false));
       return true;
     case value::UNSIGNED_SHORT :
-      aThis.set((bool)(aThis.u.m_double==aV.u.m_unsigned_short?true:false));
+      aThis.set((bool)(aThis.u.m_G4double==aV.u.m_unsigned_short?true:false));
       return true;
     case value::UNSIGNED_INT:
-      aThis.set((bool)(aThis.u.m_double==aV.u.m_unsigned_int ?true:false));
+      aThis.set((bool)(aThis.u.m_G4double==aV.u.m_unsigned_int ?true:false));
       return true;
     case value::ARRAY_DOUBLE:{
-      const std::vector<double>& stdv = aV.u.m_array_double->vector();
+      const std::vector<G4double>& stdv = aV.u.m_array_G4double->vector();
       size_t number = stdv.size();
       for(size_t index=0;index<number;index++) {
-        if(aThis.u.m_double!=stdv[index]) {
+        if(aThis.u.m_G4double!=stdv[index]) {
           aThis.set(false);
           return true;
         }
@@ -2442,14 +2442,14 @@ inline bool value::if_eq(value& aThis,const value& aV,std::string& aError){
       aThis.set((bool)(v==aV.u.m_int?true:false));
       return true;}
     case value::FLOAT:
-     {float v;
-      if(!to<float>(*aThis.u.m_string,v)) break;
-      aThis.set((bool)(v==aV.u.m_float?true:false));
+     {G4float v;
+      if(!to<G4float>(*aThis.u.m_string,v)) break;
+      aThis.set((bool)(v==aV.u.m_G4float?true:false));
       return true;}
     case value::DOUBLE:
-     {double v;
-      if(!to<double>(*aThis.u.m_string,v)) break;
-      aThis.set((bool)(v==aV.u.m_double?true:false));
+     {G4double v;
+      if(!to<G4double>(*aThis.u.m_string,v)) break;
+      aThis.set((bool)(v==aV.u.m_G4double?true:false));
       return true;}
     case value::UNSIGNED_INT:
      {typedef unsigned int uint_t;
@@ -2533,13 +2533,13 @@ inline bool value::if_eq(value& aThis,const value& aV,std::string& aError){
       aThis.set((bool)((int)aThis.u.m_unsigned_int ==aV.u.m_int?true:false));
       return true;
     case value::FLOAT:
-      aThis.set((bool)((int)aThis.u.m_unsigned_int ==aV.u.m_float?true:false));
+      aThis.set((bool)((int)aThis.u.m_unsigned_int ==aV.u.m_G4float?true:false));
       return true;
     case value::DOUBLE:
-      aThis.set((bool)((int)aThis.u.m_unsigned_int ==aV.u.m_double?true:false));
+      aThis.set((bool)((int)aThis.u.m_unsigned_int ==aV.u.m_G4double?true:false));
       return true;
     case value::ARRAY_DOUBLE:{
-      const std::vector<double>& stdv = aV.u.m_array_double->vector();
+      const std::vector<G4double>& stdv = aV.u.m_array_G4double->vector();
       size_t number = stdv.size();
       for(size_t index=0;index<number;index++) {
         if(aThis.u.m_unsigned_int !=stdv[index]) {
@@ -2617,7 +2617,7 @@ inline bool value::if_eq(value& aThis,const value& aV,std::string& aError){
   case value::ARRAY_DOUBLE:
     switch(aV.m_type) {
     case value::INT:{
-      const std::vector<double>& stdv = aThis.u.m_array_double->vector();
+      const std::vector<G4double>& stdv = aThis.u.m_array_G4double->vector();
       size_t number = stdv.size();
       for(size_t index=0;index<number;index++) {
         if(stdv[index]!=aV.u.m_int) {
@@ -2629,10 +2629,10 @@ inline bool value::if_eq(value& aThis,const value& aV,std::string& aError){
       return true;
     }
     case value::FLOAT:{
-      const std::vector<double>& stdv = aThis.u.m_array_double->vector();
+      const std::vector<G4double>& stdv = aThis.u.m_array_G4double->vector();
       size_t number = stdv.size();
       for(size_t index=0;index<number;index++) {
-        if(stdv[index]!=aV.u.m_float) {
+        if(stdv[index]!=aV.u.m_G4float) {
           aThis.set(false);
           return true;
         }
@@ -2641,10 +2641,10 @@ inline bool value::if_eq(value& aThis,const value& aV,std::string& aError){
       return true;
     }
     case value::DOUBLE:{
-      const std::vector<double>& stdv = aThis.u.m_array_double->vector();
+      const std::vector<G4double>& stdv = aThis.u.m_array_G4double->vector();
       size_t number = stdv.size();
       for(size_t index=0;index<number;index++) {
-        if(stdv[index]!=aV.u.m_double) {
+        if(stdv[index]!=aV.u.m_G4double) {
           aThis.set(false);
           return true;
         }
@@ -2653,7 +2653,7 @@ inline bool value::if_eq(value& aThis,const value& aV,std::string& aError){
       return true;
     }
     case value::UNSIGNED_INT:{
-      const std::vector<double>& stdv = aThis.u.m_array_double->vector();
+      const std::vector<G4double>& stdv = aThis.u.m_array_G4double->vector();
       size_t number = stdv.size();
       for(size_t index=0;index<number;index++) {
         if(stdv[index]!=aV.u.m_unsigned_int ) {
@@ -2665,8 +2665,8 @@ inline bool value::if_eq(value& aThis,const value& aV,std::string& aError){
       return true;
     }
     case value::ARRAY_DOUBLE:{
-      const std::vector<double>& stdv = aThis.u.m_array_double->vector();
-      const std::vector<double>& stdv2 = aV.u.m_array_double->vector();
+      const std::vector<G4double>& stdv = aThis.u.m_array_G4double->vector();
+      const std::vector<G4double>& stdv2 = aV.u.m_array_G4double->vector();
       if(stdv.size()!=stdv2.size()) {
         aThis.set(false);
         return true;
@@ -2892,13 +2892,13 @@ inline bool value::if_or(value& aThis,const value& aV,std::string& aError){
   return false;
 }
 
-inline bool value::to_double(const value& aThis,double& aValue){
+inline bool value::to_G4double(const value& aThis,G4double& aValue){
   switch(aThis.m_type) {
   case value::INT:
     aValue = aThis.u.m_int;
     return true;
   case value::DOUBLE:
-    aValue = aThis.u.m_double;
+    aValue = aThis.u.m_G4double;
     return true;
   case value::UNSIGNED_SHORT:
     aValue = aThis.u.m_unsigned_short;
@@ -2910,13 +2910,13 @@ inline bool value::to_double(const value& aThis,double& aValue){
     aValue = aThis.u.m_short;
     return true;
   case value::INT64:
-    aValue = (double)aThis.u.m_int64;
+    aValue = (G4double)aThis.u.m_int64;
     return true;
   case value::UNSIGNED_INT64:
-    aValue = (double)aThis.u.m_unsigned_int64;
+    aValue = (G4double)aThis.u.m_unsigned_int64;
     return true;
   case value::FLOAT:
-    aValue = aThis.u.m_float;
+    aValue = aThis.u.m_G4float;
     return true;
   //case value::UNSIGNED_CHAR:
   //  aValue = aThis.u.m_unsigned_char;
@@ -2957,7 +2957,7 @@ inline bool value::cxx_type(const value& aThis,std::string& aValue){
     aValue = "int";
     return true;
   case value::DOUBLE:
-    aValue = "double";
+    aValue = "G4double";
     return true;
   case value::STRING:
     aValue = "std::string";
@@ -2969,7 +2969,7 @@ inline bool value::cxx_type(const value& aThis,std::string& aValue){
     aValue = "short";
     return true;
   case value::FLOAT:
-    aValue = "float";
+    aValue = "G4float";
     return true;
   //case value::CHAR:
   //  aValue = "char";
@@ -2987,10 +2987,10 @@ inline bool value::cxx_type(const value& aThis,std::string& aValue){
     aValue = "void*";
     return true;
   case value::DOUBLE_STAR:
-    aValue = "double*";
+    aValue = "G4double*";
     return true;
   case value::FLOAT_STAR:
-    aValue = "float*";
+    aValue = "G4float*";
     return true;
   case value::INT_STAR:
     aValue = "int*";
@@ -3051,19 +3051,19 @@ inline bool value::i_set(value& aThis,const Slash::Core::IValue& aValue){
     aThis.u.m_unsigned_int  = aValue.get_unsigned_int();
     return true;
   case value::DOUBLE_STAR:
-    aThis.u.m_double_star  = aValue.get_double_star();
+    aThis.u.m_G4double_star  = aValue.get_G4double_star();
     return true;
   case value::FLOAT_STAR:
-    aThis.u.m_float_star  = aValue.get_float_star();
+    aThis.u.m_G4float_star  = aValue.get_G4float_star();
     return true;
   case value::INT_STAR:
     aThis.u.m_int_star  = aValue.get_int_star();
     return true;
   case value::FLOAT:
-    aThis.u.m_float = aValue.get_float();
+    aThis.u.m_G4float = aValue.get_G4float();
     return true;
   case value::DOUBLE:
-    aThis.u.m_double = aValue.get_double();
+    aThis.u.m_G4double = aValue.get_G4double();
     return true;
   case value::VOID_STAR:
     aThis.u.m_void_star = aValue.get_void_star();
@@ -3157,18 +3157,18 @@ inline bool value::i_set(value& aThis,const Slash::Core::IValue& aValue){
 
   case value::ARRAY_FLOAT:
    {std::vector<unsigned int> is;
-    const std::vector<float>& vd = aValue.get_array_float(is);
-    aThis.u.m_array_float = new array<float>();
-    if(!aThis.u.m_array_float->configure(is)){aThis.set_none();return false;}
-    if(!aThis.u.m_array_float->fill(vd)){aThis.set_none();return false;}
+    const std::vector<G4float>& vd = aValue.get_array_G4float(is);
+    aThis.u.m_array_G4float = new array<G4float>();
+    if(!aThis.u.m_array_G4float->configure(is)){aThis.set_none();return false;}
+    if(!aThis.u.m_array_G4float->fill(vd)){aThis.set_none();return false;}
     return true;}
 
   case value::ARRAY_DOUBLE:
    {std::vector<unsigned int> is;
-    const std::vector<double>& vd = aValue.get_array_double(is);
-    aThis.u.m_array_double = new array<double>();
-    if(!aThis.u.m_array_double->configure(is)){aThis.set_none();return false;}
-    if(!aThis.u.m_array_double->fill(vd)){aThis.set_none();return false;}
+    const std::vector<G4double>& vd = aValue.get_array_G4double(is);
+    aThis.u.m_array_G4double = new array<G4double>();
+    if(!aThis.u.m_array_G4double->configure(is)){aThis.set_none();return false;}
+    if(!aThis.u.m_array_G4double->fill(vd)){aThis.set_none();return false;}
     return true;}
 
   case value::ARRAY_BOOL:
@@ -3204,7 +3204,7 @@ inline std::string value::to_string(const value& aThis){
     sprintf(s,16,"%d",aThis.u.m_int);
     return s;
   case value::DOUBLE:
-    sprintf(s,16,"%g",aThis.u.m_double);
+    sprintf(s,16,"%g",aThis.u.m_G4double);
     return s;
   case value::VOID_STAR:
     sprintf(s,32,upointer_format_x(),(upointer)aThis.u.m_void_star);
@@ -3228,7 +3228,7 @@ inline std::string value::to_string(const value& aThis){
     sprintf(s,16,int64_format(),aThis.u.m_unsigned_int64);
    }return s;
   case value::FLOAT:
-    sprintf(s,16,"%g",aThis.u.m_float);
+    sprintf(s,16,"%g",aThis.u.m_G4float);
     return s;
   //case value::UNSIGNED_CHAR:
   //  sprintf(s,16,"%c",aThis.u.m_unsigned_char);
@@ -3237,10 +3237,10 @@ inline std::string value::to_string(const value& aThis){
   //  sprintf(s,16,"%c",aThis.u.m_char);
   //  return s;
   case value::DOUBLE_STAR:
-    sprintf(s,32,upointer_format_x(),(upointer)aThis.u.m_double_star);
+    sprintf(s,32,upointer_format_x(),(upointer)aThis.u.m_G4double_star);
     return s;
   case value::FLOAT_STAR:
-    sprintf(s,32,upointer_format_x(),(upointer)aThis.u.m_float_star);
+    sprintf(s,32,upointer_format_x(),(upointer)aThis.u.m_G4float_star);
     return s;
   case value::INT_STAR:
     sprintf(s,32,upointer_format_x(),(upointer)aThis.u.m_int_star);
@@ -3274,10 +3274,10 @@ inline std::string value::to_string(const value& aThis){
     return s;
 
   case value::ARRAY_FLOAT:
-    if(!nums2s<float>(aThis.u.m_array_float->vector(),s)) {}
+    if(!nums2s<G4float>(aThis.u.m_array_G4float->vector(),s)) {}
     return s;
   case value::ARRAY_DOUBLE:
-    if(!nums2s<double>(aThis.u.m_array_double->vector(),s)) {}
+    if(!nums2s<G4double>(aThis.u.m_array_G4double->vector(),s)) {}
     return s;
   case value::ARRAY_BOOL:
     b2s(aThis.u.m_array_bool->vector(),s);

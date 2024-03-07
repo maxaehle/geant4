@@ -57,7 +57,7 @@ G4BertiniElectroNuclearBuilder( eNucl )
 G4LENDBertiniGammaElectroNuclearBuilder::~G4LENDBertiniGammaElectroNuclearBuilder() 
 {
 /*
-  DHW 13 Jan 2020 - fix double deletion error; these deletes are already done in the base class dtor
+  DHW 13 Jan 2020 - fix G4double deletion error; these deletes are already done in the base class dtor
                     (Coverity bugs 101609 and 101727) 
   if ( wasActivated ) {
      delete theFragmentation;

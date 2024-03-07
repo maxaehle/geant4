@@ -68,9 +68,9 @@ G4VPhysicalVolume* DetConstruction::Construct()
 
   // "Detector"
 
-  double rmin    = 10.*CLHEP::cm;
-  double rmax    = 80.*CLHEP::cm;
-  double zlength = 98.*CLHEP::cm;
+  G4double rmin    = 10.*CLHEP::cm;
+  G4double rmax    = 80.*CLHEP::cm;
+  G4double zlength = 98.*CLHEP::cm;
   
   G4VSolid* sDet = new G4Tubs( "det_solid", 
                                rmin, rmax, 0.5*zlength, 

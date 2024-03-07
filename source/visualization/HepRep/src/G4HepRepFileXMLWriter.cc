@@ -179,7 +179,7 @@ void G4HepRepFileXMLWriter::addPrimitive()
   }
 }
 
-void G4HepRepFileXMLWriter::addPoint(double x, double y, double z)
+void G4HepRepFileXMLWriter::addPoint(G4double x, G4double y, G4double z)
 {
   if(fout.good())
   {
@@ -258,7 +258,7 @@ void G4HepRepFileXMLWriter::addAttValue(const char* name, const char* value)
   }
 }
 
-void G4HepRepFileXMLWriter::addAttValue(const char* name, double value)
+void G4HepRepFileXMLWriter::addAttValue(const char* name, G4double value)
 {
   if(fout.good())
   {
@@ -318,8 +318,8 @@ void G4HepRepFileXMLWriter::addAttValue(const char* name, bool value)
   }
 }
 
-void G4HepRepFileXMLWriter::addAttValue(const char* name, double value1,
-                                        double value2, double value3)
+void G4HepRepFileXMLWriter::addAttValue(const char* name, G4double value1,
+                                        G4double value2, G4double value3)
 {
   if(fout.good())
   {

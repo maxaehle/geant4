@@ -256,12 +256,12 @@ Construct()
     
     position.setZ(0.0);
     fCopyNumber = 0;
-    for(double x = 0.0;
+    for(G4double x = 0.0;
         x <= plateRadius;
         x += xSpacing)
     {
         // 5 rows of plates
-        for(double y = 0.0;
+        for(G4double y = 0.0;
             y <= plateRadius;
             y += ySpacing)
         {
@@ -540,8 +540,8 @@ DefineMaterials(void)
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 void FFDetectorConstruction::
-PlaceFuelPlate(double x,
-               double y,
+PlaceFuelPlate(G4double x,
+               G4double y,
                G4LogicalVolume* const myLogicalVolume,
                G4LogicalVolume* const parentLogicalVolume)
 {

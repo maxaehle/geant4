@@ -79,8 +79,8 @@ void G4AdjointCSMatrix::Clear()
 
 ///////////////////////////////////////////////////////
 void G4AdjointCSMatrix::AddData(G4double aLogPrimEnergy, G4double aLogCS,
-                                std::vector<double>* aLogSecondEnergyVector,
-                                std::vector<double>* aLogProbVector,
+                                std::vector<G4double>* aLogSecondEnergyVector,
+                                std::vector<G4double>* aLogProbVector,
                                 size_t n_pro_decade)
 {
   G4AdjointInterpolator* theInterpolator = G4AdjointInterpolator::GetInstance();
@@ -121,8 +121,8 @@ void G4AdjointCSMatrix::AddData(G4double aLogPrimEnergy, G4double aLogCS,
 ///////////////////////////////////////////////////////
 G4bool G4AdjointCSMatrix::GetData(unsigned int i, G4double& aLogPrimEnergy,
                                   G4double& aLogCS, G4double& log0,
-                                  std::vector<double>*& aLogSecondEnergyVector,
-                                  std::vector<double>*& aLogProbVector,
+                                  std::vector<G4double>*& aLogSecondEnergyVector,
+                                  std::vector<G4double>*& aLogProbVector,
                                   std::vector<size_t>*& aLogProbVectorIndex)
 {
   if(i >= fNbPrimEnergy)

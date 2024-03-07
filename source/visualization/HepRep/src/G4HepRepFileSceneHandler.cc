@@ -706,9 +706,9 @@ void G4HepRepFileSceneHandler::AddCompound(const G4VTrajectory& traj)
     previousName = hepRepXMLWriter->prevTypeName[2];
     hepRepXMLWriter->addType("Trajectory Step Points", 2);
 
-    float redness;
-    float greenness;
-    float blueness;
+    G4float redness;
+    G4float greenness;
+    G4float blueness;
     G4int markSize;
     G4bool visible;
     G4bool square;
@@ -816,9 +816,9 @@ void G4HepRepFileSceneHandler::AddCompound(const G4VTrajectory& traj)
     previousName = hepRepXMLWriter->prevTypeName[2];
     hepRepXMLWriter->addType("Trajectory Auxiliary Points", 2);
 
-    float redness;
-    float greenness;
-    float blueness;
+    G4float redness;
+    G4float greenness;
+    G4float blueness;
     G4int markSize;
     G4bool visible;
     G4bool square;
@@ -1221,9 +1221,9 @@ void G4HepRepFileSceneHandler::AddPrimitive(const G4Text& text)
   hepRepXMLWriter->addAttValue("FontBannerColor", "0,0,0");
 
   const G4Colour& colour = GetTextColour(text);
-  float redness          = colour.GetRed();
-  float greenness        = colour.GetGreen();
-  float blueness         = colour.GetBlue();
+  G4float redness          = colour.GetRed();
+  G4float greenness        = colour.GetGreen();
+  G4float blueness         = colour.GetBlue();
 
   // Avoiding drawing anything black on black.
   if(redness == 0. && greenness == 0. && blueness == 0.)
@@ -1604,9 +1604,9 @@ void G4HepRepFileSceneHandler::AddHepRepInstance(const char* primName,
   hepRepXMLWriter->addAttValue("DrawAs", primName);
 
   // Handle color and visibility attributes.
-  float redness;
-  float greenness;
-  float blueness;
+  G4float redness;
+  G4float greenness;
+  G4float blueness;
   G4bool isVisible;
 
   if(fpVisAttribs || haveVisible)

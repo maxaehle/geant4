@@ -71,7 +71,7 @@ G4KDNode_Base* __1DSortOut::PopOutMiddle()
   G4KDNode_Base* pos = GetMidle(middle);
   _deq_iterator deq_pos = fContainer.begin() + middle;
 
-  if(deq_pos == fContainer.end()) return 0; // this is a double check
+  if(deq_pos == fContainer.end()) return 0; // this is a G4double check
 
   fContainer.erase(deq_pos);
   return pos;

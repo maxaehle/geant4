@@ -47,7 +47,7 @@ struct PoP_s {              /* Any changes here must be reflected in functions P
     enum PoPs_genre genre;
     char const *name;
     int Z, A, l;
-    double mass;            /* Mass to be added to base. */
+    G4double mass;            /* Mass to be added to base. */
     char const *massUnit;
 };
 
@@ -68,8 +68,8 @@ int PoPs_numberOfParticle( void );
 int PoPs_particleIndex( char const *name );
 int PoPs_particleIndex_smr( statusMessageReporting *smr, char const *name, char const *file, int line, char const *func );
 char const *PoPs_getName_atIndex( statusMessageReporting *smr, int index );
-double PoPs_getMassInUnitOf( statusMessageReporting *smr, char const *name, char const *unit );
-double PoPs_getMassInUnitOf_atIndex( statusMessageReporting *smr, int index, char const *unit );
+G4double PoPs_getMassInUnitOf( statusMessageReporting *smr, char const *name, char const *unit );
+G4double PoPs_getMassInUnitOf_atIndex( statusMessageReporting *smr, int index, char const *unit );
 enum PoPs_genre PoPs_getGenre( statusMessageReporting *smr, char const *name );
 enum PoPs_genre PoPs_getGenre_atIndex( statusMessageReporting *smr, int index );
 int PoPs_getZ_A_l( statusMessageReporting *smr, char const *name, int *Z, int *A, int *l );
@@ -91,7 +91,7 @@ int PoP_initialize( statusMessageReporting *smr, PoP *pop );
 int PoP_release( PoP *pop );
 PoP *PoP_free( PoP *pop );
 int PoP_copyParticle( statusMessageReporting *smr, PoP *desc, PoP *src );
-PoP *PoP_makeParticle( statusMessageReporting *smr, enum PoPs_genre genre, char const *name, double mass, char const *massUnit );
+PoP *PoP_makeParticle( statusMessageReporting *smr, enum PoPs_genre genre, char const *name, G4double mass, char const *massUnit );
 int PoP_setZ_A_l( statusMessageReporting *smr, PoP *pop, int Z, int A, int l );
 int PoP_getIndex( PoP *pop );
 char const *PoP_getName( PoP *pop );
@@ -100,11 +100,11 @@ int PoPs_particleReadDatabase( statusMessageReporting *smr, char const *name );
 PoP *PoPs_particleCreateLoadInfo( statusMessageReporting *smr, const char *name );
 int PoPs_particleLoadInfo( statusMessageReporting *smr, const char *name, PoP *pop );
 
-double PoP_getMassInUnitOf( statusMessageReporting *smr, PoP *pop, char const *unit );
+G4double PoP_getMassInUnitOf( statusMessageReporting *smr, PoP *pop, char const *unit );
 
 PoP *PoP_makeAlias( statusMessageReporting *smr, char const *name, char const *alias );
 
-int PoPs_unitConversionRatio( char const *_from, char const *_to, double *ratio );
+int PoPs_unitConversionRatio( char const *_from, char const *_to, G4double *ratio );
 
 int lPoPs_addParticleIfNeeded( statusMessageReporting *smr, char const *name, char const *special );
 

@@ -40,8 +40,8 @@ class ExN04Field : public G4MagneticField
     ExN04Field();
     ~ExN04Field();
 
-    void GetFieldValue( const  double Point[3],
-                               double *Bfield ) const;
+    void GetFieldValue( const  G4double Point[3],
+                               G4double *Bfield ) const;
 
   private:
     G4double Bz;

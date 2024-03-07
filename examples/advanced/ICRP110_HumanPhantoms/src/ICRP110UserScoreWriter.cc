@@ -100,10 +100,10 @@ std::map<G4int, G4StatDouble*> * score = msMapItr -> second-> GetMap();
 ofile << "# primitive scorer name: " << msMapItr -> first << G4endl;
 
   // declare dose array and initialize to zero.
-  std::vector<double> ScoringMeshEdep;
+  std::vector<G4double> ScoringMeshEdep;
   for(G4int y = 0; y < fNMeshSegments[0]*fNMeshSegments[1]*fNMeshSegments[2]; y++) ScoringMeshEdep.push_back(0.);
 
-ofile << std::setprecision(16); // for double value with 8 bytes
+ofile << std::setprecision(16); // for G4double value with 8 bytes
   
 for(G4int x = 0; x < fNMeshSegments[0]; x++) {
    for(G4int y = 0; y < fNMeshSegments[1]; y++) {
@@ -118,7 +118,7 @@ for(G4int x = 0; x < fNMeshSegments[0]; x++) {
 
 ofile << std::setprecision(6);
 
-ofile << std::setprecision(16); // for double value with 8 bytes
+ofile << std::setprecision(16); // for G4double value with 8 bytes
   
 for(G4int x = 0; x < fNMeshSegments[0]; x++) {
    for(G4int y = 0; y < fNMeshSegments[1]; y++) {

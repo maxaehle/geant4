@@ -65,7 +65,7 @@ void G4tgrParameterMgr::AddParameterNumber(const std::vector<G4String>& wl,
 {
   CheckIfNewParameter(wl, mustBeNew);
 
-  //----- Convert third argument to double, but then store it as string
+  //----- Convert third argument to G4double, but then store it as string
   //      for later use in CLHEP evaluator
   G4float val             = G4tgrUtils::GetDouble(wl[2]);
   theParameterList[wl[1]] = G4UIcommand::ConvertToString(val);

@@ -49,7 +49,7 @@
 #define G4cerr std::cerr 
 #define G4endl std::endl 
 #define G4String std::string // string included in PDBatom.hh
-#include <cfloat>
+#include <cG4float>
 #endif
 #include <fstream>
 #include <iostream>
@@ -106,8 +106,8 @@ Molecule * PDBlib::Load(const std::string& filename,
     G4String atomName; //Atom name
     G4String element; //Element Symbol
     G4String resName; //Residue name for this atom
-    double x, y, z; //Orthogonal coordinates in Angstroms
-    double occupancy; //Occupancy
+    G4double x, y, z; //Orthogonal coordinates in Angstroms
+    G4double occupancy; //Occupancy
 
     Residue * residueOld = nullptr;
     Residue * residueFirst = nullptr;
@@ -120,10 +120,10 @@ Molecule * PDBlib::Load(const std::string& filename,
     /////////////////////////////////
     //NEW variable to draw a fitting cylinder if z oriented
     //=> fitting box
-    double minGlobZ, maxGlobZ;
-    double minGlobX, maxGlobX;
-    double minGlobY, maxGlobY;
-    double minX, maxX, minY, maxY, minZ, maxZ; //Sort of 'mother volume' box
+    G4double minGlobZ, maxGlobZ;
+    G4double minGlobX, maxGlobX;
+    G4double minGlobY, maxGlobY;
+    G4double minX, maxX, minY, maxY, minZ, maxZ; //Sort of 'mother volume' box
 
     minGlobZ = -DBL_MAX;
     minGlobX = -DBL_MAX;
@@ -286,7 +286,7 @@ Molecule * PDBlib::Load(const std::string& filename,
         else element = sLine.substr(12, 1);
 
         // set Van der Waals radius expressed in Angstrom
-        double vdwRadius = -1.;
+        G4double vdwRadius = -1.;
         if(element == "H")
         {
           vdwRadius = 1.2;
@@ -492,10 +492,10 @@ Barycenter * PDBlib::ComputeNucleotideBarycenters(Molecule * moleculeListTemp)
       }
 
       //Barycenter computation
-      double baryX = 0., baryY = 0., baryZ = 0.;
-      double baryBaseX = 0., baryBaseY = 0., baryBaseZ = 0.;
-      double barySugX = 0., barySugY = 0., barySugZ = 0.;
-      double baryPhosX = 0., baryPhosY = 0., baryPhosZ = 0.;
+      G4double baryX = 0., baryY = 0., baryZ = 0.;
+      G4double baryBaseX = 0., baryBaseY = 0., baryBaseZ = 0.;
+      G4double barySugX = 0., barySugY = 0., barySugZ = 0.;
+      G4double baryPhosX = 0., baryPhosY = 0., baryPhosZ = 0.;
       unsigned short int nbAtomInBase = 0;
 
       for(int i = 0; i < residueListTemp->fNbAtom; i++)
@@ -562,9 +562,9 @@ Barycenter * PDBlib::ComputeNucleotideBarycenters(Molecule * moleculeListTemp)
         AtomTemp = AtomTemp->GetNext();
       } //end of for (  i=0 ; i < residueListTemp->nbAtom ; i++)
 
-      baryX = baryX / (double) residueListTemp->fNbAtom;
-      baryY = baryY / (double) residueListTemp->fNbAtom;
-      baryZ = baryZ / (double) residueListTemp->fNbAtom;
+      baryX = baryX / (G4double) residueListTemp->fNbAtom;
+      baryY = baryY / (G4double) residueListTemp->fNbAtom;
+      baryZ = baryZ / (G4double) residueListTemp->fNbAtom;
 
       if(residueListTemp->fResSeq != 1) //Special case first Phosphate
       {
@@ -575,9 +575,9 @@ Barycenter * PDBlib::ComputeNucleotideBarycenters(Molecule * moleculeListTemp)
       barySugX = barySugX / 7.;
       barySugY = barySugY / 7.;
       barySugZ = barySugZ / 7.;
-      baryBaseX = baryBaseX / (double) nbAtomInBase;
-      baryBaseY = baryBaseY / (double) nbAtomInBase;
-      baryBaseZ = baryBaseZ / (double) nbAtomInBase;
+      baryBaseX = baryBaseX / (G4double) nbAtomInBase;
+      baryBaseY = baryBaseY / (G4double) nbAtomInBase;
+      baryBaseZ = baryBaseZ / (G4double) nbAtomInBase;
 
       //Barycenter creation:
       if(BarycenterOld == NULL)
@@ -617,8 +617,8 @@ Barycenter * PDBlib::ComputeNucleotideBarycenters(Molecule * moleculeListTemp)
       //distance computation between all atoms inside
       //a residue and the barycenter
       AtomTemp = residueListTemp->GetFirst();
-      double dT3Dp;
-      double max = 0.;
+      G4double dT3Dp;
+      G4double max = 0.;
       for(int ii = 0; ii < residueListTemp->fNbAtom; ii++)
       {
         dT3Dp = DistanceTwo3Dpoints(AtomTemp->fX,
@@ -659,15 +659,15 @@ Barycenter * PDBlib::ComputeNucleotideBarycenters(Molecule * moleculeListTemp)
  *            to build a box from atoms coordinates
  */
 void PDBlib::ComputeBoundingVolumeParams(Molecule *moleculeListTemp,
-                                         double &dX,
-                                         double &dY,
-                                         double &dZ, //Dimensions for bounding volume
-                                         double &tX,
-                                         double &tY,
-                                         double &tZ) //Translation for bounding volume
+                                         G4double &dX,
+                                         G4double &dY,
+                                         G4double &dZ, //Dimensions for bounding volume
+                                         G4double &tX,
+                                         G4double &tY,
+                                         G4double &tZ) //Translation for bounding volume
 {
-  double minminX, minminY, minminZ; //minimum minimorum
-  double maxmaxX, maxmaxY, maxmaxZ; //maximum maximorum
+  G4double minminX, minminY, minminZ; //minimum minimorum
+  G4double maxmaxX, maxmaxY, maxmaxZ; //maximum maximorum
 
   minminX = DBL_MAX;
   minminY = DBL_MAX;
@@ -758,9 +758,9 @@ void PDBlib::ComputeNbNucleotidsPerStrand(Molecule * moleculeListTemp)
  */
 unsigned short int PDBlib::ComputeMatchEdepDNA(Barycenter *BarycenterList,
                                                Molecule *moleculeListTemp,
-                                               double x,
-                                               double y,
-                                               double z,
+                                               G4double x,
+                                               G4double y,
+                                               G4double z,
                                                int &numStrand,
                                                int &numNucleotid,
                                                int &codeResidue)
@@ -775,9 +775,9 @@ unsigned short int PDBlib::ComputeMatchEdepDNA(Barycenter *BarycenterList,
   G4String baseName; //Base name [A,C,T,G]
   unsigned short int BSP = 2; //Base (default value), Sugar, Phosphat
 
-  double smallestDist; //smallest dist Atom <-> edep coordinates
-  double distEdepDNA;
-  double distEdepAtom;
+  G4double smallestDist; //smallest dist Atom <-> edep coordinates
+  G4double distEdepDNA;
+  G4double distEdepAtom;
 
   //Residue (Base, Phosphate,suggar) list
   Residue *residueListTemp;
@@ -880,12 +880,12 @@ unsigned short int PDBlib::ComputeMatchEdepDNA(Barycenter *BarycenterList,
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-double PDBlib::DistanceTwo3Dpoints(double xA,
-                                   double xB,
-                                   double yA,
-                                   double yB,
-                                   double zA,
-                                   double zB)
+G4double PDBlib::DistanceTwo3Dpoints(G4double xA,
+                                   G4double xB,
+                                   G4double yA,
+                                   G4double yB,
+                                   G4double zA,
+                                   G4double zB)
 {
   return sqrt((xA - xB) * (xA - xB) + (yA - yB) * (yA - yB)
               + (zA - zB) * (zA - zB));

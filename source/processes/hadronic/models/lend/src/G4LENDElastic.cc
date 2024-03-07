@@ -31,8 +31,8 @@
 #include "G4Nucleus.hh"
 #include "G4IonTable.hh"
 
-//extern "C" double MyRNG(void*) { return drand48(); }
-//extern "C" double MyRNG(void*) { return  CLHEP::HepRandom::getTheEngine()->flat(); }
+//extern "C" G4double MyRNG(void*) { return drand48(); }
+//extern "C" G4double MyRNG(void*) { return  CLHEP::HepRandom::getTheEngine()->flat(); }
 
 G4HadFinalState * G4LENDElastic::ApplyYourself(const G4HadProjectile& aTrack, G4Nucleus& aTarg )
 {

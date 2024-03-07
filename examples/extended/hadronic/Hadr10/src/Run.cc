@@ -417,7 +417,7 @@ void Run::PrintInfo() const {
          << fMaxOverestimated_rDeltaPos / CLHEP::micrometer
          << " (mean=" << fSumOverestimated_rDeltaPos / NN / CLHEP::micrometer
          << ")\t (#above threshold = " << fNumLargeOverestimates << ")" << G4endl
-         << " --- float  instead of  double --- " << G4endl
+         << " --- G4float  instead of  G4double --- " << G4endl
          << " fMaxFloat_rDeltaPos_deltaMax [mum] = "
          << fMaxFloat_rDeltaPos_deltaMax / CLHEP::micrometer << G4endl
          << " ============================================= " << G4endl

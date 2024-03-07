@@ -34,13 +34,13 @@
 //
 // ----------------------------- INPUT --------------------------------
 //
-//    op     - double precision vector of coefficients in order of
+//    op     - G4double precision vector of coefficients in order of
 //             decreasing powers
 //    degree - integer degree of polynomial
 //
 // ----------------------------- OUTPUT -------------------------------
 //
-//    zeror,zeroi - double precision vectors of the
+//    zeror,zeroi - G4double precision vectors of the
 //                  real and imaginary parts of the zeros
 //
 // ---------------------------- EXAMPLE -------------------------------

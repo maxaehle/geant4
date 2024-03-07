@@ -10,7 +10,7 @@
 // John Marraffino - Created: 12th May 1998
 // M Fischler     - put and get to/from streams 12/10/04
 // M Fischler	      - put/get to/from streams uses pairs of ulongs when
-//			+ storing doubles avoid problems with precision 
+//			+ storing G4doubles avoid problems with precision 
 //			4/14/05
 // =======================================================================
 
@@ -30,46 +30,46 @@ HepRandomEngine & RandChiSquare::engine() {return *localEngine;}
 RandChiSquare::~RandChiSquare() {
 }
 
-double RandChiSquare::shoot( HepRandomEngine *anEngine,  double a ) {
+G4double RandChiSquare::shoot( HepRandomEngine *anEngine,  G4double a ) {
   return genChiSquare( anEngine, a );
 }
 
-double RandChiSquare::shoot( double a ) {
+G4double RandChiSquare::shoot( G4double a ) {
   HepRandomEngine *anEngine = HepRandom::getTheEngine();
   return genChiSquare( anEngine, a );
 }
 
-double RandChiSquare::fire( double a ) {
+G4double RandChiSquare::fire( G4double a ) {
   return genChiSquare( localEngine.get(), a );
 }
 
-void RandChiSquare::shootArray( const int size, double* vect,
-                            double a ) {
-  for( double* v = vect; v != vect+size; ++v )
+void RandChiSquare::shootArray( const int size, G4double* vect,
+                            G4double a ) {
+  for( G4double* v = vect; v != vect+size; ++v )
     *v = shoot(a);
 }
 
 void RandChiSquare::shootArray( HepRandomEngine* anEngine,
-                            const int size, double* vect,
-                            double a )
+                            const int size, G4double* vect,
+                            G4double a )
 {
-  for( double* v = vect; v != vect+size; ++v )
+  for( G4double* v = vect; v != vect+size; ++v )
     *v = shoot(anEngine,a);
 }
 
-void RandChiSquare::fireArray( const int size, double* vect) {
-  for( double* v = vect; v != vect+size; ++v )
+void RandChiSquare::fireArray( const int size, G4double* vect) {
+  for( G4double* v = vect; v != vect+size; ++v )
     *v = fire(defaultA);
 }
 
-void RandChiSquare::fireArray( const int size, double* vect,
-                           double a ) {
-  for( double* v = vect; v != vect+size; ++v )
+void RandChiSquare::fireArray( const int size, G4double* vect,
+                           G4double a ) {
+  for( G4double* v = vect; v != vect+size; ++v )
     *v = fire(a);
 }
 
-double RandChiSquare::genChiSquare( HepRandomEngine *anEngine,
-                                       double a ) {
+G4double RandChiSquare::genChiSquare( HepRandomEngine *anEngine,
+                                       G4double a ) {
 /******************************************************************
  *                                                                *
  *        Chi Distribution - Ratio of Uniforms  with shift        *
@@ -87,8 +87,8 @@ double RandChiSquare::genChiSquare( HepRandomEngine *anEngine,
  * Implemented by R. Kremer, 1990                                 *
  ******************************************************************/
 
- static CLHEP_THREAD_LOCAL double a_in = -1.0,b,vm,vp,vd;
- double u,v,z,zz,r;
+ static CLHEP_THREAD_LOCAL G4double a_in = -1.0,b,vm,vp,vd;
+ G4double u,v,z,zz,r;
 
 // Check for invalid input value
 
@@ -161,7 +161,7 @@ std::istream & RandChiSquare::get ( std::istream & is ) {
   }
   if (possibleKeywordInput(is, "Uvec", defaultA)) {
     std::vector<unsigned long> t(2);
-    is >> defaultA >> t[0] >> t[1]; defaultA = DoubConv::longs2double(t); 
+    is >> defaultA >> t[0] >> t[1]; defaultA = DoubConv::longs2G4double(t); 
     return is;
   }
   // is >> defaultA encompassed by possibleKeywordInput

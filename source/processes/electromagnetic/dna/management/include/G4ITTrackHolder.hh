@@ -137,7 +137,7 @@ public:
   //----- typedefs -----
   typedef int Key; //TODO
   typedef std::map<Key, PriorityList*> MapOfPriorityLists;
-  typedef std::map<double, std::map<Key, G4TrackList*> > MapOfDelayedLists;
+  typedef std::map<G4double, std::map<Key, G4TrackList*> > MapOfDelayedLists;
 
   //----- Access singletons + constructors/destructors-----
 
@@ -149,7 +149,7 @@ public:
   ~G4ITTrackHolder();
 
   //----- Time of the next set of tracks -----
-  inline double GetNextTime()
+  inline G4double GetNextTime()
   {
     if (fDelayedList.empty()) return DBL_MAX;
     return fDelayedList.begin()->first;
@@ -171,7 +171,7 @@ public:
     }
   }
 
-  bool MergeNextTimeToMainList(double& time);
+  bool MergeNextTimeToMainList(G4double& time);
   void MergeSecondariesWithMainList();
   void MoveMainToWaitingList();
 
@@ -251,8 +251,8 @@ protected:
   int fVerbose;
   int fNbTracks;
 
-  double fPostActivityGlobalTime;
-  //  double fPreActivityGlobalTime ;
+  G4double fPostActivityGlobalTime;
+  //  G4double fPreActivityGlobalTime ;
 
   G4TrackManyList fAllMainList;
   G4TrackManyList fAllSecondariesList;

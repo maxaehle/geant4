@@ -39,11 +39,11 @@ public:
   virtual ~RanluxppEngine();
   // Constructors and destructor
 
-  double flat() override;
+  G4double flat() override;
   // It returns a pseudo random number between 0 and 1,
   // excluding the end points.
 
-  void flatArray(const int size, double *vect) override;
+  void flatArray(const int size, G4double *vect) override;
   // Fills the array "vect" of specified size with flat random values.
 
   void setSeed(long seed, int dummy = 0) override;
@@ -81,8 +81,8 @@ public:
   bool getState(const std::vector<unsigned long> &v) override;
 
   // Save and restore to/from streams
-  operator double() override { return flat(); }
-  operator float() override { return float(flat()); }
+  operator G4double() override { return flat(); }
+  operator G4float() override { return G4float(flat()); }
   operator unsigned int() override { return (unsigned int)nextRandomBits(); }
 
   // 1 value for the engine ID, 2 * 9 values for the state, and 2 more values

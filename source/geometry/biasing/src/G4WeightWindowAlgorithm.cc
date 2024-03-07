@@ -66,7 +66,7 @@ G4WeightWindowAlgorithm::Calculate(G4double init_w,
     if(split_i != temp_wi_ws)  { ++split_i; }
     G4double wi_ws = init_w/split_i;
 
-    // values in case integer mode or in csae of double
+    // values in case integer mode or in csae of G4double
     // mode and the lower number of splits will be diced
     //
     nw.fN = split_i;
@@ -74,7 +74,7 @@ G4WeightWindowAlgorithm::Calculate(G4double init_w,
 
 //TB     if (wi_ws <= fMaxNumberOfSplits) {
 //TB       if (wi_ws > int_wi_ws) {
-//TB         // double mode
+//TB         // G4double mode
 //TB         G4double p2 =  wi_ws - int_wi_ws;
 //TB         G4double r = G4UniformRand();
 //TB         if (r<p2) {

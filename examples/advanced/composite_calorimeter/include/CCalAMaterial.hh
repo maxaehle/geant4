@@ -58,7 +58,7 @@ protected:
                    G4double* weights);
 
 protected:
-  double aEff;  //Effective mass
+  G4double aEff;  //Effective mass
 
 };
 

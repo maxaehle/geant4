@@ -80,12 +80,12 @@ public:
   std::string fMolName;   //!< Molecule name
   int fMolNum;       //!< Molecule number
 
-  double fMinGlobZ;   //Cylinder length => min Z
-  double fMaxGlobZ;
-  double fMinGlobX;   //Radius => min X
-  double fMaxGlobX;
-  double fMinGlobY;   //=> min Y
-  double fMaxGlobY;
+  G4double fMinGlobZ;   //Cylinder length => min Z
+  G4double fMaxGlobZ;
+  G4double fMinGlobX;   //Radius => min X
+  G4double fMaxGlobX;
+  G4double fMinGlobY;   //=> min Y
+  G4double fMaxGlobY;
 
   int fCenterX;      //!< "X center" of this Molecule (for rotation...)
   int fCenterY;      //!< "Y center" of this Molecule (for rotation...)

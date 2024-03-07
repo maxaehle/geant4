@@ -478,7 +478,7 @@ G4VParticleChange* G4Scintillation::PostStepDoIt(const G4Track& aTrack,
     }
     else if(scnt == 1)
     {
-      // to be consistent with old version (due to double->int conversion)
+      // to be consistent with old version (due to G4double->int conversion)
       if(N_timeconstants == 2)
       {
         numPhot = fNumPhotons - numPhot;

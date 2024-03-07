@@ -89,12 +89,12 @@ G4ImportanceAlgorithm::Calculate(G4double ipre,
     nw.fN = static_cast<G4int>(inv);
     nw.fW = init_w * ipre_over_ipost;
     
-    // geometrical splitting for double mode
+    // geometrical splitting for G4double mode
     if (ipre_over_ipost<1)
     {
       if ( static_cast<G4double>(nw.fN) != inv)
       {
-        // double mode
+        // G4double mode
         // probability p for splitting into n+1 tracks
         G4double p = inv - nw.fN;
         // get a random number out of [0,1)

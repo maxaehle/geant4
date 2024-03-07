@@ -67,7 +67,7 @@ private:
 
   G4String fMapPath;		// Path to config file to find velocity maps
   G4String fToken;		// Reusable buffers for reading file
-  G4double fValue;		// ... floating point data values
+  G4double fValue;		// ... G4floating point data values
   G4String fMap, fsPol;		// ... map filename and polarization code
   G4int    fPol, fNX, fNY;	// ... map binning in each direction
 

@@ -6,7 +6,7 @@
 //                          class header file
 // -----------------------------------------------------------------------
 // The algorithm for this random engine has been taken from the notes of 
-// a double-precision ranlux implementation by Martin Luscher, dated 
+// a G4double-precision ranlux implementation by Martin Luscher, dated 
 // November 1997.
 //
 // Like the previous ranlux generator, this one also has "luxury" levels,
@@ -56,11 +56,11 @@ public:
   virtual ~Ranlux64Engine();
   // Constructors and destructor
 
-  double flat();
+  G4double flat();
   // It returns a pseudo random number between 0 and 1,
   // excluding the end points.
 
-  void flatArray (const int size, double* vect);
+  void flatArray (const int size, G4double* vect);
   // Fills the array "vect" of specified size with flat random values.
 
   void setSeed(long seed, int lxr=1);
@@ -107,8 +107,8 @@ private:
   int luxury;
 
   int index;
-  double randoms[12]; // randoms [i] is the x[n-i] of Luscher's note
-  double carry;
+  G4double randoms[12]; // randoms [i] is the x[n-i] of Luscher's note
+  G4double carry;
 
 }; // Ranlux64Engine
 

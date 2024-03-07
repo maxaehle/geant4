@@ -476,7 +476,7 @@ G4bool G4tgrUtils::GetBool(const G4String& str)
   }
   else
   {
-    G4String ErrMessage = G4String("Trying to get a float from a string") +
+    G4String ErrMessage = G4String("Trying to get a G4float from a string") +
                           G4String(" which is not 'ON'/'OFF'/'TRUE'/'FALSE' ") +
                           str;
     G4Exception("G4tgrUtils::GetBool()", "ParseError", FatalException,

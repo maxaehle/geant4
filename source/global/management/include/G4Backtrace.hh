@@ -242,7 +242,7 @@ class G4Backtrace
       id_entry_t("SIGTRAP", SIGTRAP, "trace trap"),
       id_entry_t("SIGABRT", SIGABRT, "abort program (formerly SIGIOT)"),
       id_entry_t("SIGEMT", SIGEMT, "emulate instruction executed"),
-      id_entry_t("SIGFPE", SIGFPE, "floating-point exception"),
+      id_entry_t("SIGFPE", SIGFPE, "G4floating-point exception"),
       id_entry_t("SIGKILL", SIGKILL, "kill program"),
       id_entry_t("SIGBUS", SIGBUS, "bus error"),
       id_entry_t("SIGSEGV", SIGSEGV, "segmentation violation"),
@@ -506,14 +506,14 @@ inline void G4Backtrace::Message(int sig, siginfo_t* sinfo, std::ostream& os)
           os << "Floating point invalid operation.";
           break;
         default:
-          os << "Unknown floating point exception error: " << sinfo->si_code
+          os << "Unknown G4floating point exception error: " << sinfo->si_code
              << ".";
           break;
       }
     }
     else
     {
-      os << "Unknown floating point exception";
+      os << "Unknown G4floating point exception";
       if(sinfo)
         os << ": " << sinfo->si_code;
       os << ". ";

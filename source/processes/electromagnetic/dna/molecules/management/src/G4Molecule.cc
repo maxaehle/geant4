@@ -417,8 +417,8 @@ G4double G4Molecule::GetKineticEnergy() const
 {
     ////
     // Ideal Gaz case
-    double v = GetDiffusionVelocity();
-    double E = (fpMolecularConfiguration->GetMass() / (c_squared)) * (v * v) / 2.;
+    G4double v = GetDiffusionVelocity();
+    G4double E = (fpMolecularConfiguration->GetMass() / (c_squared)) * (v * v) / 2.;
     ////
     return E;
 }
@@ -427,13 +427,13 @@ G4double G4Molecule::GetKineticEnergy() const
 
 G4double G4Molecule::GetDiffusionVelocity() const
 {
-    double moleculeMass = fpMolecularConfiguration->GetMass() / (c_squared);
+    G4double moleculeMass = fpMolecularConfiguration->GetMass() / (c_squared);
 
     ////
     // Different possibilities
     ////
     // Ideal Gaz case : Maxwell Boltzmann Distribution
-    //    double sigma = k_Boltzmann * fgTemperature / mass;
+    //    G4double sigma = k_Boltzmann * fgTemperature / mass;
     //    return G4RandGauss::shoot( 0, sigma );
     ////
     // Ideal Gaz case : mean velocity from equipartition theorem
@@ -521,7 +521,7 @@ G4double G4Molecule::GetDiffusionCoefficient() const
 //______________________________________________________________________________
 
 G4double G4Molecule::GetDiffusionCoefficient(const G4Material* pMaterial,
-                                             double temperature) const
+                                             G4double temperature) const
 {
     return fpMolecularConfiguration->GetDiffusionCoefficient(pMaterial,
                                                              temperature);

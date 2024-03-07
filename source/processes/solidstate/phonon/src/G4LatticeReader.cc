@@ -153,7 +153,7 @@ G4bool G4LatticeReader::SkipComments() {
   return true;		// Never fails
 }
 
-// Read double value from file, store based on name string
+// Read G4double value from file, store based on name string
 
 G4bool G4LatticeReader::ProcessValue(const G4String& name) {
   *psLatfile >> fValue;

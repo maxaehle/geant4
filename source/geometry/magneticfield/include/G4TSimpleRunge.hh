@@ -46,7 +46,7 @@ class G4TSimpleRunge
   : public G4TMagErrorStepper<G4TSimpleRunge<T_Equation, N>, T_Equation, N>
 {
  public:  // with description
-  static constexpr double IntegratorCorrection = 1. / ((1 << 2) - 1);
+  static constexpr G4double IntegratorCorrection = 1. / ((1 << 2) - 1);
 
   G4TSimpleRunge(T_Equation* EqRhs, G4int numberOfVariables = 6)
     : G4TMagErrorStepper<G4TSimpleRunge<T_Equation, N>, T_Equation, N>(

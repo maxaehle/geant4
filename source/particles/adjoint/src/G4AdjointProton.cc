@@ -55,7 +55,7 @@ G4AdjointProton* G4AdjointProton::Definition()
   //             stable         lifetime    decay table
   //             shortlived      subType    anti_encoding
   // use constants in CLHEP
-  //  static const double   proton_mass_c2 = 938.27231 * MeV;
+  //  static const G4double   proton_mass_c2 = 938.27231 * MeV;
 
    anInstance = new G4ParticleDefinition(
                  name,  proton_mass_c2,       0.0*MeV,       -eplus, 

@@ -145,11 +145,11 @@ private:
 
   G4PhysicsLogVector* fEnergyVector;
   
-  std::vector<std::vector<std::vector<double>*>*>  fEnergyAngleVectorBank;
-  std::vector<std::vector<std::vector<double>*>*>  fEnergySumVectorBank;
+  std::vector<std::vector<std::vector<G4double>*>*>  fEnergyAngleVectorBank;
+  std::vector<std::vector<std::vector<G4double>*>*>  fEnergySumVectorBank;
 
-  std::vector<std::vector<double>*>*  fEnergyAngleVector;
-  std::vector<std::vector<double>*>*  fEnergySumVector;
+  std::vector<std::vector<G4double>*>*  fEnergyAngleVector;
+  std::vector<std::vector<G4double>*>*  fEnergySumVector;
 
   
   std::vector<G4double> fElementNumberVector;

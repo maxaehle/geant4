@@ -105,10 +105,10 @@ void SoGL2PSAction::disableFileWriting(
 bool SoGL2PSAction::addBitmap(
  int aWidth
 ,int aHeight
-,float aXorig
-,float aYorig
-,float aXmove
-,float aYmove
+,G4float aXorig
+,G4float aYorig
+,G4float aXmove
+,G4float aYmove
 )
 /////////////////////////////////////////////////////////////////////////////
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
@@ -117,7 +117,7 @@ bool SoGL2PSAction::addBitmap(
   GLboolean valid;
   glGetBooleanv(GL_CURRENT_RASTER_POSITION_VALID,&valid);
   if(!valid) return false;
-  float pos[4];
+  G4float pos[4];
   glGetFloatv(GL_CURRENT_RASTER_POSITION,pos);
   int xoff = -(int)(aXmove + aXorig);
   int yoff = -(int)(aYmove + aYorig);
@@ -132,7 +132,7 @@ bool SoGL2PSAction::addBitmap(
   if(y+h>(vp[1]+vp[3])) h = vp[1]+vp[3]-y;
   int s = 3 * w * h;
   if(s<=0) return false;
-  float* image = (float*)::malloc(s * sizeof(float));
+  G4float* image = (G4float*)::malloc(s * sizeof(G4float));
   if(!image) return false;
   glReadPixels(x,y,w,h,GL_RGB,GL_FLOAT,image);
   GLint status = gl2psDrawPixels(w,h,xoff,yoff,GL_RGB,GL_FLOAT,image);

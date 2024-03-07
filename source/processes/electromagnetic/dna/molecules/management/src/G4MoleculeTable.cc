@@ -67,7 +67,7 @@ G4MoleculeTable* G4MoleculeTable::GetMoleculeTable()
 
 G4MoleculeDefinition*
 G4MoleculeTable::CreateMoleculeDefinition(const G4String& name,
-                                          double diffusion_coefficient)
+                                          G4double diffusion_coefficient)
 {
   return new G4MoleculeDefinition(name, -1 /* mass*/,
                                   diffusion_coefficient);
@@ -209,7 +209,7 @@ G4MolecularConfiguration*
 G4MoleculeTable::CreateConfiguration(const G4String& userIdentifier,
                                      G4MoleculeDefinition* molDef,
                                      int charge,
-                                     double diffusion_coefficient)
+                                     G4double diffusion_coefficient)
 {
   bool alreadyCreated(false);
 

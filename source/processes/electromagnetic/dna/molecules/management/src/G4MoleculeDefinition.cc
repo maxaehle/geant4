@@ -169,7 +169,7 @@ G4MolecularConfiguration*
 G4MoleculeDefinition::
   NewConfigurationWithElectronOccupancy(const G4String& exStId,
                                         const G4ElectronOccupancy& elecConf,
-                                        double decayTime)
+                                        G4double decayTime)
 {
   bool alreadyExist(false);
   G4MolecularConfiguration* conf =

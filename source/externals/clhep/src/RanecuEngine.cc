@@ -58,7 +58,7 @@ namespace {
 
 static const int MarkerLen = 64; // Enough room to hold a begin or end marker. 
 
-static const double prec = 4.6566128E-10;
+static const G4double prec = 4.6566128E-10;
 
 std::string RanecuEngine::name() const {return "RanecuEngine";}
 
@@ -196,7 +196,7 @@ void RanecuEngine::showStatus() const
    std::cout << "----------------------------------------" << std::endl;
 }
 
-double RanecuEngine::flat()
+G4double RanecuEngine::flat()
 {
    const int index = seq;
    long seed1 = table[index][0];
@@ -216,10 +216,10 @@ double RanecuEngine::flat()
    long diff = seed1-seed2;
 
    if (diff <= 0) diff += (shift1-1);
-   return (double)(diff*prec);
+   return (G4double)(diff*prec);
 }
 
-void RanecuEngine::flatArray(const int size, double* vect)
+void RanecuEngine::flatArray(const int size, G4double* vect)
 {
    const int index = seq;
    long seed1 = table[index][0];
@@ -240,18 +240,18 @@ void RanecuEngine::flatArray(const int size, double* vect)
      long diff = seed1-seed2;
      if (diff <= 0) diff += (shift1-1);
 
-     vect[i] = (double)(diff*prec);
+     vect[i] = (G4double)(diff*prec);
    }
    table[index][0] = seed1;
    table[index][1] = seed2;
 }
 
-RanecuEngine::operator double() {
+RanecuEngine::operator G4double() {
   return flat();
 }
 
-RanecuEngine::operator float() {
-  return float( flat() );
+RanecuEngine::operator G4float() {
+  return G4float( flat() );
 }
 
 RanecuEngine::operator unsigned int() {

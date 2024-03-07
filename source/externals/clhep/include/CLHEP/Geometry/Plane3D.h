@@ -57,10 +57,10 @@ namespace HepGeom {
     Plane3D(const Plane3D<T> &) = default;
 
     /**
-     * Constructor for Plane3D<double> from Plane3D<float>. */
+     * Constructor for Plane3D<G4double> from Plane3D<G4float>. */
     template<typename U = T,
-             typename = typename std::enable_if<!std::is_same<U,float>::value >::type>
-    Plane3D(const Plane3D<float> & p)
+             typename = typename std::enable_if<!std::is_same<U,G4float>::value >::type>
+    Plane3D(const Plane3D<G4float> & p)
       : a_(p.a_), b_(p.b_), c_(p.c_), d_(p.d_) {}
 
     /**
@@ -99,7 +99,7 @@ namespace HepGeom {
     /**
      * Normalization. */
     Plane3D<T> & normalize() {
-      double ll = std::sqrt(a_*a_ + b_*b_ + c_*c_);
+      G4double ll = std::sqrt(a_*a_ + b_*b_ + c_*c_);
       if (ll > 0.) { a_ /= ll; b_ /= ll; c_ /= ll, d_ /= ll; }
       return *this;
     }
@@ -150,13 +150,13 @@ namespace HepGeom {
    * Output to the stream.
    * @relates Plane3D
    */
-  std::ostream & operator<<(std::ostream & os, const Plane3D<float> & p);
+  std::ostream & operator<<(std::ostream & os, const Plane3D<G4float> & p);
 
   /**
    * Output to the stream.
    * @relates Plane3D
    */
-  std::ostream & operator<<(std::ostream & os, const Plane3D<double> & p);
+  std::ostream & operator<<(std::ostream & os, const Plane3D<G4double> & p);
 
 } /* namespace HepGeom */
 

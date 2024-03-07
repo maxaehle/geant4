@@ -34,7 +34,7 @@ G4LEPTSDistribution::G4LEPTSDistribution()
 void G4LEPTSDistribution::ReadFile(G4String fileName) {
 
   G4int eB, out, out2;
-  float  float_data1,float_data2;
+  G4float  G4float_data1,G4float_data2;
   G4double sum, esum;
   FILE * fp;
 
@@ -57,11 +57,11 @@ void G4LEPTSDistribution::ReadFile(G4String fileName) {
     out=1;
     eB=1;
     while (out==1){
-      out  = fscanf(fp,"%f \n",&float_data1);
-      out2 = fscanf(fp,"%f \n",&float_data2);
+      out  = fscanf(fp,"%f \n",&G4float_data1);
+      out2 = fscanf(fp,"%f \n",&G4float_data2);
       if (out==1 && out2==1){
-	E[eB]=(G4double)float_data1;
-	f[eB]=(G4double)float_data2;
+	E[eB]=(G4double)G4float_data1;
+	f[eB]=(G4double)G4float_data2;
 	eB++;
       }
     }
@@ -99,7 +99,7 @@ G4bool G4LEPTSDistribution::ReadFile( FILE* fp, G4int nData )
 {
 
   G4int eB, out, out2;
-  float  float_data1,float_data2;
+  G4float  G4float_data1,G4float_data2;
   G4double sum, esum;
 
   for (eB=0;eB<10000;eB++){
@@ -114,11 +114,11 @@ G4bool G4LEPTSDistribution::ReadFile( FILE* fp, G4int nData )
   eB=1;
 
   for( G4int id = 0; id < nData; id++ ){	  
-    out  = fscanf(fp,"%f \n",&float_data1);
-    out2 = fscanf(fp,"%f \n",&float_data2);
+    out  = fscanf(fp,"%f \n",&G4float_data1);
+    out2 = fscanf(fp,"%f \n",&G4float_data2);
     if (out==1 && out2==1){
-      E[eB]=(G4double)float_data1;
-      f[eB]=(G4double)float_data2;
+      E[eB]=(G4double)G4float_data1;
+      f[eB]=(G4double)G4float_data2;
       eB++;
     }else{
       return 1;

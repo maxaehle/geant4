@@ -81,13 +81,13 @@ void G4ReactionTableMessenger::SetNewValue(G4UIcommand* command,
     G4String species2;
     iss >> species2;
 
-    double reactionRate;
+    G4double reactionRate;
     iss >> reactionRate;
 
 //    G4String reactionRateUnit;
 //    iss >> reactionRateUnit;
 
-    double dimensionedReactionRate = reactionRate * (1e-3 * m3 / (mole * s));
+    G4double dimensionedReactionRate = reactionRate * (1e-3 * m3 / (mole * s));
 //        G4UIcmdWithADoubleAndUnit::ConvertToDimensionedDouble((reactionRate
 //            + G4String(" ") + reactionRateUnit).c_str());
 
@@ -101,7 +101,7 @@ void G4ReactionTableMessenger::SetNewValue(G4UIcommand* command,
 //
 //    if(productionRate != "" && productionRate != "X")
 //    {
-//      double prodRateReal = G4UIcommand::ConvertToDouble(productionRate);
+//      G4double prodRateReal = G4UIcommand::ConvertToDouble(productionRate);
 //
 //      if(prodRateReal == 0 || isnan(prodRateReal))
 //      {
@@ -110,7 +110,7 @@ void G4ReactionTableMessenger::SetNewValue(G4UIcommand* command,
 //                    FatalException, "");
 //      }
 //
-//      double dimensionedProductionRate = prodRateReal
+//      G4double dimensionedProductionRate = prodRateReal
 //          * (1e-3 * m3 / (mole * s));
 //      reactionData->SetProductionRate(dimensionedProductionRate);
 //    }
@@ -142,7 +142,7 @@ void G4ReactionTableMessenger::SetNewValue(G4UIcommand* command,
 //    G4String species2;
 //    iss >> species2;
 //
-//    double reactionRate;
+//    G4double reactionRate;
 //    iss >> reactionRate;
 //
 ////    G4String reactionRateUnit;
@@ -151,19 +151,19 @@ void G4ReactionTableMessenger::SetNewValue(G4UIcommand* command,
 ////    G4String reactionRateUnit;
 ////    iss >> reactionRateUnit;
 //
-//    double reactionRadius;
+//    G4double reactionRadius;
 //    iss >> reactionRadius;
 //
 ////    G4String reactionRadiusUnit;
 ////    iss >> reactionRadiusUnit;
 //
-//    double dimensionedReactionRate = reactionRate * (1e-3 * m3 / (mole * s));
+//    G4double dimensionedReactionRate = reactionRate * (1e-3 * m3 / (mole * s));
 //
-////    double dimensionedReactionRate =
+////    G4double dimensionedReactionRate =
 ////        G4UIcmdWithADoubleAndUnit::ConvertToDimensionedDouble((reactionRate
 ////            + " " + reactionRateUnit).c_str());
 //
-//    double dimensionedReactionRadius = reactionRadius * nm;
+//    G4double dimensionedReactionRadius = reactionRadius * nm;
 ////        G4UIcmdWithADoubleAndUnit::ConvertToDimensionedDouble((reactionRadius
 ////            + " " + reactionRadiusUnit).c_str());
 //
@@ -201,7 +201,7 @@ void G4ReactionTableMessenger::SetNewValue(G4UIcommand* command,
 //    G4String species2;
 //    iss >> species2;
 //
-//    double reactionRate;
+//    G4double reactionRate;
 //    iss >> reactionRate;
 //
 //    //    G4String reactionRateUnit;
@@ -210,15 +210,15 @@ void G4ReactionTableMessenger::SetNewValue(G4UIcommand* command,
 //    //    G4String reactionRateUnit;
 //    //    iss >> reactionRateUnit;
 //
-//    double activationRate;
+//    G4double activationRate;
 //    iss >> activationRate;
 //
 //    //    G4String reactionRadiusUnit;
 //    //    iss >> reactionRadiusUnit;
 //
-//    double dimensionedReactionRate = reactionRate * (1e-3 * m3 / (mole * s));
+//    G4double dimensionedReactionRate = reactionRate * (1e-3 * m3 / (mole * s));
 //
-//    double dimensionedActivationRate = activationRate
+//    G4double dimensionedActivationRate = activationRate
 //        * (1e-3 * m3 / (mole * s));
 //
 //    G4DNAMolecularReactionData* reactionData =
@@ -310,10 +310,10 @@ void G4ReactionTableMessenger::SetNewValue(G4UIcommand* command,
     if(rateconst_method == "Fix")
     {
       iss >> marker; // must be |
-      double reactionRate;
+      G4double reactionRate;
       iss >> reactionRate;
 
-      double dimensionedReactionRate = reactionRate * (1e-3 * m3 / (mole * s));
+      G4double dimensionedReactionRate = reactionRate * (1e-3 * m3 / (mole * s));
       reactionData->SetObservedReactionRateConstant(dimensionedReactionRate);
 
 //      G4String productionRate;
@@ -321,7 +321,7 @@ void G4ReactionTableMessenger::SetNewValue(G4UIcommand* command,
 //
 //      if(productionRate != "" && productionRate != "X")
 //      {
-//        double prodRateReal = G4UIcommand::ConvertToDouble(productionRate);
+//        G4double prodRateReal = G4UIcommand::ConvertToDouble(productionRate);
 //
 //        if(prodRateReal == 0 || isnan(prodRateReal))
 //        {
@@ -331,7 +331,7 @@ void G4ReactionTableMessenger::SetNewValue(G4UIcommand* command,
 //                      "");
 //        }
 //
-//        double dimensionedProductionRate = prodRateReal
+//        G4double dimensionedProductionRate = prodRateReal
 //            * (1e-3 * m3 / (mole * s));
 //        reactionData->SetProductionRate(dimensionedProductionRate);
 //      }
@@ -339,8 +339,8 @@ void G4ReactionTableMessenger::SetNewValue(G4UIcommand* command,
     else if(rateconst_method == "Arr")
     {
       iss >> marker; // must be |
-      double A0  = 0;
-      double E_R = 0;
+      G4double A0  = 0;
+      G4double E_R = 0;
 
       iss >> A0;
       iss >> E_R;
@@ -349,12 +349,12 @@ void G4ReactionTableMessenger::SetNewValue(G4UIcommand* command,
     else if(rateconst_method == "Pol")
     {
       iss >> marker; // must be |
-      std::vector<double> P = {0, 0, 0, 0, 0};
+      std::vector<G4double> P = {0, 0, 0, 0, 0};
 
       size_t i = 0;
       while(i < 4) // could be changed to 5 only if marker is used as delimiter
       {
-        double tmp;
+        G4double tmp;
         iss >> tmp;
         P[i] = tmp;
 //        G4cout << newValue << G4endl;
@@ -367,11 +367,11 @@ void G4ReactionTableMessenger::SetNewValue(G4UIcommand* command,
     else if(rateconst_method == "Scale")
     {
       iss >> marker; // must be |
-      double temp_K;
+      G4double temp_K;
       iss >> temp_K;
-      double reactionRateCste;
+      G4double reactionRateCste;
       iss >> reactionRateCste;
-      double dimensionedReactionRate = reactionRateCste * (1e-3 * m3 / (mole * s));
+      G4double dimensionedReactionRate = reactionRateCste * (1e-3 * m3 / (mole * s));
       reactionData->SetObservedReactionRateConstant(dimensionedReactionRate);
       reactionData->SetScaledParameterization(temp_K, dimensionedReactionRate);
     }
@@ -387,7 +387,7 @@ void G4ReactionTableMessenger::SetNewValue(G4UIcommand* command,
 //
 ////        G4cout << productionRate << G4endl;
 //
-//        double dimProductionRate = G4UIcommand::ConvertToDouble(productionRate)* (1e-3 * m3 / (mole * s));
+//        G4double dimProductionRate = G4UIcommand::ConvertToDouble(productionRate)* (1e-3 * m3 / (mole * s));
 //
 //        G4cout << " DIM PROD RATE = " << reactionData->GetReactant1()->GetName()
 //             << " + " << reactionData->GetReactant2()->GetName() << " = " << dimProductionRate << G4endl;

@@ -844,7 +844,7 @@ G4AdjointCSManager::BuildCrossSectionsModelAndElement(G4VEmAdjointModel* aModel,
   // Product to projectile backward scattering
   G4double dE = std::pow(10., 1. / nbin_pro_decade);
   G4double E2 =
-    std::pow(10., double(int(std::log10(EkinMin) * nbin_pro_decade) + 1) /
+    std::pow(10., G4double(int(std::log10(EkinMin) * nbin_pro_decade) + 1) /
                     nbin_pro_decade) / dE;
   G4double E1 = EkinMin;
   // Loop checking, 07-Aug-2015, Vladimir Ivanchenko
@@ -852,13 +852,13 @@ G4AdjointCSManager::BuildCrossSectionsModelAndElement(G4VEmAdjointModel* aModel,
   {
     E1 = std::max(EkinMin, E2);
     E1 = std::min(EkinMaxForProd, E1);
-    std::vector<std::vector<double>*> aMat =
+    std::vector<std::vector<G4double>*> aMat =
       aModel->ComputeAdjointCrossSectionVectorPerAtomForSecond(E1, Z, A,
                                                                nbin_pro_decade);
     if(aMat.size() >= 2)
     {
-      std::vector<double>* log_ESecVec = aMat[0];
-      std::vector<double>* log_CSVec   = aMat[1];
+      std::vector<G4double>* log_ESecVec = aMat[0];
+      std::vector<G4double>* log_CSVec   = aMat[1];
       G4double log_adjointCS           = log_CSVec->back();
       // normalise CSVec such that it becomes a probability vector
       for(size_t j = 0; j < log_CSVec->size(); ++j)
@@ -939,7 +939,7 @@ G4AdjointCSManager::BuildCrossSectionsModelAndMaterial(
   // Product to projectile backward scattering
   G4double dE = std::pow(10., 1. / nbin_pro_decade);
   G4double E2 =
-    std::pow(10., double(int(std::log10(EkinMin) * nbin_pro_decade) + 1) /
+    std::pow(10., G4double(int(std::log10(EkinMin) * nbin_pro_decade) + 1) /
                     nbin_pro_decade) / dE;
   G4double E1 = EkinMin;
   // Loop checking, 07-Aug-2015, Vladimir Ivanchenko
@@ -1087,7 +1087,7 @@ void G4AdjointCSManager::DefineCurrentParticle(
 G4double G4AdjointCSManager::ComputeAdjointCS(
   G4double aPrimEnergy, G4AdjointCSMatrix* anAdjointCSMatrix, G4double Tcut)
 {
-  std::vector<double>* theLogPrimEnergyVector =
+  std::vector<G4double>* theLogPrimEnergyVector =
     anAdjointCSMatrix->GetLogPrimEnergyVector();
   if(theLogPrimEnergyVector->empty())
   {

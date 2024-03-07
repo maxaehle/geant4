@@ -296,7 +296,7 @@ Molecule *DetectorConstruction::GetMoleculeList()
 ///////////////// BEGIN atomistic representation
 //
 void DetectorConstruction::AtomisticView(G4LogicalVolume* worldLV,
-    Molecule *moleculeListTemp, double atomSizeFactor)
+    Molecule *moleculeListTemp, G4double atomSizeFactor)
 {
   CheckMaterials();
 
@@ -752,8 +752,8 @@ void DetectorConstruction::DrawBoundingVolume(G4LogicalVolume* worldLV,
 {
   CheckMaterials();
 
-  double dX,dY,dZ;//Dimensions for bounding volume
-  double tX,tY,tZ;//Translation for bounding volume
+  G4double dX,dY,dZ;//Dimensions for bounding volume
+  G4double tX,tY,tZ;//Translation for bounding volume
   fPDBlib.ComputeBoundingVolumeParams(moleculeListTemp,
                                       dX, dY, dZ,
                                       tX, tY, tZ);

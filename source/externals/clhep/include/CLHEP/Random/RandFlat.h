@@ -7,9 +7,9 @@
 // -----------------------------------------------------------------------
 // This file is part of Geant4 (simulation toolkit for HEP).
 
-// Class defining methods for shooting flat random numbers, double or
+// Class defining methods for shooting flat random numbers, G4double or
 // integers.
-// It provides methods to fill with double flat values arrays of
+// It provides methods to fill with G4double flat values arrays of
 // specified size, as well as methods for shooting sequences of 0,1 (bits).
 // Default boundaries ]0.1[ for operator()().
 
@@ -43,11 +43,11 @@ class RandFlat : public HepRandom {
 public:
 
   inline RandFlat ( HepRandomEngine& anEngine );
-  inline RandFlat ( HepRandomEngine& anEngine, double width );
-  inline RandFlat ( HepRandomEngine& anEngine, double a, double b );
+  inline RandFlat ( HepRandomEngine& anEngine, G4double width );
+  inline RandFlat ( HepRandomEngine& anEngine, G4double a, G4double b );
   inline RandFlat ( HepRandomEngine* anEngine );
-  inline RandFlat ( HepRandomEngine* anEngine, double width );
-  inline RandFlat ( HepRandomEngine* anEngine, double a, double b );
+  inline RandFlat ( HepRandomEngine* anEngine, G4double width );
+  inline RandFlat ( HepRandomEngine* anEngine, G4double a, G4double b );
   // These constructors should be used to instantiate a RandFlat
   // distribution object defining a local engine for it.
   // The static generator will be skipped using the non-static methods
@@ -62,11 +62,11 @@ public:
 
   // Static methods to shoot random values using the static generator
 
-  static  double shoot();
+  static  G4double shoot();
 
-  static  inline double shoot( double width );
+  static  inline G4double shoot( G4double width );
 
-  static  inline double shoot( double a, double b );
+  static  inline G4double shoot( G4double a, G4double b );
 
   static  inline long shootInt( long n );
 
@@ -74,20 +74,20 @@ public:
 
   static  inline int shootBit();
 
-  static  void shootArray ( const int size, double* vect );
+  static  void shootArray ( const int size, G4double* vect );
 
-  static  void shootArray ( const int size, double* vect,
-                            double lx, double dx );
+  static  void shootArray ( const int size, G4double* vect,
+                            G4double lx, G4double dx );
 
   //  Static methods to shoot random values using a given engine
   //  by-passing the static generator.
 
-  static  inline double shoot ( HepRandomEngine* anEngine );
+  static  inline G4double shoot ( HepRandomEngine* anEngine );
 
-  static  inline double shoot( HepRandomEngine* anEngine, double width );
+  static  inline G4double shoot( HepRandomEngine* anEngine, G4double width );
 
-  static  inline double shoot( HepRandomEngine* anEngine,
-                                  double a, double b );
+  static  inline G4double shoot( HepRandomEngine* anEngine,
+                                  G4double a, G4double b );
   static  inline long shootInt( HepRandomEngine* anEngine, long n );
   
   static  inline long shootInt( HepRandomEngine* anEngine, long a1, long n );
@@ -95,20 +95,20 @@ public:
   static  inline int shootBit( HepRandomEngine* );
 
   static  inline void shootArray ( HepRandomEngine* anEngine,
-                                   const int size, double* vect );
+                                   const int size, G4double* vect );
 
   static  void shootArray ( HepRandomEngine* anEngine, 
-                            const int size, double* vect,
-                            double lx, double dx );
+                            const int size, G4double* vect,
+                            G4double lx, G4double dx );
 
   //  Methods using the localEngine to shoot random values, by-passing
   //  the static generator.
 
-  inline double fire();
+  inline G4double fire();
 
-  inline double fire( double width );
+  inline G4double fire( G4double width );
 
-  inline double fire( double a, double b );
+  inline G4double fire( G4double a, G4double b );
 
   inline long fireInt( long n );
 
@@ -116,14 +116,14 @@ public:
 
   inline int fireBit();
 
-  void fireArray (const int size, double* vect);
+  void fireArray (const int size, G4double* vect);
 
-  void fireArray (const int size, double* vect,
-                  double lx, double dx);
+  void fireArray (const int size, G4double* vect,
+                  G4double lx, G4double dx);
 
-  double operator()();
-  double operator()( double width );
-  double operator()( double a, double b );
+  G4double operator()();
+  G4double operator()( G4double width );
+  G4double operator()( G4double a, G4double b );
 
   // Save and restore to/from streams
   
@@ -197,9 +197,9 @@ private:
   static CLHEP_THREAD_LOCAL unsigned long staticFirstUnusedBit;
   
   std::shared_ptr<HepRandomEngine> localEngine;
-  double defaultWidth;
-  double defaultA;
-  double defaultB;
+  G4double defaultWidth;
+  G4double defaultA;
+  G4double defaultB;
 
 };
 

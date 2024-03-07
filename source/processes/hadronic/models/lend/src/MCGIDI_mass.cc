@@ -14,7 +14,7 @@ using namespace GIDI;
 
 struct ZAMass {
     char const *symbol;
-    double mass;
+    G4double mass;
 };
 
 static struct ZAMass ZAMasses[] = {
@@ -850,10 +850,10 @@ static struct ZAMass ZAMasses[] = {
 /*
 ***************************************************************
 */
-double MCGIDI_particleMass_AMU( statusMessageReporting *smr, const char *name ) {
+G4double MCGIDI_particleMass_AMU( statusMessageReporting *smr, const char *name ) {
 
     int i, n = sizeof( ZAMasses ) / sizeof( ZAMasses[0] );
-    double mass = -1.;
+    G4double mass = -1.;
 
     for( i = 0; i < n; i++ ) {
         if( strcmp( ZAMasses[i].symbol, name ) == 0 ) {

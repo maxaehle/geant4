@@ -30,7 +30,7 @@
 #ifndef G4GIDI_mass_h_included
 #define G4GIDI_mass_h_included 1
 
-double G4GIDI_targetMass( const char *targetSymbol );
-double G4GIDI_Z_AMass( int iZ, int iA );
+G4double G4GIDI_targetMass( const char *targetSymbol );
+G4double G4GIDI_Z_AMass( int iZ, int iA );
 
 #endif      // End of G4GIDI_mass_h_included

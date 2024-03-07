@@ -1123,7 +1123,7 @@ ExciteParticipants_doNonDiffraction( G4VSplitableHadron* projectile,
     #endif
 
   } while ( ( common.Pprojectile + common.Qmomentum ).mag2() < 
-            common.ProjectileNonDiffStateMinMass2  ||  // No double Diffraction
+            common.ProjectileNonDiffStateMinMass2  ||  // No G4double Diffraction
             ( common.Ptarget - common.Qmomentum ).mag2() <  
             common.TargetNonDiffStateMinMass2 );  /* Loop checking, 10.08.2015, A.Ribon */
 

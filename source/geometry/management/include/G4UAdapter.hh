@@ -178,7 +178,7 @@ class G4UAdapter : public G4VSolid, protected UnplacedVolume_t
       // Dumps contents of the solid to a stream.
 
     virtual void DescribeYourselfTo(G4VGraphicsScene& scene) const override;
-      // A "double dispatch" function which identifies the solid
+      // A "G4double dispatch" function which identifies the solid
       // to the graphics scene for visualization.
 
     virtual G4VisExtent GetExtent()  const override;

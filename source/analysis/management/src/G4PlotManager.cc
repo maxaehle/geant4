@@ -43,7 +43,7 @@ namespace {
 
 // from g4tools/test/viewplot.cpp
 //_____________________________________________________________________________
-void HD_style(tools::sg::plots& a_plots,float a_line_width) {
+void HD_style(tools::sg::plots& a_plots,G4float a_line_width) {
   std::vector<tools::sg::plotter*> plotters;
   a_plots.plotters(plotters);
   tools_vforcit(tools::sg::plotter*,plotters,it) {
@@ -79,27 +79,27 @@ void HD_style(tools::sg::plots& a_plots,float a_line_width) {
 
 // from g4tools/test/viewplot.cpp
 //_____________________________________________________________________________
-void regions_style(tools::sg::plots& a_plots,float a_plotter_scale = 1) {
+void regions_style(tools::sg::plots& a_plots,G4float a_plotter_scale = 1) {
   // Rescale some plotter parameters (for example margins) according to the number of regions.
   // We assume that these parameters had been set previously according to one plot per page.
   // Then this function must be applied after all the styles had been applied (because
   // a plotting style may set these parameters).
 
-  float ww_wc = a_plots.width;
-  float wh_wc = a_plots.height;
-  float rw_wc = ww_wc/a_plots.cols;
-  float rh_wc = wh_wc/a_plots.rows;
+  G4float ww_wc = a_plots.width;
+  G4float wh_wc = a_plots.height;
+  G4float rw_wc = ww_wc/a_plots.cols;
+  G4float rh_wc = wh_wc/a_plots.rows;
 
-  float cooking = 1.2f; //if increased the data area is diminished.
+  G4float cooking = 1.2f; //if increased the data area is diminished.
 
-  float wfac = (rw_wc/ww_wc)*cooking;
-  float hfac = (rh_wc/wh_wc)*cooking;
+  G4float wfac = (rw_wc/ww_wc)*cooking;
+  G4float hfac = (rh_wc/wh_wc)*cooking;
 
-  float label_cooking = 1.6f; //if increased the labels are bigger.
+  G4float label_cooking = 1.6f; //if increased the labels are bigger.
 
   if((a_plots.cols.value()>=4)&&(a_plots.cols.value()>a_plots.rows.value())) label_cooking = 0.9f;
 
-  float title_cooking = 1.1f; //extra title cooking.
+  G4float title_cooking = 1.1f; //extra title cooking.
 
   a_plots.plotter_scale = a_plotter_scale;
 
@@ -133,7 +133,7 @@ bool load_embeded_styles(tools::xml::styles& a_styles) {
   const char** lines = viewplot_fonts_google_style(linen);
   for(unsigned int index=0;index<linen;index++) {
     std::string s = lines[index];
-    tools::replace(s,"@@double_quote@@","\"");
+    tools::replace(s,"@@G4double_quote@@","\"");
     tools::replace(s,"@@back_slash@@","\\");
     ss += s + "\n";
   }
@@ -160,8 +160,8 @@ G4PlotManager::G4PlotManager(const G4AnalysisManagerState& state)
   fState.Message(kVL1,  "... using high resolution with Freetype fonts", "");
   //Have vertical A4 :
   // unsigned int ww = 2000; //to have better antialising on freetype fonts.
-  // float A4 = 29.7f/21.0f;
-  // unsigned int wh = (unsigned int)(float(ww)*A4*0.80);
+  // G4float A4 = 29.7f/21.0f;
+  // unsigned int wh = (unsigned int)(G4float(ww)*A4*0.80);
   static tools::sg::text_freetype ttf;
   ttf.add_embedded_font(tools::sg::font_lato_regular_ttf(),tools::font::lato_regular_ttf);
   ttf.add_embedded_font(tools::sg::font_roboto_bold_ttf(),tools::font::roboto_bold_ttf);

@@ -29,7 +29,7 @@ typedef struct unitConversions_s unitConversions;
 struct unitConversions_s {
     char const *_from;
     char const *_to;
-    double ratio;
+    G4double ratio;
 };
 
 int PoPs_smr_ID = smr_unknownID;
@@ -262,7 +262,7 @@ static int PoPs_sortedParticleIndex( char const *name ) {
 /*
 ========================================================================
 */
-double PoPs_getMassInUnitOf( statusMessageReporting *smr, char const *name, char const *unit ) {
+G4double PoPs_getMassInUnitOf( statusMessageReporting *smr, char const *name, char const *unit ) {
 
     int index = PoPs_particleIndex_smr( smr, name, __FILE__, __LINE__, __func__ );
 
@@ -283,9 +283,9 @@ char const *PoPs_getName_atIndex( statusMessageReporting *smr, int index ) {
 /*
 ========================================================================
 */
-double PoPs_getMassInUnitOf_atIndex( statusMessageReporting *smr, int index, char const *unit ) {
+G4double PoPs_getMassInUnitOf_atIndex( statusMessageReporting *smr, int index, char const *unit ) {
 
-    double mass = -1.;
+    G4double mass = -1.;
 
     if( ( index < 0 ) || ( index >= popsRoot.numberOfParticles ) ) {
         smr_setReportError2( smr, PoPs_smr_ID, PoPs_errorToken_badIndex, "index %d not in PoPs", index ); }
@@ -582,7 +582,7 @@ int PoP_copyParticle( statusMessageReporting *smr, PoP *desc, PoP *src ) {
 /*
 ========================================================================
 */
-PoP *PoP_makeParticle( statusMessageReporting *smr, enum PoPs_genre genre, char const *name, double mass, char const *massUnit ) {
+PoP *PoP_makeParticle( statusMessageReporting *smr, enum PoPs_genre genre, char const *name, G4double mass, char const *massUnit ) {
 
     PoP *pop;
     
@@ -623,9 +623,9 @@ char const *PoP_getName( PoP *pop ) {
 /*
 ========================================================================
 */
-double PoP_getMassInUnitOf( statusMessageReporting *smr, PoP *pop, char const *unit ) {
+G4double PoP_getMassInUnitOf( statusMessageReporting *smr, PoP *pop, char const *unit ) {
 
-    double mass = -1., ratio;
+    G4double mass = -1., ratio;
     /* PoP *pop_ = pop;*/
 
     /*if( pop->genre == PoPs_genre_alias ) pop_ = popsRoot.pops[PoPs_particleProperIndex( pop->index )];*/
@@ -745,7 +745,7 @@ char const *unitsDB_stringFromIndex( statusMessageReporting *smr, int index ) {
 /*
 ========================================================================
 */
-int PoPs_unitConversionRatio( char const *_from, char const *_to, double *ratio ) {
+int PoPs_unitConversionRatio( char const *_from, char const *_to, G4double *ratio ) {
 
     int i, n = sizeof( conversions ) / sizeof( conversions[0] );
 

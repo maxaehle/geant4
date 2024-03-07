@@ -70,27 +70,27 @@ public:
 
   // Static methods to shoot random values using the static generator
 
-  static  inline double shoot();
+  static  inline G4double shoot();
 
-  static  void shootArray ( const int size, double* vect );
+  static  void shootArray ( const int size, G4double* vect );
 
   //  Static methods to shoot random values using a given engine
   //  by-passing the static generator.
 
-  static  inline double shoot( HepRandomEngine* anotherEngine );
+  static  inline G4double shoot( HepRandomEngine* anotherEngine );
 
   static  void shootArray ( HepRandomEngine* anotherEngine, 
 			    const int size,
-                            double* vect );
+                            G4double* vect );
 
   //  Instance methods using the localEngine to instead of the static 
   //  generator, and the default mean and stdDev established at construction
 
-  inline double fire();
+  inline G4double fire();
 
-  void fireArray  ( const int size, double* vect);
+  void fireArray  ( const int size, G4double* vect);
 
-  inline double operator()();
+  inline G4double operator()();
 
   std::string name() const;
   HepRandomEngine & engine();
@@ -101,8 +101,8 @@ public:
 
 protected:
 
-  static double transform      (double r);
-  static double transformSmall (double r);
+  static G4double transform      (G4double r);
+  static G4double transformSmall (G4double r);
 
 private:
 

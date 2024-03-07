@@ -103,7 +103,7 @@ static G4double InvErfc(G4double x)
   return CLHEP::HepStat::inverseErf(1. - x);
 }
 
-//static double Erf(double x)
+//static G4double Erf(G4double x)
 //{
 //  return CLHEP::HepStat::erf(x);
 //}
@@ -375,9 +375,9 @@ void G4DNABrownianTransportation::ComputeStep(const G4Track& track,
             // 1D approximation to place the brownian between its starting point
             // and the geometry boundary
             //==================================================================
-            double min_randomNumber = Erfc(State(fEndPointDistance)/2*sqrt_Dt);
-            double value = State(fRandomNumber)+(1-State(fRandomNumber))*G4UniformRand();
-            double invErfc = InvErfc(value*G4UniformRand());
+            G4double min_randomNumber = Erfc(State(fEndPointDistance)/2*sqrt_Dt);
+            G4double value = State(fRandomNumber)+(1-State(fRandomNumber))*G4UniformRand();
+            G4double invErfc = InvErfc(value*G4UniformRand());
             spaceStep = invErfc*2*sqrt_Dt;
             State(fGeometryLimitedStep) = false;
             */
@@ -735,7 +735,7 @@ G4double G4DNABrownianTransportation::AlongStepGetPhysicalInteractionLength(cons
       G4double minTimeStepAllowed = G4VScheduler::Instance()->GetLimitingTimeStep();
       //========================================================================
       // TODO
-//      double currentMinTimeStep = G4VScheduler::Instance()->GetTimeStep();
+//      G4double currentMinTimeStep = G4VScheduler::Instance()->GetTimeStep();
       //========================================================================
 
       if (State(theInteractionTimeLeft) < minTimeStepAllowed)

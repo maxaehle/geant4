@@ -19,7 +19,7 @@ using namespace GIDI;
 void ptwX_simpleWrite( ptwXPoints const *ptwX, FILE *f, char const *format ) {
 
     int64_t i1;
-    double *p1 = ptwX->points;
+    G4double *p1 = ptwX->points;
 
     for( i1 = 0; i1 < ptwX->length; ++i1, ++p1 ) fprintf( f, format, *p1 );
 }

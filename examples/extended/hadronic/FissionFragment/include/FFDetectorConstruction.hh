@@ -75,8 +75,8 @@ private:
 
 // Functions
     void DefineMaterials(void);
-    void PlaceFuelPlate(double x,
-                        double y,
+    void PlaceFuelPlate(G4double x,
+                        G4double y,
                         G4LogicalVolume* const myLogicalVolume,
                         G4LogicalVolume* const parentLogicalVolume);
 };

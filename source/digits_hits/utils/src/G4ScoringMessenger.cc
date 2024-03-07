@@ -187,7 +187,7 @@ G4ScoringMessenger::G4ScoringMessenger(G4ScoringManager* SManager)
   mBinCmd->SetGuidance("   Nz  :(int) Number of bins in z axis ");
   mBinCmd->SetGuidance("   Nphi:(int) Number of bins in phi axis ");
   // mBinCmd->SetGuidance("  Axis:(int) Axis of division ");
-  //  mBinCmd->SetGuidance("  P1..Pn-1  :(double) \"paramter from P1 to Pn-1 for
+  //  mBinCmd->SetGuidance("  P1..Pn-1  :(G4double) \"paramter from P1 to Pn-1 for
   //  division.\"");
   param = new G4UIparameter("Ni", 'i', false);
   param->SetDefaultValue("1");
@@ -310,12 +310,12 @@ G4ScoringMessenger::G4ScoringMessenger(G4ScoringManager* SManager)
   listColorMapCmd->SetGuidance("List registered score color maps.");
   listColorMapCmd->SetToBeBroadcasted(false);
 
-  floatMinMaxCmd = new G4UIcmdWithAString("/score/colorMap/floatMinMax", this);
-  floatMinMaxCmd->SetGuidance(
+  G4floatMinMaxCmd = new G4UIcmdWithAString("/score/colorMap/G4floatMinMax", this);
+  G4floatMinMaxCmd->SetGuidance(
     "Min/Max of the color map is calculated according to the actual scores.");
-  floatMinMaxCmd->SetParameterName("colorMapName", true, false);
-  floatMinMaxCmd->SetDefaultValue("defaultLinearColorMap");
-  floatMinMaxCmd->SetToBeBroadcasted(false);
+  G4floatMinMaxCmd->SetParameterName("colorMapName", true, false);
+  G4floatMinMaxCmd->SetDefaultValue("defaultLinearColorMap");
+  G4floatMinMaxCmd->SetToBeBroadcasted(false);
 
   colorMapMinMaxCmd = new G4UIcommand("/score/colorMap/setMinMax", this);
   colorMapMinMaxCmd->SetGuidance("Define min/max value of the color map.");
@@ -473,7 +473,7 @@ G4ScoringMessenger::~G4ScoringMessenger()
   delete drawCmd;
   delete drawColumnCmd;
   delete listColorMapCmd;
-  delete floatMinMaxCmd;
+  delete G4floatMinMaxCmd;
   delete colorMapMinMaxCmd;
   delete colorMapDir;
   delete dumpQtyToFileCmd;
@@ -771,7 +771,7 @@ void G4ScoringMessenger::SetNewValue(G4UIcommand* command, G4String newVal)
   {
     fSMan->ListScoreColorMaps();
   }
-  else if(command == floatMinMaxCmd)
+  else if(command == G4floatMinMaxCmd)
   {
     G4VScoreColorMap* colorMap = fSMan->GetScoreColorMap(newVal);
     if(colorMap)
@@ -781,7 +781,7 @@ void G4ScoringMessenger::SetNewValue(G4UIcommand* command, G4String newVal)
     else
     {
       G4ExceptionDescription ed;
-      ed << "ERROR[" << floatMinMaxCmd->GetCommandPath() << "] : color map <"
+      ed << "ERROR[" << G4floatMinMaxCmd->GetCommandPath() << "] : color map <"
          << newVal << "> is not defined. Command ignored.";
       command->CommandFailed(ed);
     }

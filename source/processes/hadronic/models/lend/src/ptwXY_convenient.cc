@@ -5,7 +5,7 @@
 
 #include <stdlib.h>
 #include <cmath>
-#include <float.h>
+#include <G4float.h>
 
 #include "ptwXY.h"
 
@@ -17,7 +17,7 @@ namespace GIDI {
 using namespace GIDI;
 #endif
 
-static nfu_status ptwXY_createGaussianCenteredSigma1_2( ptwXYPoints *ptwXY, double x1, double y1, double x2, double y2, int addX1Point );
+static nfu_status ptwXY_createGaussianCenteredSigma1_2( ptwXYPoints *ptwXY, G4double x1, G4double y1, G4double x2, G4double y2, int addX1Point );
 /*
 ************************************************************
 */
@@ -39,12 +39,12 @@ ptwXPoints *ptwXY_getXArray( ptwXYPoints *ptwXY, nfu_status *status ) {
 /*
 ************************************************************
 */
-nfu_status ptwXY_dullEdges( ptwXYPoints *ptwXY, double lowerEps, double upperEps, int positiveXOnly ) {
+nfu_status ptwXY_dullEdges( ptwXYPoints *ptwXY, G4double lowerEps, G4double upperEps, int positiveXOnly ) {
 
 #define minEps 5e-16
 
     nfu_status status;
-    double xm, xp, dx, y, x1, y1, x2, y2, sign;
+    G4double xm, xp, dx, y, x1, y1, x2, y2, sign;
     ptwXYPoint *p;
 
 /* This routine can only be used for linear interpolation for the y-axes since for log interpolation, y cannot be 0. 
@@ -138,10 +138,10 @@ This needs to be fixed and documented. */
 /*
 ************************************************************
 */
-nfu_status ptwXY_mergeClosePoints( ptwXYPoints *ptwXY, double epsilon ) {
+nfu_status ptwXY_mergeClosePoints( ptwXYPoints *ptwXY, G4double epsilon ) {
 
     int64_t i, i1, j, k, n = ptwXY->length;
-    double x, y;
+    G4double x, y;
     ptwXYPoint *p1, *p2;
 
     if( n < 2 ) return( ptwXY->status );
@@ -194,7 +194,7 @@ nfu_status ptwXY_mergeClosePoints( ptwXYPoints *ptwXY, double epsilon ) {
 ptwXYPoints *ptwXY_intersectionWith_ptwX( ptwXYPoints *ptwXY, ptwXPoints *ptwX, nfu_status *status ) {
 
     int64_t i, i1, i2, lengthX = ptwX_length( ptwX );
-    double x, y, xMin, xMax;
+    G4double x, y, xMin, xMax;
     ptwXYPoints *n = NULL;
 
     if( ( *status = ptwXY->status ) != nfu_Okay ) return( NULL );
@@ -292,11 +292,11 @@ nfu_status ptwXY_areDomainsMutual( ptwXYPoints *ptwXY1, ptwXYPoints *ptwXY2 ) {
 /*
 ************************************************************
 */
-nfu_status ptwXY_tweakDomainsToMutualify( ptwXYPoints *ptwXY1, ptwXYPoints *ptwXY2, int epsilonFactor, double epsilon ) {
+nfu_status ptwXY_tweakDomainsToMutualify( ptwXYPoints *ptwXY1, ptwXYPoints *ptwXY2, int epsilonFactor, G4double epsilon ) {
 
     nfu_status status;
     int64_t n1 = ptwXY1->length, n2 = ptwXY2->length;
-    double sum, diff;
+    G4double sum, diff;
     ptwXYPoint *xy1, *xy2;
 
     epsilon = std::fabs( epsilon ) + std::fabs( epsilonFactor * DBL_EPSILON );
@@ -365,8 +365,8 @@ nfu_status ptwXY_tweakDomainsToMutualify( ptwXYPoints *ptwXY1, ptwXYPoints *ptwX
 /*
 ************************************************************
 */
-nfu_status ptwXY_mutualifyDomains( ptwXYPoints *ptwXY1, double lowerEps1, double upperEps1, int positiveXOnly1,
-                                          ptwXYPoints *ptwXY2, double lowerEps2, double upperEps2, int positiveXOnly2 ) {
+nfu_status ptwXY_mutualifyDomains( ptwXYPoints *ptwXY1, G4double lowerEps1, G4double upperEps1, int positiveXOnly1,
+                                          ptwXYPoints *ptwXY2, G4double lowerEps2, G4double upperEps2, int positiveXOnly2 ) {
 
     nfu_status status;
     int64_t n1 = ptwXY1->length, n2 = ptwXY2->length;
@@ -421,10 +421,10 @@ nfu_status ptwXY_mutualifyDomains( ptwXYPoints *ptwXY1, double lowerEps1, double
 /*
 ************************************************************
 */
-nfu_status ptwXY_copyToC_XY( ptwXYPoints *ptwXY, int64_t index1, int64_t index2, int64_t allocatedSize, int64_t *numberOfPoints, double *xys ) {
+nfu_status ptwXY_copyToC_XY( ptwXYPoints *ptwXY, int64_t index1, int64_t index2, int64_t allocatedSize, int64_t *numberOfPoints, G4double *xys ) {
 
     int64_t i;
-    double *d = xys;
+    G4double *d = xys;
     nfu_status status;
     ptwXYPoint *pointFrom;
 
@@ -447,18 +447,18 @@ nfu_status ptwXY_copyToC_XY( ptwXYPoints *ptwXY, int64_t index1, int64_t index2,
 /*
 ************************************************************
 */
-nfu_status ptwXY_valueTo_ptwXAndY( ptwXYPoints *ptwXY, double **xs, double **ys ) {
+nfu_status ptwXY_valueTo_ptwXAndY( ptwXYPoints *ptwXY, G4double **xs, G4double **ys ) {
 
     int64_t i1, length = ptwXY_length( ptwXY );
-    double *xps, *yps;
+    G4double *xps, *yps;
     ptwXYPoint *pointFrom;
     nfu_status status;
 
     if( ptwXY->status != nfu_Okay ) return( ptwXY->status );
     if( ( status = ptwXY_simpleCoalescePoints( ptwXY ) ) != nfu_Okay ) return( status );
 
-    if( ( *xs = (double *) malloc( length * sizeof( double ) ) ) == NULL ) return( nfu_mallocError );
-    if( ( *ys = (double *) malloc( length * sizeof( double ) ) ) == NULL ) {
+    if( ( *xs = (G4double *) malloc( length * sizeof( G4double ) ) ) == NULL ) return( nfu_mallocError );
+    if( ( *ys = (G4double *) malloc( length * sizeof( G4double ) ) ) == NULL ) {
         free( *xs );
         *xs = NULL;
         return( nfu_mallocError );
@@ -474,7 +474,7 @@ nfu_status ptwXY_valueTo_ptwXAndY( ptwXYPoints *ptwXY, double **xs, double **ys 
 /*
 ************************************************************
 */
-ptwXYPoints *ptwXY_valueTo_ptwXY( double x1, double x2, double y, nfu_status *status ) {
+ptwXYPoints *ptwXY_valueTo_ptwXY( G4double x1, G4double x2, G4double y, nfu_status *status ) {
 
     ptwXYPoints *n;
 
@@ -489,11 +489,11 @@ ptwXYPoints *ptwXY_valueTo_ptwXY( double x1, double x2, double y, nfu_status *st
 /*
 ************************************************************
 */
-ptwXYPoints *ptwXY_createGaussianCenteredSigma1( double accuracy, nfu_status *status ) {
+ptwXYPoints *ptwXY_createGaussianCenteredSigma1( G4double accuracy, nfu_status *status ) {
 
     int64_t i, n;
     ptwXYPoint *pm, *pp;
-    double x1, y1, x2, y2, accuracy2, yMin = 1e-10;
+    G4double x1, y1, x2, y2, accuracy2, yMin = 1e-10;
     ptwXYPoints *gaussian;
 
     if( accuracy < 1e-5 ) accuracy = 1e-5;
@@ -546,12 +546,12 @@ Err:
 /*
 ************************************************************
 */
-static nfu_status ptwXY_createGaussianCenteredSigma1_2( ptwXYPoints *ptwXY, double x1, double y1, double x2, double y2, int addX1Point ) {
+static nfu_status ptwXY_createGaussianCenteredSigma1_2( ptwXYPoints *ptwXY, G4double x1, G4double y1, G4double x2, G4double y2, int addX1Point ) {
 
     nfu_status status = nfu_Okay;
     int morePoints = 0;
-    double x = 0.5 * ( x1 + x2 );
-    double y = G4Exp( -x * x / 2 ), yMin = ( y1 * ( x2 - x ) + y2 * ( x - x1 ) ) / ( x2 - x1 );
+    G4double x = 0.5 * ( x1 + x2 );
+    G4double y = G4Exp( -x * x / 2 ), yMin = ( y1 * ( x2 - x ) + y2 * ( x - x1 ) ) / ( x2 - x1 );
 
     if( std::fabs( y - yMin ) > y * ptwXY->accuracy ) morePoints = 1;
     if( morePoints && ( status = ptwXY_createGaussianCenteredSigma1_2( ptwXY, x, y, x2, y2, 0 ) ) != nfu_Okay ) return( status );
@@ -563,8 +563,8 @@ static nfu_status ptwXY_createGaussianCenteredSigma1_2( ptwXYPoints *ptwXY, doub
 /*
 ************************************************************
 */
-ptwXYPoints *ptwXY_createGaussian( double accuracy, double xCenter, double sigma, double amplitude, double xMin, double xMax, 
-        double /*dullEps*/, nfu_status *status ) {
+ptwXYPoints *ptwXY_createGaussian( G4double accuracy, G4double xCenter, G4double sigma, G4double amplitude, G4double xMin, G4double xMax, 
+        G4double /*dullEps*/, nfu_status *status ) {
 
     int64_t i;
     ptwXYPoints *gaussian, *sliced;

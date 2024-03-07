@@ -199,7 +199,7 @@ CexmcAST::BasicEval::ScalarValueType  CexmcASTEval::GetVarScalarValue(
 
     /* bound to CexmcAST::Variable:addr */
 
-    const double * const *  addr( boost::get< const double * >( &var.addr ) );
+    const G4double * const *  addr( boost::get< const G4double * >( &var.addr ) );
 
     if ( addr )
     {
@@ -361,9 +361,9 @@ void  CexmcASTEval::BindAddresses( CexmcAST::Subtree &  ast )
             }
             else
             {
-                const double * const &  doubleVarAddr(
-                                    boost::get< const double * >( var->addr ) );
-                if ( doubleVarAddr )
+                const G4double * const &  G4doubleVarAddr(
+                                    boost::get< const G4double * >( var->addr ) );
+                if ( G4doubleVarAddr )
                     continue;
             }
 

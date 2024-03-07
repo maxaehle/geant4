@@ -304,7 +304,7 @@ class G4UImanager : public G4VStateDependent
     G4MTcoutDestination* threadCout = nullptr;
     G4ICOMS_DLL static G4int igThreadID;
 
-    G4ICOMS_DLL static G4bool doublePrecisionStr;
+    G4ICOMS_DLL static G4bool G4doublePrecisionStr;
 
     G4int lastRC = 0;
 

@@ -85,7 +85,7 @@ public:
 #endif
   inline void operator delete(void*);
 
-  void Insert(double, G4KDNode_Base*);
+  void Insert(G4double, G4KDNode_Base*);
 
   void Clear();
 
@@ -113,8 +113,8 @@ public:
     PointT* GetItem() const;
   G4KDNode_Base* GetNode() const;
   template<typename PointT>
-    PointT* GetItemNDistanceSQ(double& /*distance*/) const;
-  double GetDistanceSqr() const;
+    PointT* GetItemNDistanceSQ(G4double& /*distance*/) const;
+  G4double GetDistanceSqr() const;
 };
 
 //------------------------------------------------------------------------------
@@ -143,7 +143,7 @@ template<typename PointT>
   }
 
 template<typename PointT>
-  PointT* G4KDTreeResult::GetItemNDistanceSQ(double& dist_sq) const
+  PointT* G4KDTreeResult::GetItemNDistanceSQ(G4double& dist_sq) const
   {
     dist_sq = GetDistanceSqr();
     return this->GetItem<PointT>();

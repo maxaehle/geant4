@@ -88,8 +88,8 @@ public:
 
   virtual void ComputeStep(const G4Track&,
                            const G4Step&,
-                           const double timeStep,
-                           double& spaceStep);
+                           const G4double timeStep,
+                           G4double& spaceStep);
 
   virtual void StartTracking(G4Track* aTrack);
   // Give to the track a pointer to the transportation state

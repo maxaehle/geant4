@@ -116,7 +116,7 @@ void G4OpenGLImmediateQtViewer::initializeGL () {
     fmvMatrixUniform = glGetUniformLocation(fShaderProgram, "uMVMatrix");
   
   // Load identity at beginning
-  float identity[16] = {
+  G4float identity[16] = {
     1.0f, 0, 0, 0,
     0, 1.0f, 0, 0,
     0, 0, 1.0f, 0,
@@ -131,7 +131,7 @@ void G4OpenGLImmediateQtViewer::initializeGL () {
 
 #endif
 
-  // If a double buffer context has been forced upon us, ignore the
+  // If a G4double buffer context has been forced upon us, ignore the
   // back buffer for this OpenGLImmediate view.
   //  glDrawBuffer (GL_FRONT); // FIXME : Ne marche pas avec cette ligne, mais affiche le run correctement...
 
@@ -165,7 +165,7 @@ void  G4OpenGLImmediateQtViewer::DrawView() {
 void G4OpenGLImmediateQtViewer::ComputeView () {
 
   makeCurrent();
-  // If a double buffer context has been forced upon us, ignore the
+  // If a G4double buffer context has been forced upon us, ignore the
   // back buffer for this OpenGLImmediate view.
   //  glDrawBuffer (GL_FRONT);
 
@@ -283,7 +283,7 @@ void G4OpenGLImmediateQtViewer::showEvent (QShowEvent *)
 
 
 /**
- * This function was build in order to make a zoom on double clic event.
+ * This function was build in order to make a zoom on G4double clic event.
  * It was think to build a rubberband on the zoom area, but never work fine
  */
 void G4OpenGLImmediateQtViewer::mouseDoubleClickEvent(QMouseEvent *)

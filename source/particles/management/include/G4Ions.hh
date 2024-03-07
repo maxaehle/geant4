@@ -79,7 +79,7 @@ class G4Ions : public G4ParticleDefinition
     inline G4int GetIsomerLevel() const; 
       // Get Isomer level (=0 for ground state)
    
-    enum class G4FloatLevelBase   // enumerator for floating level base
+    enum class G4FloatLevelBase   // enumerator for G4floating level base
     {
       no_Float=0,
       plus_X, plus_Y, plus_Z, plus_U, plus_V, plus_W,
@@ -90,7 +90,7 @@ class G4Ions : public G4ParticleDefinition
     static G4Ions::G4FloatLevelBase FloatLevelBase(G4int flbIdx);
     static char FloatLevelBaseChar(G4Ions::G4FloatLevelBase flb);
 
-    // Set/Get methods for floating level base
+    // Set/Get methods for G4floating level base
     //
     inline G4Ions::G4FloatLevelBase GetFloatLevelBase() const;
     inline G4int GetFloatLevelBaseIndex() const;
@@ -106,7 +106,7 @@ class G4Ions : public G4ParticleDefinition
 
     G4double theExcitationEnergy = 0.0; 
     G4int theIsomerLevel = 0;
-    G4FloatLevelBase floatLevelBase = G4FloatLevelBase::no_Float;
+    G4FloatLevelBase G4floatLevelBase = G4FloatLevelBase::no_Float;
 };
 
 #define noFloat G4Ions::G4FloatLevelBase::no_Float
@@ -156,31 +156,31 @@ G4int G4Ions::GetIsomerLevel() const
 inline
 G4Ions::G4FloatLevelBase G4Ions::GetFloatLevelBase() const
 {
-  return floatLevelBase;
+  return G4floatLevelBase;
 }
 
 inline
 G4int G4Ions::GetFloatLevelBaseIndex() const
 {
-  return static_cast<G4int>(floatLevelBase);
+  return static_cast<G4int>(G4floatLevelBase);
 }
 
 inline
 void G4Ions::SetFloatLevelBase(G4Ions::G4FloatLevelBase flb)
 {
-  floatLevelBase = flb;
+  G4floatLevelBase = flb;
 }
 
 inline
 void G4Ions::SetFloatLevelBase(char flbChar)
 {
-  floatLevelBase = FloatLevelBase(flbChar);
+  G4floatLevelBase = FloatLevelBase(flbChar);
 }
 
 inline
 void G4Ions::SetFloatLevelBase(G4int flbIdx)
 {
-  floatLevelBase = FloatLevelBase(flbIdx);
+  G4floatLevelBase = FloatLevelBase(flbIdx);
 }
 
 #endif

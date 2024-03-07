@@ -257,10 +257,10 @@ void
 G4JpegCoder::ForwardDCT(int* picData)
 {
   for( int v=0; v<8; v++ ){
-    double cv = v ? 1.0 : DisSqrt2;
+    G4double cv = v ? 1.0 : DisSqrt2;
     for( int u=0; u<8; u++ ){
-      double cu = u ? 1.0 : DisSqrt2;
-      double sum = 0;
+      G4double cu = u ? 1.0 : DisSqrt2;
+      G4double sum = 0;
       for( int y=0; y<8; y++ )
         for( int x=0; x<8; x++ )
           sum += picData[ y * 8 + x ] * mCosT[u][x] * mCosT[v][y];

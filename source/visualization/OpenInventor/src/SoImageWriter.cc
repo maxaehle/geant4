@@ -51,13 +51,13 @@ typedef struct {
 } Pixel;
 typedef unsigned char Uchar;
 
-//static void getImagePixels(int,int,float*,int&,
+//static void getImagePixels(int,int,G4float*,int&,
 //                         Uchar*&,Uchar*&,Uchar*&,Uchar*&);
 
 static int sWidth = 0;
 static int sHeight = 0;
-static float* sImage = 0;
-static int getRGB(unsigned int,unsigned int,double&,double&,double&);
+static G4float* sImage = 0;
+static int getRGB(unsigned int,unsigned int,G4double&,G4double&,G4double&);
 
 SO_NODE_SOURCE(SoImageWriter)
 //////////////////////////////////////////////////////////////////////////////
@@ -142,7 +142,7 @@ void SoImageWriter::GLRender(
   int x = 0;
   int y = 0;
   int s = 3 * w * h;
-  float* image = new float[s];
+  G4float* image = new G4float[s];
   if(!image) return;
 
   //printf("debug : SoImageWriter::GLRender : %d %d %d %d\n",x,y,w,h);
@@ -212,7 +212,7 @@ void SoImageWriter::GLRender(
 void getImagePixels (
  int aWidth
 ,int aHeight
-,float* aImage
+,G4float* aImage
 ,int& aColorn
 ,Uchar*& aReds
 ,Uchar*& aGreens
@@ -244,7 +244,7 @@ void getImagePixels (
   int row,col;
   Uchar red,green,blue;
   Uchar ored = 0,ogreen = 0,oblue = 0;
-  float* pimag = aImage;
+  G4float* pimag = aImage;
   Uchar* pdata = 0;
   Uchar index = 0;
   int status = 0;
@@ -330,16 +330,16 @@ void getImagePixels (
 int getRGB(
  unsigned int aX
 ,unsigned int aY
-,double& aRed
-,double& aGreen
-,double& aBlue
+,G4double& aRed
+,G4double& aGreen
+,G4double& aBlue
 )
 //////////////////////////////////////////////////////////////////////////////
 // OpenGL image is from down to up.
 // PS image is up to down.
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 {
-  float* pimag = sImage + 3 * (sWidth * (sHeight - 1 - aY) + aX);
+  G4float* pimag = sImage + 3 * (sWidth * (sHeight - 1 - aY) + aX);
   aRed   = *pimag;pimag++;
   aGreen = *pimag;pimag++;
   aBlue  = *pimag;pimag++;

@@ -74,7 +74,7 @@ GIDI_settings_particle::~GIDI_settings_particle( ) {
 */
 int GIDI_settings_particle::addFlux( statusMessageReporting* /* smr */, GIDI_settings_flux const &flux ) {
 
-    double temperature = flux.getTemperature( );
+    G4double temperature = flux.getTemperature( );
     std::vector<GIDI_settings_processedFlux>::iterator iter;
 
     for( iter = mProcessedFluxes.begin( ); iter != mProcessedFluxes.end( ); ++iter ) {
@@ -87,9 +87,9 @@ int GIDI_settings_particle::addFlux( statusMessageReporting* /* smr */, GIDI_set
 /*
 =========================================================
 */
-GIDI_settings_processedFlux const *GIDI_settings_particle::nearestFluxToTemperature( double temperature ) const {
+GIDI_settings_processedFlux const *GIDI_settings_particle::nearestFluxToTemperature( G4double temperature ) const {
 
-    double priorTemperature, lastTemperature;
+    G4double priorTemperature, lastTemperature;
     std::vector<GIDI_settings_processedFlux>::const_iterator iter;
 
     if( mProcessedFluxes.size( ) == 0 ) return( NULL );
@@ -115,7 +115,7 @@ GIDI_settings_processedFlux const *GIDI_settings_particle::nearestFluxToTemperat
 /*
 =========================================================
 */
-ptwXPoints *GIDI_settings_particle::groupFunction( statusMessageReporting *smr, ptwXYPoints *ptwXY1, double temperature, int order ) const {
+ptwXPoints *GIDI_settings_particle::groupFunction( statusMessageReporting *smr, ptwXYPoints *ptwXY1, G4double temperature, int order ) const {
 
     if( mGroupX == NULL ) return( NULL );
     GIDI_settings_processedFlux const *processedFlux = nearestFluxToTemperature( temperature );
@@ -133,7 +133,7 @@ GIDI_settings_processedFlux::GIDI_settings_processedFlux( GIDI_settings_flux con
     ptwXYPoints *fluxXY = NULL;
     ptwXPoints *groupedFluxX;
     GIDI_settings_flux_order const *fluxOrder;
-    double const *energies, *fluxes;
+    G4double const *energies, *fluxes;
 
     for( int order = 0; order < (int) flux.size( ); ++order ) {
         fluxOrder = flux[order];

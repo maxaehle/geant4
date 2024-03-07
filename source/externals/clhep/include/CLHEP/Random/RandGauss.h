@@ -42,10 +42,10 @@ class RandGauss : public HepRandom {
 
 public:
 
-  inline RandGauss ( HepRandomEngine& anEngine, double mean=0.0,
-                                                double stdDev=1.0 );
-  inline RandGauss ( HepRandomEngine* anEngine, double mean=0.0,
-                                                double stdDev=1.0 );
+  inline RandGauss ( HepRandomEngine& anEngine, G4double mean=0.0,
+                                                G4double stdDev=1.0 );
+  inline RandGauss ( HepRandomEngine* anEngine, G4double mean=0.0,
+                                                G4double stdDev=1.0 );
   // These constructors should be used to instantiate a RandGauss
   // distribution object defining a local engine for it.
   // The static generator will be skipped using the non-static methods
@@ -60,38 +60,38 @@ public:
 
   // Static methods to shoot random values using the static generator
 
-  static  double shoot();
+  static  G4double shoot();
 
-  static  inline double shoot( double mean, double stdDev );
+  static  inline G4double shoot( G4double mean, G4double stdDev );
 
-  static  void shootArray ( const int size, double* vect,
-                            double mean=0.0, double stdDev=1.0 );
+  static  void shootArray ( const int size, G4double* vect,
+                            G4double mean=0.0, G4double stdDev=1.0 );
 
   //  Static methods to shoot random values using a given engine
   //  by-passing the static generator.
 
-  static  double shoot( HepRandomEngine* anEngine );
+  static  G4double shoot( HepRandomEngine* anEngine );
 
-  static  inline double shoot( HepRandomEngine* anEngine, 
-                                  double mean, double stdDev );
+  static  inline G4double shoot( HepRandomEngine* anEngine, 
+                                  G4double mean, G4double stdDev );
 
   static  void shootArray ( HepRandomEngine* anEngine, const int size,
-                            double* vect, double mean=0.0,
-                            double stdDev=1.0 );
+                            G4double* vect, G4double mean=0.0,
+                            G4double stdDev=1.0 );
 
   //  Methods using the localEngine to shoot random values, by-passing
   //  the static generator.
 
-  double fire();
+  G4double fire();
 
-  inline double fire( double mean, double stdDev );
+  inline G4double fire( G4double mean, G4double stdDev );
   
-  void fireArray ( const int size, double* vect);
-  void fireArray ( const int size, double* vect,
-                   double mean, double stdDev );
+  void fireArray ( const int size, G4double* vect);
+  void fireArray ( const int size, G4double* vect,
+                   G4double mean, G4double stdDev );
 
-  virtual double operator()();
-  virtual double operator()( double mean, double stdDev );
+  virtual G4double operator()();
+  virtual G4double operator()( G4double mean, G4double stdDev );
 
   std::string name() const;
   HepRandomEngine & engine();
@@ -142,25 +142,25 @@ public:
 
 protected:
 
-  static  double getVal();
+  static  G4double getVal();
 
-  static  void setVal( double nextVal );
+  static  void setVal( G4double nextVal );
 
-  double normal();
+  G4double normal();
 
-  double defaultMean;
-  double defaultStdDev;
+  G4double defaultMean;
+  G4double defaultStdDev;
 
   std::shared_ptr<HepRandomEngine> localEngine;
 
 private:
 
   bool   set;
-  double nextGauss;
+  G4double nextGauss;
 
   // static data
   static CLHEP_THREAD_LOCAL bool set_st;
-  static CLHEP_THREAD_LOCAL double nextGauss_st;
+  static CLHEP_THREAD_LOCAL G4double nextGauss_st;
 
 };
 

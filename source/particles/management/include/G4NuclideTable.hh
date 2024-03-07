@@ -88,7 +88,7 @@ class G4NuclideTable : public G4VIsotopeTable
       //   Z: Atomic Number
       //   A: Atomic Mass
       //   E: Excitaion energy
-      //   flb: floating level base (enum defined in G4Ions.hh)
+      //   flb: G4floating level base (enum defined in G4Ions.hh)
       //    or
       //   lvl: isomer level
 

@@ -105,7 +105,7 @@ int MCGIDI_outputChannel_parseFromTOM( statusMessageReporting *smr, xDataTOM_ele
         }
     }
     if( outputChannel->genre == MCGIDI_channelGenre_twoBody_e ) {
-        double projectileMass_MeV, targetMass_MeV, productMass_MeV, residualMass_MeV;
+        G4double projectileMass_MeV, targetMass_MeV, productMass_MeV, residualMass_MeV;
 
         projectileMass_MeV = MCGIDI_reaction_getProjectileMass_MeV( smr, reaction );
         targetMass_MeV = MCGIDI_reaction_getTargetMass_MeV( smr, reaction );
@@ -150,7 +150,7 @@ MCGIDI_product *MCGIDI_outputChannel_getProductAtIndex( statusMessageReporting *
 /*
 ************************************************************
 */
-int MCGIDI_outputChannel_getDomain( statusMessageReporting *smr, MCGIDI_outputChannel *outputChannel, double *EMin, double *EMax ) {
+int MCGIDI_outputChannel_getDomain( statusMessageReporting *smr, MCGIDI_outputChannel *outputChannel, G4double *EMin, G4double *EMax ) {
 
     if( outputChannel->reaction != NULL ) return( MCGIDI_reaction_getDomain( smr, outputChannel->reaction, EMin, EMax ) );
     return( MCGIDI_product_getDomain( smr, outputChannel->parent, EMin, EMax ) );
@@ -166,7 +166,7 @@ MCGIDI_target_heated *MCGIDI_outputChannel_getTargetHeated( statusMessageReporti
 /*
 ************************************************************
 */
-double MCGIDI_outputChannel_getProjectileMass_MeV( statusMessageReporting *smr, MCGIDI_outputChannel *outputChannel ) {
+G4double MCGIDI_outputChannel_getProjectileMass_MeV( statusMessageReporting *smr, MCGIDI_outputChannel *outputChannel ) {
 
     if( outputChannel->reaction != NULL ) return( MCGIDI_reaction_getProjectileMass_MeV( smr, outputChannel->reaction ) );
     return( MCGIDI_product_getProjectileMass_MeV( smr, outputChannel->parent ) );
@@ -174,7 +174,7 @@ double MCGIDI_outputChannel_getProjectileMass_MeV( statusMessageReporting *smr, 
 /*
 ************************************************************
 */
-double MCGIDI_outputChannel_getTargetMass_MeV( statusMessageReporting *smr, MCGIDI_outputChannel *outputChannel ) {
+G4double MCGIDI_outputChannel_getTargetMass_MeV( statusMessageReporting *smr, MCGIDI_outputChannel *outputChannel ) {
 
     if( outputChannel->reaction != NULL ) return( MCGIDI_reaction_getTargetMass_MeV( smr, outputChannel->reaction ) );
     return( MCGIDI_product_getTargetMass_MeV( smr, outputChannel->parent ) );
@@ -182,17 +182,17 @@ double MCGIDI_outputChannel_getTargetMass_MeV( statusMessageReporting *smr, MCGI
 /*
 ************************************************************
 */
-double MCGIDI_outputChannel_getQ_MeV( statusMessageReporting * /*smr*/, MCGIDI_outputChannel *outputChannel, double /*e_in*/ ) {
+G4double MCGIDI_outputChannel_getQ_MeV( statusMessageReporting * /*smr*/, MCGIDI_outputChannel *outputChannel, G4double /*e_in*/ ) {
 
     return( outputChannel->Q );
 }
 /*
 ************************************************************
 */
-double MCGIDI_outputChannel_getFinalQ( statusMessageReporting *smr, MCGIDI_outputChannel *outputChannel, double e_in ) {
+G4double MCGIDI_outputChannel_getFinalQ( statusMessageReporting *smr, MCGIDI_outputChannel *outputChannel, G4double e_in ) {
 
     int iProduct;
-    double Q = outputChannel->Q;
+    G4double Q = outputChannel->Q;
     MCGIDI_product *product;
 
     for( iProduct = 0; iProduct < outputChannel->numberOfProducts; iProduct++ ) {
@@ -210,14 +210,14 @@ int MCGIDI_outputChannel_sampleProductsAtE(statusMessageReporting* smr,
                                            MCGIDI_quantitiesLookupModes &modes,
                                            MCGIDI_decaySamplingInfo* decaySamplingInfo,
                                            MCGIDI_sampledProductsDatas* productDatas,
-                                           double *masses_ )
+                                           G4double *masses_ )
 {
   int i1;
   int multiplicity(0);
   int secondTwoBody = 0, isDecayChannel = ( outputChannel->reaction == NULL );
-  double e_in = modes.getProjectileEnergy( );
+  G4double e_in = modes.getProjectileEnergy( );
   MCGIDI_product *product;
-  double phi, p, masses[3];
+  G4double phi, p, masses[3];
   MCGIDI_distribution *distribution;
   MCGIDI_sampledProductsData productData[2];
 

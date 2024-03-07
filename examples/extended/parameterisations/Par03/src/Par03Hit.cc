@@ -111,7 +111,7 @@ void Par03Hit::Draw()
       // Cannot use directly fLogVol due to rho parametrisation (change of
       // solid!) Recalculation of radius is needed
       solid     = *dynamic_cast<G4Tubs*>(fLogVol->GetSolid());
-      double dR = solid.GetOuterRadius() - solid.GetInnerRadius();
+      G4double dR = solid.GetOuterRadius() - solid.GetInnerRadius();
       solid.SetInnerRadius(solid.GetInnerRadius() + fRhoId * dR);
       solid.SetOuterRadius(solid.GetOuterRadius() + fRhoId * dR);
     }

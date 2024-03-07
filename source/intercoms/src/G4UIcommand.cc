@@ -469,23 +469,23 @@ G4String G4UIcommand::ConvertToString(G4long longValue)
 }
 
 // --------------------------------------------------------------------
-G4String G4UIcommand::ConvertToString(G4double doubleValue)
+G4String G4UIcommand::ConvertToString(G4double G4doubleValue)
 {
   std::ostringstream os;
   if(G4UImanager::DoublePrecisionStr())
   {
-    os << std::setprecision(17) << doubleValue;
+    os << std::setprecision(17) << G4doubleValue;
   }
   else
   {
-    os << doubleValue;
+    os << G4doubleValue;
   }
   G4String vl = os.str();
   return vl;
 }
 
 // --------------------------------------------------------------------
-G4String G4UIcommand::ConvertToString(G4double doubleValue,
+G4String G4UIcommand::ConvertToString(G4double G4doubleValue,
                                       const char* unitName)
 {
   G4String unt = unitName;
@@ -494,11 +494,11 @@ G4String G4UIcommand::ConvertToString(G4double doubleValue,
   std::ostringstream os;
   if(G4UImanager::DoublePrecisionStr())
   {
-    os << std::setprecision(17) << doubleValue / uv << " " << unitName;
+    os << std::setprecision(17) << G4doubleValue / uv << " " << unitName;
   }
   else
   {
-    os << doubleValue / uv << " " << unitName;
+    os << G4doubleValue / uv << " " << unitName;
   }
   G4String vl = os.str();
   return vl;
@@ -649,7 +649,7 @@ G4int G4UIcommand::TypeCheck(const char* t)
       case 'D':
         if(IsDouble(aNewValue) == 0)
         {
-          G4cerr << aNewValue << ": double value expected." << G4endl;
+          G4cerr << aNewValue << ": G4double value expected." << G4endl;
           return 0;
         }
         break;
@@ -1216,7 +1216,7 @@ G4int G4UIcommand::Eval2(yystype arg1, G4int op, yystype arg2)
           }
           else if(newValtype2 == 'D')
           {
-            G4cerr << "Warning : Integer is compared with double : "
+            G4cerr << "Warning : Integer is compared with G4double : "
                    << rangeString << G4endl;
             return CompareDouble(newVal[i].I, op, newVal[iii].D);
           }
@@ -1251,7 +1251,7 @@ G4int G4UIcommand::Eval2(yystype arg1, G4int op, yystype arg2)
           }
           else if(newValtype2 == 'D')
           {
-            G4cerr << "Warning : Long int is compared with double : "
+            G4cerr << "Warning : Long int is compared with G4double : "
                    << rangeString << G4endl;
             return CompareDouble(newVal[i].L, op, newVal[iii].D);
           }

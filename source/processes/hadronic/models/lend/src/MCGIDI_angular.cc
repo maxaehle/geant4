@@ -56,8 +56,8 @@ int MCGIDI_angular_release( statusMessageReporting *smr, MCGIDI_angular *angular
 /*
 ************************************************************
 */
-int MCGIDI_angular_setTwoBodyMasses( statusMessageReporting * /*smr*/, MCGIDI_angular *angular, double projectileMass_MeV, double targetMass_MeV, 
-    double productMass_MeV, double residualMass_MeV ) {
+int MCGIDI_angular_setTwoBodyMasses( statusMessageReporting * /*smr*/, MCGIDI_angular *angular, G4double projectileMass_MeV, G4double targetMass_MeV, 
+    G4double productMass_MeV, G4double residualMass_MeV ) {
 
     if( angular == NULL ) return( 0 );         /* ???????? This needs work. Happens when first product of a two-body reaction as no distribution. */
     angular->projectileMass_MeV = projectileMass_MeV;
@@ -92,7 +92,7 @@ int MCGIDI_angular_parseFromTOM( statusMessageReporting *smr, xDataTOM_element *
         angular->type = MCGIDI_angularType_recoil; }
     else {
         int i, j, n;
-        double norm, energyFactor;
+        G4double norm, energyFactor;
         nfu_status status;
         xDataTOM_XYs *XYs;
         xDataTOM_W_XYs *W_XYs;
@@ -115,7 +115,7 @@ int MCGIDI_angular_parseFromTOM( statusMessageReporting *smr, xDataTOM_element *
         dists->interpolationXY = interpolationXY;
 
         if( ( W_XYs = (xDataTOM_W_XYs *) xDataTOME_getXDataIfID( smr, linearElement, "W_XYs" ) ) == NULL ) goto err;
-        if( ( dists->Ws = (double *) smr_malloc2( smr, W_XYs->length * sizeof( double ), 1, "dists->Ws" ) ) == NULL ) goto err;
+        if( ( dists->Ws = (G4double *) smr_malloc2( smr, W_XYs->length * sizeof( G4double ), 1, "dists->Ws" ) ) == NULL ) goto err;
         if( ( dists->dist = (MCGIDI_pdfOfX *) smr_malloc2( smr, W_XYs->length * sizeof( MCGIDI_pdfOfX ), 0, "dists->dist" ) ) == NULL ) goto err;
 
         energyUnit = xDataTOM_subAxes_getUnit( smr, &(W_XYs->subAxes), 0 );
@@ -131,7 +131,7 @@ int MCGIDI_angular_parseFromTOM( statusMessageReporting *smr, xDataTOM_element *
             if( ptwXY_simpleCoalescePoints( pdfXY ) != nfu_Okay ) goto err;
             dist->numberOfXs = n = (int) ptwXY_length( pdfXY );
 
-            if( ( dist->Xs = (double *) smr_malloc2( smr, 3 * n * sizeof( double ), 0, "dist->Xs" ) ) == NULL ) goto err;
+            if( ( dist->Xs = (G4double *) smr_malloc2( smr, 3 * n * sizeof( G4double ), 0, "dist->Xs" ) ) == NULL ) goto err;
             dists->numberOfWs++;
             dist->pdf = &(dist->Xs[n]);
             dist->cdf = &(dist->pdf[n]);
@@ -182,7 +182,7 @@ err:
 int MCGIDI_angular_sampleMu( statusMessageReporting *smr, MCGIDI_angular *angular, MCGIDI_quantitiesLookupModes &modes, 
         MCGIDI_decaySamplingInfo *decaySamplingInfo ) {
 
-    double randomMu = decaySamplingInfo->rng( decaySamplingInfo->rngState );
+    G4double randomMu = decaySamplingInfo->rng( decaySamplingInfo->rngState );
     MCGIDI_pdfsOfXGivenW_sampled sampled;
 
     switch( angular->type ) {

@@ -266,25 +266,25 @@ void G4OpenInventorViewer::SetView () {
   if(!camera) return;
 
   // viewer camera setup :
-  camera->position.setValue((float)cameraPosition.x(),
-                               (float)cameraPosition.y(),
-                               (float)cameraPosition.z());
+  camera->position.setValue((G4float)cameraPosition.x(),
+                               (G4float)cameraPosition.y(),
+                               (G4float)cameraPosition.z());
 
-  SbVec3f sbTarget((float)target.x(),
-                   (float)target.y(),
-                   (float)target.z());
-  SbVec3f sbUp((float)up.x(),
-	       (float)up.y(),
-	       (float)up.z());
+  SbVec3f sbTarget((G4float)target.x(),
+                   (G4float)target.y(),
+                   (G4float)target.z());
+  SbVec3f sbUp((G4float)up.x(),
+	       (G4float)up.y(),
+	       (G4float)up.z());
   sbUp.normalize();
   // Need Coin's camera->pointAt(sbTarget,sbUp); not in the SGI API
   // Stole Coin's code...
   pointAt(camera,sbTarget,sbUp);
 
   //camera->height.setValue(10);
-  //camera->nearDistance.setValue((float)pnear);
-  //camera->farDistance.setValue((float)pfar);
-  //camera->focalDistance.setValue((float)cameraDistance);
+  //camera->nearDistance.setValue((G4float)pnear);
+  //camera->farDistance.setValue((G4float)pfar);
+  //camera->focalDistance.setValue((G4float)cameraDistance);
 
   if(camera->isOfType(SoOrthographicCamera::getClassTypeId())) {
     if (fVP.GetFieldHalfAngle() == 0.) {

@@ -148,7 +148,7 @@ int MCGIDI_target_read( statusMessageReporting *smr, MCGIDI_target *target, cons
     xDataXML_document *doc;
     xDataXML_element *element, *child;
     int i, iHeated, nHeated = 0, status = 1;
-    double temperature;
+    G4double temperature;
     /* char *pReturnValue; */
     char const *version, *contents;
 
@@ -249,7 +249,7 @@ char const *MCGIDI_target_getAttributesValue( statusMessageReporting * /*smr*/, 
 /*
 ************************************************************
 */
-int MCGIDI_target_getTemperatures( statusMessageReporting * /*smr*/, MCGIDI_target *target, double *temperatures ) {
+int MCGIDI_target_getTemperatures( statusMessageReporting * /*smr*/, MCGIDI_target *target, G4double *temperatures ) {
 
     int i;
 
@@ -355,11 +355,11 @@ return( 0 );
 /*
 ************************************************************
 */
-double MCGIDI_target_getTotalCrossSectionAtTAndE( statusMessageReporting *smr, MCGIDI_target *target, MCGIDI_quantitiesLookupModes &modes,
+G4double MCGIDI_target_getTotalCrossSectionAtTAndE( statusMessageReporting *smr, MCGIDI_target *target, MCGIDI_quantitiesLookupModes &modes,
         bool sampling ) {
 
     int i;
-    double xsec = 0., xsec1, xsec2, temperature = modes.getTemperature( );
+    G4double xsec = 0., xsec1, xsec2, temperature = modes.getTemperature( );
 
     for( i = 0; i < target->nReadHeatedTargets; i++ ) if( target->readHeatedTargets[i]->temperature > temperature ) break;
     if( i == 0 ) {
@@ -379,10 +379,10 @@ double MCGIDI_target_getTotalCrossSectionAtTAndE( statusMessageReporting *smr, M
 /*
 ************************************************************
 */
-int MCGIDI_target_getDomain( statusMessageReporting *smr, MCGIDI_target *target, double *EMin, double *EMax ) {
+int MCGIDI_target_getDomain( statusMessageReporting *smr, MCGIDI_target *target, G4double *EMin, G4double *EMax ) {
 
     int ir, nr = MCGIDI_target_numberOfReactions( smr, target );
-    double EMin_, EMax_;
+    G4double EMin_, EMax_;
 
     for( ir = 0; ir < nr; ir++ ) {
         MCGIDI_target_heated_getReactionsDomain( smr, target->baseHeatedTarget, ir, &EMin_, &EMax_ );
@@ -399,11 +399,11 @@ int MCGIDI_target_getDomain( statusMessageReporting *smr, MCGIDI_target *target,
 /*
 ************************************************************
 */
-double MCGIDI_target_getIndexReactionCrossSectionAtE( statusMessageReporting *smr, MCGIDI_target *target, int index, MCGIDI_quantitiesLookupModes &modes,
+G4double MCGIDI_target_getIndexReactionCrossSectionAtE( statusMessageReporting *smr, MCGIDI_target *target, int index, MCGIDI_quantitiesLookupModes &modes,
         bool sampling ) {
 
     int i;
-    double xsec = 0., xsec1, xsec2, temperature = modes.getTemperature( );
+    G4double xsec = 0., xsec1, xsec2, temperature = modes.getTemperature( );
 
     for( i = 0; i < target->nReadHeatedTargets; i++ ) if( target->readHeatedTargets[i]->temperature > temperature ) break;
     if( i == 0 ) {
@@ -423,12 +423,12 @@ double MCGIDI_target_getIndexReactionCrossSectionAtE( statusMessageReporting *sm
 /*
 ************************************************************
 */
-int MCGIDI_target_sampleReaction( statusMessageReporting *smr, MCGIDI_target *target, MCGIDI_quantitiesLookupModes &modes, double totalXSec, 
-        double (*userrng)( void * ), void *rngState ) {
+int MCGIDI_target_sampleReaction( statusMessageReporting *smr, MCGIDI_target *target, MCGIDI_quantitiesLookupModes &modes, G4double totalXSec, 
+        G4double (*userrng)( void * ), void *rngState ) {
 
     int ir, nr = MCGIDI_target_numberOfReactions( smr, target );
-    double rngValue = (*userrng)( rngState );
-    double cumm_xsec = 0., r_xsec = rngValue * totalXSec;
+    G4double rngValue = (*userrng)( rngState );
+    G4double cumm_xsec = 0., r_xsec = rngValue * totalXSec;
 
     for( ir = 0; ir < nr; ir++ ) {
         cumm_xsec += MCGIDI_target_getIndexReactionCrossSectionAtE( smr, target, ir, modes, true );
@@ -447,7 +447,7 @@ int MCGIDI_target_sampleReaction( statusMessageReporting *smr, MCGIDI_target *ta
         MCGIDI_reaction *reaction = MCGIDI_target_heated_getReactionAtIndex( target->baseHeatedTarget, ir );
 
         if( modes.getGroupIndex( ) == reaction->thresholdGroupIndex ) {
-            double dEnergy = modes.getProjectileEnergy( ) - reaction->EMin;
+            G4double dEnergy = modes.getProjectileEnergy( ) - reaction->EMin;
 
             if( dEnergy  <= 0 ) return( MCGIDI_nullReaction );
             if( ( (*userrng)( rngState ) * reaction->thresholdGroupDomain ) > dEnergy ) return( MCGIDI_nullReaction );
@@ -490,7 +490,7 @@ int MCGIDI_target_sampleIndexReactionProductsAtE( statusMessageReporting *smr, M
 /*
 ************************************************************
 */
-double MCGIDI_target_getIndexReactionFinalQ( statusMessageReporting *smr, MCGIDI_target *target, int index, 
+G4double MCGIDI_target_getIndexReactionFinalQ( statusMessageReporting *smr, MCGIDI_target *target, int index, 
         MCGIDI_quantitiesLookupModes &modes ) {
 
     return( MCGIDI_target_heated_getIndexReactionFinalQ( smr, target->baseHeatedTarget, index, modes ) );

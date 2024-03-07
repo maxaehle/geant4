@@ -35,8 +35,8 @@ class RandExponential : public HepRandom {
 
 public:
 
-  inline RandExponential ( HepRandomEngine& anEngine, double mean=1.0 );
-  inline RandExponential ( HepRandomEngine* anEngine, double mean=1.0 );
+  inline RandExponential ( HepRandomEngine& anEngine, G4double mean=1.0 );
+  inline RandExponential ( HepRandomEngine* anEngine, G4double mean=1.0 );
   // These constructors should be used to instantiate a RandExponential
   // distribution object defining a local engine for it.
   // The static generator will be skipped using the non-static methods
@@ -51,35 +51,35 @@ public:
 
   // Static methods to shoot random values using the static generator
 
-  static  double shoot();
+  static  G4double shoot();
 
-  static  double shoot( double mean );
+  static  G4double shoot( G4double mean );
 
-  static  void shootArray ( const int size, double* vect,
-                            double mean=1.0 );
+  static  void shootArray ( const int size, G4double* vect,
+                            G4double mean=1.0 );
 
   //  Static methods to shoot random values using a given engine
   //  by-passing the static generator.
 
-  static  inline double shoot( HepRandomEngine* anEngine );
+  static  inline G4double shoot( HepRandomEngine* anEngine );
 
-  static  inline double shoot( HepRandomEngine* anEngine, double mean );
+  static  inline G4double shoot( HepRandomEngine* anEngine, G4double mean );
 
   static  void shootArray ( HepRandomEngine* anEngine, const int size,
-                            double* vect, double mean=1.0 );
+                            G4double* vect, G4double mean=1.0 );
 
   //  Methods using the localEngine to shoot random values, by-passing
   //  the static generator.
 
-  inline double fire();
+  inline G4double fire();
 
-  inline double fire( double mean );
+  inline G4double fire( G4double mean );
 
-  void fireArray ( const int size, double* vect );
-  void fireArray ( const int size, double* vect, double mean );
+  void fireArray ( const int size, G4double* vect );
+  void fireArray ( const int size, G4double* vect, G4double mean );
   
-  double operator()();
-  double operator()( double mean );
+  G4double operator()();
+  G4double operator()( G4double mean );
 
   // Save and restore to/from streams
   
@@ -95,7 +95,7 @@ public:
 private:
 
   std::shared_ptr<HepRandomEngine> localEngine;
-  double defaultMean;
+  G4double defaultMean;
 
 };
 

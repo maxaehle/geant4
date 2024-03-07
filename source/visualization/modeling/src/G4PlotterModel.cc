@@ -40,8 +40,8 @@ G4PlotterModel::G4PlotterModel(G4Plotter& a_plotter,const G4String& description,
   //   radius = sqrt(half_x*half_x+half_y*half_y+half_z*half_z);
   //   radius = sqrt(3*half*half)
   //   half = sqrt(radius*radius/3)
-  double radius = 0.5;
-  double half = ::sqrt(radius*radius/3.0);
+  G4double radius = 0.5;
+  G4double half = ::sqrt(radius*radius/3.0);
   fExtent = G4VisExtent(-half,half,-half,half,-half,half); //x,y,z min/max.
 }
 

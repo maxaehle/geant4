@@ -6,7 +6,7 @@
 
 typedef int            tools_GLint;
 typedef unsigned int   tools_GLuint;
-typedef float          tools_GLfloat;
+typedef G4float          tools_GLG4float;
 typedef unsigned int   tools_GLenum;
 typedef short          tools_GLshort;
 typedef unsigned short tools_GLushort;
@@ -106,8 +106,8 @@ typedef unsigned char  tools_GLboolean;
 #define TOOLS_GL2PS_TEXT_TL 8
 #define TOOLS_GL2PS_TEXT_TR 9
 
-typedef tools_GLfloat tools_GL2PSrgba[4];
-typedef tools_GLfloat tools_GL2PSxyz[3];
+typedef tools_GLG4float tools_GL2PSrgba[4];
+typedef tools_GLG4float tools_GL2PSxyz[3];
 
 typedef struct {
   tools_GL2PSxyz xyz;
@@ -185,13 +185,13 @@ typedef struct {
   tools_GLboolean (*m_glIsEnabled)      (tools_GLenum);
   void      (*m_glBegin)          (tools_GLenum);
   void      (*m_glEnd)            ();
-  void      (*m_glGetFloatv)      (tools_GLenum,tools_GLfloat*);
-  void      (*m_glVertex3f)       (tools_GLfloat,tools_GLfloat,tools_GLfloat);
+  void      (*m_glGetFloatv)      (tools_GLenum,tools_GLG4float*);
+  void      (*m_glVertex3f)       (tools_GLG4float,tools_GLG4float,tools_GLG4float);
   void      (*m_glGetBooleanv)    (tools_GLenum,tools_GLboolean*);
   void      (*m_glGetIntegerv)    (tools_GLenum,tools_GLint*);
   tools_GLint     (*m_glRenderMode)     (tools_GLenum);
-  void      (*m_glFeedbackBuffer) (tools_GLsizei,tools_GLenum,tools_GLfloat*);
-  void      (*m_glPassThrough)    (tools_GLfloat);
+  void      (*m_glFeedbackBuffer) (tools_GLsizei,tools_GLenum,tools_GLG4float*);
+  void      (*m_glPassThrough)    (tools_GLG4float);
 } tools_gl2ps_gl_funcs_t;
 
 #endif

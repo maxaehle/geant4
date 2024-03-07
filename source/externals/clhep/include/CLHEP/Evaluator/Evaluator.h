@@ -15,7 +15,7 @@ namespace HepTool {
  *   #include "CLHEP/Evaluator/Evaluator.h"
  *   HepTool::Evaluator eval;
  *   eval.setStdMath();
- *   double res = eval.evaluate("sin(30*degree)");
+ *   G4double res = eval.evaluate("sin(30*degree)");
  *   if (eval.status() != HepTool::Evaluator::OK) eval.print_error();
  * @endcode
  *
@@ -72,7 +72,7 @@ class Evaluator {
    * @see error_position
    * @see print_error
    */
-  double evaluate(const char * expression);
+  G4double evaluate(const char * expression);
 
   /**
    * Returns status of the last operation with the evaluator.
@@ -101,7 +101,7 @@ class Evaluator {
    * @param name name of the variable.
    * @param value value assigned to the variable.
    */
-  void setVariable(const char * name, double value);
+  void setVariable(const char * name, G4double value);
 
   /**
    * Adds to the dictionary a variable with an arithmetic expression
@@ -122,7 +122,7 @@ class Evaluator {
    * @param name function name.
    * @param fun pointer to the real function in the user code. 
    */
-  void setFunction(const char * name, double (*fun)());
+  void setFunction(const char * name, G4double (*fun)());
 
   /**
    * Adds to the dictionary a function with one parameter.
@@ -132,7 +132,7 @@ class Evaluator {
    * @param name function name.
    * @param fun pointer to the real function in the user code. 
    */
-  void setFunction(const char * name, double (*fun)(double));
+  void setFunction(const char * name, G4double (*fun)(G4double));
 
   /**
    * Adds to the dictionary a function with two parameters.
@@ -142,7 +142,7 @@ class Evaluator {
    * @param name function name.
    * @param fun pointer to the real function in the user code. 
    */
-  void setFunction(const char * name, double (*fun)(double,double));
+  void setFunction(const char * name, G4double (*fun)(G4double,G4double));
 
   /**
    * Adds to the dictionary a function with three parameters.
@@ -152,7 +152,7 @@ class Evaluator {
    * @param name function name.
    * @param fun pointer to the real function in the user code. 
    */
-  void setFunction(const char * name, double (*fun)(double,double,double));
+  void setFunction(const char * name, G4double (*fun)(G4double,G4double,G4double));
 
   /**
    * Adds to the dictionary a function with four parameters.
@@ -163,7 +163,7 @@ class Evaluator {
    * @param fun pointer to the real function in the user code. 
    */
   void setFunction(const char * name,
-		   double (*fun)(double,double,double,double));
+		   G4double (*fun)(G4double,G4double,G4double,G4double));
 
   /**
    * Adds to the dictionary a function with five parameters.
@@ -174,7 +174,7 @@ class Evaluator {
    * @param fun pointer to the real function in the user code. 
    */
   void setFunction(const char * name,
-                   double (*fun)(double,double,double,double,double));
+                   G4double (*fun)(G4double,G4double,G4double,G4double,G4double));
 
   /**
    * Finds the variable in the dictionary.
@@ -244,13 +244,13 @@ class Evaluator {
    *   steradian               (steradian  = 1.)
    * @endcode
    */
-  void setSystemOfUnits(double meter    = 1.0,
-                        double kilogram = 1.0,
-                        double second   = 1.0,
-                        double ampere   = 1.0,
-                        double kelvin   = 1.0,
-                        double mole     = 1.0,
-                        double candela  = 1.0);
+  void setSystemOfUnits(G4double meter    = 1.0,
+                        G4double kilogram = 1.0,
+                        G4double second   = 1.0,
+                        G4double ampere   = 1.0,
+                        G4double kelvin   = 1.0,
+                        G4double mole     = 1.0,
+                        G4double candela  = 1.0);
 
 private: 
   void * p;                                 // private data 

@@ -82,12 +82,12 @@ public:
   void SetHisto2DMode(G4String str) {histo2DMode = str;};
   G4String GetHisto2DMode() {return histo2DMode;};
   
-  void InsertPositionXZ(double x, double z);
-  void InsertPositionYZ(double y, double z);
-  void InsertEnergy(double en);
+  void InsertPositionXZ(G4double x, G4double z);
+  void InsertPositionYZ(G4double y, G4double z);
+  void InsertEnergy(G4double en);
   void InsertHits(int nplane);
 
-  void setNtuple(float E, float p, float x, float y, float z);
+  void setNtuple(G4float E, G4float p, G4float x, G4float y, G4float z);
 
   static GammaRayTelAnalysis* getInstance();
 

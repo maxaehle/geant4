@@ -299,7 +299,7 @@ G4bool G4ExcitedStringDecay::
 EnergyAndMomentumCorrector(G4KineticTrackVector* Output, G4LorentzVector& TotalCollisionMom)   
 {
     const int    nAttemptScale = 500;
-    const double ErrLimit = 1.E-5;
+    const G4double ErrLimit = 1.E-5;
     if (Output->empty()) return TRUE;
     G4LorentzVector SumMom;
     G4double        SumMass = 0;

@@ -258,8 +258,8 @@ void G4DNAPTBElasticModel::ReadDiffCSFile(const G4String& materialName,
         std::istringstream iss(line);
 
         // Variables to be filled by the input file
-        double tDummy;
-        double eDummy;
+        G4double tDummy;
+        G4double eDummy;
 
         // fill the variables with the content of the line
         iss>>tDummy>>eDummy;
@@ -417,14 +417,14 @@ G4double G4DNAPTBElasticModel::Theta
 
     if (particleDefinition == G4Electron::ElectronDefinition())
     {
-        std::vector<double>::iterator t2 = std::upper_bound(tValuesVec[materialName][particleName].begin(),tValuesVec[materialName][particleName].end(), k);
-        std::vector<double>::iterator t1 = t2-1;
+        std::vector<G4double>::iterator t2 = std::upper_bound(tValuesVec[materialName][particleName].begin(),tValuesVec[materialName][particleName].end(), k);
+        std::vector<G4double>::iterator t1 = t2-1;
 
-        std::vector<double>::iterator e12 = std::upper_bound(eValuesVect[materialName][particleName][(*t1)].begin(),eValuesVect[materialName][particleName][(*t1)].end(), integrDiff);
-        std::vector<double>::iterator e11 = e12-1;
+        std::vector<G4double>::iterator e12 = std::upper_bound(eValuesVect[materialName][particleName][(*t1)].begin(),eValuesVect[materialName][particleName][(*t1)].end(), integrDiff);
+        std::vector<G4double>::iterator e11 = e12-1;
 
-        std::vector<double>::iterator e22 = std::upper_bound(eValuesVect[materialName][particleName][(*t2)].begin(),eValuesVect[materialName][particleName][(*t2)].end(), integrDiff);
-        std::vector<double>::iterator e21 = e22-1;
+        std::vector<G4double>::iterator e22 = std::upper_bound(eValuesVect[materialName][particleName][(*t2)].begin(),eValuesVect[materialName][particleName][(*t2)].end(), integrDiff);
+        std::vector<G4double>::iterator e21 = e22-1;
 
         valueT1  =*t1;
         valueT2  =*t2;

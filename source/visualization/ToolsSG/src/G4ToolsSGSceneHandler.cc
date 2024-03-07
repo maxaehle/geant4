@@ -239,10 +239,10 @@ void G4ToolsSGSceneHandler::AddPrimitive(const G4Polyline& a_polyline)
  {const auto& colour = GetColour(a_polyline);
   tools::sg::rgba* mat = new tools::sg::rgba();
   mat->color =
-    tools::colorf(float(colour.GetRed()),
-                  float(colour.GetGreen()),
-                  float(colour.GetBlue()),
-                  float(colour.GetAlpha()));
+    tools::colorf(G4float(colour.GetRed()),
+                  G4float(colour.GetGreen()),
+                  G4float(colour.GetBlue()),
+                  G4float(colour.GetAlpha()));
   parentNode->add(mat);}
 
  {tools::sg::draw_style* ds = new tools::sg::draw_style;
@@ -255,7 +255,7 @@ void G4ToolsSGSceneHandler::AddPrimitive(const G4Polyline& a_polyline)
   parentNode->add(vtxs);
   
  {for (size_t i = 0; i < a_polyline.size(); ++i) {
-    vtxs->add(float(a_polyline[i].x()),float(a_polyline[i].y()),float(a_polyline[i].z()));
+    vtxs->add(G4float(a_polyline[i].x()),G4float(a_polyline[i].y()),G4float(a_polyline[i].z()));
   }}
   
 }
@@ -280,10 +280,10 @@ void G4ToolsSGSceneHandler::AddPrimitive (const G4Polymarker& a_polymarker)
  {const auto& colour = GetColour(a_polymarker);
   tools::sg::rgba* mat = new tools::sg::rgba();
   mat->color =
-    tools::colorf(float(colour.GetRed()),
-                  float(colour.GetGreen()),
-                  float(colour.GetBlue()),
-                  float(colour.GetAlpha()));
+    tools::colorf(G4float(colour.GetRed()),
+                  G4float(colour.GetGreen()),
+                  G4float(colour.GetBlue()),
+                  G4float(colour.GetAlpha()));
   currentNode->add(mat);}
 
   switch (a_polymarker.GetMarkerType()) {
@@ -298,7 +298,7 @@ void G4ToolsSGSceneHandler::AddPrimitive (const G4Polymarker& a_polymarker)
       tools::sg::vertices* vtxs = new tools::sg::vertices;
       vtxs->mode = tools::gl::points();
      {for (size_t i = 0; i < a_polymarker.size(); ++i) {
-        vtxs->add(float(a_polymarker[i].x()),float(a_polymarker[i].y()),float(a_polymarker[i].z()));
+        vtxs->add(G4float(a_polymarker[i].x()),G4float(a_polymarker[i].y()),G4float(a_polymarker[i].z()));
       }}
       currentNode->add(vtxs);
     }break;
@@ -308,7 +308,7 @@ void G4ToolsSGSceneHandler::AddPrimitive (const G4Polymarker& a_polymarker)
       markers->size = 10;
       markers->style = tools::sg::marker_circle_line;
       for (size_t i = 0; i < a_polymarker.size(); ++i) {
-        markers->add(float(a_polymarker[i].x()),float(a_polymarker[i].y()),float(a_polymarker[i].z()));
+        markers->add(G4float(a_polymarker[i].x()),G4float(a_polymarker[i].y()),G4float(a_polymarker[i].z()));
       }
       currentNode->add(markers);}
     }break;
@@ -318,7 +318,7 @@ void G4ToolsSGSceneHandler::AddPrimitive (const G4Polymarker& a_polymarker)
       markers->size = 10;
       markers->style = tools::sg::marker_square_line;
       for (size_t i = 0; i < a_polymarker.size(); ++i) {
-        markers->add(float(a_polymarker[i].x()),float(a_polymarker[i].y()),float(a_polymarker[i].z()));
+        markers->add(G4float(a_polymarker[i].x()),G4float(a_polymarker[i].y()),G4float(a_polymarker[i].z()));
       }
       currentNode->add(markers);}
   }break;
@@ -364,10 +364,10 @@ void G4ToolsSGSceneHandler::AddPrimitive(const G4Text& a_text)
  {const auto& colour = GetTextColour(a_text);
   tools::sg::rgba* mat = new tools::sg::rgba();
   mat->color =
-    tools::colorf(float(colour.GetRed()),
-                  float(colour.GetGreen()),
-                  float(colour.GetBlue()),
-                  float(colour.GetAlpha()));
+    tools::colorf(G4float(colour.GetRed()),
+                  G4float(colour.GetGreen()),
+                  G4float(colour.GetBlue()),
+                  G4float(colour.GetAlpha()));
   parentNode->add(mat);}
  
 #ifdef TOOLS_USE_FREETYPE
@@ -380,7 +380,7 @@ void G4ToolsSGSceneHandler::AddPrimitive(const G4Text& a_text)
   tools::sg::text_hershey_marker* text = new tools::sg::text_hershey_marker;
 //text->encoding.value(a_encoding);
 #endif
-  text->height = float(size); //pixels
+  text->height = G4float(size); //pixels
   text->strings.add(a_text.GetText());
  {switch (a_text.GetLayout()) {
   default:
@@ -523,10 +523,10 @@ void G4ToolsSGSceneHandler::AddPrimitive(const G4Polyhedron& a_polyhedron)
  {const auto& colour = GetColour(a_polyhedron);
   tools::sg::rgba* mat = new tools::sg::rgba();
   mat->color =
-    tools::colorf(float(colour.GetRed()),
-                  float(colour.GetGreen()),
-                  float(colour.GetBlue()),
-                  float(colour.GetAlpha()));
+    tools::colorf(G4float(colour.GetRed()),
+                  G4float(colour.GetGreen()),
+                  G4float(colour.GetBlue()),
+                  G4float(colour.GetAlpha()));
   sep->add(mat);}
 
   if (drawing_style == G4ViewParameters::hlr ||
@@ -544,8 +544,8 @@ void G4ToolsSGSceneHandler::AddPrimitive(const G4Polyhedron& a_polyhedron)
     
     const auto nVerts = vertices.size();
     for (size_t i = 0; i < nVerts; i++) {
-      vtxs->add(float(vertices[i].x()),float(vertices[i].y()),float(vertices[i].z()));
-      vtxs->add_normal(float(normals[i].x()),float(normals[i].y()),float(normals[i].z()));
+      vtxs->add(G4float(vertices[i].x()),G4float(vertices[i].y()),G4float(vertices[i].z()));
+      vtxs->add_normal(G4float(normals[i].x()),G4float(normals[i].y()),G4float(normals[i].z()));
     }
   }
 
@@ -563,8 +563,8 @@ void G4ToolsSGSceneHandler::AddPrimitive(const G4Polyhedron& a_polyhedron)
     sep->add(vtxs);
     
     for (const auto& line: lines) {
-      vtxs->add(float(line.first.x()),float(line.first.y()),float(line.first.z()));
-      vtxs->add(float(line.second.x()),float(line.second.y()),float(line.second.z()));
+      vtxs->add(G4float(line.first.x()),G4float(line.first.y()),G4float(line.first.z()));
+      vtxs->add(G4float(line.second.x()),G4float(line.second.y()),G4float(line.second.z()));
     }
   
   }

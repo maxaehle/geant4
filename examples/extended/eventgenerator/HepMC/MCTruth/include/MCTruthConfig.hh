@@ -53,7 +53,7 @@ public:
 
   virtual ~MCTruthConfig();
 
-  void SetMinE(double e) {fMinE = e;}
+  void SetMinE(G4double e) {fMinE = e;}
   G4double GetMinE() const {return fMinE;}
 
   void SetParticleTypes(std::vector<G4int>& types) {fParticleTypes = types;}

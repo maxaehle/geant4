@@ -8,7 +8,7 @@
 
 // Contains methods that do not depend on large tables.
 //
-// erfQ		  (double x)
+// erfQ		  (G4double x)
 
 // =======================================================================
 // M Fischler	  - Created 1/26/00.
@@ -20,13 +20,13 @@
 
 namespace CLHEP {
 
-double HepStat::erfQ (double x) {
+G4double HepStat::erfQ (G4double x) {
 //
 // erfQ is accurate to 7 places.
 // See Numerical Recipes P 221
 //
 
-  double t, z, erfc; 
+  G4double t, z, erfc; 
 
   z = std::abs(x);
   t = 1.0/(1.0+.5*z);

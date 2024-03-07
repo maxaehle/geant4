@@ -105,8 +105,8 @@ void EventAction::EndOfEventAction(const G4Event* evt){
         analysisManager->FillNtupleDColumn(0, angXin * 1.E6 * CLHEP::rad);
         analysisManager->FillNtupleDColumn(1, angYin * 1.E6 * CLHEP::rad);
 
-        double posXin = ssd[1].x() - angXin * ssd[1].z();
-        double posYin = ssd[1].y() - angYin * ssd[1].z();
+        G4double posXin = ssd[1].x() - angXin * ssd[1].z();
+        G4double posYin = ssd[1].y() - angYin * ssd[1].z();
 
         analysisManager->FillNtupleDColumn(2, posXin / CLHEP::mm);
         analysisManager->FillNtupleDColumn(3, posYin / CLHEP::mm);

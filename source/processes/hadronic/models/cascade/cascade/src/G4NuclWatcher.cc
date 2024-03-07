@@ -69,7 +69,7 @@ void G4NuclWatcher::watch(G4int a, G4int z) {
 void G4NuclWatcher::setInuclCs(G4double csec, G4int nev) { 
   G4int  simulatedAsSize = simulated_as.size();
   for(G4int i = 0; i < simulatedAsSize ; i++) {
-    double err = std::sqrt(simulated_cs[i]) / simulated_cs[i];
+    G4double err = std::sqrt(simulated_cs[i]) / simulated_cs[i];
     
     simulated_prob.push_back(simulated_cs[i] / nev);
     simulated_cs[i] *= csec / nev;

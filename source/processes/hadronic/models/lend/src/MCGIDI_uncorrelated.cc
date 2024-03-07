@@ -16,7 +16,7 @@ using namespace GIDI;
 ************************************************************
 */
 int MCGIDI_uncorrelated_parseFromTOM( statusMessageReporting *smr, xDataTOM_element *element, MCGIDI_distribution *distribution, ptwXYPoints *norms,
-        enum MCGIDI_energyType energyType, double gammaEnergy_MeV ) {
+        enum MCGIDI_energyType energyType, G4double gammaEnergy_MeV ) {
 
     xDataTOM_element *uncorrelatedElement;
     ptwXYPoints *angularNorms = NULL;

@@ -40,8 +40,8 @@ public:
   RE01Field();
   virtual ~RE01Field();
   
-  virtual void GetFieldValue( const  double point[3],
-                              double *bfield ) const;
+  virtual void GetFieldValue( const  G4double point[3],
+                              G4double *bfield ) const;
   
 private:
   G4double fBz;

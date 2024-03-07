@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <cmath>
 #include <cstdlib>   //for std::abs(int)
-#include <float.h>
+#include <G4float.h>
 
 #include "ptwX.h"
 
@@ -47,7 +47,7 @@ nfu_status ptwX_setup( ptwXPoints *ptwX, int64_t size ) {
 /*
 ************************************************************
 */
-ptwXPoints *ptwX_create( int64_t size, int64_t length, double const *xs, nfu_status *status ) {
+ptwXPoints *ptwX_create( int64_t size, int64_t length, G4double const *xs, nfu_status *status ) {
 
     ptwXPoints *ptwX = ptwX_new( size, status );
 
@@ -59,10 +59,10 @@ ptwXPoints *ptwX_create( int64_t size, int64_t length, double const *xs, nfu_sta
 /*
 ************************************************************
 */
-ptwXPoints *ptwX_createLine( int64_t size, int64_t length, double slope, double offset, nfu_status *status ) {
+ptwXPoints *ptwX_createLine( int64_t size, int64_t length, G4double slope, G4double offset, nfu_status *status ) {
 
     int64_t i1;
-    double *p1;
+    G4double *p1;
     ptwXPoints *ptwX;
 
     if( size < length ) size = length;
@@ -119,9 +119,9 @@ nfu_status ptwX_reallocatePoints( ptwXPoints *ptwX, int64_t size, int forceSmall
     if( size < ptwX->length ) size = ptwX->length;
     if( size != ptwX->allocatedSize ) {
         if( size > ptwX->allocatedSize ) {                                         /* Increase size of allocated points. */
-             ptwX->points = (double *) nfu_realloc( (size_t) size * sizeof( double ), ptwX->points ); }
+             ptwX->points = (G4double *) nfu_realloc( (size_t) size * sizeof( G4double ), ptwX->points ); }
         else if( ( ptwX->allocatedSize > 2 * size ) || forceSmallerResize ) {      /* Decrease size, if at least 1/2 size reduction or if forced to. */
-            ptwX->points = (double *) nfu_realloc( (size_t) size * sizeof( double ), ptwX->points );
+            ptwX->points = (G4double *) nfu_realloc( (size_t) size * sizeof( G4double ), ptwX->points );
         }
         if( ptwX->points == NULL ) {
             ptwX->mallocFailedSize = size;
@@ -148,7 +148,7 @@ nfu_status ptwX_release( ptwXPoints *ptwX ) {
 
     ptwX->length = 0;
     ptwX->allocatedSize = 0;
-    ptwX->points = (double *) nfu_free( ptwX->points );
+    ptwX->points = (G4double *) nfu_free( ptwX->points );
 
     return( nfu_Okay );
 }
@@ -170,7 +170,7 @@ int64_t ptwX_length( ptwXPoints *ptwX ) {
 /*
 ************************************************************
 */
-nfu_status ptwX_setData( ptwXPoints *ptwX, int64_t length, double const *xs ) {
+nfu_status ptwX_setData( ptwXPoints *ptwX, int64_t length, G4double const *xs ) {
 
     int64_t  i;
 
@@ -203,7 +203,7 @@ nfu_status ptwX_deletePoints( ptwXPoints *ptwX, int64_t i1, int64_t i2 ) {
 /*
 ************************************************************
 */
-double *ptwX_getPointAtIndex( ptwXPoints *ptwX, int64_t index ) {
+G4double *ptwX_getPointAtIndex( ptwXPoints *ptwX, int64_t index ) {
 
     if( ptwX->status != nfu_Okay ) return( NULL );
     if( ( index < 0 ) || ( index >= ptwX->length ) ) return( NULL );
@@ -212,14 +212,14 @@ double *ptwX_getPointAtIndex( ptwXPoints *ptwX, int64_t index ) {
 /*
 ************************************************************
 */
-double ptwX_getPointAtIndex_Unsafely( ptwXPoints *ptwX, int64_t index ) {
+G4double ptwX_getPointAtIndex_Unsafely( ptwXPoints *ptwX, int64_t index ) {
 
     return( ptwX->points[index] );
 }
 /*
 ************************************************************
 */
-nfu_status ptwX_setPointAtIndex( ptwXPoints *ptwX, int64_t index, double x ) {
+nfu_status ptwX_setPointAtIndex( ptwXPoints *ptwX, int64_t index, G4double x ) {
 
     nfu_status status;
 
@@ -235,7 +235,7 @@ nfu_status ptwX_setPointAtIndex( ptwXPoints *ptwX, int64_t index, double x ) {
 /*
 ************************************************************
 */
-nfu_status ptwX_insertPointsAtIndex( ptwXPoints *ptwX, int64_t index, int64_t n1, double const *xs ) {
+nfu_status ptwX_insertPointsAtIndex( ptwXPoints *ptwX, int64_t index, int64_t n1, G4double const *xs ) {
 
     nfu_status status;
     int64_t i1, i2, n1p, size = n1 + ptwX->length;
@@ -260,7 +260,7 @@ int ptwX_ascendingOrder( ptwXPoints *ptwX ) {
 */
     int order = 1;
     int64_t i;
-    double x1, x2;
+    G4double x1, x2;
 
     if( ptwX->length < 2 ) return( 0 );
 
@@ -287,18 +287,18 @@ int ptwX_ascendingOrder( ptwXPoints *ptwX ) {
 ptwXPoints *ptwX_fromString( char const *str, char **endCharacter, nfu_status *status ) {
 
     int64_t numberConverted;
-    double  *doublePtr;
+    G4double  *G4doublePtr;
     ptwXPoints *ptwX = NULL;
 
-    if( ( *status = nfu_stringToListOfDoubles( str, &numberConverted, &doublePtr, endCharacter ) ) != nfu_Okay ) return( NULL );
-    ptwX = ptwX_create( numberConverted, numberConverted, doublePtr, status );
-    nfu_free( doublePtr );
+    if( ( *status = nfu_stringToListOfDoubles( str, &numberConverted, &G4doublePtr, endCharacter ) ) != nfu_Okay ) return( NULL );
+    ptwX = ptwX_create( numberConverted, numberConverted, G4doublePtr, status );
+    nfu_free( G4doublePtr );
     return( ptwX );
 }
 /*
 ************************************************************
 */
-nfu_status ptwX_countOccurrences( ptwXPoints *ptwX, double value, int *count ) {
+nfu_status ptwX_countOccurrences( ptwXPoints *ptwX, G4double value, int *count ) {
 
     int64_t i1;
 
@@ -314,7 +314,7 @@ nfu_status ptwX_countOccurrences( ptwXPoints *ptwX, double value, int *count ) {
 nfu_status ptwX_reverse( ptwXPoints *ptwX ) {
 
     int64_t i1, i2 = ptwX->length - 1, n1 = ptwX->length / 2;
-    double tmp;
+    G4double tmp;
 
     for( i1 = 0; i1 < n1; i1++, i2-- ) {
         tmp = ptwX->points[i1];
@@ -340,7 +340,7 @@ nfu_status ptwX_sort( ptwXPoints *ptwX, enum ptwX_sort_order order ) {
 static int ptwX_sort_descending( void const *p1, void const *p2 ) { return( -ptwX_sort_ascending( p1, p2 ) ); }
 static int ptwX_sort_ascending( void const *p1, void const *p2 ) {
 
-    double *d1 = (double *) p1, *d2 = (double *) p2;
+    G4double *d1 = (G4double *) p1, *d2 = (G4double *) p2;
 
     if( *d1 < *d2 ) return( -1 );
     if( *d1 == *d2 ) return( 0 );
@@ -349,18 +349,18 @@ static int ptwX_sort_ascending( void const *p1, void const *p2 ) {
 /*
 ************************************************************
 */
-nfu_status ptwX_closesDifference( ptwXPoints *ptwX, double value, int64_t *index, double *difference ) {
+nfu_status ptwX_closesDifference( ptwXPoints *ptwX, G4double value, int64_t *index, G4double *difference ) {
 
     return( ptwX_closesDifferenceInRange( ptwX, 0, ptwX->length, value, index, difference ) );
 }
 /*
 ************************************************************
 */
-nfu_status ptwX_closesDifferenceInRange( ptwXPoints *ptwX, int64_t i1, int64_t i2, double value, int64_t *index, double *difference ) {
+nfu_status ptwX_closesDifferenceInRange( ptwXPoints *ptwX, int64_t i1, int64_t i2, G4double value, int64_t *index, G4double *difference ) {
 /*
 *   Finds the closes datum to value. If *difference is zero, datum is same as value.
 */
-    double d1;
+    G4double d1;
 
     *index = -1;
     *difference = -1;
@@ -387,7 +387,7 @@ ptwXPoints *ptwX_unique( ptwXPoints *ptwX, int order, nfu_status *status ) {
 *   If order < 0 order is descending, if order > 0 order is ascending, otherwise, order is the same as ptwX.
 */
     int64_t i1, i2, n1 = 0;
-    double x1, *p2;
+    G4double x1, *p2;
     ptwXPoints *ptwX2 = NULL;
 
     if( order == 0 ) {
@@ -434,7 +434,7 @@ err:
 nfu_status ptwX_abs( ptwXPoints *ptwX ) {
 
     int64_t i1;
-    double *p1;
+    G4double *p1;
 
     if( ptwX->status != nfu_Okay ) return( ptwX->status );
     for( i1 = 0, p1 = ptwX->points; i1 < ptwX->length; i1++, p1++ ) *p1 = std::fabs( *p1 );
@@ -450,24 +450,24 @@ nfu_status ptwX_neg( ptwXPoints *ptwX ) {
 /*
 ************************************************************
 */
-nfu_status ptwX_add_double( ptwXPoints *ptwX, double value ) {
+nfu_status ptwX_add_G4double( ptwXPoints *ptwX, G4double value ) {
 
     return( ptwX_slopeOffset( ptwX, 1, value ) );
 }
 /*
 ************************************************************
 */
-nfu_status ptwX_mul_double( ptwXPoints *ptwX, double value ) {
+nfu_status ptwX_mul_G4double( ptwXPoints *ptwX, G4double value ) {
 
     return( ptwX_slopeOffset( ptwX, value, 0 ) );
 }
 /*
 ************************************************************
 */
-nfu_status ptwX_slopeOffset( ptwXPoints *ptwX, double slope, double offset ) {
+nfu_status ptwX_slopeOffset( ptwXPoints *ptwX, G4double slope, G4double offset ) {
 
     int64_t i1;
-    double *p1;
+    G4double *p1;
 
     if( ptwX->status != nfu_Okay ) return( ptwX->status );
     for( i1 = 0, p1 = ptwX->points; i1 < ptwX->length; i1++, p1++ ) *p1 = slope * *p1 + offset;
@@ -479,7 +479,7 @@ nfu_status ptwX_slopeOffset( ptwXPoints *ptwX, double slope, double offset ) {
 nfu_status ptwX_add_ptwX( ptwXPoints *ptwX1, ptwXPoints *ptwX2 ) {
 
     int64_t i1;
-    double *p1 = ptwX1->points, *p2 = ptwX2->points;
+    G4double *p1 = ptwX1->points, *p2 = ptwX2->points;
 
     if( ptwX1->status != nfu_Okay ) return( ptwX1->status );
     if( ptwX2->status != nfu_Okay ) return( ptwX2->status );
@@ -494,7 +494,7 @@ nfu_status ptwX_add_ptwX( ptwXPoints *ptwX1, ptwXPoints *ptwX2 ) {
 nfu_status ptwX_sub_ptwX( ptwXPoints *ptwX1, ptwXPoints *ptwX2 ) {
 
     int64_t i1;
-    double *p1 = ptwX1->points, *p2 = ptwX2->points;
+    G4double *p1 = ptwX1->points, *p2 = ptwX2->points;
 
     if( ptwX1->status != nfu_Okay ) return( ptwX1->status );
     if( ptwX2->status != nfu_Okay ) return( ptwX2->status );
@@ -506,11 +506,11 @@ nfu_status ptwX_sub_ptwX( ptwXPoints *ptwX1, ptwXPoints *ptwX2 ) {
 /*
 ************************************************************
 */
-nfu_status ptwX_xMinMax( ptwXPoints *ptwX, double *xMin, double *xMax ) {
+nfu_status ptwX_xMinMax( ptwXPoints *ptwX, G4double *xMin, G4double *xMax ) {
 
     int64_t i1, n1 = ptwX->length;
     *xMin = *xMax = 0;
-    double *p1 = ptwX->points;
+    G4double *p1 = ptwX->points;
 
     if( ptwX->status != nfu_Okay ) return( ptwX->status );
     if( n1 > 0 ) {
@@ -528,7 +528,7 @@ nfu_status ptwX_xMinMax( ptwXPoints *ptwX, double *xMin, double *xMax ) {
 nfu_status ptwX_compare( ptwXPoints *ptwX1, ptwXPoints *ptwX2, int *comparison ) {
 
     int64_t i1, n1 = ptwX1->length, n2 = ptwX2->length, nn = n1;
-    double *p1 = ptwX1->points, *p2 = ptwX2->points;
+    G4double *p1 = ptwX1->points, *p2 = ptwX2->points;
 
     *comparison = 0;
     if( ptwX1->status != nfu_Okay ) return( ptwX1->status );
@@ -550,11 +550,11 @@ nfu_status ptwX_compare( ptwXPoints *ptwX1, ptwXPoints *ptwX2, int *comparison )
 /*
 ************************************************************
 */
-int ptwX_close( ptwXPoints *ptwX1, ptwXPoints *ptwX2, int epsilonFactor, double epsilon, nfu_status *status ) {
+int ptwX_close( ptwXPoints *ptwX1, ptwXPoints *ptwX2, int epsilonFactor, G4double epsilon, nfu_status *status ) {
 
     int64_t i1, n1 = ptwX1->length;
-    double larger;
-    double *p1 = ptwX1->points, *p2 = ptwX2->points;
+    G4double larger;
+    G4double *p1 = ptwX1->points, *p2 = ptwX2->points;
 
     epsilon = std::fabs( epsilon ) + std::abs( epsilonFactor ) * DBL_EPSILON;
 

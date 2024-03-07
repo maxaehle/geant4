@@ -83,10 +83,10 @@ class MCGIDI_quantitiesLookupModes {
 
     private:
         int mProjectilesPOPID;
-        double mProjectileEnergy;
+        G4double mProjectileEnergy;
         int mGroupIndex;
-        double mProjectileEnergyForGroupIndex;
-        double mTemperature;
+        G4double mProjectileEnergyForGroupIndex;
+        G4double mTemperature;
         enum MCGIDI_quantityLookupMode mCrossSectionMode;
         enum MCGIDI_quantityLookupMode mMultiplicityMode;
 
@@ -94,14 +94,14 @@ class MCGIDI_quantitiesLookupModes {
         MCGIDI_quantitiesLookupModes( int projectilesPOPID );
         ~MCGIDI_quantitiesLookupModes( );
 
-        inline double getProjectileEnergy( void ) const { return( mProjectileEnergy ); }
-        void setProjectileEnergy( double e_in ) { mProjectileEnergy = e_in; }
+        inline G4double getProjectileEnergy( void ) const { return( mProjectileEnergy ); }
+        void setProjectileEnergy( G4double e_in ) { mProjectileEnergy = e_in; }
 
         inline int getGroupIndex( void ) const { return( mGroupIndex ); }
         int setGroupIndex( GIDI_settings const &settings, bool encloseOutOfRange );
 
-        inline double getTemperature( void ) const { return( mTemperature ); }
-        void setTemperature( double temperature ) { mTemperature = temperature; }
+        inline G4double getTemperature( void ) const { return( mTemperature ); }
+        void setTemperature( G4double temperature ) { mTemperature = temperature; }
 
         enum MCGIDI_quantityLookupMode getMode( std::string const &quantity ) const;
         enum MCGIDI_quantityLookupMode getCrossSectionMode( void ) const { return( mCrossSectionMode ); };
@@ -115,7 +115,7 @@ typedef struct MCGIDI_samplingMultiplicityBias_s MCGIDI_samplingMultiplicityBias
 
 struct MCGIDI_samplingMultiplicityBias_s {
     int PoPID;
-    double multiplicityFactor;
+    G4double multiplicityFactor;
 };
 
 class MCGIDI_samplingMethods {
@@ -130,26 +130,26 @@ class MCGIDI_samplingSettings {
     private:                    // This is user input.
         enum GIDI::xDataTOM_frame mWantFrame;
         bool mWantVelocities;
-        double (*mRng)( void * );
+        G4double (*mRng)( void * );
         void *mRngState;
         std::vector<struct MCGIDI_samplingMultiplicityBias_s> mSamplingMultiplicityBiases;
 
     public:                     // Temporary variables used in MCGIDI sampling routines.
         enum GIDI::xDataTOM_frame mGotFrame;
         GIDI::MCGIDI_POP *mPoP;
-        double mMu;
-        double mEp;
+        G4double mMu;
+        G4double mEp;
 
     public:
-        MCGIDI_samplingSettings( enum GIDI::xDataTOM_frame frame, bool wantVelocities, double (*rng)( void * ), void *rngState );
+        MCGIDI_samplingSettings( enum GIDI::xDataTOM_frame frame, bool wantVelocities, G4double (*rng)( void * ), void *rngState );
         ~MCGIDI_samplingSettings( );
 
-        inline double getProductMultiplicityBias( int PoPID ) const {
+        inline G4double getProductMultiplicityBias( int PoPID ) const {
                 for( int i1 = 0; i1 < (int) mSamplingMultiplicityBiases.size( ); ++i1 ) {
                     if( PoPID == mSamplingMultiplicityBiases[i1].PoPID ) return( mSamplingMultiplicityBiases[i1].multiplicityFactor );
                 }
                 return( 1. ); }
-        int setProductMultiplicityBias( GIDI::statusMessageReporting *smr, int PoPID, double fractor );
+        int setProductMultiplicityBias( GIDI::statusMessageReporting *smr, int PoPID, G4double fractor );
 };
 
 #if defined __cplusplus
@@ -223,7 +223,7 @@ extern const char *MCGIDI_productGenre_unknown, *MCGIDI_productGenre_twoBody_ang
 
 struct MCGIDI_GammaBranching_s {
     MCGIDI_POP *finalLevel;
-    double probability;
+    G4double probability;
 };
 
 struct MCGIDI_POP_s {
@@ -232,8 +232,8 @@ struct MCGIDI_POP_s {
     char *name;
     int globalPoPsIndex;        /* Index of particle in the PoPs library if particle can be return to packages using */
     int Z, A, level, m;         /* this library. Otherwise, -1. */
-    double mass_MeV;
-    double level_MeV;
+    G4double mass_MeV;
+    G4double level_MeV;
     int numberOfGammaBranchs;
     MCGIDI_GammaBranching *gammas;
 };
@@ -248,18 +248,18 @@ struct MCGIDI_particle_s {
     MCGIDI_particle *next;
     int ordinal;
     int Z, A, m;
-    double mass_MeV;
+    G4double mass_MeV;
     char *name;
 };
 
 struct MCGIDI_decaySamplingInfo_s {
     enum xDataTOM_frame frame;                  /* The frame the product data are in. */
     int isVelocity;                             /* See struct MCGIDI_sampledProductsData_s for meaning. This is user input. */
-    double (*rng)( void * );                    /* User supplied rng. */
+    G4double (*rng)( void * );                    /* User supplied rng. */
     void *rngState;                             /* User supplied rng state. */
     MCGIDI_POP *pop;                            /* pop for the sampled product. */
-    double mu;                                  /* mu = cos( theta ) for the sampled product. Frame is given by frame member. */
-    double Ep;                                  /* Energy of the product. Frame is given by frame member. */
+    G4double mu;                                  /* mu = cos( theta ) for the sampled product. Frame is given by frame member. */
+    G4double Ep;                                  /* Energy of the product. Frame is given by frame member. */
 };
 
 struct MCGIDI_productInfo_s {
@@ -278,13 +278,13 @@ struct MCGIDI_productsInfo_s {
 struct MCGIDI_sampledProductsData_s {
     int isVelocity;             /* If true, px_vx, py_vy and pz_vz are velocities otherwise momenta. */
     MCGIDI_POP *pop;
-    double kineticEnergy;
-    double px_vx;
-    double py_vy;
-    double pz_vz;
+    G4double kineticEnergy;
+    G4double px_vx;
+    G4double py_vy;
+    G4double pz_vz;
     int delayedNeutronIndex;
-    double delayedNeutronRate;
-    double birthTimeSec;        /* Some products, like delayed fission neutrons, are to appear (be born) later. */
+    G4double delayedNeutronRate;
+    G4double birthTimeSec;        /* Some products, like delayed fission neutrons, are to appear (be born) later. */
 };
 
 struct MCGIDI_sampledProductsDatas_s {
@@ -296,15 +296,15 @@ struct MCGIDI_sampledProductsDatas_s {
 
 struct MCGIDI_pdfOfX_s {
     int numberOfXs;
-    double *Xs;
-    double *pdf;
-    double *cdf;
+    G4double *Xs;
+    G4double *pdf;
+    G4double *cdf;
 };
 
 struct MCGIDI_pdfsOfXGivenW_s {
     int numberOfWs;
     ptwXY_interpolation interpolationWY, interpolationXY;
-    double *Ws;
+    G4double *Ws;
     MCGIDI_pdfOfX *dist;
 };
 
@@ -312,7 +312,7 @@ struct MCGIDI_pdfsOfXGivenW_sampled_s {
     statusMessageReporting *smr;
     ptwXY_interpolation interpolationWY, interpolationXY;
     int iW, iX1, iX2;
-    double x, w, frac;
+    G4double x, w, frac;
 };
 
 struct MCGIDI_angular_s {
@@ -320,7 +320,7 @@ struct MCGIDI_angular_s {
     enum MCGIDI_angularType type;
     MCGIDI_angular *recoilProduct;
     MCGIDI_pdfsOfXGivenW dists;
-    double projectileMass_MeV, targetMass_MeV, productMass_MeV, residualMass_MeV;
+    G4double projectileMass_MeV, targetMass_MeV, productMass_MeV, residualMass_MeV;
 };
 
 struct MCGIDI_energyWeightedFunctional_s {
@@ -335,17 +335,17 @@ struct MCGIDI_energyWeightedFunctionals_s {
 
 struct MCGIDI_energyNBodyPhaseSpace_s {
     int numberOfProducts;
-    double mass, massFactor, e_inCOMFactor, Q_MeV;
+    G4double mass, massFactor, e_inCOMFactor, Q_MeV;
 };
 
 struct MCGIDI_energy_s {
     enum xDataTOM_frame frame;
     enum MCGIDI_energyType type;
-    double gammaEnergy_MeV;
-    double primaryGammaMassFactor;
-    double e_inCOMFactor;
+    G4double gammaEnergy_MeV;
+    G4double primaryGammaMassFactor;
+    G4double e_inCOMFactor;
     MCGIDI_pdfsOfXGivenW dists;
-    double U;
+    G4double U;
     ptwXYPoints *theta, *Watt_a, *Watt_b;
     ptwXY_interpolation gInterpolation;
     MCGIDI_pdfOfX g;
@@ -366,13 +366,13 @@ struct MCGIDI_angularEnergy_s {
 };
 
 struct MCGIDI_KalbachMann_ras_s {
-    double *rs;
-    double *as;
+    G4double *rs;
+    G4double *as;
 };
 
 struct MCGIDI_KalbachMann_s {
     enum xDataTOM_frame frame;
-    double energyToMeVFactor, massFactor, Sa, Sb, Ma, mb;           /* Needed if a(E,E') is caluclated from the formula. */
+    G4double energyToMeVFactor, massFactor, Sa, Sb, Ma, mb;           /* Needed if a(E,E') is caluclated from the formula. */
     MCGIDI_pdfsOfXGivenW dists;                             /* Sa currently not used. */
     MCGIDI_KalbachMann_ras *ras;
 };
@@ -392,7 +392,7 @@ struct MCGIDI_outputChannel_s {
     MCGIDI_reaction *reaction;              /* This is only used for output channels. */
     MCGIDI_product *parent;                 /* This is only used for decay channels. */
     int QIsFloat;
-    double Q;
+    G4double Q;
     int numberOfProducts;
     MCGIDI_product *products;
 };
@@ -403,7 +403,7 @@ struct MCGIDI_product_s {
     MCGIDI_outputChannel *outputChannel;
     int multiplicity;                                       /* If 0, the multiplicity is either 'energyDependent' or 'partialProduction'. */
     int delayedNeutronIndex;
-    double delayedNeutronRate;
+    G4double delayedNeutronRate;
     ptwXYPoints *multiplicityVsEnergy;
     ptwXYPoints *norms;
     int numberOfPiecewiseMultiplicities;
@@ -420,9 +420,9 @@ struct MCGIDI_reaction_s {
     xDataTOM_attributionList attributes;            /* Do not free, owned by attributes. */
     int domainValuesPresent;                        /* True if cross section data defined so EMin and EMax are value. */
     int thresholdGroupIndex;                        /* For grouped data, the group index where threshold starts. */
-    double thresholdGroupDomain;                    /* This is groupEnergy[thresholdGroupIndex+1] - EMin. */
-    double thresholdGroupedDeltaCrossSection;       /* The adjusted group cross section in group thresholdGroupIndex. */
-    double EMin, EMax, finalQ;                      /* BRB, EMin is used as threshold. However, some reactions, especially charged particle */
+    G4double thresholdGroupDomain;                    /* This is groupEnergy[thresholdGroupIndex+1] - EMin. */
+    G4double thresholdGroupedDeltaCrossSection;       /* The adjusted group cross section in group thresholdGroupIndex. */
+    G4double EMin, EMax, finalQ;                      /* BRB, EMin is used as threshold. However, some reactions, especially charged particle */
     ptwXYPoints *crossSection;                      /* have effective thresholds much higher than EMin, may need to handle these differently??????? */
     ptwXPoints *crossSectionGrouped;
     MCGIDI_outputChannel outputChannel;
@@ -439,8 +439,8 @@ struct MCGIDI_target_heated_s {
     MCGIDI_POP *targetPOP;
     xDataTOM_attributionList attributes;
     char *contents;
-    double temperature_MeV;
-    double EMin, EMax;
+    G4double temperature_MeV;
+    G4double EMin, EMax;
     ptwXYPoints *crossSection;
     ptwXPoints *crossSectionGrouped;
     ptwXPoints *crossSectionGroupedForSampling;
@@ -451,7 +451,7 @@ struct MCGIDI_target_heated_s {
 
 struct MCGIDI_target_heated_info_s {
     int ordinal;
-    double temperature;
+    G4double temperature;
     char *path;                 /* Full path of input file. */
     char *contents;
     MCGIDI_target_heated *heatedTarget;
@@ -492,7 +492,7 @@ MCGIDI_target *MCGIDI_target_free( statusMessageReporting *smr, MCGIDI_target *t
 int MCGIDI_target_release( statusMessageReporting *smr, MCGIDI_target *target );
 int MCGIDI_target_read( statusMessageReporting *smr, MCGIDI_target *target, const char *fileName );
 char const *MCGIDI_target_getAttributesValue( statusMessageReporting *smr, MCGIDI_target *target, char const *name );
-int MCGIDI_target_getTemperatures( statusMessageReporting *smr, MCGIDI_target *target, double *temperatures );
+int MCGIDI_target_getTemperatures( statusMessageReporting *smr, MCGIDI_target *target, G4double *temperatures );
 int MCGIDI_target_readHeatedTarget( statusMessageReporting *smr, MCGIDI_target *target, int index );
 MCGIDI_target_heated *MCGIDI_target_getHeatedTargetAtIndex_ReadIfNeeded( statusMessageReporting *smr, MCGIDI_target *target, int index );
 MCGIDI_target_heated *MCGIDI_target_getHeatedTargetAtTIndex( statusMessageReporting *smr, MCGIDI_target *target, int index );
@@ -506,18 +506,18 @@ int MCGIDI_target_numberOfProductionReactions( statusMessageReporting *smr, MCGI
 transportabilitiesMap const *MCGIDI_target_getUniqueProducts( statusMessageReporting *smr, MCGIDI_target *target );
 int MCGIDI_target_recast( statusMessageReporting *smr, MCGIDI_target *target, GIDI_settings &settings );
 
-int MCGIDI_target_getDomain( statusMessageReporting *smr, MCGIDI_target *target, double *EMin, double *EMax );
-double MCGIDI_target_getTotalCrossSectionAtTAndE( statusMessageReporting *smr, MCGIDI_target *target, MCGIDI_quantitiesLookupModes &modes,
+int MCGIDI_target_getDomain( statusMessageReporting *smr, MCGIDI_target *target, G4double *EMin, G4double *EMax );
+G4double MCGIDI_target_getTotalCrossSectionAtTAndE( statusMessageReporting *smr, MCGIDI_target *target, MCGIDI_quantitiesLookupModes &modes,
         bool sampling );
-double MCGIDI_target_getIndexReactionCrossSectionAtE( statusMessageReporting *smr, MCGIDI_target *target, int index, MCGIDI_quantitiesLookupModes &modes,
+G4double MCGIDI_target_getIndexReactionCrossSectionAtE( statusMessageReporting *smr, MCGIDI_target *target, int index, MCGIDI_quantitiesLookupModes &modes,
         bool sampling );
-int MCGIDI_target_sampleReaction( statusMessageReporting *smr, MCGIDI_target *target, MCGIDI_quantitiesLookupModes &modes, double totalXSec, 
-        double (*userrng)( void * ), void *rngState );
+int MCGIDI_target_sampleReaction( statusMessageReporting *smr, MCGIDI_target *target, MCGIDI_quantitiesLookupModes &modes, G4double totalXSec, 
+        G4double (*userrng)( void * ), void *rngState );
 int MCGIDI_target_sampleNullReactionProductsAtE( statusMessageReporting *smr, MCGIDI_target *target,
     MCGIDI_quantitiesLookupModes &modes, MCGIDI_decaySamplingInfo *decaySamplingInfo, MCGIDI_sampledProductsDatas *productDatas );
 int MCGIDI_target_sampleIndexReactionProductsAtE( statusMessageReporting *smr, MCGIDI_target *target, int index, 
         MCGIDI_quantitiesLookupModes &modes, MCGIDI_decaySamplingInfo *decaySamplingInfo, MCGIDI_sampledProductsDatas *productData );
-double MCGIDI_target_getIndexReactionFinalQ( statusMessageReporting *smr, MCGIDI_target *target, int index, MCGIDI_quantitiesLookupModes &modes );
+G4double MCGIDI_target_getIndexReactionFinalQ( statusMessageReporting *smr, MCGIDI_target *target, int index, MCGIDI_quantitiesLookupModes &modes );
 
 /*
 * Routines in MCGIDI_target_heated.c
@@ -537,18 +537,18 @@ MCGIDI_reaction *MCGIDI_target_heated_getProductionReactionAtIndex( MCGIDI_targe
 #endif
 MCGIDI_POP *MCGIDI_target_heated_getPOPForProjectile( statusMessageReporting *smr, MCGIDI_target_heated *target );
 MCGIDI_POP *MCGIDI_target_heated_getPOPForTarget( statusMessageReporting *smr, MCGIDI_target_heated *target );
-double MCGIDI_target_heated_getProjectileMass_MeV( statusMessageReporting *smr, MCGIDI_target_heated *target );
-double MCGIDI_target_heated_getTargetMass_MeV( statusMessageReporting *smr, MCGIDI_target_heated *target );
-int MCGIDI_target_heated_getEnergyGrid( statusMessageReporting *smr, MCGIDI_target_heated *target, double **energyGrid );
-double MCGIDI_target_heated_getTotalCrossSectionAtE( statusMessageReporting *smr, MCGIDI_target_heated *target, MCGIDI_quantitiesLookupModes &modes,
+G4double MCGIDI_target_heated_getProjectileMass_MeV( statusMessageReporting *smr, MCGIDI_target_heated *target );
+G4double MCGIDI_target_heated_getTargetMass_MeV( statusMessageReporting *smr, MCGIDI_target_heated *target );
+int MCGIDI_target_heated_getEnergyGrid( statusMessageReporting *smr, MCGIDI_target_heated *target, G4double **energyGrid );
+G4double MCGIDI_target_heated_getTotalCrossSectionAtE( statusMessageReporting *smr, MCGIDI_target_heated *target, MCGIDI_quantitiesLookupModes &modes,
         bool sampling );
-double MCGIDI_target_heated_getIndexReactionCrossSectionAtE( statusMessageReporting *smr, MCGIDI_target_heated *target, int index, 
+G4double MCGIDI_target_heated_getIndexReactionCrossSectionAtE( statusMessageReporting *smr, MCGIDI_target_heated *target, int index, 
         MCGIDI_quantitiesLookupModes &modes, bool sampling );
 int MCGIDI_target_heated_sampleIndexReactionProductsAtE( statusMessageReporting *smr, MCGIDI_target_heated *target, int index, 
         MCGIDI_quantitiesLookupModes &modes, MCGIDI_decaySamplingInfo *decaySamplingInfo, MCGIDI_sampledProductsDatas *productData );
-double MCGIDI_target_heated_getReactionsThreshold( statusMessageReporting *smr, MCGIDI_target_heated *target, int index );
-int MCGIDI_target_heated_getReactionsDomain( statusMessageReporting *smr, MCGIDI_target_heated *target, int index, double *EMin, double *EMax );
-double MCGIDI_target_heated_getIndexReactionFinalQ( statusMessageReporting *smr, MCGIDI_target_heated *target, int index, 
+G4double MCGIDI_target_heated_getReactionsThreshold( statusMessageReporting *smr, MCGIDI_target_heated *target, int index );
+int MCGIDI_target_heated_getReactionsDomain( statusMessageReporting *smr, MCGIDI_target_heated *target, int index, G4double *EMin, G4double *EMax );
+G4double MCGIDI_target_heated_getIndexReactionFinalQ( statusMessageReporting *smr, MCGIDI_target_heated *target, int index, 
         MCGIDI_quantitiesLookupModes &modes );
 
 transportabilitiesMap const *MCGIDI_target_heated_getUniqueProducts( statusMessageReporting *smr, MCGIDI_target_heated *target );
@@ -565,16 +565,16 @@ int MCGIDI_reaction_parseFromTOM( statusMessageReporting *smr, xDataTOM_element 
     MCGIDI_POPs *pops, MCGIDI_reaction *reaction );
 enum MCGIDI_reactionType MCGIDI_reaction_getReactionType( statusMessageReporting *smr, MCGIDI_reaction *reaction );
 MCGIDI_target_heated *MCGIDI_reaction_getTargetHeated( statusMessageReporting *smr, MCGIDI_reaction *reaction );
-double MCGIDI_reaction_getProjectileMass_MeV( statusMessageReporting *smr, MCGIDI_reaction *reaction );
-double MCGIDI_reaction_getTargetMass_MeV( statusMessageReporting *smr, MCGIDI_reaction *reaction );
-int MCGIDI_reaction_getDomain( statusMessageReporting *smr, MCGIDI_reaction *reaction, double *EMin, double *EMax );
-int MCGIDI_reaction_fixDomains( statusMessageReporting *smr, MCGIDI_reaction *reaction, double EMin, double EMax, nfu_status *status );
-double MCGIDI_reaction_getCrossSectionAtE( statusMessageReporting *smr, MCGIDI_reaction *reaction, MCGIDI_quantitiesLookupModes &modes, bool sampling );
-double MCGIDI_reaction_getFinalQ( statusMessageReporting *smr, MCGIDI_reaction *reaction, MCGIDI_quantitiesLookupModes &modes );
+G4double MCGIDI_reaction_getProjectileMass_MeV( statusMessageReporting *smr, MCGIDI_reaction *reaction );
+G4double MCGIDI_reaction_getTargetMass_MeV( statusMessageReporting *smr, MCGIDI_reaction *reaction );
+int MCGIDI_reaction_getDomain( statusMessageReporting *smr, MCGIDI_reaction *reaction, G4double *EMin, G4double *EMax );
+int MCGIDI_reaction_fixDomains( statusMessageReporting *smr, MCGIDI_reaction *reaction, G4double EMin, G4double EMax, nfu_status *status );
+G4double MCGIDI_reaction_getCrossSectionAtE( statusMessageReporting *smr, MCGIDI_reaction *reaction, MCGIDI_quantitiesLookupModes &modes, bool sampling );
+G4double MCGIDI_reaction_getFinalQ( statusMessageReporting *smr, MCGIDI_reaction *reaction, MCGIDI_quantitiesLookupModes &modes );
 int MCGIDI_reaction_getENDF_MTNumber( MCGIDI_reaction *reaction );
 int MCGIDI_reaction_getENDL_CSNumbers( MCGIDI_reaction *reaction, int *S );
 int MCGIDI_reaction_recast( statusMessageReporting *smr, MCGIDI_reaction *reaction, GIDI_settings &settings, 
-    GIDI_settings_particle const *projectileSettings, double temperature_MeV, ptwXPoints *totalGroupedCrossSection );
+    GIDI_settings_particle const *projectileSettings, G4double temperature_MeV, ptwXPoints *totalGroupedCrossSection );
 
 MCGIDI_productsInfo *MCGIDI_reaction_getProductsInfo( MCGIDI_reaction *reaction );
 int MCGIDI_productsInfo_getNumberOfUniqueProducts( MCGIDI_productsInfo *productsInfo );
@@ -590,17 +590,17 @@ MCGIDI_POPs *MCGIDI_POPs_new( statusMessageReporting *smr, int size );
 int MCGIDI_POPs_initial( statusMessageReporting *smr, MCGIDI_POPs *pops, int size );
 void *MCGIDI_POPs_free( MCGIDI_POPs *pops );
 int MCGIDI_POPs_release( MCGIDI_POPs *pops );
-MCGIDI_POP *MCGIDI_POPs_addParticleIfNeeded( statusMessageReporting *smr, MCGIDI_POPs *pops, char const *name, double mass_MeV, 
-    double level_MeV, MCGIDI_POP *parent, int globalParticle );
+MCGIDI_POP *MCGIDI_POPs_addParticleIfNeeded( statusMessageReporting *smr, MCGIDI_POPs *pops, char const *name, G4double mass_MeV, 
+    G4double level_MeV, MCGIDI_POP *parent, int globalParticle );
 int MCGIDI_POPs_findParticleIndex( MCGIDI_POPs *pops, char const *name );
 MCGIDI_POP *MCGIDI_POPs_findParticle( MCGIDI_POPs *pops, char const *name );
 void MCGIDI_POPs_writeSortedList( MCGIDI_POPs *pops, FILE *f );
 void MCGIDI_POPs_printSortedList( MCGIDI_POPs *pops );
 
-MCGIDI_POP *MCGIDI_POP_new( statusMessageReporting *smr, char const *name, double mass_MeV, double level_MeV, MCGIDI_POP *parent );
+MCGIDI_POP *MCGIDI_POP_new( statusMessageReporting *smr, char const *name, G4double mass_MeV, G4double level_MeV, MCGIDI_POP *parent );
 MCGIDI_POP *MCGIDI_POP_free( MCGIDI_POP *pop );
 MCGIDI_POP *MCGIDI_POP_release( MCGIDI_POP *pop );
-double MCGIDI_POP_getMass_MeV( MCGIDI_POP *pop );
+G4double MCGIDI_POP_getMass_MeV( MCGIDI_POP *pop );
 
 /*
 * Routines in MCGIDI_particle.c
@@ -624,14 +624,14 @@ int MCGIDI_outputChannel_parseFromTOM( statusMessageReporting *smr, xDataTOM_ele
     MCGIDI_reaction *reaction, MCGIDI_product *parent );
 int MCGIDI_outputChannel_numberOfProducts( MCGIDI_outputChannel *outputChannel );
 MCGIDI_product *MCGIDI_outputChannel_getProductAtIndex( statusMessageReporting *smr, MCGIDI_outputChannel *outputChannel, int i );
-int MCGIDI_outputChannel_getDomain( statusMessageReporting *smr, MCGIDI_outputChannel *outputChannel, double *EMin, double *EMax );
+int MCGIDI_outputChannel_getDomain( statusMessageReporting *smr, MCGIDI_outputChannel *outputChannel, G4double *EMin, G4double *EMax );
 MCGIDI_target_heated *MCGIDI_outputChannel_getTargetHeated( statusMessageReporting *smr, MCGIDI_outputChannel *outputChannel );
-double MCGIDI_outputChannel_getProjectileMass_MeV( statusMessageReporting *smr, MCGIDI_outputChannel *outputChannel );
-double MCGIDI_outputChannel_getTargetMass_MeV( statusMessageReporting *smr, MCGIDI_outputChannel *outputChannel );
-double MCGIDI_outputChannel_getQ_MeV( statusMessageReporting *smr, MCGIDI_outputChannel *outputChannel, double e_in );
-double MCGIDI_outputChannel_getFinalQ( statusMessageReporting *smr, MCGIDI_outputChannel *outputChannel, double e_in );
+G4double MCGIDI_outputChannel_getProjectileMass_MeV( statusMessageReporting *smr, MCGIDI_outputChannel *outputChannel );
+G4double MCGIDI_outputChannel_getTargetMass_MeV( statusMessageReporting *smr, MCGIDI_outputChannel *outputChannel );
+G4double MCGIDI_outputChannel_getQ_MeV( statusMessageReporting *smr, MCGIDI_outputChannel *outputChannel, G4double e_in );
+G4double MCGIDI_outputChannel_getFinalQ( statusMessageReporting *smr, MCGIDI_outputChannel *outputChannel, G4double e_in );
 int MCGIDI_outputChannel_sampleProductsAtE( statusMessageReporting *smr, MCGIDI_outputChannel *outputChannel, MCGIDI_quantitiesLookupModes &modes,
-    MCGIDI_decaySamplingInfo *decaySamplingInfo, MCGIDI_sampledProductsDatas *productDatas, double *masses );
+    MCGIDI_decaySamplingInfo *decaySamplingInfo, MCGIDI_sampledProductsDatas *productDatas, G4double *masses );
 
 /*
 * Routines in MCGIDI_product.c
@@ -642,14 +642,14 @@ MCGIDI_product *MCGIDI_product_free( statusMessageReporting *smr, MCGIDI_product
 int MCGIDI_product_release( statusMessageReporting *smr, MCGIDI_product *product );
 int MCGIDI_product_parseFromTOM( statusMessageReporting *smr, xDataTOM_element *element, MCGIDI_outputChannel *outputChannel,
         MCGIDI_POPs *pops, MCGIDI_product *product, int *delayedNeutronIndex );
-int MCGIDI_product_getDomain( statusMessageReporting *smr, MCGIDI_product *product, double *EMin, double *EMax );
-int MCGIDI_product_setTwoBodyMasses( statusMessageReporting *smr, MCGIDI_product *product, double projectileMass_MeV, double targetMass_MeV,
-    double productMass_MeV, double residualMass_MeV );
-double MCGIDI_product_getMass_MeV( statusMessageReporting *smr, MCGIDI_product *product );
+int MCGIDI_product_getDomain( statusMessageReporting *smr, MCGIDI_product *product, G4double *EMin, G4double *EMax );
+int MCGIDI_product_setTwoBodyMasses( statusMessageReporting *smr, MCGIDI_product *product, G4double projectileMass_MeV, G4double targetMass_MeV,
+    G4double productMass_MeV, G4double residualMass_MeV );
+G4double MCGIDI_product_getMass_MeV( statusMessageReporting *smr, MCGIDI_product *product );
 MCGIDI_target_heated *MCGIDI_product_getTargetHeated( statusMessageReporting *smr, MCGIDI_product *product );
-double MCGIDI_product_getProjectileMass_MeV( statusMessageReporting *smr, MCGIDI_product *product );
-double MCGIDI_product_getTargetMass_MeV( statusMessageReporting *smr, MCGIDI_product *product );
-int MCGIDI_product_sampleMultiplicity( statusMessageReporting *smr, MCGIDI_product *product, double e_in, double r );
+G4double MCGIDI_product_getProjectileMass_MeV( statusMessageReporting *smr, MCGIDI_product *product );
+G4double MCGIDI_product_getTargetMass_MeV( statusMessageReporting *smr, MCGIDI_product *product );
+int MCGIDI_product_sampleMultiplicity( statusMessageReporting *smr, MCGIDI_product *product, G4double e_in, G4double r );
 int MCGIDI_product_sampleMu( statusMessageReporting *smr, MCGIDI_product *product, MCGIDI_quantitiesLookupModes &modes,
     MCGIDI_decaySamplingInfo *decaySamplingInfo );
 
@@ -677,8 +677,8 @@ MCGIDI_angular *MCGIDI_angular_new( statusMessageReporting *smr );
 int MCGIDI_angular_initialize( statusMessageReporting *smr, MCGIDI_angular *angular );
 MCGIDI_angular *MCGIDI_angular_free( statusMessageReporting *smr, MCGIDI_angular *angular );
 int MCGIDI_angular_release( statusMessageReporting *smr, MCGIDI_angular *angular );
-int MCGIDI_angular_setTwoBodyMasses( statusMessageReporting *smr, MCGIDI_angular *angular, double projectileMass_MeV, double targetMass_MeV,
-    double productMass_MeV, double residualMass_MeV );
+int MCGIDI_angular_setTwoBodyMasses( statusMessageReporting *smr, MCGIDI_angular *angular, G4double projectileMass_MeV, G4double targetMass_MeV,
+    G4double productMass_MeV, G4double residualMass_MeV );
 int MCGIDI_angular_parseFromTOM( statusMessageReporting *smr, xDataTOM_element *element, MCGIDI_distribution *distribution, ptwXYPoints *norms );
 int MCGIDI_angular_sampleMu( statusMessageReporting *smr, MCGIDI_angular *angular, MCGIDI_quantitiesLookupModes &modes,
     MCGIDI_decaySamplingInfo *decaySamplingInfo );
@@ -691,7 +691,7 @@ int MCGIDI_energy_initialize( statusMessageReporting *smr, MCGIDI_energy *energy
 MCGIDI_energy *MCGIDI_energy_free( statusMessageReporting *smr, MCGIDI_energy *energy );
 int MCGIDI_energy_release( statusMessageReporting *smr, MCGIDI_energy *energy );
 int MCGIDI_energy_parseFromTOM( statusMessageReporting *smr, xDataTOM_element *element, MCGIDI_distribution *distribution, ptwXYPoints *norms,
-    enum MCGIDI_energyType energyType, double gammaEnergy_MeV );
+    enum MCGIDI_energyType energyType, G4double gammaEnergy_MeV );
 int MCGIDI_energy_sampleEnergy( statusMessageReporting *smr, MCGIDI_energy *energy, MCGIDI_quantitiesLookupModes &modes, 
     MCGIDI_decaySamplingInfo *decaySamplingInfo );
 
@@ -732,7 +732,7 @@ int MCGIDI_KalbachMann_sampleEp( statusMessageReporting *smr, MCGIDI_KalbachMann
 * Routines in MCGIDI_uncorrelated.c
 */
 int MCGIDI_uncorrelated_parseFromTOM( statusMessageReporting *smr, xDataTOM_element *element, MCGIDI_distribution *distribution, ptwXYPoints *norms,
-    enum MCGIDI_energyType energyType, double gammaEnergy_MeV );
+    enum MCGIDI_energyType energyType, G4double gammaEnergy_MeV );
 int MCGIDI_uncorrelated_sampleDistribution( statusMessageReporting *smr, MCGIDI_distribution *distribution, MCGIDI_quantitiesLookupModes &modes,
     MCGIDI_decaySamplingInfo *decaySamplingInfo );
 
@@ -744,11 +744,11 @@ int MCGIDI_LLNLAngular_angularEnergy_parseFromTOM( statusMessageReporting *smr, 
 /*
 * Routines in MCGIDI_kinetics.c
 */
-int MCGIDI_kinetics_2BodyReaction( statusMessageReporting *smr, MCGIDI_angular *angular, double K, double mu, double phi,
+int MCGIDI_kinetics_2BodyReaction( statusMessageReporting *smr, MCGIDI_angular *angular, G4double K, G4double mu, G4double phi,
         MCGIDI_sampledProductsData *outgoingData );
-int MCGIDI_kinetics_COMKineticEnergy2LabEnergyAndMomentum( statusMessageReporting *smr, double beta, double e_kinetic_com, double mu, double phi,
-        double m3cc, double m4cc, MCGIDI_sampledProductsData *outgoingData );
-int MCGIDI_kinetics_COM2Lab( statusMessageReporting *smr, MCGIDI_quantitiesLookupModes &modes, MCGIDI_decaySamplingInfo *decaySamplingInfo, double masses[3] );
+int MCGIDI_kinetics_COMKineticEnergy2LabEnergyAndMomentum( statusMessageReporting *smr, G4double beta, G4double e_kinetic_com, G4double mu, G4double phi,
+        G4double m3cc, G4double m4cc, MCGIDI_sampledProductsData *outgoingData );
+int MCGIDI_kinetics_COM2Lab( statusMessageReporting *smr, MCGIDI_quantitiesLookupModes &modes, MCGIDI_decaySamplingInfo *decaySamplingInfo, G4double masses[3] );
 
 /*
 * Routines in MCGIDI_sampling.c
@@ -756,12 +756,12 @@ int MCGIDI_kinetics_COM2Lab( statusMessageReporting *smr, MCGIDI_quantitiesLooku
 int MCGIDI_sampling_pdfsOfXGivenW_initialize( statusMessageReporting *smr, MCGIDI_pdfsOfXGivenW *dists );
 int MCGIDI_sampling_pdfsOfXGivenW_release( statusMessageReporting *smr, MCGIDI_pdfsOfXGivenW *dists );
 int MCGIDI_sampling_pdfsOfX_release( statusMessageReporting *smr, MCGIDI_pdfOfX *dist );
-int MCGIDI_sampling_sampleX_from_pdfsOfXGivenW( MCGIDI_pdfsOfXGivenW *dists, MCGIDI_pdfsOfXGivenW_sampled *sampled, double r );
-int MCGIDI_sampling_sampleX_from_pdfOfX( MCGIDI_pdfOfX *dist, MCGIDI_pdfsOfXGivenW_sampled *sampled, double r );
-int MCGIDI_sampling_doubleDistribution( statusMessageReporting *smr, MCGIDI_pdfsOfXGivenW *pdfOfWGivenV, MCGIDI_pdfsOfXGivenW *pdfOfXGivenVAndW,  
+int MCGIDI_sampling_sampleX_from_pdfsOfXGivenW( MCGIDI_pdfsOfXGivenW *dists, MCGIDI_pdfsOfXGivenW_sampled *sampled, G4double r );
+int MCGIDI_sampling_sampleX_from_pdfOfX( MCGIDI_pdfOfX *dist, MCGIDI_pdfsOfXGivenW_sampled *sampled, G4double r );
+int MCGIDI_sampling_G4doubleDistribution( statusMessageReporting *smr, MCGIDI_pdfsOfXGivenW *pdfOfWGivenV, MCGIDI_pdfsOfXGivenW *pdfOfXGivenVAndW,  
         MCGIDI_quantitiesLookupModes &modes, MCGIDI_decaySamplingInfo *decaySamplingInfo );
-int MCGIDI_sampling_interpolationValues( statusMessageReporting *smr, ptwXY_interpolation interpolation, double *ws, double y1, double y2, double *y );
-double MCGIDI_sampling_ptwXY_getValueAtX( ptwXYPoints *ptwXY, double x1 );
+int MCGIDI_sampling_interpolationValues( statusMessageReporting *smr, ptwXY_interpolation interpolation, G4double *ws, G4double y1, G4double y2, G4double *y );
+G4double MCGIDI_sampling_ptwXY_getValueAtX( ptwXYPoints *ptwXY, G4double x1 );
 
 /*
 * Routines in MCGIDI_misc.c
@@ -770,9 +770,9 @@ int MCGIDI_misc_NumberOfZSymbols( void );
 const char *MCGIDI_misc_ZToSymbol( int iZ );
 int MCGIDI_misc_symbolToZ( const char *Z );
 int MCGIDI_miscNameToZAm( statusMessageReporting *smr, const char *name, int *Z, int *A, int *m, int *level );
-xDataTOM_Int MCGIDI_misc_binarySearch( xDataTOM_Int n, double *ds, double d );
-int MCGIDI_misc_PQUStringToDouble( statusMessageReporting *smr, char const *str, char const *unit, double conversion, double *value );
-int MCGIDI_misc_PQUStringToDoubleInUnitOf( statusMessageReporting *smr, char const *str, char const *toUnit, double *value );
+xDataTOM_Int MCGIDI_misc_binarySearch( xDataTOM_Int n, G4double *ds, G4double d );
+int MCGIDI_misc_PQUStringToDouble( statusMessageReporting *smr, char const *str, char const *unit, G4double conversion, G4double *value );
+int MCGIDI_misc_PQUStringToDoubleInUnitOf( statusMessageReporting *smr, char const *str, char const *toUnit, G4double *value );
 void MCGIDI_misc_updateTransportabilitiesMap( transportabilitiesMap *transportabilities, int PoPID, enum MCGIDI_transportability transportability );
 void MCGIDI_misc_updateTransportabilitiesMap2( transportabilitiesMap *transportabilities, int PoPID, int transportable );
 

@@ -37,10 +37,10 @@ class RandBreitWigner : public HepRandom {
 
 public:
 
-  inline RandBreitWigner ( HepRandomEngine& anEngine, double a=1.0,
-                                       double b=0.2 );
-  inline RandBreitWigner ( HepRandomEngine* anEngine, double a=1.0,
-                                       double b=0.2 );
+  inline RandBreitWigner ( HepRandomEngine& anEngine, G4double a=1.0,
+                                       G4double b=0.2 );
+  inline RandBreitWigner ( HepRandomEngine* anEngine, G4double a=1.0,
+                                       G4double b=0.2 );
   // These constructors should be used to instantiate a RandBreitWigner
   // distribution object defining a local engine for it.
   // The static generator will be skipped using the non-static methods
@@ -55,69 +55,69 @@ public:
 
   // Static methods to shoot random values using the static generator
 
-  static  double shoot( double a=1.0, double b=0.2 );
+  static  G4double shoot( G4double a=1.0, G4double b=0.2 );
 
-  static  double shoot( double a, double b, double c );
+  static  G4double shoot( G4double a, G4double b, G4double c );
 
-  static  double shootM2( double a=1.0, double b=0.2 );
+  static  G4double shootM2( G4double a=1.0, G4double b=0.2 );
 
-  static  double shootM2( double a, double b, double c );
+  static  G4double shootM2( G4double a, G4double b, G4double c );
 
-  static  void shootArray ( const int size, double* vect);
+  static  void shootArray ( const int size, G4double* vect);
 
-  static  void shootArray ( const int size, double* vect,
-                            double a, double b );
+  static  void shootArray ( const int size, G4double* vect,
+                            G4double a, G4double b );
 
-  static  void shootArray ( const int size, double* vect,
-                            double a, double b, double c );
+  static  void shootArray ( const int size, G4double* vect,
+                            G4double a, G4double b, G4double c );
                            
   //  Static methods to shoot random values using a given engine
   //  by-passing the static generator.
 
-  static  double shoot( HepRandomEngine* anEngine, double a=1.0,
-                           double b=0.2 );
-  static  double shoot( HepRandomEngine* anEngine, double a,
-                           double b, double c );
-  static  double shootM2( HepRandomEngine* anEngine, double a=1.0,
-                             double b=0.2 );
-  static  double shootM2( HepRandomEngine* anEngine, double a,
-                             double b, double c );
+  static  G4double shoot( HepRandomEngine* anEngine, G4double a=1.0,
+                           G4double b=0.2 );
+  static  G4double shoot( HepRandomEngine* anEngine, G4double a,
+                           G4double b, G4double c );
+  static  G4double shootM2( HepRandomEngine* anEngine, G4double a=1.0,
+                             G4double b=0.2 );
+  static  G4double shootM2( HepRandomEngine* anEngine, G4double a,
+                             G4double b, G4double c );
   static  void shootArray ( HepRandomEngine* anEngine,
-                            const int size, double* vect );
+                            const int size, G4double* vect );
   static  void shootArray ( HepRandomEngine* anEngine,
-                            const int size, double* vect,
-                            double a, double b );
+                            const int size, G4double* vect,
+                            G4double a, G4double b );
   static  void shootArray ( HepRandomEngine* anEngine,
-                            const int size, double* vect,
-                            double a, double b, double c );
+                            const int size, G4double* vect,
+                            G4double a, G4double b, G4double c );
 
   //  Methods using the localEngine to shoot random values, by-passing
   //  the static generator. These methods respect distribution parameters
   //  passed by the user at instantiation unless superseded by actual
   //  arguments in the call.
 
-  double fire();
+  G4double fire();
 
-  double fire( double a, double b );
+  G4double fire( G4double a, G4double b );
 
-  double fire( double a, double b, double c );
+  G4double fire( G4double a, G4double b, G4double c );
 
-  double fireM2();
+  G4double fireM2();
 
-  double fireM2( double a, double b );
+  G4double fireM2( G4double a, G4double b );
 
-  double fireM2( double a, double b, double c );
+  G4double fireM2( G4double a, G4double b, G4double c );
 
-  void fireArray ( const int size, double* vect);
+  void fireArray ( const int size, G4double* vect);
 
-  void fireArray ( const int size, double* vect,
-                   double a, double b );
+  void fireArray ( const int size, G4double* vect,
+                   G4double a, G4double b );
 
-  void fireArray ( const int size, double* vect,
-                   double a, double b, double c );
-  double operator()();
-  double operator()( double a, double b );
-  double operator()( double a, double b, double c );
+  void fireArray ( const int size, G4double* vect,
+                   G4double a, G4double b, G4double c );
+  G4double operator()();
+  G4double operator()( G4double a, G4double b );
+  G4double operator()( G4double a, G4double b, G4double c );
 
   // Save and restore to/from streams
   
@@ -133,8 +133,8 @@ public:
 private:
 
   std::shared_ptr<HepRandomEngine> localEngine;
-  double defaultA;
-  double defaultB;
+  G4double defaultA;
+  G4double defaultB;
 
 };
 

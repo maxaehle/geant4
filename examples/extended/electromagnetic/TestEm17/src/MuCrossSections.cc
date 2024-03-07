@@ -97,7 +97,7 @@ G4double MuCrossSections::CR_PerAtom(const G4String& process,
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-double MuCrossSections::CRB_Mephi(double z,double a,double tkin,double ep)
+G4double MuCrossSections::CRB_Mephi(G4double z,G4double a,G4double tkin,G4double ep)
 
 //***********************************************************************
 //***        crb_g4_1.inc        in comparison with crb_.inc, following

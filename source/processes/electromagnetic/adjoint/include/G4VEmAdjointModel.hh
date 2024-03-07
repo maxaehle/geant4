@@ -112,21 +112,21 @@ class G4VEmAdjointModel
 
   void DefineCurrentMaterial(const G4MaterialCutsCouple* couple);
 
-  std::vector<std::vector<double>*>
+  std::vector<std::vector<G4double>*>
   ComputeAdjointCrossSectionVectorPerAtomForSecond(G4double kinEnergyProd,
                                                    G4double Z, G4double A = 0.,
                                                    G4int nbin_pro_decade = 10);
 
-  std::vector<std::vector<double>*>
+  std::vector<std::vector<G4double>*>
   ComputeAdjointCrossSectionVectorPerAtomForScatProj(
     G4double kinEnergyProd, G4double Z, G4double A = 0.,
     G4int nbin_pro_decade = 10);
 
-  std::vector<std::vector<double>*>
+  std::vector<std::vector<G4double>*>
   ComputeAdjointCrossSectionVectorPerVolumeForSecond(
     G4Material* aMaterial, G4double kinEnergyProd, G4int nbin_pro_decade = 10);
 
-  std::vector<std::vector<double>*>
+  std::vector<std::vector<G4double>*>
   ComputeAdjointCrossSectionVectorPerVolumeForScatProj(
     G4Material* aMaterial, G4double kinEnergyProd, G4int nbin_pro_decade = 10);
 

@@ -31,10 +31,10 @@ class RandGaussQ : public RandGauss {
 
 public:
 
-  inline RandGaussQ ( HepRandomEngine& anEngine, double mean=0.0,
-                                                double stdDev=1.0 );
-  inline RandGaussQ ( HepRandomEngine* anEngine, double mean=0.0,
-                                                double stdDev=1.0 );
+  inline RandGaussQ ( HepRandomEngine& anEngine, G4double mean=0.0,
+                                                G4double stdDev=1.0 );
+  inline RandGaussQ ( HepRandomEngine* anEngine, G4double mean=0.0,
+                                                G4double stdDev=1.0 );
   // These constructors should be used to instantiate a RandGaussQ
   // distribution object defining a local engine for it.
   // The static generator will be skipped using the non-static methods
@@ -56,40 +56,40 @@ public:
 
   // Static methods to shoot random values using the static generator
 
-  static  inline double shoot();
+  static  inline G4double shoot();
 
-  static  inline double shoot( double mean, double stdDev );
+  static  inline G4double shoot( G4double mean, G4double stdDev );
 
-  static  void shootArray ( const int size, double* vect,
-                            double mean=0.0, double stdDev=1.0 );
+  static  void shootArray ( const int size, G4double* vect,
+                            G4double mean=0.0, G4double stdDev=1.0 );
 
   //  Static methods to shoot random values using a given engine
   //  by-passing the static generator.
 
-  static  inline double shoot( HepRandomEngine* anotherEngine );
+  static  inline G4double shoot( HepRandomEngine* anotherEngine );
 
-  static  inline double shoot( HepRandomEngine* anotherEngine, 
-                                  double mean, double stdDev );
+  static  inline G4double shoot( HepRandomEngine* anotherEngine, 
+                                  G4double mean, G4double stdDev );
 
 
   static  void shootArray ( HepRandomEngine* anotherEngine, 
 			    const int size,
-                            double* vect, double mean=0.0,
-                            double stdDev=1.0 );
+                            G4double* vect, G4double mean=0.0,
+                            G4double stdDev=1.0 );
 
   //  Instance methods using the localEngine to instead of the static 
   //  generator, and the default mean and stdDev established at construction
 
-  inline double fire();
+  inline G4double fire();
 
-  inline double fire ( double mean, double stdDev );
+  inline G4double fire ( G4double mean, G4double stdDev );
   
-  void fireArray  ( const int size, double* vect);
-  void fireArray  ( const int size, double* vect,
-                    double mean, double stdDev );
+  void fireArray  ( const int size, G4double* vect);
+  void fireArray  ( const int size, G4double* vect,
+                    G4double mean, G4double stdDev );
 
-  virtual double operator()();
-  virtual double operator()( double mean, double stdDev );
+  virtual G4double operator()();
+  virtual G4double operator()( G4double mean, G4double stdDev );
 
   // Save and restore to/from streams
   
@@ -105,8 +105,8 @@ public:
 
 protected:
 
-  static double transformQuick (double r);
-  static double transformSmall (double r);
+  static G4double transformQuick (G4double r);
+  static G4double transformSmall (G4double r);
 
 private:
 

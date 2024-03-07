@@ -41,7 +41,7 @@
 // M Fischler         - put and get to/from streams 12/15/04
 //			+ Modifications to use a vector as theIntegraPdf
 // M Fischler	      - put/get to/from streams uses pairs of ulongs when
-//			+ storing doubles avoid problems with precision 
+//			+ storing G4doubles avoid problems with precision 
 //			4/14/05
 //
 // =======================================================================
@@ -63,7 +63,7 @@ HepRandomEngine & RandGeneral::engine() {return *localEngine;}
 // Constructors
 //////////////////
 
-RandGeneral::RandGeneral( const double* aProbFunc, 
+RandGeneral::RandGeneral( const G4double* aProbFunc, 
 			  int theProbSize, 
 			  int IntType  )
   : HepRandom(),
@@ -75,7 +75,7 @@ RandGeneral::RandGeneral( const double* aProbFunc,
 }
 
 RandGeneral::RandGeneral(HepRandomEngine& anEngine,
-                         const double* aProbFunc, 
+                         const G4double* aProbFunc, 
 			 int theProbSize, 
 			 int IntType  )
 : HepRandom(),
@@ -87,7 +87,7 @@ RandGeneral::RandGeneral(HepRandomEngine& anEngine,
 }
 
 RandGeneral::RandGeneral(HepRandomEngine* anEngine,
-                         const double* aProbFunc, 
+                         const G4double* aProbFunc, 
 			 int theProbSize, 
 			 int IntType )
 : HepRandom(),
@@ -98,7 +98,7 @@ RandGeneral::RandGeneral(HepRandomEngine* anEngine,
   prepareTable(aProbFunc);
 }
 
-void RandGeneral::prepareTable(const double* aProbFunc) {
+void RandGeneral::prepareTable(const G4double* aProbFunc) {
 //
 // Private method called only by constructors.  Prepares theIntegralPdf.
 //
@@ -112,7 +112,7 @@ void RandGeneral::prepareTable(const double* aProbFunc) {
   theIntegralPdf.resize(nBins+1);
   theIntegralPdf[0] = 0;
   int ptn;
-  double weight;
+  G4double weight;
 
   for ( ptn = 0; ptn<nBins; ++ptn ) {
     weight = aProbFunc[ptn];
@@ -179,7 +179,7 @@ RandGeneral::~RandGeneral() {
 //  mapRandom(rand)
 ///////////////////
 
-double RandGeneral::mapRandom(double rand) const {
+G4double RandGeneral::mapRandom(G4double rand) const {
 //
 // Private method to take the random (however it is created) and map it
 // according to the distribution.
@@ -209,7 +209,7 @@ double RandGeneral::mapRandom(double rand) const {
 
   } else {
 
-    double binMeasure = theIntegralPdf[nabove] - theIntegralPdf[nbelow];
+    G4double binMeasure = theIntegralPdf[nabove] - theIntegralPdf[nbelow];
     // binMeasure is always aProbFunc[nbelow], 
     // but we don't have aProbFunc any more so we subtract.
 
@@ -220,7 +220,7 @@ double RandGeneral::mapRandom(double rand) const {
         return (nbelow + .5) * oneOverNbins;
     }
 
-    double binFraction = (rand - theIntegralPdf[nbelow]) / binMeasure;
+    G4double binFraction = (rand - theIntegralPdf[nbelow]) / binMeasure;
 
     return (nbelow + binFraction) * oneOverNbins;
   }
@@ -228,7 +228,7 @@ double RandGeneral::mapRandom(double rand) const {
 } // mapRandom(rand)
  
 void RandGeneral::shootArray( HepRandomEngine* anEngine,
-                            const int size, double* vect )
+                            const int size, G4double* vect )
 {
    int i;
 
@@ -237,7 +237,7 @@ void RandGeneral::shootArray( HepRandomEngine* anEngine,
    }
 }
 
-void RandGeneral::fireArray( const int size, double* vect )
+void RandGeneral::fireArray( const int size, G4double* vect )
 {
    int i;
 
@@ -277,11 +277,11 @@ std::istream & RandGeneral::get ( std::istream & is ) {
   if (possibleKeywordInput(is, "Uvec", nBins)) {
     std::vector<unsigned long> t(2);
     is >> nBins >> oneOverNbins >> InterpolationType;
-    is >> t[0] >> t[1]; oneOverNbins = DoubConv::longs2double(t); 
+    is >> t[0] >> t[1]; oneOverNbins = DoubConv::longs2G4double(t); 
     theIntegralPdf.resize(nBins+1);
     for (unsigned int i=0; i<theIntegralPdf.size(); ++i) {
       is >> theIntegralPdf[i] >> t[0] >> t[1];
-      theIntegralPdf[i] = DoubConv::longs2double(t); 
+      theIntegralPdf[i] = DoubConv::longs2G4double(t); 
     }
     return is;
   }

@@ -112,14 +112,14 @@ G4int G4NtupleBookingManager::CreateNtupleIColumn(const G4String& name,
 
 //_____________________________________________________________________________
 G4int G4NtupleBookingManager::CreateNtupleFColumn(const G4String& name,
-                                               std::vector<float>* vector)
+                                               std::vector<G4float>* vector)
 {
   return CreateNtupleFColumn(GetCurrentNtupleId(), name, vector);
 }
 
 //_____________________________________________________________________________
 G4int G4NtupleBookingManager::CreateNtupleDColumn(const G4String& name,
-                                               std::vector<double>* vector)
+                                               std::vector<G4double>* vector)
 {
   return CreateNtupleDColumn(GetCurrentNtupleId(), name, vector);
 }
@@ -146,16 +146,16 @@ G4int G4NtupleBookingManager::CreateNtupleIColumn(
 
 //_____________________________________________________________________________
 G4int G4NtupleBookingManager::CreateNtupleFColumn(
-  G4int ntupleId, const G4String& name, std::vector<float>* vector)
+  G4int ntupleId, const G4String& name, std::vector<G4float>* vector)
 {
-  return CreateNtupleTColumn<float>(ntupleId, name, vector);
+  return CreateNtupleTColumn<G4float>(ntupleId, name, vector);
 }
 
 //_____________________________________________________________________________
 G4int G4NtupleBookingManager::CreateNtupleDColumn(
-  G4int ntupleId, const G4String& name, std::vector<double>* vector)
+  G4int ntupleId, const G4String& name, std::vector<G4double>* vector)
 {
-  return CreateNtupleTColumn<double>(ntupleId, name, vector);
+  return CreateNtupleTColumn<G4double>(ntupleId, name, vector);
 }
 
 //_____________________________________________________________________________

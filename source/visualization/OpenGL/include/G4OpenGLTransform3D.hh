@@ -39,9 +39,9 @@
 class G4OpenGLTransform3D {
 public:
   G4OpenGLTransform3D (const G4Transform3D &t);
-  const GLdouble* GetGLMatrix () {return m;}
+  const GLG4double* GetGLMatrix () {return m;}
 private:
-  GLdouble m[16];
+  GLG4double m[16];
 };
 
 #endif

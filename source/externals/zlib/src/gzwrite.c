@@ -20,7 +20,7 @@ local int gz_init(state)
     int ret;
     z_streamp strm = &(state->strm);
 
-    /* allocate input buffer (double size for gzprintf) */
+    /* allocate input buffer (G4double size for gzprintf) */
     state->in = (unsigned char *)malloc(state->want << 1);
     if (state->in == NULL) {
         gz_error(state, Z_MEM_ERROR, "out of memory");
@@ -412,7 +412,7 @@ int ZEXPORTVA gzvprintf(gzFile file, const char *format, va_list va)
     }
 
     /* do the printf() into the input buffer, put length in len -- the input
-       buffer is double-sized just for this function, so there is guaranteed to
+       buffer is G4double-sized just for this function, so there is guaranteed to
        be state->size bytes available after the current contents */
     if (strm->avail_in == 0)
         strm->next_in = state->in;
@@ -506,7 +506,7 @@ int ZEXPORTVA gzprintf (file, format, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10,
     }
 
     /* do the printf() into the input buffer, put length in len -- the input
-       buffer is double-sized just for this function, so there is guaranteed to
+       buffer is G4double-sized just for this function, so there is guaranteed to
        be state->size bytes available after the current contents */
     if (strm->avail_in == 0)
         strm->next_in = state->in;

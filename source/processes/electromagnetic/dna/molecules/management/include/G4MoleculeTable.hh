@@ -71,7 +71,7 @@ public:
   //____________________________________________________________________________
 
   G4MoleculeDefinition* CreateMoleculeDefinition(const G4String& userIdentifier,
-                                                 double diffusion_coefficient);
+                                                 G4double diffusion_coefficient);
 
   //____________________________________________________________________________
 
@@ -85,7 +85,7 @@ public:
   CreateConfiguration(const G4String& userIdentifier,
                       G4MoleculeDefinition*,
                       int charge,
-                      double diffusion_coefficient = -1);
+                      G4double diffusion_coefficient = -1);
 
   G4MolecularConfiguration*
   CreateConfiguration(const G4String& userIdentifier,

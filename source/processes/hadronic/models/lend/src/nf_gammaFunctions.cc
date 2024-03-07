@@ -86,27 +86,27 @@ using namespace GIDI;
 using namespace std;
 #endif
 
-static double P[] = { 1.60119522476751861407E-4, 1.19135147006586384913E-3, 1.04213797561761569935E-2, 4.76367800457137231464E-2,
+static G4double P[] = { 1.60119522476751861407E-4, 1.19135147006586384913E-3, 1.04213797561761569935E-2, 4.76367800457137231464E-2,
                       2.07448227648435975150E-1, 4.94214826801497100753E-1, 9.99999999999999996796E-1 };
-static double Q[] = { -2.31581873324120129819E-5, 5.39605580493303397842E-4, -4.45641913851797240494E-3, 1.18139785222060435552E-2,
+static G4double Q[] = { -2.31581873324120129819E-5, 5.39605580493303397842E-4, -4.45641913851797240494E-3, 1.18139785222060435552E-2,
                        3.58236398605498653373E-2, -2.34591795718243348568E-1, 7.14304917030273074085E-2, 1.00000000000000000320E0 };
 #define MAXGAM 171.624376956302725
-static double LOGPI = 1.14472988584940017414;
-static double SQTPI = 2.50662827463100050242E0;
+static G4double LOGPI = 1.14472988584940017414;
+static G4double SQTPI = 2.50662827463100050242E0;
 
 /* Stirling's formula for the gamma function */
-static double STIR[5] = { 7.873113957930936284e-4, -2.2954996161337812638e-4, -2.6813261780578123283e-3, 3.472222216054586673e-3, 8.3333333333348225713e-2 };
+static G4double STIR[5] = { 7.873113957930936284e-4, -2.2954996161337812638e-4, -2.6813261780578123283e-3, 3.472222216054586673e-3, 8.3333333333348225713e-2 };
 #define MAXSTIR 143.01608
 
-static double stirf( double x, nfu_status *status );
-static double lgam( double x, int *sgngam, nfu_status *status );
+static G4double stirf( G4double x, nfu_status *status );
+static G4double lgam( G4double x, int *sgngam, nfu_status *status );
 /*
 ************************************************************
 */
-static double stirf( double x, nfu_status * /*status*/ ) {
+static G4double stirf( G4double x, nfu_status * /*status*/ ) {
 /* Gamma function computed by Stirling's formula. The polynomial STIR is valid for 33 <= x <= 172.  */
 
-    double y, w, v;
+    G4double y, w, v;
 
     w = 1.0 / x;
     w = 1.0 + w * nf_polevl( w, STIR, 4 );
@@ -123,9 +123,9 @@ static double stirf( double x, nfu_status * /*status*/ ) {
 /*
 ************************************************************
 */
-double nf_gammaFunction( double x, nfu_status *status ) {
+G4double nf_gammaFunction( G4double x, nfu_status *status ) {
 
-    double p, q, z;
+    G4double p, q, z;
     int i, sgngam = 1;
 
     *status = nfu_badInput;
@@ -191,19 +191,19 @@ goverf:
 /* A[]: Stirling's formula expansion of log gamma
 *  B[], C[]: log gamma function between 2 and 3
 */
-static double A[] = { 8.11614167470508450300E-4, -5.95061904284301438324E-4, 7.93650340457716943945E-4,
+static G4double A[] = { 8.11614167470508450300E-4, -5.95061904284301438324E-4, 7.93650340457716943945E-4,
                      -2.77777777730099687205E-3, 8.33333333333331927722E-2 };
-static double B[] = { -1.37825152569120859100E3, -3.88016315134637840924E4, -3.31612992738871184744E5,
+static G4double B[] = { -1.37825152569120859100E3, -3.88016315134637840924E4, -3.31612992738871184744E5,
                       -1.16237097492762307383E6, -1.72173700820839662146E6, -8.53555664245765465627E5 };
-static double C[] = { -3.51815701436523470549E2, -1.70642106651881159223E4, -2.20528590553854454839E5,
+static G4double C[] = { -3.51815701436523470549E2, -1.70642106651881159223E4, -2.20528590553854454839E5,
                       -1.13933444367982507207E6, -2.53252307177582951285E6, -2.01889141433532773231E6 };
-static double LS2PI  =  0.91893853320467274178;     /* log( sqrt( 2*pi ) ) */
+static G4double LS2PI  =  0.91893853320467274178;     /* log( sqrt( 2*pi ) ) */
 #define MAXLGM 2.556348e305
 
 /*
 ************************************************************
 */
-double nf_logGammaFunction( double x, nfu_status *status ) {
+G4double nf_logGammaFunction( G4double x, nfu_status *status ) {
 /* Logarithm of gamma function */
 
     int sgngam;
@@ -216,9 +216,9 @@ double nf_logGammaFunction( double x, nfu_status *status ) {
 /*
 ************************************************************
 */
-static double lgam( double x, int *sgngam, nfu_status *status ) {
+static G4double lgam( G4double x, int *sgngam, nfu_status *status ) {
 
-    double p, q, u, w, z;
+    G4double p, q, u, w, z;
     int i;
 
     *sgngam = 1;

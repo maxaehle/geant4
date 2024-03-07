@@ -12,31 +12,31 @@
 
 namespace CLHEP {
 
-inline RandChiSquare::RandChiSquare(HepRandomEngine & anEngine, double a)
+inline RandChiSquare::RandChiSquare(HepRandomEngine & anEngine, G4double a)
 : HepRandom( ), localEngine(&anEngine, do_nothing_deleter()), defaultA(a)
   {}
 
-inline RandChiSquare::RandChiSquare(HepRandomEngine * anEngine, double a)
+inline RandChiSquare::RandChiSquare(HepRandomEngine * anEngine, G4double a)
 : HepRandom( ), localEngine(anEngine), defaultA(a)
   {}
 
-inline double RandChiSquare::fire() {
+inline G4double RandChiSquare::fire() {
   return fire( defaultA );
 }
 
-inline double RandChiSquare::shoot() {
+inline G4double RandChiSquare::shoot() {
   return shoot( 1.0 );
 }
 
-inline double RandChiSquare::operator()() {
+inline G4double RandChiSquare::operator()() {
   return fire( defaultA );
 }
 
-inline double RandChiSquare::operator()( double a ) {
+inline G4double RandChiSquare::operator()( G4double a ) {
   return fire( a );
 }
 
-inline double RandChiSquare::shoot( HepRandomEngine* anEngine ) {
+inline G4double RandChiSquare::shoot( HepRandomEngine* anEngine ) {
   return shoot( anEngine, 1.0 );
 }
 

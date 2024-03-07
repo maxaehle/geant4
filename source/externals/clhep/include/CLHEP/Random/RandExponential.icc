@@ -16,31 +16,31 @@
 namespace CLHEP {
 
 inline RandExponential::RandExponential(HepRandomEngine & anEngine,
-                                        double mean )
+                                        G4double mean )
 : HepRandom(), localEngine(&anEngine, do_nothing_deleter()), defaultMean(mean) {}
 
 inline RandExponential::RandExponential(HepRandomEngine * anEngine,
-                                        double mean )
+                                        G4double mean )
 : HepRandom(), localEngine(anEngine), defaultMean(mean) {}
 
 //-------------
 
-inline double RandExponential::shoot(HepRandomEngine* anEngine) {
+inline G4double RandExponential::shoot(HepRandomEngine* anEngine) {
   return -std::log(anEngine->flat());
 }
 
-inline double RandExponential::shoot(HepRandomEngine* anEngine,
-                                        double mean) {
+inline G4double RandExponential::shoot(HepRandomEngine* anEngine,
+                                        G4double mean) {
   return -std::log(anEngine->flat())*mean;
 }
 
 //-------------
 
-inline double RandExponential::fire() {
+inline G4double RandExponential::fire() {
   return -std::log(localEngine->flat())*defaultMean;
 }
 
-inline double RandExponential::fire(double mean) {
+inline G4double RandExponential::fire(G4double mean) {
   return -std::log(localEngine->flat())*mean;
 }
 

@@ -29,13 +29,13 @@ RandLandau::RandLandau(HepRandomEngine * anEngine )
 // Getting a Landau deviate - static methods
 // -------------------------------------------
 
-double RandLandau::shoot()
+G4double RandLandau::shoot()
 {
   HepRandomEngine* anEngine = HepRandom::getTheEngine();
   return transform (anEngine->flat());
 }
 
-double RandLandau::shoot( HepRandomEngine* anotherEngine )
+G4double RandLandau::shoot( HepRandomEngine* anotherEngine )
 { 
   return transform  (anotherEngine->flat());
 }
@@ -43,11 +43,11 @@ double RandLandau::shoot( HepRandomEngine* anotherEngine )
 // Getting a Landau deviate - instance methods
 // ---------------------------------------------
 
-double RandLandau::fire() {
+G4double RandLandau::fire() {
   return transform(localEngine->flat());
 }
 
-double RandLandau::operator()() {
+G4double RandLandau::operator()() {
   return transform(localEngine->flat());
 }
 

@@ -29,7 +29,7 @@
 //
 // A concrete class of G4UIcommand. The command defined by this class
 // takes a string. In case the parameter string contains space(s), it
-// must be enclosed by double-quotations (").
+// must be enclosed by G4double-quotations (").
 // General information of G4UIcommand is given in G4UIcommand.hh
 
 // Author: M.Asai, 1998

@@ -179,7 +179,7 @@
     G4double y;
     if(e<theData[nEntries-1].GetX()) 
     {
-      // Protect against doubled-up x values
+      // Protect against G4doubled-up x values
       //if( (theData[high].GetX()-theData[low].GetX())/theData[high].GetX() < 0.000001)
       if ( theData[high].GetX() !=0 
        //080808 TKDB

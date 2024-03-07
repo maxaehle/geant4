@@ -814,7 +814,7 @@ void G4OpenInventorQtExaminerViewer::superimpositionEvent(SoAction * action)
    SbVec2s viewportSize = vpRegion.getViewportSizePixels();
    
    // Aspect is WIDTH/HEIGHT
-   float aspect = float(viewportSize[0]) / float(viewportSize[1]);
+   G4float aspect = G4float(viewportSize[0]) / G4float(viewportSize[1]);
 
    // FWJ DEBUG
    //   G4cout << "SPEVENT X0 Y0 DX DY aspect: " << vpRegion.getViewportOrigin()[0] <<
@@ -825,8 +825,8 @@ void G4OpenInventorQtExaminerViewer::superimpositionEvent(SoAction * action)
 
    // Translation and scale factor for animation speed indicator...
 
-   float factorx = 1.0f / float(viewportSize[1]) * 220.0f;
-   float factory = factorx;
+   G4float factorx = 1.0f / G4float(viewportSize[1]) * 220.0f;
+   G4float factory = factorx;
 
    if (aspect > 1.0f) {
       stranslation->translation.setValue(SbVec3f(0.0f, -0.4f, 0.0f));
@@ -838,7 +838,7 @@ void G4OpenInventorQtExaminerViewer::superimpositionEvent(SoAction * action)
    if (viewportSize[0] > 500)
       factorx *= 500.0f / 400.0f;
    else
-      factorx *= float(viewportSize[0]) / 400.0f;
+      factorx *= G4float(viewportSize[0]) / 400.0f;
 
    sscale->scaleFactor.setValue(SbVec3f(factorx, factory, 1.0f));
 
@@ -848,7 +848,7 @@ void G4OpenInventorQtExaminerViewer::superimpositionEvent(SoAction * action)
    // with the overlayed text after a viewer window resize.
    // Result is now readable but needs further refinement of the scaling.
 
-   float xInfo, yInfo, xLogName, yLogName, xSolid, ySolid,
+   G4float xInfo, yInfo, xLogName, yLogName, xSolid, ySolid,
       xMaterial, yMaterial, xZPos, yZPos;
 
    // Base point for navigation distance or viewpoint name
@@ -856,7 +856,7 @@ void G4OpenInventorQtExaminerViewer::superimpositionEvent(SoAction * action)
    xInfo = -.475;
    yInfo = .475;
    // Menu bar height in same coordinates:
-   float mbgap = 0.03;
+   G4float mbgap = 0.03;
    if (aspect > 1.) xInfo = xInfo*aspect;
    if (aspect < 1.) yInfo = yInfo/aspect;
    yInfo = yInfo - mbgap*aspect;
@@ -913,7 +913,7 @@ bool G4OpenInventorQtExaminerViewer::loadViewPts()
    std::string token;
    SbVec3f axis;
    SbRotation orient;
-   float x, y, z, angle;
+   G4float x, y, z, angle;
 
    // Gets the last view point accessed, stored in the first line of the data file.
    fileIn >> token;
@@ -930,21 +930,21 @@ bool G4OpenInventorQtExaminerViewer::loadViewPts()
       tmp.viewPtName = vpName;
       fileIn >> token;
 
-      parseString<float>(x, token, error);
+      parseString<G4float>(x, token, error);
       fileIn >> token;
-      parseString<float>(y, token, error);
+      parseString<G4float>(y, token, error);
       fileIn >> token;
-      parseString<float>(z, token, error);
+      parseString<G4float>(z, token, error);
       fileIn >> token;
       tmp.position = axis.setValue(x, y, z);
 
-      parseString<float>(x, token, error);
+      parseString<G4float>(x, token, error);
       fileIn >> token;
-      parseString<float>(y, token, error);
+      parseString<G4float>(y, token, error);
       fileIn >> token;
-      parseString<float>(z, token, error);
+      parseString<G4float>(z, token, error);
       fileIn >> token;
-      parseString<float>(angle, token, error);
+      parseString<G4float>(angle, token, error);
       fileIn >> token;
       orient.setValue(axis.setValue(x, y, z), angle);
       tmp.orientation = orient.getValue();
@@ -954,17 +954,17 @@ bool G4OpenInventorQtExaminerViewer::loadViewPts()
       fileIn >> token;
       tmp.camType = (CameraType) camType;
 
-      parseString<float>(tmp.height, token, error);
+      parseString<G4float>(tmp.height, token, error);
       fileIn >> token;
-      parseString<float>(tmp.focalDistance, token, error);
+      parseString<G4float>(tmp.focalDistance, token, error);
       fileIn >> token;
-      parseString<float>(tmp.nearDistance, token, error);
+      parseString<G4float>(tmp.nearDistance, token, error);
       fileIn >> token;
-      parseString<float>(tmp.farDistance, token, error);
+      parseString<G4float>(tmp.farDistance, token, error);
       fileIn >> token;
       parseString<int>(tmp.viewportMapping, token, error);
       fileIn >> token;
-      parseString<float>(tmp.aspectRatio, token, error);
+      parseString<G4float>(tmp.aspectRatio, token, error);
 
       getline(fileIn, token); // To remove "\n" characters
       getline(fileIn, token);
@@ -1010,7 +1010,7 @@ void G4OpenInventorQtExaminerViewer::rotateCamera()
 
 
 // Slides camera along the beamline.
-void G4OpenInventorQtExaminerViewer::moveCamera(float dist, bool lookdown)
+void G4OpenInventorQtExaminerViewer::moveCamera(G4float dist, bool lookdown)
 {
 
    SoCamera *cam = getCamera();
@@ -1095,7 +1095,7 @@ void G4OpenInventorQtExaminerViewer::moveCamera(float dist, bool lookdown)
       // }
 
 
-      float x,y,z;
+      G4float x,y,z;
       prevPt.getValue(x,y,z);
 
 
@@ -1277,7 +1277,7 @@ void G4OpenInventorQtExaminerViewer::mouseoverCB(void *aThis, SoEventCallback *e
       const SbViewportRegion & viewportRegion = action->getViewportRegion();
 
       std::string sLogName;
-      float x,y,z;
+      G4float x,y,z;
       std::stringstream ssZPos;
       std::stringstream ssSolids;
       std::stringstream ssMaterials;
@@ -1486,7 +1486,7 @@ void G4OpenInventorQtExaminerViewer::incSpeed() {
 void G4OpenInventorQtExaminerViewer::decSpeed() {
    animateBtwPtsPeriod += speedStep;
    if (animateBtwPtsPeriod < MIN_SPEED) {
-      if (std::floor(animateBtwPtsPeriod * 100) == 12) { // Errors in double representation
+      if (std::floor(animateBtwPtsPeriod * 100) == 12) { // Errors in G4double representation
     speedStep = 0.08;
       } else if (animateBtwPtsPeriod > 0.12)
          speedStep += 0.02;
@@ -1575,7 +1575,7 @@ void G4OpenInventorQtExaminerViewer::setReferencePathZPos()
 {
    refZPositions.clear();
    refZPositions.push_back(0);
-   float dist;
+   G4float dist;
    for(unsigned int i=0; i < refParticleTrajectory.size() - 1; ++i) {
       dist = (refParticleTrajectory[i] - 
               refParticleTrajectory[i + 1]).length();
@@ -1675,7 +1675,7 @@ void G4OpenInventorQtExaminerViewer::findAndSetRefPath()
       //else
 
       int longestIdx = 0;
-      float longestLength = 0.0;
+      G4float longestLength = 0.0;
       // For all paths
       for(unsigned int i=0;i < linevec.size(); ++i) {
 
@@ -1690,7 +1690,7 @@ void G4OpenInventorQtExaminerViewer::findAndSetRefPath()
          }
 
          // Then calculate the total length
-         float tmpLength=0.0;
+         G4float tmpLength=0.0;
          for(unsigned int j=0; j < trajectory.size() - 1; ++j) {
             tmpLength += (trajectory[j] - trajectory[j + 1]).length();
          }
@@ -1768,7 +1768,7 @@ void G4OpenInventorQtExaminerViewer::getSceneElements()
    }
 
    for(int i = 0; i < pl.getLength(); i++) {
-      float x,y,z;
+      G4float x,y,z;
       std::stringstream ssCount;
       SoFullPath *path = (SoFullPath *)pl[i];
       node = (Geant4_SoPolyhedron *)path->getTail();
@@ -1802,16 +1802,16 @@ void G4OpenInventorQtExaminerViewer::getSceneElements()
 }
 
 
-float G4OpenInventorQtExaminerViewer::sqrlen(const SbVec3f &a)
+G4float G4OpenInventorQtExaminerViewer::sqrlen(const SbVec3f &a)
 {
-   float x,y,z;
+   G4float x,y,z;
    a.getValue(x,y,z);
    return x*x + y*y + z*z;
 }
 
 
 void G4OpenInventorQtExaminerViewer::distanceToTrajectory(const SbVec3f &q,
-                                                          float &dist,
+                                                          G4float &dist,
                                                 SbVec3f &closestPoint,
                                                           int &index)
 {
@@ -1852,7 +1852,7 @@ void G4OpenInventorQtExaminerViewer::distanceToTrajectory(const SbVec3f &q,
 
    SbVec3f b = refParticleTrajectory[0];
    SbVec3f dbq = b - q;
-   float sqrDist = sqrlen(dbq);
+   G4float sqrDist = sqrlen(dbq);
    closestPoint = b;
    index = 0;
    for (size_t i = 1; i < count; ++i) {
@@ -1862,22 +1862,22 @@ void G4OpenInventorQtExaminerViewer::distanceToTrajectory(const SbVec3f &q,
       dbq = b - q;
       const SbVec3f dab = a - b;
 
-      float dab_x, dab_y, dab_z;
+      G4float dab_x, dab_y, dab_z;
       dab.getValue(dab_x,dab_y,dab_z);
-      float daq_x, daq_y, daq_z;
+      G4float daq_x, daq_y, daq_z;
       daq.getValue(daq_x, daq_y, daq_z);
-      float dbq_x, dbq_y, dbq_z;
+      G4float dbq_x, dbq_y, dbq_z;
       dbq.getValue(dbq_x, dbq_y, dbq_z);
 
-      const float inv_sqrlen = 1./sqrlen(dab);
-      const float t = (dab_x*daq_x + dab_y*daq_y + dab_z*daq_z)*inv_sqrlen;
+      const G4float inv_sqrlen = 1./sqrlen(dab);
+      const G4float t = (dab_x*daq_x + dab_y*daq_y + dab_z*daq_z)*inv_sqrlen;
 
       if (t<0.) {
          // The trajectory point occurs before point a
          // Go to the next point
          continue;
       }
-      float current_dist;
+      G4float current_dist;
       if (t<=1.) {
          // The trajectory point occurs between a and b.
          // Compute the distance to that point
@@ -1907,7 +1907,7 @@ void G4OpenInventorQtExaminerViewer::sortElements()
    if(refParticleTrajectory.empty())
       return;
 
-   float * trajLength = new float[refParticleTrajectory.size()];
+   G4float * trajLength = new G4float[refParticleTrajectory.size()];
    typedef std::map<elementForSorting, sceneElement> sortedMap;
    sortedMap sorted;
 
@@ -2084,7 +2084,7 @@ G4OpenInventorQtExaminerViewer::LookAtSceneElementCB(QListWidgetItem* item)
          refParticleIdx = 0;
          SbVec3f p;
 
-         float absLengthNow, absLengthMin;
+         G4float absLengthNow, absLengthMin;
          int maxIdx = refParticleTrajectory.size() - 2;
          int targetIdx = 0;
          SbVec3f dir;
@@ -2177,7 +2177,7 @@ void G4OpenInventorQtExaminerViewer::FileLoadRefPathCB()
    std::ifstream ifs(filename);
    if(ifs.is_open()) {
       refParticleTrajectory.clear();
-      float x,y,z;
+      G4float x,y,z;
       while(ifs >> x >> y >> z) {
          refParticleTrajectory.push_back(SbVec3f(x,y,z));
       }
@@ -2228,7 +2228,7 @@ void G4OpenInventorQtExaminerViewer::FileSaveRefPathCB()
 
    std::ofstream ofs(filename);
    if (ofs.is_open()) {
-      float x,y,z;
+      G4float x,y,z;
       for (unsigned int i=0; i < refParticleTrajectory.size(); ++i) {
          refParticleTrajectory[i].getValue(x,y,z);
          ofs << x << " " << y << " " << z << "\n";
@@ -2251,8 +2251,8 @@ void G4OpenInventorQtExaminerViewer::evenOutRefParticlePts()
       return;
 
    SbVec3f p1, p2, p3, dirNow, dirNxt, dir, p2_tmp, p_start, p_corner, p_nxt;
-   float avgDistBtwPts = 0;
-   float totalDistBtwPts = 0;
+   G4float avgDistBtwPts = 0;
+   G4float totalDistBtwPts = 0;
    std::vector<SbVec3f> newRefParticleTrajectory;
    SbVec3f refPoint;
    int size = refParticleTrajectory.size() - 1;
@@ -2269,10 +2269,10 @@ void G4OpenInventorQtExaminerViewer::evenOutRefParticlePts()
    if (numOfPts <= 2) return;
 
    avgDistBtwPts = totalDistBtwPts / numOfPts;
-   float minDistAllowed = 0.75 * avgDistBtwPts;
-   //	float maxDistAllowed = 1.25 * avgDistBtwPts; // Pts tend to be close not far
+   G4float minDistAllowed = 0.75 * avgDistBtwPts;
+   //	G4float maxDistAllowed = 1.25 * avgDistBtwPts; // Pts tend to be close not far
 
-   float x, y, z;
+   G4float x, y, z;
    int i = 0, j = 0;
    while (i < size) {
       p1 = refParticleTrajectory[i];
@@ -2366,7 +2366,7 @@ void G4OpenInventorQtExaminerViewer::animateSensorRotationCB(void *data,
 
    SoTimerSensor* s = (SoTimerSensor*) sensor;
 
-   float t = float((curTime - s->getBaseTime()).getValue())
+   G4float t = G4float((curTime - s->getBaseTime()).getValue())
       / This->animateBtwPtsPeriod;
 
    if ((t > 1.0f) || (t + s->getInterval().getValue() > 1.0f))
@@ -2399,7 +2399,7 @@ void G4OpenInventorQtExaminerViewer::animateSensorCB(void *data,
    SoCamera *cam = This->getCamera();
    SoTimerSensor* s = (SoTimerSensor*) sensor;
 
-   float t = float((curTime - s->getBaseTime()).getValue())
+   G4float t = G4float((curTime - s->getBaseTime()).getValue())
       / This->animateBtwPtsPeriod;
 
    if ((t > 1.0f) || (t + s->getInterval().getValue() > 1.0f))
@@ -2439,7 +2439,7 @@ void G4OpenInventorQtExaminerViewer::setStartingPtForAnimation()
 
    SbRotation rot;
    SbVec3f p1, p2, p2_tmp, camUpV, camD, camD_tmp, leftRightAxis;
-   float x1, y1, z1, x2, y2, z2;
+   G4float x1, y1, z1, x2, y2, z2;
 
    if (currentState == ANIMATION) {
       p1 = refParticleTrajectory[refParticleIdx];
@@ -2625,7 +2625,7 @@ void G4OpenInventorQtExaminerViewer::addViewPoints()
 }
 
 
-// Converts a string type word into a float type.
+// Converts a string type word into a G4float type.
 
 template<class T> 
 void G4OpenInventorQtExaminerViewer::parseString(T &t, const std::string &s,
@@ -2869,7 +2869,7 @@ void G4OpenInventorQtExaminerViewer::saveViewPt(char *name)
 {
    SbVec3f axis;
    viewPtData tmp;
-   float x, y, z, angle;
+   G4float x, y, z, angle;
    SoCamera* camera = getCamera();
 
    // NOTE: Xt VSN increments this at end of procedure
@@ -3415,7 +3415,7 @@ void G4OpenInventorQtExaminerViewer::SortBookmarksCB()
 void G4OpenInventorQtExaminerViewer::sortViewPts(std::vector<std::string> sortedViewPts) 
 {
    SbVec3f axis;
-   float x, y, z, angle;
+   G4float x, y, z, angle;
    int sortIdx = 0, unsortIdx = 0;
 
    if (fileOut.is_open())
@@ -3464,14 +3464,14 @@ void G4OpenInventorQtExaminerViewer::sortViewPts(std::vector<std::string> sorted
 
 // Emulating private method SoGuiFullViewerP::zoom()
 void
-G4OpenInventorQtExaminerViewer::zoom(const float diffvalue)
+G4OpenInventorQtExaminerViewer::zoom(const G4float diffvalue)
 {
-   float multiplicator = float(std::exp(diffvalue));
+   G4float multiplicator = G4float(std::exp(diffvalue));
    SoCamera *cam = getCamera();
 
    if (cam->isOfType(SoPerspectiveCamera::getClassTypeId())) {
-      const float oldfocaldist = cam->focalDistance.getValue();
-      const float newfocaldist = oldfocaldist * multiplicator;
+      const G4float oldfocaldist = cam->focalDistance.getValue();
+      const G4float newfocaldist = oldfocaldist * multiplicator;
 
       SbVec3f direction;
       cam->orientation.getValue().multVec(SbVec3f(0, 0, -1), direction);

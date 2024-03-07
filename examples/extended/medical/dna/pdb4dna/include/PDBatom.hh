@@ -61,12 +61,12 @@ public:
        const std::string& resName,
        int numInRes,
        int resSeq,
-       double xInit,
-       double yInit,
-       double zInit,
-       double radius,
-       double occupancy, 
-       double tempFactor, 
+       G4double xInit,
+       G4double yInit,
+       G4double zInit,
+       G4double radius,
+       G4double occupancy, 
+       G4double tempFactor, 
        const std::string& element);
        
   //! Empty destructor
@@ -77,11 +77,11 @@ public:
   //! Returns the next Atom
   Atom *GetNext();
   //! Return the X position for the Atom
-  double GetX();
+  G4double GetX();
   //! Return the Y position for the Atom
-  double GetY();
+  G4double GetY();
   //! Return the Z position for the Atom
-  double GetZ();
+  G4double GetZ();
   //! Return the Atom's ID
   int GetID();
   //! Return name of the atom
@@ -89,7 +89,7 @@ public:
   //! Return name of the element
   const std::string& GetElementName();
   //! Return name of the atom
-  double GetVanDerWaalsRadius();
+  G4double GetVanDerWaalsRadius();
   //! Set the next atom
   void SetNext(Atom *);
 
@@ -98,13 +98,13 @@ public:
   std::string fName;      //!< Atom name
   std::string fResName;   //!< Residue name
   int fResSeq;       //!< Residue sequence number
-  double fX;          //!< X orthogonal coordinates in Angstroms
-  double fY;          //!< Y orthogonal coordinates in Angstroms
-  double fZ;          //!< Z orthogonal coordinates in Angstroms
-  double fVdwRadius;  // Vand der Waals Radius in Angstrom
-  double fOccupancy;  //!< Occupancy for the Atom
+  G4double fX;          //!< X orthogonal coordinates in Angstroms
+  G4double fY;          //!< Y orthogonal coordinates in Angstroms
+  G4double fZ;          //!< Z orthogonal coordinates in Angstroms
+  G4double fVdwRadius;  // Vand der Waals Radius in Angstrom
+  G4double fOccupancy;  //!< Occupancy for the Atom
   std::string fElement;   //!< Element symbol extracted from 'atom name'
-  double fTempFactor; //!< Temperature factor for the Atom
+  G4double fTempFactor; //!< Temperature factor for the Atom
 
 private:
   Atom * fpNext;       //!< Pointer to the next Atom

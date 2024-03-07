@@ -32,23 +32,23 @@ DicomBeamDeviceRef::DicomBeamDeviceRef(DRTBeamLimitingDeviceSequenceInRTBeamsMod
 {
   OFString fstr;
   Sint32 fint;
-  Float64 ffloat;
-  OFVector<Float64> fvfloat;
+  Float64 fG4float;
+  OFVector<Float64> fvG4float;
 
   bldsItem.getRTBeamLimitingDeviceType(fstr);
   G4cout << "   " << " RTBeamLimitingDeviceType " << fstr << G4endl;
   SetType(fstr);
-  bldsItem.getSourceToBeamLimitingDeviceDistance(ffloat);
-  G4cout << "   " << " SourceToBeamLimitingDeviceDistance " << ffloat << G4endl;
-  SetSourceToBeamLimitingDeviceDistance( ffloat ); 
+  bldsItem.getSourceToBeamLimitingDeviceDistance(fG4float);
+  G4cout << "   " << " SourceToBeamLimitingDeviceDistance " << fG4float << G4endl;
+  SetSourceToBeamLimitingDeviceDistance( fG4float ); 
   bldsItem.getNumberOfLeafJawPairs(fint);
   SetNumberOfLeafJawPairs(fint);
   G4cout << "   " << " NumberOfLeafJawPairs " << fint << G4endl;
-  bldsItem.getLeafPositionBoundaries(fvfloat);
+  bldsItem.getLeafPositionBoundaries(fvG4float);
   if( fint != 1 ) fint++;
   for( int ii = 0; ii < fint; ii++ ) {
-    G4cout << "   " << ii << " LeafPositionBoundaries " << fvfloat[ii] << G4endl;
-    AddPositionBoundary(fvfloat[ii]);
+    G4cout << "   " << ii << " LeafPositionBoundaries " << fvG4float[ii] << G4endl;
+    AddPositionBoundary(fvG4float[ii]);
   }
 }
 

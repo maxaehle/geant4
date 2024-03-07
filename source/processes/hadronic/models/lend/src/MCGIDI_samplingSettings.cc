@@ -24,7 +24,7 @@ MCGIDI_samplingMethods::~MCGIDI_samplingMethods( ) {
 /*
 =========================================================
 */
-MCGIDI_samplingSettings::MCGIDI_samplingSettings( enum xDataTOM_frame frame, bool wantVelocities, double (*rng)( void * ), void *rngState ) {
+MCGIDI_samplingSettings::MCGIDI_samplingSettings( enum xDataTOM_frame frame, bool wantVelocities, G4double (*rng)( void * ), void *rngState ) {
 
     mWantFrame = frame;
     mWantVelocities = wantVelocities;
@@ -45,7 +45,7 @@ MCGIDI_samplingSettings::~MCGIDI_samplingSettings( void ) {
 /*
 =========================================================
 */
-int MCGIDI_samplingSettings::setProductMultiplicityBias( statusMessageReporting *smr, int PoPID, double factor ) {
+int MCGIDI_samplingSettings::setProductMultiplicityBias( statusMessageReporting *smr, int PoPID, G4double factor ) {
 
     if( factor < 0 ) {
         smr_setReportError2( smr, smr_unknownID, 1, "factor = %e cannot be negative", factor );

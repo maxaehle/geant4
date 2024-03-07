@@ -12,9 +12,9 @@
 namespace GIDI {
 using namespace GIDI;
 #endif
-const double C1 = 0.04, C2 = 1.8e-6/*, C3 = 6.7e-7*/;
+const G4double C1 = 0.04, C2 = 1.8e-6/*, C3 = 6.7e-7*/;
 /*
-const double Et1 = 130., Et3 = 41.;
+const G4double Et1 = 130., Et3 = 41.;
 */
 #if defined __cplusplus
 }
@@ -31,8 +31,8 @@ using namespace GIDI;
 
 
 static int MCGIDI_KalbachMann_parseFromTOM2( statusMessageReporting *smr, int dataPerEout, int index, xDataTOM_KalbachMannCoefficients *coefficientsXData, 
-        double energyInFactor, double energyOutFactor, MCGIDI_KalbachMann *KalbachMann );
-static double MCGIDI_KalbachMann_S_a_or_b( double Z_AB, double N_AB, double Z_C, double N_C, double I_ab );
+        G4double energyInFactor, G4double energyOutFactor, MCGIDI_KalbachMann *KalbachMann );
+static G4double MCGIDI_KalbachMann_S_a_or_b( G4double Z_AB, G4double N_AB, G4double Z_C, G4double N_C, G4double I_ab );
 /*
 ************************************************************
 */
@@ -91,20 +91,20 @@ int MCGIDI_KalbachMann_parseFromTOM( statusMessageReporting *smr, xDataTOM_eleme
     MCGIDI_KalbachMann *KalbachMann = NULL;
     xDataTOM_element *KalbachMannElement;
     int index, dataPerEout = 3;
-    double energyInFactor, energyOutFactor;
+    G4double energyInFactor, energyOutFactor;
     xDataTOM_xDataInfo *xDataInfo;
     xDataTOM_KalbachMann *KalbachMannXData;
     ptwXY_interpolation interpolationXY, interpolationWY;
     char const *energyFromUnit, *energyToUnit = "MeV";
 
     MCGIDI_POP *productPOP = distribution->product->pop;
-    double productZ = productPOP->Z, productA = productPOP->A, productN = productA - productZ;
+    G4double productZ = productPOP->Z, productA = productPOP->A, productN = productA - productZ;
     MCGIDI_target_heated *targetHeated = MCGIDI_product_getTargetHeated( smr, distribution->product );
     MCGIDI_POP *projectilePOP = MCGIDI_target_heated_getPOPForProjectile( smr, targetHeated );
-    double projectileZ = projectilePOP->Z, projectileA = projectilePOP->A, projectileN = projectileA - projectileZ;
+    G4double projectileZ = projectilePOP->Z, projectileA = projectilePOP->A, projectileN = projectileA - projectileZ;
     MCGIDI_POP *targetPOP = MCGIDI_target_heated_getPOPForTarget( smr, targetHeated );
-    double targetZ = targetPOP->Z, targetA = targetPOP->A, targetN = targetA - targetZ;
-    double Ia = 0., Ib = 0., Ma = -1, mb = -1;
+    G4double targetZ = targetPOP->Z, targetA = targetPOP->A, targetN = targetA - targetZ;
+    G4double Ia = 0., Ib = 0., Ma = -1, mb = -1;
 
     if( ( targetA == 0 ) && ( targetZ == 6 ) ) {    /* Special case for C_000 evaluation. */
         targetN = 6;
@@ -132,10 +132,10 @@ int MCGIDI_KalbachMann_parseFromTOM( statusMessageReporting *smr, xDataTOM_eleme
     if( ( KalbachMann = distribution->KalbachMann = MCGIDI_KalbachMann_new( smr, interpolationWY, interpolationXY ) ) == NULL ) goto err;
 
 /*
-    double productMass MCGIDI_product_getMass_MeV( smr, distribution->product ), residualMass;
+    G4double productMass MCGIDI_product_getMass_MeV( smr, distribution->product ), residualMass;
 */
     KalbachMann->energyToMeVFactor = MCGIDI_misc_getUnitConversionFactor( smr, energyToUnit, "MeV" );
-    KalbachMann->massFactor = (double) productZ + productN;     /* This is not correct as masses are needed not Z and N. */
+    KalbachMann->massFactor = (G4double) productZ + productN;     /* This is not correct as masses are needed not Z and N. */
     KalbachMann->massFactor /= projectileN + projectileZ + targetZ + targetN - productZ + productN;
     KalbachMann->massFactor += 1.;
 
@@ -183,7 +183,7 @@ int MCGIDI_KalbachMann_parseFromTOM( statusMessageReporting *smr, xDataTOM_eleme
         targetZ + projectileZ, targetN + projectileN, Ib );
 
     KalbachMann->dists.numberOfWs = 0;
-    if( ( KalbachMann->dists.Ws = (double *) smr_malloc2( smr, KalbachMannXData->numberOfEnergies * sizeof( double ), 0, "KalbachMann->dists->Ws" ) ) == NULL ) goto err;
+    if( ( KalbachMann->dists.Ws = (G4double *) smr_malloc2( smr, KalbachMannXData->numberOfEnergies * sizeof( G4double ), 0, "KalbachMann->dists->Ws" ) ) == NULL ) goto err;
     if( ( KalbachMann->dists.dist = (MCGIDI_pdfOfX *) smr_malloc2( smr, KalbachMannXData->numberOfEnergies * sizeof( MCGIDI_pdfOfX ), 0, "KalbachMann->dists->dist" ) ) == NULL ) goto err;
     if( ( KalbachMann->ras = (MCGIDI_KalbachMann_ras *) smr_malloc2( smr, KalbachMannXData->numberOfEnergies * sizeof( MCGIDI_KalbachMann_ras ), 0, "KalbachMann->ras" ) ) == NULL ) goto err;
 
@@ -205,23 +205,23 @@ err:
 ************************************************************
 */
 static int MCGIDI_KalbachMann_parseFromTOM2( statusMessageReporting *smr, int dataPerEout, int index, xDataTOM_KalbachMannCoefficients *coefficientsXData, 
-        double energyInFactor, double energyOutFactor, MCGIDI_KalbachMann *KalbachMann ) {
+        G4double energyInFactor, G4double energyOutFactor, MCGIDI_KalbachMann *KalbachMann ) {
 
     int i, j, n = coefficientsXData->length / dataPerEout;
     MCGIDI_pdfsOfXGivenW *dists = &(KalbachMann->dists);
     MCGIDI_pdfOfX *dist = &(dists->dist[index]);
-    double norm, *p, *rs = NULL, *as_ = NULL, *Xs = NULL, *pdf, *cdf;
+    G4double norm, *p, *rs = NULL, *as_ = NULL, *Xs = NULL, *pdf, *cdf;
     nfu_status status;
     ptwXYPoints *pdfXY = NULL;
     ptwXYPoint *point;
     ptwXPoints *cdfX = NULL;
     char const *ptwFunc = "";
 
-    if( ( Xs = (double *) smr_malloc2( smr, 3 * n * sizeof( double ), 0, "Xs" ) ) == NULL ) goto err;
+    if( ( Xs = (G4double *) smr_malloc2( smr, 3 * n * sizeof( G4double ), 0, "Xs" ) ) == NULL ) goto err;
     pdf = &(Xs[n]);
     cdf = &(pdf[n]);
 
-    if( ( rs = (double *) smr_malloc2( smr, ( dataPerEout - 2 ) * n * sizeof( double ), 0, "rs" ) ) == NULL ) goto err;
+    if( ( rs = (G4double *) smr_malloc2( smr, ( dataPerEout - 2 ) * n * sizeof( G4double ), 0, "rs" ) ) == NULL ) goto err;
     if( dataPerEout == 4 ) as_ = &(rs[n]);
 
     ptwFunc = "ptwXY_new";
@@ -276,11 +276,11 @@ err:
 /*
 ************************************************************
 */
-static double MCGIDI_KalbachMann_S_a_or_b( double Z_AB, double N_AB, double Z_C, double N_C, double I_ab ) {
+static G4double MCGIDI_KalbachMann_S_a_or_b( G4double Z_AB, G4double N_AB, G4double Z_C, G4double N_C, G4double I_ab ) {
 
-    double A_AB = Z_AB + N_AB, A_C = Z_C + N_C;
-    double invA_AB_third = 1.0 / G4Pow::GetInstance()->A13( A_AB ), invA_C_third = 1.0 /  G4Pow::GetInstance()->A13 ( A_C );
-    double NZA_AB = ( N_AB - Z_AB ) * ( N_AB - Z_AB ) / A_AB, NZA_C = ( N_C - Z_C ) * ( N_C - Z_C ) / A_C, S;
+    G4double A_AB = Z_AB + N_AB, A_C = Z_C + N_C;
+    G4double invA_AB_third = 1.0 / G4Pow::GetInstance()->A13( A_AB ), invA_C_third = 1.0 /  G4Pow::GetInstance()->A13 ( A_C );
+    G4double NZA_AB = ( N_AB - Z_AB ) * ( N_AB - Z_AB ) / A_AB, NZA_C = ( N_C - Z_C ) * ( N_C - Z_C ) / A_C, S;
 
     S =   15.68 * ( A_C - A_AB )                                             - 28.07 * ( NZA_C - NZA_AB )
         - 18.56 * ( A_C * invA_C_third - A_AB * invA_AB_third )              + 33.22 * ( NZA_C * invA_C_third - NZA_AB * invA_AB_third )
@@ -294,7 +294,7 @@ static double MCGIDI_KalbachMann_S_a_or_b( double Z_AB, double N_AB, double Z_C,
 int MCGIDI_KalbachMann_sampleEp( statusMessageReporting *smr, MCGIDI_KalbachMann *KalbachMann, MCGIDI_quantitiesLookupModes &modes, 
         MCGIDI_decaySamplingInfo *decaySamplingInfo ) {
 
-    double Epl, Epu, Ep, r, r2, rl, ru, a, a2, al, au, mu, randomEp = decaySamplingInfo->rng( decaySamplingInfo->rngState );
+    G4double Epl, Epu, Ep, r, r2, rl, ru, a, a2, al, au, mu, randomEp = decaySamplingInfo->rng( decaySamplingInfo->rngState );
     MCGIDI_pdfsOfXGivenW_sampled sampled;
     MCGIDI_pdfsOfXGivenW *dists = &(KalbachMann->dists);
     ptwXY_interpolation interpolationWY;
@@ -337,8 +337,8 @@ int MCGIDI_KalbachMann_sampleEp( statusMessageReporting *smr, MCGIDI_KalbachMann
     }
 
     if( KalbachMann->ras[0].as == NULL ) {                          /* Now determine a. */
-        double X1, X3_2;
-        double eb = KalbachMann->massFactor * KalbachMann->energyToMeVFactor * Ep + KalbachMann->Sb;
+        G4double X1, X3_2;
+        G4double eb = KalbachMann->massFactor * KalbachMann->energyToMeVFactor * Ep + KalbachMann->Sb;
 
         X1 = eb;             /* Not valid for ea > Et1. */
         X3_2 = eb * eb;       /* Not valid for ea > Et3. */
@@ -370,11 +370,11 @@ int MCGIDI_KalbachMann_sampleEp( statusMessageReporting *smr, MCGIDI_KalbachMann
 
         /* In the following: Cosh[ a mu ] + r Sinh[ a mu ] = ( 1 - r ) Cosh[ a mu ] + r ( Cosh[ a mu ] + Sinh[ a mu ] ). */
     if( decaySamplingInfo->rng( decaySamplingInfo->rngState ) >= r ) {   /* Sample the '( 1 - r ) Cosh[ a mu ]' term. */
-        double T = ( 2. * decaySamplingInfo->rng( decaySamplingInfo->rngState ) - 1. ) * std::sinh( a );
+        G4double T = ( 2. * decaySamplingInfo->rng( decaySamplingInfo->rngState ) - 1. ) * std::sinh( a );
 
         mu = G4Log( T + std::sqrt( T * T + 1. ) ) / a; }
     else {                                                              /* Sample the 'r ( Cosh[ a mu ] + Sinh[ a mu ]' term. */
-        double rng1 = decaySamplingInfo->rng( decaySamplingInfo->rngState ), exp_a = G4Exp( a );
+        G4double rng1 = decaySamplingInfo->rng( decaySamplingInfo->rngState ), exp_a = G4Exp( a );
 
         mu = G4Log( rng1 * exp_a + ( 1. - rng1 ) / exp_a ) / a;
     }

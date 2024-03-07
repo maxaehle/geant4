@@ -34,7 +34,7 @@ int MCGIDI_misc_copyXMLAttributesToTOM( statusMessageReporting *smr, xDataTOM_at
     MCGIDI_misc_pointerToAttributeIfAllOk( smr, NULL, path, required, attributes, name, __FILE__, __LINE__ )
 enum xDataTOM_frame MCGIDI_misc_getProductFrame( statusMessageReporting *smr, xDataTOM_element *frameElement );
 
-double MCGIDI_misc_getUnitConversionFactor( statusMessageReporting *smr, char const *fromUnit, char const *toUnit );
+G4double MCGIDI_misc_getUnitConversionFactor( statusMessageReporting *smr, char const *fromUnit, char const *toUnit );
 ptwXYPoints *MCGIDI_misc_dataFromXYs2ptwXYPointsInUnitsOf( statusMessageReporting *smr, xDataTOM_XYs *XYs, 
         ptwXY_interpolation interpolation, char const *units[2] );
 ptwXYPoints *MCGIDI_misc_dataFromElement2ptwXYPointsInUnitsOf( statusMessageReporting *smr, xDataTOM_element *linear, char const *toUnits[2] );

@@ -221,11 +221,11 @@ int main(int argc, char** argv)
     delete ui;
   }
   eventTimer->Stop();
-  double totalCPUTime =
+  G4double totalCPUTime =
     eventTimer->GetUserElapsed() + eventTimer->GetSystemElapsed();
   G4int precision_t          = G4cout.precision(3);
   std::ios::fmtflags flags_t = G4cout.flags();
-  G4cout.setf(std::ios::fixed, std::ios::floatfield);
+  G4cout.setf(std::ios::fixed, std::ios::G4floatfield);
   G4cout << "TimeTotal> " << eventTimer->GetRealElapsed() << " " << totalCPUTime
          << G4endl;
   G4cout.setf(flags_t);

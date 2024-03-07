@@ -54,7 +54,7 @@ if  ( (step->GetTrack()->GetDynamicParticle()->GetDefinition() ==
        G4Proton::ProtonDefinition())
 
 /*
-// for doublet
+// for G4doublet
 
     && (step->GetPostStepPoint()->GetPosition().z()/mm>-3230.2)
          && (step->GetPostStepPoint()->GetPosition().z()/mm<-3229.8) 

@@ -54,13 +54,13 @@ DicomVFileImage::DicomVFileImage(DcmDataset* dset) : DicomVFile(dset)
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 void DicomVFileImage::ReadData()
 {
-  std::vector<double> dImagePositionPatient = Read1Data(theDataset, DCM_ImagePositionPatient,3);
+  std::vector<G4double> dImagePositionPatient = Read1Data(theDataset, DCM_ImagePositionPatient,3);
   fLocation = dImagePositionPatient[2];
-  std::vector<double> dSliceThickness = Read1Data(theDataset, DCM_SliceThickness, 1);
-  std::vector<double> dPixelSpacing = Read1Data(theDataset, DCM_PixelSpacing, 2);
+  std::vector<G4double> dSliceThickness = Read1Data(theDataset, DCM_SliceThickness, 1);
+  std::vector<G4double> dPixelSpacing = Read1Data(theDataset, DCM_PixelSpacing, 2);
 
-  std::vector<double> dRows = Read1Data(theDataset, DCM_Rows, 1);
-  std::vector<double> dColumns = Read1Data(theDataset, DCM_Columns, 1);
+  std::vector<G4double> dRows = Read1Data(theDataset, DCM_Rows, 1);
+  std::vector<G4double> dColumns = Read1Data(theDataset, DCM_Columns, 1);
   fNoVoxelsY = dRows[0];
   fNoVoxelsX = dColumns[0];
   fNoVoxelsZ = 1;
@@ -86,7 +86,7 @@ void DicomVFileImage::ReadData()
   if( DicomFileMgr::verbose >= debugVerb ) G4cout << " DicomVFileImage::ReadData:  fVoxelDim " 
        << fVoxelDimX << " " << fVoxelDimY << " " << fVoxelDimZ << G4endl;
      
-  std::vector<double> dImageOrientationPatient =
+  std::vector<G4double> dImageOrientationPatient =
    Read1Data(theDataset, DCM_ImageOrientationPatient,6);
   fOrientationRows = G4ThreeVector(dImageOrientationPatient[0],dImageOrientationPatient[1],
    dImageOrientationPatient[2]);
@@ -105,13 +105,13 @@ void DicomVFileImage::ReadData()
   fBitAllocated = Read1Data(theDataset, DCM_BitsAllocated, 1)[0];
   if( DicomFileMgr::verbose >= 4 ) G4cout << " BIT ALLOCATED " << fBitAllocated << G4endl; 
 
-  std::vector<double> dRescaleSlope = Read1Data(theDataset, DCM_RescaleSlope, 1);
+  std::vector<G4double> dRescaleSlope = Read1Data(theDataset, DCM_RescaleSlope, 1);
   if( dRescaleSlope.size() == 1 ) {
     fRescaleSlope = dRescaleSlope[0];
   } else {
     fRescaleSlope = 1;
   }
-  std::vector<double> dRescaleIntercept = Read1Data(theDataset, DCM_RescaleIntercept, 1);
+  std::vector<G4double> dRescaleIntercept = Read1Data(theDataset, DCM_RescaleIntercept, 1);
   if( dRescaleIntercept.size() == 1 ) {
     fRescaleIntercept = dRescaleIntercept[0];
   } else {

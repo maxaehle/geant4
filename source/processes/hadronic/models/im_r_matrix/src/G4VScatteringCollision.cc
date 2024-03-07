@@ -153,10 +153,10 @@ G4KineticTrackVector* G4VScatteringCollision::FinalState(const G4KineticTrack& t
 
 
 
-double G4VScatteringCollision::SampleResonanceMass(const double poleMass, 
-						   const double gamma,
-						   const double aMinMass,
-						   const double maxMass) const
+G4double G4VScatteringCollision::SampleResonanceMass(const G4double poleMass, 
+						   const G4double gamma,
+						   const G4double aMinMass,
+						   const G4double maxMass) const
 {
   // Chooses a mass randomly between minMass and maxMass 
   //     according to a Breit-Wigner function with constant 
@@ -170,9 +170,9 @@ double G4VScatteringCollision::SampleResonanceMass(const double poleMass,
   if (gamma < 1E-10*GeV)
     return std::max(minMass,std::min(maxMass, poleMass));
   else {
-    double fmin = BrWigInt0(minMass, gamma, poleMass);
-    double fmax = BrWigInt0(maxMass, gamma, poleMass);
-    double f = fmin + (fmax-fmin)*G4UniformRand();
+    G4double fmin = BrWigInt0(minMass, gamma, poleMass);
+    G4double fmax = BrWigInt0(maxMass, gamma, poleMass);
+    G4double f = fmin + (fmax-fmin)*G4UniformRand();
     return BrWigInv(f, gamma, poleMass);
   }
 }

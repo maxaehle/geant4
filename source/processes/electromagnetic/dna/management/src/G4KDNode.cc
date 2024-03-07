@@ -47,7 +47,7 @@
 //	return node->GetData() ;
 //}
 //
-//const double* GetNodePosition(G4KDNode* node)
+//const G4double* GetNodePosition(G4KDNode* node)
 //{
 //	return node->GetPosition() ;
 //}

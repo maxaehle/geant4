@@ -21,7 +21,7 @@ static int MCGIDI_reaction_initialize2( statusMessageReporting *smr, MCGIDI_reac
 static int MCGIDI_reaction_particleChanges( MCGIDI_POP *projectile, MCGIDI_POP *target, MCGIDI_productsInfo *productsInfo, int n1, int *particlesChanges );
 static int MCGIDI_reaction_ParseReactionTypeAndDetermineProducts( statusMessageReporting *smr, MCGIDI_POPs *pops, MCGIDI_reaction *reaction );
 static int MCGIDI_reaction_ParseDetermineReactionProducts( statusMessageReporting *smr, MCGIDI_POPs *pops, MCGIDI_outputChannel *outputChannel,
-    MCGIDI_productsInfo *productsInfo, MCGIDI_reaction *reaction, double *finalQ, int level );
+    MCGIDI_productsInfo *productsInfo, MCGIDI_reaction *reaction, G4double *finalQ, int level );
 static int MCGIDI_reaction_addReturnProduct( statusMessageReporting *smr, MCGIDI_productsInfo *productsInfo, int ID, MCGIDI_product *product, 
         MCGIDI_reaction *reaction, int transportable );
 static int MCGIDI_reaction_setENDL_CSNumbers( statusMessageReporting *smr, MCGIDI_reaction *reaction );
@@ -131,7 +131,7 @@ static int MCGIDI_reaction_ParseReactionTypeAndDetermineProducts( statusMessageR
     MCGIDI_outputChannel *outputChannel = &(reaction->outputChannel);
     int MT;
     int particlesChanges[nParticleChanges], numberOfChanges;
-    double finalQ = 0.;
+    G4double finalQ = 0.;
 
     if( MCGIDI_reaction_ParseDetermineReactionProducts( smr, pops, outputChannel, &(reaction->productsInfo), reaction, &finalQ, 0 ) != 0 ) return( 1 );
     reaction->finalQ = finalQ;
@@ -200,7 +200,7 @@ static int MCGIDI_reaction_particleChanges( MCGIDI_POP *projectile, MCGIDI_POP *
 ************************************************************
 */
 static int MCGIDI_reaction_ParseDetermineReactionProducts( statusMessageReporting *smr, MCGIDI_POPs *pops, MCGIDI_outputChannel *outputChannel,
-    MCGIDI_productsInfo *productsInfo, MCGIDI_reaction *reaction, double *finalQ, int level ) {
+    MCGIDI_productsInfo *productsInfo, MCGIDI_reaction *reaction, G4double *finalQ, int level ) {
 /*
 *   This function determines all products that can be returned during sampling for this outputChannel. Note, products like 'U238_c' and
 *   'U238_e3' are not returned during sampling as both are decay to the groud state (unless a meta-stable is encountered). 
@@ -333,21 +333,21 @@ MCGIDI_target_heated *MCGIDI_reaction_getTargetHeated( statusMessageReporting * 
 /*
 ************************************************************
 */
-double MCGIDI_reaction_getProjectileMass_MeV( statusMessageReporting *smr, MCGIDI_reaction *reaction ) {
+G4double MCGIDI_reaction_getProjectileMass_MeV( statusMessageReporting *smr, MCGIDI_reaction *reaction ) {
 
     return( MCGIDI_target_heated_getProjectileMass_MeV( smr, reaction->target ) );
 }
 /*
 ************************************************************
 */
-double MCGIDI_reaction_getTargetMass_MeV( statusMessageReporting *smr, MCGIDI_reaction *reaction ) {
+G4double MCGIDI_reaction_getTargetMass_MeV( statusMessageReporting *smr, MCGIDI_reaction *reaction ) {
 
     return( MCGIDI_target_heated_getTargetMass_MeV( smr, reaction->target ) );
 }
 /*
 ************************************************************
 */
-int MCGIDI_reaction_getDomain( statusMessageReporting * /*smr*/, MCGIDI_reaction *reaction, double *EMin, double *EMax ) {
+int MCGIDI_reaction_getDomain( statusMessageReporting * /*smr*/, MCGIDI_reaction *reaction, G4double *EMin, G4double *EMax ) {
 /*
 *   Return value
 *       <  0    No cross section data.
@@ -363,9 +363,9 @@ int MCGIDI_reaction_getDomain( statusMessageReporting * /*smr*/, MCGIDI_reaction
 /*
 ************************************************************
 */
-int MCGIDI_reaction_fixDomains( statusMessageReporting * /*smr*/, MCGIDI_reaction *reaction, double EMin, double EMax, nfu_status *status ) {
+int MCGIDI_reaction_fixDomains( statusMessageReporting * /*smr*/, MCGIDI_reaction *reaction, G4double EMin, G4double EMax, nfu_status *status ) {
 
-    double lowerEps = 1e-14, upperEps = -1e-14;
+    G4double lowerEps = 1e-14, upperEps = -1e-14;
 
     if( reaction->EMin == EMin ) lowerEps = 0.;
     if( reaction->EMax == EMax ) upperEps = 0.;
@@ -377,10 +377,10 @@ int MCGIDI_reaction_fixDomains( statusMessageReporting * /*smr*/, MCGIDI_reactio
 /*
 ************************************************************
 */
-double MCGIDI_reaction_getCrossSectionAtE( statusMessageReporting *smr, MCGIDI_reaction *reaction, MCGIDI_quantitiesLookupModes &modes,
+G4double MCGIDI_reaction_getCrossSectionAtE( statusMessageReporting *smr, MCGIDI_reaction *reaction, MCGIDI_quantitiesLookupModes &modes,
         bool sampling ) {
 
-    double e_in = modes.getProjectileEnergy( ), xsec;
+    G4double e_in = modes.getProjectileEnergy( ), xsec;
 
     if( modes.getCrossSectionMode( ) == MCGIDI_quantityLookupMode_pointwise ) {
         if( e_in < reaction->EMin ) e_in = reaction->EMin;
@@ -388,7 +388,7 @@ double MCGIDI_reaction_getCrossSectionAtE( statusMessageReporting *smr, MCGIDI_r
         ptwXY_getValueAtX( reaction->crossSection, e_in, &xsec ); }
     else if( modes.getCrossSectionMode( ) == MCGIDI_quantityLookupMode_grouped ) {
         int index = modes.getGroupIndex( );
-        double *xSecP = ptwX_getPointAtIndex( reaction->crossSectionGrouped, index );
+        G4double *xSecP = ptwX_getPointAtIndex( reaction->crossSectionGrouped, index );
 
         if( xSecP != NULL ) {
             xsec = *xSecP;
@@ -405,7 +405,7 @@ double MCGIDI_reaction_getCrossSectionAtE( statusMessageReporting *smr, MCGIDI_r
 /*
 ************************************************************
 */
-double MCGIDI_reaction_getFinalQ( statusMessageReporting * /*smr*/, MCGIDI_reaction *reaction, MCGIDI_quantitiesLookupModes &/*modes*/ ) {
+G4double MCGIDI_reaction_getFinalQ( statusMessageReporting * /*smr*/, MCGIDI_reaction *reaction, MCGIDI_quantitiesLookupModes &/*modes*/ ) {
 
     return( reaction->finalQ );
 }
@@ -494,7 +494,7 @@ MCGIDI_productsInfo *MCGIDI_reaction_getProductsInfo( MCGIDI_reaction *reaction 
 ************************************************************
 */
 int MCGIDI_reaction_recast( statusMessageReporting *smr, MCGIDI_reaction *reaction, GIDI_settings & /*settings*/, 
-        GIDI_settings_particle const *projectileSettings, double temperature_MeV, ptwXPoints *totalGroupedCrossSection ) {
+        GIDI_settings_particle const *projectileSettings, G4double temperature_MeV, ptwXPoints *totalGroupedCrossSection ) {
 
     if( totalGroupedCrossSection != NULL ) {
         nfu_status status_nf;

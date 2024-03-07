@@ -196,17 +196,17 @@ HepRandom::HepRandom(HepRandomEngine * algorithm)
 HepRandom::~HepRandom()
 { }
 
-double HepRandom::flat()
+G4double HepRandom::flat()
 {
   return theDefaults().theEngine->flat();
 }
 
-void HepRandom::flatArray(const int size, double* vect)
+void HepRandom::flatArray(const int size, G4double* vect)
 {
   theDefaults().theEngine->flatArray(size,vect);
 }
 
-double HepRandom::operator()() {
+G4double HepRandom::operator()() {
   return flat();
 }
 

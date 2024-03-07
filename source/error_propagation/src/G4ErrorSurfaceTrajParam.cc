@@ -113,7 +113,7 @@ void G4ErrorSurfaceTrajParam::SetParameters(const G4Point3D& pos,
 //------------------------------------------------------------------------
 std::ostream& operator<<(std::ostream& out, const G4ErrorSurfaceTrajParam& tp)
 {
-  //  long mode = out.setf(std::ios::fixed,std::ios::floatfield);
+  //  long mode = out.setf(std::ios::fixed,std::ios::G4floatfield);
 
   //  out << tp.theType;
   //  out << std::setprecision(5) << std::setw(10);

@@ -619,9 +619,9 @@ xDataTOM_Int xDataXML_convertAttributeTo_xDataTOM_Int( statusMessageReporting *s
 /*
 ************************************************************
 */
-int xDataXML_convertAttributeToDouble( statusMessageReporting *smr, xDataXML_element *element, char const *name, double *d, int required ) {
+int xDataXML_convertAttributeToDouble( statusMessageReporting *smr, xDataXML_element *element, char const *name, G4double *d, int required ) {
 /*
-*   Returns 1 if no such attribute, -1 if error converting to double and 0 if successful.
+*   Returns 1 if no such attribute, -1 if error converting to G4double and 0 if successful.
 */
     char const *value;
     char *e;
@@ -634,7 +634,7 @@ int xDataXML_convertAttributeToDouble( statusMessageReporting *smr, xDataXML_ele
     *d = strtod( value, &e );
     if( *e != 0 ) {
         smr_setReportError3( smr, xDataXML_get_smrUserInterfaceFromElement( element) , xDataTOM_smrLibraryID, 1, 
-            "could not convert attribute %s's values = %s to a double", name, value );
+            "could not convert attribute %s's values = %s to a G4double", name, value );
         return( -1 );
     }
     return( 0 );
@@ -886,7 +886,7 @@ int xDataXML_stringTo_xDataTOM_Int( statusMessageReporting *smr, void *smrUserIn
 /*
 ************************************************************
 */
-int xDataXML_stringTo_double( statusMessageReporting *smr, void *smrUserInterface, char const *c, double *value, char const *endings, char **e ) {
+int xDataXML_stringTo_G4double( statusMessageReporting *smr, void *smrUserInterface, char const *c, G4double *value, char const *endings, char **e ) {
 
     char const *s;
     char tmp[64];
@@ -895,7 +895,7 @@ int xDataXML_stringTo_double( statusMessageReporting *smr, void *smrUserInterfac
     for( s = c; *s != 0; s++ ) if( !isspace( *s ) ) break;
     *value = strtod( s, e );
     if( *e == s ) {
-        smr_setReportError3( smr, smrUserInterface, xDataTOM_smrLibraryID, 1, "could not convert \"%s\" to an double", 
+        smr_setReportError3( smr, smrUserInterface, xDataTOM_smrLibraryID, 1, "could not convert \"%s\" to an G4double", 
             xDataXML_shortStringForMessage( n, tmp, c ));}
     else {
         if( *endings == 0 ) while( isspace( **e ) ) (*e)++; // Loop checking, 11.06.2015, T. Koi
@@ -903,11 +903,11 @@ int xDataXML_stringTo_double( statusMessageReporting *smr, void *smrUserInterfac
             status = 0; }
         else {
             if( *endings == 0 ) {
-                smr_setReportError3( smr, smrUserInterface, xDataTOM_smrLibraryID, 1, "double string \"%s\" does not end with a '\\0'", 
+                smr_setReportError3( smr, smrUserInterface, xDataTOM_smrLibraryID, 1, "G4double string \"%s\" does not end with a '\\0'", 
                     xDataXML_shortStringForMessage( n, tmp, c ) ); }
             else {
                 if( strchr( endings, **e ) == NULL ) {
-                    smr_setReportError3( smr, smrUserInterface, xDataTOM_smrLibraryID, 1, "double string \"%s\" does not end with a white space or a '\\0\'", 
+                    smr_setReportError3( smr, smrUserInterface, xDataTOM_smrLibraryID, 1, "G4double string \"%s\" does not end with a white space or a '\\0\'", 
                         xDataXML_shortStringForMessage( n, tmp, c ) ); }
                 else {
                     status = 0;

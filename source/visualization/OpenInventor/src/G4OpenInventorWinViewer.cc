@@ -228,7 +228,7 @@ void G4OpenInventorWinViewer::SetView () {
   // Background.
   G4Colour b = fVP.GetBackgroundColour ();
   fViewer->setBackgroundColor
-    (SbColor((float)b.GetRed(),(float)b.GetGreen(),(float)b.GetBlue()));
+    (SbColor((G4float)b.GetRed(),(G4float)b.GetGreen(),(G4float)b.GetBlue()));
 }
 void G4OpenInventorWinViewer::ViewerRender () {
   if(!fViewer) return;

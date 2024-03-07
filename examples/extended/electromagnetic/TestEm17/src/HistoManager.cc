@@ -231,7 +231,7 @@ void HistoManager::SaveAscii()
     return;
   }  
 
- File.setf( std::ios::scientific, std::ios::floatfield );
+ File.setf( std::ios::scientific, std::ios::G4floatfield );
   
  //write selected histograms
  for (G4int ih=0; ih<kMaxHisto; ih++) {

@@ -169,7 +169,7 @@ public:
   void setOnShell(G4InuclParticle* bullet, G4InuclParticle* target);
   void setRemainingExitationEnergy();
 
-  double getRemainingExitationEnergy() const { return eex_rest; };
+  G4double getRemainingExitationEnergy() const { return eex_rest; };
   G4bool acceptable() const { return on_shell; };
 
 private: 

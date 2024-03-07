@@ -54,11 +54,11 @@ void G4LEPTSElossDistr::ReadFile()
   G4int nData;
   (void) fscanf(fp,"%i \n",&nEnergies);
   for( G4int ie = 0; ie < nEnergies; ie++ ){
-    float energySep; 
+    G4float energySep; 
     (void) fscanf(fp,"%f \n",&energySep);
     (void) fscanf(fp,"%i \n",&nAngles);
     for( G4int ia = 0; ia < nAngles; ia++ ){
-      float angleSep; 
+      G4float angleSep; 
       (void) fscanf(fp,"%f \n",&angleSep);
       G4LEPTSDistribution* dist = new G4LEPTSDistribution();
       theNDistributions ++;

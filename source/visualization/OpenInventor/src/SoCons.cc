@@ -68,7 +68,7 @@ SoCons::SoCons() {
   SO_NODE_ADD_FIELD(fRmax2,               (1.0));
   SO_NODE_ADD_FIELD(fDz,                 (10.0));
   SO_NODE_ADD_FIELD(fSPhi,                (0.0));
-  SO_NODE_ADD_FIELD(fDPhi,             ((float)(2*M_PI)));
+  SO_NODE_ADD_FIELD(fDPhi,             ((G4float)(2*M_PI)));
   SO_NODE_ADD_FIELD(smoothDraw,          (TRUE));
   SO_NODE_ADD_FIELD(alternateRep,        (NULL));
   children = new SoChildList(this);
@@ -121,13 +121,13 @@ void SoCons::generatePrimitives(SoAction *action) {
   ///////////////////////////////////////////////////////
   //-----------------------------------------------------
 #define GEN_VERTEX(pv,x,y,z,s,t,nx,ny,nz)               \
-  point.setValue((float)(x),(float)(y),(float)(z));     \
-  normal.setValue((float)(nx),(float)(ny),(float)(nz)); \
+  point.setValue((G4float)(x),(G4float)(y),(G4float)(z));     \
+  normal.setValue((G4float)(nx),(G4float)(ny),(G4float)(nz)); \
   if (useTexFunction) {                                 \
     texCoord=tce->get(point,normal);                    \
   } else {                                              \
-    texCoord[0]=(float)(s);                             \
-    texCoord[1]=(float)(t);                             \
+    texCoord[0]=(G4float)(s);                             \
+    texCoord[1]=(G4float)(t);                             \
   }                                                     \
   pv.setPoint(point);                                   \
   pv.setNormal(normal);                                 \
@@ -138,28 +138,28 @@ void SoCons::generatePrimitives(SoAction *action) {
 
 
   int NPHI = (int)(2+22*std::fabs(fDPhi.getValue()/(2.0*M_PI)));
-  double deltaPhi = fDPhi.getValue()/NPHI;
-  double phi0     = fSPhi.getValue();
-  double phi1     = phi0 + fDPhi.getValue();
-  double rMax1    = fRmax1.getValue();
-  double rMin1    = fRmin1.getValue();
-  double rMax2    = fRmax2.getValue();
-  double rMin2    = fRmin2.getValue();
-  double zMax     = fDz.getValue();
-  double zMin     = -zMax;
-  double cosPhi0  = std::cos(phi0);
-  double sinPhi0  = std::sin(phi0);
-  double cosPhi1  = std::cos(phi1);
-  double sinPhi1  = std::sin(phi1);
-  double cosDeltaPhi = std::cos(deltaPhi);
-  double sinDeltaPhi = std::sin(deltaPhi);
+  G4double deltaPhi = fDPhi.getValue()/NPHI;
+  G4double phi0     = fSPhi.getValue();
+  G4double phi1     = phi0 + fDPhi.getValue();
+  G4double rMax1    = fRmax1.getValue();
+  G4double rMin1    = fRmin1.getValue();
+  G4double rMax2    = fRmax2.getValue();
+  G4double rMin2    = fRmin2.getValue();
+  G4double zMax     = fDz.getValue();
+  G4double zMin     = -zMax;
+  G4double cosPhi0  = std::cos(phi0);
+  G4double sinPhi0  = std::sin(phi0);
+  G4double cosPhi1  = std::cos(phi1);
+  G4double sinPhi1  = std::sin(phi1);
+  G4double cosDeltaPhi = std::cos(deltaPhi);
+  G4double sinDeltaPhi = std::sin(deltaPhi);
   //
   // The outer surface!
   //
   beginShape(action,TRIANGLE_STRIP);
   int    i;
-  double sinPhi=sinPhi0;
-  double cosPhi=cosPhi0;
+  G4double sinPhi=sinPhi0;
+  G4double cosPhi=cosPhi0;
   for (i = 0; i<=NPHI; i++) {
     GEN_VERTEX(pv,rMax2*cosPhi,rMax2*sinPhi,zMax,0.0,0.0,cosPhi,sinPhi,0);   
     GEN_VERTEX(pv,rMax1*cosPhi,rMax1*sinPhi,zMin,1.0,1.0,cosPhi,sinPhi,0);   
@@ -238,7 +238,7 @@ SoChildList *SoCons::getChildren() const {
 
 // computeBBox
 void SoCons::computeBBox(SoAction *, SbBox3f &box, SbVec3f &center ){
-  float fRmax= fRmax1.getValue();  
+  G4float fRmax= fRmax1.getValue();  
   if (fRmax2.getValue() > fRmax) fRmax = fRmax2.getValue(); 
 
   SbVec3f vmin(-fRmax,-fRmax,-fDz.getValue()), 
@@ -264,14 +264,14 @@ void SoCons::updateChildren() {
   SoIndexedFaceSet  *theFaceSet         = (SoIndexedFaceSet *)   ( sep->getChild(3));
 
   const int NPHI=24, NPOINTS=2*(2*NPHI+2), NFACES=4*NPHI+2, NINDICES = NFACES*5;
-  float points[NPOINTS][3], normals[NFACES][3];
+  G4float points[NPOINTS][3], normals[NFACES][3];
 #ifdef INVENTOR2_0
   static long     indices[NINDICES];
 #else
   static int32_t  indices[NINDICES];
 #endif
   static int init=0;
-  double phi, pp, DeltaPhi;
+  G4double phi, pp, DeltaPhi;
 
   // Indices need to be generated once! This is here to keep it close to the point
   // generation, since otherwise it will be confusing.
@@ -328,7 +328,7 @@ void SoCons::updateChildren() {
   // Points need to be generated each time:
   // The outer surface
   DeltaPhi = fDPhi.getValue()/NPHI, phi = fSPhi.getValue();
-  float  t,st,ct;
+  G4float  t,st,ct;
   t = FATAN((fRmax2.getValue()-fRmax1.getValue())/(2*fDz.getValue()));
   st = FSIN(t);
   ct = FCOS(t);

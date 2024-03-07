@@ -98,21 +98,21 @@ GammaRayTelAnalysis* GammaRayTelAnalysis::getInstance()
 }
 
 // This function fill the 2d histogram of the XZ positions
-void GammaRayTelAnalysis::InsertPositionXZ(double x, double z)
+void GammaRayTelAnalysis::InsertPositionXZ(G4double x, G4double z)
 {
   G4AnalysisManager* man = G4AnalysisManager::Instance();
   man->FillH2(1,x,z);
 }
 
 // This function fill the 2d histogram of the YZ positions
-void GammaRayTelAnalysis::InsertPositionYZ(double y, double z)
+void GammaRayTelAnalysis::InsertPositionYZ(G4double y, G4double z)
 {
   G4AnalysisManager* man = G4AnalysisManager::Instance();
   man->FillH2(2,y,z);
 }
 
 // This function fill the 1d histogram of the energy released in the last Si plane
-void GammaRayTelAnalysis::InsertEnergy(double en)
+void GammaRayTelAnalysis::InsertEnergy(G4double en)
 {
   G4AnalysisManager* man = G4AnalysisManager::Instance();
   man->FillH1(1,en);
@@ -125,8 +125,8 @@ void GammaRayTelAnalysis::InsertHits(int nplane)
   man->FillH1(2,nplane);
 }
 
-void GammaRayTelAnalysis::setNtuple(float E, float p, float x, 
-				    float y, float z)
+void GammaRayTelAnalysis::setNtuple(G4float E, G4float p, G4float x, 
+				    G4float y, G4float z)
 {
   G4AnalysisManager* man = G4AnalysisManager::Instance();
   man->FillNtupleDColumn(0,E);
@@ -160,8 +160,8 @@ void GammaRayTelAnalysis::BeginOfRun()
   int Nplane = GammaRayTelDetector->GetNbOfTKRLayers();
   int Nstrip = GammaRayTelDetector->GetNbOfTKRStrips();
   int Ntile = GammaRayTelDetector->GetNbOfTKRTiles();
-  double sizexy = GammaRayTelDetector->GetTKRSizeXY();
-  double sizez = GammaRayTelDetector->GetTKRSizeZ();
+  G4double sizexy = GammaRayTelDetector->GetTKRSizeXY();
+  G4double sizez = GammaRayTelDetector->GetTKRSizeZ();
   int N = Nstrip*Ntile;      
 
   // Book1D histograms 

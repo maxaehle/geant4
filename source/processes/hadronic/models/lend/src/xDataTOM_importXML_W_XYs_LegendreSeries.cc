@@ -15,7 +15,7 @@ using namespace GIDI;
 #endif
 
 static int xDataXML_LegendreSeriesDataToTOM( statusMessageReporting *smr, xDataXML_element *XE, xDataTOM_LegendreSeries *LegendreSeries, 
-        int index, int length, double value );
+        int index, int length, G4double value );
 /*
 ************************************************************
 */
@@ -58,7 +58,7 @@ err:
 int xDataXML_W_XYs_LegendreSeries_LegendreSeriesToTOM( statusMessageReporting *smr, xDataXML_element *XE, xDataTOM_LegendreSeries *LegendreSeries ) {
 
     int index, length;
-    double value;
+    G4double value;
 
     if( xDataXML_convertAttributeTo_xDataTOM_Int( smr, XE, "index", &index, 1 ) != 0 ) return( 1 );
     if( xDataXML_convertAttributeTo_xDataTOM_Int( smr, XE, "length", &length, 1 ) != 0 ) return( 1 );
@@ -69,7 +69,7 @@ int xDataXML_W_XYs_LegendreSeries_LegendreSeriesToTOM( statusMessageReporting *s
 ************************************************************
 */
 static int xDataXML_LegendreSeriesDataToTOM( statusMessageReporting *smr, xDataXML_element *XE, xDataTOM_LegendreSeries *LegendreSeries, 
-        int index, int length, double value ) {
+        int index, int length, G4double value ) {
 
     if( xDataTOM_LegendreSeries_initialize( smr, LegendreSeries, index, length, value ) != 0 ) return( 1 );
     if( xDataXML_stringToDoubles( smr, XE, XE->text.text, length, LegendreSeries->LegendreSeries ) == 0 ) return( 0 );

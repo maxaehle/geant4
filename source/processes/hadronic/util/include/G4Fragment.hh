@@ -32,7 +32,7 @@
 //
 // Modifications:
 // 03.05.2010 V.Ivanchenko General cleanup of inline functions: objects 
-//            are accessed by reference; remove double return 
+//            are accessed by reference; remove G4double return 
 //            tolerance of excitation energy at modent it is computed;
 //            safe computation of excitation for exotic fragments
 // 18.05.2010 V.Ivanchenko added member theGroundStateMass and inline

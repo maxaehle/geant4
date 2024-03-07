@@ -263,15 +263,15 @@ void G4ScoringCylinder::Draw(RunScore* map, G4VScoreColorMap* colorMap,
   if(pVisManager)
   {
     // cell vectors
-    std::vector<double> ephi;
+    std::vector<G4double> ephi;
     for(int phi = 0; phi < fNSegment[IPHI]; phi++)
       ephi.push_back(0.);
     //-
-    std::vector<std::vector<double>> zphicell;  // zphicell[Z][PHI]
+    std::vector<std::vector<G4double>> zphicell;  // zphicell[Z][PHI]
     for(int z = 0; z < fNSegment[IZ]; z++)
       zphicell.push_back(ephi);
     //-
-    std::vector<std::vector<double>> rphicell;  // rphicell[R][PHI]
+    std::vector<std::vector<G4double>> rphicell;  // rphicell[R][PHI]
     for(int r = 0; r < fNSegment[IR]; r++)
       rphicell.push_back(ephi);
 
@@ -463,28 +463,28 @@ void G4ScoringCylinder::DrawColumn(RunScore* map, G4VScoreColorMap* colorMap,
   if(pVisManager)
   {
     // cell vectors
-    std::vector<std::vector<std::vector<double>>> cell;  // cell[R][Z][PHI]
-    std::vector<double> ephi;
+    std::vector<std::vector<std::vector<G4double>>> cell;  // cell[R][Z][PHI]
+    std::vector<G4double> ephi;
     for(int phi = 0; phi < fNSegment[IPHI]; phi++)
       ephi.push_back(0.);
-    std::vector<std::vector<double>> ezphi;
+    std::vector<std::vector<G4double>> ezphi;
     for(int z = 0; z < fNSegment[IZ]; z++)
       ezphi.push_back(ephi);
     for(int r = 0; r < fNSegment[IR]; r++)
       cell.push_back(ezphi);
 
-    std::vector<std::vector<double>> rzcell;  // rzcell[R][Z]
-    std::vector<double> ez;
+    std::vector<std::vector<G4double>> rzcell;  // rzcell[R][Z]
+    std::vector<G4double> ez;
     for(int z = 0; z < fNSegment[IZ]; z++)
       ez.push_back(0.);
     for(int r = 0; r < fNSegment[IR]; r++)
       rzcell.push_back(ez);
 
-    std::vector<std::vector<double>> zphicell;  // zphicell[Z][PHI]
+    std::vector<std::vector<G4double>> zphicell;  // zphicell[Z][PHI]
     for(int z = 0; z < fNSegment[IZ]; z++)
       zphicell.push_back(ephi);
 
-    std::vector<std::vector<double>> rphicell;  // rphicell[R][PHI]
+    std::vector<std::vector<G4double>> rphicell;  // rphicell[R][PHI]
     for(int r = 0; r < fNSegment[IR]; r++)
       rphicell.push_back(ephi);
 

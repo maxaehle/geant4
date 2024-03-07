@@ -46,10 +46,10 @@ public:
 protected:
   ~SoStyleCache();
 public:
-  SoMaterial* getMaterial(const SbColor&,float = 0); 
-  SoMaterial* getMaterial(float,float,float,float = 0); 
-  //SoDrawStyle* getLineStyle(SbLineStyle,float = 0); 
-  SoDrawStyle* getLineStyle(unsigned short = 0xFFFF,float = 0); 
+  SoMaterial* getMaterial(const SbColor&,G4float = 0); 
+  SoMaterial* getMaterial(G4float,G4float,G4float,G4float = 0); 
+  //SoDrawStyle* getLineStyle(SbLineStyle,G4float = 0); 
+  SoDrawStyle* getLineStyle(unsigned short = 0xFFFF,G4float = 0); 
   SoLightModel* getLightModelPhong(); 
   SoLightModel* getLightModelBaseColor(); 
   SoResetTransform* getResetTransform();

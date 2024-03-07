@@ -77,7 +77,7 @@ G4KokoulinMuonNuclearXS::CrossSectionDescription(std::ostream& outFile) const
 {
     outFile << "G4KokoulinMuonNuclearXS provides the total inelastic\n"
     << "cross section for mu- and mu+ interactions with nuclei.\n"
-    << "R. Kokoulin's approximation of the Borog and Petrukhin double\n"
+    << "R. Kokoulin's approximation of the Borog and Petrukhin G4double\n"
     << "differential cross section at high energy and low Q**2 is integrated\n"
     << "over the muon energy loss to get the total cross section as a\n"
     << "function of muon kinetic energy\n" ;
@@ -137,7 +137,7 @@ G4double G4KokoulinMuonNuclearXS::
 ComputeMicroscopicCrossSection(G4double KineticEnergy, G4double A)
 {
   // Calculate cross section (differential in muon incident kinetic energy) by 
-  // integrating the double differential cross section over the energy loss
+  // integrating the G4double differential cross section over the energy loss
 
   static const G4double xgi[] = 
     {0.0199,0.1017,0.2372,0.4083,0.5917,0.7628,0.8983,0.9801};
@@ -182,7 +182,7 @@ G4double G4KokoulinMuonNuclearXS::
 ComputeDDMicroscopicCrossSection(G4double KineticEnergy, G4double,
                                  G4double A, G4double epsilon)
 {
-  // Calculate the double-differential microscopic cross section (in muon
+  // Calculate the G4double-differential microscopic cross section (in muon
   // incident kinetic energy and energy loss) using the cross section formula
   // of R.P. Kokoulin (18/01/98)
 

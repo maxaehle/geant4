@@ -3526,7 +3526,7 @@ void G4UIQt::updateHelpArea (
 
 
 /**
-   Return true if this command takes almost a number (int, double, bool,
+   Return true if this command takes almost a number (int, G4double, bool,
    string) as an input
    or a string with a candidate list
  */
@@ -4125,7 +4125,7 @@ void G4UIQt::HelpTreeClicCallback (
   }
 }
 
-/**   This callback is activated when user double clic on a item in the help tree
+/**   This callback is activated when user G4double clic on a item in the help tree
 */
 void G4UIQt::HelpTreeDoubleClicCallback (
 )
@@ -4366,7 +4366,7 @@ void G4UIQt::OpenHelpTreeOnCommand(
   QMap<int,QString>::const_iterator i = commandResultMap.constEnd();
   i--;
   // 10 maximum progress values
-  float multValue = 10.0/(float)(i.key());
+  G4float multValue = 10.0/(G4float)(i.key());
   QString progressChar = "|";
   QString progressStr = "|";
 

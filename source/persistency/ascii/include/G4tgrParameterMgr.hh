@@ -72,7 +72,7 @@ class G4tgrParameterMgr
 
     G4mapss theParameterList;
       // Map of Parameter's: G4String is the Parameter name,
-      // double is its value
+      // G4double is its value
 
     static G4ThreadLocal G4tgrParameterMgr* theInstance;
 };

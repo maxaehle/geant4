@@ -57,16 +57,16 @@ public:
   inline HepRotation(const HepRotationZ & m);
   // Construct from specialized rotation.
 
-  HepRotation & set( const Hep3Vector & axis, double delta );
-  HepRotation      ( const Hep3Vector & axis, double delta );
+  HepRotation & set( const Hep3Vector & axis, G4double delta );
+  HepRotation      ( const Hep3Vector & axis, G4double delta );
   // Construct from axis and angle.
 
   HepRotation & set( const HepAxisAngle & ax );
   HepRotation      ( const HepAxisAngle & ax );
   // Construct from AxisAngle structure.
 
-  HepRotation & set( double phi, double theta, double psi );
-  HepRotation      ( double phi, double theta, double psi );
+  HepRotation & set( G4double phi, G4double theta, G4double psi );
+  HepRotation      ( G4double phi, G4double theta, G4double psi );
   // Construct from three Euler angles (in radians).
 
   HepRotation & set( const HepEulerAngles & e );
@@ -128,15 +128,15 @@ public:
   inline Hep3Vector rowZ() const;
   // orthogonal unit-length row vectors
                                 
-  inline double xx() const;
-  inline double xy() const;
-  inline double xz() const;
-  inline double yx() const;
-  inline double yy() const;
-  inline double yz() const;
-  inline double zx() const;
-  inline double zy() const;
-  inline double zz() const;
+  inline G4double xx() const;
+  inline G4double xy() const;
+  inline G4double xz() const;
+  inline G4double yx() const;
+  inline G4double yy() const;
+  inline G4double yz() const;
+  inline G4double zx() const;
+  inline G4double zy() const;
+  inline G4double zz() const;
   // Elements of the rotation matrix (Geant4).
 
   inline HepRep3x3 rep3x3() const;
@@ -147,7 +147,7 @@ public:
   class HepRotation_row {
   public:
     inline HepRotation_row(const HepRotation &, int);
-    inline double operator [] (int) const;
+    inline G4double operator [] (int) const;
   private:
     const HepRotation & rr;
     int ii;
@@ -158,35 +158,35 @@ public:
   // Returns object of the helper class for C-style subscripting r[i][j]
   // i and j range from 0 to 2.  
 
-  double operator () (int, int) const;
+  G4double operator () (int, int) const;
   // Fortran-style subscripting: returns (i,j) element of the rotation matrix.
   // Note:  i and j still range from 0 to 2.			[Rotation.cc]
 
   // ------------  Euler angles:
-  inline  double getPhi  () const;
-  inline  double getTheta() const;
-  inline  double getPsi  () const;
-  double    phi  () const;
-  double    theta() const;
-  double    psi  () const;
+  inline  G4double getPhi  () const;
+  inline  G4double getTheta() const;
+  inline  G4double getPsi  () const;
+  G4double    phi  () const;
+  G4double    theta() const;
+  G4double    psi  () const;
   HepEulerAngles eulerAngles() const;
 
   // ------------  axis & angle of rotation:
-  inline  double  getDelta() const;
+  inline  G4double  getDelta() const;
   inline  Hep3Vector getAxis () const;
-  double     delta() const;
+  G4double     delta() const;
   Hep3Vector    axis () const;
   HepAxisAngle  axisAngle() const;
-  void getAngleAxis(double & delta, Hep3Vector & axis) const;
+  void getAngleAxis(G4double & delta, Hep3Vector & axis) const;
   // Returns the rotation angle and rotation axis (Geant4). 	[Rotation.cc]
 
   // ------------- Angles of rotated axes
-  double phiX() const;
-  double phiY() const;
-  double phiZ() const;
-  double thetaX() const;
-  double thetaY() const;
-  double thetaZ() const;
+  G4double phiX() const;
+  G4double phiY() const;
+  G4double phiZ() const;
+  G4double thetaX() const;
+  G4double thetaY() const;
+  G4double thetaZ() const;
   // Return angles (RADS) made by rotated axes against original axes (Geant4).
   //								[Rotation.cc]
 
@@ -208,15 +208,15 @@ public:
   inline HepLorentzVector row4() const;
   // Will be (0,0,0,1) for this pure Rotation.
 
-  inline double xt() const;
-  inline double yt() const;
-  inline double zt() const;
-  inline double tx() const;
-  inline double ty() const;
-  inline double tz() const;
+  inline G4double xt() const;
+  inline G4double yt() const;
+  inline G4double zt() const;
+  inline G4double tx() const;
+  inline G4double ty() const;
+  inline G4double tz() const;
   // Will be zero for this pure Rotation
 
-  inline double tt() const;
+  inline G4double tt() const;
   // Will be one for this pure Rotation
 
   inline HepRep4x4 rep4x4() const;
@@ -224,19 +224,19 @@ public:
 
   // ---------   Mutators 
 
-  void setPhi (double phi);
+  void setPhi (G4double phi);
   // change Euler angle phi, leaving theta and psi unchanged.
 
-  void setTheta (double theta);
+  void setTheta (G4double theta);
   // change Euler angle theta, leaving phi and psi unchanged.
 
-  void setPsi (double psi);
+  void setPsi (G4double psi);
   // change Euler angle psi, leaving theta and phi unchanged.
 
   void setAxis (const Hep3Vector & axis);
   // change rotation axis, leaving delta unchanged.
 
-  void setDelta (double delta);
+  void setDelta (G4double delta);
   // change angle of rotation, leaving rotation axis unchanged.
 
   // ----------  Decomposition:
@@ -261,28 +261,28 @@ public:
   inline bool operator<= ( const HepRotation & r ) const;
   inline bool operator>= ( const HepRotation & r ) const;
   
-  double distance2( const HepRotation &  r  ) const; 
+  G4double distance2( const HepRotation &  r  ) const; 
   // 3 - Tr ( this/r ) -- This works with RotationX, Y or Z also
 
-  double howNear( const HepRotation & r ) const;
+  G4double howNear( const HepRotation & r ) const;
   bool isNear( const HepRotation & r,
-             double epsilon=Hep4RotationInterface::tolerance) const;
+             G4double epsilon=Hep4RotationInterface::tolerance) const;
 
-  double distance2( const HepBoost           & lt  ) const; 
+  G4double distance2( const HepBoost           & lt  ) const; 
   // 3 - Tr ( this ) + |b|^2 / (1-|b|^2) 
-  double distance2( const HepLorentzRotation & lt  ) const; 
+  G4double distance2( const HepLorentzRotation & lt  ) const; 
   // 3 - Tr ( this/r ) + |b|^2 / (1-|b|^2) where b is the boost vector of lt
 
-  double howNear( const HepBoost           & lt ) const;
-  double howNear( const HepLorentzRotation & lt ) const;
+  G4double howNear( const HepBoost           & lt ) const;
+  G4double howNear( const HepLorentzRotation & lt ) const;
   bool isNear( const HepBoost           & lt, 
-             double epsilon=Hep4RotationInterface::tolerance) const;
+             G4double epsilon=Hep4RotationInterface::tolerance) const;
   bool isNear( const HepLorentzRotation & lt,
-             double epsilon=Hep4RotationInterface::tolerance) const;
+             G4double epsilon=Hep4RotationInterface::tolerance) const;
 
   // ----------  Properties:
 
-  double norm2() const; 
+  G4double norm2() const; 
   // distance2 (IDENTITY), which is 3 - Tr ( *this )
 
   void rectify();
@@ -330,17 +330,17 @@ public:
   inline  HepRotation & transform   (const HepRotationZ & r);
   // Matrix multiplication by specialized matrices
 
-  HepRotation & rotateX(double delta);
+  HepRotation & rotateX(G4double delta);
   // Rotation around the x-axis; equivalent to R = RotationX(delta) * R
 
-  HepRotation & rotateY(double delta);
+  HepRotation & rotateY(G4double delta);
   // Rotation around the y-axis; equivalent to R = RotationY(delta) * R
 
-  HepRotation & rotateZ(double delta);
+  HepRotation & rotateZ(G4double delta);
   // Rotation around the z-axis; equivalent to R = RotationZ(delta) * R
 
-         HepRotation & rotate(double delta, const Hep3Vector & axis);
-  inline HepRotation & rotate(double delta, const Hep3Vector * axis);
+         HepRotation & rotate(G4double delta, const Hep3Vector & axis);
+  inline HepRotation & rotate(G4double delta, const Hep3Vector * axis);
   // Rotation around a specified vector.  
   // r.rotate(d,a) is equivalent to r = Rotation(d,a) * r
 
@@ -367,14 +367,14 @@ public:
 
   // ---------- Tolerance
 
-  static inline double getTolerance();
-  static inline double setTolerance(double tol); 
+  static inline G4double getTolerance();
+  static inline G4double setTolerance(G4double tol); 
 
 protected:
 
-  inline HepRotation(double mxx, double mxy, double mxz, 
-		     double myx, double myy, double myz,
-		     double mzx, double mzy, double mzz);
+  inline HepRotation(G4double mxx, G4double mxy, G4double mxz, 
+		     G4double myx, G4double myy, G4double myz,
+		     G4double mzx, G4double mzy, G4double mzz);
   // Protected constructor.  
   // DOES NOT CHECK FOR VALIDITY AS A ROTATION.
 
@@ -382,7 +382,7 @@ protected:
   friend HepRotation operator* (const HepRotationY & ry, const HepRotation & r);
   friend HepRotation operator* (const HepRotationZ & rz, const HepRotation & r);
 
-  double rxx, rxy, rxz, 
+  G4double rxx, rxy, rxz, 
 	    ryx, ryy, ryz, 
 	    rzx, rzy, rzz;
   // The matrix elements.
@@ -392,7 +392,7 @@ private:
        setCols ( const Hep3Vector & u1,	// Vectors assume to be of unit length 
                  const Hep3Vector & u2,
                  const Hep3Vector & u3,
-                 double u1u2,
+                 G4double u1u2,
                  Hep3Vector & v1,		// Returned vectors
                  Hep3Vector & v2,
                  Hep3Vector & v3 ) const;

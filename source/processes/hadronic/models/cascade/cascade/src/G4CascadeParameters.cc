@@ -37,7 +37,7 @@
 // 20141111  M. Kelsey -- Revert defaults for PreCompound, phase-space,
 //		and trailing effect.
 // 20141121  Use G4AutoDelete to avoid end-of-thread memory leaks
-// 20141211  M. Kelsey -- Change PIN_ABSORPTION flag to double, for energy cut
+// 20141211  M. Kelsey -- Change PIN_ABSORPTION flag to G4double, for energy cut
 
 #include "G4CascadeParameters.hh"
 #include "G4CascadeParamMessenger.hh"

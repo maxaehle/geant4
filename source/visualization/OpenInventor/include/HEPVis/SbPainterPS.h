@@ -43,9 +43,9 @@ public:
   SbPainterPS();
   ~SbPainterPS();
   void beginTraversal();
-  void clearColorBuffer(float,float,float);
+  void clearColorBuffer(G4float,G4float,G4float);
   //void drawPrimitive(SbPrimitiveType,
-  //                   int,float*,float*,float*,
+  //                   int,G4float*,G4float*,G4float*,
   //                   const SbPainterContext&);
   void endTraversal();
 public:
@@ -59,37 +59,37 @@ public:
   const char* getFileName() const;
   void openFileForWriting(const char*);
   void closeStream();
-  void putPageScaleInStream(float,float);
+  void putPageScaleInStream(G4float,G4float);
   void putSaveStateInStream();
   void putRestoreStateInStream();
-  void putTranslationInStream(float,float);
-  void putScaleInStream(float,float);
+  void putTranslationInStream(G4float,G4float);
+  void putScaleInStream(G4float,G4float);
   void putBeginPageInStream();
   void putEndPageInStream();
-  void putRGB_InStream(float,float,float);
-  void putMarkerSizeInStream(float);
+  void putRGB_InStream(G4float,G4float,G4float);
+  void putMarkerSizeInStream(G4float);
   //void putMarkerStyleInStream(SbMarkerStyle);
-  void putBackgroundInStream(float,float,float,float,float);
-  void putFrameInStream(float,float,float,float,float);
-  void putRotateInStream(float);
+  void putBackgroundInStream(G4float,G4float,G4float,G4float,G4float);
+  void putFrameInStream(G4float,G4float,G4float,G4float,G4float);
+  void putRotateInStream(G4float);
   void putNewPathInStream();
   void putStrokeInStream();
   void putFillInStream();
   void putClosePathInStream();
   void putCapInStream(int);
-  void putLineToInStream(float,float);
-  void putMoveInStream(float,float);
-  void putCircleInStream(float,float,float);
+  void putLineToInStream(G4float,G4float);
+  void putMoveInStream(G4float,G4float);
+  void putCircleInStream(G4float,G4float,G4float);
   void putLineWidthInStream(int);
   //void putLineStyleInStream(SbLineStyle);
   typedef int(*GetRGB_Function)(unsigned int,unsigned int,
-                                double&,double&,double&);
+                                G4double&,G4double&,G4double&);
   void putImageInStream(unsigned int,unsigned int,GetRGB_Function);
 private:
-  //void drawPolygon(int,float*,float*,float,float,float,const SbAreaStyle&);
-  //void drawLines(int,float*,float*,float,float,float,const SbLineStyle&,int);
-  //void drawMarkers(int,float*,float*,
-  //                 float,float,float,const SbMarkerStyle&,int);
+  //void drawPolygon(int,G4float*,G4float*,G4float,G4float,G4float,const SbAreaStyle&);
+  //void drawLines(int,G4float*,G4float*,G4float,G4float,G4float,const SbLineStyle&,int);
+  //void drawMarkers(int,G4float*,G4float*,
+  //                 G4float,G4float,G4float,const SbMarkerStyle&,int);
   enum ColorScheme {
     Color = 0,
     Grey = 1,
@@ -100,12 +100,12 @@ private:
     int portrait;
     int nbit;
     int doBack;
-    float lineWidth;
+    G4float lineWidth;
   } fParams;
-  float fDeviceWidth;
-  float fDeviceHeight;
+  G4float fDeviceWidth;
+  G4float fDeviceHeight;
   int fPageNumber;
-  float fMarkerSize;
+  G4float fMarkerSize;
   FILE* fFile;
   char* fFileName;
   int fGSave;
@@ -117,7 +117,7 @@ private:
   void putInStreamF(const char*,...);
   void printFLN(const char*,...);
   void printV(const char*,va_list);
-  float convertRGB_ToGrey(float,float,float);
+  G4float convertRGB_ToGrey(G4float,G4float,G4float);
   void writeByte(unsigned char);
 };
 

@@ -136,7 +136,7 @@ void ScoreSpecies::EndOfEvent(G4HCofThisEvent*)
   {
     for(auto time_mol: fTimeToRecord)
     {
-      double n_mol =
+      G4double n_mol =
           G4MoleculeCounter::Instance()->GetNMoleculesAtTime(molecule,
                                                              time_mol);
 
@@ -148,7 +148,7 @@ void ScoreSpecies::EndOfEvent(G4HCofThisEvent*)
 
       SpeciesInfo& molInfo = fSpeciesInfoPerTime[time_mol][molecule];
       molInfo.fNumber += n_mol;
-      double gValue = (n_mol/(fEdep/eV)) * 100.;
+      G4double gValue = (n_mol/(fEdep/eV)) * 100.;
       molInfo.fG += gValue;
       molInfo.fG2 += gValue*gValue;
     }

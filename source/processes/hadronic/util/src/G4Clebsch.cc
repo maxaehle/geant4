@@ -346,7 +346,7 @@ G4double G4Clebsch::Wigner3J(G4double j1, G4double j2, G4double j3,
 			     G4double m1, G4double m2, G4double m3)
 {
   //  G4Exception("G4Clebsch::Wigner3J()", "Clebsch030", JustWarning, 
-  //  "G4Clebsch::Wigner3J with double arguments is deprecated. Please use G4int version.");
+  //  "G4Clebsch::Wigner3J with G4double arguments is deprecated. Please use G4int version.");
   G4int twoJ1 = (G4int) (2.*j1);
   G4int twoJ2 = (G4int) (2.*j2);
   G4int twoJ3 = (G4int) (2.*j3);
@@ -410,7 +410,7 @@ G4double G4Clebsch::TriangleCoeff(G4int twoA, G4int twoB, G4int twoC)
   // return 0 if the triad does not satisfy the triangle inequalities
   G4Pow* g4pow =  G4Pow::GetInstance();
 
-  double val = 0;
+  G4double val = 0;
   G4int i = twoA+twoB-twoC;
   // only have to check that i is even the first time
   if(i<0 || (i%2)) return 0;
@@ -455,7 +455,7 @@ G4double G4Clebsch::Wigner6J(G4int twoJ1, G4int twoJ2, G4int twoJ3,
   // Check triangle inequalities and calculate triangle coefficients.
   // Also check evenness of sums
   G4Pow* g4pow =  G4Pow::GetInstance();
-  double triangles = 0;
+  G4double triangles = 0;
   G4int i;
   i =  twoJ1+twoJ2-twoJ3;   if(i<0 || i%2) return 0; else triangles += g4pow->logfactorial(i/2);
   i =  twoJ1-twoJ2+twoJ3;   if(i<0 || i%2) return 0; else triangles += g4pow->logfactorial(i/2);

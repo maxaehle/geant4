@@ -62,7 +62,7 @@ class G4LocatorChangeRecord
 
     // No set methods -> create a new record for each entry (more reliable)
     // void SetLocation( EChangeLocation loc ) { fCodeLocation= loc; }
-    // void SetLength( double len ) { fLength= len; }
+    // void SetLength( G4double len ) { fLength= len; }
     // void SetCount( int cnt ) {  fEventCount= cnt; }
     // void SetIteration( int iter ) {  fIteration= iter; }
 

@@ -120,7 +120,7 @@ public:
 
   void RecordCurrentPositionNTime();
   const G4ThreeVector& GetPosition() const;
-  double operator[](int i) const;
+  G4double operator[](int i) const;
   const G4ThreeVector& GetPreStepPosition() const;
   G4double GetPreStepLocalTime() const;
   G4double GetPreStepGlobalTime() const;

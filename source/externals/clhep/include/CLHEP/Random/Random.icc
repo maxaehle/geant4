@@ -16,13 +16,13 @@
 
 namespace CLHEP {
 
-inline double HepRandom::flat(HepRandomEngine* theNewEngine)
+inline G4double HepRandom::flat(HepRandomEngine* theNewEngine)
 {
   return theNewEngine->flat();
 }
 
 inline void HepRandom::flatArray(HepRandomEngine* theNewEngine, 
-                                 const int size, double* vect)
+                                 const int size, G4double* vect)
 {
   theNewEngine->flatArray(size,vect);
 }

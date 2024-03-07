@@ -137,7 +137,7 @@ void EventAction::WriteFibers(const G4Event* evt)
   
   std::ofstream File(fileName, std::ios::app);
   std::ios::fmtflags mode = File.flags();  
-  File.setf( std::ios::scientific, std::ios::floatfield );
+  File.setf( std::ios::scientific, std::ios::G4floatfield );
   G4int prec = File.precision(3);
     
   //write event number  
@@ -167,7 +167,7 @@ void EventAction::WriteFibers(const G4Event* evt)
   File << G4endl;
     
   // restaure default formats
-  File.setf(mode,std::ios::floatfield);
+  File.setf(mode,std::ios::G4floatfield);
   File.precision(prec);         
 }
 

@@ -220,7 +220,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event *anEvent) {
     }
     // Particle momentum
     if (fMomentumGaussianSpread > 0) {
-      double energy = fParticleGun->GetParticleEnergy();
+      G4double energy = fParticleGun->GetParticleEnergy();
       energy += G4RandGauss::shoot(0., fMomentumGaussianSpread) * energy;
       fParticleGun->SetParticleEnergy(energy);
     }

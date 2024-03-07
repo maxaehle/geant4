@@ -4,7 +4,7 @@
 */
 
 #include <cmath>
-#include <float.h>
+#include <G4float.h>
 
 #include "ptwXY.h"
 
@@ -16,19 +16,19 @@ namespace GIDI {
 using namespace GIDI;
 #endif
 
-static nfu_status ptwXY_clip2( ptwXYPoints *ptwXY1, double y, double x1, double y1, double x2, double y2 );
-static double ptwXY_thicken_linear_dx( int sectionSubdivideMax, double dxMax, double x1, double x2 );
-static nfu_status ptwXY_thin2( ptwXYPoints *thinned, char *thin, double accuracy, int64_t i1, int64_t i2 );
+static nfu_status ptwXY_clip2( ptwXYPoints *ptwXY1, G4double y, G4double x1, G4double y1, G4double x2, G4double y2 );
+static G4double ptwXY_thicken_linear_dx( int sectionSubdivideMax, G4double dxMax, G4double x1, G4double x2 );
+static nfu_status ptwXY_thin2( ptwXYPoints *thinned, char *thin, G4double accuracy, int64_t i1, int64_t i2 );
 /*
 ************************************************************
 */
-nfu_status ptwXY_clip( ptwXYPoints *ptwXY1, double yMin, double yMax ) {
+nfu_status ptwXY_clip( ptwXYPoints *ptwXY1, G4double yMin, G4double yMax ) {
 /*
     This function acts oddly for xy = [ [ 1, 0 ], [ 3, -2 ], [ 4, 1 ] ] and yMin = 0.2, why???????
     This function probably only works for linear, linear interpolation (mainly because of ptwXY_clip2).
 */
     int64_t i, j, n;
-    double x2, y2;
+    G4double x2, y2;
     nfu_status status;
     ptwXYPoints *clipped;
     ptwXYPoint *points;
@@ -123,9 +123,9 @@ Err:
 /*
 ************************************************************
 */
-static nfu_status ptwXY_clip2( ptwXYPoints *clipped, double y, double x1, double y1, double x2, double y2 ) {
+static nfu_status ptwXY_clip2( ptwXYPoints *clipped, G4double y, G4double x1, G4double y1, G4double x2, G4double y2 ) {
 
-    double x;
+    G4double x;
     nfu_status status = nfu_Okay;
 
     x = ( y - y1 ) * ( x2 - x1 ) / ( y2 - y1 ) + x1;
@@ -141,9 +141,9 @@ static nfu_status ptwXY_clip2( ptwXYPoints *clipped, double y, double x1, double
 /*
 ************************************************************
 */
-nfu_status ptwXY_thicken( ptwXYPoints *ptwXY1, int sectionSubdivideMax, double dxMax, double fxMax ) {
+nfu_status ptwXY_thicken( ptwXYPoints *ptwXY1, int sectionSubdivideMax, G4double dxMax, G4double fxMax ) {
 
-    double x1, x2 = 0., y1, y2 = 0., fx = 1.1, x, dx, dxp, lfx, y;    /* fx initialized so compilers want complain. */
+    G4double x1, x2 = 0., y1, y2 = 0., fx = 1.1, x, dx, dxp, lfx, y;    /* fx initialized so compilers want complain. */
     int64_t i, notFirstPass = 0;
     int nfx, nDone, doLinear;
     nfu_status status;
@@ -208,11 +208,11 @@ nfu_status ptwXY_thicken( ptwXYPoints *ptwXY1, int sectionSubdivideMax, double d
 /*
 ************************************************************
 */
-ptwXYPoints *ptwXY_thin( ptwXYPoints *ptwXY1, double accuracy, nfu_status *status ) {
+ptwXYPoints *ptwXY_thin( ptwXYPoints *ptwXY1, G4double accuracy, nfu_status *status ) {
 
     int64_t i, j, length = ptwXY1->length;
     ptwXYPoints *thinned = NULL;
-    double y1, y2, y3;
+    G4double y1, y2, y3;
     char *thin = NULL;
 
     if( length < 3 ) return( ptwXY_clone( ptwXY1, status ) );   /* Logic below requires at least 2 points. */
@@ -261,11 +261,11 @@ Err:
 /*
 ************************************************************
 */
-static nfu_status ptwXY_thin2( ptwXYPoints *thinned, char *thin, double accuracy, int64_t i1, int64_t i2 ) {
+static nfu_status ptwXY_thin2( ptwXYPoints *thinned, char *thin, G4double accuracy, int64_t i1, int64_t i2 ) {
 
     int64_t i, iMax = 0;
-    double y, s, dY, dYMax = 0., dYR, dYRMax = 0;
-    double x1 = thinned->points[i1].x, y1 = thinned->points[i1].y, x2 = thinned->points[i2].x, y2 = thinned->points[i2].y;
+    G4double y, s, dY, dYMax = 0., dYR, dYRMax = 0;
+    G4double x1 = thinned->points[i1].x, y1 = thinned->points[i1].y, x2 = thinned->points[i2].x, y2 = thinned->points[i2].y;
     nfu_status status = nfu_Okay;
 
     if( i1 + 1 >= i2 ) return( nfu_Okay );
@@ -292,10 +292,10 @@ static nfu_status ptwXY_thin2( ptwXYPoints *thinned, char *thin, double accuracy
 /*
 ************************************************************
 */
-static double ptwXY_thicken_linear_dx( int sectionSubdivideMax, double dxMax, double x1, double x2 ) {
+static G4double ptwXY_thicken_linear_dx( int sectionSubdivideMax, G4double dxMax, G4double x1, G4double x2 ) {
 
     int ndx;
-    double dx = x2 - x1, dndx;
+    G4double dx = x2 - x1, dndx;
 
     if( dxMax == 0. ) {
         dx = ( x2 - x1 ) / sectionSubdivideMax; }
@@ -351,7 +351,7 @@ ptwXYPoints *ptwXY_union( ptwXYPoints *ptwXY1, ptwXYPoints *ptwXY2, nfu_status *
     int64_t overflowSize, i, i1 = 0, i2 = 0, n1 = ptwXY1->length, n2 = ptwXY2->length, length;
     int fillWithFirst = unionOptions & ptwXY_union_fill, trim = unionOptions & ptwXY_union_trim;
     ptwXYPoints *n;
-    double x1 = 0., x2 = 0., y1 = 0., y2 = 0., y, biSectionMax, accuracy;
+    G4double x1 = 0., x2 = 0., y1 = 0., y2 = 0., y, biSectionMax, accuracy;
 
     if( ( *status = ptwXY1->status ) != nfu_Okay ) return( NULL );
     if( ( *status = ptwXY2->status ) != nfu_Okay ) return( NULL );
@@ -478,7 +478,7 @@ ptwXYPoints *ptwXY_union( ptwXYPoints *ptwXY1, ptwXYPoints *ptwXY2, nfu_status *
 /*
 ************************************************************
 */
-nfu_status ptwXY_scaleOffsetXAndY( ptwXYPoints *ptwXY, double xScale, double xOffset, double yScale, double yOffset ) {
+nfu_status ptwXY_scaleOffsetXAndY( ptwXYPoints *ptwXY, G4double xScale, G4double xOffset, G4double yScale, G4double yOffset ) {
 
     int64_t i1, length = ptwXY->length;
     ptwXYPoint *p1;

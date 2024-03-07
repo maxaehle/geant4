@@ -170,8 +170,8 @@ private:
   //
   //! help with trigonometry.  increments sines an cosines by an angle.
   //
-  void inc(double & sinPhi, double & cosPhi, double sinDeltaPhi, double cosDeltaPhi) const {
-    double oldSin=sinPhi,oldCos=cosPhi;
+  void inc(G4double & sinPhi, G4double & cosPhi, G4double sinDeltaPhi, G4double cosDeltaPhi) const {
+    G4double oldSin=sinPhi,oldCos=cosPhi;
     sinPhi = oldSin*cosDeltaPhi+oldCos*sinDeltaPhi;
     cosPhi = oldCos*cosDeltaPhi-oldSin*sinDeltaPhi;    
   }

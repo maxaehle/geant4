@@ -61,7 +61,7 @@ G4Ions::G4Ions(
 			  shortlived, subType, anti_encoding),
     theExcitationEnergy(excitation),
     theIsomerLevel(isomer),
-    floatLevelBase(G4FloatLevelBase::no_Float)
+    G4floatLevelBase(G4FloatLevelBase::no_Float)
 {
    if ((aName == "proton") || (aName == "neutron")) { 
      isGeneralIon = false ;
@@ -78,8 +78,8 @@ G4Ions::G4Ions(
    } else if ( aName == "hypertriton" || aName == "anti_hypertriton" ||
                aName == "hyperalpha" || aName == "anti_hyperalpha" ||
                aName == "hyperH4" || aName == "anti_hyperH4" ||
-               aName == "doublehyperH4" || aName == "anti_doublehyperH4" ||
-               aName == "doublehyperdoubleneutron" || aName == "anti_doublehyperdoubleneutron" ||
+               aName == "G4doublehyperH4" || aName == "anti_G4doublehyperH4" ||
+               aName == "G4doublehyperG4doubleneutron" || aName == "anti_G4doublehyperG4doubleneutron" ||
                aName == "hyperHe5" || aName == "anti_hyperHe5" ) {
      isGeneralIon = false;
    } else {

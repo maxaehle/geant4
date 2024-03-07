@@ -57,7 +57,7 @@ class G4TExplicitEuler
   : public G4TMagErrorStepper<G4TExplicitEuler<T_Equation, N>, T_Equation, N>
 {
  public:  // with description
-  static constexpr double IntegratorCorrection = 1.;
+  static constexpr G4double IntegratorCorrection = 1.;
 
   G4TExplicitEuler(T_Equation* EqRhs, G4int numberOfVariables = N)
     : G4TMagErrorStepper<G4TExplicitEuler<T_Equation, N>, T_Equation, N>(

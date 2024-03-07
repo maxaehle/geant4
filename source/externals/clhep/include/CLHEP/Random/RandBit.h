@@ -7,9 +7,9 @@
 // -----------------------------------------------------------------------
 // 
 
-// Class defining methods for shooting Flat or Bit random numbers, double or
+// Class defining methods for shooting Flat or Bit random numbers, G4double or
 // integers.
-// It provides methods to fill with double flat values arrays of
+// It provides methods to fill with G4double flat values arrays of
 // specified size, as well as methods for shooting sequences of 0,1 (bits).
 // Default boundaries ]0.1[ for operator()().
 
@@ -40,11 +40,11 @@ class RandBit : public RandFlat {
 public:
 
   inline RandBit ( HepRandomEngine& anEngine );
-  inline RandBit ( HepRandomEngine& anEngine, double width );
-  inline RandBit ( HepRandomEngine& anEngine, double a, double b );
+  inline RandBit ( HepRandomEngine& anEngine, G4double width );
+  inline RandBit ( HepRandomEngine& anEngine, G4double a, G4double b );
   inline RandBit ( HepRandomEngine* anEngine );
-  inline RandBit ( HepRandomEngine* anEngine, double width );
-  inline RandBit ( HepRandomEngine* anEngine, double a, double b );
+  inline RandBit ( HepRandomEngine* anEngine, G4double width );
+  inline RandBit ( HepRandomEngine* anEngine, G4double a, G4double b );
   // These constructors should be used to instantiate a RandBit
   // distribution object defining a local engine for it.
   // The static generator will be skipped using the non-static methods

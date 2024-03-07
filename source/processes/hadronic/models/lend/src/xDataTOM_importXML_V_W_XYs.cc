@@ -58,7 +58,7 @@ err:
 static int xDataXML_V_W_XYs_W_XYsToTOM( statusMessageReporting *smr, xDataXML_element *XE, xDataTOM_W_XYs *W_XYs, xDataTOM_axes *axes ) {
 
     int index;
-    double value;
+    G4double value;
 
     if( xDataXML_convertAttributeTo_xDataTOM_Int( smr, XE, "index", &index, 1 ) != 0 ) return( 1 );
     if( xDataXML_convertAttributeToDouble( smr, XE, "value", &value, 1 ) != 0 ) return( 1 );

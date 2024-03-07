@@ -49,7 +49,7 @@
 class G4PolynomialPDF
 {
   public:
-    G4PolynomialPDF(size_t n = 0, const double* coeffs = nullptr, 
+    G4PolynomialPDF(size_t n = 0, const G4double* coeffs = nullptr, 
 		    G4double x1=0, G4double x2=1);
 
     ~G4PolynomialPDF();

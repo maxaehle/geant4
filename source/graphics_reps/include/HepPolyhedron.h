@@ -122,7 +122,7 @@
 // - added GetNextVertexIndex, GetVertex by Yasuhide Sawada
 // - added GetNextUnitNormal, GetNextEdgeIndices, GetNextEdge
 // - improvements: angles now expected in radians
-//                 int -> G4int, double -> G4double
+//                 int -> G4int, G4double -> G4double
 // - G4ThreeVector replaced by either G4Point3D or G4Normal3D
 //
 // 15.12.96 E.Chernyaev

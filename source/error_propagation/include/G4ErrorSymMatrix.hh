@@ -84,10 +84,10 @@ class G4ErrorSymMatrix
   // Another form of assignment. For consistency.
 
   G4ErrorSymMatrix& operator*=(G4double t);
-  // Multiply a G4ErrorSymMatrix by a floating number.
+  // Multiply a G4ErrorSymMatrix by a G4floating number.
 
   G4ErrorSymMatrix& operator/=(G4double t);
-  // Divide a G4ErrorSymMatrix by a floating number.
+  // Divide a G4ErrorSymMatrix by a G4floating number.
 
   G4ErrorSymMatrix& operator+=(const G4ErrorSymMatrix& m2);
   G4ErrorSymMatrix& operator-=(const G4ErrorSymMatrix& m2);

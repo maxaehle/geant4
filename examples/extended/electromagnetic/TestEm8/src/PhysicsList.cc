@@ -84,7 +84,7 @@
 PhysicsList::PhysicsList(DetectorConstruction* ptr) 
   : G4VModularPhysicsList(), fDetectorConstruction(ptr)
 {
-  // set verbosity for zero to avoid double printout 
+  // set verbosity for zero to avoid G4double printout 
   // on physics verbosity should be restored to 1 when cuts
   // are set
   G4EmParameters::Instance()->SetVerbose(0);

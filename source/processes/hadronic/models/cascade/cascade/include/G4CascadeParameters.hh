@@ -32,7 +32,7 @@
 // 20130702  M. Kelsey -- Add flag to use N-body phase-space generator
 // 20140311  G. Cosmo -- Implement standard (non-const) singleton pattern
 // 20141030  M. Kelsey -- Add flag to enable direct pi-N absorption
-// 20141211  M. Kelsey -- Change PIN_ABSORPTION flag to double, for energy cut
+// 20141211  M. Kelsey -- Change PIN_ABSORPTION flag to G4double, for energy cut
 
 #ifndef G4CascadeParameters_hh
 #define G4CascadeParameters_hh 1

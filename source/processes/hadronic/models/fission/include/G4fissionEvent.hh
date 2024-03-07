@@ -84,7 +84,7 @@ class G4fissionEvent {
       static G4int Cf252ndistoption;
       static G4int Cf252nengoption;
       static G4double (*rngdptr)(void);
-      static float (*rngfptr)(void);
+      static G4float (*rngfptr)(void);
 
    public:
       // These are all the methods of this class accessible to the caller of the object 
@@ -157,7 +157,7 @@ class G4fissionEvent {
          Cf252ndistoption = ndist;
          Cf252nengoption = neng;
       };
-      static void setRNGf(float (*funcptr) (void)) {
+      static void setRNGf(G4float (*funcptr) (void)) {
          rngfptr = funcptr;
          rngdptr = rngf2d;
       }

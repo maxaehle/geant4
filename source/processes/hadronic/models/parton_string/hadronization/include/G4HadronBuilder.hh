@@ -51,8 +51,8 @@ class G4HadronBuilder
 
      //  ctor
      G4HadronBuilder(G4double mesonMix, G4double barionMix,
-		     std::vector<double> scalarMesonMix,
-		     std::vector<double> vectorMesonMix,
+		     std::vector<G4double> scalarMesonMix,
+		     std::vector<G4double> vectorMesonMix,
                      G4double Eta_cProb, G4double Eta_bProb);
 
   private:
@@ -66,8 +66,8 @@ class G4HadronBuilder
      
      G4double mesonSpinMix;
      G4double barionSpinMix;
-     std::vector<double> scalarMesonMixings;
-     std::vector<double> vectorMesonMixings;
+     std::vector<G4double> scalarMesonMixings;
+     std::vector<G4double> vectorMesonMixings;
      
      G4double ProbEta_c, ProbEta_b;
 };

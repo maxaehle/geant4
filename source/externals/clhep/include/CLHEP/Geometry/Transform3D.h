@@ -169,22 +169,22 @@ namespace HepGeom {
    */
   class Transform3D {
   protected:
-    double xx_, xy_, xz_, dx_,     // 4x3  Transformation Matrix
+    G4double xx_, xy_, xz_, dx_,     // 4x3  Transformation Matrix
            yx_, yy_, yz_, dy_,
            zx_, zy_, zz_, dz_;
 
     // Protected constructor
-    Transform3D(double XX, double XY, double XZ, double DX,
-		double YX, double YY, double YZ, double DY,
-		double ZX, double ZY, double ZZ, double DZ)
+    Transform3D(G4double XX, G4double XY, G4double XZ, G4double DX,
+		G4double YX, G4double YY, G4double YZ, G4double DY,
+		G4double ZX, G4double ZY, G4double ZZ, G4double DZ)
       : xx_(XX), xy_(XY), xz_(XZ), dx_(DX),
 	yx_(YX), yy_(YY), yz_(YZ), dy_(DY),
 	zx_(ZX), zy_(ZY), zz_(ZZ), dz_(DZ) {}
 
     // Set transformation matrix
-    void setTransform(double XX, double XY, double XZ, double DX,
-		      double YX, double YY, double YZ, double DY,
-		      double ZX, double ZY, double ZZ, double DZ) {
+    void setTransform(G4double XX, G4double XY, G4double XZ, G4double DX,
+		      G4double YX, G4double YY, G4double YZ, G4double DY,
+		      G4double ZX, G4double ZY, G4double ZZ, G4double DZ) {
       xx_ = XX; xy_ = XY; xz_ = XZ; dx_ = DX;
       yx_ = YX; yy_ = YY; yz_ = YZ; dy_ = DY;
       zx_ = ZX; zy_ = ZY; zz_ = ZZ; dz_ = DZ;
@@ -199,7 +199,7 @@ namespace HepGeom {
     class Transform3D_row {
     public:
       inline Transform3D_row(const Transform3D &, int);
-      inline double operator [] (int) const;
+      inline G4double operator [] (int) const;
     private:
       const Transform3D & rr;
       int ii;
@@ -218,12 +218,12 @@ namespace HepGeom {
 
     /**
      * Constructor: transformation of basis (assumed - no reflection). */
-    Transform3D(const Point3D<double> & fr0,
-		const Point3D<double> & fr1,
-		const Point3D<double> & fr2,
-		const Point3D<double> & to0,
-		const Point3D<double> & to1,
-		const Point3D<double> & to2);
+    Transform3D(const Point3D<G4double> & fr0,
+		const Point3D<G4double> & fr1,
+		const Point3D<G4double> & fr2,
+		const Point3D<G4double> & to0,
+		const Point3D<G4double> & to1,
+		const Point3D<G4double> & to2);
 
     /**
      * Copy constructor. */
@@ -250,44 +250,44 @@ namespace HepGeom {
     inline const Transform3D_row operator [] (int) const;
 
     /** Fortran-style subscripting: returns (i,j) element of the matrix. */
-    double operator () (int, int) const;
+    G4double operator () (int, int) const;
 
     /**
      * Gets xx-element of the transformation matrix. */
-    double xx() const { return xx_; }
+    G4double xx() const { return xx_; }
     /**
      * Gets xy-element of the transformation matrix. */
-    double xy() const { return xy_; }
+    G4double xy() const { return xy_; }
     /**
      * Gets xz-element of the transformation matrix. */
-    double xz() const { return xz_; }
+    G4double xz() const { return xz_; }
     /**
      * Gets yx-element of the transformation matrix. */
-    double yx() const { return yx_; }
+    G4double yx() const { return yx_; }
     /**
      * Gets yy-element of the transformation matrix. */
-    double yy() const { return yy_; }
+    G4double yy() const { return yy_; }
     /**
      * Gets yz-element of the transformation matrix. */
-    double yz() const { return yz_; }
+    G4double yz() const { return yz_; }
     /**
      * Gets zx-element of the transformation matrix. */
-    double zx() const { return zx_; }
+    G4double zx() const { return zx_; }
     /**
      * Gets zy-element of the transformation matrix. */
-    double zy() const { return zy_; }
+    G4double zy() const { return zy_; }
     /**
      * Gets zz-element of the transformation matrix. */
-    double zz() const { return zz_; }
+    G4double zz() const { return zz_; }
     /**
      * Gets dx-element of the transformation matrix. */
-    double dx() const { return dx_; }
+    G4double dx() const { return dx_; }
     /**
      * Gets dy-element of the transformation matrix. */
-    double dy() const { return dy_; }
+    G4double dy() const { return dy_; }
     /**
      * Gets dz-element of the transformation matrix. */
-    double dz() const { return dz_; }
+    G4double dz() const { return dz_; }
 
     /**
      * Sets the Identity transformation. */
@@ -326,7 +326,7 @@ namespace HepGeom {
      * Returns true if the difference between corresponding
      * matrix elements is less than the tolerance.
      */
-    bool isNear(const Transform3D & t, double tolerance = 2.2E-14 ) const;
+    bool isNear(const Transform3D & t, G4double tolerance = 2.2E-14 ) const;
 
     /**
      * Extracts the rotation matrix.
@@ -383,16 +383,16 @@ namespace HepGeom {
      * @param p1 begin point of the axis
      * @param p2 end point of the axis
      */
-    Rotate3D(double a,
-	     const Point3D<double> & p1,
-	     const Point3D<double> & p2);
+    Rotate3D(G4double a,
+	     const Point3D<G4double> & p1,
+	     const Point3D<G4double> & p2);
 
     /**
      * Constructor from angle and axis.
      * @param a angle of rotation
      * @param v axis of rotation
      */
-    inline Rotate3D(double a, const Vector3D<double> & v);
+    inline Rotate3D(G4double a, const Vector3D<G4double> & v);
 
     /**
      * Constructor for rotation given by original and rotated position of
@@ -402,10 +402,10 @@ namespace HepGeom {
      * @param to1 rotated position of 1st point
      * @param to2 rotated position of 2nd point
      */
-    inline Rotate3D(const Point3D<double> & fr1,
-		    const Point3D<double> & fr2,
-		    const Point3D<double> & to1,
-		    const Point3D<double> & to2);
+    inline Rotate3D(const Point3D<G4double> & fr1,
+		    const Point3D<G4double> & fr2,
+		    const Point3D<G4double> & to1,
+		    const Point3D<G4double> & to2);
   };
 
   /**
@@ -430,8 +430,8 @@ namespace HepGeom {
 
     /**
      * Constructs a rotation around x-axis by angle a. */
-    RotateX3D(double a) {
-      double cosa = std::cos(a), sina = std::sin(a);
+    RotateX3D(G4double a) {
+      G4double cosa = std::cos(a), sina = std::sin(a);
       setTransform(1,0,0,0,  0,cosa,-sina,0,  0,sina,cosa,0);
     }
   };
@@ -458,8 +458,8 @@ namespace HepGeom {
 
     /**
      * Constructs a rotation around y-axis by angle a. */
-    RotateY3D(double a) {
-      double cosa = std::cos(a), sina = std::sin(a);
+    RotateY3D(G4double a) {
+      G4double cosa = std::cos(a), sina = std::sin(a);
       setTransform(cosa,0,sina,0,  0,1,0,0,  -sina,0,cosa,0);
     }
   };
@@ -486,8 +486,8 @@ namespace HepGeom {
 
     /**
      * Constructs a rotation around z-axis by angle a. */
-    RotateZ3D(double a) {
-      double cosa = std::cos(a), sina = std::sin(a);
+    RotateZ3D(G4double a) {
+      G4double cosa = std::cos(a), sina = std::sin(a);
       setTransform(cosa,-sina,0,0,  sina,cosa,0,0,  0,0,1,0);
     }
   };
@@ -520,7 +520,7 @@ namespace HepGeom {
 
     /**
      * Constructor from three numbers. */
-    Translate3D(double x, double y, double z)
+    Translate3D(G4double x, G4double y, G4double z)
       : Transform3D(1,0,0,x, 0,1,0,y, 0,0,1,z) {}
   };
 
@@ -546,7 +546,7 @@ namespace HepGeom {
 
     /**
      * Constructor from a number. */
-    TranslateX3D(double x) : Translate3D(x, 0, 0) {}
+    TranslateX3D(G4double x) : Translate3D(x, 0, 0) {}
   };
 
   /**
@@ -571,7 +571,7 @@ namespace HepGeom {
 
     /**
      * Constructor from a number. */
-    TranslateY3D(double y) : Translate3D(0, y, 0) {}
+    TranslateY3D(G4double y) : Translate3D(0, y, 0) {}
   };
 
   /**
@@ -596,7 +596,7 @@ namespace HepGeom {
 
     /**
      * Constructor from a number. */
-    TranslateZ3D(double z) : Translate3D(0, 0, z) {}
+    TranslateZ3D(G4double z) : Translate3D(0, 0, z) {}
   };
 
   //   R E F L E C T I O N S
@@ -617,9 +617,9 @@ namespace HepGeom {
    */
   class Reflect3D : public Transform3D {
   protected:
-    Reflect3D(double XX, double XY, double XZ, double DX,
-              double YX, double YY, double YZ, double DY,
-              double ZX, double ZY, double ZZ, double DZ)
+    Reflect3D(G4double XX, G4double XY, G4double XZ, G4double DX,
+              G4double YX, G4double YY, G4double YZ, G4double DY,
+              G4double ZX, G4double ZY, G4double ZZ, G4double DZ)
       : Transform3D(XX,XY,XZ,DX, YX,YY,YZ,DY, ZX,ZY,ZZ,DZ) {}
 
   public:
@@ -631,12 +631,12 @@ namespace HepGeom {
      * Constructor from four numbers.
      * Sets reflection in a plane a*x+b*y+c*z+d=0
      */
-    Reflect3D(double a, double b, double c, double d);
+    Reflect3D(G4double a, G4double b, G4double c, G4double d);
 
     /**
      * Constructor from a plane given by its normal and origin. */
-    inline Reflect3D(const Normal3D<double> & normal,
-                     const Point3D<double> & point);
+    inline Reflect3D(const Normal3D<G4double> & normal,
+                     const Point3D<G4double> & point);
   };
 
   /**
@@ -657,7 +657,7 @@ namespace HepGeom {
   public:
     /**
      * Constructor from a number. */
-    ReflectX3D(double x=0) : Reflect3D(-1,0,0,x+x, 0,1,0,0, 0,0,1,0) {}
+    ReflectX3D(G4double x=0) : Reflect3D(-1,0,0,x+x, 0,1,0,0, 0,0,1,0) {}
   };
 
   /**
@@ -678,7 +678,7 @@ namespace HepGeom {
   public:
     /**
      * Constructor from a number. */
-    ReflectY3D(double y=0) : Reflect3D(1,0,0,0, 0,-1,0,y+y, 0,0,1,0) {}
+    ReflectY3D(G4double y=0) : Reflect3D(1,0,0,0, 0,-1,0,y+y, 0,0,1,0) {}
   };
 
   /**
@@ -699,7 +699,7 @@ namespace HepGeom {
   public:
     /**
      *  Constructor from a number. */
-    ReflectZ3D(double z=0) : Reflect3D(1,0,0,0, 0,1,0,0, 0,0,-1,z+z) {}
+    ReflectZ3D(G4double z=0) : Reflect3D(1,0,0,0, 0,1,0,0, 0,0,-1,z+z) {}
   };
 
   //   S C A L I N G S
@@ -727,12 +727,12 @@ namespace HepGeom {
     /**
      * Constructor from three numbers - scale factors in different directions.
      */
-    Scale3D(double x, double y, double z)
+    Scale3D(G4double x, G4double y, G4double z)
       : Transform3D(x,0,0,0, 0,y,0,0, 0,0,z,0) {}
 
     /**
      * Constructor from a number: sets uniform scaling in all directions. */
-    Scale3D(double sc)
+    Scale3D(G4double sc)
       : Transform3D(sc,0,0,0, 0,sc,0,0, 0,0,sc,0) {}
   };
 
@@ -758,7 +758,7 @@ namespace HepGeom {
 
     /**
      * Constructor from a number (scale factor in x-direction). */
-    ScaleX3D(double x) : Scale3D(x, 1, 1) {}
+    ScaleX3D(G4double x) : Scale3D(x, 1, 1) {}
   };
 
   /**
@@ -783,7 +783,7 @@ namespace HepGeom {
 
     /**
      * Constructor from a number (scale factor in y-direction). */
-    ScaleY3D(double y) : Scale3D(1, y, 1) {}
+    ScaleY3D(G4double y) : Scale3D(1, y, 1) {}
   };
 
   /**
@@ -807,7 +807,7 @@ namespace HepGeom {
     ScaleZ3D() : Scale3D() {}
     /**
      * Constructor from a number (scale factor in z-direction). */
-    ScaleZ3D(double z) : Scale3D(1, 1, z) {}
+    ScaleZ3D(G4double z) : Scale3D(1, 1, z) {}
   };
 } /* namespace HepGeom */
 

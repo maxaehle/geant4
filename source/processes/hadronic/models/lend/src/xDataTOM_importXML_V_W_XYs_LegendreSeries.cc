@@ -60,7 +60,7 @@ static int xDataXML_V_W_XYs_LegendreSeries_W_XYs_LegendreSeriesToTOM( statusMess
         xDataTOM_W_XYs_LegendreSeries *W_XYs_LegendreSeries, xDataTOM_axes *axes ) {
 
     int index, length;
-    double value;
+    G4double value;
     char const *wLabel;
     xDataXML_element *XMLChild;
 

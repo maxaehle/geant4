@@ -68,7 +68,7 @@ class G4VIsotopeTable
       //    G4int    A:  number of nucleon (Atomic mass)
       //      and
       //    G4double E:  excited energy
-      //    G4Ions::G4FloatLevelBase flb: floating level base (from G4Ions.hh)
+      //    G4Ions::G4FloatLevelBase flb: G4floating level base (from G4Ions.hh)
       //      or
       //    G4int  level: isomer level
       // in the given G4IsotopeProperty.

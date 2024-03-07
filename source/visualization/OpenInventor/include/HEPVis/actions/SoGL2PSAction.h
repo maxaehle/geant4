@@ -45,7 +45,7 @@ public: /*SoINTERNAL*/
   static void initClass();
   bool enableFileWriting();
   void disableFileWriting();
-  bool addBitmap(int,int,float=0,float=0,float=0,float=0);
+  bool addBitmap(int,int,G4float=0,G4float=0,G4float=0,G4float=0);
 protected:
   virtual void beginTraversal(SoNode*);
 };

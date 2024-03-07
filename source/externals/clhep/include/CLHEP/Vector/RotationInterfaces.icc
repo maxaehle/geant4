@@ -20,18 +20,18 @@ inline HepRep3x3::HepRep3x3() :
 	, zx_(0.0), zy_(0.0), zz_(1.0)
 {}
 
-inline HepRep3x3::HepRep3x3(  double xx, double xy, double xz
-                   , double yx, double yy, double yz
-                   , double zx, double zy, double zz
+inline HepRep3x3::HepRep3x3(  G4double xx, G4double xy, G4double xz
+                   , G4double yx, G4double yy, G4double yz
+                   , G4double zx, G4double zy, G4double zz
                    ) :
 	  xx_(xx), xy_(xy), xz_(xz)
 	, yx_(yx), yy_(yy), yz_(yz)
 	, zx_(zx), zy_(zy), zz_(zz)
 {}
 
-inline HepRep3x3::HepRep3x3( const double * array ) {
-  const double * a = array; 
-  double * r = &xx_;
+inline HepRep3x3::HepRep3x3( const G4double * array ) {
+  const G4double * a = array; 
+  G4double * r = &xx_;
   for ( int i = 0; i < 9; i++ ) { *r++ = *a++; }
 }
 
@@ -41,9 +41,9 @@ inline void HepRep3x3::setToIdentity() {
 	  zx_ = 0.0; zy_ = 0.0; zz_ = 1.0;
 }
 
-inline void HepRep3x3::getArray( double * array ) const {
-  double * a = array; 
-  const double * r = &xx_;
+inline void HepRep3x3::getArray( G4double * array ) const {
+  G4double * a = array; 
+  const G4double * r = &xx_;
   for ( int i = 0; i < 9; i++ ) { *a++ = *r++; }
 }
 
@@ -60,10 +60,10 @@ inline HepRep4x4::HepRep4x4() :
 {}
 
 inline HepRep4x4::HepRep4x4(  
-		     double xx, double xy, double xz, double xt
-                   , double yx, double yy, double yz, double yt
-                   , double zx, double zy, double zz, double zt
-                   , double tx, double ty, double tz, double tt
+		     G4double xx, G4double xy, G4double xz, G4double xt
+                   , G4double yx, G4double yy, G4double yz, G4double yt
+                   , G4double zx, G4double zy, G4double zz, G4double zt
+                   , G4double tx, G4double ty, G4double tz, G4double tt
                    ) :
 	  xx_(xx), xy_(xy), xz_(xz), xt_(xt)
 	, yx_(yx), yy_(yy), yz_(yz), yt_(yt)
@@ -78,9 +78,9 @@ inline HepRep4x4::HepRep4x4( const HepRep4x4Symmetric & rep ) :
 	, tx_(rep.xt_), ty_(rep.yt_), tz_(rep.zt_), tt_(rep.tt_)
 {}
 
-inline HepRep4x4::HepRep4x4( const double * array ) {
-  const double * a = array; 
-  double * r = &xx_;
+inline HepRep4x4::HepRep4x4( const G4double * array ) {
+  const G4double * a = array; 
+  G4double * r = &xx_;
   for ( int i = 0; i < 16; i++ ) { *r++ = *a++; }
 }
 
@@ -91,9 +91,9 @@ inline void HepRep4x4::setToIdentity() {
 	  tx_ = 0.0; ty_ = 0.0; tz_ = 0.0; tt_ = 1.0;
 }
 
-inline void HepRep4x4::getArray( double * array ) const {
-  double * a = array; 
-  const double * r = &xx_;
+inline void HepRep4x4::getArray( G4double * array ) const {
+  G4double * a = array; 
+  const G4double * r = &xx_;
   for ( int i = 0; i < 16; i++ ) { *a++ = *r++; }
 }
 
@@ -120,19 +120,19 @@ inline HepRep4x4Symmetric::HepRep4x4Symmetric() :
 {}
 
 inline HepRep4x4Symmetric::HepRep4x4Symmetric 
-        ( double xx, double xy, double xz, double xt
-                      , double yy, double yz, double yt
-                                    , double zz, double zt
-                                                  , double tt ) :
+        ( G4double xx, G4double xy, G4double xz, G4double xt
+                      , G4double yy, G4double yz, G4double yt
+                                    , G4double zz, G4double zt
+                                                  , G4double tt ) :
 	  xx_(xx), xy_(xy), xz_(xz), xt_(xt)
 		 , yy_(yy), yz_(yz), yt_(yt)
 			  , zz_(zz), zt_(zt)
 				   , tt_(tt)
 {}
 
-inline HepRep4x4Symmetric::HepRep4x4Symmetric( const double * array ) {
-  const double * a = array; 
-  double * r = &xx_;
+inline HepRep4x4Symmetric::HepRep4x4Symmetric( const G4double * array ) {
+  const G4double * a = array; 
+  G4double * r = &xx_;
   for ( int i = 0; i < 10; i++ ) { *r++ = *a++; }
 }
 
@@ -143,9 +143,9 @@ inline void HepRep4x4Symmetric::setToIdentity() {
 	                                   tt_ = 1.0;
 }
 
-inline void HepRep4x4Symmetric::getArray( double * array ) const {
-  double * a = array; 
-  const double * r = &xx_;
+inline void HepRep4x4Symmetric::getArray( G4double * array ) const {
+  G4double * a = array; 
+  const G4double * r = &xx_;
   for ( int i = 0; i < 10; i++ ) { *a++ = *r++; }
 }
 

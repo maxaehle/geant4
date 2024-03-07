@@ -184,7 +184,7 @@ void ScoreSpecies::EndOfEvent(G4HCofThisEvent*)
   {
     for(auto time_mol: fTimeToRecord)
     {
-      double n_mol =
+      G4double n_mol =
           G4MoleculeCounter::Instance()->GetNMoleculesAtTime(molecule,
                                                              time_mol);
 
@@ -196,7 +196,7 @@ void ScoreSpecies::EndOfEvent(G4HCofThisEvent*)
 
       SpeciesInfo& molInfo = fSpeciesInfoPerTime[time_mol][molecule];
       molInfo.fNumber += n_mol;
-      double gValue = (n_mol/(fEdep/eV)) * 100.;
+      G4double gValue = (n_mol/(fEdep/eV)) * 100.;
       molInfo.fG += gValue;
       molInfo.fG2 += gValue*gValue;
 
@@ -342,13 +342,13 @@ ScoreSpecies::WriteWithAnalysisManager(G4VAnalysisManager* analysisManager)
 
     for(auto it_map2 : map2)
     {
-      double time = it_map1.first;
+      G4double time = it_map1.first;
       auto species = it_map2.first;
       const G4String& name = species->GetName();
       int molID = it_map2.first->GetMoleculeID();
       int number = it_map2.second.fNumber;
-      double G = it_map2.second.fG;
-      double G2 = it_map2.second.fG2;
+      G4double G = it_map2.second.fG;
+      G4double G2 = it_map2.second.fG2;
       G4int N = fNEvent;
 
       if(time == *fTimeToRecord.rbegin()){

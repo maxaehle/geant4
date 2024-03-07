@@ -49,8 +49,8 @@ struct DNAParser::Molecule
     Molecule(std::string name,
              int copyNumber,
              const G4ThreeVector& position,
-             double radius,
-             double waterRadius,
+             G4double radius,
+             G4double waterRadius,
              const std::string& material,
              int strand)
                   : fName(name),

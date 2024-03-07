@@ -202,7 +202,7 @@ void G4VisCommandPlotterAddRegionParameter::SetNewValue (G4UIcommand* command, G
   G4VisManager::Verbosity verbosity = fpVisManager->GetVerbosity();
 
   std::vector<std::string> args;
-  tools::double_quotes_tokenize(newValue, args);
+  tools::G4double_quotes_tokenize(newValue, args);
   if ( args.size() != command->GetParameterEntries() ) { // check consistency.
     if (verbosity >= G4VisManager::errors) {
       G4cerr <<	"ERROR: tokenize value problem." << G4endl;

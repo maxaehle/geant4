@@ -16,15 +16,15 @@ using namespace GIDI;
 
 typedef struct polynomialCallbackArgs_s {
     int length;
-    double energyFactor;
-    double *coefficients;
+    G4double energyFactor;
+    G4double *coefficients;
 } polynomialCallbackArgs;
 
 static int MCGIDI_product_parsePiecewiseMultiplicity( statusMessageReporting *smr, xDataTOM_element *element, MCGIDI_product *product );
 static ptwXYPoints *MCGIDI_product_parsePolynomialMultiplicity( statusMessageReporting *smr, xDataTOM_element *element, MCGIDI_product *product );
 static int MCGIDI_product_parseWeightedReferenceMultiplicityFromTOM( statusMessageReporting *smr, xDataTOM_element *element, MCGIDI_product *product, 
     ptwXYPoints **multiplicityVsEnergy, ptwXYPoints **norms );
-static double MCGIDI_product_evaluatePolynomial( double x, polynomialCallbackArgs *args );
+static G4double MCGIDI_product_evaluatePolynomial( G4double x, polynomialCallbackArgs *args );
 /*
 ************************************************************
 */
@@ -197,11 +197,11 @@ static int MCGIDI_product_parsePiecewiseMultiplicity( statusMessageReporting *sm
 static ptwXYPoints *MCGIDI_product_parsePolynomialMultiplicity( statusMessageReporting *smr, xDataTOM_element *element, MCGIDI_product *product ) {
 
     int length;
-    double *coefficients;
+    G4double *coefficients;
     char const *energyUnit;
     ptwXYPoints *ptwXY = NULL;
     nfu_status status;
-    double EMin, EMax;
+    G4double EMin, EMax;
     polynomialCallbackArgs args;
 
     if( MCGIDI_product_getDomain( smr, product, &EMin, &EMax ) ) goto err;
@@ -222,7 +222,7 @@ static ptwXYPoints *MCGIDI_product_parsePolynomialMultiplicity( statusMessageRep
     ptwXY_setValueAtX( ptwXY, EMax, MCGIDI_product_evaluatePolynomial( EMax, &args ) );
     if( length > 2 ) {          /* ?????????????? This needs work. */
         int i, n = 4 * length;
-        double E = EMin, dE = ( EMax - EMin ) / n;
+        G4double E = EMin, dE = ( EMax - EMin ) / n;
 
         for( i = 1; i < n; i++ ) {
             E += dE;
@@ -238,10 +238,10 @@ err:
 /*
 ************************************************************
 */
-static double MCGIDI_product_evaluatePolynomial( double x, polynomialCallbackArgs *args ) {
+static G4double MCGIDI_product_evaluatePolynomial( G4double x, polynomialCallbackArgs *args ) {
 
     int i;
-    double value = 0.;
+    G4double value = 0.;
 
     x /= args->energyFactor;
     for( i = args->length; i > 0; i-- ) value = value * x + args->coefficients[i-1];
@@ -279,22 +279,22 @@ err:
 /*
 ************************************************************
 */
-int MCGIDI_product_getDomain( statusMessageReporting *smr, MCGIDI_product *product, double *EMin, double *EMax ) {
+int MCGIDI_product_getDomain( statusMessageReporting *smr, MCGIDI_product *product, G4double *EMin, G4double *EMax ) {
 
     return( MCGIDI_outputChannel_getDomain( smr, product->outputChannel, EMin, EMax ) );
 }
 /*
 ************************************************************
 */
-int MCGIDI_product_setTwoBodyMasses( statusMessageReporting *smr, MCGIDI_product *product, double projectileMass_MeV, double targetMass_MeV,
-    double productMass_MeV, double residualMass_MeV ) {
+int MCGIDI_product_setTwoBodyMasses( statusMessageReporting *smr, MCGIDI_product *product, G4double projectileMass_MeV, G4double targetMass_MeV,
+    G4double productMass_MeV, G4double residualMass_MeV ) {
 
     return( MCGIDI_angular_setTwoBodyMasses( smr, product->distribution.angular, projectileMass_MeV, targetMass_MeV, productMass_MeV, residualMass_MeV ) );
 }
 /*
 ************************************************************
 */
-double MCGIDI_product_getMass_MeV( statusMessageReporting * /*smr*/, MCGIDI_product *product ) {
+G4double MCGIDI_product_getMass_MeV( statusMessageReporting * /*smr*/, MCGIDI_product *product ) {
 
     return( MCGIDI_POP_getMass_MeV( product->pop ) );
 }
@@ -308,24 +308,24 @@ MCGIDI_target_heated *MCGIDI_product_getTargetHeated( statusMessageReporting *sm
 /*
 ************************************************************
 */
-double MCGIDI_product_getProjectileMass_MeV( statusMessageReporting *smr, MCGIDI_product *product ) {
+G4double MCGIDI_product_getProjectileMass_MeV( statusMessageReporting *smr, MCGIDI_product *product ) {
 
     return( MCGIDI_outputChannel_getProjectileMass_MeV( smr, product->outputChannel ) );
 }
 /*
 ************************************************************
 */
-double MCGIDI_product_getTargetMass_MeV( statusMessageReporting *smr, MCGIDI_product *product ) {
+G4double MCGIDI_product_getTargetMass_MeV( statusMessageReporting *smr, MCGIDI_product *product ) {
 
     return( MCGIDI_outputChannel_getTargetMass_MeV( smr, product->outputChannel ) );
 }
 /*
 ************************************************************
 */
-int MCGIDI_product_sampleMultiplicity( statusMessageReporting * /*smr*/, MCGIDI_product *product, double e_in, double r ) {
+int MCGIDI_product_sampleMultiplicity( statusMessageReporting * /*smr*/, MCGIDI_product *product, G4double e_in, G4double r ) {
 
     int i, multiplicity;
-    double y, norm = 1.0;
+    G4double y, norm = 1.0;
     ptwXYPoints *ptwXY = product->multiplicityVsEnergy;
 
     if( product->piecewiseMultiplicities != NULL ) {

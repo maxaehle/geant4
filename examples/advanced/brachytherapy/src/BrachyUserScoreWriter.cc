@@ -102,7 +102,7 @@ ofile << "# primitive scorer name: " << msMapItr -> first << G4endl;
 //
 // Write quantity in the ASCII output file and in brachytherapy.root
 //
-ofile << std::setprecision(16); // for double value with 8 bytes
+ofile << std::setprecision(16); // for G4double value with 8 bytes
  
 auto analysisManager = G4AnalysisManager::Instance();
 

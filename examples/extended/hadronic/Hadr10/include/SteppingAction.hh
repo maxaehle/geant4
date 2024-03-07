@@ -173,7 +173,7 @@ class SteppingAction : public G4UserSteppingAction {
     G4double fMeanUnderestimated_rDeltaPos;           
     G4double fMeanOverestimated_rDeltaPos;            
  
-    // Max error due to the use of  float  instead of  double
+    // Max error due to the use of  G4float  instead of  G4double
     G4double fMaxFloat_rDeltaPos_deltaMax;
 
     // Energy-momentum violation in the decay of the primary particle, computed as difference

@@ -119,15 +119,15 @@ protected:
 private:
 
     G4int verboseLevel; ///< verbose level
-    std::map<G4String, double > killBelowEnergyTable; ///< map to save the different energy kill limits for the materials
+    std::map<G4String, G4double > killBelowEnergyTable; ///< map to save the different energy kill limits for the materials
     G4double fKillBelowEnergy; ///< energy kill limit
 
-    typedef std::map<G4String, std::map<G4String, std::map<double, std::map<double, double> > > > TriDimensionMap;
+    typedef std::map<G4String, std::map<G4String, std::map<G4double, std::map<G4double, G4double> > > > TriDimensionMap;
     TriDimensionMap diffCrossSectionData; ///< A map: [materialName][particleName]=DiffCrossSectionTable
 
-    typedef std::map<G4String, std::map<G4String, std::map<double, std::vector<double> > > > VecMap;
+    typedef std::map<G4String, std::map<G4String, std::map<G4double, std::vector<G4double> > > > VecMap;
     VecMap eValuesVect; /*!< map with vectors containing all the output energy (E) of the differential file */
-    std::map<G4String, std::map<G4String, std::vector<double> > > tValuesVec; ///< map with vectors containing all the incident (T) energy of the differential file
+    std::map<G4String, std::map<G4String, std::vector<G4double> > > tValuesVec; ///< map with vectors containing all the incident (T) energy of the differential file
 
     /*!
      * \brief ReadDiffCSFile

@@ -79,16 +79,16 @@ using namespace GIDI;
 using namespace std;
 #endif
 
-static double big = 4.503599627370496e15;
-static double biginv =  2.22044604925031308085e-16;
+static G4double big = 4.503599627370496e15;
+static G4double biginv =  2.22044604925031308085e-16;
 
 /*
 ************************************************************
 */
-double nf_incompleteGammaFunctionComplementary( double a, double x, nfu_status *status ) {
+G4double nf_incompleteGammaFunctionComplementary( G4double a, G4double x, nfu_status *status ) {
 
-    double ans, ax, c, yc, r, t, y, z;
-    double pk, pkm1, pkm2, qk, qkm1, qkm2;
+    G4double ans, ax, c, yc, r, t, y, z;
+    G4double pk, pkm1, pkm2, qk, qkm1, qkm2;
 
     *status = nfu_badInput;
     if( !isfinite( x ) ) return( x );
@@ -152,7 +152,7 @@ double nf_incompleteGammaFunctionComplementary( double a, double x, nfu_status *
 /*
 ************************************************************
 */
-double nf_incompleteGammaFunction( double a, double x, nfu_status *status ) {
+G4double nf_incompleteGammaFunction( G4double a, G4double x, nfu_status *status ) {
 /* left tail of incomplete gamma function:
 *
 *          inf.      k
@@ -161,7 +161,7 @@ double nf_incompleteGammaFunction( double a, double x, nfu_status *status ) {
 *           -     -
 *          k=0   | (a+k+1)
 */
-    double ans, ax, c, r;
+    G4double ans, ax, c, r;
 
     *status = nfu_badInput;
     if( !isfinite( x ) ) return( x );

@@ -75,8 +75,8 @@ namespace G4TrajectoryDrawerUtils {
 	  trajectoryPointPosition != positions[positions.size()-1]) {
 
 	// Pre- and Post-Point times from the trajectory point...
-	G4double trajectoryPointPreTime = -std::numeric_limits<double>::max();
-	G4double trajectoryPointPostTime = std::numeric_limits<double>::max();
+	G4double trajectoryPointPreTime = -std::numeric_limits<G4double>::max();
+	G4double trajectoryPointPostTime = std::numeric_limits<G4double>::max();
 
 	if (context.GetTimeSliceInterval() && validity == ValidTimes) {
 

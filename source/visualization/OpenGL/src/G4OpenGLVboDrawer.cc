@@ -53,7 +53,7 @@ fOGLType(type)
   
   fFragmentShaderSrc =
   "#ifdef GL_ES\n"
-  "precision highp float;\n"
+  "precision highp G4float;\n"
   "#endif\n"
   "\n"
   "varying vec3 vLightWeighting;\n"
@@ -72,14 +72,14 @@ fOGLType(type)
   "uniform highp mat4 uPMatrix;  // Perspective [P]rojection matrix\n"
   "uniform highp mat4 uMVMatrix; // [M]odel[V]iew matrix\n"
   "uniform highp mat4 uTMatrix;  // [T]ransformation  matrix\n"
-  "uniform float uPointSize;  // Point size\n"
+  "uniform G4float uPointSize;  // Point size\n"
   "void main(void)\n"
   "{\n"
   "   gl_Position = uPMatrix * uCMatrix * uMVMatrix * uTMatrix * aVertexPosition;\n"
   "  // Phong shading\n"
   //                                               "  vec3 transformedNormal = normalize((uNMatrix * vec4(normalize(aVertexNormal), 0)).xyz);\n"
   "  vec3 lightingDirection = normalize(vec3(1, 1, 1));\n"
-  //                                               "  float directionalLightWeighting = max(dot(transformedNormal, lightingDirection), 0.0);\n"
+  //                                               "  G4float directionalLightWeighting = max(dot(transformedNormal, lightingDirection), 0.0);\n"
   //                                               "  vec3 uAmbientLightColor = vec3(0.2, 0.2, 0.2);\n"
   //                                               "  vec3 uDirectionalColor = vec3(0.8, 0.8, 0.8);\n"
   "  gl_PointSize = uPointSize;\n"
@@ -99,7 +99,7 @@ G4OpenGLVboDrawer::~G4OpenGLVboDrawer (
 // +        QT (OpenGL ES) case     +
 // +--------------------------------+
 
-void G4OpenGLVboDrawer:: vboGlMultMatrixf(const GLfloat *matrix){
+void G4OpenGLVboDrawer:: vboGlMultMatrixf(const GLG4float *matrix){
   if (fVboViewer) {
     if (fVboViewer->isInitialized()) {
       // FIXME
@@ -116,14 +116,14 @@ void G4OpenGLVboDrawer:: vboGlMultMatrixf(const GLfloat *matrix){
 }
 
 
-void G4OpenGLVboDrawer:: vboGlMultMatrixd(const GLdouble *matrix){
+void G4OpenGLVboDrawer:: vboGlMultMatrixd(const GLG4double *matrix){
   if (fVboViewer) {
     if (fVboViewer->isInitialized()) {
       // FIXME !
       //    if (fMatrixMode == GL_MODELVIEW) {
       //      printf("G4OpenGLVboDrawer:: vboGlMultMatrixd %d %d\n",fVboViewer->getShaderTransformMatrix(), matrix);
       //!! TEST !!
-      float mat[16] = {
+      G4float mat[16] = {
         matrix[0],matrix[1],matrix[2],matrix[3],
         matrix[4],matrix[5],matrix[6],matrix[7],
         matrix[8],matrix[9],matrix[10],matrix[11],
@@ -148,19 +148,19 @@ void G4OpenGLVboDrawer:: vboGlMultMatrixd(const GLdouble *matrix){
 
 
 
-void G4OpenGLVboDrawer::vboGlOrtho(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar) {
+void G4OpenGLVboDrawer::vboGlOrtho(GLG4double left, GLG4double right, GLG4double bottom, GLG4double top, GLG4double zNear, GLG4double zFar) {
   if (fVboViewer) {
     if (fVboViewer->isInitialized()) {
       printf("glOrtho implemented --- %f %f %f %f %f %f \n",left, right, bottom, top, zNear, zFar);
-      float a = 2.0f / (right - left);
-      float b = 2.0f / (top - bottom);
-      float c = -2.0f / (zFar - zNear);
+      G4float a = 2.0f / (right - left);
+      G4float b = 2.0f / (top - bottom);
+      G4float c = -2.0f / (zFar - zNear);
       
-      float tx = - (right + left)/(right - left);
-      float ty = - (top + bottom)/(top - bottom);
-      float tz = - (zFar + zNear)/(zFar - zNear);
+      G4float tx = - (right + left)/(right - left);
+      G4float ty = - (top + bottom)/(top - bottom);
+      G4float tz = - (zFar + zNear)/(zFar - zNear);
       
-      float ortho[16] = {
+      G4float ortho[16] = {
         a, 0, 0, 0,
         0, b, 0, 0,
         0, 0, c, 0,
@@ -180,21 +180,21 @@ void G4OpenGLVboDrawer::vboGlOrtho(GLdouble left, GLdouble right, GLdouble botto
 }
 
 
-void G4OpenGLVboDrawer::vboGlFrustum(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar) {
+void G4OpenGLVboDrawer::vboGlFrustum(GLG4double left, GLG4double right, GLG4double bottom, GLG4double top, GLG4double zNear, GLG4double zFar) {
   if (fVboViewer) {
     if (fVboViewer->isInitialized()) {
-      float deltaX = right - left;
-      float deltaY = top - bottom;
-      float deltaZ = zFar - zNear;
+      G4float deltaX = right - left;
+      G4float deltaY = top - bottom;
+      G4float deltaZ = zFar - zNear;
       
-      float a = 2.0f * zNear / deltaX;
-      float b = 2.0f * zNear / deltaY;
-      float c = (right + left) / deltaX;
-      float d = (top + bottom) / deltaY;
-      float e = -(zFar + zNear) / (zFar - zNear);
-      float f = -2.0f * zFar * zNear / deltaZ;
+      G4float a = 2.0f * zNear / deltaX;
+      G4float b = 2.0f * zNear / deltaY;
+      G4float c = (right + left) / deltaX;
+      G4float d = (top + bottom) / deltaY;
+      G4float e = -(zFar + zNear) / (zFar - zNear);
+      G4float f = -2.0f * zFar * zNear / deltaZ;
       
-      float proj[16] = {
+      G4float proj[16] = {
         a, 0, 0, 0,
         0, b, 0, 0,
         c, d, e, -1.0f,
@@ -224,7 +224,7 @@ void G4OpenGLVboDrawer::vboGlMatrixMode(GLenum a) {
 void G4OpenGLVboDrawer::vboGlColor4d(int red,int green,int blue,int alpha) {
   if (fVboViewer) {
     if (fVboViewer->isInitialized()) {
-      //    double color [] = { red, green, blue, alpha };
+      //    G4double color [] = { red, green, blue, alpha };
       // FIXME : REMOVE /2 , used to render transparents for testing purpose
       alpha = 0.7;
       glUniform4f (glGetUniformLocation(fVboViewer->getShaderProgram(), "uPointColor"),red, green, blue, alpha);
@@ -232,17 +232,17 @@ void G4OpenGLVboDrawer::vboGlColor4d(int red,int green,int blue,int alpha) {
   }
 }
 
-void G4OpenGLVboDrawer:: vboGlColor4fv(const GLfloat* data) {
+void G4OpenGLVboDrawer:: vboGlColor4fv(const GLG4float* data) {
   if (fVboViewer) {
     if (fVboViewer->isInitialized()) {
-      double color [] = { (data[0]), (data[1]), (data[2]), 0.7};
+      G4double color [] = { (data[0]), (data[1]), (data[2]), 0.7};
       // FIXME : REMOVE /2 , used to render transparents for testing purpose
       glUniform4f (glGetUniformLocation(fVboViewer->getShaderProgram(), "uPointColor"),color[0],color[1],color[2], color[3]);
     }
   }
 }
 
-void G4OpenGLVboDrawer:: vboGlPointSize(float size) {
+void G4OpenGLVboDrawer:: vboGlPointSize(G4float size) {
   if (fVboViewer) {
     if (fVboViewer->isInitialized()) {
       glUniform1f (glGetUniformLocation(fVboViewer->getShaderProgram(), "uPointSize"),size);

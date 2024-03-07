@@ -14,12 +14,12 @@
 namespace CLHEP {
 
 inline RandBreitWigner::RandBreitWigner(HepRandomEngine & anEngine,
-                                        double a, double b )
+                                        G4double a, G4double b )
 : HepRandom( ), localEngine(&anEngine, do_nothing_deleter()), defaultA(a),
   defaultB(b) {}
 
 inline RandBreitWigner::RandBreitWigner(HepRandomEngine * anEngine,
-                                        double a, double b )
+                                        G4double a, G4double b )
 : HepRandom( ), localEngine(anEngine), defaultA(a),
   defaultB(b) {}
 

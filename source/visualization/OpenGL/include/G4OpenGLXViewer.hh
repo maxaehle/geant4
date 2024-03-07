@@ -74,7 +74,7 @@ protected:
   XWindowAttributes                 xwa;
   Display                           *dpy;
   static XVisualInfo                *vi_single_buffer;
-  static XVisualInfo                *vi_double_buffer;
+  static XVisualInfo                *vi_G4double_buffer;
   XVisualInfo                       *vi_immediate,
                                     *vi_stored,
                                     *vi;

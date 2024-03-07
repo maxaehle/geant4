@@ -98,9 +98,9 @@ inline HepLorentzRotation & HepLorentzRotation::set (const HepBoostZ & bboost) {
   return set (bboost.rep4x4());
 }
 
-inline HepLorentzRotation::HepLorentzRotation(double bx,
-                                              double by,
-                                              double bz) 
+inline HepLorentzRotation::HepLorentzRotation(G4double bx,
+                                              G4double by,
+                                              G4double bz) 
 {
   set(bx, by, bz);
 }
@@ -139,38 +139,38 @@ inline HepLorentzRotation ::HepLorentzRotation ( const HepRep4x4 & rep ) :
 // - Protected methods
 
 inline HepLorentzRotation::HepLorentzRotation( 
-  double rxx, double rxy, double rxz, double rxt,
-  double ryx, double ryy, double ryz, double ryt,
-  double rzx, double rzy, double rzz, double rzt,
-  double rtx, double rty, double rtz, double rtt) : 
+  G4double rxx, G4double rxy, G4double rxz, G4double rxt,
+  G4double ryx, G4double ryy, G4double ryz, G4double ryt,
+  G4double rzx, G4double rzy, G4double rzz, G4double rzt,
+  G4double rtx, G4double rty, G4double rtz, G4double rtt) : 
     mxx(rxx), mxy(rxy), mxz(rxz), mxt(rxt),
     myx(ryx), myy(ryy), myz(ryz), myt(ryt),
     mzx(rzx), mzy(rzy), mzz(rzz), mzt(rzt),
     mtx(rtx), mty(rty), mtz(rtz), mtt(rtt) {}
 
 inline void HepLorentzRotation::setBoost
-				(double bx, double by, double bz) {
+				(G4double bx, G4double by, G4double bz) {
   set(bx, by, bz);
 }
 
 // ----------  Accessors:
 
-inline double HepLorentzRotation::xx() const { return mxx; }
-inline double HepLorentzRotation::xy() const { return mxy; }
-inline double HepLorentzRotation::xz() const { return mxz; }
-inline double HepLorentzRotation::xt() const { return mxt; }
-inline double HepLorentzRotation::yx() const { return myx; }
-inline double HepLorentzRotation::yy() const { return myy; }
-inline double HepLorentzRotation::yz() const { return myz; }
-inline double HepLorentzRotation::yt() const { return myt; }
-inline double HepLorentzRotation::zx() const { return mzx; }
-inline double HepLorentzRotation::zy() const { return mzy; }
-inline double HepLorentzRotation::zz() const { return mzz; }
-inline double HepLorentzRotation::zt() const { return mzt; }
-inline double HepLorentzRotation::tx() const { return mtx; }
-inline double HepLorentzRotation::ty() const { return mty; }
-inline double HepLorentzRotation::tz() const { return mtz; }
-inline double HepLorentzRotation::tt() const { return mtt; }
+inline G4double HepLorentzRotation::xx() const { return mxx; }
+inline G4double HepLorentzRotation::xy() const { return mxy; }
+inline G4double HepLorentzRotation::xz() const { return mxz; }
+inline G4double HepLorentzRotation::xt() const { return mxt; }
+inline G4double HepLorentzRotation::yx() const { return myx; }
+inline G4double HepLorentzRotation::yy() const { return myy; }
+inline G4double HepLorentzRotation::yz() const { return myz; }
+inline G4double HepLorentzRotation::yt() const { return myt; }
+inline G4double HepLorentzRotation::zx() const { return mzx; }
+inline G4double HepLorentzRotation::zy() const { return mzy; }
+inline G4double HepLorentzRotation::zz() const { return mzz; }
+inline G4double HepLorentzRotation::zt() const { return mzt; }
+inline G4double HepLorentzRotation::tx() const { return mtx; }
+inline G4double HepLorentzRotation::ty() const { return mty; }
+inline G4double HepLorentzRotation::tz() const { return mtz; }
+inline G4double HepLorentzRotation::tt() const { return mtt; }
 
 inline HepLorentzVector HepLorentzRotation::col1() const {
   return HepLorentzVector ( mxx, myx, mzx, mtx );
@@ -211,7 +211,7 @@ inline HepRep4x4 HepLorentzRotation::rep4x4() const {
 inline HepLorentzRotation::HepLorentzRotation_row::HepLorentzRotation_row
 (const HepLorentzRotation & r, int i) : rr(r), ii(i) {}
 
-inline double
+inline G4double
 HepLorentzRotation::HepLorentzRotation_row::operator [] (int jj) const {
   return rr(ii,jj);
 }
@@ -263,10 +263,10 @@ inline bool HepLorentzRotation::isIdentity() const {
 
 inline HepLorentzVector
 HepLorentzRotation::vectorMultiplication(const HepLorentzVector & p) const {
-  double x(p.x());
-  double y(p.y());
-  double z(p.z());
-  double t(p.t());
+  G4double x(p.x());
+  G4double y(p.y());
+  G4double z(p.z());
+  G4double t(p.t());
   return HepLorentzVector(mxx*x + mxy*y + mxz*z + mxt*t,
                 	  myx*x + myy*y + myz*z + myt*t,
 			  mzx*x + mzy*y + mzz*z + mzt*t,
@@ -325,17 +325,17 @@ HepLorentzRotation::transform   (const HepLorentzRotation & lt) {
 }
 
 inline HepLorentzRotation &
-HepLorentzRotation::rotate(double angle, const Hep3Vector & axis) {
+HepLorentzRotation::rotate(G4double angle, const Hep3Vector & axis) {
   return transform(HepRotation().rotate(angle, axis));
 }
 
 inline HepLorentzRotation &
-HepLorentzRotation::rotate(double angle, const Hep3Vector * axis) {
+HepLorentzRotation::rotate(G4double angle, const Hep3Vector * axis) {
   return transform(HepRotation().rotate(angle, axis));
 }
 
 inline HepLorentzRotation &
-HepLorentzRotation::boost(double bx, double by, double bz) {
+HepLorentzRotation::boost(G4double bx, G4double by, G4double bz) {
   return transform(HepLorentzRotation(bx, by, bz));
 }
 
@@ -364,10 +364,10 @@ inline HepLorentzRotation inverseOf ( const HepLorentzRotation & lt ) {
                             -lt.mxt, -lt.myt, -lt.mzt,  lt.mtt )  );
 }
 
-inline double HepLorentzRotation::getTolerance() { 
+inline G4double HepLorentzRotation::getTolerance() { 
   return Hep4RotationInterface::tolerance;
 }
-inline double HepLorentzRotation::setTolerance(double tol) { 
+inline G4double HepLorentzRotation::setTolerance(G4double tol) { 
   return Hep4RotationInterface::setTolerance(tol);
 }
 

@@ -48,7 +48,7 @@ G4VViewer (sceneHandler, sceneHandler.IncrementViewCount (), name) {
 
 void G4OpenGLStoredWin32Viewer::Initialise () {
 
-  //Check that G4OpenGLWin32Viewer got a double buffered colour visual
+  //Check that G4OpenGLWin32Viewer got a G4double buffered colour visual
 
   CreateGLWin32Context ();
   CreateMainWindow ();

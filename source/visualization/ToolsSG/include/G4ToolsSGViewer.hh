@@ -202,9 +202,9 @@ public:
     const G4double top    = fVP.GetFrontHalfHeight (pnear, radius);
     const G4double bottom = -top;
     // sanity check :
-    tools::vec3f dir(float(targetPoint.x()-cameraPosition.x()),
-                     float(targetPoint.y()-cameraPosition.y()),
-                     float(targetPoint.z()-cameraPosition.z()));
+    tools::vec3f dir(G4float(targetPoint.x()-cameraPosition.x()),
+                     G4float(targetPoint.y()-cameraPosition.y()),
+                     G4float(targetPoint.z()-cameraPosition.z()));
     if(!dir.length()) {
       fSGViewer->set_clear_color(0.3,0.3,0.3,1);
       G4cerr << "G4ToolsSGViewer::SetView : null size viewer area." << G4endl;
@@ -237,21 +237,21 @@ public:
         return;
       }
       tools::sg::ortho* ortho_camera = new tools::sg::ortho;
-      ortho_camera->height.value(float(top-bottom));
+      ortho_camera->height.value(G4float(top-bottom));
       _camera = ortho_camera;
     } else {
-      //G4cout << "debug : camera : perspec : heightAngle " << float(2*fVP.GetFieldHalfAngle()) << std::endl;
+      //G4cout << "debug : camera : perspec : heightAngle " << G4float(2*fVP.GetFieldHalfAngle()) << std::endl;
       tools::sg::perspective* perspective_camera = new tools::sg::perspective;
-      perspective_camera->height_angle.value(float(2*fVP.GetFieldHalfAngle()));
+      perspective_camera->height_angle.value(G4float(2*fVP.GetFieldHalfAngle()));
       _camera = perspective_camera;
     }
     
     _camera->position.value
-      (tools::vec3f(float(cameraPosition.x()),
-		    float(cameraPosition.y()),
-		    float(cameraPosition.z())));
-    _camera->znear.value(float(pnear));
-    _camera->zfar.value(float(pfar));
+      (tools::vec3f(G4float(cameraPosition.x()),
+		    G4float(cameraPosition.y()),
+		    G4float(cameraPosition.z())));
+    _camera->znear.value(G4float(pnear));
+    _camera->zfar.value(G4float(pfar));
 
     _camera->look_at(dir,tools::vec3f(up.x(),up.y(),up.z()));  //same logic as in G4OpenInventorViewer.
 
@@ -265,7 +265,7 @@ public:
     CreateSG(_camera,fVP.GetActualLightpointDirection());
     
    {G4Color background = fVP.GetBackgroundColour ();
-    fSGViewer->set_clear_color(float(background.GetRed()),float(background.GetBlue()),float(background.GetBlue()),1);}
+    fSGViewer->set_clear_color(G4float(background.GetRed()),G4float(background.GetBlue()),G4float(background.GetBlue()),1);}
   }
 
   virtual void ClearView() {}
@@ -421,7 +421,7 @@ protected:
     if(!fSGViewer) return;
     const G4Colour& back_color = fVP.GetBackgroundColour();
     if(!write_paper(G4cout,f_gl2ps_mgr,f_zb_mgr,0,0,
-                    float(back_color.GetRed()),float(back_color.GetGreen()),float(back_color.GetBlue()),float(back_color.GetAlpha()),
+                    G4float(back_color.GetRed()),G4float(back_color.GetGreen()),G4float(back_color.GetBlue()),G4float(back_color.GetAlpha()),
 		    fSGViewer->sg(),
 		    fSGViewer->width(),fSGViewer->height(),a_file,a_format)) {
       G4cout << "G4ToolsSGViewer::Export: write_paper() failed." << G4endl;
@@ -476,7 +476,7 @@ protected:
         return;
       }
       std::vector<std::string> args;
-      tools::double_quotes_tokenize(a_value,args);
+      tools::G4double_quotes_tokenize(a_value,args);
       if(args.size()!=a_cmd->GetParameterEntries()) return;
       if(a_cmd==write_scene) {
         tsg_viewer->Export(args[0],args[1]);

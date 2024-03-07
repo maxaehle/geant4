@@ -204,7 +204,7 @@ G4bool G4IT::operator!=(const G4IT& right) const
   return !(this->operator==(right));
 }
 
-double G4IT::operator[](int i) const
+G4double G4IT::operator[](int i) const
 {
   return fpTrack->GetPosition()[i];
 }

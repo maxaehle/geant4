@@ -41,7 +41,7 @@ public:
     theData.push_back(aPoint);
   }
   
-  double getCrossSection(G4double anEnergy)
+  G4double getCrossSection(G4double anEnergy)
   {
     G4double result;
     if(anEnergy < theData[0].first)

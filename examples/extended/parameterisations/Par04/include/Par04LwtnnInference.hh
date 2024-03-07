@@ -54,13 +54,13 @@ class Par04LwtnnInference : public Par04InferenceInterface
   /// @param[in] aGenVector Input latent space and conditions
   /// @param[out] aEnergies Model output = generated shower energies
   /// @param[in] aSize Size of the output
-  void RunInference(vector<float> aGenVector, std::vector<G4double>& aEnergies, int aSize);
+  void RunInference(vector<G4float> aGenVector, std::vector<G4double>& aEnergies, int aSize);
 
  private:
   /// LWTNN graph , Network input and output vectors
   std::unique_ptr<lwt::LightweightGraph> fGraph;
-  typedef std::map<std::string, std::map<std::string, double>> fNetworkInputs;
-  typedef std::map<std::string, double> fNetworkOutputs;
+  typedef std::map<std::string, std::map<std::string, G4double>> fNetworkInputs;
+  typedef std::map<std::string, G4double> fNetworkOutputs;
 };
 
 #endif /* PAR04LWTNNINFERENCE_HH */

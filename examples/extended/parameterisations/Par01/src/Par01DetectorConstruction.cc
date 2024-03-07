@@ -212,7 +212,7 @@ G4VPhysicalVolume* Par01DetectorConstruction::Construct()
   // -- Makes the calorimeterLog volume becoming a G4Region: 
    G4Region* caloRegion = new G4Region("EM_calo_region");
    caloRegion->AddRootLogicalVolume(calorimeterLog);
-   std::vector<double> cuts; 
+   std::vector<G4double> cuts; 
    cuts.push_back(1.0*mm);cuts.push_back(1.0*mm);cuts.push_back(1.0*mm);cuts.push_back(1.0*mm);
    caloRegion->SetProductionCuts(new G4ProductionCuts());
    caloRegion->GetProductionCuts()->SetProductionCuts(cuts);

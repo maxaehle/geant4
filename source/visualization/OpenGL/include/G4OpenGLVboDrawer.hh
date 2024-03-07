@@ -116,19 +116,19 @@ public:
   
   virtual ~G4OpenGLVboDrawer ();
 
-  void vboGlMultMatrixf( const GLfloat *m );
-  void vboGlMultMatrixd( const GLdouble *m );
+  void vboGlMultMatrixf( const GLG4float *m );
+  void vboGlMultMatrixd( const GLG4double *m );
 
   void vboGlFlush();
-  void vboGlOrtho(GLdouble, GLdouble, GLdouble, GLdouble, GLdouble, GLdouble);
-  void vboGlFrustum(GLdouble, GLdouble, GLdouble, GLdouble, GLdouble, GLdouble);
+  void vboGlOrtho(GLG4double, GLG4double, GLG4double, GLG4double, GLG4double, GLG4double);
+  void vboGlFrustum(GLG4double, GLG4double, GLG4double, GLG4double, GLG4double, GLG4double);
   void vboGlMatrixMode(GLenum);
-  void vboGlPointSize(float size);
+  void vboGlPointSize(G4float size);
   inline void vboGlColor3d(int red,int green,int blue) {
     vboGlColor4d(red,green, blue, 1.0);
   }
   void vboGlColor4d(int red,int green,int blue,int alpha);
-  void vboGlColor4fv(const GLfloat*);
+  void vboGlColor4fv(const GLG4float*);
   inline const char * getFragmentShaderSrc() {
     return fFragmentShaderSrc;
   }

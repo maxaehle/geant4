@@ -56,8 +56,8 @@ namespace G4 {
 namespace MoleculeCounter {
 struct TimePrecision
 {
-    bool operator()(const double& a, const double& b) const;
-    static G4ThreadLocal double fPrecision;
+    bool operator()(const G4double& a, const G4double& b) const;
+    static G4ThreadLocal G4double fPrecision;
 };
 }
 }
@@ -86,7 +86,7 @@ public:
 
     //----------------------------------------------------------------------------
 
-    int GetNMoleculesAtTime(Reactant* molecule, double time);
+    int GetNMoleculesAtTime(Reactant* molecule, G4double time);
     const NbMoleculeAgainstTime& GetNbMoleculeAgainstTime(Reactant* molecule);
 
     RecordedMolecules GetRecordedMolecules();
@@ -96,7 +96,7 @@ public:
     G4int GetVerbose();
 
     /* It sets the min time difference in between two time slices. */
-    static void SetTimeSlice(double);
+    static void SetTimeSlice(G4double);
 
     void Dump();
 
@@ -120,7 +120,7 @@ protected:
     //----------------------------------------------------------------------------
 protected:
     G4bool SearchTimeMap(Reactant* molecule);
-    int SearchUpperBoundTime(double time, bool sameTypeOfMolecule);
+    int SearchUpperBoundTime(G4double time, bool sameTypeOfMolecule);
 
 protected:
     G4MoleculeCounter();

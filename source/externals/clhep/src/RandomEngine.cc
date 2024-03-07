@@ -31,12 +31,12 @@ HepRandomEngine::HepRandomEngine()
 
 HepRandomEngine::~HepRandomEngine() {}
 
-HepRandomEngine::operator double() {
+HepRandomEngine::operator G4double() {
   return flat();
 }
 
-HepRandomEngine::operator float() {
-  return float( flat() );
+HepRandomEngine::operator G4float() {
+  return G4float( flat() );
 }
 
 HepRandomEngine::operator unsigned int() {

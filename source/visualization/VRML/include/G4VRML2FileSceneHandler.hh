@@ -93,8 +93,8 @@ class G4VRML2FileSceneHandler : public G4VSceneHandler
   void SendMarkerWorldPosition(const G4VMarker& mark);
 
   G4double GetMarkerHalfSize(const G4VMarker& mark);
-  void GetMarkerWorldPosition(const G4VMarker& mark, double* pX, double* pY,
-                              double* pZ);
+  void GetMarkerWorldPosition(const G4VMarker& mark, G4double* pX, G4double* pY,
+                              G4double* pZ);
 
   G4bool isConnected() { return fFlagDestOpen; }
 

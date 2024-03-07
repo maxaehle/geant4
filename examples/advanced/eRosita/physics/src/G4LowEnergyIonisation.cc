@@ -34,7 +34,7 @@
 //
 // Modifications:
 // - 11.04.2000 VL
-//   Changing use of float and G4float casts to G4double casts 
+//   Changing use of G4float and G4float casts to G4double casts 
 //   because of problems with optimisation (bug ?)
 //   10.04.2000 VL
 // - Correcting Fluorescence transition probabilities in order to take into account 

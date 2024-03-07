@@ -17,13 +17,13 @@ CLHEP_THREAD_LOCAL bool DoubConv::byte_order_known = false;
 CLHEP_THREAD_LOCAL int  DoubConv::byte_order[8];
 
 void DoubConv::fill_byte_order () {
-  double x = 1.0;
+  G4double x = 1.0;
   int t30 = 1 << 30;
   int t22 = 1 << 22;
   x *= t30;
   x *= t22;
-  double y = 1;
-  double z = 1;
+  G4double y = 1;
+  G4double z = 1;
   x *= z;
   for (int k=0; k<6; k++) {
     x += y*z;
@@ -67,11 +67,11 @@ void DoubConv::fill_byte_order () {
         break;
       default:
         throw DoubConvException(
-		"Cannot determine byte-ordering of doubles on this system");
+		"Cannot determine byte-ordering of G4doubles on this system");
     } 
     if (byte_order[n] != UNSET) {
         throw DoubConvException(
-		"Confusion in byte-ordering of doubles on this system");
+		"Confusion in byte-ordering of G4doubles on this system");
     }    
     byte_order[n] = order;
     byte_order_known = true;
@@ -79,7 +79,7 @@ void DoubConv::fill_byte_order () {
   return;
 }
 
-std::string DoubConv::d2x(double d) {
+std::string DoubConv::d2x(G4double d) {
   if ( !byte_order_known ) fill_byte_order ();
   DB8 db;
   db.d = d;
@@ -91,7 +91,7 @@ std::string DoubConv::d2x(double d) {
   return ss.str();
 }
 
-std::vector<unsigned long> DoubConv::dto2longs(double d) {
+std::vector<unsigned long> DoubConv::dto2longs(G4double d) {
   std::vector<unsigned long> v(2);
   if ( !byte_order_known ) fill_byte_order ();
   DB8 db;
@@ -107,7 +107,7 @@ std::vector<unsigned long> DoubConv::dto2longs(double d) {
   return v; 
 }
 
-double DoubConv::longs2double (const std::vector<unsigned long> & v) {
+G4double DoubConv::longs2G4double (const std::vector<unsigned long> & v) {
   DB8 db;
   unsigned char bytes[8];
   if ( !byte_order_known ) fill_byte_order ();

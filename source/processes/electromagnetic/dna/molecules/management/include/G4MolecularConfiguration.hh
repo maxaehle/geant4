@@ -99,8 +99,8 @@ class G4MolecularConfiguration
 {
 public:
 
-  typedef std::function<double(const G4Material*,
-                         double,
+  typedef std::function<G4double(const G4Material*,
+                         G4double,
      const G4MolecularConfiguration*)> G4DiffCoeffParam;
 
   //____________________________________________________________________________
@@ -174,7 +174,7 @@ public:
   // Release memory of the mol conf manager
   static void DeleteManager();
 
-  static double DiffCoeffWater(double temperature_K);
+  static G4double DiffCoeffWater(G4double temperature_K);
 
   void AddDiffCoeffParameterization(const G4DiffCoeffParam&);
 
@@ -248,7 +248,7 @@ public:
   inline G4double GetDiffusionCoefficient() const;
 
   inline G4double GetDiffusionCoefficient(const G4Material*,
-                                          double temperature) const;
+                                          G4double temperature) const;
 
   /** Set the decay time of the molecule.
    */
@@ -334,7 +334,7 @@ protected:
   void SetUserID(const G4String& userID);
 
   void CreateDefaultDiffCoeffParam();
-  static void ScaleAllDiffusionCoefficientsOnWater(double temperature_K);
+  static void ScaleAllDiffusionCoefficientsOnWater(G4double temperature_K);
 
 public:
   class G4MolecularConfigurationManager
@@ -473,10 +473,10 @@ protected:
   G4bool fIsFinalized;
 
   G4DiffCoeffParam fDiffParam;
-  static /*G4ThreadLocal*/double fgTemperature;
+  static /*G4ThreadLocal*/G4double fgTemperature;
 
-  static double ReturnDefaultDiffCoeff(const G4Material*,
-                                       double,
+  static G4double ReturnDefaultDiffCoeff(const G4Material*,
+                                       G4double,
                                        const G4MolecularConfiguration*
                                        molConf);
 };
@@ -586,7 +586,7 @@ inline void G4MolecularConfiguration::AddDiffCoeffParameterization
 
 inline G4double
 G4MolecularConfiguration::GetDiffusionCoefficient(const G4Material* material,
-                                                  double temperature) const
+                                                  G4double temperature) const
 {
   return fDiffParam(material, temperature, this);
 }

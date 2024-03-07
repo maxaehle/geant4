@@ -355,7 +355,7 @@ void G4VEmProcess::BuildPhysicsTable(const G4ParticleDefinition& part)
       }
     }
   }
-  // protection against double printout
+  // protection against G4double printout
   if(theParameters->IsPrintLocked()) { return; }
 
   // explicitly defined printout by particle name

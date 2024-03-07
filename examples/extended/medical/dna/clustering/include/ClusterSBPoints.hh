@@ -92,7 +92,7 @@ private:
   void UpdateDoubleStrand();
 
   unsigned int fSize;
-  bool fIsDoubleSB; // is a double strand break ?
+  bool fIsDoubleSB; // is a G4double strand break ?
 
   std::set<SBPoint* > fpRegisteredSBPoints;
 };

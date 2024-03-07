@@ -50,9 +50,9 @@
 template <typename T> class GMocrenDataPrimitive {
 protected:
   int kSize[3];
-  double kScale;
+  G4double kScale;
   T kMinmax[2];
-  float kCenter[3];
+  G4float kCenter[3];
   std::vector<T *> kImage;
   std::string kDataName;
   //std::vector<std::vector<T>> image;
@@ -70,16 +70,16 @@ public:
   void clearImage();
   void setSize(int _size[3]);
   void getSize(int _size[3]);
-  void setScale(double & _scale);
-  double getScale();
+  void setScale(G4double & _scale);
+  G4double getScale();
   void setMinMax(T _minmax[2]);
   void getMinMax(T _minmax[2]);
   void setImage(std::vector<T *> & _image);
   void addImage(T * _image);
   std::vector<T *> & getImage();
   T * getImage(int _z);  // get image of each layer
-  void setCenterPosition(float _center[3]);
-  void getCenterPosition(float _center[3]);
+  void setCenterPosition(G4float _center[3]);
+  void getCenterPosition(G4float _center[3]);
   void setName(std::string & _name);
   std::string getName();
 };
@@ -91,8 +91,8 @@ public:
 class GMocrenTrack {
 public:
   struct Step {
-    float startPoint[3];
-    float endPoint[3];
+    G4float startPoint[3];
+    G4float endPoint[3];
   };
 protected:
   std::vector<struct Step> kTrack;
@@ -104,10 +104,10 @@ public:
 
   
   int getNumberOfSteps() {return (int)kTrack.size();}
-  void addStep(float _startx, float _starty, float _startz,
-	       float _endx, float _endy, float _endz);
-  void getStep(float & _startx, float & _starty, float & _startz,
-	       float & _endx, float & _endy, float & _endz,
+  void addStep(G4float _startx, G4float _starty, G4float _startz,
+	       G4float _endx, G4float _endy, G4float _endz);
+  void getStep(G4float & _startx, G4float & _starty, G4float & _startz,
+	       G4float & _endx, G4float & _endy, G4float & _endz,
 	       int _num);
   void setTrack(std::vector<struct Step> & _aTrack) {kTrack = _aTrack;}
   void setColor(unsigned char _color[3]) {
@@ -116,7 +116,7 @@ public:
   void getColor(unsigned char _color[3]) {
     for(int i = 0; i < 3; i++) _color[i] = kColor[i];
   }
-  void translate(std::vector<float> & _tranlate);
+  void translate(std::vector<G4float> & _tranlate);
 };
 
 
@@ -127,8 +127,8 @@ public:
 class GMocrenDetector {
 public:
   struct Edge {
-    float startPoint[3];
-    float endPoint[3];
+    G4float startPoint[3];
+    G4float endPoint[3];
   };
 protected:
   std::vector<struct Edge> kDetector;
@@ -141,10 +141,10 @@ public:
 
   
   int getNumberOfEdges() {return (int)kDetector.size();}
-  void addEdge(float _startx, float _starty, float _startz,
-	       float _endx, float _endy, float _endz);
-  void getEdge(float & _startx, float & _starty, float & _startz,
-	       float & _endx, float & _endy, float & _endz,
+  void addEdge(G4float _startx, G4float _starty, G4float _startz,
+	       G4float _endx, G4float _endy, G4float _endz);
+  void getEdge(G4float & _startx, G4float & _starty, G4float & _startz,
+	       G4float & _endx, G4float & _endy, G4float & _endz,
 	       int _num);
   void setDetector(std::vector<struct Edge> & _aDetector) {kDetector = _aDetector;}
   void setColor(unsigned char _color[3]) {
@@ -156,7 +156,7 @@ public:
   void setName(std::string & _name) { kName = _name;}
   std::string getName() {return kName;}
 
-  void translate(std::vector<float> & _tranlate);
+  void translate(std::vector<G4float> & _tranlate);
 };
 
 
@@ -195,16 +195,16 @@ public:
   static unsigned int kPointerToDetectorData;
 
   // voxel spacing (universal size)
-  static float kVoxelSpacing[3];
+  static G4float kVoxelSpacing[3];
 
   //----- modality image -----//
   static class GMocrenDataPrimitive<short> kModality;
   // density map to modality (CT) values
-  static std::vector<float> kModalityImageDensityMap;
+  static std::vector<G4float> kModalityImageDensityMap;
   static std::string kModalityUnit;
 
   //----- dose distribution -----//
-  static std::vector<class GMocrenDataPrimitive<double> > kDose;
+  static std::vector<class GMocrenDataPrimitive<G4double> > kDose;
   //std::vector<short *> kShortDose;
   static std::string kDoseUnit;
 
@@ -212,7 +212,7 @@ public:
   static std::vector<class GMocrenDataPrimitive<short> > kRoi;
 
   //----- track information -----//
-  static std::vector<float *> kSteps; // begin (x,y,z), end (x,y,z)
+  static std::vector<G4float *> kSteps; // begin (x,y,z), end (x,y,z)
   static std::vector<unsigned char *> kStepColors; // r, g, b
 
   static std::vector<class GMocrenTrack> kTracks;
@@ -276,8 +276,8 @@ public:
   
 
   // voxel spacing
-  void setVoxelSpacing(float _spacing[3]);
-  void getVoxelSpacing(float _spacing[3]);
+  void setVoxelSpacing(G4float _spacing[3]);
+  void getVoxelSpacing(G4float _spacing[3]);
 
   // get & set number of events
   int & getNumberOfEvents();
@@ -309,18 +309,18 @@ public:
   void getModalityImageSize(int _size[3]);
   void setModalityImageSize(int _size[3]);
   // get & set the modality image spacing size
-  void getModalityImageVoxelSpacing(float _size[3]); // un-usable
-  void setModalityImageVoxelSpacing(float _size[3]); // un-usable
+  void getModalityImageVoxelSpacing(G4float _size[3]); // un-usable
+  void setModalityImageVoxelSpacing(G4float _size[3]); // un-usable
   // get & set the modality image size
-  void setModalityImageScale(double & _scale);
-  double getModalityImageScale();
+  void setModalityImageScale(G4double & _scale);
+  G4double getModalityImageScale();
   // set the modality image in CT 
   void setModalityImage(short * _image);
   short * getModalityImage(int _z);
   void clearModalityImage();
   // set/get the modality image density map
-  void setModalityImageDensityMap(std::vector<float> & _map);
-  std::vector<float> & getModalityImageDensityMap();
+  void setModalityImageDensityMap(std::vector<G4float> & _map);
+  std::vector<G4float> & getModalityImageDensityMap();
   // set the modality image min./max.
   void setModalityImageMinMax(short _minmax[2]);
   // get min. & max. of the modality image 
@@ -328,13 +328,13 @@ public:
   short getModalityImageMax();
   short getModalityImageMin();
   // set center of the modality image position
-  void setModalityCenterPosition(float _center[3]);
-  void getModalityCenterPosition(float _center[3]);
+  void setModalityCenterPosition(G4float _center[3]);
+  void getModalityCenterPosition(G4float _center[3]);
   // get & set the modality image unit
   std::string getModalityImageUnit();
   void setModalityImageUnit(std::string & _unit);
 
-  short convertDensityToHU(float & _dens);
+  short convertDensityToHU(G4float & _dens);
 
   //----- Dose distribution -----//
 
@@ -352,33 +352,33 @@ public:
   void setDoseDistMinMax(short _minmax[2], int _num = 0);
   void getDoseDistMinMax(short _minmax[2], int _num = 0);
   // get min. & max. of the dose distribution 
-  void setDoseDistMinMax(double _minmax[2], int _num = 0);
-  void getDoseDistMinMax(double _minmax[2], int _num = 0);
+  void setDoseDistMinMax(G4double _minmax[2], int _num = 0);
+  void getDoseDistMinMax(G4double _minmax[2], int _num = 0);
   // get & set scale value of the dose distribution for the image
-  void setDoseDistScale(double & _scale, int _num = 0);
-  double getDoseDistScale(int _num = 0);
+  void setDoseDistScale(G4double & _scale, int _num = 0);
+  G4double getDoseDistScale(int _num = 0);
   // set the dose distribution image
   void setShortDoseDist(short * _image, int _num = 0);
   void getShortDoseDist(short * _data, int _z, int _num = 0);
   void getShortDoseDistMinMax(short _minmax[2], int _num = 0);
   // set the dose distribution 
-  void setDoseDist(double * _image, int _num = 0);
-  double * getDoseDist(int _z, int _num = 0);
+  void setDoseDist(G4double * _image, int _num = 0);
+  G4double * getDoseDist(int _z, int _num = 0);
   // add another dose ditribution map to this map
-  bool addDoseDist(std::vector<double *> & _image, int _num = 0);
+  bool addDoseDist(std::vector<G4double *> & _image, int _num = 0);
 
   // get & get center position of calculated dose region
-  void getDoseDistCenterPosition(float _center[3], int _num = 0);
-  void setDoseDistCenterPosition(float _center[3], int _num = 0);
+  void getDoseDistCenterPosition(G4float _center[3], int _num = 0);
+  void setDoseDistCenterPosition(G4float _center[3], int _num = 0);
 
   // get & get name of calculated dose distribution
   std::string getDoseDistName(int _num = 0);
   void setDoseDistName(std::string _name, int _num = 0);
 
   // copy dose distributions
-  void copyDoseDist(std::vector<class GMocrenDataPrimitive<double> > & _dose);
+  void copyDoseDist(std::vector<class GMocrenDataPrimitive<G4double> > & _dose);
   // merge two dose distributions
-  bool mergeDoseDist(std::vector<class GMocrenDataPrimitive<double> > & _dose);
+  bool mergeDoseDist(std::vector<class GMocrenDataPrimitive<G4double> > & _dose);
 
   // clear all dose distributions
   void clearDoseDistAll();
@@ -396,8 +396,8 @@ public:
   // get number of RoI data
   int getNumROI();
   // get & set the ROI image scale
-  double getROIScale(int _num = 0);
-  void setROIScale(double & _scale, int _num = 0);
+  G4double getROIScale(int _num = 0);
+  void setROIScale(G4double & _scale, int _num = 0);
   // get & set the ROI image 
   short * getROI(int _z, int _num = 0);
   void setROI(short * _image, int _num = 0);
@@ -405,8 +405,8 @@ public:
   void getROISize(int _size[3], int _num = 0);
   void setROISize(int _size[3], int _num = 0);
   // get & set position of the ROI region center
-  void getROICenterPosition(float _center[3], int _num = 0);
-  void setROICenterPosition(float _center[3], int _num = 0);
+  void getROICenterPosition(G4float _center[3], int _num = 0);
+  void setROICenterPosition(G4float _center[3], int _num = 0);
   // get & set the ROI image min. and max.
   void getROIMinMax(short _minmax[2], int _num = 0);
   void setROIMinMax(short _minmax[2], int _num = 0);
@@ -422,32 +422,32 @@ public:
   int getNumTracks();
   int getNumTracks4();
   // get & set tracks
-  std::vector<float *> & getTracks();
-  void getTrack(int _num, std::vector<float *> & _steps, 
+  std::vector<G4float *> & getTracks();
+  void getTrack(int _num, std::vector<G4float *> & _steps, 
 		std::vector<unsigned char * > & _color);
-  void addTrack(float * _tracks);
-  void setTracks(std::vector<float *> & _tracks);
+  void addTrack(G4float * _tracks);
+  void setTracks(std::vector<G4float *> & _tracks);
   std::vector<unsigned char *> & getTrackColors();
   void addTrackColor(unsigned char * _colors);
   void setTrackColors(std::vector<unsigned char *> & _trackColors);
-  void copyTracks(std::vector<float *> & _tracks, std::vector<unsigned char *> & _colors);
-  void mergeTracks(std::vector<float *> & _tracks, std::vector<unsigned char *> & _colors);
-  void addTrack(std::vector<float *> & _steps, unsigned char _color[3]);
+  void copyTracks(std::vector<G4float *> & _tracks, std::vector<unsigned char *> & _colors);
+  void mergeTracks(std::vector<G4float *> & _tracks, std::vector<unsigned char *> & _colors);
+  void addTrack(std::vector<G4float *> & _steps, unsigned char _color[3]);
 
   void notStoredTracks() {kTracksWillBeStored = false;};
-  void translateTracks(std::vector<float> & _translateo);
+  void translateTracks(std::vector<G4float> & _translateo);
   void clearTracks() {kTracks.clear();}
 
 
   //----- Detectors -----//
   // get number of detectors
   int getNumberOfDetectors();
-  // add one detector which consists of edges (float[6])
-  void addDetector(std::string & _name, std::vector<float *> & _det, unsigned char _color[3]);
-  void getDetector(int _num, std::vector<float *> & _edges,
+  // add one detector which consists of edges (G4float[6])
+  void addDetector(std::string & _name, std::vector<G4float *> & _det, unsigned char _color[3]);
+  void getDetector(int _num, std::vector<G4float *> & _edges,
 		   std::vector<unsigned char *> & _color,
 		   std::string & _detectorName);
-  void translateDetector(std::vector<float> & _translate);
+  void translateDetector(std::vector<G4float> & _translate);
   void clearDetector() {kDetectors.clear();}
 
 protected:

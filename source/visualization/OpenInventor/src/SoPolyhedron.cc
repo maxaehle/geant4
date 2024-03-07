@@ -51,8 +51,8 @@
 //typedef SbVec3f HVPoint3D;
 //typedef SbVec3f HVNormal3D;
 
-typedef HepGeom::Point3D<double> HVPoint3D;
-typedef HepGeom::Normal3D<double> HVNormal3D;
+typedef HepGeom::Point3D<G4double> HVPoint3D;
+typedef HepGeom::Normal3D<G4double> HVNormal3D;
 
 SO_NODE_SOURCE(Geant4_SoPolyhedron) 
 //////////////////////////////////////////////////////////////////////////////
@@ -265,9 +265,9 @@ void Geant4_SoPolyhedron::computeBBox(
     aCenter.setValue(0,0,0);
   } else {
     SbBool first = TRUE;
-    float xmn = 0,ymn = 0,zmn = 0;
-    float xmx = 0,ymx = 0,zmx = 0;
-    float xct = 0,yct = 0,zct = 0;
+    G4float xmn = 0,ymn = 0,zmn = 0;
+    G4float xmx = 0,ymx = 0,zmx = 0;
+    G4float xct = 0,yct = 0,zct = 0;
     SbVec3f point;
     int count = 0;
     // Assume all facets are convex quadrilaterals :

@@ -10,7 +10,7 @@
 // John Marraffino - Created: 12th May 1998
 // M Fischler      - put and get to/from streams 12/13/04
 // M Fischler	      - put/get to/from streams uses pairs of ulongs when
-//			+ storing doubles avoid problems with precision 
+//			+ storing G4doubles avoid problems with precision 
 //			4/14/05
 // =======================================================================
 
@@ -30,57 +30,57 @@ HepRandomEngine & RandGamma::engine() {return *localEngine;}
 RandGamma::~RandGamma() {
 }
 
-double RandGamma::shoot( HepRandomEngine *anEngine,  double k,
-                                                        double lambda ) {
+G4double RandGamma::shoot( HepRandomEngine *anEngine,  G4double k,
+                                                        G4double lambda ) {
   return genGamma( anEngine, k, lambda );
 }
 
-double RandGamma::shoot( double k, double lambda ) {
+G4double RandGamma::shoot( G4double k, G4double lambda ) {
   HepRandomEngine *anEngine = HepRandom::getTheEngine();
   return genGamma( anEngine, k, lambda );
 }
 
-double RandGamma::fire( double k, double lambda ) {
+G4double RandGamma::fire( G4double k, G4double lambda ) {
   return genGamma( localEngine.get(), k, lambda );
 }
 
-void RandGamma::shootArray( const int size, double* vect,
-                            double k, double lambda )
+void RandGamma::shootArray( const int size, G4double* vect,
+                            G4double k, G4double lambda )
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( G4double* v = vect; v != vect + size; ++v )
     *v = shoot(k,lambda);
 }
 
 void RandGamma::shootArray( HepRandomEngine* anEngine,
-                            const int size, double* vect,
-                            double k, double lambda )
+                            const int size, G4double* vect,
+                            G4double k, G4double lambda )
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( G4double* v = vect; v != vect + size; ++v )
     *v = shoot(anEngine,k,lambda);
 }
 
-void RandGamma::fireArray( const int size, double* vect)
+void RandGamma::fireArray( const int size, G4double* vect)
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( G4double* v = vect; v != vect + size; ++v )
     *v = fire(defaultK,defaultLambda);
 }
 
-void RandGamma::fireArray( const int size, double* vect,
-                           double k, double lambda )
+void RandGamma::fireArray( const int size, G4double* vect,
+                           G4double k, G4double lambda )
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( G4double* v = vect; v != vect + size; ++v )
     *v = fire(k,lambda);
 }
 
-double RandGamma::genGamma( HepRandomEngine *anEngine,
-                               double a, double lambda ) {
+G4double RandGamma::genGamma( HepRandomEngine *anEngine,
+                               G4double a, G4double lambda ) {
 /*************************************************************************
  *         Gamma Distribution - Rejection algorithm gs combined with     *
  *                              Acceptance complement method gd          *
  *************************************************************************/
 
-  static CLHEP_THREAD_LOCAL double aa = -1.0, aaa = -1.0, b, c, d, e, r, s, si, ss, q0;
-  static const double q1 = 0.0416666664, q2 =  0.0208333723, q3 = 0.0079849875,
+  static CLHEP_THREAD_LOCAL G4double aa = -1.0, aaa = -1.0, b, c, d, e, r, s, si, ss, q0;
+  static const G4double q1 = 0.0416666664, q2 =  0.0208333723, q3 = 0.0079849875,
        q4 = 0.0015746717, q5 = -0.0003349403, q6 = 0.0003340332,
        q7 = 0.0006053049, q8 = -0.0004701849, q9 = 0.0001710320,
        a1 = 0.333333333,  a2 = -0.249999949,  a3 = 0.199999867,
@@ -90,8 +90,8 @@ double RandGamma::genGamma( HepRandomEngine *anEngine,
        e4 = 0.041664508,  e5 =  0.008345522,  e6 = 0.001353826,
        e7 = 0.000247453;
 
-double gds,p,q,t,sign_u,u,v,w,x;
-double v1,v2,v12;
+G4double gds,p,q,t,sign_u,u,v,w,x;
+G4double v1,v2,v12;
 
 // Check for invalid input values
 
@@ -248,8 +248,8 @@ std::istream & RandGamma::get ( std::istream & is ) {
   }
   if (possibleKeywordInput(is, "Uvec", defaultK)) {
     std::vector<unsigned long> t(2);
-    is >> defaultK >> t[0] >> t[1]; defaultK = DoubConv::longs2double(t); 
-    is >> defaultLambda>>t[0]>>t[1]; defaultLambda = DoubConv::longs2double(t); 
+    is >> defaultK >> t[0] >> t[1]; defaultK = DoubConv::longs2G4double(t); 
+    is >> defaultLambda>>t[0]>>t[1]; defaultLambda = DoubConv::longs2G4double(t); 
     return is;
   }
   // is >> defaultK encompassed by possibleKeywordInput

@@ -168,7 +168,7 @@ int xDataXML_getCommonData( statusMessageReporting *smr, xDataXML_element *eleme
         xDataTOM_Int *length );
 int xDataXML_xDataTypeConvertAttributes( statusMessageReporting *smr, xDataXML_element *element );
 xDataTOM_Int xDataXML_convertAttributeTo_xDataTOM_Int( statusMessageReporting *smr, xDataXML_element *element, char const *name, xDataTOM_Int *n, int required );
-int xDataXML_convertAttributeToDouble( statusMessageReporting *smr, xDataXML_element *element, char const *name, double *d, int required );
+int xDataXML_convertAttributeToDouble( statusMessageReporting *smr, xDataXML_element *element, char const *name, G4double *d, int required );
 int xDataXML_numberOfElementsByTagName( statusMessageReporting *smr, xDataXML_element *element, char const *tagName );
 xDataXML_elementList *xDataXML_getElementsByTagName( statusMessageReporting *smr, xDataXML_element *element, char const *tagName );
 xDataXML_element *xDataXML_getOneElementByTagName( statusMessageReporting *smr, xDataXML_element *element, char *name, int required );
@@ -180,7 +180,7 @@ xDataXML_document *xDataXML_getElementsDocument( xDataXML_element *element );
 void *xDataXML_get_smrUserInterfaceFromDocument( xDataXML_document *doc );
 void *xDataXML_get_smrUserInterfaceFromElement( xDataXML_element *element );
 int xDataXML_stringTo_xDataTOM_Int( statusMessageReporting *smr, void *smrUserInterface, char const *c, xDataTOM_Int *value, char const *endings, char **e );
-int xDataXML_stringTo_double( statusMessageReporting *smr, void *smrUserInterface, char const *c, double *value, char const *endings, char **e );
+int xDataXML_stringTo_G4double( statusMessageReporting *smr, void *smrUserInterface, char const *c, G4double *value, char const *endings, char **e );
 int xDataXML_addToAccessed( statusMessageReporting *smr, xDataXML_element *element, int increment );
 int xDataXML_getAccessed( statusMessageReporting *smr, xDataXML_element *element );
 void *xDataXML_initializeData( statusMessageReporting *smr, xDataXML_element *XE, xDataTOM_element *TE, char const *ID, size_t size );
@@ -195,9 +195,9 @@ int xDataXML_axesToTOM( statusMessageReporting *smr, xDataXML_element *XE, xData
 c Stuff in xDataTOM_importXML_XYs.c
 */
 int xDataXML_XYsToTOM( statusMessageReporting *smr, xDataXML_element *XE, xDataTOM_element *TE );
-int xDataXML_XYsDataToTOM( statusMessageReporting *smr, xDataXML_element *XE, xDataTOM_XYs *XYs, int index, int length, double value, double accuracy,
+int xDataXML_XYsDataToTOM( statusMessageReporting *smr, xDataXML_element *XE, xDataTOM_XYs *XYs, int index, int length, G4double value, G4double accuracy,
         enum xDataTOM_subAxesType subAxesType, int axesOffest, xDataTOM_axes *axes, xDataTOM_interpolation *interpolation );
-int xDataXML_stringToDoubles( statusMessageReporting *smr, xDataXML_element *XE, char const *s, int length, double *d );
+int xDataXML_stringToDoubles( statusMessageReporting *smr, xDataXML_element *XE, char const *s, int length, G4double *d );
 
 /*
 c Stuff in xDataTOM_importXML_regionsXYs.c
@@ -208,7 +208,7 @@ int xDataXML_regionsXYsToTOM( statusMessageReporting *smr, xDataXML_element *XE,
 c Stuff in xDataTOM_importXML_W_XYs.c
 */
 int xDataXML_W_XYsToTOM( statusMessageReporting *smr, xDataXML_element *XE, xDataTOM_element *TE );
-int xDataXML_W_XYsDataToTOM( statusMessageReporting *smr, xDataXML_element *XE, xDataTOM_W_XYs *W_XYs, int index, double value, xDataTOM_axes *axes,
+int xDataXML_W_XYsDataToTOM( statusMessageReporting *smr, xDataXML_element *XE, xDataTOM_W_XYs *W_XYs, int index, G4double value, xDataTOM_axes *axes,
     int axesOffset );
 
 /*

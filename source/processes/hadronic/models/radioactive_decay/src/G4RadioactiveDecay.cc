@@ -522,7 +522,7 @@ G4RadioactiveDecay::LoadDecayTable(const G4ParticleDefinition& theParentNucleus)
   G4int Z = ((const G4Ions*)(&theParentNucleus))->GetAtomicNumber();
 
   G4double levelEnergy = ((const G4Ions*)(&theParentNucleus))->GetExcitationEnergy();
-  G4Ions::G4FloatLevelBase floatingLevel =
+  G4Ions::G4FloatLevelBase G4floatingLevel =
     ((const G4Ions*)(&theParentNucleus))->GetFloatLevelBase();
 
 #ifdef G4MULTITHREADED
@@ -553,7 +553,7 @@ G4RadioactiveDecay::LoadDecayTable(const G4ParticleDefinition& theParentNucleus)
 
   if (DecaySchemeFile.good()) {
     // Initialize variables used for reading in radioactive decay data
-    G4bool floatMatch(false);
+    G4bool G4floatMatch(false);
     const G4int nMode = G4RadioactiveDecayModeSize;
     G4double modeTotalBR[nMode] = {0.0};
     G4double modeSumBR[nMode];
@@ -564,7 +564,7 @@ G4RadioactiveDecay::LoadDecayTable(const G4ParticleDefinition& theParentNucleus)
     char inputChars[120]={' '};
     G4String inputLine;
     G4String recordType("");
-    G4String floatingFlag("");
+    G4String G4floatingFlag("");
     G4String daughterFloatFlag("");
     G4Ions::G4FloatLevelBase daughterFloatLevel;
     G4RadioactiveDecayMode theDecayMode;
@@ -598,19 +598,19 @@ G4RadioactiveDecay::LoadDecayTable(const G4ParticleDefinition& theParentNucleus)
         if (inputChars[0] == 'P') {
           // Nucleus is a parent type.  Check excitation level to see if it
           // matches that of theParentNucleus
-          tmpStream >> recordType >> parentExcitation >> floatingFlag >> dummy;
+          tmpStream >> recordType >> parentExcitation >> G4floatingFlag >> dummy;
           // "dummy" takes the place of half-life
           //  Now read in from ENSDFSTATE in particle category
 
           if (found) {
             complete = true;
           } else {
-            // Take first level which matches excitation energy regardless of floating level
+            // Take first level which matches excitation energy regardless of G4floating level
             found = (std::abs(parentExcitation*keV - levelEnergy) < levelTolerance);
-            if (floatingLevel != noFloat) {
-              // If floating level specificed, require match of both energy and floating level
-              floatMatch = (floatingLevel == G4Ions::FloatLevelBase(floatingFlag.back()) );
-              if (!floatMatch) found = false;
+            if (G4floatingLevel != noFloat) {
+              // If G4floating level specificed, require match of both energy and G4floating level
+              G4floatMatch = (G4floatingLevel == G4Ions::FloatLevelBase(G4floatingFlag.back()) );
+              if (!G4floatMatch) found = false;
             }
           }
 

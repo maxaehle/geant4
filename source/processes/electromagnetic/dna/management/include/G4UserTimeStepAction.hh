@@ -92,8 +92,8 @@ public:
   virtual void EndProcessing(){;}
 
 protected:
-  void SetMinimumTimeSteps(std::map<double,double>*);
-  void AddTimeStep(double /*startingTime*/, double /*timeStep*/);
+  void SetMinimumTimeSteps(std::map<G4double,G4double>*);
+  void AddTimeStep(G4double /*startingTime*/, G4double /*timeStep*/);
 
 private:
   G4UserTimeStepAction& operator=(const G4UserTimeStepAction& );

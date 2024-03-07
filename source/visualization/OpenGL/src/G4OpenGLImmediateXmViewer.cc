@@ -65,7 +65,7 @@ void G4OpenGLImmediateXmViewer::Initialise () {
 
   InitializeGLView ();
 
-  // If a double buffer context has been forced upon us, ignore the
+  // If a G4double buffer context has been forced upon us, ignore the
   // back buffer for this OpenGLImmediate view.
   glDrawBuffer (GL_FRONT);
 }

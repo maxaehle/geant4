@@ -46,11 +46,11 @@ class G4ErrorSurfaceTarget : public G4ErrorTanPlaneTarget
     G4ErrorSurfaceTarget();
     virtual ~G4ErrorSurfaceTarget() = default;
 
-    virtual double GetDistanceFromPoint( const G4ThreeVector& point,
+    virtual G4double GetDistanceFromPoint( const G4ThreeVector& point,
                                          const G4ThreeVector& direc ) const = 0;
       // Distance from a point to the surface in a given direction
 
-    virtual double GetDistanceFromPoint( const G4ThreeVector& point ) const = 0;
+    virtual G4double GetDistanceFromPoint( const G4ThreeVector& point ) const = 0;
       // Minimal distance from a point to the surface in any direction
 
     virtual G4Plane3D GetTangentPlane( const G4ThreeVector& point ) const = 0;

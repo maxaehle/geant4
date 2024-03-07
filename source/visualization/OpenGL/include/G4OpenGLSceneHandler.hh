@@ -106,7 +106,7 @@ public:
 #ifdef G4OPENGL_VERSION_2
   private :
   // vertex vector to be given to the graphic card
-  std::vector<double> fOglVertex;
+  std::vector<G4double> fOglVertex;
   // indices vector to be given to the graphic card
   std::vector<unsigned short> fOglIndices;
   // before, drawyType (as GL_QUADS, GL_TRIANGLES...) was
@@ -120,7 +120,7 @@ public:
   // emulating glEnd and glBegin
   void glEndVBO();
   void glBeginVBO(GLenum type);
-  void drawVBOArray(std::vector<double> vertices);
+  void drawVBOArray(std::vector<G4double> vertices);
   
   // Buffers used to access vertex and indices elements
   GLuint fVertexBufferObject;

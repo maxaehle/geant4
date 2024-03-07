@@ -31,7 +31,7 @@
 // G4UCNMaterialPropertiesTable
 // ----------------------------
 //
-// Derives from G4MaterialPropertiesTable and adds a double pointer to the
+// Derives from G4MaterialPropertiesTable and adds a G4double pointer to the
 // MicroRoughnessTable
 //
 // This file includes the initialization and calculation of the mr-lookup

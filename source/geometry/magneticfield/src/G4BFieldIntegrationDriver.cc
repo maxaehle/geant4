@@ -148,7 +148,7 @@ G4BFieldIntegrationDriver::GetFieldValue(const G4FieldTrack& track,
 void G4BFieldIntegrationDriver::PrintStatistics() const
 {
     const auto totSteps = fSmallDriverSteps + fLargeDriverSteps;
-    const auto toFraction = [&](double value) { return value / totSteps * 100; };
+    const auto toFraction = [&](G4double value) { return value / totSteps * 100; };
 
     G4cout << "============= G4BFieldIntegrationDriver statistics ===========\n"
            << "total steps " << totSteps << " "

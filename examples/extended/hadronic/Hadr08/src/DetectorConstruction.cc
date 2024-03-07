@@ -101,7 +101,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct() {
   // Define the tracker region
   G4Region* trackerRegion = new G4Region( "Tracker_region" );
   trackerRegion->AddRootLogicalVolume( fSiliconTrackerLogical );
-  std::vector< double > cuts;
+  std::vector< G4double > cuts;
   cuts.push_back( 10.0*cm ); cuts.push_back( 10.0*cm ); 
   cuts.push_back( 10.0*cm ); cuts.push_back( 10.0*cm );
   trackerRegion->SetProductionCuts( new G4ProductionCuts );

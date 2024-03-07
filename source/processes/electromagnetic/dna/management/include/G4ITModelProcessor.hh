@@ -81,7 +81,7 @@ public:
 
     void Initialize();
 
-    void RegisterModel(double time, G4VITStepModel*);
+    void RegisterModel(G4double time, G4VITStepModel*);
 
     /** Restore the original state. This method should be called only by G4Scheduler */
     void CleanProcessor();

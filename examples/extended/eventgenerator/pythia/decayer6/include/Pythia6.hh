@@ -92,17 +92,17 @@ struct Pyjets_t
   int    N;
   int    NPAD;
   int    K[5][4000];
-  double P[5][4000];
-  double V[5][4000];
+  G4double P[5][4000];
+  G4double V[5][4000];
 };
 
 /// PYDAT1 common-block 
 struct Pydat1_t
 {
   int    MSTU[200];
-  double PARU[200];
+  G4double PARU[200];
   int    MSTJ[200];
-  double PARJ[200];
+  G4double PARJ[200];
 };
 
 /// PYDAT3 common-block 
@@ -110,7 +110,7 @@ struct Pydat3_t
 {
   int    MDCY[3][500];
   int    MDME[2][KNDCAY];
-  double BRAT[KNDCAY];
+  G4double BRAT[KNDCAY];
   int    KFDP[5][KNDCAY];
 };
 
@@ -119,8 +119,8 @@ struct Pythia6Particle
 {
    Pythia6Particle(
      int ks, int kf, int parent, int firstChild, int lastChild,
-     float px, float py, float pz, float energy, float mass,
-     float vx, float vy, float vz, float time, float lifetime)
+     G4float px, G4float py, G4float pz, G4float energy, G4float mass,
+     G4float vx, G4float vy, G4float vz, G4float time, G4float lifetime)
      : fKS(ks), fKF(kf), 
        fParent(parent), fFirstChild(firstChild), fLastChild(lastChild),
        fPx(px), fPy(py), fPz(pz), fEnergy(energy), fMass(mass),
@@ -132,17 +132,17 @@ struct Pythia6Particle
    int    fFirstChild;    // id of first child        ( LUJETS K[4] )
    int    fLastChild;     // id of last  child        ( LUJETS K[5] )
 
-   float  fPx;            // X momenta [GeV/c]        ( LUJETS P[1] )
-   float  fPy;            // Y momenta [GeV/c]        ( LUJETS P[2] )
-   float  fPz;            // Z momenta [GeV/c]        ( LUJETS P[3] )
-   float  fEnergy;        // Energy    [GeV]          ( LUJETS P[4] )
-   float  fMass;          // Mass      [Gev/c^2]      ( LUJETS P[5] )
+   G4float  fPx;            // X momenta [GeV/c]        ( LUJETS P[1] )
+   G4float  fPy;            // Y momenta [GeV/c]        ( LUJETS P[2] )
+   G4float  fPz;            // Z momenta [GeV/c]        ( LUJETS P[3] )
+   G4float  fEnergy;        // Energy    [GeV]          ( LUJETS P[4] )
+   G4float  fMass;          // Mass      [Gev/c^2]      ( LUJETS P[5] )
 
-   float  fVx;            // X vertex  [mm]           ( LUJETS V[1] )
-   float  fVy;            // Y vertex  [mm]           ( LUJETS V[2] )
-   float  fVz;            // Z vertex  [mm]           ( LUJETS V[3] )
-   float  fTime;          // time of procuction [mm/c]( LUJETS V[4] )
-   float  fLifetime;      // proper lifetime [mm/c]   ( LUJETS V[5] )
+   G4float  fVx;            // X vertex  [mm]           ( LUJETS V[1] )
+   G4float  fVy;            // Y vertex  [mm]           ( LUJETS V[2] )
+   G4float  fVz;            // Z vertex  [mm]           ( LUJETS V[3] )
+   G4float  fTime;          // time of procuction [mm/c]( LUJETS V[4] )
+   G4float  fLifetime;      // proper lifetime [mm/c]   ( LUJETS V[5] )
 };   
 
 typedef std::vector<Pythia6Particle*> ParticleVector;
@@ -172,7 +172,7 @@ class Pythia6
    // ****** TPYTHIA routines
    //
    int   Pycomp(int kf);
-   void  Py1ent(int line, int kf, double pe, double theta, double phi);
+   void  Py1ent(int line, int kf, G4double pe, G4double theta, G4double phi);
    ParticleVector*  ImportParticles();
    int   ImportParticles(ParticleVector* particles, const char* option="");
 

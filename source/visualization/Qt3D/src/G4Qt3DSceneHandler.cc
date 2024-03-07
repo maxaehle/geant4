@@ -56,12 +56,12 @@
 
 #include <utility>
 
-// Qt3D seems to offer a choice of type - float or double. It would be nice
-// to use double since it offers the prospect of higher precision, hopefully
+// Qt3D seems to offer a choice of type - G4float or G4double. It would be nice
+// to use G4double since it offers the prospect of higher precision, hopefully
 // avoiding some issues that we see at high zoom. But it currently gives the
 // following warning: "findBoundingVolumeComputeData: Position attribute not
-// suited for bounding volume computation", so for now we use float.
-#define PRECISION float
+// suited for bounding volume computation", so for now we use G4float.
+#define PRECISION G4float
 #define BASETYPE Qt3DRender::QAttribute::Float
 
 G4int G4Qt3DSceneHandler::fSceneIdCount = 0;

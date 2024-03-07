@@ -98,9 +98,9 @@ public:
    
 
 // -------------initialize HIJING ------------------------
-float efrm;        //CM energy per nucleon (GeV/A)
-float bmin;        //impact parameter
-float bmax;
+G4float efrm;        //CM energy per nucleon (GeV/A)
+G4float bmin;        //impact parameter
+G4float bmax;
 G4int Nproduce;    //Number of produced particles
 //-------------------------------------------------------
   

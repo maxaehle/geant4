@@ -51,7 +51,7 @@ class G4UIparameter
     G4UIparameter(const char* theName, char theType, G4bool theOmittable);
       // Constructors, where "theName" is the name of the parameter which will
       // be used by the range checking, "theType" is the type of the parameter
-      // (currently "b" (Boolean), "i" (integer), "l" (long int), "d" (double)
+      // (currently "b" (Boolean), "i" (integer), "l" (long int), "d" (G4double)
       // and "s" (string) are supported). 
       // "theOmittable" is a Boolean flag to set whether
       // the user of the command can omit the parameter or not.

@@ -12,11 +12,11 @@
 //                   methods : 20th Aug 1998
 // M Fischler      - put and get to/from streams 12/13/04
 // M Fischler	      - put/get to/from streams uses pairs of ulongs when
-//			+ storing doubles avoid problems with precision 
+//			+ storing G4doubles avoid problems with precision 
 //			4/14/05
 // =======================================================================
 
-#include <float.h>
+#include <G4float.h>
 #include "CLHEP/Random/RandStudentT.h"
 #include "CLHEP/Random/DoubConv.h"
 
@@ -34,15 +34,15 @@ RandStudentT::~RandStudentT()
 {
 }
 
-double RandStudentT::operator()() {
+G4double RandStudentT::operator()() {
   return fire( defaultA );
 }
 
-double RandStudentT::operator()( double a ) {
+G4double RandStudentT::operator()( G4double a ) {
   return fire( a );
 }
 
-double RandStudentT::shoot( double a ) {
+G4double RandStudentT::shoot( G4double a ) {
 /******************************************************************
  *                                                                *
  *           Student-t Distribution - Polar Method                *
@@ -67,7 +67,7 @@ double RandStudentT::shoot( double a ) {
  * Implemented by F. Niederl, 1994                                *
  ******************************************************************/
 
- double u,v,w;
+ G4double u,v,w;
 
 // Check for valid input value
 
@@ -83,24 +83,24 @@ double RandStudentT::shoot( double a ) {
  return(u * std::sqrt( a * ( std::exp(- 2.0 / a * std::log(w)) - 1.0) / w));
 }
 
-void RandStudentT::shootArray( const int size, double* vect,
-                            double a )
+void RandStudentT::shootArray( const int size, G4double* vect,
+                            G4double a )
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( G4double* v = vect; v != vect + size; ++v )
     *v = shoot(a);
 }
 
 void RandStudentT::shootArray( HepRandomEngine* anEngine,
-                            const int size, double* vect,
-                            double a )
+                            const int size, G4double* vect,
+                            G4double a )
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( G4double* v = vect; v != vect + size; ++v )
     *v = shoot(anEngine,a);
 }
 
-double RandStudentT::fire( double a ) {
+G4double RandStudentT::fire( G4double a ) {
 
- double u,v,w;
+ G4double u,v,w;
 
  do
  {
@@ -112,22 +112,22 @@ double RandStudentT::fire( double a ) {
  return(u * std::sqrt( a * ( std::exp(- 2.0 / a * std::log(w)) - 1.0) / w));
 }
 
-void RandStudentT::fireArray( const int size, double* vect)
+void RandStudentT::fireArray( const int size, G4double* vect)
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( G4double* v = vect; v != vect + size; ++v )
     *v = fire(defaultA);
 }
 
-void RandStudentT::fireArray( const int size, double* vect,
-                           double a )
+void RandStudentT::fireArray( const int size, G4double* vect,
+                           G4double a )
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( G4double* v = vect; v != vect + size; ++v )
     *v = fire(a);
 }
 
-double RandStudentT::shoot( HepRandomEngine *anEngine, double a ) {
+G4double RandStudentT::shoot( HepRandomEngine *anEngine, G4double a ) {
 
- double u,v,w;
+ G4double u,v,w;
 
  do
  {
@@ -163,7 +163,7 @@ std::istream & RandStudentT::get ( std::istream & is ) {
   }
   if (possibleKeywordInput(is, "Uvec", defaultA)) {
     std::vector<unsigned long> t(2);
-    is >> defaultA >> t[0] >> t[1]; defaultA = DoubConv::longs2double(t); 
+    is >> defaultA >> t[0] >> t[1]; defaultA = DoubConv::longs2G4double(t); 
     return is;
   }
   // is >> defaultA encompassed by possibleKeywordInput

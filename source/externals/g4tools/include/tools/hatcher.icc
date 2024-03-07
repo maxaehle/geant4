@@ -168,8 +168,8 @@ inline bool hatcher::compute_polyline (vec3f* tabPoints,unsigned int aNumber) {
 
   int firstComputeFirstNumHatch =0;
   unsigned int firstComputeNumberHatchToDraw =0;
-  float firstHatchShiftToMatchFirstPoint = FLT_MAX; // use in one case when there is no intersection points: to test we have to fill all the polygone
-  float secondHatchShiftToMatchFirstPoint = FLT_MAX; // use in one case when there is no intersection points: to test we have to fill all the polygone
+  G4float firstHatchShiftToMatchFirstPoint = FLT_MAX; // use in one case when there is no intersection points: to test we have to fill all the polygone
+  G4float secondHatchShiftToMatchFirstPoint = FLT_MAX; // use in one case when there is no intersection points: to test we have to fill all the polygone
   //call compute for first set of hatch
   if ( !compute_single_polyline (tabPoints,aNumber))
     return false;
@@ -399,8 +399,8 @@ inline bool hatcher::compute_polyline (vec3f* tabPoints,unsigned int aNumber) {
               indTmp = 0;
               while ((solution == 0) && (indTmp < aNumber)) {
 
-                if ((fHatchShiftToMatchPointVec[indTmp] > ((float)firstComputeFirstNumHatch+(float)indHatch-fStripWidth))
-                    && (fHatchShiftToMatchPointVec[indTmp] < ((float)firstComputeFirstNumHatch+(float)indHatch))
+                if ((fHatchShiftToMatchPointVec[indTmp] > ((G4float)firstComputeFirstNumHatch+(G4float)indHatch-fStripWidth))
+                    && (fHatchShiftToMatchPointVec[indTmp] < ((G4float)firstComputeFirstNumHatch+(G4float)indHatch))
                     && ((indTmp == lineNumber) || (indTmp==lineNumber+1) || ((lineNumber == (aNumber-1)) && (indTmp ==0)))) {
                   find = false;
                   unsigned a =0;
@@ -464,8 +464,8 @@ inline bool hatcher::compute_polyline (vec3f* tabPoints,unsigned int aNumber) {
               indTmp = 0;
               while ((solution == 0) && (indTmp < aNumber)) {
 
-                if ((fHatchShiftToMatchPointVec[indTmp] > ((float)fFirstNumHatch+(float)indHatch-fStripWidth))
-                    && (fHatchShiftToMatchPointVec[indTmp] < ((float)fFirstNumHatch+(float)indHatch))
+                if ((fHatchShiftToMatchPointVec[indTmp] > ((G4float)fFirstNumHatch+(G4float)indHatch-fStripWidth))
+                    && (fHatchShiftToMatchPointVec[indTmp] < ((G4float)fFirstNumHatch+(G4float)indHatch))
                     && ((indTmp == lineNumber) || (indTmp==lineNumber+1) || ((lineNumber == (aNumber-1)) && (indTmp ==0)))) {
                   find = false;
                   unsigned a =0;
@@ -606,14 +606,14 @@ inline bool hatcher::compute_single_polyline (vec3f* tabPoints,unsigned int aNum
                           fNormal[2]*AB[0]-fNormal[0]*AB[2],
                           fNormal[0]*AB[1]-fNormal[1]*AB[0]);
 
-    float normAB =(float)std::sqrt(std::pow(AB[0],2)+
+    G4float normAB =(G4float)std::sqrt(std::pow(AB[0],2)+
                         std::pow(AB[1],2)+
                         std::pow(AB[2],2));
-    float normABPerpVector =(float)std::sqrt(std::pow(ABPerpVector[0],2)+
+    G4float normABPerpVector =(G4float)std::sqrt(std::pow(ABPerpVector[0],2)+
                         std::pow(ABPerpVector[1],2)+
                         std::pow(ABPerpVector[2],2));
 
-    float j = std::tan(fDirAngle)*normAB/normABPerpVector;
+    G4float j = std::tan(fDirAngle)*normAB/normABPerpVector;
 
     if (normABPerpVector == 0){  // never done (should be test before)
 #ifdef TOOLS_HATCHER_DEBUG
@@ -623,7 +623,7 @@ inline bool hatcher::compute_single_polyline (vec3f* tabPoints,unsigned int aNum
       return false;
     }
 
-    fDirVec = AB +(float)j*ABPerpVector;
+    fDirVec = AB +(G4float)j*ABPerpVector;
     // normalize vector to unit on X or on Y
     if (fDirVec.getValue()[0] ==0){
       fDirVec[0] = fPrecisionFactor; // to get rid of somes errors
@@ -642,8 +642,8 @@ inline bool hatcher::compute_single_polyline (vec3f* tabPoints,unsigned int aNum
                             fNormal[0]*fDirVec.getValue()[1]-fNormal[1]*fDirVec.getValue()[0]);
 
     // normalize vector to match the shift size
-    float param = 1.0f;
-    param = (float)std::sqrt((std::pow(fShift,2))/(
+    G4float param = 1.0f;
+    param = (G4float)std::sqrt((std::pow(fShift,2))/(
                                         std::pow(dirShiftVector[0],2)+
                                         std::pow(dirShiftVector[1],2)+
                                         std::pow(dirShiftVector[2],2)));
@@ -663,7 +663,7 @@ inline bool hatcher::compute_single_polyline (vec3f* tabPoints,unsigned int aNum
   // (origin_point_of_hatch)+i*(directionVector)+j*(shiftVector) = each_point_of_polyline
   // We will be interest only on j factor for the moment. This factor represent the offset
   // between the Origin point of the hatch and the compute point of the polyline
-  // We put results in a float table
+  // We put results in a G4float table
   //
   // We also have to memorize the min and max number of the hatch to be draw
   // Point                  0 1 2 3 4 5 6 ...n 1
@@ -672,8 +672,8 @@ inline bool hatcher::compute_single_polyline (vec3f* tabPoints,unsigned int aNum
   ////////////////////////////////////////////
 
   fHatchShiftToMatchPointVec.resize(numberOfPolylinePoints+1);
-  float minShiftHatch =FLT_MAX;
-  float maxShiftHatch =-FLT_MAX;
+  G4float minShiftHatch =FLT_MAX;
+  G4float maxShiftHatch =-FLT_MAX;
   vec2f res;
 
   for (int a=0;a<numberOfPolylinePoints;a++) {
@@ -826,16 +826,16 @@ inline bool hatcher::compute_single_polyline (vec3f* tabPoints,unsigned int aNum
   /////////////////////////////////////////////
   // Compute the numHatchLine tab and draw correct points
   /////////////////////////////////////////////
-  std::vector<float> listCoefDirHatch(fNumberHatchToDraw);
+  std::vector<G4float> listCoefDirHatch(fNumberHatchToDraw);
   std::vector<vec3f> listConflictPoints(numberOfPolylinePoints);
 
   vec3f ABVec,tempVec;
   int valid =false;
   bool drawEnabled = false; // true : we could draw second point, false we wait for the first
-  float temp=0;
+  G4float temp=0;
   int tempInt =0;
-  float nextPointConflictHatchNumber = -FLT_MAX;
-  float currentPointConflictHatchNumber = -FLT_MAX;
+  G4float nextPointConflictHatchNumber = -FLT_MAX;
+  G4float currentPointConflictHatchNumber = -FLT_MAX;
   std::vector<unsigned int> orderConflictLineNumber;
 
   for (unsigned int hatchNumber =0;hatchNumber<fNumberHatchToDraw;hatchNumber++) {
@@ -865,9 +865,9 @@ inline bool hatcher::compute_single_polyline (vec3f* tabPoints,unsigned int aNum
 
           res = resolve_system(fDirVec.getValue(),
                               ABVec,
-                              vec3f(listPoints[fConflictNumHatchLineTab[hatchNumber][conflictLineNumber]].getValue()[0]-fOffset[0]-((float)hatchNumber+(float)fFirstNumHatch)*fShiftVec[0],
-                                      listPoints[fConflictNumHatchLineTab[hatchNumber][conflictLineNumber]].getValue()[1]-fOffset[1]-((float)hatchNumber+(float)fFirstNumHatch)*fShiftVec[1],
-                                      listPoints[fConflictNumHatchLineTab[hatchNumber][conflictLineNumber]].getValue()[2]-fOffset[2]-((float)hatchNumber+(float)fFirstNumHatch)*fShiftVec[2]));
+                              vec3f(listPoints[fConflictNumHatchLineTab[hatchNumber][conflictLineNumber]].getValue()[0]-fOffset[0]-((G4float)hatchNumber+(G4float)fFirstNumHatch)*fShiftVec[0],
+                                      listPoints[fConflictNumHatchLineTab[hatchNumber][conflictLineNumber]].getValue()[1]-fOffset[1]-((G4float)hatchNumber+(G4float)fFirstNumHatch)*fShiftVec[1],
+                                      listPoints[fConflictNumHatchLineTab[hatchNumber][conflictLineNumber]].getValue()[2]-fOffset[2]-((G4float)hatchNumber+(G4float)fFirstNumHatch)*fShiftVec[2]));
 
           if (fResolveResult ==0 ) {
             // we store results
@@ -1063,7 +1063,7 @@ inline bool hatcher::compute_single_polyline (vec3f* tabPoints,unsigned int aNum
                   follow++;
                 }
                 if(follow < fConflictNumHatchLineTab[hatchNumber].size()) {
-                  float alpha = 0;
+                  G4float alpha = 0;
                   bool findAlpha = true;
                   if (listConflictPoints[follow][0] != listConflictPoints[conflictNumber][0]) {
                     alpha = (listPoints[fConflictNumHatchLineTab[hatchNumber][follow]][0]-listConflictPoints[conflictNumber][0])/(listConflictPoints[follow][0]-listConflictPoints[conflictNumber][0]);
@@ -1154,54 +1154,54 @@ inline vec2f hatcher::resolve_system(const vec3f& A,const vec3f& B,const vec3f& 
 
   fResolveResult = RESOLVE_UNDEFINED;
 
-  double Ax = A[0];
-  double Ay = A[1];
-  double Az = A[2];
-  double Bx = B[0];
-  double By = B[1];
-  double Bz = B[2];
-  double Cx = C[0];
-  double Cy = C[1];
-  double Cz = C[2];
+  G4double Ax = A[0];
+  G4double Ay = A[1];
+  G4double Az = A[2];
+  G4double Bx = B[0];
+  G4double By = B[1];
+  G4double Bz = B[2];
+  G4double Cx = C[0];
+  G4double Cy = C[1];
+  G4double Cz = C[2];
 
-  double bDiv = (By*Ax-Ay*Bx);
-  if (ffabs(float(bDiv)) <=FLT_EPSILON) {
+  G4double bDiv = (By*Ax-Ay*Bx);
+  if (ffabs(G4float(bDiv)) <=FLT_EPSILON) {
     // we have to test in a other order
-    double tmp;
+    G4double tmp;
     tmp = Ax; Ax = Ay; Ay = Az; Az = tmp;
     tmp = Bx; Bx = By; By = Bz; Bz = tmp;
     tmp = Cx; Cx = Cy; Cy = Cz; Cz = tmp;
 
     bDiv = (By*Ax-Ay*Bx);
 
-    if  (ffabs(float(bDiv)) <=FLT_EPSILON) {
+    if  (ffabs(G4float(bDiv)) <=FLT_EPSILON) {
       // we have to test in a other order
       tmp = Ax; Ax = Ay; Ay = Az; Az = tmp;
       tmp = Bx; Bx = By; By = Bz; Bz = tmp;
       tmp = Cx; Cx = Cy; Cy = Cz; Cz = tmp;
 
       bDiv = (By*Ax-Ay*Bx);
-      if (ffabs(float(bDiv)) <=FLT_EPSILON) {
+      if (ffabs(G4float(bDiv)) <=FLT_EPSILON) {
         fResolveResult = RESOLVE_COLINEAR;
         return vec2f(0,0);
       }
     }
   }
-  double b= (Cy*Ax-Ay*Cx)/bDiv;
-  double a= -(Cy*Bx-By*Cx)/bDiv;
-  double  bid = ffabs(float(a*Az+b*Bz - Cz));
+  G4double b= (Cy*Ax-Ay*Cx)/bDiv;
+  G4double a= -(Cy*Bx-By*Cx)/bDiv;
+  G4double  bid = ffabs(G4float(a*Az+b*Bz - Cz));
 
   if (bid <= FLT_EPSILON) {
     fResolveResult = RESOLVE_OK;
-    return vec2f((float)a,(float)b);
+    return vec2f((G4float)a,(G4float)b);
   }
   else {
 
-    double minBoxValue = 1;
+    G4double minBoxValue = 1;
 
-    double minXValue =FLT_MAX;
-    double minYValue =FLT_MAX;
-    double minZValue =FLT_MAX;
+    G4double minXValue =FLT_MAX;
+    G4double minYValue =FLT_MAX;
+    G4double minZValue =FLT_MAX;
     if ((A[0] !=0) && ((A[0]) <minXValue)) minXValue = (A[0]);
     if ((B[0] !=0) && ((B[0]) <minXValue)) minXValue = (B[0]);
     if ((C[0] !=0) && ((C[0]) <minXValue)) minXValue = (C[0]);
@@ -1213,9 +1213,9 @@ inline vec2f hatcher::resolve_system(const vec3f& A,const vec3f& B,const vec3f& 
     if ((C[2] !=0) && ((C[2]) <minZValue)) minZValue = (C[2]);
 
 
-    double maxXValue =-FLT_MAX;
-    double maxYValue =-FLT_MAX;
-    double maxZValue =-FLT_MAX;
+    G4double maxXValue =-FLT_MAX;
+    G4double maxYValue =-FLT_MAX;
+    G4double maxZValue =-FLT_MAX;
     if ((A[0] !=0) && ((A[0]) >maxXValue)) maxXValue = (A[0]);
     if ((B[0] !=0) && ((B[0]) >maxXValue)) maxXValue = (B[0]);
     if ((C[0] !=0) && ((C[0]) >maxXValue)) maxXValue = (C[0]);
@@ -1236,7 +1236,7 @@ inline vec2f hatcher::resolve_system(const vec3f& A,const vec3f& B,const vec3f& 
 
     if (bid <= minBoxValue) {
       fResolveResult = RESOLVE_OK;
-      return vec2f((float)a,(float)b);
+      return vec2f((G4float)a,(G4float)b);
     }
     else {
       if (bid>100*minBoxValue) {

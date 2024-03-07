@@ -24,12 +24,12 @@ inline RandFlat::RandFlat(HepRandomEngine & anEngine)
 : HepRandom(), firstUnusedBit(0), localEngine(&anEngine, do_nothing_deleter()),
   defaultWidth(1.0), defaultA(0.0), defaultB(1.0) {}
 
-inline RandFlat::RandFlat(HepRandomEngine & anEngine, double width )
+inline RandFlat::RandFlat(HepRandomEngine & anEngine, G4double width )
 : HepRandom(), firstUnusedBit(0), localEngine(&anEngine, do_nothing_deleter()),
   defaultWidth(width), defaultA(0.0), defaultB(width) {}
 
-inline RandFlat::RandFlat(HepRandomEngine & anEngine, double a,
-                                                      double b )
+inline RandFlat::RandFlat(HepRandomEngine & anEngine, G4double a,
+                                                      G4double b )
 : HepRandom(), firstUnusedBit(0), localEngine(&anEngine, do_nothing_deleter()),
   defaultWidth(b-a), defaultA(a), defaultB(b) {}
 
@@ -37,33 +37,33 @@ inline RandFlat::RandFlat(HepRandomEngine * anEngine)
 : HepRandom(), firstUnusedBit(0), localEngine(anEngine),
   defaultWidth(1.0), defaultA(0.0), defaultB(1.0) {}
 
-inline RandFlat::RandFlat(HepRandomEngine * anEngine, double width )
+inline RandFlat::RandFlat(HepRandomEngine * anEngine, G4double width )
 : HepRandom(), firstUnusedBit(0), localEngine(anEngine),
   defaultWidth(width), defaultA(0.0), defaultB(width) {}
 
-inline RandFlat::RandFlat(HepRandomEngine * anEngine, double a,
-                                                      double b )
+inline RandFlat::RandFlat(HepRandomEngine * anEngine, G4double a,
+                                                      G4double b )
 : HepRandom(), firstUnusedBit(0), localEngine(anEngine),
   defaultWidth(b-a), defaultA(a), defaultB(b) {}
 
-inline double RandFlat::shoot(double a, double b) {
+inline G4double RandFlat::shoot(G4double a, G4double b) {
   return (b-a)* shoot() + a;
 }
 
-inline double RandFlat::shoot(double width) {
+inline G4double RandFlat::shoot(G4double width) {
   return width * shoot();
 }
 
 inline long RandFlat::shootInt(long n) {
-  return long(shoot()*double(n));
+  return long(shoot()*G4double(n));
 }
 
 inline long RandFlat::shootInt(long a1, long n) {
-  return long(shoot()*double(n-a1)) + a1;
+  return long(shoot()*G4double(n-a1)) + a1;
 }
 
 inline void RandFlat::shootBits() {
-  const double factor= 2.0*MSB; // this should fit into a double! 
+  const G4double factor= 2.0*MSB; // this should fit into a G4double! 
   staticFirstUnusedBit= MSB;
   staticRandomInt= (unsigned long)(factor*shoot());  
 }
@@ -78,38 +78,38 @@ inline int RandFlat::shootBit() {
 
 //---------------------
 
-inline double RandFlat::shoot(HepRandomEngine* anEngine) {
+inline G4double RandFlat::shoot(HepRandomEngine* anEngine) {
   return anEngine->flat();
 }
 
 
-inline double RandFlat::shoot(HepRandomEngine* anEngine,
-                                 double a, double b) {
+inline G4double RandFlat::shoot(HepRandomEngine* anEngine,
+                                 G4double a, G4double b) {
   return (b-a)* anEngine->flat() + a;
 }
 
-inline double RandFlat::shoot(HepRandomEngine* anEngine,
-                                 double width) {
+inline G4double RandFlat::shoot(HepRandomEngine* anEngine,
+                                 G4double width) {
   return width * anEngine->flat();
 }
 
 inline long RandFlat::shootInt(HepRandomEngine* anEngine,
                                   long n) {
-  return long(anEngine->flat()*double(n));
+  return long(anEngine->flat()*G4double(n));
 }
 
 inline long RandFlat::shootInt(HepRandomEngine* anEngine,
                                   long a1, long n) {
-  return long(double(n-a1)*anEngine->flat()) + a1;
+  return long(G4double(n-a1)*anEngine->flat()) + a1;
 }
 
 inline void RandFlat::shootArray(HepRandomEngine* anEngine,
-                                 const int size, double* vect) {
+                                 const int size, G4double* vect) {
   anEngine->flatArray(size,vect);
 }
 
 inline void RandFlat::shootBits(HepRandomEngine* engine) {
-  const double factor= 2.0*MSB; // this should fit into a double! 
+  const G4double factor= 2.0*MSB; // this should fit into a G4double! 
   staticFirstUnusedBit= MSB;
   staticRandomInt= (unsigned long)(factor*shoot(engine));  
 }
@@ -124,28 +124,28 @@ inline int RandFlat::shootBit(HepRandomEngine* engine) {
 
 //---------------------
 
-inline double RandFlat::fire() {
+inline G4double RandFlat::fire() {
   return (defaultB-defaultA)*localEngine->flat()+defaultA;
 }
 
-inline double RandFlat::fire(double a, double b) {
+inline G4double RandFlat::fire(G4double a, G4double b) {
   return (b-a)* localEngine->flat() + a;
 }
 
-inline double RandFlat::fire(double width) {
+inline G4double RandFlat::fire(G4double width) {
   return width * localEngine->flat();
 }
 
 inline long RandFlat::fireInt(long n) {
-  return long(localEngine->flat()*double(n));
+  return long(localEngine->flat()*G4double(n));
 }
 
 inline long RandFlat::fireInt(long a1, long n) {
-  return long(localEngine->flat()*double(n-a1)) + a1;
+  return long(localEngine->flat()*G4double(n-a1)) + a1;
 }
 
 inline void RandFlat::fireBits() {
-  const double factor= 2.0*MSB; // this should fit into a double! 
+  const G4double factor= 2.0*MSB; // this should fit into a G4double! 
   firstUnusedBit= MSB;
   randomInt= (unsigned long)(factor*localEngine->flat());  
 }

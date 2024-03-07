@@ -982,7 +982,7 @@ G4FFG_DATA_FUNCTIONENTER__
 //        G4String Name = MakeIsotopeName(Product, MetaState);
 //        // Calculate the rest mass using a function already in Geant4
 //        G4double Mass = G4NucleiProperties::
-//                        GetNuclearMass((double)A, (double)Z );
+//                        GetNuclearMass((G4double)A, (G4double)Z );
 //        G4double Charge = Z*eplus;
 //        G4int BaryonNum = A;
 //        G4bool Stable = TRUE;

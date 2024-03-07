@@ -21,19 +21,19 @@ namespace CLHEP  {
 //-*********************************************
 
 
-double Hep3Vector::polarAngle (const Hep3Vector & v2) const {
+G4double Hep3Vector::polarAngle (const Hep3Vector & v2) const {
   return std::fabs(v2.getTheta() - getTheta());
 } /* polarAngle */
 
-double Hep3Vector::polarAngle (const Hep3Vector & v2,
+G4double Hep3Vector::polarAngle (const Hep3Vector & v2,
 				const Hep3Vector & ref) const {
   return std::fabs( v2.angle(ref) - angle(ref) );
 } /* polarAngle (v2, ref) */
 
-// double Hep3Vector::azimAngle (const Hep3Vector & v2) const 
+// G4double Hep3Vector::azimAngle (const Hep3Vector & v2) const 
 // is now in the .icc file as deltaPhi(v2)
 
-double Hep3Vector::azimAngle  (const Hep3Vector & v2,
+G4double Hep3Vector::azimAngle  (const Hep3Vector & v2,
 				const Hep3Vector & ref) const {
 
   Hep3Vector vperp ( perpPart(ref) );
@@ -52,7 +52,7 @@ double Hep3Vector::azimAngle  (const Hep3Vector & v2,
    return 0;
   }
 
-  double ang = vperp.angle(v2perp);
+  G4double ang = vperp.angle(v2perp);
 
   // Now compute the sign of the answer:  that of U*(VxV2) or 
   // the equivalent expression V*(V2xU).

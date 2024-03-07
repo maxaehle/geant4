@@ -55,21 +55,21 @@ class G4HepRepFileXMLWriter
   void addType(const char* name, int newTypeDepth);
   void addInstance();
   void addPrimitive();
-  void addPoint(double x, double y, double z);
+  void addPoint(G4double x, G4double y, G4double z);
 
   void addAttDef(const char* name, const char* desc, const char* type,
                  const char* extra);
 
   void addAttValue(const char* name, const char* value);
 
-  void addAttValue(const char* name, double value);
+  void addAttValue(const char* name, G4double value);
 
   void addAttValue(const char* name, int value);
 
   void addAttValue(const char* name, bool value);
 
-  void addAttValue(const char* name, double value1, double value2,
-                   double value3);
+  void addAttValue(const char* name, G4double value1, G4double value2,
+                   G4double value3);
 
   void open(const char* filespec);
   void close();

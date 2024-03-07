@@ -34,7 +34,7 @@
 //
 // History:
 // 18.12.97, V. Grichine (Vladimir.Grichine@cern.ch)
-// 02.02.00, V.Grichine, new data fEnergy and fVarAngle for double
+// 02.02.00, V.Grichine, new data fEnergy and fVarAngle for G4double
 //                       numerical integration in inherited classes
 // 03.06.03, V.Ivanchenko fix compilation warnings
 // 28.07.05, P.Gumplinger add G4ProcessType to constructor

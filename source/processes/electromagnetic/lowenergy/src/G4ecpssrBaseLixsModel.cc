@@ -63,8 +63,8 @@ G4ecpssrBaseLixsModel::G4ecpssrBaseLixsModel()
 
   while(!FL1.eof())
     {
-      double x1;
-      double y1;
+      G4double x1;
+      G4double y1;
 
       FL1>>x1>>y1;
 
@@ -89,8 +89,8 @@ G4ecpssrBaseLixsModel::G4ecpssrBaseLixsModel()
   
   while(!FL2.eof())
     {
-      double x2;
-      double y2;
+      G4double x2;
+      G4double y2;
 
       FL2>>x2>>y2;
 

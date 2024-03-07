@@ -30,7 +30,7 @@
 #include <vector>
 #include "globals.hh"
 
-class G4LowEXsection : public std::vector<std::pair<double,double> >
+class G4LowEXsection : public std::vector<std::pair<G4double,G4double> >
 {
 public:
   G4LowEXsection() {}

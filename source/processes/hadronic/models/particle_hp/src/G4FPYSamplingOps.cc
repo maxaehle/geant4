@@ -666,7 +666,7 @@ G4FFG_SAMPLING_FUNCTIONLEAVE__
         Mean_ = AdjMean;
     } else if(Mean_ / 7 < StdDev_)
     {
-        // If the requested type is double, then just re-define the standard
+        // If the requested type is G4double, then just re-define the standard
         // deviation appropriately - chances are approximately 2.56E-12 that
         // the value will be negative using this sampling scheme
         StdDev_ = Mean_ / 7;

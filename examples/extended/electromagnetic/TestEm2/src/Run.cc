@@ -292,7 +292,7 @@ void Run::EndOfRun(G4double edep, G4double rms, G4double& limit)
 
   //print
   std::ios::fmtflags mode = G4cout.flags();
-  G4cout.setf(std::ios::fixed,std::ios::floatfield);
+  G4cout.setf(std::ios::fixed,std::ios::G4floatfield);
   G4int  prec = G4cout.precision(2);
   
   if (fVerbose) {
@@ -363,7 +363,7 @@ void Run::EndOfRun(G4double edep, G4double rms, G4double& limit)
            << G4BestUnit( RMoliere2, "Length") << ")" << "\n" << G4endl;
   }           
 
-  G4cout.setf(mode,std::ios::floatfield);
+  G4cout.setf(mode,std::ios::G4floatfield);
   G4cout.precision(prec);
 
   // Acceptance

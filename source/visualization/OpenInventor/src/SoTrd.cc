@@ -138,7 +138,7 @@ void SoTrd::generatePrimitives(SoAction *action) {
 
   
   // points for the eight vertices
-  float points[NPOINTS][3];
+  G4float points[NPOINTS][3];
   points[0][0] =  fDx1.getValue(); 
   points[0][1] =  fDy1.getValue(); 
   points[0][2] = -fDz.getValue();
@@ -171,14 +171,14 @@ void SoTrd::generatePrimitives(SoAction *action) {
   points[7][1] = -fDy2.getValue(); 
   points[7][2] =  fDz.getValue();
 
-  float t1  = FATAN((fDx2.getValue()-fDx1.getValue())/(2*fDz.getValue()));
-  float t2  = FATAN((fDy2.getValue()-fDy1.getValue())/(2*fDz.getValue()));
-  float st1 = FSIN(t1);
-  float st2 = FSIN(t2);
-  float ct1 = FCOS(t1);
-  float ct2 = FCOS(t2);
+  G4float t1  = FATAN((fDx2.getValue()-fDx1.getValue())/(2*fDz.getValue()));
+  G4float t2  = FATAN((fDy2.getValue()-fDy1.getValue())/(2*fDz.getValue()));
+  G4float st1 = FSIN(t1);
+  G4float st2 = FSIN(t2);
+  G4float ct1 = FCOS(t1);
+  G4float ct2 = FCOS(t2);
 
-  float normals[NFACES][3];
+  G4float normals[NFACES][3];
   //z back.
   normals[0][0] = 0   ; normals[0][1] =    0; normals [0][2] =  -1;    
   //z front.
@@ -192,7 +192,7 @@ void SoTrd::generatePrimitives(SoAction *action) {
   //x right.
   normals[5][0] =  ct1; normals[5][1] =    0; normals [5][2] = -st1;    
 
-  float x,y,z;
+  G4float x,y,z;
   int   index;
   for (int nf=0;nf<NFACES;nf++) {
     beginShape(action,TRIANGLE_FAN);
@@ -228,7 +228,7 @@ SoChildList *SoTrd::getChildren() const {
 
 // computeBBox
 void SoTrd::computeBBox(SoAction *, SbBox3f &box, SbVec3f &center ){
-  float fDx= fDx1.getValue(),fDy=fDy1.getValue();
+  G4float fDx= fDx1.getValue(),fDy=fDy1.getValue();
   
   if (fDx2.getValue() > fDx) fDx = fDx2.getValue(); 
   if (fDy2.getValue() > fDy) fDy = fDy2.getValue(); 
@@ -257,8 +257,8 @@ void SoTrd::updateChildren() {
   SoIndexedFaceSet  *theFaceSet         = (SoIndexedFaceSet *)   ( sep->getChild(3));
 
   const int NPOINTS=8, NFACES=6, NINDICES = NFACES*5;
-  float points[NPOINTS][3];
-  float normals[NFACES][3]= {{0,0,-1}, {0,0,1}, {0,1,0}, {-1, 0, 0}, {0, -1, 0}, {1,0,0}};
+  G4float points[NPOINTS][3];
+  G4float normals[NFACES][3]= {{0,0,-1}, {0,0,1}, {0,1,0}, {-1, 0, 0}, {0, -1, 0}, {1,0,0}};
 
   // Indices for the eight faces
 #ifdef INVENTOR2_0
@@ -284,12 +284,12 @@ void SoTrd::updateChildren() {
   points[6][0] = -fDx2.getValue(); points[6][1] = -fDy2.getValue(); points[6][2] =  fDz.getValue();
   points[7][0] =  fDx2.getValue(); points[7][1] = -fDy2.getValue(); points[7][2] =  fDz.getValue();
 
-  float t1 = FATAN((fDx2.getValue()-fDx1.getValue())/(2*fDz.getValue()));
-  float t2 = FATAN((fDy2.getValue()-fDy1.getValue())/(2*fDz.getValue()));
-  float st1 = FSIN(t1);
-  float st2 = FSIN(t2);
-  float ct1 = FCOS(t1);
-  float ct2 = FCOS(t2);
+  G4float t1 = FATAN((fDx2.getValue()-fDx1.getValue())/(2*fDz.getValue()));
+  G4float t2 = FATAN((fDy2.getValue()-fDy1.getValue())/(2*fDz.getValue()));
+  G4float st1 = FSIN(t1);
+  G4float st2 = FSIN(t2);
+  G4float ct1 = FCOS(t1);
+  G4float ct2 = FCOS(t2);
 
   normals[0][0] = 0   ; normals[0][1] =    0; normals [0][2] =  -1;    
   normals[1][0] = 0   ; normals[1][1] =    0; normals [1][2] =   1;    

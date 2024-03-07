@@ -46,7 +46,7 @@ ExN04Field::~ExN04Field()
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-void ExN04Field::GetFieldValue(const double Point[3],double *Bfield) const
+void ExN04Field::GetFieldValue(const G4double Point[3],G4double *Bfield) const
 {
   Bfield[0] = 0.;
   Bfield[1] = 0.;

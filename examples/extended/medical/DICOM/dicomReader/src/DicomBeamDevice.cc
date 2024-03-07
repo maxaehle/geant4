@@ -32,23 +32,23 @@ DicomBeamDevice::DicomBeamDevice(DRTBeamLimitingDeviceSequenceInRTBeamsModule::I
 {
   OFString fstr;
   Sint32 fint;
-  Float64 ffloat;
-  OFVector<Float64> fvfloat;
+  Float64 fG4float;
+  OFVector<Float64> fvG4float;
 
   bldsItem.getRTBeamLimitingDeviceType(fstr);
   G4cout << "   " << " RTBeamLimitingDeviceType " << fstr << G4endl;
   SetType(fstr);
-  bldsItem.getSourceToBeamLimitingDeviceDistance(ffloat);
-  G4cout << "   " << " SourceToBeamLimitingDeviceDistance " << ffloat << G4endl;
-  SetSourceToBeamLimitingDeviceDistance( ffloat ); 
+  bldsItem.getSourceToBeamLimitingDeviceDistance(fG4float);
+  G4cout << "   " << " SourceToBeamLimitingDeviceDistance " << fG4float << G4endl;
+  SetSourceToBeamLimitingDeviceDistance( fG4float ); 
   bldsItem.getNumberOfLeafJawPairs(fint);
   SetNumberOfLeafJawPairs(fint);
   G4cout << "   " << " NumberOfLeafJawPairs " << fint << G4endl;
-  bldsItem.getLeafPositionBoundaries(fvfloat);
+  bldsItem.getLeafPositionBoundaries(fvG4float);
   if( fint != 1 ) fint++;
   for( int ii = 0; ii < fint; ii++ ) {
-    G4cout << "   " << ii << " LeafPositionBoundaries " << fvfloat[ii] << G4endl;
-    AddPositionBoundary(fvfloat[ii]);
+    G4cout << "   " << ii << " LeafPositionBoundaries " << fvG4float[ii] << G4endl;
+    AddPositionBoundary(fvG4float[ii]);
   }
 }
 
@@ -56,15 +56,15 @@ DicomBeamDevice::DicomBeamDevice(DRTBeamLimitingDeviceSequenceInRTBeamsModule::I
 DicomBeamDevice::DicomBeamDevice(DRTBeamLimitingDevicePositionSequence::Item bldpsItem)
 {
   OFString fstr;
-  Float64 ffloat;
+  Float64 fG4float;
   
   bldpsItem.getRTBeamLimitingDeviceType(fstr);
   G4cout << "    " << " BeamLimitingDeviceType " << fstr << G4endl;
   SetType(fstr);
   for(size_t ii = 0;; ii++ ){
-    if( bldpsItem.getLeafJawPositions(ffloat,ii) == EC_Normal ){
-      G4cout << "    " << ii << " LeafPositionBoundaries " << ffloat << G4endl;
-      AddPositionBoundary(ffloat);
+    if( bldpsItem.getLeafJawPositions(fG4float,ii) == EC_Normal ){
+      G4cout << "    " << ii << " LeafPositionBoundaries " << fG4float << G4endl;
+      AddPositionBoundary(fG4float);
     } else {
       break;
     }

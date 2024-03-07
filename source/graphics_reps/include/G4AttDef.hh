@@ -102,7 +102,7 @@
     G4String m_category;
     /// Some extra property of the attribute (units, etc.)
     G4String m_extra;
-    /// The type of the value of the attribute (int, double, vector, etc.)
+    /// The type of the value of the attribute (int, G4double, vector, etc.)
     G4String m_valueType;
     // Type key
     G4TypeKey m_typeKey;

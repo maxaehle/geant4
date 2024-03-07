@@ -65,8 +65,8 @@ void DicomFilePlan::ReadData()
   }
   OFString fstr;
   Sint32 fint;
-  Float64 ffloat;
-  OFVector<Float64> fvfloat; 
+  Float64 fG4float;
+  OFVector<Float64> fvG4float; 
   
   DRTFractionGroupSequence frgSeq = rtplan.getFractionGroupSequence();
   if( frgSeq.isEmpty() ) {
@@ -109,17 +109,17 @@ void DicomFilePlan::ReadData()
       theBeams.push_back(db);
       DRTReferencedBeamSequenceInRTFractionSchemeModule::Item &rbsItem = 
        refBeamSeq.getCurrentItem();
-      rbsItem.getBeamDeliveryDurationLimit(ffloat);
-      G4cout << "  " << i2 << " BeamDeliveryDurationLimit " << ffloat << G4endl;
-      rbsItem.getBeamDose(ffloat);
-      G4cout << "  " << i2 << " BeamDose " << ffloat << G4endl; // dose at dose point
-      rbsItem.getBeamDoseSpecificationPoint(fvfloat);
-      G4cout << "  " << i2 << " BeamDoseSpecificationPoint (" << fvfloat[0] << "," << fvfloat[1] 
-             << "," << fvfloat[2] << ")" << G4endl;
-      db->SetDoseSpecificationPoint(G4ThreeVector(fvfloat[0],fvfloat[1],fvfloat[2]));
-      rbsItem.getBeamMeterset(ffloat);
-      G4cout << "  " << i2 << " BeamMeterset " << ffloat << G4endl;
-      db->SetMeterset(ffloat);
+      rbsItem.getBeamDeliveryDurationLimit(fG4float);
+      G4cout << "  " << i2 << " BeamDeliveryDurationLimit " << fG4float << G4endl;
+      rbsItem.getBeamDose(fG4float);
+      G4cout << "  " << i2 << " BeamDose " << fG4float << G4endl; // dose at dose point
+      rbsItem.getBeamDoseSpecificationPoint(fvG4float);
+      G4cout << "  " << i2 << " BeamDoseSpecificationPoint (" << fvG4float[0] << "," << fvG4float[1] 
+             << "," << fvG4float[2] << ")" << G4endl;
+      db->SetDoseSpecificationPoint(G4ThreeVector(fvG4float[0],fvG4float[1],fvG4float[2]));
+      rbsItem.getBeamMeterset(fG4float);
+      G4cout << "  " << i2 << " BeamMeterset " << fG4float << G4endl;
+      db->SetMeterset(fG4float);
       rbsItem.getReferencedBeamNumber(fint);
       G4cout << "  " << i2 << " ReferencedBeamNumber " << fint << G4endl;
     
@@ -151,9 +151,9 @@ void DicomFilePlan::ReadData()
     G4cout << " " << i1 << " TreatmentMachineName " << fstr << G4endl;
     beamItem.getPrimaryDosimeterUnit(fstr);
     G4cout << " " << i1 << " PrimaryDosimeterUnit " << fstr << G4endl;
-    beamItem.getSourceAxisDistance(ffloat);
-    G4cout << " " << i1 << " SourceAxisDistance " << ffloat << G4endl;
-    db->SetSourceAxisDistance(ffloat);
+    beamItem.getSourceAxisDistance(fG4float);
+    G4cout << " " << i1 << " SourceAxisDistance " << fG4float << G4endl;
+    db->SetSourceAxisDistance(fG4float);
     
     DRTBeamLimitingDeviceSequenceInRTBeamsModule beamLDS = beamItem.getBeamLimitingDeviceSequence();
     G4cout << " @@@ NUMBER OF BeamLimitingDeviceSequence " << beamLDS.getNumberOfItems() << G4endl;
@@ -233,10 +233,10 @@ void DicomFilePlan::ReadData()
     G4cout << " " << i1 << " ReferencedPatientSetupNumber " << fint << G4endl;
     beamItem.getReferencedToleranceTableNumber(fint);
     G4cout << " " << i1 << " ReferencedToleranceTableNumber " << fint << G4endl;
-    beamItem.getTotalBlockTrayFactor(ffloat);
-    G4cout << " " << i1 << " TotalBlockTrayFactor " << ffloat << G4endl;
-    beamItem.getTotalCompensatorTrayFactor(ffloat);
-    G4cout << " " << i1 << " TotalCompensatorTrayFactor " << ffloat << G4endl;
+    beamItem.getTotalBlockTrayFactor(fG4float);
+    G4cout << " " << i1 << " TotalBlockTrayFactor " << fG4float << G4endl;
+    beamItem.getTotalCompensatorTrayFactor(fG4float);
+    G4cout << " " << i1 << " TotalCompensatorTrayFactor " << fG4float << G4endl;
     
     beamItem.getNumberOfControlPoints(fint);
     DRTControlPointSequence controlPSeq = beamItem.getControlPointSequence();

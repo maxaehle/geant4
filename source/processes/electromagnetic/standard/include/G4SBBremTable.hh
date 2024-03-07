@@ -76,7 +76,7 @@ public:
    void ClearSamplingTables();
 
    // run-time method to sample energy transferred to the emitted photon
-   double SampleEnergyTransfer(const G4double eekin, const G4double leekin,
+   G4double SampleEnergyTransfer(const G4double eekin, const G4double leekin,
                                const G4double gcut , const G4double dielSupConst,
                                const G4int    izet , const G4int matCutIndx,
                                const bool     iselectron);

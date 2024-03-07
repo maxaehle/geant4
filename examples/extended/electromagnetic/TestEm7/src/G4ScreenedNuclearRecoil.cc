@@ -843,7 +843,7 @@ G4_c2_function &ZBLScreening(G4int z1, G4int z2, size_t npoints,
         std::vector<G4double> r(npoints), phi(npoints);
         
         for(size_t i=0; i<npoints; i++) {
-                G4double rr=(float)i/(float)(npoints-1);
+                G4double rr=(G4float)i/(G4float)(npoints-1);
                 r[i]=rr*rr*rMax; 
                 // use quadratic r scale to make sampling fine near the center
                 G4double sum=0.0;
@@ -875,7 +875,7 @@ G4_c2_function &MoliereScreening(G4int z1, G4int z2, size_t npoints,
         std::vector<G4double> r(npoints), phi(npoints);
         
         for(size_t i=0; i<npoints; i++) {
-                G4double rr=(float)i/(float)(npoints-1);
+                G4double rr=(G4float)i/(G4float)(npoints-1);
                 r[i]=rr*rr*rMax; 
                 // use quadratic r scale to make sampling fine near the center
                 G4double sum=0.0;
@@ -905,7 +905,7 @@ G4_c2_function &LJScreening(G4int z1, G4int z2, size_t npoints,
         std::vector<G4double> r(npoints), phi(npoints);
         
         for(size_t i=0; i<npoints; i++) {
-                G4double rr=(float)i/(float)(npoints-1);
+                G4double rr=(G4float)i/(G4float)(npoints-1);
                 r[i]=rr*rr*rMax; 
                 // use quadratic r scale to make sampling fine near the center
 

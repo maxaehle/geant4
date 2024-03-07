@@ -28,7 +28,7 @@
 // Class description:
 //
 // A concrete class of G4UIcommand. The command defined by this class
-// takes three double values and a unit.
+// takes three G4double values and a unit.
 // General information of G4UIcommand is given in G4UIcommand.hh
 
 // Author: M.Asai, 1998
@@ -51,17 +51,17 @@ class G4UIcmdWith3VectorAndUnit : public G4UIcommand
     virtual G4int DoIt(G4String parameterList);
 
     static G4ThreeVector GetNew3VectorValue(const char* paramString);
-      // Convert string which represents three double values and a unit to
+      // Convert string which represents three G4double values and a unit to
       // G4ThreeVector. Values are converted to the Geant4 internal unit
 
     static G4ThreeVector GetNew3VectorRawValue(const char* paramString);
-      // Convert string which represents three double values and a unit to
+      // Convert string which represents three G4double values and a unit to
       // G4ThreeVector. Values are NOT converted to the Geant4 internal unit
       // but just as the given string
 
     static G4double GetNewUnitValue(const char* paramString);
       // Convert the unit string to the value of the unit. "paramString"
-      // must contain three double values AND a unit string
+      // must contain three G4double values AND a unit string
 
     G4String ConvertToStringWithBestUnit(G4ThreeVector vec);
       // Convert a 3 vector value to a string of digits and unit. Best unit is

@@ -36,7 +36,7 @@
 //
 // Modifications:
 // 04.03.2009 V.Ivanchenko cleanup and format according to Geant4 EM style
-// 12.05.2010 O.Kadri: adding Qn1 and Qn12 as private doubles
+// 12.05.2010 O.Kadri: adding Qn1 and Qn12 as private G4doubles
 // 18.05.2015 M. Novak provide PLERIMINARYY version of updated class.
 //            All algorithms of the class were revised and updated, new methods added.
 //            A new version of Kawrakow-Bielajew Goudsmit-Saunderson MSC model

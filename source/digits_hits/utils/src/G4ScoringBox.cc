@@ -250,28 +250,28 @@ void G4ScoringBox::Draw(RunScore* map, G4VScoreColorMap* colorMap, G4int axflg)
   if(pVisManager)
   {
     // cell vectors
-    std::vector<std::vector<std::vector<double>>> cell;  // cell[X][Y][Z]
-    std::vector<double> ez;
+    std::vector<std::vector<std::vector<G4double>>> cell;  // cell[X][Y][Z]
+    std::vector<G4double> ez;
     for(int z = 0; z < fNSegment[2]; z++)
       ez.push_back(0.);
-    std::vector<std::vector<double>> eyz;
+    std::vector<std::vector<G4double>> eyz;
     for(int y = 0; y < fNSegment[1]; y++)
       eyz.push_back(ez);
     for(int x = 0; x < fNSegment[0]; x++)
       cell.push_back(eyz);
 
-    std::vector<std::vector<double>> xycell;  // xycell[X][Y]
-    std::vector<double> ey;
+    std::vector<std::vector<G4double>> xycell;  // xycell[X][Y]
+    std::vector<G4double> ey;
     for(int y = 0; y < fNSegment[1]; y++)
       ey.push_back(0.);
     for(int x = 0; x < fNSegment[0]; x++)
       xycell.push_back(ey);
 
-    std::vector<std::vector<double>> yzcell;  // yzcell[Y][Z]
+    std::vector<std::vector<G4double>> yzcell;  // yzcell[Y][Z]
     for(int y = 0; y < fNSegment[1]; y++)
       yzcell.push_back(ez);
 
-    std::vector<std::vector<double>> xzcell;  // xzcell[X][Z]
+    std::vector<std::vector<G4double>> xzcell;  // xzcell[X][Z]
     for(int x = 0; x < fNSegment[0]; x++)
       xzcell.push_back(ez);
 
@@ -589,28 +589,28 @@ void G4ScoringBox::DrawColumn(RunScore* map, G4VScoreColorMap* colorMap,
     pVisManager->BeginDraw();
 
     // cell vectors
-    std::vector<std::vector<std::vector<double>>> cell;  // cell[X][Y][Z]
-    std::vector<double> ez;
+    std::vector<std::vector<std::vector<G4double>>> cell;  // cell[X][Y][Z]
+    std::vector<G4double> ez;
     for(int z = 0; z < fNSegment[2]; z++)
       ez.push_back(0.);
-    std::vector<std::vector<double>> eyz;
+    std::vector<std::vector<G4double>> eyz;
     for(int y = 0; y < fNSegment[1]; y++)
       eyz.push_back(ez);
     for(int x = 0; x < fNSegment[0]; x++)
       cell.push_back(eyz);
 
-    std::vector<std::vector<double>> xycell;  // xycell[X][Y]
-    std::vector<double> ey;
+    std::vector<std::vector<G4double>> xycell;  // xycell[X][Y]
+    std::vector<G4double> ey;
     for(int y = 0; y < fNSegment[1]; y++)
       ey.push_back(0.);
     for(int x = 0; x < fNSegment[0]; x++)
       xycell.push_back(ey);
 
-    std::vector<std::vector<double>> yzcell;  // yzcell[Y][Z]
+    std::vector<std::vector<G4double>> yzcell;  // yzcell[Y][Z]
     for(int y = 0; y < fNSegment[1]; y++)
       yzcell.push_back(ez);
 
-    std::vector<std::vector<double>> xzcell;  // xzcell[X][Z]
+    std::vector<std::vector<G4double>> xzcell;  // xzcell[X][Z]
     for(int x = 0; x < fNSegment[0]; x++)
       xzcell.push_back(ez);
 

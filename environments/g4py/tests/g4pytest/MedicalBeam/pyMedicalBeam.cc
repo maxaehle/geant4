@@ -84,8 +84,8 @@ std::string GetParticleByName(MedicalBeam* beam)
 void f_SetFieldXY(MedicalBeam* beam, const list& listXY)
 ////////////////////////////////////////////////////////
 {
-  G4double fx= extract<double>(listXY[0]);
-  G4double fy= extract<double>(listXY[1]);
+  G4double fx= extract<G4double>(listXY[0]);
+  G4double fy= extract<G4double>(listXY[1]);
   beam-> SetFieldXY(fx, fy);
 }
 

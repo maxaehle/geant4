@@ -31,16 +31,16 @@
 DicomBeamDevicePos::DicomBeamDevicePos(DRTBeamLimitingDevicePositionSequence::Item bldpsItem)
 {
   OFString fstr;
-  Float64 ffloat;
+  Float64 fG4float;
   
   bldpsItem.getRTBeamLimitingDeviceType(fstr);
   G4cout << "    " << " BeamLimitingDeviceType " << fstr << G4endl;
   SetType(fstr);
   size_t ii = 0;
   for(;; ii++ ){
-    if( bldpsItem.getLeafJawPositions(ffloat,ii) == EC_Normal ){
-      G4cout << "    " << ii << " LeafPositionBoundaries " << ffloat << G4endl;
-      AddPositionBoundary(ffloat);
+    if( bldpsItem.getLeafJawPositions(fG4float,ii) == EC_Normal ){
+      G4cout << "    " << ii << " LeafPositionBoundaries " << fG4float << G4endl;
+      AddPositionBoundary(fG4float);
     } else {
       break;
     }

@@ -165,7 +165,7 @@ G4bool G4VAnalysisManager::WriteAscii(const G4String& fileName)
       fkClass, "WriteAscii");
     return false;
   }
-  output.setf( std::ios::scientific, std::ios::floatfield );
+  output.setf( std::ios::scientific, std::ios::G4floatfield );
 
   result &= fVH1Manager->WriteOnAscii(output);
   result &= fVH2Manager->WriteOnAscii(output);
@@ -810,7 +810,7 @@ G4int G4VAnalysisManager::CreateNtupleIColumn(const G4String& name,
 
 //_____________________________________________________________________________
 G4int G4VAnalysisManager::CreateNtupleFColumn(const G4String& name,
-                                              std::vector<float>& vector)
+                                              std::vector<G4float>& vector)
 {
   if ( ! CheckName(name, "NtupleFColumn") ) return kInvalidId;
 
@@ -819,7 +819,7 @@ G4int G4VAnalysisManager::CreateNtupleFColumn(const G4String& name,
 
 //_____________________________________________________________________________
 G4int G4VAnalysisManager::CreateNtupleDColumn(const G4String& name,
-                                              std::vector<double>& vector)
+                                              std::vector<G4double>& vector)
 {
   if ( ! CheckName(name, "NtupleDColumn") ) return kInvalidId;
 
@@ -933,7 +933,7 @@ G4int G4VAnalysisManager::CreateNtupleIColumn(G4int ntupleId,
 //_____________________________________________________________________________
 G4int G4VAnalysisManager::CreateNtupleFColumn(G4int ntupleId,
                                               const G4String& name,
-                                              std::vector<float>& vector)
+                                              std::vector<G4float>& vector)
 {
   if ( ! CheckName(name, "NtupleFColumn") ) return kInvalidId;
 
@@ -943,7 +943,7 @@ G4int G4VAnalysisManager::CreateNtupleFColumn(G4int ntupleId,
 //_____________________________________________________________________________
 G4int G4VAnalysisManager::CreateNtupleDColumn(G4int ntupleId,
                                               const G4String& name,
-                                              std::vector<double>& vector)
+                                              std::vector<G4double>& vector)
 {
   if ( ! CheckName(name, "NtupleDColumn") ) return kInvalidId;
 

@@ -12,33 +12,33 @@
 
 namespace CLHEP {
 
-inline RandGamma::RandGamma(HepRandomEngine & anEngine, double k,
-                                                        double lambda )
+inline RandGamma::RandGamma(HepRandomEngine & anEngine, G4double k,
+                                                        G4double lambda )
 : HepRandom(), localEngine(&anEngine, do_nothing_deleter()),
   defaultK(k), defaultLambda(lambda) {}
 
-inline RandGamma::RandGamma(HepRandomEngine * anEngine, double k,
-                                                        double lambda )
+inline RandGamma::RandGamma(HepRandomEngine * anEngine, G4double k,
+                                                        G4double lambda )
 : HepRandom(), localEngine(anEngine),
   defaultK(k), defaultLambda(lambda) {}
 
-inline double RandGamma::shoot() {
+inline G4double RandGamma::shoot() {
   return shoot( 1.0, 1.0 );
 }
 
-inline double RandGamma::shoot( HepRandomEngine* anEngine ) {
+inline G4double RandGamma::shoot( HepRandomEngine* anEngine ) {
   return shoot( anEngine, 1.0, 1.0 );
 }
 
-inline double RandGamma::operator()() {
+inline G4double RandGamma::operator()() {
   return fire( defaultK, defaultLambda );
 }
 
-inline double RandGamma::operator()( double k, double lambda ) {
+inline G4double RandGamma::operator()( G4double k, G4double lambda ) {
   return fire( k, lambda );
 }
 
-inline double RandGamma::fire() {
+inline G4double RandGamma::fire() {
   return fire( defaultK, defaultLambda );
 }
 

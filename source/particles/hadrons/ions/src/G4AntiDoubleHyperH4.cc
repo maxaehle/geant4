@@ -44,7 +44,7 @@ G4AntiDoubleHyperH4* G4AntiDoubleHyperH4::theInstance = nullptr;
 
 G4AntiDoubleHyperH4* G4AntiDoubleHyperH4::Definition() {
   if ( theInstance != nullptr ) return theInstance;
-  const G4String name = "anti_doublehyperH4";
+  const G4String name = "anti_G4doublehyperH4";
   // search in particle table
   G4ParticleTable* pTable = G4ParticleTable::GetParticleTable();
   G4Ions* anInstance =  reinterpret_cast< G4Ions* >( pTable->FindParticle( name ) );
@@ -77,14 +77,14 @@ G4AntiDoubleHyperH4* G4AntiDoubleHyperH4::Definition() {
     const G4double half_br_lambda_to_n_piz = 0.5*0.358;
     G4VDecayChannel** mode = new G4VDecayChannel*[4];
     // anti_lambda -> anti_proton + pi+ , with 50% probability of capturing the anti_proton
-    mode[0] = new G4PhaseSpaceDecayChannel( "anti_doublehyperH4", half_br_lambda_to_p_pim, 3,
+    mode[0] = new G4PhaseSpaceDecayChannel( "anti_G4doublehyperH4", half_br_lambda_to_p_pim, 3,
                                             "anti_hypertriton", "anti_proton", "pi+" );
-    mode[1] = new G4PhaseSpaceDecayChannel( "anti_doublehyperH4", half_br_lambda_to_p_pim, 2,
+    mode[1] = new G4PhaseSpaceDecayChannel( "anti_G4doublehyperH4", half_br_lambda_to_p_pim, 2,
                                             "anti_hyperalpha", "pi+" );
     // anti_lambda -> anti_neutron + pi0 , with 50% probability of capturing the anti_neutron
-    mode[2] = new G4PhaseSpaceDecayChannel( "anti_doublehyperH4", half_br_lambda_to_n_piz, 3,
+    mode[2] = new G4PhaseSpaceDecayChannel( "anti_G4doublehyperH4", half_br_lambda_to_n_piz, 3,
                                             "anti_hypertriton", "anti_neutron", "pi0" );
-    mode[3] = new G4PhaseSpaceDecayChannel( "anti_doublehyperH4", half_br_lambda_to_n_piz, 2,
+    mode[3] = new G4PhaseSpaceDecayChannel( "anti_G4doublehyperH4", half_br_lambda_to_n_piz, 2,
                                             "anti_hyperH4", "pi0" );
     for ( G4int index = 0; index < 4; ++index ) table->Insert( mode[index] );
     delete [] mode;

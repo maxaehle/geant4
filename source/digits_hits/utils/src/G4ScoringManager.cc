@@ -95,7 +95,7 @@ void G4ScoringManager::Accumulate(G4VHitsCollection* map)
     G4cout << "  is calling G4VScoringMesh::Accumulate() of "
            << sm->GetWorldName() << G4endl;
   }
-  sm->Accumulate(static_cast<G4THitsMap<double>*>(map));
+  sm->Accumulate(static_cast<G4THitsMap<G4double>*>(map));
 }
 
 G4VScoringMesh* G4ScoringManager::FindMesh(G4VHitsCollection* map)

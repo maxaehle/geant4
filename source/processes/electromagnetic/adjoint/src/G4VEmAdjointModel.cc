@@ -434,10 +434,10 @@ G4double G4VEmAdjointModel::SampleAdjSecEnergyFromCSMatrix(
   G4double aLogPrimEnergy1, aLogPrimEnergy2;
   G4double aLogCS1, aLogCS2;
   G4double log01, log02;
-  std::vector<double>* aLogSecondEnergyVector1 = nullptr;
-  std::vector<double>* aLogSecondEnergyVector2 = nullptr;
-  std::vector<double>* aLogProbVector1         = nullptr;
-  std::vector<double>* aLogProbVector2         = nullptr;
+  std::vector<G4double>* aLogSecondEnergyVector1 = nullptr;
+  std::vector<G4double>* aLogSecondEnergyVector2 = nullptr;
+  std::vector<G4double>* aLogProbVector1         = nullptr;
+  std::vector<G4double>* aLogProbVector2         = nullptr;
   std::vector<size_t>* aLogProbVectorIndex1    = nullptr;
   std::vector<size_t>* aLogProbVectorIndex2    = nullptr;
 

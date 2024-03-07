@@ -63,11 +63,11 @@ public:
 //           correlations have very small chance of being observed.
 //  level 4  (p=389): highest possible luxury, all 24 bits chaotic.
 
-  double flat();
+  G4double flat();
   // It returns a pseudo random number between 0 and 1,
   // excluding the end points.
 
-  void flatArray (const int size, double* vect);
+  void flatArray (const int size, G4double* vect);
   // Fills the array "vect" of specified size with flat random values.
 
   void setSeed(long seed, int lxr=3);
@@ -90,9 +90,9 @@ public:
   int getLuxury() const { return luxury; }
   // Gets the luxury level.
 
-  operator double();       // Returns same as flat()
-  operator float();        // less precise flat, faster if possible
-  operator unsigned int(); // 32-bit flat, but slower than double or float
+  operator G4double();       // Returns same as flat()
+  operator G4float();        // less precise flat, faster if possible
+  operator unsigned int(); // 32-bit flat, but slower than G4double or G4float
 
   virtual std::ostream & put (std::ostream & os) const;
   virtual std::istream & get (std::istream & is);
@@ -111,9 +111,9 @@ public:
 private:
 
   int nskip, luxury;
-  float float_seed_table[24];
+  G4float G4float_seed_table[24];
   int i_lag,j_lag;  
-  float carry;
+  G4float carry;
   int count24;
   static const int int_modulus = 0x1000000;
 };

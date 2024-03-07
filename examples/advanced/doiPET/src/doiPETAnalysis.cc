@@ -120,8 +120,8 @@ doiPETAnalysis::doiPETAnalysis()
 
 	//intialize deadtime for blocks and modules
 	numberOfBlocks_total = numberOfRings * numberOfDetector_perRing; 
-	blockTime = new double[numberOfBlocks_total];//for each individual block.
-	moduleTime = new double[numberOfBlocks_total];//for axially multiplexed detectors.
+	blockTime = new G4double[numberOfBlocks_total];//for each individual block.
+	moduleTime = new G4double[numberOfBlocks_total];//for axially multiplexed detectors.
 
 	//Initialize the deadtime for each detector and axially multiplexed detector (also called modules)
 	for(G4int i = 0; i<numberOfBlocks_total; i++){
@@ -871,11 +871,11 @@ void doiPETAnalysis::PrepareDOILookUpTable(G4String){
 		//doi_table.resize(numberOfCrystal_tangential*numberOfCrystal_axial*numberOfCrystal_DOI,0);
 
 		for(G4int i_DOI = 0; i_DOI<numberOfCrystal_DOI; i_DOI++){
-			crystalPositionX=(i_DOI-((float)numberOfCrystal_DOI)/2 + 0.5)*(sizeOfCrystal_DOI + crystalGap_DOI); //Becuase only lateral distances are used
+			crystalPositionX=(i_DOI-((G4float)numberOfCrystal_DOI)/2 + 0.5)*(sizeOfCrystal_DOI + crystalGap_DOI); //Becuase only lateral distances are used
 			for(G4int i_axial=0; i_axial< numberOfCrystal_axial;i_axial++){
-				crystalPositionZ = (i_axial-((float)numberOfCrystal_axial)/2 + 0.5)*(sizeOfCrystal_axial + crystalGap_axial);
+				crystalPositionZ = (i_axial-((G4float)numberOfCrystal_axial)/2 + 0.5)*(sizeOfCrystal_axial + crystalGap_axial);
 				for(G4int i_tan=0; i_tan<numberOfCrystal_tangential;i_tan++){
-					crystalPositionY=(i_tan-((float)numberOfCrystal_tangential)/2 + 0.5)*(sizeOfCrystal_tangential + crystalGap_tangential);
+					crystalPositionY=(i_tan-((G4float)numberOfCrystal_tangential)/2 + 0.5)*(sizeOfCrystal_tangential + crystalGap_tangential);
 					AngerLogic(crystalPositionX, crystalPositionY, crystalPositionZ, 1, 0.5, isDOIlookUpTablePrepared);
 					outFile<<PositionAngerZ<<" "<<PositionAngerY<<G4endl;
 					doi_table[crystalID_in2D_posHist]=i_DOI;
@@ -899,14 +899,14 @@ void doiPETAnalysis::AngerLogic(G4double posCrystalX, G4double posCrystalY, G4do
 	G4double crystalPitch_axial = sizeOfCrystal_axial + crystalGap_axial;
 
 	//The crystal ID are calculated based on the center of mass 
-	G4int i_doi = posCrystalX/crystalPitch_DOI + (float)numberOfCrystal_DOI*0.5;
-	G4int i_tan = posCrystalY/crystalPitch_tan + (float)numberOfCrystal_tangential*0.5;
-	G4int i_axial = posCrystalZ/crystalPitch_axial + (float)numberOfCrystal_axial*0.5;
+	G4int i_doi = posCrystalX/crystalPitch_DOI + (G4float)numberOfCrystal_DOI*0.5;
+	G4int i_tan = posCrystalY/crystalPitch_tan + (G4float)numberOfCrystal_tangential*0.5;
+	G4int i_axial = posCrystalZ/crystalPitch_axial + (G4float)numberOfCrystal_axial*0.5;
 
 	//position of interaction is shifted  the centre of the crystal. This is to use DOI-look up tables as the real scanner
-	posCrystalX = (i_doi-((float)numberOfCrystal_DOI)/2 + 0.5)*crystalPitch_DOI;
-	posCrystalY = (i_tan-((float)numberOfCrystal_tangential)/2 + 0.5)*crystalPitch_tan;
-	posCrystalZ = (i_axial-((float)numberOfCrystal_axial)/2 + 0.5)*crystalPitch_axial;
+	posCrystalX = (i_doi-((G4float)numberOfCrystal_DOI)/2 + 0.5)*crystalPitch_DOI;
+	posCrystalY = (i_tan-((G4float)numberOfCrystal_tangential)/2 + 0.5)*crystalPitch_tan;
+	posCrystalZ = (i_axial-((G4float)numberOfCrystal_axial)/2 + 0.5)*crystalPitch_axial;
 
 	//1z and 2z are at the same z distance; 3z and 4z are at the same z distance
 	//The signal (the energy deposition) is devided into the four PMTs depending on their lateral distances (in the axial and tangential directions) from the interaction position

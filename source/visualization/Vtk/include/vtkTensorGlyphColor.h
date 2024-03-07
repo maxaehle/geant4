@@ -137,8 +137,8 @@ public:
    * Specify scale factor to scale object by. (Scale factor always affects
    * output even if scaling is off.)
    */
-  vtkSetMacro(ScaleFactor,double);
-  vtkGetMacro(ScaleFactor,double);
+  vtkSetMacro(ScaleFactor,G4double);
+  vtkGetMacro(ScaleFactor,G4double);
   //@}
 
   //@{
@@ -164,8 +164,8 @@ public:
    * Set/Get the distance, along x, from the origin to the end of the
    * source glyph. It is used to draw the symmetric glyphs.
    */
-  vtkSetMacro(Length,double);
-  vtkGetMacro(Length,double);
+  vtkSetMacro(Length,G4double);
+  vtkGetMacro(Length,G4double);
   //@}
 
   //@{
@@ -231,8 +231,8 @@ public:
    * factor is reset to the MaxScaleFactor. The boolean ClampScaling has to
    * be "on" for this to work.
    */
-  vtkSetMacro(MaxScaleFactor,double);
-  vtkGetMacro(MaxScaleFactor,double);
+  vtkSetMacro(MaxScaleFactor,G4double);
+  vtkGetMacro(MaxScaleFactor,G4double);
   //@}
 
 protected:
@@ -244,15 +244,15 @@ protected:
   int FillInputPortInformation(int port, vtkInformation *info) override;
 
   vtkTypeBool Scaling; // Determine whether scaling of geometry is performed
-  double ScaleFactor; // Scale factor to use to scale geometry
+  G4double ScaleFactor; // Scale factor to use to scale geometry
   vtkTypeBool ExtractEigenvalues; // Boolean controls eigenfunction extraction
   vtkTypeBool ColorGlyphs; // Boolean controls coloring with input scalar data
   int ColorMode; // The coloring mode to use for the glyphs.
   vtkTypeBool ClampScaling; // Boolean controls whether scaling is clamped.
-  double MaxScaleFactor; // Maximum scale factor (ScaleFactor*eigenvalue)
+  G4double MaxScaleFactor; // Maximum scale factor (ScaleFactor*eigenvalue)
   vtkTypeBool ThreeGlyphs; // Boolean controls drawing 1 or 3 glyphs
   vtkTypeBool Symmetric; // Boolean controls drawing a "mirror" of each glyph
-  double Length; // Distance, in x, from the origin to the end of the glyph
+  G4double Length; // Distance, in x, from the origin to the end of the glyph
 private:
   vtkTensorGlyphColor(const vtkTensorGlyphColor&) = delete;
   void operator=(const vtkTensorGlyphColor&) = delete;

@@ -13,9 +13,9 @@
 
 #define NUMERICALFUNCTIONS_SVN_VERSION 110+
 
-#define nf_floatToShortestString_trimZeros   ( 1 << 0 )
-#define nf_floatToShortestString_keepPeriod  ( 1 << 1 )
-#define nf_floatToShortestString_includeSign ( 1 << 2 )
+#define nf_G4floatToShortestString_trimZeros   ( 1 << 0 )
+#define nf_G4floatToShortestString_keepPeriod  ( 1 << 1 )
+#define nf_G4floatToShortestString_includeSign ( 1 << 2 )
 
 #if defined __cplusplus
     extern "C" {
@@ -32,9 +32,9 @@ typedef enum nfu_status_e {         nfu_Okay,           nfu_mallocError,        
 /*
 * Functions in nf_utilities.c
 */
-double nfu_getNAN( void );
-int nfu_isNAN( double d );
-double nfu_getInfinity( double sign );
+G4double nfu_getNAN( void );
+int nfu_isNAN( G4double d );
+G4double nfu_getInfinity( G4double sign );
 const char *nfu_statusMessage( nfu_status status );
 void nfu_setMemoryDebugMode( int mode );
 void *nfu_malloc( size_t size );
@@ -47,8 +47,8 @@ void nfu_printErrorMsg( char *fmt, ... );
 /*
 * Functions in nf_stringToDoubles.c
 */
-nfu_status nfu_stringToListOfDoubles( char const *str, int64_t *numberConverted, double **doublePtr, char **endCharacter );
-char *nf_floatToShortestString( double value, int significantDigits, int favorEFormBy, int flags );
+nfu_status nfu_stringToListOfDoubles( char const *str, int64_t *numberConverted, G4double **G4doublePtr, char **endCharacter );
+char *nf_G4floatToShortestString( G4double value, int significantDigits, int favorEFormBy, int flags );
 
 #if defined __cplusplus
     }

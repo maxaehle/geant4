@@ -409,7 +409,7 @@ G4GeometryManager::ReportVoxelStats( std::vector<G4SmartVoxelStat> & stats,
            << std::setw(13) << (stats[i].GetMemoryUse()+512)/1024
            << "k " << std::setiosflags(std::ios::left)
            << stats[i].GetVolume()->GetName()
-           << std::resetiosflags(std::ios::floatfield|std::ios::adjustfield)
+           << std::resetiosflags(std::ios::G4floatfield|std::ios::adjustfield)
            << std::setprecision(6)
            << G4endl;
   }
@@ -448,7 +448,7 @@ G4GeometryManager::ReportVoxelStats( std::vector<G4SmartVoxelStat> & stats,
            << std::setw(13) << totTime << "    "
            << std::setiosflags(std::ios::left)
            << stats[i].GetVolume()->GetName()
-           << std::resetiosflags(std::ios::floatfield|std::ios::adjustfield)
+           << std::resetiosflags(std::ios::G4floatfield|std::ios::adjustfield)
            << std::setprecision(6)
            << G4endl;
   }

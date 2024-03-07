@@ -108,7 +108,7 @@ public:
   G4int GetSSB() const;
   // Return the number of complex simple break
   G4int GetComplexSSB() const;
-  // Return the number of double strand break
+  // Return the number of G4double strand break
   G4int GetDSB() const;
   // Return a map representing cluster size distribution
   // first G4int : cluster size (1 = SSB)

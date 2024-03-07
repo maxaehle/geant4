@@ -49,12 +49,12 @@ G4UserTimeStepAction& G4UserTimeStepAction::operator=(const G4UserTimeStepAction
     return *this;
 }
 
-void G4UserTimeStepAction::SetMinimumTimeSteps(std::map<double, double>* timeSteps)
+void G4UserTimeStepAction::SetMinimumTimeSteps(std::map<G4double, G4double>* timeSteps)
 {
 	G4VScheduler::Instance()-> SetTimeSteps(timeSteps);
 }
 
-void G4UserTimeStepAction::AddTimeStep(double startingTime, double timeStep)
+void G4UserTimeStepAction::AddTimeStep(G4double startingTime, G4double timeStep)
 {
   G4VScheduler::Instance()-> AddTimeStep(startingTime,timeStep);
 }

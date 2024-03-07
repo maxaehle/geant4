@@ -89,7 +89,7 @@ err:
 static int MCGIDI_energyAngular_linear_parseFromTOM( statusMessageReporting *smr, xDataTOM_element *element, MCGIDI_distribution *distribution ) {
 
     int iV, iW;
-    double y, norm, energyInFactor, energyOutFactor;
+    G4double y, norm, energyInFactor, energyOutFactor;
     char const *energyUnit, *multiplicityProbabilityUnits[2] = { "", "1/MeV" };
     xDataTOM_element *linear;
     ptwXY_interpolation interpolationXY, interpolationWY, interpolationVY;
@@ -115,7 +115,7 @@ static int MCGIDI_energyAngular_linear_parseFromTOM( statusMessageReporting *smr
     pdfOfEpGivenE->interpolationXY = interpolationWY;
 
     if( ( V_W_XYs = (xDataTOM_V_W_XYs *) xDataTOME_getXDataIfID( smr, linear, "V_W_XYs" ) ) == NULL ) goto err;
-    if( ( pdfOfEpGivenE->Ws = (double *) smr_malloc2( smr, V_W_XYs->length * sizeof( double ), 1, "pdfOfEpGivenE->Ws" ) ) == NULL ) goto err;
+    if( ( pdfOfEpGivenE->Ws = (G4double *) smr_malloc2( smr, V_W_XYs->length * sizeof( G4double ), 1, "pdfOfEpGivenE->Ws" ) ) == NULL ) goto err;
     if( ( pdfOfEpGivenE->dist = (MCGIDI_pdfOfX *) smr_malloc2( smr, V_W_XYs->length * sizeof( MCGIDI_pdfOfX ), 0, "pdfOfEpGivenE->dist" ) ) == NULL ) goto err;
     if( ( pdfOfMuGivenEAndEp = (MCGIDI_pdfsOfXGivenW *) smr_malloc2( smr, V_W_XYs->length * sizeof( MCGIDI_pdfsOfXGivenW ), 1, "pdfOfMuGivenEAndEp" ) ) == NULL ) goto err;
 
@@ -135,7 +135,7 @@ static int MCGIDI_energyAngular_linear_parseFromTOM( statusMessageReporting *smr
         pdfOfMuGivenEAndEp2->interpolationWY = interpolationWY;
         pdfOfMuGivenEAndEp2->interpolationXY = interpolationXY;
         if( ( pdfXY2 = ptwXY_new( interpolationWY, NULL, 2., 1e-6, W_XYs->length, 10, &status, 0 ) ) == NULL ) goto errA;
-        if( ( pdfOfMuGivenEAndEp2->Ws = (double *) smr_malloc2( smr, W_XYs->length * sizeof( double ), 1, "pdfOfMuGivenEAndEp2->Ws" ) ) == NULL ) goto err;
+        if( ( pdfOfMuGivenEAndEp2->Ws = (G4double *) smr_malloc2( smr, W_XYs->length * sizeof( G4double ), 1, "pdfOfMuGivenEAndEp2->Ws" ) ) == NULL ) goto err;
         if( ( pdfOfMuGivenEAndEp2->dist = (MCGIDI_pdfOfX *) smr_malloc2( smr, W_XYs->length * sizeof( MCGIDI_pdfOfX ), 0, "pdfOfMuGivenEAndEp2->dist" ) ) == NULL ) goto err;
         for( iW = 0; iW < W_XYs->length; iW++ ) {
             XYs = &(W_XYs->XYs[iW]);
@@ -145,7 +145,7 @@ static int MCGIDI_energyAngular_linear_parseFromTOM( statusMessageReporting *smr
             if( status != nfu_Okay ) goto errA;
 
             if( y == 0 ) {
-                if( ( status = ptwXY_add_double( pdfXY1, 0.5 ) ) != nfu_Okay ) goto errA;
+                if( ( status = ptwXY_add_G4double( pdfXY1, 0.5 ) ) != nfu_Okay ) goto errA;
             }
             pdfOfMuGivenEAndEp2->Ws[iW] = energyOutFactor * XYs->value;
             if( MCGIDI_fromTOM_pdfOfX( smr, pdfXY1, &(pdfOfMuGivenEAndEp2->dist[iW]), &norm ) ) goto err;
@@ -180,10 +180,10 @@ err:
 int MCGIDI_energyAngular_sampleDistribution( statusMessageReporting *smr, MCGIDI_distribution *distribution, MCGIDI_quantitiesLookupModes &modes,
         MCGIDI_decaySamplingInfo *decaySamplingInfo ) {
 
-    double Ep;
+    G4double Ep;
     MCGIDI_energyAngular *energyAngular = distribution->energyAngular;
 
-    MCGIDI_sampling_doubleDistribution( smr, &(energyAngular->pdfOfEpGivenE), energyAngular->pdfOfMuGivenEAndEp, modes, decaySamplingInfo );
+    MCGIDI_sampling_G4doubleDistribution( smr, &(energyAngular->pdfOfEpGivenE), energyAngular->pdfOfMuGivenEAndEp, modes, decaySamplingInfo );
     Ep = decaySamplingInfo->mu;
     decaySamplingInfo->mu = decaySamplingInfo->Ep;
     decaySamplingInfo->Ep = Ep;

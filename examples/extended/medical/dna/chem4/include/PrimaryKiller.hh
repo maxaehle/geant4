@@ -52,11 +52,11 @@ class PrimaryKiller : public G4VPrimitiveScorer,
                       public G4UImessenger
 {
 private:
-  double fELoss; // cumulated energy loss by the primary
+  G4double fELoss; // cumulated energy loss by the primary
   
-  double fELossRange_Min; // fELoss from which the primary is killed
-  double fELossRange_Max; // fELoss from which the event is aborted
-  double fKineticE_Min; // kinetic energy below which the primary is killed
+  G4double fELossRange_Min; // fELoss from which the primary is killed
+  G4double fELossRange_Max; // fELoss from which the event is aborted
+  G4double fKineticE_Min; // kinetic energy below which the primary is killed
 
   G4UIcmdWithADoubleAndUnit* fpELossUI;
   G4UIcmdWithADoubleAndUnit* fpAbortEventIfELossUpperThan;
@@ -69,19 +69,19 @@ public:
   
   /** Set energy under which the particle should be
    killed*/
-  inline void SetEnergyThreshold(double energy){
+  inline void SetEnergyThreshold(G4double energy){
     fKineticE_Min = energy;
   }
   
   /** Set the energy loss from which the primary is
    killed*/
-  inline void SetMinLossEnergyLimit(double energy){
+  inline void SetMinLossEnergyLimit(G4double energy){
     fELossRange_Min = energy;
   }
   
   /** Set the energy loss from which the event is
    aborted*/
-  inline void SetMaxLossEnergyLimit(double energy){
+  inline void SetMaxLossEnergyLimit(G4double energy){
     fELossRange_Max = energy;
   }
 

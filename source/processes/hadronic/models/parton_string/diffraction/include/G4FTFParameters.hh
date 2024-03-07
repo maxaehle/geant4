@@ -55,23 +55,23 @@ class G4FTFParamCollection {
      //
      // Proc=0 --> Qexchg w/o excitation
      //
-     double GetProc0A1()   const  { return fProc0A1; }
-     double GetProc0B1()   const  { return fProc0B1; }
-     double GetProc0A2()   const  { return fProc0A2; }
-     double GetProc0B2()   const  { return fProc0B2; }
-     double GetProc0A3()   const  { return fProc0A3; }
-     double GetProc0Atop() const  { return fProc0Atop; }
-     double GetProc0Ymin() const  { return fProc0Ymin; }
+     G4double GetProc0A1()   const  { return fProc0A1; }
+     G4double GetProc0B1()   const  { return fProc0B1; }
+     G4double GetProc0A2()   const  { return fProc0A2; }
+     G4double GetProc0B2()   const  { return fProc0B2; }
+     G4double GetProc0A3()   const  { return fProc0A3; }
+     G4double GetProc0Atop() const  { return fProc0Atop; }
+     G4double GetProc0Ymin() const  { return fProc0Ymin; }
      //
      // Proc=1 --> Qexchg w/excitation
      //
-     double GetProc1A1()   const  { return fProc1A1; }
-     double GetProc1B1()   const  { return fProc1B1; }
-     double GetProc1A2()   const  { return fProc1A2; }
-     double GetProc1B2()   const  { return fProc1B2; }
-     double GetProc1A3()   const  { return fProc1A3; }
-     double GetProc1Atop() const  { return fProc1Atop; }
-     double GetProc1Ymin() const  { return fProc1Ymin; }
+     G4double GetProc1A1()   const  { return fProc1A1; }
+     G4double GetProc1B1()   const  { return fProc1B1; }
+     G4double GetProc1A2()   const  { return fProc1A2; }
+     G4double GetProc1B2()   const  { return fProc1B2; }
+     G4double GetProc1A3()   const  { return fProc1A3; }
+     G4double GetProc1Atop() const  { return fProc1Atop; }
+     G4double GetProc1Ymin() const  { return fProc1Ymin; }
      //
      // Proc=2 & Proc=3 in case ( AbsProjectileBaryonNumber > 1 ||  NumberOfTargetNucleons > 1 )
      // Update: Proc=2 & Proc=3 in case ( AbsProjectileBaryonNumber > 10 ||  NumberOfTargetNucleons > 10 )
@@ -82,71 +82,71 @@ class G4FTFParamCollection {
      //
      // Proc=2 --> Projectile diffraction
      //
-     double GetProc2A1()   const  { return fProc2A1; }
-     double GetProc2B1()   const  { return fProc2B1; }
-     double GetProc2A2()   const  { return fProc2A2; }
-     double GetProc2B2()   const  { return fProc2B2; }
-     double GetProc2A3()   const  { return fProc2A3; }
-     double GetProc2Atop() const  { return fProc2Atop; }
-     double GetProc2Ymin() const  { return fProc2Ymin; }
+     G4double GetProc2A1()   const  { return fProc2A1; }
+     G4double GetProc2B1()   const  { return fProc2B1; }
+     G4double GetProc2A2()   const  { return fProc2A2; }
+     G4double GetProc2B2()   const  { return fProc2B2; }
+     G4double GetProc2A3()   const  { return fProc2A3; }
+     G4double GetProc2Atop() const  { return fProc2Atop; }
+     G4double GetProc2Ymin() const  { return fProc2Ymin; }
      //
      // Proc=3 --> Target diffraction
      //
-     double GetProc3A1()   const  { return fProc3A1; }
-     double GetProc3B1()   const  { return fProc3B1; }
-     double GetProc3A2()   const  { return fProc3A2; }
-     double GetProc3B2()   const  { return fProc3B2; }
-     double GetProc3A3()   const  { return fProc3A3; }
-     double GetProc3Atop() const  { return fProc3Atop; }
-     double GetProc3Ymin() const  { return fProc3Ymin; }
+     G4double GetProc3A1()   const  { return fProc3A1; }
+     G4double GetProc3B1()   const  { return fProc3B1; }
+     G4double GetProc3A2()   const  { return fProc3A2; }
+     G4double GetProc3B2()   const  { return fProc3B2; }
+     G4double GetProc3A3()   const  { return fProc3A3; }
+     G4double GetProc3Atop() const  { return fProc3Atop; }
+     G4double GetProc3Ymin() const  { return fProc3Ymin; }
      //
      bool   IsProjDiffDissociation() const { return fProjDiffDissociation; }
      bool   IsTgtDiffDissociation()  const { return fTgtDiffDissociation; }
      //
      // Proc=4 --> Qexchg "w/additional multiplier" in excitation
      //
-     double GetProc4A1()   const  { return fProc4A1; }
-     double GetProc4B1()   const  { return fProc4B1; }
-     double GetProc4A2()   const  { return fProc4A2; }
-     double GetProc4B2()   const  { return fProc4B2; }
-     double GetProc4A3()   const  { return fProc4A3; }
-     double GetProc4Atop() const  { return fProc4Atop; }
-     double GetProc4Ymin() const  { return fProc4Ymin; }
+     G4double GetProc4A1()   const  { return fProc4A1; }
+     G4double GetProc4B1()   const  { return fProc4B1; }
+     G4double GetProc4A2()   const  { return fProc4A2; }
+     G4double GetProc4B2()   const  { return fProc4B2; }
+     G4double GetProc4A3()   const  { return fProc4A3; }
+     G4double GetProc4Atop() const  { return fProc4Atop; }
+     G4double GetProc4Ymin() const  { return fProc4Ymin; }
      //
      // 
-     double GetDeltaProbAtQuarkExchange() const  { return fDeltaProbAtQuarkExchange; }  
-     double GetProbOfSameQuarkExchange()  const  { return fProbOfSameQuarkExchange; }
-     double GetProjMinDiffMass()          const  { return fProjMinDiffMass; }
-     double GetProjMinNonDiffMass()       const  { return fProjMinNonDiffMass; }
-     double GetTgtMinDiffMass()           const  { return fTgtMinDiffMass; }
-     double GetTgtMinNonDiffMass()        const  { return fTgtMinNonDiffMass; }
-     double GetAveragePt2()               const  { return fAveragePt2; }
-     double GetProbLogDistrPrD()          const  { return fProbLogDistrPrD; }
-     double GetProbLogDistr()             const  { return fProbLogDistr; }
+     G4double GetDeltaProbAtQuarkExchange() const  { return fDeltaProbAtQuarkExchange; }  
+     G4double GetProbOfSameQuarkExchange()  const  { return fProbOfSameQuarkExchange; }
+     G4double GetProjMinDiffMass()          const  { return fProjMinDiffMass; }
+     G4double GetProjMinNonDiffMass()       const  { return fProjMinNonDiffMass; }
+     G4double GetTgtMinDiffMass()           const  { return fTgtMinDiffMass; }
+     G4double GetTgtMinNonDiffMass()        const  { return fTgtMinNonDiffMass; }
+     G4double GetAveragePt2()               const  { return fAveragePt2; }
+     G4double GetProbLogDistrPrD()          const  { return fProbLogDistrPrD; }
+     G4double GetProbLogDistr()             const  { return fProbLogDistr; }
 
      // NOTE (JVY): There is also the Pt2Kind parameter but for now it's set to 0., so we'll leave it aside
 
-     // --> FIXME !!! --> void Get/SetBaryonMaxNumberOfCollisions( const double, const double ); // 1st is Plab, 2nd - D=2.
+     // --> FIXME !!! --> void Get/SetBaryonMaxNumberOfCollisions( const G4double, const G4double ); // 1st is Plab, 2nd - D=2.
      //
-     double GetNuclearProjDestructP1()    const { return fNuclearProjDestructP1; }
+     G4double GetNuclearProjDestructP1()    const { return fNuclearProjDestructP1; }
      bool   IsNuclearProjDestructP1_NBRNDEP() const { return fNuclearProjDestructP1_NBRNDEP; }
-     double GetNuclearTgtDestructP1()     const { return fNuclearTgtDestructP1; }
+     G4double GetNuclearTgtDestructP1()     const { return fNuclearTgtDestructP1; }
      bool   IsNuclearTgtDestructP1_ADEP() const { return fNuclearTgtDestructP1_ADEP; }
-     double GetNuclearProjDestructP2()    const { return fNuclearProjDestructP2; }
-     double GetNuclearProjDestructP3()    const { return fNuclearProjDestructP3; }
-     double GetNuclearTgtDestructP2()     const { return fNuclearTgtDestructP2; }
-     double GetNuclearTgtDestructP3()     const { return fNuclearTgtDestructP3; }
-     double GetPt2NuclearDestructP1()     const { return fPt2NuclearDestructP1; }
-     double GetPt2NuclearDestructP2()     const { return fPt2NuclearDestructP2; }
-     double GetPt2NuclearDestructP3()     const { return fPt2NuclearDestructP3; }
-     double GetPt2NuclearDestructP4()     const { return fPt2NuclearDestructP4; }      
+     G4double GetNuclearProjDestructP2()    const { return fNuclearProjDestructP2; }
+     G4double GetNuclearProjDestructP3()    const { return fNuclearProjDestructP3; }
+     G4double GetNuclearTgtDestructP2()     const { return fNuclearTgtDestructP2; }
+     G4double GetNuclearTgtDestructP3()     const { return fNuclearTgtDestructP3; }
+     G4double GetPt2NuclearDestructP1()     const { return fPt2NuclearDestructP1; }
+     G4double GetPt2NuclearDestructP2()     const { return fPt2NuclearDestructP2; }
+     G4double GetPt2NuclearDestructP3()     const { return fPt2NuclearDestructP3; }
+     G4double GetPt2NuclearDestructP4()     const { return fPt2NuclearDestructP4; }      
      //
      // separately for baryons, mesons, etc.
      //
-     double GetR2ofNuclearDestruct()         const { return fR2ofNuclearDestruct; }
-     double GetExciEnergyPerWoundedNucleon() const { return fExciEnergyPerWoundedNucleon; }
-     double GetDofNuclearDestruct()          const { return fDofNuclearDestruct; } 
-     double GetMaxPt2ofNuclearDestruct()     const { return fMaxPt2ofNuclearDestruct; }
+     G4double GetR2ofNuclearDestruct()         const { return fR2ofNuclearDestruct; }
+     G4double GetExciEnergyPerWoundedNucleon() const { return fExciEnergyPerWoundedNucleon; }
+     G4double GetDofNuclearDestruct()          const { return fDofNuclearDestruct; } 
+     G4double GetMaxPt2ofNuclearDestruct()     const { return fMaxPt2ofNuclearDestruct; }
    
    protected:
 
@@ -163,21 +163,21 @@ class G4FTFParamCollection {
       // for details, see also G4FTFParameters::GetProcProb( ProcN, y )
       //
       // Proc=0 --> Qexchg w/o excitation
-      double fProc0A1; // D=13.71 
-      double fProc0B1; // D=1.75
-      double fProc0A2; // D=-30.69 (or -214.5 as in Doc ?)
-      double fProc0B2; // D=3.     ( or 4. as in Doc ?)
-      double fProc0A3; // D=0.
-      double fProc0Atop; // D=1.   ( or 0.5 as in Doc ?)
-      double fProc0Ymin; // D=0.93 (or 1.1 as in Doc ?)
+      G4double fProc0A1; // D=13.71 
+      G4double fProc0B1; // D=1.75
+      G4double fProc0A2; // D=-30.69 (or -214.5 as in Doc ?)
+      G4double fProc0B2; // D=3.     ( or 4. as in Doc ?)
+      G4double fProc0A3; // D=0.
+      G4double fProc0Atop; // D=1.   ( or 0.5 as in Doc ?)
+      G4double fProc0Ymin; // D=0.93 (or 1.1 as in Doc ?)
       // Proc=1 --> Qexchg w/excitation
-      double fProc1A1; // D=25.
-      double fProc1B1; // D=1.
-      double fProc1A2; // D=-50.34
-      double fProc1B2; // D=1.5
-      double fProc1A3; // D=0.
-      double fProc1Atop; // D=0.
-      double fProc1Ymin; // D=1.4
+      G4double fProc1A1; // D=25.
+      G4double fProc1B1; // D=1.
+      G4double fProc1A2; // D=-50.34
+      G4double fProc1B2; // D=1.5
+      G4double fProc1A3; // D=0.
+      G4double fProc1Atop; // D=0.
+      G4double fProc1Ymin; // D=1.4
       //
       // NOTE: Proc #2 & 3 are projectile & target diffraction
       //       they have more complex definition of A1 & A2 
@@ -191,29 +191,29 @@ class G4FTFParamCollection {
       bool   fProjDiffDissociation;
       bool   fTgtDiffDissociation;
       // Proc=2 --> Projectile diffraction
-      double fProc2A1; 
-      double fProc2B1; 
-      double fProc2A2; 
-      double fProc2B2; 
-      double fProc2A3; 
-      double fProc2Atop; 
-      double fProc2Ymin; 
+      G4double fProc2A1; 
+      G4double fProc2B1; 
+      G4double fProc2A2; 
+      G4double fProc2B2; 
+      G4double fProc2A3; 
+      G4double fProc2Atop; 
+      G4double fProc2Ymin; 
       // Proc=3 --> Target diffraction
-      double fProc3A1; 
-      double fProc3B1; 
-      double fProc3A2; 
-      double fProc3B2; 
-      double fProc3A3; 
-      double fProc3Atop; 
-      double fProc3Ymin; 
+      G4double fProc3A1; 
+      G4double fProc3B1; 
+      G4double fProc3A2; 
+      G4double fProc3B2; 
+      G4double fProc3A3; 
+      G4double fProc3Atop; 
+      G4double fProc3Ymin; 
       // Proc=4 --> Qexchg w/additional multiplier in excitation  
-      double fProc4A1; // D=0.6 (or 1. as in Doc ?)
-      double fProc4B1; // D=0.
-      double fProc4A2; // D=-1.2 (or -2.01 as in Doc ?)
-      double fProc4B2; // D=0.5 
-      double fProc4A3; // D=0.
-      double fProc4Atop; // D=0.
-      double fProc4Ymin; // D=1.4
+      G4double fProc4A1; // D=0.6 (or 1. as in Doc ?)
+      G4double fProc4B1; // D=0.
+      G4double fProc4A2; // D=-1.2 (or -2.01 as in Doc ?)
+      G4double fProc4B2; // D=0.5 
+      G4double fProc4A3; // D=0.
+      G4double fProc4Atop; // D=0.
+      G4double fProc4Ymin; // D=1.4
       //
       // parameters of participating baryon excitation 
       // NOTE: baryon ot HADRON ???
@@ -223,15 +223,15 @@ class G4FTFParamCollection {
       //       the defaults listed under coments are for baryons, 
       //       and they may be different or the same for other hadrons (e.g. mesons)
       //
-      double fDeltaProbAtQuarkExchange; // D=0. 
-      double fProbOfSameQuarkExchange;  // D=0. if A<=26, otherwise D=1.
-      double fProjMinDiffMass;          // projectile, D=1.16GeV
-      double fProjMinNonDiffMass;       // projectile, D=1.16GeV
-      double fTgtMinDiffMass;           // target, D=1.16GeV
-      double fTgtMinNonDiffMass;        // target, D=1.16GeV
-      double fAveragePt2;               // D=0.3GeV**2 ( or 0.15 as in the Doc ???)
-      double fProbLogDistrPrD;          // D=0.55 (or 0.6 ??? or 0.3 ???)
-      double fProbLogDistr;             // D=0.55 (or 0.6 ??? or 0.3 ???)
+      G4double fDeltaProbAtQuarkExchange; // D=0. 
+      G4double fProbOfSameQuarkExchange;  // D=0. if A<=26, otherwise D=1.
+      G4double fProjMinDiffMass;          // projectile, D=1.16GeV
+      G4double fProjMinNonDiffMass;       // projectile, D=1.16GeV
+      G4double fTgtMinDiffMass;           // target, D=1.16GeV
+      G4double fTgtMinNonDiffMass;        // target, D=1.16GeV
+      G4double fAveragePt2;               // D=0.3GeV**2 ( or 0.15 as in the Doc ???)
+      G4double fProbLogDistrPrD;          // D=0.55 (or 0.6 ??? or 0.3 ???)
+      G4double fProbLogDistr;             // D=0.55 (or 0.6 ??? or 0.3 ???)
 
       // parameters of nuclear distruction 
       //
@@ -240,37 +240,37 @@ class G4FTFParamCollection {
       //             * anti-baryon projectile
       //             * meson projectile
       //
-      // double fBaryonMaxNumberOfCollisions; // D=2.
-      // void SetBaryonProbOfInteraction( const double ); // ??? this is prob. of inelastic interaction 
+      // G4double fBaryonMaxNumberOfCollisions; // D=2.
+      // void SetBaryonProbOfInteraction( const G4double ); // ??? this is prob. of inelastic interaction 
                                                           //     that is set internally based on certain conditions...
       // general (i.e. for used for baryons,anti-baryons, and mesons)
       // NOTE: these parameters have stayed THE SAME for quite a while 
-      double fNuclearProjDestructP1; // D=0.00481 in 10.3.ref04 !!!
+      G4double fNuclearProjDestructP1; // D=0.00481 in 10.3.ref04 !!!
                                      // BUT !!! In 10.3.ref04 as well as in 10.2-seriesit's multiplied of AbsProjectileBaryonNumber
 				     // which somehow is 0 for the proton projectile (see in 10.3.ref04 around lines 130-140 In G4FTFParameters.cc).
 				     // For the target destr. it's multipled by the number of target nucleons (12 for Carbon).
 				     // In 10.3.p01 it's set to 1. FLAT OUT for both projectile & target, no multiplications, etc.
 				     // Now, make default at 1.
       bool   fNuclearProjDestructP1_NBRNDEP;
-      double fNuclearTgtDestructP1;  // Make D=1. as in 10.3.p01
+      G4double fNuclearTgtDestructP1;  // Make D=1. as in 10.3.p01
       bool   fNuclearTgtDestructP1_ADEP;
-      double fNuclearProjDestructP2; // D=4.0
-      double fNuclearProjDestructP3; // D=2.1
-      double fNuclearTgtDestructP2; // D=4.0
-      double fNuclearTgtDestructP3; // D=2.1
+      G4double fNuclearProjDestructP2; // D=4.0
+      G4double fNuclearProjDestructP3; // D=2.1
+      G4double fNuclearTgtDestructP2; // D=4.0
+      G4double fNuclearTgtDestructP3; // D=2.1
       //
-      double fPt2NuclearDestructP1; // D=0.035
-      double fPt2NuclearDestructP2; // D=0.04
-      double fPt2NuclearDestructP3; // D=4.0
-      double fPt2NuclearDestructP4; // D=2.5 
+      G4double fPt2NuclearDestructP1; // D=0.035
+      G4double fPt2NuclearDestructP2; // D=0.04
+      G4double fPt2NuclearDestructP3; // D=4.0
+      G4double fPt2NuclearDestructP4; // D=2.5 
       // baryons... well, in fact also mesons...
-      double fR2ofNuclearDestruct;         // D=1.5*fermi*fermi
-      double fExciEnergyPerWoundedNucleon; // D=40MeV
-      double fDofNuclearDestruct;          // D=0.3
+      G4double fR2ofNuclearDestruct;         // D=1.5*fermi*fermi
+      G4double fExciEnergyPerWoundedNucleon; // D=40MeV
+      G4double fDofNuclearDestruct;          // D=0.3
       // NOTE: this parameter has changed from 1. to 9. between 10.2 and 10.4.ref04 !!!
       //       ... but that's for baryons !
       //       ... while for mesons it's 1GeV**2
-      double fMaxPt2ofNuclearDestruct;     // D=9GeV**2
+      G4double fMaxPt2ofNuclearDestruct;     // D=9GeV**2
 
 };
 

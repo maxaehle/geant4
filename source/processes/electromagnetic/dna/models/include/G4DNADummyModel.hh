@@ -69,7 +69,7 @@ public:
 private:
     G4VEmModel* fpEmModel;
     const G4ParticleDefinition* fpParticleDef;
-    const std::vector<double>* fMaterialMolPerVol;
+    const std::vector<G4double>* fMaterialMolPerVol;
 
     G4double GetNumMoleculePerVolumeUnitForMaterial(const G4Material *mat);
 };

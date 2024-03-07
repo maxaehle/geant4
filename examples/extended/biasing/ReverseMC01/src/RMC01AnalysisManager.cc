@@ -520,7 +520,7 @@ void RMC01AnalysisManager::ComputeMeanEdepAndError(
    // LD: This is wrong! With the use of fNentry the results were no longer
    //     correctly normalised. The mean and the error should be computed
    //     with nb_event. The old computation has been reset.
-   // VI: OK, but let computations be double
+   // VI: OK, but let computations be G4double
    if (nb_event > 0) {
      G4double norm = 1.0/(G4double)nb_event;
      mean = fAccumulated_edep*norm;

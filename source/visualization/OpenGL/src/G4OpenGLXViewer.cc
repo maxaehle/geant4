@@ -80,7 +80,7 @@ int G4OpenGLXViewer::dblBuf_RGBA[13] =
 #define USE_STANDARD_COLORMAP 0
 
 XVisualInfo*  G4OpenGLXViewer::vi_single_buffer = 0;
-XVisualInfo*  G4OpenGLXViewer::vi_double_buffer = 0;
+XVisualInfo*  G4OpenGLXViewer::vi_G4double_buffer = 0;
 
 extern "C" {
   static Bool G4OpenGLXViewerWaitForNotify (Display*, XEvent* e, char* arg) {
@@ -482,16 +482,16 @@ cmap (0)
       glXChooseVisual (dpy, XDefaultScreen (dpy), snglBuf_RGBA);
     //G.Barrand : we should do a XFree(vi_single_buffer) at end;
   }
-  if (!vi_double_buffer) {
-    vi_double_buffer =
+  if (!vi_G4double_buffer) {
+    vi_G4double_buffer =
       glXChooseVisual (dpy, XDefaultScreen (dpy), dblBuf_RGBA);
-    //G.Barrand : we should do a XFree(vi_double_buffer) at end;
+    //G.Barrand : we should do a XFree(vi_G4double_buffer) at end;
   }
 
-  if (vi_single_buffer || vi_double_buffer) {
-    if (!vi_double_buffer) {
+  if (vi_single_buffer || vi_G4double_buffer) {
+    if (!vi_G4double_buffer) {
       G4cout <<
-	"G4OpenGLXViewer::G4OpenGLXViewer: unable to get a double buffer visual."
+	"G4OpenGLXViewer::G4OpenGLXViewer: unable to get a G4double buffer visual."
 	"\n  Working with a single buffer."
 	     << G4endl;
     }
@@ -501,9 +501,9 @@ cmap (0)
 	"G4OpenGLXViewer::G4OpenGLXViewer: unable to get a single buffer visual."
 	     << G4endl;
     }
-    if (!vi_double_buffer) {
+    if (!vi_G4double_buffer) {
       G4cout <<
-	"G4OpenGLXViewer::G4OpenGLXViewer: unable to get a double buffer visual."
+	"G4OpenGLXViewer::G4OpenGLXViewer: unable to get a G4double buffer visual."
 	     << G4endl;
     }
   }
@@ -514,17 +514,17 @@ cmap (0)
   }
   
   if (!vi_immediate){
-    // next try for a double buffered RGB, but Draw to top buffer
-    if (vi_double_buffer) {
-      vi_immediate = vi_double_buffer;
+    // next try for a G4double buffered RGB, but Draw to top buffer
+    if (vi_G4double_buffer) {
+      vi_immediate = vi_G4double_buffer;
       attributeList = dblBuf_RGBA;
     }
   }
 
   // Now try for a visual suitable for OpenGLStored...
-  // Try for a double buffered RGB window
-  if (vi_double_buffer) {
-    vi_stored = vi_double_buffer;
+  // Try for a G4double buffered RGB window
+  if (vi_G4double_buffer) {
+    vi_stored = vi_G4double_buffer;
     attributeList = dblBuf_RGBA;
   }
 

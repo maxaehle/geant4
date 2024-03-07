@@ -93,7 +93,7 @@ public:
 
 protected:
   void RegisterTimeStepModel(G4VITStepModel* timeStepModel,
-                             double startingTime = 0);
+                             G4double startingTime = 0);
   void BuildPhysicsTable(G4MoleculeDefinition*);
 
   int verboseLevel;

@@ -28,7 +28,7 @@
 // Class description:
 //
 // A concrete class of G4UIcommand. The command defined by this class
-// takes a double value and a unit string.
+// takes a G4double value and a unit string.
 // General information of G4UIcommand is given in G4UIcommand.hh
 
 // Author: M.Asai, 1998
@@ -50,38 +50,38 @@ class G4UIcmdWithADoubleAndUnit : public G4UIcommand
     virtual G4int DoIt(G4String parameterList);
 
     static G4double GetNewDoubleValue(const char* paramString);
-      // Convert string which represents a double value and a unit to
-      // double. Value is converted to the Geant4 internal unit
+      // Convert string which represents a G4double value and a unit to
+      // G4double. Value is converted to the Geant4 internal unit
 
     static G4double GetNewDoubleRawValue(const char* paramString);
-      // Convert string which represents a double value and a unit to
-      // double. Value is NOT converted to the Geant4 internal unit
+      // Convert string which represents a G4double value and a unit to
+      // G4double. Value is NOT converted to the Geant4 internal unit
       // but just as the given string
 
     static G4double GetNewUnitValue(const char* paramString);
       // Convert the unit string to the value of the unit. "paramString"
-      // must contain a double value AND a unit string
+      // must contain a G4double value AND a unit string
 
     G4String ConvertToStringWithBestUnit(G4double val);
-      // Convert a double value to a string of digits and unit. Best unit is
+      // Convert a G4double value to a string of digits and unit. Best unit is
       // chosen from the unit category of default unit (in case SetDefaultUnit()
       // is defined) or category defined by SetUnitCategory()
 
     G4String ConvertToStringWithDefaultUnit(G4double val);
-      // Convert a double value to a string of digits and unit. Best unit is
+      // Convert a G4double value to a string of digits and unit. Best unit is
       // chosen from the category defined by SetUnitCategory() in case default
       // unit is not defined
 
     void SetParameterName(const char* theName, G4bool omittable,
                           G4bool currentAsDefault = false);
-      // Set the parameter name for double parameters. Name is used by
+      // Set the parameter name for G4double parameters. Name is used by
       // the range checking function.
       // If "omittable" is set as true, the user of this command can omit
       // the value when the command is applied. If "omittable" is false,
       // the user must supply a value.
       // "currentAsDefault" flag is valid only if "omittable" is true. If this
       // flag is true, the current value is used as the default value when the
-      // user omits the double parameter. If this flag is false, the value
+      // user omits the G4double parameter. If this flag is false, the value
       // given by the next SetDefaultValue() method is used
 
     void SetDefaultValue(G4double defVal);

@@ -431,7 +431,7 @@ G4Element* G4Element::GetElement(G4String elementName, G4bool warning)
 std::ostream& operator<<(std::ostream& flux, const G4Element* element)
 {
   std::ios::fmtflags mode = flux.flags();
-  flux.setf(std::ios::fixed,std::ios::floatfield);
+  flux.setf(std::ios::fixed,std::ios::G4floatfield);
   G4long prec = flux.precision(3);
   
   flux
@@ -449,7 +449,7 @@ std::ostream& operator<<(std::ostream& flux, const G4Element* element)
     << (element->fRelativeAbundanceVector[i])/perCent << " %";
     
   flux.precision(prec);        
-  flux.setf(mode,std::ios::floatfield);         
+  flux.setf(mode,std::ios::G4floatfield);         
   return flux;
 }
 

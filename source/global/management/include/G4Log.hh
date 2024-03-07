@@ -140,7 +140,7 @@ namespace G4LogConsts
   }
 
   //----------------------------------------------------------------------------
-  // Converts a double to an unsigned long long
+  // Converts a G4double to an unsigned long long
   //
   inline uint64_t dp2uint64(G4double x)
   {
@@ -150,7 +150,7 @@ namespace G4LogConsts
   }
 
   //----------------------------------------------------------------------------
-  // Converts an unsigned long long to a double
+  // Converts an unsigned long long to a G4double
   //
   inline G4double uint642dp(uint64_t ll)
   {
@@ -160,7 +160,7 @@ namespace G4LogConsts
   }
 
   //----------------------------------------------------------------------------
-  // Converts an int to a float
+  // Converts an int to a G4float
   //
   inline G4float uint322sp(G4int x)
   {
@@ -170,7 +170,7 @@ namespace G4LogConsts
   }
 
   //----------------------------------------------------------------------------
-  // Converts a float to an int
+  // Converts a G4float to an int
   //
   inline uint32_t sp2uint32(G4float x)
   {
@@ -180,7 +180,7 @@ namespace G4LogConsts
   }
 
   //----------------------------------------------------------------------------
-  /// Like frexp but vectorising and the exponent is a double.
+  /// Like frexp but vectorising and the exponent is a G4double.
   inline G4double getMantExponent(const G4double x, G4double& fe)
   {
     uint64_t n = dp2uint64(x);
@@ -205,7 +205,7 @@ namespace G4LogConsts
   }
 
   //----------------------------------------------------------------------------
-  /// Like frexp but vectorising and the exponent is a float.
+  /// Like frexp but vectorising and the exponent is a G4float.
   inline G4float getMantExponentf(const G4float x, G4float& fe)
   {
     uint32_t n = sp2uint32(x);
@@ -221,7 +221,7 @@ namespace G4LogConsts
   }
 }  // namespace G4LogConsts
 
-// Log double precision --------------------------------------------------------
+// Log G4double precision --------------------------------------------------------
 
 inline G4double G4Log(G4double x)
 {

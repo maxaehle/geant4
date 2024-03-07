@@ -7378,11 +7378,11 @@
   -0.00194053, -0.00133768, -0.000691315, 9.19946e-17}; 
 
 
-G4double G4ParticleHPFastLegendre::regularEvaluate( int l , double x )
+G4double G4ParticleHPFastLegendre::regularEvaluate( int l , G4double x )
 {
-   double y_pre;
-   double y;
-   double y_post;
+   G4double y_pre;
+   G4double y;
+   G4double y_post;
 
    y_pre=1;
    y=x;
@@ -7398,12 +7398,12 @@ G4double G4ParticleHPFastLegendre::regularEvaluate( int l , double x )
    return y;
 }
 
-G4double G4ParticleHPFastLegendre::regularIntegrate( int l , double x )
+G4double G4ParticleHPFastLegendre::regularIntegrate( int l , G4double x )
 {
-   double y_pre;
-   double y;
-   double y_post;
-   double ydx;
+   G4double y_pre;
+   G4double y;
+   G4double y_post;
+   G4double ydx;
 
    y_pre=1;
    y=x;

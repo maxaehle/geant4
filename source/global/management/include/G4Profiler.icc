@@ -172,7 +172,7 @@ struct FuncHandler
   // despite the potential variants. Thus this is valid:
   //
   // GetLabelFunctor() = [](int i) { return std::to_string(i); }
-  // GetLabelFunctor() = [](float v) { return std::to_string(v); }
+  // GetLabelFunctor() = [](G4float v) { return std::to_string(v); }
   //
   // but will only compile for types that are explicitly
   // supported --> the assign function iterates through the

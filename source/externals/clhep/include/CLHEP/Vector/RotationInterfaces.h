@@ -16,7 +16,7 @@
 // It may be desirable in the future to turn these classes into constraints
 // in the Stroustrup sense, so as to enforce this interface, still without 
 // inheritance.  However, they do contain an important static:
-// static double tolerance to set criteria for relative nearness.
+// static G4double tolerance to set criteria for relative nearness.
 //
 // This file also defines structs 
 // HepRep3x3;
@@ -113,7 +113,7 @@ class Hep4RotationInterface  {
 
 public:
 
-  DLL_API static double tolerance;        // to determine relative nearness
+  DLL_API static G4double tolerance;        // to determine relative nearness
 
   // ----------  Accessors:
 
@@ -129,22 +129,22 @@ public:
   HepLorentzVector row4() const;
 
   //  individual elements:
-  double xx() const  ;
-  double xy() const  ;
-  double xz() const  ;
-  double xt() const  ;
-  double yx() const  ;
-  double yy() const  ;
-  double yz() const  ;
-  double yt() const  ;
-  double zx() const  ;
-  double zy() const  ;
-  double zz() const  ;
-  double zt() const  ;
-  double tx() const  ;
-  double ty() const  ;
-  double tz() const  ;
-  double tt() const  ;
+  G4double xx() const  ;
+  G4double xy() const  ;
+  G4double xz() const  ;
+  G4double xt() const  ;
+  G4double yx() const  ;
+  G4double yy() const  ;
+  G4double yz() const  ;
+  G4double yt() const  ;
+  G4double zx() const  ;
+  G4double zy() const  ;
+  G4double zz() const  ;
+  G4double zt() const  ;
+  G4double tx() const  ;
+  G4double ty() const  ;
+  G4double tz() const  ;
+  G4double tt() const  ;
 
   //   4x4 representation:
 //HepRep4x4 rep4x4() const;	JMM  Declared here but not defined anywhere!
@@ -168,11 +168,11 @@ public:
 
   //   relative comparison:
 
-  double norm2() const  ;
-  double  distance2( const Hep4RotationInterface & lt ) const  ;
-  double  howNear( const Hep4RotationInterface & lt ) const  ;
+  G4double norm2() const  ;
+  G4double  distance2( const Hep4RotationInterface & lt ) const  ;
+  G4double  howNear( const Hep4RotationInterface & lt ) const  ;
   bool isNear (const Hep4RotationInterface & lt, 
-				   double epsilon=tolerance) const  ;
+				   G4double epsilon=tolerance) const  ;
 
   void rectify()  ;
   // non-const but logically const correction for accumulated roundoff errors
@@ -189,8 +189,8 @@ public:
 
 #endif /* ONLY_IN_CONCRETE_CLASSES */
 
-  static double getTolerance();
-  static double setTolerance( double tol );
+  static G4double getTolerance();
+  static G4double setTolerance( G4double tol );
 
   enum { ToleranceTicks = 100 };
 
@@ -226,18 +226,18 @@ public:
 #ifdef ONLY_IN_CONCRETE_CLASSES
 
   //   Euler angles:
-  double getPhi  () const  ;
-  double getTheta() const  ;
-  double getPsi  () const  ;
-  double    phi  () const  ;
-  double    theta() const  ;
-  double    psi  () const  ;
+  G4double getPhi  () const  ;
+  G4double getTheta() const  ;
+  G4double getPsi  () const  ;
+  G4double    phi  () const  ;
+  G4double    theta() const  ;
+  G4double    psi  () const  ;
   HepEulerAngles eulerAngles() const  ;
 
   //   axis & angle of rotation:
-  double  getDelta() const  ;
+  G4double  getDelta() const  ;
   Hep3Vector getAxis () const  ;
-  double     delta() const  ;
+  G4double     delta() const  ;
   Hep3Vector    axis () const  ;
   HepAxisAngle axisAngle() const  ;
 
@@ -264,13 +264,13 @@ public:
   HepLorentzVector row4() const;
 
   //  individual elements treating this as a 4-rotation:
-  double xt() const; 
-  double yt() const; 
-  double zt() const; 
-  double tx() const; 
-  double ty() const;
-  double tz() const;
-  double tt() const;
+  G4double xt() const; 
+  G4double yt() const; 
+  G4double zt() const; 
+  G4double tx() const; 
+  G4double ty() const;
+  G4double tz() const;
+  G4double tt() const;
 
   // ---------- Operations in the Rotation group
 
@@ -308,24 +308,24 @@ struct HepRep3x3 {
 
   inline HepRep3x3();
 
-  inline HepRep3x3(  double xx, double xy, double xz
-                   , double yx, double yy, double yz
-                   , double zx, double zy, double zz
+  inline HepRep3x3(  G4double xx, G4double xy, G4double xz
+                   , G4double yx, G4double yy, G4double yz
+                   , G4double zx, G4double zy, G4double zz
                    );
 
-  inline HepRep3x3( const double * array );
-  // construct from an array of doubles, holding the rotation matrix
+  inline HepRep3x3( const G4double * array );
+  // construct from an array of G4doubles, holding the rotation matrix
   // in ROW order (xx, xy, ...)
 
   inline void setToIdentity();
 
   // -----  The data members are public:
-  double xx_, xy_, xz_,
+  G4double xx_, xy_, xz_,
             yx_, yy_, yz_,
             zx_, zy_, zz_;
 
-  inline void getArray ( double * array ) const;
-  // fill array with the NINE doubles xx, xy, xz ... zz
+  inline void getArray ( G4double * array ) const;
+  // fill array with the NINE G4doubles xx, xy, xz ... zz
 
 };  // HepRep3x3
 
@@ -334,28 +334,28 @@ struct HepRep4x4 {
   // -----  Constructors:
   inline HepRep4x4();
 
-  inline HepRep4x4(  double xx, double xy, double xz, double xt
-                   , double yx, double yy, double yz, double yt
-                   , double zx, double zy, double zz, double zt
-                   , double tx, double ty, double tz, double tt
+  inline HepRep4x4(  G4double xx, G4double xy, G4double xz, G4double xt
+                   , G4double yx, G4double yy, G4double yz, G4double yt
+                   , G4double zx, G4double zy, G4double zz, G4double zt
+                   , G4double tx, G4double ty, G4double tz, G4double tt
                    );
 
   inline HepRep4x4( const HepRep4x4Symmetric & rep );
 
-  inline HepRep4x4( const double * array );
-  // construct from an array of doubles, holding the transformation matrix
+  inline HepRep4x4( const G4double * array );
+  // construct from an array of G4doubles, holding the transformation matrix
   // in ROW order xx, xy, ...
 
   inline void setToIdentity();
 
   // -----  The data members are public:
-  double xx_, xy_, xz_, xt_,
+  G4double xx_, xy_, xz_, xt_,
             yx_, yy_, yz_, yt_,
             zx_, zy_, zz_, zt_,
             tx_, ty_, tz_, tt_;
                          
-  inline void getArray ( double * array ) const;
-  // fill array with the SIXTEEN doubles xx, xy, xz ... tz, tt
+  inline void getArray ( G4double * array ) const;
+  // fill array with the SIXTEEN G4doubles xx, xy, xz ... tz, tt
 
   inline bool operator==(HepRep4x4 const & r) const;
   inline bool operator!=(HepRep4x4 const & r) const;
@@ -370,25 +370,25 @@ struct HepRep4x4Symmetric {
   inline HepRep4x4Symmetric();
 
   inline HepRep4x4Symmetric
-	( double xx, double xy, double xz, double xt
-                      , double yy, double yz, double yt
-                                    , double zz, double zt
-                                                  , double tt );
+	( G4double xx, G4double xy, G4double xz, G4double xt
+                      , G4double yy, G4double yz, G4double yt
+                                    , G4double zz, G4double zt
+                                                  , G4double tt );
 
-  inline HepRep4x4Symmetric( const double * array );
-  // construct from an array of doubles, holding the transformation matrix
+  inline HepRep4x4Symmetric( const G4double * array );
+  // construct from an array of G4doubles, holding the transformation matrix
   // elements in this order:  xx, xy, xz, xt, yy, yz, yt, zz, zt, tt
 
   inline void setToIdentity();
 
   // -----  The data members are public:
-  double xx_, xy_, xz_, xt_,
+  G4double xx_, xy_, xz_, xt_,
                  yy_, yz_, yt_,
                       zz_, zt_,
                            tt_;
 
-  inline void getArray ( double * array ) const;
-  // fill array with the TEN doubles xx, xy, xz, xt, yy, yz, yt, zz, zt, tt
+  inline void getArray ( G4double * array ) const;
+  // fill array with the TEN G4doubles xx, xy, xz, xt, yy, yz, yt, zz, zt, tt
 
 };
 

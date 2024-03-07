@@ -54,7 +54,7 @@ G4VUserChemistryList::~G4VUserChemistryList()
 }
 
 void G4VUserChemistryList::RegisterTimeStepModel(G4VITStepModel* timeStepModel,
-                                                 double startingTime)
+                                                 G4double startingTime)
 {
   G4VScheduler::Instance()->RegisterModel(timeStepModel, startingTime);
 }

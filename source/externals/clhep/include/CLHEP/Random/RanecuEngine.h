@@ -53,11 +53,11 @@ public:
   virtual ~RanecuEngine();
   // Constructors and destructor.
 
-  double flat();
+  G4double flat();
   // Returns a pseudo random number between 0 and 1 
   // (excluding the end points)
 
-  void flatArray (const int size, double* vect);
+  void flatArray (const int size, G4double* vect);
   // Fills an array "vect" of specified size with flat random values.
 
   void setIndex (long index);
@@ -83,9 +83,9 @@ public:
   void showStatus() const;
   // Dumps the engine status on the screen.
 
-  operator double();
+  operator G4double();
   // Returns same as flat()
-  operator float();
+  operator G4float();
   // less precise flat, faster if possible
   operator unsigned int();
   // 32-bit int flat, faster in this case

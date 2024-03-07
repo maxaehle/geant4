@@ -44,42 +44,42 @@ G4AblaVirtualData::G4AblaVirtualData(G4INCL::Config *) {}
 #endif
 G4AblaVirtualData::~G4AblaVirtualData() {}
 
-bool G4AblaVirtualData::setAlpha(int A, int Z, double value)
+bool G4AblaVirtualData::setAlpha(int A, int Z, G4double value)
 {
   alpha[A][Z] = value;
 
   return true;
 }
 
-bool G4AblaVirtualData::setEcnz(int A, int Z, double value)
+bool G4AblaVirtualData::setEcnz(int A, int Z, G4double value)
 {
   ecnz[A][Z] = value;
 
   return true;
 }
 
-bool G4AblaVirtualData::setVgsld(int A, int Z, double value)
+bool G4AblaVirtualData::setVgsld(int A, int Z, G4double value)
 {
   vgsld[A][Z] = value;
 
   return true;
 }
 
-bool G4AblaVirtualData::setPace2(int A, int Z, double value)
+bool G4AblaVirtualData::setPace2(int A, int Z, G4double value)
 {
   pace2[A][Z] = value;
 
   return true;
 }
 
-bool G4AblaVirtualData::setRms(int A, int Z, double value)
+bool G4AblaVirtualData::setRms(int A, int Z, G4double value)
 {
   rms[A][Z] = value;
 
   return true;
 }
 
-bool G4AblaVirtualData::setMexp(int A, int Z, double value)
+bool G4AblaVirtualData::setMexp(int A, int Z, G4double value)
 {
   mexp[A][Z] = value;
 
@@ -93,14 +93,14 @@ bool G4AblaVirtualData::setMexpID(int A, int Z, int value)
   return true;
 }
 
-bool G4AblaVirtualData::setBeta2(int A, int Z, double value)
+bool G4AblaVirtualData::setBeta2(int A, int Z, G4double value)
 {
   beta2[A][Z] = value;
 
   return true;
 }
 
-bool G4AblaVirtualData::setBeta4(int A, int Z, double value)
+bool G4AblaVirtualData::setBeta4(int A, int Z, G4double value)
 {
   beta4[A][Z] = value;
 
@@ -108,32 +108,32 @@ bool G4AblaVirtualData::setBeta4(int A, int Z, double value)
 }
 
 
-double G4AblaVirtualData::getAlpha(int A, int Z)
+G4double G4AblaVirtualData::getAlpha(int A, int Z)
 {
   return alpha[A][Z];
 }
 
-double G4AblaVirtualData::getEcnz(int A, int Z)
+G4double G4AblaVirtualData::getEcnz(int A, int Z)
 {
   return ecnz[A][Z];
 }
 
-double G4AblaVirtualData::getVgsld(int A, int Z)
+G4double G4AblaVirtualData::getVgsld(int A, int Z)
 {
   return vgsld[A][Z];
 }
 
-double G4AblaVirtualData::getPace2(int A, int Z)
+G4double G4AblaVirtualData::getPace2(int A, int Z)
 {
   return pace2[A][Z];
 }
 
-double G4AblaVirtualData::getRms(int A, int Z)
+G4double G4AblaVirtualData::getRms(int A, int Z)
 {
   return rms[A][Z];
 }
 
-double G4AblaVirtualData::getMexp(int A, int Z)
+G4double G4AblaVirtualData::getMexp(int A, int Z)
 {
   return mexp[A][Z];
 }
@@ -143,12 +143,12 @@ int G4AblaVirtualData::getMexpID(int A, int Z)
   return mexpid[A][Z];
 }
 
-double G4AblaVirtualData::getBeta2(int A, int Z)
+G4double G4AblaVirtualData::getBeta2(int A, int Z)
 {
   return beta2[A][Z];
 }
 
-double G4AblaVirtualData::getBeta4(int A, int Z)
+G4double G4AblaVirtualData::getBeta4(int A, int Z)
 {
   return beta4[A][Z];
 }

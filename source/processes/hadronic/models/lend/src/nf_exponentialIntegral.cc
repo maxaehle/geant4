@@ -25,11 +25,11 @@ using namespace std;
 /*
 ************************************************************
 */
-double nf_exponentialIntegral( int n, double x, nfu_status *status ) {
+G4double nf_exponentialIntegral( int n, G4double x, nfu_status *status ) {
 
     int i, ii, nm1;
-    double a, b, c, d, del, fact, h, psi;
-    double ans = 0.0;
+    G4double a, b, c, d, del, fact, h, psi;
+    G4double ans = 0.0;
 
     *status = nfu_badInput;
     if( !isfinite( x ) ) return( x );

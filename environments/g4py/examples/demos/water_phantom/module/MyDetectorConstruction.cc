@@ -81,8 +81,8 @@ G4VPhysicalVolume* MyDetectorConstruction::Construct()
   // phantom
   // ==============================================================
   // water phantom
-  const double dxyphantom= 40.*cm;
-  const double dzphantom= 50.*cm;
+  const G4double dxyphantom= 40.*cm;
+  const G4double dzphantom= 50.*cm;
   
   G4Box* sphantom= new G4Box("phantom", 
 			     dxyphantom/2., dxyphantom/2., dzphantom/2.);

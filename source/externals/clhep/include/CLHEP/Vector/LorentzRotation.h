@@ -77,7 +77,7 @@ public:
   inline HepLorentzRotation & operator = (const HepBoost           & m);
   // Assignment.
 
-         HepLorentzRotation & set (double bx, double by, double bz);
+         HepLorentzRotation & set (G4double bx, G4double by, G4double bz);
   inline HepLorentzRotation & set (const Hep3Vector & p);
   inline HepLorentzRotation & set (const HepRotation  & r);
   inline HepLorentzRotation & set (const HepRotationX & r);
@@ -87,7 +87,7 @@ public:
   inline HepLorentzRotation & set (const HepBoostX & boost);
   inline HepLorentzRotation & set (const HepBoostY & boost);
   inline HepLorentzRotation & set (const HepBoostZ & boost);
-  inline HepLorentzRotation (double bx, double by, double bz);
+  inline HepLorentzRotation (G4double bx, G4double by, G4double bz);
   inline HepLorentzRotation (const Hep3Vector & p);
   // Other Constructors giving a Lorentz-boost.
 
@@ -138,22 +138,22 @@ public:
 
   // ----------  Accessors:
 
-  inline double xx() const;
-  inline double xy() const;
-  inline double xz() const;
-  inline double xt() const;
-  inline double yx() const;
-  inline double yy() const;
-  inline double yz() const;
-  inline double yt() const;
-  inline double zx() const;
-  inline double zy() const;
-  inline double zz() const;
-  inline double zt() const;
-  inline double tx() const;
-  inline double ty() const;
-  inline double tz() const;
-  inline double tt() const;
+  inline G4double xx() const;
+  inline G4double xy() const;
+  inline G4double xz() const;
+  inline G4double xt() const;
+  inline G4double yx() const;
+  inline G4double yy() const;
+  inline G4double yz() const;
+  inline G4double yt() const;
+  inline G4double zx() const;
+  inline G4double zy() const;
+  inline G4double zz() const;
+  inline G4double zt() const;
+  inline G4double tx() const;
+  inline G4double ty() const;
+  inline G4double tz() const;
+  inline G4double tt() const;
   // Elements of the matrix.
 
   inline HepLorentzVector col1() const;
@@ -176,7 +176,7 @@ public:
   class HepLorentzRotation_row {
   public:
     inline HepLorentzRotation_row(const HepLorentzRotation &, int);
-    inline double operator [] (int) const;
+    inline G4double operator [] (int) const;
   private:
     const HepLorentzRotation & rr;
     int ii;
@@ -186,7 +186,7 @@ public:
   inline const HepLorentzRotation_row operator [] (int) const; 
   // Returns object of the helper class for C-style subscripting r[i][j]
 
-  double operator () (int, int) const;
+  G4double operator () (int, int) const;
   // Fortran-style subscripting: returns (i,j) element of the matrix.
 
   // ----------  Decomposition:
@@ -215,25 +215,25 @@ public:
   inline bool isIdentity() const;
   // Returns true if the Identity matrix.
 
-  double distance2( const HepBoost & b  ) const;
-  double distance2( const HepRotation & r  ) const;
-  double distance2( const HepLorentzRotation & lt  ) const;
+  G4double distance2( const HepBoost & b  ) const;
+  G4double distance2( const HepRotation & r  ) const;
+  G4double distance2( const HepLorentzRotation & lt  ) const;
   // Decomposes L = B*R, returns the sum of distance2 for B and R.
 
-  double howNear(   const HepBoost & b ) const;
-  double howNear(   const HepRotation & r) const;
-  double howNear(   const HepLorentzRotation & lt ) const;
+  G4double howNear(   const HepBoost & b ) const;
+  G4double howNear(   const HepRotation & r) const;
+  G4double howNear(   const HepLorentzRotation & lt ) const;
 
   bool isNear(const HepBoost & b,
-             double epsilon=Hep4RotationInterface::tolerance) const;
+             G4double epsilon=Hep4RotationInterface::tolerance) const;
   bool isNear(const HepRotation & r,
-             double epsilon=Hep4RotationInterface::tolerance) const;
+             G4double epsilon=Hep4RotationInterface::tolerance) const;
   bool isNear(const HepLorentzRotation & lt,
-             double epsilon=Hep4RotationInterface::tolerance) const;
+             G4double epsilon=Hep4RotationInterface::tolerance) const;
 
   // ----------  Properties:
 
-  double norm2() const;
+  G4double norm2() const;
   // distance2 (IDENTITY), which involves decomposing into B and R and summing 
   // norm2 for the individual B and R parts. 
 
@@ -276,29 +276,29 @@ public:
   // of lt * r and lt * b where r is a RotationX Y or Z or b is a BoostX Y or Z
   // These are, in fact, provided below for the transform() methods.
 
-  HepLorentzRotation & rotateX(double delta);
+  HepLorentzRotation & rotateX(G4double delta);
   // Rotation around the x-axis; equivalent to LT = RotationX(delta) * LT
 
-  HepLorentzRotation & rotateY(double delta);
+  HepLorentzRotation & rotateY(G4double delta);
   // Rotation around the y-axis; equivalent to LT = RotationY(delta) * LT
 
-  HepLorentzRotation & rotateZ(double delta);
+  HepLorentzRotation & rotateZ(G4double delta);
   // Rotation around the z-axis; equivalent to LT = RotationZ(delta) * LT
 
-  inline HepLorentzRotation & rotate(double delta, const Hep3Vector& axis);
-  inline HepLorentzRotation & rotate(double delta, const Hep3Vector *axis);
+  inline HepLorentzRotation & rotate(G4double delta, const Hep3Vector& axis);
+  inline HepLorentzRotation & rotate(G4double delta, const Hep3Vector *axis);
   // Rotation around specified vector - LT = Rotation(delta,axis)*LT
 
-  HepLorentzRotation & boostX(double beta);
+  HepLorentzRotation & boostX(G4double beta);
   // Pure boost along the x-axis; equivalent to LT = BoostX(beta) * LT
 
-  HepLorentzRotation & boostY(double beta);
+  HepLorentzRotation & boostY(G4double beta);
   // Pure boost along the y-axis; equivalent to LT = BoostX(beta) * LT
 
-  HepLorentzRotation & boostZ(double beta);
+  HepLorentzRotation & boostZ(G4double beta);
   // Pure boost along the z-axis; equivalent to LT = BoostX(beta) * LT
 
-  inline HepLorentzRotation & boost(double, double, double);
+  inline HepLorentzRotation & boost(G4double, G4double, G4double);
   inline HepLorentzRotation & boost(const Hep3Vector &);
   // Lorenz boost.
 
@@ -315,25 +315,25 @@ public:
 
   // ---------- Tolerance
 
-  static inline double getTolerance();
-  static inline double setTolerance(double tol); 
+  static inline G4double getTolerance();
+  static inline G4double setTolerance(G4double tol); 
 
   friend HepLorentzRotation inverseOf ( const HepLorentzRotation & lt );
 
 protected:
 
   inline HepLorentzRotation
-       (double mxx, double mxy, double mxz, double mxt,
-	double myx, double myy, double myz, double myt,
-	double mzx, double mzy, double mzz, double mzt,
-	double mtx, double mty, double mtz, double mtt);
+       (G4double mxx, G4double mxy, G4double mxz, G4double mxt,
+	G4double myx, G4double myy, G4double myz, G4double myt,
+	G4double mzx, G4double mzy, G4double mzz, G4double mzt,
+	G4double mtx, G4double mty, G4double mtz, G4double mtt);
   // Protected constructor.
   // DOES NOT CHECK FOR VALIDITY AS A LORENTZ TRANSFORMATION.
 
-  inline void setBoost(double, double, double);
+  inline void setBoost(G4double, G4double, G4double);
   // Set elements according to a boost vector.
 
-  double mxx, mxy, mxz, mxt,
+  G4double mxx, mxy, mxz, mxt,
             myx, myy, myz, myt,
             mzx, mzy, mzz, mzt,
             mtx, mty, mtz, mtt;

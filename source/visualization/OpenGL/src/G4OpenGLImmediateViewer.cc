@@ -48,7 +48,7 @@ void G4OpenGLImmediateViewer::ProcessView ()
   for (size_t i = 0; i < nPasses; ++i) {
 
     if (cutawayUnion) {
-      double a[4];
+      G4double a[4];
       a[0] = cutaways[i].a();
       a[1] = cutaways[i].b();
       a[2] = cutaways[i].c();

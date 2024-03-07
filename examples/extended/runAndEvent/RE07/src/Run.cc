@@ -222,7 +222,7 @@ void Run::EndOfRun()
   G4cout << "------------------------------------------------------------\n"
          << G4endl;
 
-  G4cout.setf(mode, std::ios::floatfield);
+  G4cout.setf(mode, std::ios::G4floatfield);
   G4cout.precision(prec);
 }
 

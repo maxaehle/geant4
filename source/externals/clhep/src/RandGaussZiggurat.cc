@@ -6,7 +6,7 @@
 namespace CLHEP {
 
 CLHEP_THREAD_LOCAL unsigned long RandGaussZiggurat::kn[128], RandGaussZiggurat::ke[256];
-CLHEP_THREAD_LOCAL float RandGaussZiggurat::wn[128],RandGaussZiggurat::fn[128],RandGaussZiggurat::we[256],RandGaussZiggurat::fe[256];
+CLHEP_THREAD_LOCAL G4float RandGaussZiggurat::wn[128],RandGaussZiggurat::fn[128],RandGaussZiggurat::we[256],RandGaussZiggurat::fe[256];
 CLHEP_THREAD_LOCAL bool RandGaussZiggurat::ziggurat_is_init = false;
 
 HepRandomEngine & RandGaussZiggurat::engine() {return RandGauss::engine();}
@@ -21,9 +21,9 @@ std::string RandGaussZiggurat::name() const
 
 bool RandGaussZiggurat::ziggurat_init()
 {  
-  const double rzm1 = 2147483648.0, rzm2 = 4294967296.;
-  double dn=3.442619855899,tn=dn,vn=9.91256303526217e-3, q;
-  double de=7.697117470131487, te=de, ve=3.949659822581572e-3;
+  const G4double rzm1 = 2147483648.0, rzm2 = 4294967296.;
+  G4double dn=3.442619855899,tn=dn,vn=9.91256303526217e-3, q;
+  G4double de=7.697117470131487, te=de, ve=3.949659822581572e-3;
   int i;
 
 /* Set up tables for RNOR */
@@ -70,11 +70,11 @@ bool RandGaussZiggurat::ziggurat_init()
   return true;
 }
 
-float RandGaussZiggurat::ziggurat_nfix(long hz,HepRandomEngine* anEngine)
+G4float RandGaussZiggurat::ziggurat_nfix(long hz,HepRandomEngine* anEngine)
 {
   if(!ziggurat_is_init) ziggurat_init();
-  const float r = 3.442620f;     /* The start of the right tail */
-  float x, y;
+  const G4float r = 3.442620f;     /* The start of the right tail */
+  G4float x, y;
   unsigned long iz=hz&127;
   for(;;)
   {  
@@ -98,64 +98,64 @@ float RandGaussZiggurat::ziggurat_nfix(long hz,HepRandomEngine* anEngine)
   }
 }
 
-double RandGaussZiggurat::operator()() {
+G4double RandGaussZiggurat::operator()() {
   return ziggurat_RNOR(localEngine.get()) * defaultStdDev + defaultMean;
 }
 
-double RandGaussZiggurat::operator()( double mean, double stdDev ) {
+G4double RandGaussZiggurat::operator()( G4double mean, G4double stdDev ) {
   return ziggurat_RNOR(localEngine.get()) * stdDev + mean;
 }
 
-void RandGaussZiggurat::shootArray( const int size, float* vect, float mean, float stdDev )
+void RandGaussZiggurat::shootArray( const int size, G4float* vect, G4float mean, G4float stdDev )
 {
    for (int i=0; i<size; ++i) {
      vect[i] = shoot(mean,stdDev);
    }
 }
 
-void RandGaussZiggurat::shootArray( const int size, double* vect, double mean, double stdDev )
+void RandGaussZiggurat::shootArray( const int size, G4double* vect, G4double mean, G4double stdDev )
 {
    for (int i=0; i<size; ++i) {
      vect[i] = shoot(mean,stdDev);
    }
 }
 
-void RandGaussZiggurat::shootArray( HepRandomEngine* anEngine, const int size, float* vect, float mean, float stdDev )
+void RandGaussZiggurat::shootArray( HepRandomEngine* anEngine, const int size, G4float* vect, G4float mean, G4float stdDev )
 {
    for (int i=0; i<size; ++i) {
      vect[i] = shoot(anEngine,mean,stdDev);
    }
 }
 
-void RandGaussZiggurat::shootArray( HepRandomEngine* anEngine, const int size, double* vect, double mean, double stdDev )
+void RandGaussZiggurat::shootArray( HepRandomEngine* anEngine, const int size, G4double* vect, G4double mean, G4double stdDev )
 {
    for (int i=0; i<size; ++i) {
      vect[i] = shoot(anEngine,mean,stdDev);
    }
 }
 
-void RandGaussZiggurat::fireArray( const int size, float* vect)
+void RandGaussZiggurat::fireArray( const int size, G4float* vect)
 {
    for (int i=0; i<size; ++i) {
      vect[i] = fire( defaultMean, defaultStdDev );
    }
 }
 
-void RandGaussZiggurat::fireArray( const int size, double* vect)
+void RandGaussZiggurat::fireArray( const int size, G4double* vect)
 {
    for (int i=0; i<size; ++i) {
      vect[i] = fire( defaultMean, defaultStdDev );
    }
 }
 
-void RandGaussZiggurat::fireArray( const int size, float* vect, float mean, float stdDev )
+void RandGaussZiggurat::fireArray( const int size, G4float* vect, G4float mean, G4float stdDev )
 {
    for (int i=0; i<size; ++i) {
      vect[i] = fire( mean, stdDev );
    }
 }
 
-void RandGaussZiggurat::fireArray( const int size, double* vect, double mean, double stdDev )
+void RandGaussZiggurat::fireArray( const int size, G4double* vect, G4double mean, G4double stdDev )
 {
    for (int i=0; i<size; ++i) {
      vect[i] = fire( mean, stdDev );

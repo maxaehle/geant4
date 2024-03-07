@@ -670,7 +670,7 @@ void HEPVis_SoMarkerSet::GLRender (
   }
 
   const SbColor& color = SoLazyElement::getDiffuse(aAction->getState(),0);
-  float red,green,blue;
+  G4float red,green,blue;
   color.getValue(red,green,blue);
 
   int mark = markerIndex[0];
@@ -713,8 +713,8 @@ void drawMarker(
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 {
   GLsizei w = 0,h = 0;
-  GLfloat xorig = 0,yorig = 0;
-  GLfloat xmove = 0,ymove = 0;
+  GLG4float xorig = 0,yorig = 0;
+  GLG4float xmove = 0,ymove = 0;
 
   if((aStyle>=0)&&(aStyle<18)) {
     w = h = 5;

@@ -29,7 +29,7 @@
 // 17.09.96 V.Grichine: final modifications to commit
 // 30.10.03 J.Apostolakis: new algorithm in Inside for SPhi-sections
 // 03.05.05 V.Grichine: SurfaceNormal(p) according to J. Apostolakis proposal
-// 22.07.05 O.Link: Added check for intersection with double cone
+// 22.07.05 O.Link: Added check for intersection with G4double cone
 // 26.03.09 G.Cosmo: optimisations and uniform use of local radial tolerance
 // 26.10.16 E.Tcherniaev: re-implemented CalculateExtent() using
 //                        G4BoundingEnvelope, removed CreateRotatedVertices()

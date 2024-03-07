@@ -659,7 +659,7 @@ void G4FTFParameters::InitForInteraction( const G4ParticleDefinition* particle,
     SetMaxPt2ofNuclearDestruction( 1.0*GeV*GeV );
     SetExcitationEnergyPerWoundedNucleon( 40.0*MeV );
     */
-    double coeff = fParCollMesonProj.GetNuclearTgtDestructP1();
+    G4double coeff = fParCollMesonProj.GetNuclearTgtDestructP1();
     // 
     // NOTE (JVY): Set this switch to false/true on line 138
     //
@@ -667,7 +667,7 @@ void G4FTFParameters::InitForInteraction( const G4ParticleDefinition* particle,
     {                                                             
       coeff *= G4double(NumberOfTargetNucleons);                  
     }                                                             
-    double exfactor = G4Exp( fParCollMesonProj.GetNuclearTgtDestructP2()
+    G4double exfactor = G4Exp( fParCollMesonProj.GetNuclearTgtDestructP2()
                            * (Ylab-fParCollMesonProj.GetNuclearTgtDestructP3()) );
     coeff *= exfactor;
     coeff /= ( 1.+ exfactor );
@@ -716,7 +716,7 @@ void G4FTFParameters::InitForInteraction( const G4ParticleDefinition* particle,
 
     // projectile destruction - does NOT really matter for particle projectile, only for a nucleus projectile
     //
-    double coeff = 0.;
+    G4double coeff = 0.;
     coeff = fParCollBaryonProj.GetNuclearProjDestructP1();
     // 
     // NOTE (JVY): Set this switch to false/true on line 136
@@ -725,7 +725,7 @@ void G4FTFParameters::InitForInteraction( const G4ParticleDefinition* particle,
     {                                                             
       coeff *= G4double(AbsProjectileBaryonNumber);               
     }                                                             
-    double exfactor = G4Exp( fParCollBaryonProj.GetNuclearProjDestructP2()*(Ylab-fParCollBaryonProj.GetNuclearProjDestructP3()) ); 
+    G4double exfactor = G4Exp( fParCollBaryonProj.GetNuclearProjDestructP2()*(Ylab-fParCollBaryonProj.GetNuclearProjDestructP3()) ); 
     coeff *= exfactor;
     coeff /= ( 1.+ exfactor );
     SetCofNuclearDestructionPr( coeff );

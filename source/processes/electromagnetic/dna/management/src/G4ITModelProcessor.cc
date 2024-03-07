@@ -69,7 +69,7 @@ G4ITModelProcessor::G4ITModelProcessor()
 
 G4ITModelProcessor::~G4ITModelProcessor() = default;
 
-void G4ITModelProcessor::RegisterModel(double time, G4VITStepModel* model)
+void G4ITModelProcessor::RegisterModel(G4double time, G4VITStepModel* model)
 {
     fpModelHandler->RegisterModel(model, time);
 }

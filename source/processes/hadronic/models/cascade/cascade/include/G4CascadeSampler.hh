@@ -50,7 +50,7 @@ public:
   virtual ~G4CascadeSampler() {}
 
   virtual G4double 
-  findCrossSection(double ke, const G4double (&xsec)[energyBins]) const;
+  findCrossSection(G4double ke, const G4double (&xsec)[energyBins]) const;
 
   virtual G4int 
   findMultiplicity(G4double ke, const G4double xmult[][energyBins]) const;

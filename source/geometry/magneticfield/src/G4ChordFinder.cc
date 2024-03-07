@@ -205,7 +205,7 @@ G4ChordFinder::G4ChordFinder( G4MagneticField*        theMagField,
      }
      
   }
-  else if ( useRegularStepper   )  // Plain stepper -- not double ...
+  else if ( useRegularStepper   )  // Plain stepper -- not G4double ...
   {
      auto regularStepper = new RegularStepperType(pEquation);
      //                    *** ******************     

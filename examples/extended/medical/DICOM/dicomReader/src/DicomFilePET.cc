@@ -62,7 +62,7 @@ void DicomFilePET::BuildActivities()
   }
 
   //  if( DicomVerb(debugVerb) ) G4cout << " BuildMaterials " << fFileName << G4endl;
-  double meanHV = 0.;
+  G4double meanHV = 0.;
   for( int ir = 0; ir < fNoVoxelsY; ir += fCompress ) {
     for( int ic = 0; ic < fNoVoxelsX; ic += fCompress ) {
       meanHV = 0.;

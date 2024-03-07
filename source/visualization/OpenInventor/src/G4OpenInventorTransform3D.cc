@@ -38,7 +38,7 @@
 
 G4OpenInventorTransform3D::G4OpenInventorTransform3D (const G4Transform3D &t) 
 : G4Transform3D (t) {
-#define elem(i,j) ((float)t(i,j))
+#define elem(i,j) ((G4float)t(i,j))
   m[0]  = elem(0,0); //xx
   m[1]  = elem(1,0); //yx
   m[2]  = elem(2,0); //zx

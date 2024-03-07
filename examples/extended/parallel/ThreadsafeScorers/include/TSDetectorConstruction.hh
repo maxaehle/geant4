@@ -41,7 +41,7 @@
 ///     (i.e. coarse meshing) such that the contention in operating on
 ///     the atomic hits maps is higher and round-off errors in the
 ///     thread-local hits maps are detectable (printed out in TSRunAction)
-///     from the sheer number of floating point sum operations.
+///     from the sheer number of G4floating point sum operations.
 /// Two scorers are implemented: EnergyDeposit and Number of steps
 ///     The energy deposit is to (possibly) show the round-off error seen
 ///     with thread-local hits maps. The # of steps scorer is to verify

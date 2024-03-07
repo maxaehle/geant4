@@ -20,14 +20,14 @@ GIDI_settings_flux_order::GIDI_settings_flux_order( int order ) {
 /*
 =========================================================
 */
-GIDI_settings_flux_order::GIDI_settings_flux_order( int order, int length, double const *energies, double const *fluxes ) {
+GIDI_settings_flux_order::GIDI_settings_flux_order( int order, int length, G4double const *energies, G4double const *fluxes ) {
 
     initialize( order, length, energies, fluxes );
 }
 /*
 =========================================================
 */
-GIDI_settings_flux_order::GIDI_settings_flux_order( int order, std::vector<double> const &energies, std::vector<double> const &fluxes ) {
+GIDI_settings_flux_order::GIDI_settings_flux_order( int order, std::vector<G4double> const &energies, std::vector<G4double> const &fluxes ) {
 
     int length = (int) energies.size( );
 
@@ -44,7 +44,7 @@ GIDI_settings_flux_order::GIDI_settings_flux_order( GIDI_settings_flux_order con
 /*
 =========================================================
 */
-void GIDI_settings_flux_order::initialize( int order, int length, double const *energies, double const *fluxes ) {
+void GIDI_settings_flux_order::initialize( int order, int length, G4double const *energies, G4double const *fluxes ) {
 
     if( order < 0 ) throw 1;
     mOrder = order;
@@ -95,7 +95,7 @@ void GIDI_settings_flux_order::print( int valuesPerLine ) const {
 /*
 =========================================================
 */
-GIDI_settings_flux::GIDI_settings_flux( std::string const &label, double temperature ) {
+GIDI_settings_flux::GIDI_settings_flux( std::string const &label, G4double temperature ) {
 
     mLabel = label;
     mTemperature = temperature;
@@ -103,7 +103,7 @@ GIDI_settings_flux::GIDI_settings_flux( std::string const &label, double tempera
 /*
 =========================================================
 */
-GIDI_settings_flux::GIDI_settings_flux( char const *label, double temperature ) {
+GIDI_settings_flux::GIDI_settings_flux( char const *label, G4double temperature ) {
 
     mLabel = label;
     mTemperature = temperature;
@@ -168,28 +168,28 @@ void GIDI_settings_flux::print( bool outline, int valuesPerLine ) const {
 /*
 =========================================================
 */
-GIDI_settings_fluxes_from_bdfls::GIDI_settings_fluxes_from_bdfls( std::string const &fileName, double temperature_MeV = 0 ) {
+GIDI_settings_fluxes_from_bdfls::GIDI_settings_fluxes_from_bdfls( std::string const &fileName, G4double temperature_MeV = 0 ) {
 
     initialize( fileName.c_str( ), temperature_MeV );
 }
 /*
 =========================================================
 */
-GIDI_settings_fluxes_from_bdfls::GIDI_settings_fluxes_from_bdfls( char const *fileName, double temperature_MeV = 0 ) {
+GIDI_settings_fluxes_from_bdfls::GIDI_settings_fluxes_from_bdfls( char const *fileName, G4double temperature_MeV = 0 ) {
 
     initialize( fileName, temperature_MeV );
 }
 /*
 =========================================================
 */
-GIDI_settings_fluxes_from_bdfls::GIDI_settings_fluxes_from_bdfls( cbdfls_file const *bdfls, double temperature_MeV = 0 ) {
+GIDI_settings_fluxes_from_bdfls::GIDI_settings_fluxes_from_bdfls( cbdfls_file const *bdfls, G4double temperature_MeV = 0 ) {
 
     initialize2( bdfls, temperature_MeV );
 }
 /*
 =========================================================
 */
-void GIDI_settings_fluxes_from_bdfls::initialize( char const *fileName, double temperature_MeV ) {
+void GIDI_settings_fluxes_from_bdfls::initialize( char const *fileName, G4double temperature_MeV ) {
 
     cbdfls_file *bdfls;
     cbdflsErrors Error;
@@ -201,10 +201,10 @@ void GIDI_settings_fluxes_from_bdfls::initialize( char const *fileName, double t
 /*
 =========================================================
 */
-void GIDI_settings_fluxes_from_bdfls::initialize2( cbdfls_file const *bdfls, double temperature_MeV ) {
+void GIDI_settings_fluxes_from_bdfls::initialize2( cbdfls_file const *bdfls, G4double temperature_MeV ) {
 
     int nf, length, *fids, order;
-    double *energies, *fluxes;
+    G4double *energies, *fluxes;
     char label[100];
 
     nf = cbdflsFIDs( (cbdfls_file *) bdfls, &fids );

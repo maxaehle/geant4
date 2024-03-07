@@ -12,23 +12,23 @@
 
 namespace CLHEP {
 
-inline RandStudentT::RandStudentT(HepRandomEngine & anEngine, double a)
+inline RandStudentT::RandStudentT(HepRandomEngine & anEngine, G4double a)
 : HepRandom( ), localEngine( &anEngine, do_nothing_deleter() ), defaultA(a)
   {}
 
-inline RandStudentT::RandStudentT(HepRandomEngine * anEngine, double a)
+inline RandStudentT::RandStudentT(HepRandomEngine * anEngine, G4double a)
 : HepRandom( ), localEngine( anEngine ), defaultA(a)
   {}
 
-inline double RandStudentT::fire() {
+inline G4double RandStudentT::fire() {
   return fire( defaultA );
 }
 
-inline double RandStudentT::shoot() {
+inline G4double RandStudentT::shoot() {
   return shoot( 1.0 );
 }
 
-inline double RandStudentT::shoot( HepRandomEngine* anEngine )
+inline G4double RandStudentT::shoot( HepRandomEngine* anEngine )
 {
   return shoot( anEngine, 1.0 );
 }

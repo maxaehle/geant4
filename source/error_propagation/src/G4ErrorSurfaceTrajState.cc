@@ -234,7 +234,7 @@ void G4ErrorSurfaceTrajState::Dump(std::ostream& out) const { out << *this; }
 std::ostream& operator<<(std::ostream& out, const G4ErrorSurfaceTrajState& ts)
 {
   std::ios::fmtflags oldFlags = out.flags();
-  out.setf(std::ios::fixed, std::ios::floatfield);
+  out.setf(std::ios::fixed, std::ios::G4floatfield);
 
   ts.DumpPosMomError(out);
 

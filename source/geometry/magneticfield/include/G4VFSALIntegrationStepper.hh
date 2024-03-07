@@ -80,7 +80,7 @@ class G4VFSALIntegrationStepper
      inline void NormalisePolarizationVector( G4double vec[12] );
        // Simple utility function to (re)normalise 'unit spin' vector.
 
-      void RightHandSide( const double y[], double dydx[] );
+      void RightHandSide( const G4double y[], G4double dydx[] );
        // Utility method to supply the standard Evaluation of the
        // Right Hand side of the associated equation.
 

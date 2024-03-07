@@ -243,7 +243,7 @@ std::vector <G4ThreeVector> G4VViewer::ComputeFlyThrough(G4Vector3D* /*aVect*/)
         // Draw the spline
         
         for (int i = 0; i < stepPoints; i++) {
-            float t = (float)i / (float)stepPoints;
+            G4float t = (G4float)i / (G4float)stepPoints;
             G4Vector3D cameraPosition = spline.GetInterpolatedSplinePoint(t);
             //        G4Vector3D targetPoint = spline.GetInterpolatedSplinePoint(t);
             
@@ -290,14 +290,14 @@ std::vector <G4ThreeVector> G4VViewer::ComputeFlyThrough(G4Vector3D* /*aVect*/)
 //        G4Vector3D firstPoint;
 //        G4Vector3D lastPoint;
 //        
-//        float nbBezierSteps = (stepPoints * bezierSpeed*(1-stayStraight)) * (2./spline.GetNumPoints());
-//        float nbFirstSteps = ((stepPoints/2-nbBezierSteps/2) /(1+stayStraight)) * (2./spline.GetNumPoints());
+//        G4float nbBezierSteps = (stepPoints * bezierSpeed*(1-stayStraight)) * (2./spline.GetNumPoints());
+//        G4float nbFirstSteps = ((stepPoints/2-nbBezierSteps/2) /(1+stayStraight)) * (2./spline.GetNumPoints());
 //        
 //        // First points
 //        firstPoint = spline.GetPoint(0);
 //        lastPoint = (firstPoint + spline.GetPoint(1))/2;
 //        
-//        for( float j=0; j<1; j+= 1/nbFirstSteps) {
+//        for( G4float j=0; j<1; j+= 1/nbFirstSteps) {
 //            G4ThreeVector pt = firstPoint + (lastPoint - firstPoint) * j;
 //            viewVect.push_back(pt);
 //            G4cout << "FLY Bezier A1("<< viewVect.size()<< "):" << pt << G4endl;
@@ -317,14 +317,14 @@ std::vector <G4ThreeVector> G4VViewer::ComputeFlyThrough(G4Vector3D* /*aVect*/)
 //                firstPoint = (P0 + P1)/2;
 //                lastPoint = (P0 + P1)/2 + (P1-P0)*stayStraight/2;
 //                
-//                for( float j=0; j<1; j+= 1/(nbFirstSteps*stayStraight)) {
+//                for( G4float j=0; j<1; j+= 1/(nbFirstSteps*stayStraight)) {
 //                    G4ThreeVector pt = firstPoint + (lastPoint - firstPoint)* j;
 //                    viewVect.push_back(pt);
 //                    G4cout << "FLY Bezier A2("<< viewVect.size()<< "):" << pt << G4endl;
 //                }
 //            }
 //            // Compute Bezier curve
-//            for( float delta = 0 ; delta < 1 ; delta += 1/nbBezierSteps)
+//            for( G4float delta = 0 ; delta < 1 ; delta += 1/nbBezierSteps)
 //            {
 //                // The Green Line
 //                a = m1 + ( (P1 - m1) * delta );
@@ -341,7 +341,7 @@ std::vector <G4ThreeVector> G4VViewer::ComputeFlyThrough(G4Vector3D* /*aVect*/)
 //                firstPoint = (P1 + P2)/2 - (P2-P1)*stayStraight/2;
 //                lastPoint = (P1 + P2)/2;
 //                
-//                for( float j=0; j<1; j+= 1/(nbFirstSteps*stayStraight)) {
+//                for( G4float j=0; j<1; j+= 1/(nbFirstSteps*stayStraight)) {
 //                    G4ThreeVector pt = firstPoint + (lastPoint - firstPoint)* j;
 //                    viewVect.push_back(pt);
 //                    G4cout << "FLY Bezier B1("<< viewVect.size()<< "):" << pt << G4endl;
@@ -352,7 +352,7 @@ std::vector <G4ThreeVector> G4VViewer::ComputeFlyThrough(G4Vector3D* /*aVect*/)
 //        // last points
 //        firstPoint = spline.GetPoint(spline.GetNumPoints()-2);
 //        lastPoint = spline.GetPoint(spline.GetNumPoints()-1);
-//        for( float j=1; j>0; j-= 1/nbFirstSteps) {
+//        for( G4float j=1; j>0; j-= 1/nbFirstSteps) {
 //            G4ThreeVector pt = lastPoint - ((lastPoint-firstPoint)*((1-stayStraight)/2) * j );
 //            viewVect.push_back(pt);
 //            G4cout << "FLY Bezier B2("<< viewVect.size()<< "):" << pt << G4endl;
@@ -409,15 +409,15 @@ G4VViewer::G4Spline::~G4Spline()
 {}
 
 // Solve the Catmull-Rom parametric equation for a given time(t) and vector quadruple (p1,p2,p3,p4)
-G4Vector3D G4VViewer::G4Spline::CatmullRom_Eq(float t, const G4Vector3D& p1, const G4Vector3D& p2, const G4Vector3D& p3, const G4Vector3D& p4)
+G4Vector3D G4VViewer::G4Spline::CatmullRom_Eq(G4float t, const G4Vector3D& p1, const G4Vector3D& p2, const G4Vector3D& p3, const G4Vector3D& p4)
 {
-    float t2 = t * t;
-    float t3 = t2 * t;
+    G4float t2 = t * t;
+    G4float t3 = t2 * t;
     
-    float b1 = .5 * (  -t3 + 2*t2 - t);
-    float b2 = .5 * ( 3*t3 - 5*t2 + 2);
-    float b3 = .5 * (-3*t3 + 4*t2 + t);
-    float b4 = .5 * (   t3 -   t2    );
+    G4float b1 = .5 * (  -t3 + 2*t2 - t);
+    G4float b2 = .5 * ( 3*t3 - 5*t2 + 2);
+    G4float b3 = .5 * (-3*t3 + 4*t2 + t);
+    G4float b4 = .5 * (   t3 -   t2    );
     
     return (p1*b1 + p2*b2 + p3*b3 + p4*b4);
 }
@@ -425,7 +425,7 @@ G4Vector3D G4VViewer::G4Spline::CatmullRom_Eq(float t, const G4Vector3D& p1, con
 void G4VViewer::G4Spline::AddSplinePoint(const G4Vector3D& v)
 {
     vp.push_back(v);
-    delta_t = (float)1 / (float)vp.size();
+    delta_t = (G4float)1 / (G4float)vp.size();
 }
 
 
@@ -439,7 +439,7 @@ int G4VViewer::G4Spline::GetNumPoints()
     return vp.size();
 }
 
-G4Vector3D G4VViewer::G4Spline::GetInterpolatedSplinePoint(float t)
+G4Vector3D G4VViewer::G4Spline::GetInterpolatedSplinePoint(G4float t)
 {
     // Find out in which interval we are on the spline
     int p = (int)(t / delta_t);
@@ -450,7 +450,7 @@ G4Vector3D G4VViewer::G4Spline::GetInterpolatedSplinePoint(float t)
     int p2 = p + 1;     BOUNDS(p2);
     int p3 = p + 2;     BOUNDS(p3);
     // Relative (local) time
-    float lt = (t - delta_t*(float)p) / delta_t;
+    G4float lt = (t - delta_t*(G4float)p) / delta_t;
     // Interpolate
     return CatmullRom_Eq(lt, vp[p0], vp[p1], vp[p2], vp[p3]);
 }

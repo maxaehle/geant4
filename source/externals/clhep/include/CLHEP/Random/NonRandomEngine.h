@@ -10,7 +10,7 @@
 // other programs that depend on random numbers) by feeding them a stream
 // of "randoms" that the testing program supplies explicitly.
 //
-// The testing program calls setNextRandom (double) to setup the next
+// The testing program calls setNextRandom (G4double) to setup the next
 // value to be produced when flat() is done.  
 //
 // To protect against accidental use of this NON-RANDOM engine as a random
@@ -43,22 +43,22 @@ public:
   virtual ~NonRandomEngine();
   // Constructors and destructor
 
-  void setNextRandom     (double r);
+  void setNextRandom     (G4double r);
 	// Preset the next random to be delivered
-  void setRandomSequence (double *s, int n);
+  void setRandomSequence (G4double *s, int n);
 	// Establish a sequence of n next randoms; 
 	// replaces setNextRandom n times.
-  void setRandomInterval (double x);
+  void setRandomInterval (G4double x);
 	// Establish that if there is no sequence active each 
 	// random should be bumped by this interval (mod 1) compared 
 	// to the last.  x should be between 0 and 1.
 
-  double flat();
+  G4double flat();
   // It returns the previously established setNextRandom and bumps that up
   // by the non-zero randomInterval supplied.  Thus repeated calls to flat()
   // generate an evenly spaced sequence (mod 1).
 
-  void flatArray (const int size, double* vect);
+  void flatArray (const int size, G4double* vect);
   // Fills the array "vect" of specified size with flat random values.
 
   virtual std::ostream & put (std::ostream & os) const;
@@ -78,10 +78,10 @@ private:
   bool nextHasBeenSet;
   bool sequenceHasBeenSet;
   bool intervalHasBeenSet;
-  double  nextRandom;
-  std::vector<double> sequence;
+  G4double  nextRandom;
+  std::vector<G4double> sequence;
   unsigned int nInSeq;
-  double  randomInterval;
+  G4double  randomInterval;
 
   // The following are necessary to fill virtual methods but should never 
   // be used:

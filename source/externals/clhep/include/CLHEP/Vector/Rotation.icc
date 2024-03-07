@@ -11,15 +11,15 @@ namespace CLHEP {
 
 // Put commonly used accessors as early as possible to avoid inlining misses:
 
-inline double HepRotation::xx() const { return rxx; }
-inline double HepRotation::xy() const { return rxy; }
-inline double HepRotation::xz() const { return rxz; }
-inline double HepRotation::yx() const { return ryx; }
-inline double HepRotation::yy() const { return ryy; }
-inline double HepRotation::yz() const { return ryz; }
-inline double HepRotation::zx() const { return rzx; }
-inline double HepRotation::zy() const { return rzy; }
-inline double HepRotation::zz() const { return rzz; }
+inline G4double HepRotation::xx() const { return rxx; }
+inline G4double HepRotation::xy() const { return rxy; }
+inline G4double HepRotation::xz() const { return rxz; }
+inline G4double HepRotation::yx() const { return ryx; }
+inline G4double HepRotation::yy() const { return ryy; }
+inline G4double HepRotation::yz() const { return ryz; }
+inline G4double HepRotation::zx() const { return rzx; }
+inline G4double HepRotation::zy() const { return rzy; }
+inline G4double HepRotation::zz() const { return rzz; }
 
 inline HepRep3x3 HepRotation::rep3x3() const {
   return HepRep3x3 ( rxx, rxy, rxz, 
@@ -27,13 +27,13 @@ inline HepRep3x3 HepRotation::rep3x3() const {
 		     rzx, rzy, rzz );
 }
 
-inline double HepRotation::xt() const { return 0.0; }
-inline double HepRotation::yt() const { return 0.0; }
-inline double HepRotation::zt() const { return 0.0; }
-inline double HepRotation::tx() const { return 0.0; }
-inline double HepRotation::ty() const { return 0.0; }
-inline double HepRotation::tz() const { return 0.0; }
-inline double HepRotation::tt() const { return 1.0; }
+inline G4double HepRotation::xt() const { return 0.0; }
+inline G4double HepRotation::yt() const { return 0.0; }
+inline G4double HepRotation::zt() const { return 0.0; }
+inline G4double HepRotation::tx() const { return 0.0; }
+inline G4double HepRotation::ty() const { return 0.0; }
+inline G4double HepRotation::tz() const { return 0.0; }
+inline G4double HepRotation::tt() const { return 1.0; }
 
 inline HepRep4x4 HepRotation::rep4x4() const {
   return HepRep4x4 ( rxx, rxy, rxz, 0.0,
@@ -54,9 +54,9 @@ inline HepRotation::HepRotation(const HepRotation & m1) :
 	rzx(m1.rzx), rzy(m1.rzy), rzz(m1.rzz) {}
 
 inline HepRotation::HepRotation
-			(double mxx, double mxy, double mxz,
-			 double myx, double myy, double myz,
-			 double mzx, double mzy, double mzz) : 
+			(G4double mxx, G4double mxy, G4double mxz,
+			 G4double myx, G4double myy, G4double myz,
+			 G4double mzx, G4double mzy, G4double mzz) : 
 	rxx(mxx), rxy(mxy), rxz(mxz), 
 	ryx(myx), ryy(myy), ryz(myz),
 	rzx(mzx), rzy(mzy), rzz(mzz) {}
@@ -88,7 +88,7 @@ inline HepRotation::~HepRotation() {}
 inline HepRotation::HepRotation_row::HepRotation_row
 (const HepRotation & r, int i) : rr(r), ii(i) {}
 
-inline double HepRotation::HepRotation_row::operator [] (int jj) const {
+inline G4double HepRotation::HepRotation_row::operator [] (int jj) const {
   return rr(ii,jj);
 }
 
@@ -128,10 +128,10 @@ inline HepLorentzVector HepRotation::row3() const
 inline HepLorentzVector HepRotation::row4() const
 				{ return HepLorentzVector (0,0,0,1); }
 
-inline double  HepRotation::getPhi  () const { return phi();   }
-inline double  HepRotation::getTheta() const { return theta(); }
-inline double  HepRotation::getPsi  () const { return psi();   }
-inline double  HepRotation::getDelta() const { return delta(); }
+inline G4double  HepRotation::getPhi  () const { return phi();   }
+inline G4double  HepRotation::getTheta() const { return theta(); }
+inline G4double  HepRotation::getPsi  () const { return psi();   }
+inline G4double  HepRotation::getDelta() const { return delta(); }
 inline Hep3Vector HepRotation::getAxis () const { return axis();  }
 
 inline HepRotation & HepRotation::operator = (const HepRotation & m1) {
@@ -188,9 +188,9 @@ inline Hep3Vector HepRotation::operator * (const Hep3Vector & p) const {
 }
 
 inline Hep3Vector HepRotation::operator () (const Hep3Vector & p) const {
-  double x = p.x();
-  double y = p.y();
-  double z = p.z();
+  G4double x = p.x();
+  G4double y = p.y();
+  G4double z = p.z();
   return Hep3Vector(rxx*x + rxy*y + rxz*z,
                     ryx*x + ryy*y + ryz*z,
                     rzx*x + rzy*y + rzz*z);
@@ -219,10 +219,10 @@ inline HepRotation HepRotation::operator* (const HepRotation & r) const {
 }
 
 inline HepRotation HepRotation::operator * (const HepRotationX & rx) const {
-  double yy1 = rx.yy();
-  double yz1 = rx.yz();
-  double zy1 = -yz1;
-  double zz1 =  yy1;
+  G4double yy1 = rx.yy();
+  G4double yz1 = rx.yz();
+  G4double zy1 = -yz1;
+  G4double zz1 =  yy1;
   return HepRotation(
     rxx,   rxy*yy1 + rxz*zy1,   rxy*yz1 + rxz*zz1,
     ryx,   ryy*yy1 + ryz*zy1,   ryy*yz1 + ryz*zz1,
@@ -230,10 +230,10 @@ inline HepRotation HepRotation::operator * (const HepRotationX & rx) const {
 }
 
 inline HepRotation HepRotation::operator * (const HepRotationY & ry) const {
-  double xx1 = ry.xx();
-  double xz1 = ry.xz();
-  double zx1 = -xz1;
-  double zz1 =  xx1;
+  G4double xx1 = ry.xx();
+  G4double xz1 = ry.xz();
+  G4double zx1 = -xz1;
+  G4double zz1 =  xx1;
   return HepRotation(
     rxx*xx1 + rxz*zx1,   rxy,   rxx*xz1 + rxz*zz1,
     ryx*xx1 + ryz*zx1,   ryy,   ryx*xz1 + ryz*zz1,
@@ -241,10 +241,10 @@ inline HepRotation HepRotation::operator * (const HepRotationY & ry) const {
 }
 
 inline HepRotation HepRotation::operator * (const HepRotationZ & rz) const {
-  double xx1 = rz.xx();
-  double xy1 = rz.xy();
-  double yx1 = -xy1;
-  double yy1 =  xx1;
+  G4double xx1 = rz.xx();
+  G4double xy1 = rz.xy();
+  G4double yx1 = -xy1;
+  G4double yy1 =  xx1;
   return HepRotation(
     rxx*xx1 + rxy*yx1,   rxx*xy1 + rxy*yy1,   rxz,
     ryx*xx1 + ryy*yx1,   ryx*xy1 + ryy*yy1,   ryz,
@@ -289,7 +289,7 @@ inline HepRotation & HepRotation::invert() {
 }
 
 inline HepRotation & HepRotation::rotate
-				(double ddelta, const Hep3Vector * p) {
+				(G4double ddelta, const Hep3Vector * p) {
   return rotate(ddelta, *p);
 }
 
@@ -310,17 +310,17 @@ inline bool HepRotation::operator>=( const HepRotation & r ) const
 inline bool HepRotation::operator> ( const HepRotation & r ) const 
 	{ return compare(r)> 0; }
 
-inline double HepRotation::getTolerance() { 
+inline G4double HepRotation::getTolerance() { 
   return Hep4RotationInterface::tolerance;
 }
-inline double HepRotation::setTolerance(double tol) { 
+inline G4double HepRotation::setTolerance(G4double tol) { 
   return Hep4RotationInterface::setTolerance(tol);
 }
 
 inline HepRotation operator * (const HepRotationX & rx, const HepRotation & r){
   HepRep3x3 mmm = r.rep3x3();
-  double c = rx.yy();
-  double ss = rx.zy();
+  G4double c = rx.yy();
+  G4double ss = rx.zy();
   return HepRotation (        mmm.xx_,           mmm.xy_,          mmm.xz_,
                         c*mmm.yx_-ss*mmm.zx_, c*mmm.yy_-ss*mmm.zy_, c*mmm.yz_-ss*mmm.zz_,
                         ss*mmm.yx_+c*mmm.zx_, ss*mmm.yy_+c*mmm.zy_, ss*mmm.yz_+c*mmm.zz_ );
@@ -328,8 +328,8 @@ inline HepRotation operator * (const HepRotationX & rx, const HepRotation & r){
 
 inline HepRotation operator * (const HepRotationY & ry, const HepRotation & r){
   HepRep3x3 mmm = r.rep3x3();
-  double c = ry.xx();
-  double ss = ry.xz();
+  G4double c = ry.xx();
+  G4double ss = ry.xz();
   return HepRotation (  c*mmm.xx_+ss*mmm.zx_, c*mmm.xy_+ss*mmm.zy_, c*mmm.xz_+ss*mmm.zz_,
                               mmm.yx_,           mmm.yy_,          mmm.yz_,
                        -ss*mmm.xx_+c*mmm.zx_,-ss*mmm.xy_+c*mmm.zy_,-ss*mmm.xz_+c*mmm.zz_ );
@@ -337,8 +337,8 @@ inline HepRotation operator * (const HepRotationY & ry, const HepRotation & r){
 
 inline HepRotation operator * (const HepRotationZ & rz, const HepRotation & r){
   HepRep3x3 mmm = r.rep3x3();
-  double c = rz.xx();
-  double ss = rz.yx();
+  G4double c = rz.xx();
+  G4double ss = rz.yx();
   return HepRotation (  c*mmm.xx_-ss*mmm.yx_, c*mmm.xy_-ss*mmm.yy_, c*mmm.xz_-ss*mmm.yz_,
                         ss*mmm.xx_+c*mmm.yx_, ss*mmm.xy_+c*mmm.yy_, ss*mmm.xz_+c*mmm.yz_,
                               mmm.zx_,           mmm.zy_,          mmm.zz_       );

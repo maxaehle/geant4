@@ -125,7 +125,7 @@ void G4PlotterManager::AddStyleParameter(const G4String& a_parameter,const G4Str
 
 void G4PlotterManager::Messenger::SetNewValue(G4UIcommand* a_cmd,G4String a_value) {
   std::vector<std::string> args;
-  tools::double_quotes_tokenize(a_value,args);
+  tools::G4double_quotes_tokenize(a_value,args);
   if(args.size()!=a_cmd->GetParameterEntries()) return;
   if(a_cmd==select_style) {
     fPlotterManager.SelectStyle(args[0]);

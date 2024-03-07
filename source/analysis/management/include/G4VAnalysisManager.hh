@@ -298,9 +298,9 @@ class G4VAnalysisManager
     G4int CreateNtupleIColumn(
             const G4String& name, std::vector<int>& vector);
     G4int CreateNtupleFColumn(
-            const G4String& name, std::vector<float>& vector);
+            const G4String& name, std::vector<G4float>& vector);
     G4int CreateNtupleDColumn(
-            const G4String& name, std::vector<double>& vector);
+            const G4String& name, std::vector<G4double>& vector);
     G4int CreateNtupleSColumn(
             const G4String& name, std::vector<std::string>& vector);
     void  FinishNtuple();
@@ -315,9 +315,9 @@ class G4VAnalysisManager
     G4int CreateNtupleIColumn(G4int ntupleId,
             const G4String& name, std::vector<int>& vector);
     G4int CreateNtupleFColumn(G4int ntupleId,
-            const G4String& name, std::vector<float>& vector);
+            const G4String& name, std::vector<G4float>& vector);
     G4int CreateNtupleDColumn(G4int ntupleId,
-            const G4String& name, std::vector<double>& vector);
+            const G4String& name, std::vector<G4double>& vector);
     G4int CreateNtupleSColumn(G4int ntupleId,
             const G4String& name, std::vector<std::string>& vector);
 

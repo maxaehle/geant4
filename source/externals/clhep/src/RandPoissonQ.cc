@@ -26,7 +26,7 @@
 //		    saving and restoring in the instance cases.
 // M Fischler     - fireArray using defaultMean 2/10/05
 // M Fischler	      - put/get to/from streams uses pairs of ulongs when
-//			+ storing doubles avoid problems with precision 
+//			+ storing G4doubles avoid problems with precision 
 //			4/14/05
 // M Fisculer	  - Modified use of shoot (mean) instead of 
 //		    shoot(getLocalEngine(), mean) when fire(mean) is called.  
@@ -57,21 +57,21 @@ HepRandomEngine & RandPoissonQ::engine() {return RandPoisson::engine();}
   // The following MUST MATCH the corresponding values used (in
   // poissonTables.cc) when poissonTables.cdat was created.
 
-const double RandPoissonQ::FIRST_MU = 10;// lowest mu value in table
-const double RandPoissonQ::LAST_MU =  95;// highest mu value
-const double RandPoissonQ::S = 5;        // Spacing between mu values
+const G4double RandPoissonQ::FIRST_MU = 10;// lowest mu value in table
+const G4double RandPoissonQ::LAST_MU =  95;// highest mu value
+const G4double RandPoissonQ::S = 5;        // Spacing between mu values
 const int RandPoissonQ::BELOW = 30;      // Starting point for N is at mu - BELOW
 const int RandPoissonQ::ENTRIES = 51;    // Number of entries in each mu row
 
-const double RandPoissonQ::MAXIMUM_POISSON_DEVIATE = 2.0E9;
+const G4double RandPoissonQ::MAXIMUM_POISSON_DEVIATE = 2.0E9;
 	// Careful -- this is NOT the maximum number that can be held in 
 	// a long.  It actually should be some large number of sigma below
 	// that.  
 
   // Here comes the big (9K bytes) table, kept in a file of 
-  // ENTRIES * (FIRST_MU - LAST_MU + 1)/S doubles
+  // ENTRIES * (FIRST_MU - LAST_MU + 1)/S G4doubles
 
-static const double poissonTables [ 51 * ( (95-10)/5 + 1 ) ] = {
+static const G4double poissonTables [ 51 * ( (95-10)/5 + 1 ) ] = {
 #include "CLHEP/Random/poissonTables.cdat"
 };
 
@@ -86,7 +86,7 @@ void RandPoissonQ::setupForDefaultMu() {
 
   // The following are useful for quick approximation, for large mu
   
-  double sig2 = defaultMean * (.9998654 - .08346/defaultMean);
+  G4double sig2 = defaultMean * (.9998654 - .08346/defaultMean);
   sigma = std::sqrt(sig2);
 	// sigma for the Guassian which approximates the Poisson -- naively
 	// sqrt (defaultMean).
@@ -94,7 +94,7 @@ void RandPoissonQ::setupForDefaultMu() {
 	// The multiplier corrects for fact that discretization of the form
 	// [gaussian+.5] increases the second moment by a small amount.
 
-  double t = 1./(sig2);
+  G4double t = 1./(sig2);
 
   a2 = t/6 + t*t/324;
   a1 = std::sqrt (1-2*a2*a2*sig2);
@@ -116,19 +116,19 @@ void RandPoissonQ::setupForDefaultMu() {
 // fire, quick, operator(), and shoot methods:
 //
 
-long RandPoissonQ::shoot(double xm) {
+long RandPoissonQ::shoot(G4double xm) {
   return shoot(getTheEngine(), xm);
 }
 
-double RandPoissonQ::operator()() {
-  return (double) fire();
+G4double RandPoissonQ::operator()() {
+  return (G4double) fire();
 }
 
-double RandPoissonQ::operator()( double mean ) {
-  return (double) fire(mean);
+G4double RandPoissonQ::operator()( G4double mean ) {
+  return (G4double) fire(mean);
 }
 
-long RandPoissonQ::fire(double mean) {
+long RandPoissonQ::fire(G4double mean) {
   return shoot(getLocalEngine(), mean);
 }
 
@@ -140,18 +140,18 @@ long RandPoissonQ::fire() {
   }
 } // fire()
 
-long RandPoissonQ::shoot(HepRandomEngine* anEngine, double mean) {
+long RandPoissonQ::shoot(HepRandomEngine* anEngine, G4double mean) {
 
   // The following variables, static to this method, apply to the 
   // last time a large mean was supplied; they obviate certain calculations
   // if consecutive calls use the same mean.
 
-  static CLHEP_THREAD_LOCAL double lastLargeMean = -1.;	// Mean from previous shoot 
+  static CLHEP_THREAD_LOCAL G4double lastLargeMean = -1.;	// Mean from previous shoot 
 					// requiring poissonDeviateQuick()
-  static CLHEP_THREAD_LOCAL double lastA0;		
-  static CLHEP_THREAD_LOCAL double lastA1;		
-  static CLHEP_THREAD_LOCAL double lastA2;		
-  static CLHEP_THREAD_LOCAL double lastSigma;		
+  static CLHEP_THREAD_LOCAL G4double lastA0;		
+  static CLHEP_THREAD_LOCAL G4double lastA1;		
+  static CLHEP_THREAD_LOCAL G4double lastA2;		
+  static CLHEP_THREAD_LOCAL G4double lastSigma;		
 
   if ( mean < LAST_MU + S ) {
     return poissonDeviateSmall ( anEngine, mean );
@@ -159,9 +159,9 @@ long RandPoissonQ::shoot(HepRandomEngine* anEngine, double mean) {
     if ( mean != lastLargeMean ) {
       // Compute the coefficients defining the quadratic transformation from a 
       // Gaussian to a Poisson for this mean.  Also save these for next time.
-      double sig2 = mean * (.9998654 - .08346/mean);
+      G4double sig2 = mean * (.9998654 - .08346/mean);
       lastSigma = std::sqrt(sig2);
-      double t = 1./sig2;
+      G4double t = 1./sig2;
       lastA2 = t*(1./6.) + t*t*(1./324.);
       lastA1 = std::sqrt (1-2*lastA2*lastA2*sig2);
       lastA0 = mean + .5 - sig2 * lastA2;
@@ -171,7 +171,7 @@ long RandPoissonQ::shoot(HepRandomEngine* anEngine, double mean) {
 
 } // shoot (anEngine, mean)
 
-void RandPoissonQ::shootArray(const int size, long* vect, double m) {
+void RandPoissonQ::shootArray(const int size, long* vect, G4double m) {
   for( long* v = vect; v != vect + size; ++v )
     *v = shoot(m);
      // Note: We could test for m > 100, and if it is, precompute a0, a1, a2, 
@@ -179,7 +179,7 @@ void RandPoissonQ::shootArray(const int size, long* vect, double m) {
      // But since those are cached anyway, not much time would be saved.
 }
 
-void RandPoissonQ::fireArray(const int size, long* vect, double m) {
+void RandPoissonQ::fireArray(const int size, long* vect, G4double m) {
   for( long* v = vect; v != vect + size; ++v )
     *v = fire( m );
 }
@@ -192,21 +192,21 @@ void RandPoissonQ::fireArray(const int size, long* vect) {
 
 // Quick Poisson deviate algorithm used by quick for large mu:
 
-long RandPoissonQ::poissonDeviateQuick ( HepRandomEngine *e, double mu ) {
+long RandPoissonQ::poissonDeviateQuick ( HepRandomEngine *e, G4double mu ) {
 
   // Compute the coefficients defining the quadratic transformation from a 
   // Gaussian to a Poisson:
 
-  double sig2 = mu * (.9998654 - .08346/mu);
-  double sig = std::sqrt(sig2);
+  G4double sig2 = mu * (.9998654 - .08346/mu);
+  G4double sig = std::sqrt(sig2);
 	// The multiplier corrects for fact that discretization of the form
 	// [gaussian+.5] increases the second moment by a small amount.
 
-  double t = 1./sig2;
+  G4double t = 1./sig2;
 
-  double sa2 = t*(1./6.) + t*t*(1./324.);
-  double sa1 = std::sqrt (1-2*sa2*sa2*sig2);
-  double sa0 = mu + .5 - sig2 * sa2;
+  G4double sa2 = t*(1./6.) + t*t*(1./324.);
+  G4double sa1 = std::sqrt (1-2*sa2*sa2*sig2);
+  G4double sa0 = mu + .5 - sig2 * sa2;
 
   // The formula will be sa0 + sa1*x + sa2*x*x where x has sigma of sq.
   // The coeffeicients are chosen to match the first THREE moments of the 
@@ -217,7 +217,7 @@ long RandPoissonQ::poissonDeviateQuick ( HepRandomEngine *e, double mu ) {
 
 
 long RandPoissonQ::poissonDeviateQuick ( HepRandomEngine *e, 
-		double A0, double A1, double A2, double sig) {
+		G4double A0, G4double A1, G4double A2, G4double sig) {
 //
 // Quick Poisson deviate algorithm used by quick for large mu:
 //
@@ -239,10 +239,10 @@ long RandPoissonQ::poissonDeviateQuick ( HepRandomEngine *e,
 // has a second moment which is slightly larger than that of the Gaussian.  
 // To compensate, sig is multiplied by a factor which is slightly less than 1.
 
-  //  double g = RandGauss::shootQuick( e );   // TEMPORARY MOD:
-  double g = RandGaussQ::shoot( e );   // Unit normal
+  //  G4double g = RandGauss::shootQuick( e );   // TEMPORARY MOD:
+  G4double g = RandGaussQ::shoot( e );   // Unit normal
   g *= sig;
-  double p = A2*g*g + A1*g + A0;
+  G4double p = A2*g*g + A1*g + A0;
   if ( p < 0 ) return 0;	// Shouldn't ever possibly happen since 
 				// mean should not be less than 100, but
 				// we check due to paranoia.
@@ -254,13 +254,13 @@ long RandPoissonQ::poissonDeviateQuick ( HepRandomEngine *e,
 
 
 
-long RandPoissonQ::poissonDeviateSmall (HepRandomEngine * e, double mean) {
+long RandPoissonQ::poissonDeviateSmall (HepRandomEngine * e, G4double mean) {
   long N1;
   long N2;
   // The following are for later use to form a secondary random s:
-  double rRange; 	    // This will hold the interval between cdf for the
+  G4double rRange; 	    // This will hold the interval between cdf for the
 			    // computed N1 and cdf for N1+1.
-  double rRemainder = 0; // This will hold the length into that interval.
+  G4double rRemainder = 0; // This will hold the length into that interval.
 
   // Coming in, mean should not be more than LAST_MU + S.  However, we will 
   // be paranoid and test for this:
@@ -276,7 +276,7 @@ long RandPoissonQ::poissonDeviateSmall (HepRandomEngine * e, double mean) {
   // >>> 1 <<< 
   // 	Generate the first random, which we always will need.
 
-  double r = e->flat();
+  G4double r = e->flat();
 
   // >>> 2 <<< 
   // 	For small mean, below the start of the tables, 
@@ -285,7 +285,7 @@ long RandPoissonQ::poissonDeviateSmall (HepRandomEngine * e, double mean) {
   // In this case, since we know the series will terminate relatively quickly, 
   // almost alwaye use a precomputed 1/N array without fear of overrunning it.
 
-  static const double oneOverN[50] = 
+  static const G4double oneOverN[50] = 
   {    0,   1.,    1/2.,  1/3.,  1/4.,  1/5.,  1/6.,  1/7.,  1/8.,  1/9., 
    1/10.,  1/11.,  1/12., 1/13., 1/14., 1/15., 1/16., 1/17., 1/18., 1/19., 
    1/20.,  1/21.,  1/22., 1/23., 1/24., 1/25., 1/26., 1/27., 1/28., 1/29.,
@@ -296,8 +296,8 @@ long RandPoissonQ::poissonDeviateSmall (HepRandomEngine * e, double mean) {
   if ( mean < FIRST_MU ) {
 
     long N = 0;
-    double term = std::exp(-mean);
-    double cdf = term;
+    G4double term = std::exp(-mean);
+    G4double cdf = term;
 
     if ( r < (1 - 1.0E-9) ) {
       //
@@ -305,7 +305,7 @@ long RandPoissonQ::poissonDeviateSmall (HepRandomEngine * e, double mean) {
       //
       // Except when r is very close to 1, it is certain that we will exceed r 
       // before the 30-th term in the series, so a simple while loop is OK.
-      const double* oneOverNptr = oneOverN;
+      const G4double* oneOverNptr = oneOverN;
       while( cdf <= r ) {
         N++ ;  
         oneOverNptr++;
@@ -321,7 +321,7 @@ long RandPoissonQ::poissonDeviateSmall (HepRandomEngine * e, double mean) {
       // off the end of the table of 1/N.  Since this is very rare, we just
       // ignore the table and do the identical while loop, using explicit 
       // division.
-      double cdf0;
+      G4double cdf0;
       while ( cdf <= r ) {
         N++ ;  
         term *= ( mean / N );
@@ -339,9 +339,9 @@ long RandPoissonQ::poissonDeviateSmall (HepRandomEngine * e, double mean) {
   //	which is no greater than our actual mean.
 
   int rowNumber = int((mean - FIRST_MU)/S);
-  const double * cdfs = &poissonTables [rowNumber*ENTRIES]; 
-  double mu = FIRST_MU + rowNumber*S;
-  double deltaMu = mean - mu;
+  const G4double * cdfs = &poissonTables [rowNumber*ENTRIES]; 
+  G4double mu = FIRST_MU + rowNumber*S;
+  G4double deltaMu = mean - mu;
   int Nmin = int(mu - BELOW);
   if (Nmin < 1) Nmin = 1;
   int Nmax = Nmin + (ENTRIES - 1);
@@ -364,9 +364,9 @@ long RandPoissonQ::poissonDeviateSmall (HepRandomEngine * e, double mean) {
     // out of oneOverN table.
 
     long N = 0;
-    double term = std::exp(-mu);
-    double cdf = term;
-    double cdf0;
+    G4double term = std::exp(-mu);
+    G4double cdf = term;
+    G4double cdf0;
 
     while(cdf <= r) {
         N++ ;  
@@ -449,9 +449,9 @@ long RandPoissonQ::poissonDeviateSmall (HepRandomEngine * e, double mean) {
 
 		//	std::cout << "r = " << r << " mu = " << mu << "\n";
     long N = Nmax -1;
-    double cdf = cdfs[ENTRIES-1];
-    double term = cdf - cdfs[ENTRIES-2];
-    double cdf0;
+    G4double cdf = cdfs[ENTRIES-1];
+    G4double term = cdf - cdfs[ENTRIES-2];
+    G4double cdf0;
     while(cdf <= r) {
         N++ ;  
 		//	std::cout << "  N " << N << " term " << 
@@ -489,9 +489,9 @@ long RandPoissonQ::poissonDeviateSmall (HepRandomEngine * e, double mean) {
   // However, if this range is very small, then we lose too many bits of
   // randomness.  In that situation, we generate a second random for s.
 
-  double s;
+  G4double s;
 
-  static const double MINRANGE = .01;  	// Sacrifice up to two digits of 
+  static const G4double MINRANGE = .01;  	// Sacrifice up to two digits of 
 				       	// randomness when using r to produce
 					// a second random s.  Leads to up to
 					// .09 extra randoms each time.
@@ -510,14 +510,14 @@ long RandPoissonQ::poissonDeviateSmall (HepRandomEngine * e, double mean) {
   //	from deltaMu and s.
 
   N2 = 0;
-  double term = std::exp(-deltaMu);
-  double cdf = term;
+  G4double term = std::exp(-deltaMu);
+  G4double cdf = term;
 
   if ( s < (1 - 1.0E-10) ) {
       //
       // This is the normal path:
       //
-      const double* oneOverNptr = oneOverN;
+      const G4double* oneOverNptr = oneOverN;
       while( cdf <= s ) {
         N2++ ;  
         oneOverNptr++;
@@ -584,10 +584,10 @@ std::istream & RandPoissonQ::get ( std::istream & is ) {
   }
   if (possibleKeywordInput(is, "Uvec", a0)) {
     std::vector<unsigned long> t(2);
-    is >> a0 >> t[0] >> t[1]; a0 = DoubConv::longs2double(t); 
-    is >> a1 >> t[0] >> t[1]; a1 = DoubConv::longs2double(t); 
-    is >> a2 >> t[0] >> t[1]; a2 = DoubConv::longs2double(t); 
-    is >> sigma >> t[0] >> t[1]; sigma = DoubConv::longs2double(t); 
+    is >> a0 >> t[0] >> t[1]; a0 = DoubConv::longs2G4double(t); 
+    is >> a1 >> t[0] >> t[1]; a1 = DoubConv::longs2G4double(t); 
+    is >> a2 >> t[0] >> t[1]; a2 = DoubConv::longs2G4double(t); 
+    is >> sigma >> t[0] >> t[1]; sigma = DoubConv::longs2G4double(t); 
     RandPoisson::get(is);
     return is;
   }

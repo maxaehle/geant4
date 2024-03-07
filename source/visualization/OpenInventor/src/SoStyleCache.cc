@@ -67,7 +67,7 @@ SoStyleCache::~SoStyleCache(
 //////////////////////////////////////////////////////////////////////////////
 SoMaterial* SoStyleCache::getMaterial(
  const SbColor& aRGB
-,float aTransparency
+,G4float aTransparency
 ) 
 //////////////////////////////////////////////////////////////////////////////
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
@@ -88,10 +88,10 @@ SoMaterial* SoStyleCache::getMaterial(
 }
 //////////////////////////////////////////////////////////////////////////////
 SoMaterial* SoStyleCache::getMaterial(
- float aRed
-,float aGreen
-,float aBlue
-,float aTransparency
+ G4float aRed
+,G4float aGreen
+,G4float aBlue
+,G4float aTransparency
 ) 
 //////////////////////////////////////////////////////////////////////////////
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
@@ -115,7 +115,7 @@ SoMaterial* SoStyleCache::getMaterial(
 //////////////////////////////////////////////////////////////////////////////
 SoDrawStyle* SoStyleCache::getLineStyle(
  SbLineStyle aStyle
-,float aWidth
+,G4float aWidth
 ) 
 //////////////////////////////////////////////////////////////////////////////
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
@@ -155,7 +155,7 @@ SoDrawStyle* SoStyleCache::getLineStyle(
 //////////////////////////////////////////////////////////////////////////////
 SoDrawStyle* SoStyleCache::getLineStyle(
  unsigned short aPattern
-,float aWidth
+,G4float aWidth
 ) 
 //////////////////////////////////////////////////////////////////////////////
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//

@@ -142,7 +142,7 @@ void SoBox::generatePrimitives(SoAction *action) {
 
   
   // points for the eight vertices
-  float points[NPOINTS][3];
+  G4float points[NPOINTS][3];
   points[0][0] =  fDx.getValue(); 
   points[0][1] =  fDy.getValue(); 
   points[0][2] = -fDz.getValue();
@@ -175,7 +175,7 @@ void SoBox::generatePrimitives(SoAction *action) {
   points[7][1] = -fDy.getValue(); 
   points[7][2] =  fDz.getValue();
 
-  float normals[NFACES][3];
+  G4float normals[NFACES][3];
   //z back.
   normals[0][0] =  0  ; normals[0][1] =    0; normals [0][2] =  -1;    
   //z front.
@@ -189,7 +189,7 @@ void SoBox::generatePrimitives(SoAction *action) {
   //x right.
   normals[5][0] =  1  ; normals[5][1] =    0; normals [5][2] =   0;    
 
-  float x,y,z;
+  G4float x,y,z;
   int   index;
   for (int nf=0;nf<NFACES;nf++) {
     beginShape(action,TRIANGLE_FAN);

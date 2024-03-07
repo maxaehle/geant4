@@ -10,7 +10,7 @@
 // =======================================================================
 // Gabriele Cosmo - Created: 5th September 1995
 //                - Added not static Shoot() method: 17th May 1996
-//                - Algorithm now operates on doubles: 31st Oct 1996
+//                - Algorithm now operates on G4doubles: 31st Oct 1996
 //                - Added methods to shoot arrays: 28th July 1997
 //                - Added check in case xm=-1: 4th February 1998
 // J.Marraffino   - Added default mean as attribute and
@@ -18,7 +18,7 @@
 // Gabriele Cosmo - Relocated static data from HepRandom: 5th Jan 1999
 // M Fischler     - put and get to/from streams 12/15/04
 // M Fischler	      - put/get to/from streams uses pairs of ulongs when
-//			+ storing doubles avoid problems with precision 
+//			+ storing G4doubles avoid problems with precision 
 //			4/14/05
 // Mark Fischler  - Repaired BUG - when mean > 2 billion, was returning
 //                  mean instead of the proper value.  01/13/06
@@ -38,35 +38,35 @@ std::string RandPoisson::name() const {return "RandPoisson";}
 HepRandomEngine & RandPoisson::engine() {return *localEngine;}
 
 // Initialisation of static data
-CLHEP_THREAD_LOCAL double RandPoisson::status_st[3] = {0., 0., 0.};
-CLHEP_THREAD_LOCAL double RandPoisson::oldm_st = -1.0;
-const double RandPoisson::meanMax_st = 2.0E9;
+CLHEP_THREAD_LOCAL G4double RandPoisson::status_st[3] = {0., 0., 0.};
+CLHEP_THREAD_LOCAL G4double RandPoisson::oldm_st = -1.0;
+const G4double RandPoisson::meanMax_st = 2.0E9;
 
 RandPoisson::~RandPoisson() {
 }
 
-double RandPoisson::operator()() {
-  return double(fire( defaultMean ));
+G4double RandPoisson::operator()() {
+  return G4double(fire( defaultMean ));
 }
 
-double RandPoisson::operator()( double mean ) {
-  return double(fire( mean ));
+G4double RandPoisson::operator()( G4double mean ) {
+  return G4double(fire( mean ));
 }
 
-double gammln(double xx) {
+G4double gammln(G4double xx) {
 
 // Returns the value ln(Gamma(xx) for xx > 0.  Full accuracy is obtained for 
 // xx > 1. For 0 < xx < 1. the reflection formula (6.1.4) can be used first.
 // (Adapted from Numerical Recipes in C)
 
-  static const double cof[6] = {76.18009172947146,-86.50532032941677,
+  static const G4double cof[6] = {76.18009172947146,-86.50532032941677,
                              24.01409824083091, -1.231739572450155,
                              0.1208650973866179e-2, -0.5395239384953e-5};
   int j;
-  double x = xx - 1.0;
-  double tmp = x + 5.5;
+  G4double x = xx - 1.0;
+  G4double tmp = x + 5.5;
   tmp -= (x + 0.5) * std::log(tmp);
-  double ser = 1.000000000190015;
+  G4double ser = 1.000000000190015;
 
   for ( j = 0; j <= 5; j++ ) {
     x += 1.0;
@@ -76,10 +76,10 @@ double gammln(double xx) {
 }
 
 static
-double normal (HepRandomEngine* eptr) 		// mf 1/13/06
+G4double normal (HepRandomEngine* eptr) 		// mf 1/13/06
 {
-  double r;
-  double v1,v2,fac;
+  G4double r;
+  G4double v1,v2,fac;
   do {
     v1 = 2.0 * eptr->flat() - 1.0;
     v2 = 2.0 * eptr->flat() - 1.0;
@@ -90,19 +90,19 @@ double normal (HepRandomEngine* eptr) 		// mf 1/13/06
   return v2*fac;
 }
 
-long RandPoisson::shoot(double xm) {
+long RandPoisson::shoot(G4double xm) {
 
-// Returns as a floating-point number an integer value that is a random
+// Returns as a G4floating-point number an integer value that is a random
 // deviation drawn from a Poisson distribution of mean xm, using flat()
 // as a source of uniform random numbers.
 // (Adapted from Numerical Recipes in C)
 
-  double em, t, y;
-  double sq, alxm, g1;
-  double om = getOldMean();
+  G4double em, t, y;
+  G4double sq, alxm, g1;
+  G4double om = getOldMean();
   HepRandomEngine* anEngine = HepRandom::getTheEngine();
 
-  double* pstatus = getPStatus();
+  G4double* pstatus = getPStatus();
   sq = pstatus[0];
   alxm = pstatus[1];
   g1 = pstatus[2];
@@ -145,24 +145,24 @@ long RandPoisson::shoot(double xm) {
   return long(em);
 }
 
-void RandPoisson::shootArray(const int size, long* vect, double m1)
+void RandPoisson::shootArray(const int size, long* vect, G4double m1)
 {
   for( long* v = vect; v != vect + size; ++v )
     *v = shoot(m1);
 }
 
-long RandPoisson::shoot(HepRandomEngine* anEngine, double xm) {
+long RandPoisson::shoot(HepRandomEngine* anEngine, G4double xm) {
 
-// Returns as a floating-point number an integer value that is a random
+// Returns as a G4floating-point number an integer value that is a random
 // deviation drawn from a Poisson distribution of mean xm, using flat()
 // of a given Random Engine as a source of uniform random numbers.
 // (Adapted from Numerical Recipes in C)
 
-  double em, t, y;
-  double sq, alxm, g1;
-  double om = getOldMean();
+  G4double em, t, y;
+  G4double sq, alxm, g1;
+  G4double om = getOldMean();
 
-  double* pstatus = getPStatus();
+  G4double* pstatus = getPStatus();
   sq = pstatus[0];
   alxm = pstatus[1];
   g1 = pstatus[2];
@@ -206,7 +206,7 @@ long RandPoisson::shoot(HepRandomEngine* anEngine, double xm) {
 }
 
 void RandPoisson::shootArray(HepRandomEngine* anEngine, const int size,
-                             long* vect, double m1)
+                             long* vect, G4double m1)
 {
   for( long* v = vect; v != vect + size; ++v )
     *v = shoot(anEngine,m1);
@@ -216,15 +216,15 @@ long RandPoisson::fire() {
   return long(fire( defaultMean ));
 }
 
-long RandPoisson::fire(double xm) {
+long RandPoisson::fire(G4double xm) {
 
-// Returns as a floating-point number an integer value that is a random
+// Returns as a G4floating-point number an integer value that is a random
 // deviation drawn from a Poisson distribution of mean xm, using flat()
 // as a source of uniform random numbers.
 // (Adapted from Numerical Recipes in C)
 
-  double em, t, y;
-  double sq, alxm, g1;
+  G4double em, t, y;
+  G4double sq, alxm, g1;
 
   sq = status[0];
   alxm = status[1];
@@ -274,7 +274,7 @@ void RandPoisson::fireArray(const int size, long* vect )
     *v = fire( defaultMean );
 }
 
-void RandPoisson::fireArray(const int size, long* vect, double m1)
+void RandPoisson::fireArray(const int size, long* vect, G4double m1)
 {
   for( long* v = vect; v != vect + size; ++v )
     *v = fire( m1 );
@@ -314,12 +314,12 @@ std::istream & RandPoisson::get ( std::istream & is ) {
   }
   if (possibleKeywordInput(is, "Uvec", meanMax)) {
     std::vector<unsigned long> t(2);
-    is >> meanMax     >> t[0] >> t[1]; meanMax     = DoubConv::longs2double(t); 
-    is >> defaultMean >> t[0] >> t[1]; defaultMean = DoubConv::longs2double(t); 
-    is >> status[0]   >> t[0] >> t[1]; status[0]   = DoubConv::longs2double(t); 
-    is >> status[1]   >> t[0] >> t[1]; status[1]   = DoubConv::longs2double(t); 
-    is >> status[2]   >> t[0] >> t[1]; status[2]   = DoubConv::longs2double(t); 
-    is >> oldm        >> t[0] >> t[1]; oldm        = DoubConv::longs2double(t); 
+    is >> meanMax     >> t[0] >> t[1]; meanMax     = DoubConv::longs2G4double(t); 
+    is >> defaultMean >> t[0] >> t[1]; defaultMean = DoubConv::longs2G4double(t); 
+    is >> status[0]   >> t[0] >> t[1]; status[0]   = DoubConv::longs2G4double(t); 
+    is >> status[1]   >> t[0] >> t[1]; status[1]   = DoubConv::longs2G4double(t); 
+    is >> status[2]   >> t[0] >> t[1]; status[2]   = DoubConv::longs2G4double(t); 
+    is >> oldm        >> t[0] >> t[1]; oldm        = DoubConv::longs2G4double(t); 
     return is;
   }
   // is >> meanMax encompassed by possibleKeywordInput

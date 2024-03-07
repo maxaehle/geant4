@@ -68,8 +68,8 @@ int G4MolecularConfiguration::GetNumberOfSpecies()
   return GetManager()->GetNumberOfCreatedSpecies();
 }
 
-double G4MolecularConfiguration::ReturnDefaultDiffCoeff(const G4Material*,
-                                     double,
+G4double G4MolecularConfiguration::ReturnDefaultDiffCoeff(const G4Material*,
+                                     G4double,
                                      const G4MolecularConfiguration*
                                      molConf)
 {
@@ -132,7 +132,7 @@ G4MolecularConfiguration::GetManager()
   if (!fgManager)
   {
     G4AutoLock lock(&MolecularConfigurationManager::fManagerCreationMutex);
-    if (!fgManager) // double check for MT
+    if (!fgManager) // G4double check for MT
     {
       fgManager = new G4MolecularConfiguration::
           G4MolecularConfigurationManager();
@@ -1463,7 +1463,7 @@ void G4MolecularConfiguration::SetUserID(const G4String& userID)
 
 //______________________________________________________________________________
 
-double G4MolecularConfiguration::DiffCoeffWater(double temperature_K)
+G4double G4MolecularConfiguration::DiffCoeffWater(G4double temperature_K)
 {
   return pow(10, 4.311
              - 2.722e3/temperature_K
@@ -1475,10 +1475,10 @@ double G4MolecularConfiguration::DiffCoeffWater(double temperature_K)
 
 void
 G4MolecularConfiguration::
-ScaleAllDiffusionCoefficientsOnWater(double temperature_K)
+ScaleAllDiffusionCoefficientsOnWater(G4double temperature_K)
 {
-  double D_water_0 = DiffCoeffWater(fgTemperature);
-  double D_water_f = DiffCoeffWater(temperature_K);
+  G4double D_water_0 = DiffCoeffWater(fgTemperature);
+  G4double D_water_f = DiffCoeffWater(temperature_K);
 
   G4cout << "Scaling factor = " << D_water_f/D_water_0 << G4endl;
 
@@ -1488,8 +1488,8 @@ ScaleAllDiffusionCoefficientsOnWater(double temperature_K)
   while(it())
   {
     G4MolecularConfiguration* conf = it.value();
-    double D_0 = conf->GetDiffusionCoefficient() ;
-    double D_f = D_water_f * D_0 /D_water_0;
+    G4double D_0 = conf->GetDiffusionCoefficient() ;
+    G4double D_f = D_water_f * D_0 /D_water_0;
     conf->SetDiffusionCoefficient(D_f);
   };
 }

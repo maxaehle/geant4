@@ -11,7 +11,7 @@
 // Default values are used for operator()().
 
 // Valid input values are a > 0.  When invalid values are presented, the
-// code silently returns DBL_MAX from <float.h> which is the same as
+// code silently returns DBL_MAX from <G4float.h> which is the same as
 // MAXDOUBLE in <values.h> on systems where the latter exists.
 
 // =======================================================================
@@ -42,8 +42,8 @@ class RandStudentT : public HepRandom {
 
 public:
 
-  inline RandStudentT ( HepRandomEngine& anEngine, double a=1.0 );
-  inline RandStudentT ( HepRandomEngine* anEngine, double a=1.0 );
+  inline RandStudentT ( HepRandomEngine& anEngine, G4double a=1.0 );
+  inline RandStudentT ( HepRandomEngine* anEngine, G4double a=1.0 );
   // These constructors should be used to instantiate a RandStudentT
   // distribution object defining a local engine for it.
   // The static generator will be skipped using the non-static methods
@@ -63,35 +63,35 @@ public:
 
   // Static methods to shoot random values using the static generator
 
-  static  inline double shoot();
+  static  inline G4double shoot();
 
-  static  double shoot( double a );
+  static  G4double shoot( G4double a );
 
-  static  void shootArray ( const int size, double* vect,
-                            double a=1.0 );
+  static  void shootArray ( const int size, G4double* vect,
+                            G4double a=1.0 );
 
   //  Static methods to shoot random values using a given engine
   //  by-passing the static generator.
 
-  static  inline double shoot( HepRandomEngine* anEngine );
+  static  inline G4double shoot( HepRandomEngine* anEngine );
 
-  static  double shoot( HepRandomEngine* anEngine, 
-                           double a );
+  static  G4double shoot( HepRandomEngine* anEngine, 
+                           G4double a );
 
   static  void shootArray ( HepRandomEngine* anEngine, const int size,
-                            double* vect, double a=1.0 );
+                            G4double* vect, G4double a=1.0 );
 
   //  Methods using the localEngine to shoot random values, by-passing
   //  the static generator.
 
-  inline double fire();
+  inline G4double fire();
 
-  double fire( double a );
+  G4double fire( G4double a );
   
-  void fireArray ( const int size, double* vect );
-  void fireArray ( const int size, double* vect, double a );
-  double operator()();
-  double operator()( double a );
+  void fireArray ( const int size, G4double* vect );
+  void fireArray ( const int size, G4double* vect, G4double a );
+  G4double operator()();
+  G4double operator()( G4double a );
 
   std::string name() const;
   HepRandomEngine & engine();
@@ -103,7 +103,7 @@ public:
 private:
 
   std::shared_ptr<HepRandomEngine> localEngine;
-  double defaultA;
+  G4double defaultA;
 
 };
 

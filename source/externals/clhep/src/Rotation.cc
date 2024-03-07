@@ -15,12 +15,12 @@
 
 namespace CLHEP  {
 
-static inline double safe_acos (double x) {
+static inline G4double safe_acos (G4double x) {
   if (std::abs(x) <= 1.0) return std::acos(x);
   return ( (x>0) ? 0 : CLHEP::pi );
 }
 
-double HepRotation::operator() (int i, int j) const {
+G4double HepRotation::operator() (int i, int j) const {
   if (i == 0) {
     if (j == 0) { return xx(); }
     if (j == 1) { return xy(); }
@@ -39,15 +39,15 @@ double HepRotation::operator() (int i, int j) const {
   return 0.0;
 } 
 
-HepRotation & HepRotation::rotate(double a, const Hep3Vector& aaxis) {
+HepRotation & HepRotation::rotate(G4double a, const Hep3Vector& aaxis) {
   if (a != 0.0) {
-    double ll = aaxis.mag();
+    G4double ll = aaxis.mag();
     if (ll == 0.0) {
       std::cerr << "HepRotation::rotate() - "
                 << "HepRotation: zero axis" << std::endl;
     }else{
-      double sa = std::sin(a), ca = std::cos(a);
-      double dx = aaxis.x()/ll, dy = aaxis.y()/ll, dz = aaxis.z()/ll;   
+      G4double sa = std::sin(a), ca = std::cos(a);
+      G4double dx = aaxis.x()/ll, dy = aaxis.y()/ll, dz = aaxis.z()/ll;   
       HepRotation m1(
 	ca+(1-ca)*dx*dx,          (1-ca)*dx*dy-sa*dz,    (1-ca)*dx*dz+sa*dy,
 	   (1-ca)*dy*dx+sa*dz, ca+(1-ca)*dy*dy,          (1-ca)*dy*dz-sa*dx,
@@ -58,10 +58,10 @@ HepRotation & HepRotation::rotate(double a, const Hep3Vector& aaxis) {
   return *this;
 }
 
-HepRotation & HepRotation::rotateX(double a) {
-  double c1 = std::cos(a);
-  double s1 = std::sin(a);
-  double x1 = ryx, y1 = ryy, z1 = ryz; 
+HepRotation & HepRotation::rotateX(G4double a) {
+  G4double c1 = std::cos(a);
+  G4double s1 = std::sin(a);
+  G4double x1 = ryx, y1 = ryy, z1 = ryz; 
   ryx = c1*x1 - s1*rzx;
   ryy = c1*y1 - s1*rzy;
   ryz = c1*z1 - s1*rzz;
@@ -71,10 +71,10 @@ HepRotation & HepRotation::rotateX(double a) {
   return *this;
 }
 
-HepRotation & HepRotation::rotateY(double a){
-  double c1 = std::cos(a);
-  double s1 = std::sin(a);
-  double x1 = rzx, y1 = rzy, z1 = rzz; 
+HepRotation & HepRotation::rotateY(G4double a){
+  G4double c1 = std::cos(a);
+  G4double s1 = std::sin(a);
+  G4double x1 = rzx, y1 = rzy, z1 = rzz; 
   rzx = c1*x1 - s1*rxx;
   rzy = c1*y1 - s1*rxy;
   rzz = c1*z1 - s1*rxz;
@@ -84,10 +84,10 @@ HepRotation & HepRotation::rotateY(double a){
   return *this;
 }
 
-HepRotation & HepRotation::rotateZ(double a) {
-  double c1 = std::cos(a);
-  double s1 = std::sin(a);
-  double x1 = rxx, y1 = rxy, z1 = rxz; 
+HepRotation & HepRotation::rotateZ(G4double a) {
+  G4double c1 = std::cos(a);
+  G4double s1 = std::sin(a);
+  G4double x1 = rxx, y1 = rxy, z1 = rxz; 
   rxx = c1*x1 - s1*ryx;
   rxy = c1*y1 - s1*ryy;
   rxz = c1*z1 - s1*ryz;
@@ -100,7 +100,7 @@ HepRotation & HepRotation::rotateZ(double a) {
 HepRotation & HepRotation::rotateAxes(const Hep3Vector &newX,
 				      const Hep3Vector &newY,
 				      const Hep3Vector &newZ) {
-  double del = 0.001;
+  G4double del = 0.001;
   Hep3Vector w = newX.cross(newY);
 
   if (std::abs(newZ.x()-w.x()) > del ||
@@ -121,38 +121,38 @@ HepRotation & HepRotation::rotateAxes(const Hep3Vector &newX,
   }
 }
 
-double HepRotation::phiX() const {
+G4double HepRotation::phiX() const {
   return (yx() == 0.0 && xx() == 0.0) ? 0.0 : std::atan2(yx(),xx());
 }
 
-double HepRotation::phiY() const {
+G4double HepRotation::phiY() const {
   return (yy() == 0.0 && xy() == 0.0) ? 0.0 : std::atan2(yy(),xy());
 }
 
-double HepRotation::phiZ() const {
+G4double HepRotation::phiZ() const {
   return (yz() == 0.0 && xz() == 0.0) ? 0.0 : std::atan2(yz(),xz());
 }
 
-double HepRotation::thetaX() const {
+G4double HepRotation::thetaX() const {
   return safe_acos(zx());
 }
 
-double HepRotation::thetaY() const {
+G4double HepRotation::thetaY() const {
   return safe_acos(zy());
 }
 
-double HepRotation::thetaZ() const {
+G4double HepRotation::thetaZ() const {
   return safe_acos(zz());
 }
 
-void HepRotation::getAngleAxis(double &angle, Hep3Vector &aaxis) const {
-  double cosa  = 0.5*(xx()+yy()+zz()-1);
-  double cosa1 = 1-cosa;
+void HepRotation::getAngleAxis(G4double &angle, Hep3Vector &aaxis) const {
+  G4double cosa  = 0.5*(xx()+yy()+zz()-1);
+  G4double cosa1 = 1-cosa;
   if (cosa1 <= 0) {
     angle = 0;
     aaxis  = Hep3Vector(0,0,1);
   }else{
-    double x=0, y=0, z=0;
+    G4double x=0, y=0, z=0;
     if (xx() > cosa) x = std::sqrt((xx()-cosa)/cosa1);
     if (yy() > cosa) y = std::sqrt((yy()-cosa)/cosa1);
     if (zz() > cosa) z = std::sqrt((zz()-cosa)/cosa1);

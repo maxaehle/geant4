@@ -12,16 +12,16 @@
 
 namespace CLHEP {
 
-inline double HepRotationZ::xx() const { return its_c; }
-inline double HepRotationZ::xy() const { return -its_s; }
-inline double HepRotationZ::yx() const { return its_s; }
-inline double HepRotationZ::yy() const { return its_c; }
+inline G4double HepRotationZ::xx() const { return its_c; }
+inline G4double HepRotationZ::xy() const { return -its_s; }
+inline G4double HepRotationZ::yx() const { return its_s; }
+inline G4double HepRotationZ::yy() const { return its_c; }
 
-inline double HepRotationZ::zz() const { return 1.0; }
-inline double HepRotationZ::zy() const { return 0.0; }
-inline double HepRotationZ::zx() const { return 0.0; }
-inline double HepRotationZ::yz() const { return 0.0; }
-inline double HepRotationZ::xz() const { return 0.0; }
+inline G4double HepRotationZ::zz() const { return 1.0; }
+inline G4double HepRotationZ::zy() const { return 0.0; }
+inline G4double HepRotationZ::zx() const { return 0.0; }
+inline G4double HepRotationZ::yz() const { return 0.0; }
+inline G4double HepRotationZ::xz() const { return 0.0; }
 
 inline HepRep3x3 HepRotationZ::rep3x3() const {
   return HepRep3x3 ( its_c, -its_s,  0.0,
@@ -35,7 +35,7 @@ inline HepRotationZ::HepRotationZ(const HepRotationZ & orig) :
 	its_d(orig.its_d), its_s(orig.its_s), its_c(orig.its_c)
 {}
 
-inline HepRotationZ::HepRotationZ(double dd, double ss, double cc) :
+inline HepRotationZ::HepRotationZ(G4double dd, G4double ss, G4double cc) :
 	its_d(dd), its_s(ss), its_c(cc)
 {}
 
@@ -62,13 +62,13 @@ inline Hep3Vector HepRotationZ::rowY() const
 inline Hep3Vector HepRotationZ::rowZ() const 
 				{ return Hep3Vector ( 0.0, 0.0, 1.0 ); }
 
-inline double  HepRotationZ::getPhi  () const { return phi();   }
-inline double  HepRotationZ::getTheta() const { return theta(); }
-inline double  HepRotationZ::getPsi  () const { return psi();   }
-inline double  HepRotationZ::getDelta() const { return its_d; }
+inline G4double  HepRotationZ::getPhi  () const { return phi();   }
+inline G4double  HepRotationZ::getTheta() const { return theta(); }
+inline G4double  HepRotationZ::getPsi  () const { return psi();   }
+inline G4double  HepRotationZ::getDelta() const { return its_d; }
 inline Hep3Vector HepRotationZ::getAxis () const { return axis();  }
 
-inline double  HepRotationZ::delta() const { return its_d; }
+inline G4double  HepRotationZ::delta() const { return its_d; }
 inline Hep3Vector HepRotationZ::axis() const { return Hep3Vector(0,0,1); }
 
 inline HepAxisAngle HepRotationZ::axisAngle() const {
@@ -76,7 +76,7 @@ inline HepAxisAngle HepRotationZ::axisAngle() const {
 }
 
 inline void HepRotationZ::getAngleAxis
-			(double & ddelta, Hep3Vector & aaxis) const {
+			(G4double & ddelta, Hep3Vector & aaxis) const {
   ddelta = its_d;
   aaxis  = getAxis();
 }
@@ -109,9 +109,9 @@ inline void HepRotationZ::rectify() {
 } 
 
 inline Hep3Vector HepRotationZ::operator() (const Hep3Vector & p) const {
-  double x = p.x();
-  double y = p.y();
-  double z = p.z();
+  G4double x = p.x();
+  G4double y = p.y();
+  G4double z = p.z();
   return  Hep3Vector(  x * its_c - y * its_s,
                        x * its_s + y * its_c,
                              z        );
@@ -139,12 +139,12 @@ inline HepRotationZ & HepRotationZ::transform(const HepRotationZ & m1) {
   return *this = m1 * (*this);
 }
 
-inline double HepRotationZ::proper( double ddelta ) {
+inline G4double HepRotationZ::proper( G4double ddelta ) {
   // -PI < its_d <= PI
   if ( std::fabs(ddelta) < CLHEP::pi ) {
     return  ddelta;
   } else {
-    double x = ddelta / (CLHEP::twopi);
+    G4double x = ddelta / (CLHEP::twopi);
     return  (CLHEP::twopi) * ( x + std::floor(.5-x) );
   }
 }  // proper()
@@ -183,13 +183,13 @@ inline HepLorentzVector HepRotationZ::row3() const
                                 { return HepLorentzVector (rowZ(), 0); }
 inline HepLorentzVector HepRotationZ::row4() const
                                 { return HepLorentzVector (0,0,0,1); }
-inline double HepRotationZ::xt() const { return 0.0; }
-inline double HepRotationZ::yt() const { return 0.0; }
-inline double HepRotationZ::zt() const { return 0.0; }
-inline double HepRotationZ::tx() const { return 0.0; }
-inline double HepRotationZ::ty() const { return 0.0; }
-inline double HepRotationZ::tz() const { return 0.0; }
-inline double HepRotationZ::tt() const { return 1.0; }
+inline G4double HepRotationZ::xt() const { return 0.0; }
+inline G4double HepRotationZ::yt() const { return 0.0; }
+inline G4double HepRotationZ::zt() const { return 0.0; }
+inline G4double HepRotationZ::tx() const { return 0.0; }
+inline G4double HepRotationZ::ty() const { return 0.0; }
+inline G4double HepRotationZ::tz() const { return 0.0; }
+inline G4double HepRotationZ::tt() const { return 1.0; }
 
 inline HepRep4x4 HepRotationZ::rep4x4() const {
   return HepRep4x4 (  its_c, -its_s, 0.0, 0.0, 
@@ -198,10 +198,10 @@ inline HepRep4x4 HepRotationZ::rep4x4() const {
                         0.0,    0.0, 0.0, 1.0 );
 }
 
-inline double HepRotationZ::getTolerance() {
+inline G4double HepRotationZ::getTolerance() {
   return Hep4RotationInterface::tolerance;
 }
-inline double HepRotationZ::setTolerance(double tol) {
+inline G4double HepRotationZ::setTolerance(G4double tol) {
   return Hep4RotationInterface::setTolerance(tol);
 }
 

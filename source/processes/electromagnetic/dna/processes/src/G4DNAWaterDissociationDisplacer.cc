@@ -105,14 +105,14 @@ G4double G4DNAWaterDissociationDisplacer::ElectronProbaDistribution(G4double r)
 G4double G4DNAWaterDissociationDisplacer::ElectronProbaDistribution(G4double r)
 {
 #define b 27.22 // nanometer
-    static constexpr double sqrt_pi = 1.77245; // sqrt(CLHEP::pi);
-    static constexpr double b_to3 = 20168.1; // pow(b,3.);
-    static constexpr double b_to2 = 740.928; // pow(b,2.);
-    static constexpr double inverse_b_to2 = 1. / b_to2;
+    static constexpr G4double sqrt_pi = 1.77245; // sqrt(CLHEP::pi);
+    static constexpr G4double b_to3 = 20168.1; // pow(b,3.);
+    static constexpr G4double b_to2 = 740.928; // pow(b,2.);
+    static constexpr G4double inverse_b_to2 = 1. / b_to2;
 
-    static constexpr double main_factor = 4. / (sqrt_pi * b_to3);
-    static constexpr double factorA = sqrt_pi * b_to3 / 4.;
-    static constexpr double factorB = b_to2 / 2.;
+    static constexpr G4double main_factor = 4. / (sqrt_pi * b_to3);
+    static constexpr G4double factorA = sqrt_pi * b_to3 / 4.;
+    static constexpr G4double factorB = b_to2 / 2.;
 
     return (main_factor *
             (factorA * erf(r / b)
@@ -139,14 +139,14 @@ G4DNAWaterDissociationDisplacer::G4DNAWaterDissociationDisplacer()
 
     size_t nBins = 500;
     fElectronThermalization.reserve(nBins);
-    double eps = 1. / ((int) nBins);
-    double proba = eps;
+    G4double eps = 1. / ((int) nBins);
+    G4double proba = eps;
 
     fElectronThermalization.push_back(0.);
 
     for (size_t i = 1; i < nBins; ++i)
     {
-        double r = fFastElectronDistrib.Revert(proba, fProba1DFunction);
+        G4double r = fFastElectronDistrib.Revert(proba, fProba1DFunction);
         fElectronThermalization.push_back(r * nanometer);
         proba += eps;
 //  G4cout << G4BestUnit(r*nanometer, "Length") << G4endl;
@@ -478,11 +478,11 @@ G4ThreeVector
 G4DNAWaterDissociationDisplacer::
 radialDistributionOfProducts(G4double Rrms) const
 {
-    static const double inverse_sqrt_3 = 1. / sqrt(3.);
-    double sigma = Rrms * inverse_sqrt_3;
-    double x = G4RandGauss::shoot(0., sigma);
-    double y = G4RandGauss::shoot(0., sigma);
-    double z = G4RandGauss::shoot(0., sigma);
+    static const G4double inverse_sqrt_3 = 1. / sqrt(3.);
+    G4double sigma = Rrms * inverse_sqrt_3;
+    G4double x = G4RandGauss::shoot(0., sigma);
+    G4double y = G4RandGauss::shoot(0., sigma);
+    G4double z = G4RandGauss::shoot(0., sigma);
     return G4ThreeVector(x, y, z);
 }
 

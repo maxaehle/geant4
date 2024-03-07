@@ -254,7 +254,7 @@ void G4UPara::SetTanAlpha(G4double val)
 
   MakePlanes();
 }
-void G4UPara::SetThetaAndPhi(double pTheta, double pPhi)
+void G4UPara::SetThetaAndPhi(G4double pTheta, G4double pPhi)
 {
   Base_t::SetThetaAndPhi(pTheta, pPhi);
   G4double tanTheta = std::tan(pTheta);

@@ -16,7 +16,7 @@ using namespace GIDI;
 
 static int xDataXML_regionsXYs_regionToTOM( statusMessageReporting *smr, xDataXML_element *XE, xDataTOM_XYs *XYs, xDataTOM_axes *axes );
 static int xDataXML_regionsXYs_XYsToTOM( statusMessageReporting *smr, xDataXML_element *XE, xDataTOM_XYs *XYs, xDataTOM_axes *axes, 
-        xDataTOM_interpolation *interpolation, int index, int length, double accuracy );
+        xDataTOM_interpolation *interpolation, int index, int length, G4double accuracy );
 /*
 ************************************************************
 */
@@ -59,7 +59,7 @@ err:
 static int xDataXML_regionsXYs_regionToTOM( statusMessageReporting *smr, xDataXML_element *XE, xDataTOM_XYs *XYs, xDataTOM_axes *axes ) {
 
     int index, length;
-    double accuracy;
+    G4double accuracy;
     xDataXML_element *XMLChild, *interpolationAxesElement = NULL, *dataElement = NULL;
     xDataTOM_interpolation interpolation;
     char const *sInterpolation;
@@ -117,7 +117,7 @@ err:
 ************************************************************
 */
 static int xDataXML_regionsXYs_XYsToTOM( statusMessageReporting *smr, xDataXML_element *XE, xDataTOM_XYs *XYs, xDataTOM_axes *axes, 
-        xDataTOM_interpolation *interpolation, int index, int length, double accuracy ) {
+        xDataTOM_interpolation *interpolation, int index, int length, G4double accuracy ) {
 
     return( xDataXML_XYsDataToTOM( smr, XE, XYs, index, length, 0., accuracy, xDataTOM_subAxesType_intepolationAxes, 0, axes, interpolation ) );
 }

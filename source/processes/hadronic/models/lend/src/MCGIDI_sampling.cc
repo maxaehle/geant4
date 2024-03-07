@@ -46,7 +46,7 @@ int MCGIDI_sampling_pdfsOfX_release( statusMessageReporting * /*smr*/, MCGIDI_pd
 /*
 ************************************************************
 */
-int MCGIDI_sampling_sampleX_from_pdfsOfXGivenW( MCGIDI_pdfsOfXGivenW *dists, MCGIDI_pdfsOfXGivenW_sampled *sampled, double rngValue ) {
+int MCGIDI_sampling_sampleX_from_pdfsOfXGivenW( MCGIDI_pdfsOfXGivenW *dists, MCGIDI_pdfsOfXGivenW_sampled *sampled, G4double rngValue ) {
 
     int iW, iX1;
 
@@ -62,7 +62,7 @@ int MCGIDI_sampling_sampleX_from_pdfsOfXGivenW( MCGIDI_pdfsOfXGivenW *dists, MCG
     else {
         if( MCGIDI_sampling_sampleX_from_pdfOfX( &(dists->dist[iW]), sampled, rngValue ) ) return( 1 );
         if( dists->interpolationWY != ptwXY_interpolationFlat ) {    // ptwXY_interpolationOther was not allowed at startup.
-            double xSampled = sampled->x, frac = 1.;
+            G4double xSampled = sampled->x, frac = 1.;
 
             iX1 = sampled->iX1;
             if( MCGIDI_sampling_sampleX_from_pdfOfX( &(dists->dist[iW+1]), sampled, rngValue ) ) return( 1 );
@@ -95,10 +95,10 @@ int MCGIDI_sampling_sampleX_from_pdfsOfXGivenW( MCGIDI_pdfsOfXGivenW *dists, MCG
 /*
 ************************************************************
 */
-int MCGIDI_sampling_sampleX_from_pdfOfX( MCGIDI_pdfOfX *dist, MCGIDI_pdfsOfXGivenW_sampled *sampled, double rngValue ) {
+int MCGIDI_sampling_sampleX_from_pdfOfX( MCGIDI_pdfOfX *dist, MCGIDI_pdfsOfXGivenW_sampled *sampled, G4double rngValue ) {
 
     int iX;
-    double d1, d2, frac;
+    G4double d1, d2, frac;
 
     iX = sampled->iX1 = MCGIDI_misc_binarySearch( dist->numberOfXs, dist->cdf, rngValue );
 
@@ -111,7 +111,7 @@ int MCGIDI_sampling_sampleX_from_pdfOfX( MCGIDI_pdfOfX *dist, MCGIDI_pdfsOfXGive
         frac = ( dist->cdf[iX+1] - rngValue ) / ( dist->cdf[iX+1] - dist->cdf[iX] );
         sampled->x = frac * dist->Xs[iX] + ( 1 - frac ) * dist->Xs[iX+1]; }
     else {
-        double s1 = dist->pdf[iX+1] - dist->pdf[iX];
+        G4double s1 = dist->pdf[iX+1] - dist->pdf[iX];
 
         if( s1 == 0. ) {
             if( dist->pdf[iX] == 0 ) {
@@ -138,12 +138,12 @@ int MCGIDI_sampling_sampleX_from_pdfOfX( MCGIDI_pdfOfX *dist, MCGIDI_pdfsOfXGive
 /*
 ************************************************************
 */
-int MCGIDI_sampling_doubleDistribution( statusMessageReporting *smr, MCGIDI_pdfsOfXGivenW *pdfOfWGivenV, MCGIDI_pdfsOfXGivenW *pdfOfXGivenVAndW,  
+int MCGIDI_sampling_G4doubleDistribution( statusMessageReporting *smr, MCGIDI_pdfsOfXGivenW *pdfOfWGivenV, MCGIDI_pdfsOfXGivenW *pdfOfXGivenVAndW,  
         MCGIDI_quantitiesLookupModes &modes, MCGIDI_decaySamplingInfo *decaySamplingInfo ) {
 
     int iV;
-    double e_in = modes.getProjectileEnergy( );
-    double randomW = decaySamplingInfo->rng( decaySamplingInfo->rngState ), randomX = decaySamplingInfo->rng( decaySamplingInfo->rngState );
+    G4double e_in = modes.getProjectileEnergy( );
+    G4double randomW = decaySamplingInfo->rng( decaySamplingInfo->rngState ), randomX = decaySamplingInfo->rng( decaySamplingInfo->rngState );
     MCGIDI_pdfsOfXGivenW_sampled sampledX, sampledW;
     ptwXY_interpolation interpolationWY = pdfOfWGivenV->interpolationWY; 
 
@@ -166,7 +166,7 @@ int MCGIDI_sampling_doubleDistribution( statusMessageReporting *smr, MCGIDI_pdfs
     MCGIDI_sampling_sampleX_from_pdfsOfXGivenW( &(pdfOfXGivenVAndW[iV]), &sampledX, randomX );
 
     if( interpolationWY != ptwXY_interpolationFlat ) {
-        double x = sampledX.x, w = sampledW.x, Vs[3] = { e_in, pdfOfWGivenV->Ws[iV], pdfOfWGivenV->Ws[iV+1] };
+        G4double x = sampledX.x, w = sampledW.x, Vs[3] = { e_in, pdfOfWGivenV->Ws[iV], pdfOfWGivenV->Ws[iV+1] };
 
         MCGIDI_sampling_sampleX_from_pdfOfX( &(pdfOfWGivenV->dist[iV+1]), &sampledW, randomW );
         sampledX.w = sampledW.x;
@@ -184,9 +184,9 @@ int MCGIDI_sampling_doubleDistribution( statusMessageReporting *smr, MCGIDI_pdfs
 /*
 ************************************************************
 */
-int MCGIDI_sampling_interpolationValues( statusMessageReporting *smr, ptwXY_interpolation interpolation, double *ws, double y1, double y2, double *y ) {
+int MCGIDI_sampling_interpolationValues( statusMessageReporting *smr, ptwXY_interpolation interpolation, G4double *ws, G4double y1, G4double y2, G4double *y ) {
 
-    double frac;
+    G4double frac;
 
     if( interpolation == ptwXY_interpolationLinLin ) {
         frac = ( ws[2] - ws[0] ) / ( ws[2] - ws[1] );
@@ -209,9 +209,9 @@ int MCGIDI_sampling_interpolationValues( statusMessageReporting *smr, ptwXY_inte
 /*
 ************************************************************
 */
-double MCGIDI_sampling_ptwXY_getValueAtX( ptwXYPoints *ptwXY, double x1 ) {
+G4double MCGIDI_sampling_ptwXY_getValueAtX( ptwXYPoints *ptwXY, G4double x1 ) {
 
-    double y1;
+    G4double y1;
 
     if( ptwXY_getValueAtX( ptwXY, x1, &y1 ) == nfu_XOutsideDomain ) {
         if( x1 < ptwXY_getXMin( ptwXY ) ) {

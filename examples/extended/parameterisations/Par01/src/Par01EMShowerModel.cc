@@ -154,7 +154,7 @@ void Par01EMShowerModel::Explode(const G4FastTrack& fastTrack)
 
   // We shoot 100 spots of energy:
   G4int    nSpots  = 100;
-  G4double deposit = Energy/double(nSpots);
+  G4double deposit = Energy/G4double(nSpots);
   Par01EnergySpot eSpot;
   eSpot.SetEnergy(deposit);
   G4ThreeVector ePoint;

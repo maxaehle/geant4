@@ -48,7 +48,7 @@
 #define METAFILE_SCALE 1.
 
 static char* GetDate();
-static double ConvertRGB_ToGrey(double,double,double);
+static G4double ConvertRGB_ToGrey(G4double,G4double,G4double);
 //////////////////////////////////////////////////////////////////////////////
 SbPainterPS::SbPainterPS(
 )
@@ -98,7 +98,7 @@ void SbPainterPS::beginTraversal (
   if(fFile==NULL) openFileForWriting(NULL);
   if(fFile==NULL) return;
   putBeginPageInStream();
-  putPageScaleInStream((float)fWindowWidth,(float)fWindowHeight);
+  putPageScaleInStream((G4float)fWindowWidth,(G4float)fWindowHeight);
   putSaveStateInStream();
 }
 //////////////////////////////////////////////////////////////////////////////
@@ -108,31 +108,31 @@ void SbPainterPS::endTraversal(
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 {
   if(fFile==NULL) return;
-  putFrameInStream(0.0,0.0,0.0,(float)fWindowWidth,(float)fWindowHeight);
+  putFrameInStream(0.0,0.0,0.0,(G4float)fWindowWidth,(G4float)fWindowHeight);
   putRestoreStateInStream();
   putEndPageInStream();
 }
 //////////////////////////////////////////////////////////////////////////////
 void SbPainterPS::clearColorBuffer(
- float aRed
-,float aGreen
-,float aBlue
+ G4float aRed
+,G4float aGreen
+,G4float aBlue
 )
 //////////////////////////////////////////////////////////////////////////////
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 {
   if(fFile==NULL) return;
   putBackgroundInStream(aRed,aGreen,aBlue,
-                           (float)fWindowWidth,(float)fWindowHeight);
+                           (G4float)fWindowWidth,(G4float)fWindowHeight);
 }
 /*
 //////////////////////////////////////////////////////////////////////////////
 void SbPainterPS::drawPrimitive (
  SbPrimitiveType aType
 ,int aPointn
-,float* aXs
-,float* aYs
-,float* //aZs
+,G4float* aXs
+,G4float* aYs
+,G4float* //aZs
 ,const SbPainterContext& aAtb
 )
 //////////////////////////////////////////////////////////////////////////////
@@ -166,11 +166,11 @@ void SbPainterPS::drawPrimitive (
 //////////////////////////////////////////////////////////////////////////////
 void SbPainterPS::drawPolygon(
  int aPointn
-,float* aXs
-,float* aYs
-,float aRed
-,float aGreen
-,float aBlue
+,G4float* aXs
+,G4float* aYs
+,G4float aRed
+,G4float aGreen
+,G4float aBlue
 ,const SbAreaStyle& //aStyle
 )
 //////////////////////////////////////////////////////////////////////////////
@@ -193,11 +193,11 @@ void SbPainterPS::drawPolygon(
 //////////////////////////////////////////////////////////////////////////////
 void SbPainterPS::drawLines(
  int aPointn
-,float* aXs
-,float* aYs
-,float aRed
-,float aGreen
-,float aBlue
+,G4float* aXs
+,G4float* aYs
+,G4float aRed
+,G4float aGreen
+,G4float aBlue
 ,const SbLineStyle& aStyle
 ,int aWidth
 )
@@ -223,11 +223,11 @@ void SbPainterPS::drawLines(
 //////////////////////////////////////////////////////////////////////////////
 void SbPainterPS::drawMarkers (
  int aPointn
-,float* aXs
-,float* aYs
-,float aRed
-,float aGreen
-,float aBlue
+,G4float* aXs
+,G4float* aYs
+,G4float aRed
+,G4float aGreen
+,G4float aBlue
 ,const SbMarkerStyle& aStyle 
 ,int aSize
 )
@@ -235,7 +235,7 @@ void SbPainterPS::drawMarkers (
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 {
   if(fFile==NULL) return;
-  float mark_size  = (float)(aSize <=0 ? 1. : aSize);   
+  G4float mark_size  = (G4float)(aSize <=0 ? 1. : aSize);   
   mark_size *= 0.6F;
   if(aStyle==SbMarkerCircleLine) {
     putNewPathInStream();
@@ -332,7 +332,7 @@ void SbPainterPS::setLineWidth(
 //////////////////////////////////////////////////////////////////////////////
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 {
-  fParams.lineWidth = (float)aWidth;
+  fParams.lineWidth = (G4float)aWidth;
 }
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
@@ -534,8 +534,8 @@ void SbPainterPS::printV(
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 void SbPainterPS::putPageScaleInStream(
- float aWidth 
-,float aHeight 
+ G4float aWidth 
+,G4float aHeight 
 )
 //////////////////////////////////////////////////////////////////////////////
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
@@ -544,10 +544,10 @@ void SbPainterPS::putPageScaleInStream(
   if(aHeight<=0.) aHeight = 100.;
 
   putScaleInStream (1./METAFILE_SCALE,1./METAFILE_SCALE);
-  putTranslationInStream ((float)(fDeviceWidth/20.),
-                          (float)(fDeviceHeight/30.));
+  putTranslationInStream ((G4float)(fDeviceWidth/20.),
+                          (G4float)(fDeviceHeight/30.));
 
-  float scale;
+  G4float scale;
   if(fDeviceWidth<=fDeviceHeight)
     scale = (aHeight<=aWidth ? 
              fDeviceWidth /aWidth  : fDeviceWidth /aHeight );
@@ -555,7 +555,7 @@ void SbPainterPS::putPageScaleInStream(
     scale = (aHeight<=aWidth ? 
              fDeviceHeight /aWidth : fDeviceHeight /aHeight );
 
-  float xtra,ytra;
+  G4float xtra,ytra;
   if(fParams.portrait==1) {
     xtra = (fDeviceWidth  - scale * aWidth)/2;
     ytra = (fDeviceHeight - scale * aHeight)/2;
@@ -592,8 +592,8 @@ void SbPainterPS::putRestoreStateInStream(
 }
 //////////////////////////////////////////////////////////////////////////////
 void SbPainterPS::putTranslationInStream(
- float aX
-,float aY
+ G4float aX
+,G4float aY
 )
 //////////////////////////////////////////////////////////////////////////////
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
@@ -602,8 +602,8 @@ void SbPainterPS::putTranslationInStream(
 }
 //////////////////////////////////////////////////////////////////////////////
 void SbPainterPS::putScaleInStream(
- float aX
-,float aY
+ G4float aX
+,G4float aY
 )
 //////////////////////////////////////////////////////////////////////////////
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
@@ -631,9 +631,9 @@ void SbPainterPS::putEndPageInStream (
 }
 //////////////////////////////////////////////////////////////////////////////
 void SbPainterPS::putRGB_InStream (
- float aR 
-,float aG
-,float aB 
+ G4float aR 
+,G4float aG
+,G4float aB 
 )
 //////////////////////////////////////////////////////////////////////////////
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
@@ -656,7 +656,7 @@ void SbPainterPS::putLineWidthInStream(
     if(aWidth==1) {
       putInStreamF("%.1f lw ",0.5); // For a better rendering.
     } else {
-      putInStreamF("%.1f lw ",(float)(aWidth));
+      putInStreamF("%.1f lw ",(G4float)(aWidth));
     }
   } else {
     putInStreamF("%.1f lw ",fParams.lineWidth); 
@@ -664,7 +664,7 @@ void SbPainterPS::putLineWidthInStream(
 }
 //////////////////////////////////////////////////////////////////////////////
 void SbPainterPS::putMarkerSizeInStream (
- float aSize
+ G4float aSize
 )
 //////////////////////////////////////////////////////////////////////////////
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
@@ -703,11 +703,11 @@ void SbPainterPS::putMarkerStyleInStream (
 */
 //////////////////////////////////////////////////////////////////////////////
 void SbPainterPS::putBackgroundInStream (
- float aR
-,float aG
-,float aB
-,float aWidth 
-,float aHeight 
+ G4float aR
+,G4float aG
+,G4float aB
+,G4float aWidth 
+,G4float aHeight 
 )
 //////////////////////////////////////////////////////////////////////////////
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
@@ -731,11 +731,11 @@ void SbPainterPS::putBackgroundInStream (
 }
 //////////////////////////////////////////////////////////////////////////////
 void SbPainterPS::putFrameInStream (
- float aR
-,float aG
-,float aB
-,float aWidth 
-,float aHeight 
+ G4float aR
+,G4float aG
+,G4float aB
+,G4float aWidth 
+,G4float aHeight 
 )
 //////////////////////////////////////////////////////////////////////////////
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
@@ -754,10 +754,10 @@ void SbPainterPS::putFrameInStream (
   putStrokeInStream();
 }
 //////////////////////////////////////////////////////////////////////////////
-float SbPainterPS::convertRGB_ToGrey (
- float aRed
-,float aGreen
-,float aBlue
+G4float SbPainterPS::convertRGB_ToGrey (
+ G4float aRed
+,G4float aGreen
+,G4float aBlue
 )
 //////////////////////////////////////////////////////////////////////////////
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
@@ -766,7 +766,7 @@ float SbPainterPS::convertRGB_ToGrey (
 }
 //////////////////////////////////////////////////////////////////////////////
 void SbPainterPS::putRotateInStream(
- float aX                  
+ G4float aX                  
 )
 //////////////////////////////////////////////////////////////////////////////
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
@@ -816,8 +816,8 @@ void SbPainterPS::putCapInStream(
 }
 //////////////////////////////////////////////////////////////////////////////
 void SbPainterPS::putLineToInStream(
- float aX
-,float aY
+ G4float aX
+,G4float aY
 )
 //////////////////////////////////////////////////////////////////////////////
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
@@ -826,8 +826,8 @@ void SbPainterPS::putLineToInStream(
 }
 //////////////////////////////////////////////////////////////////////////////
 void SbPainterPS::putMoveInStream(
- float aX
-,float aY
+ G4float aX
+,G4float aY
 )
 //////////////////////////////////////////////////////////////////////////////
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
@@ -836,9 +836,9 @@ void SbPainterPS::putMoveInStream(
 }
 //////////////////////////////////////////////////////////////////////////////
 void SbPainterPS::putCircleInStream(
- float aX                            
-,float aY                            
-,float aR                            
+ G4float aX                            
+,G4float aY                            
+,G4float aR                            
 )
 //////////////////////////////////////////////////////////////////////////////
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
@@ -882,7 +882,7 @@ void SbPainterPS::putImageInStream (
   int status = 1;
   int      nbhex;
   unsigned int row,col,col_max;
-  double   dr,dg,db;
+  G4double   dr,dg,db;
   typedef unsigned char Uchar;
   Uchar    red,green,blue,b;
   if(fParams.shade!=0) { /*grey*/
@@ -893,7 +893,7 @@ void SbPainterPS::putImageInStream (
     printFLN ("image " );
     for ( row = 0; row < aHeight; row++ ){
       for ( col = 0; col < aWidth; col++){ 
-        double    fgrey;
+        G4double    fgrey;
         Uchar     grey;
         status    = aProc(col,row,dr,dg,db)==0 ? 0 : status;
         fgrey     = ConvertRGB_ToGrey(dr,dg,db);
@@ -1039,10 +1039,10 @@ char* GetDate (
   return string;
 }
 //////////////////////////////////////////////////////////////////////////////
-double ConvertRGB_ToGrey(
- double a_red
-,double a_green
-,double a_blue
+G4double ConvertRGB_ToGrey(
+ G4double a_red
+,G4double a_green
+,G4double a_blue
 )
 //////////////////////////////////////////////////////////////////////////////
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//

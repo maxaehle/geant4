@@ -64,8 +64,8 @@ int MCGIDI_POPs_release( MCGIDI_POPs *pops ) {
 /*
 ************************************************************
 */
-MCGIDI_POP *MCGIDI_POPs_addParticleIfNeeded( statusMessageReporting *smr, MCGIDI_POPs *pops, char const *name, double mass_MeV, 
-        double level_MeV, MCGIDI_POP *parent, int globalParticle ) {
+MCGIDI_POP *MCGIDI_POPs_addParticleIfNeeded( statusMessageReporting *smr, MCGIDI_POPs *pops, char const *name, G4double mass_MeV, 
+        G4double level_MeV, MCGIDI_POP *parent, int globalParticle ) {
 
     int i, index;
     MCGIDI_POP *pop;
@@ -162,7 +162,7 @@ void MCGIDI_POPs_printSortedList( MCGIDI_POPs *pops ) {
 /*
 ************************************************************
 */
-MCGIDI_POP *MCGIDI_POP_new( statusMessageReporting *smr, char const *name, double mass_MeV, double level_MeV, MCGIDI_POP *parent ) {
+MCGIDI_POP *MCGIDI_POP_new( statusMessageReporting *smr, char const *name, G4double mass_MeV, G4double level_MeV, MCGIDI_POP *parent ) {
 
     int Z, A, m, level;
     MCGIDI_POP *pop = (MCGIDI_POP *) smr_malloc2( smr, sizeof( MCGIDI_POP ), 0, "pop" );
@@ -209,7 +209,7 @@ MCGIDI_POP *MCGIDI_POP_release( MCGIDI_POP *pop ) {
 /*
 ************************************************************
 */
-double MCGIDI_POP_getMass_MeV( MCGIDI_POP *pop ) {
+G4double MCGIDI_POP_getMass_MeV( MCGIDI_POP *pop ) {
 
     return( pop->mass_MeV );
 }

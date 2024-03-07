@@ -169,7 +169,7 @@ namespace  CexmcCustomFilter
 
         rule< Iterator, Operator(), space_type >               rel_op;
 
-        real_parser< double, strict_real_policies< double > >  strict_double;
+        real_parser< G4double, strict_real_policies< G4double > >  strict_G4double;
 
         function< Compiler >                                   op;
     };
@@ -200,7 +200,7 @@ namespace  CexmcCustomFilter
 
         leaf_operand %= constant | variable;
 
-        constant %= strict_double | int_;
+        constant %= strict_G4double | int_;
 
         variable = identifier[ op( _val, _1 ) ] >>
                 -( lit( '[' ) >> ( uint_[ op( _val, _1, 0 ) ] - lit( '0' ) ) >>

@@ -43,7 +43,7 @@
 #include "G4NistManager.hh"
 #include "G4PhysicsModelCatalog.hh"
 
-double MyRNG(void*) { return  G4Random::getTheEngine()->flat(); }
+G4double MyRNG(void*) { return  G4Random::getTheEngine()->flat(); }
 
 G4LENDModel::G4LENDModel( G4String name )
   :G4HadronicInteraction( name ), secID(-1)

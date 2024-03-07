@@ -252,7 +252,7 @@ void G4OpenInventorXtExtendedViewer::SetView () {
   // Background.
   G4Colour b = fVP.GetBackgroundColour ();
   fViewer->setBackgroundColor
-    (SbColor((float)b.GetRed(),(float)b.GetGreen(),(float)b.GetBlue()));
+    (SbColor((G4float)b.GetRed(),(G4float)b.GetGreen(),(G4float)b.GetBlue()));
 }
 
 

@@ -100,7 +100,7 @@ static const G4double eps=0.001; // Accuracy which satisfies the search
 //
 static const G4double infEn = 9.e27;
 //
-static const G4double dM=938.27+939.57; // Mean double nucleon mass = m_n+m_p (@@ no binding)
+static const G4double dM=938.27+939.57; // Mean G4double nucleon mass = m_n+m_p (@@ no binding)
 static const G4double Q0=843.;          // Coefficient of the dipole nucleonic form-factor
 static const G4double Q02=Q0*Q0;        // Squared coefficient of the dipole nucleonic form-factor
 static const G4double blK0=G4Log(185.);   // Coefficient of the b-function

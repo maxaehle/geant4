@@ -54,8 +54,8 @@ public:
 
 public:
   void     SetNumberOfTrials( G4int val )   { theNumberOfTrials  =  val; }
-  void     SetWarningEnergy( double val )   { theWarningEnergy = val; }
-  void     SetImportantEnergy( double val ) { theImportantEnergy = val; }   
+  void     SetWarningEnergy( G4double val )   { theWarningEnergy = val; }
+  void     SetImportantEnergy( G4double val ) { theImportantEnergy = val; }   
   G4int    GetNumberOfTrials() { return theNumberOfTrials; }
   G4double GetWarningEnergy()  { return theWarningEnergy; }
   G4double GetImportantEnergy() { return theImportantEnergy; }   

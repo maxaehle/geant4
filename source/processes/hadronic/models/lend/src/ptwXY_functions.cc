@@ -15,13 +15,13 @@ using namespace GIDI;
 #endif
 
 static nfu_status ptwXY_pow_callback( ptwXYPoint *point, void *argList );
-static nfu_status ptwXY_exp_s( ptwXYPoints *ptwXY, double x1, double y1, double z1, double x2, double y2, double z2, int level );
-static nfu_status ptwXY_convolution2( ptwXYPoints *f1, ptwXYPoints *f2, double y, double yMin, double *c );
-static nfu_status ptwXY_convolution3( ptwXYPoints *convolute, ptwXYPoints *f1, ptwXYPoints *f2, double y1, double c1, double y2, double c2, double yMin );
+static nfu_status ptwXY_exp_s( ptwXYPoints *ptwXY, G4double x1, G4double y1, G4double z1, G4double x2, G4double y2, G4double z2, int level );
+static nfu_status ptwXY_convolution2( ptwXYPoints *f1, ptwXYPoints *f2, G4double y, G4double yMin, G4double *c );
+static nfu_status ptwXY_convolution3( ptwXYPoints *convolute, ptwXYPoints *f1, ptwXYPoints *f2, G4double y1, G4double c1, G4double y2, G4double c2, G4double yMin );
 /*
 ************************************************************
 */
-nfu_status ptwXY_pow( ptwXYPoints *ptwXY, double v ) { 
+nfu_status ptwXY_pow( ptwXYPoints *ptwXY, G4double v ) { 
 
     return( ptwXY_applyFunction( ptwXY, ptwXY_pow_callback, (void *) &v, 0 ) );
 }
@@ -31,7 +31,7 @@ nfu_status ptwXY_pow( ptwXYPoints *ptwXY, double v ) {
 static nfu_status ptwXY_pow_callback( ptwXYPoint *point, void *argList ) {
 
     nfu_status status = nfu_Okay;
-    double *v = (double *) argList;
+    G4double *v = (G4double *) argList;
 
     point->y = G4Pow::GetInstance()->powA( point->y, *v );
     /* ???? Need to test for valid y-value. */
@@ -40,11 +40,11 @@ static nfu_status ptwXY_pow_callback( ptwXYPoint *point, void *argList ) {
 /*
 ************************************************************
 */
-nfu_status ptwXY_exp( ptwXYPoints *ptwXY, double a ) { 
+nfu_status ptwXY_exp( ptwXYPoints *ptwXY, G4double a ) { 
 
     int64_t i, length;
     nfu_status status;
-    double x1, y1, z1, x2, y2, z2;
+    G4double x1, y1, z1, x2, y2, z2;
 
     length = ptwXY->length;
     if( length < 1 ) return( ptwXY->status );
@@ -68,10 +68,10 @@ nfu_status ptwXY_exp( ptwXYPoints *ptwXY, double a ) {
 /*
 ************************************************************
 */
-static nfu_status ptwXY_exp_s( ptwXYPoints *ptwXY, double x1, double y1, double z1, double x2, double y2, double z2, int level ) { 
+static nfu_status ptwXY_exp_s( ptwXYPoints *ptwXY, G4double x1, G4double y1, G4double z1, G4double x2, G4double y2, G4double z2, int level ) { 
 
     nfu_status status;
-    double x, y, dx, dy, z, zp, s;
+    G4double x, y, dx, dy, z, zp, s;
 
     if( ( x1 == x2 ) || ( y1 == y2 ) ) return( nfu_Okay );
     if( level >= ptwXY->biSectionMax ) return( nfu_Okay );
@@ -102,7 +102,7 @@ ptwXYPoints *ptwXY_convolution( ptwXYPoints *ptwXY1, ptwXYPoints *ptwXY2, nfu_st
 */
     int64_t i1, i2, n1, n2, n;
     ptwXYPoints *f1 = ptwXY1, *f2 = ptwXY2, *convolute;
-    double accuracy = ptwXY1->accuracy, yMin, yMax, c, y, dy;
+    G4double accuracy = ptwXY1->accuracy, yMin, yMax, c, y, dy;
 
     if( ( *status = ptwXY_simpleCoalescePoints( ptwXY1 ) ) != nfu_Okay ) return( NULL );
     if( ( *status = ptwXY_simpleCoalescePoints( ptwXY2 ) ) != nfu_Okay ) return( NULL );
@@ -171,12 +171,12 @@ Err:
 /*
 ************************************************************
 */
-static nfu_status ptwXY_convolution2( ptwXYPoints *f1, ptwXYPoints *f2, double y, double yMin, double *c ) {
+static nfu_status ptwXY_convolution2( ptwXYPoints *f1, ptwXYPoints *f2, G4double y, G4double yMin, G4double *c ) {
 
     int64_t i1 = 0, i2 = 0, n1 = f1->length, n2 = f2->length, mode;
-    double dx1, dx2, x1MinP, x1Min, x2Max;
-    double f1x1 = 0,  f1y1 = 0,  f1x2 = 0,  f1y2 = 0,  f2x1 = 0,  f2y1 = 0,  f2x2 = 0,  f2y2 = 0;
-    double f1x1p, f1y1p, f1x2p, f1y2p, f2x1p, f2y1p, f2x2p, f2y2p;
+    G4double dx1, dx2, x1MinP, x1Min, x2Max;
+    G4double f1x1 = 0,  f1y1 = 0,  f1x2 = 0,  f1y2 = 0,  f2x1 = 0,  f2y1 = 0,  f2x2 = 0,  f2y2 = 0;
+    G4double f1x1p, f1y1p, f1x2p, f1y2p, f2x1p, f2y1p, f2x2p, f2y2p;
     ptwXY_lessEqualGreaterX legx;
     ptwXYOverflowPoint lessThanEqualXPoint, greaterThanXPoint;
     nfu_status status;
@@ -291,10 +291,10 @@ static nfu_status ptwXY_convolution2( ptwXYPoints *f1, ptwXYPoints *f2, double y
 /*
 ************************************************************
 */
-static nfu_status ptwXY_convolution3( ptwXYPoints *convolute, ptwXYPoints *f1, ptwXYPoints *f2, double y1, double c1, double y2, double c2, double yMin ) {
+static nfu_status ptwXY_convolution3( ptwXYPoints *convolute, ptwXYPoints *f1, ptwXYPoints *f2, G4double y1, G4double c1, G4double y2, G4double c2, G4double yMin ) {
 
     nfu_status status;
-    double yMid = 0.5 * ( y1 + y2 ), cMid = 0.5 * ( c1 + c2 ), c;
+    G4double yMid = 0.5 * ( y1 + y2 ), cMid = 0.5 * ( c1 + c2 ), c;
 
     if( ( y2 - yMid ) <= 1e-5 * ( ptwXY_getXMax( convolute ) - ptwXY_getXMin( convolute ) ) ) return( nfu_Okay );
     if( ( status = ptwXY_convolution2( f1, f2, yMid, yMin, &c ) ) != nfu_Okay ) return( status );

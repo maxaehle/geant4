@@ -143,8 +143,8 @@ protected:
   void InitializeGLView ();
   void ResizeGLView();
   void ResizeWindow(unsigned int, unsigned int);
-  virtual G4String Pick(GLdouble x, GLdouble y);
-  const std::vector < G4OpenGLViewerPickMap* > & GetPickDetails(GLdouble x, GLdouble y);
+  virtual G4String Pick(GLG4double x, GLG4double y);
+  const std::vector < G4OpenGLViewerPickMap* > & GetPickDetails(GLG4double x, GLG4double y);
   virtual void CreateFontLists () {}
   void rotateScene (G4double dx, G4double dy);
   void rotateSceneToggle (G4double dx, G4double dy);
@@ -165,30 +165,30 @@ protected:
   unsigned int getWinHeight() const;
   G4bool sizeHasChanged();
   // return true if size has change since last redraw
-  GLdouble getSceneNearWidth();
-  GLdouble getSceneFarWidth();
-  GLdouble getSceneDepth();
+  GLG4double getSceneNearWidth();
+  GLG4double getSceneFarWidth();
+  GLG4double getSceneDepth();
   void addExportImageFormat(std::string format);
   // add a image format to the available export format list
   G4bool isGl2psWriting();
   G4bool isFramebufferReady();
   
-  void g4GluPickMatrix(GLdouble x, GLdouble y, GLdouble width, GLdouble height,
+  void g4GluPickMatrix(GLG4double x, GLG4double y, GLG4double width, GLG4double height,
                        GLint viewport[4]);
   // MESA implementation of gluPickMatrix
   
-  void g4GluLookAt( GLdouble eyex, GLdouble eyey, GLdouble eyez,
-                   GLdouble centerx, GLdouble centery, GLdouble
+  void g4GluLookAt( GLG4double eyex, GLG4double eyey, GLG4double eyez,
+                   GLG4double centerx, GLG4double centery, GLG4double
                    centerz,
-                   GLdouble upx, GLdouble upy, GLdouble upz );
+                   GLG4double upx, GLG4double upy, GLG4double upz );
   // MESA implementation of gluLookAt
-  void g4GlOrtho (GLdouble left, GLdouble right,
-                  GLdouble bottom, GLdouble top,
-                  GLdouble near, GLdouble far);
+  void g4GlOrtho (GLG4double left, GLG4double right,
+                  GLG4double bottom, GLG4double top,
+                  GLG4double near, GLG4double far);
   // Redefinition on glOrtho to solve precision issues
-  void g4GlFrustum (GLdouble left, GLdouble right,
-                  GLdouble bottom, GLdouble top,
-                  GLdouble near, GLdouble far);
+  void g4GlFrustum (GLG4double left, GLG4double right,
+                  GLG4double bottom, GLG4double top,
+                  GLG4double near, GLG4double far);
   // Redefinition on glFrustum to solve precision issues
 
   G4bool                            fPrintColour;

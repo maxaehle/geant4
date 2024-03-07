@@ -127,21 +127,21 @@ public:
 
     //----------------------------------------------------------------------------
     // Temperature scaling
-    typedef std::function<double(double)> RateParam;
+    typedef std::function<G4double(G4double)> RateParam;
 
-    static double PolynomialParam(double temp_K, std::vector<double> P);
-    static double ArrehniusParam(double temp_K, std::vector<double> P);
-    static double ScaledParameterization(double temp_K,
-                                         double temp_init,
-                                         double rateCste_init);
+    static G4double PolynomialParam(G4double temp_K, std::vector<G4double> P);
+    static G4double ArrehniusParam(G4double temp_K, std::vector<G4double> P);
+    static G4double ScaledParameterization(G4double temp_K,
+                                         G4double temp_init,
+                                         G4double rateCste_init);
 
-    void SetPolynomialParameterization(const std::vector<double>& P);
+    void SetPolynomialParameterization(const std::vector<G4double>& P);
 
-    void SetArrehniusParameterization(double A0, double E_R);
-    void SetScaledParameterization(double temperature_K,
-                                   double rateCste);
+    void SetArrehniusParameterization(G4double A0, G4double E_R);
+    void SetScaledParameterization(G4double temperature_K,
+                                   G4double rateCste);
 
-    void ScaleForNewTemperature(double temp_K);
+    void ScaleForNewTemperature(G4double temp_K);
 
 private:
     void ComputeEffectiveRadius();
@@ -234,7 +234,7 @@ public:
 
     DataList GetVectorOfReactionData();
 
-    void ScaleReactionRateForNewTemperature(double temp_K);
+    void ScaleReactionRateForNewTemperature(G4double temp_K);
 
     //_________________________________________________________________
     void PrintTable(G4VDNAReactionModel* = 0);

@@ -64,19 +64,19 @@ namespace DNA{
     struct Meesungnoen2002{
       static void GetPenetration(G4double energy,
                                  G4ThreeVector& displacement);
-      static double GetRmean(double energy);
+      static G4double GetRmean(G4double energy);
       //-----
       // Polynomial fit of Meesungnoen, 2002
-      static const double gCoeff[13];
+      static const G4double gCoeff[13];
     };
     
     struct Meesungnoen2002_amorphous{
 	  static void GetPenetration(G4double energy,
 							   G4ThreeVector& displacement);
-	  static double GetRmean(double energy);
+	  static G4double GetRmean(G4double energy);
 	  //-----
 	  // Polynomial fit of Meesungnoen, 2002
-	  static const double gCoeff[7];
+	  static const G4double gCoeff[7];
     };
 
     //-----------------------
@@ -101,12 +101,12 @@ namespace DNA{
     struct Terrisol1990{
       static void GetPenetration(G4double energy,
                                  G4ThreeVector& displacement);
-      static double GetRmean(double energy);
-      static double Get3DStdDeviation(double energy);
+      static G4double GetRmean(G4double energy);
+      static G4double Get3DStdDeviation(G4double energy);
       //-----
       // Terrisol, 1990
-      static const double gEnergies_T1990[11];
-      static const double gStdDev_T1990[11];
+      static const G4double gEnergies_T1990[11];
+      static const G4double gStdDev_T1990[11];
     };
     
     //-----------------------
@@ -121,7 +121,7 @@ namespace DNA{
     struct Ritchie1994{
       static void GetPenetration(G4double energy,
                                  G4ThreeVector& displacement);
-      static double GetRmean(double energy);
+      static G4double GetRmean(G4double energy);
     };
   }
 }
@@ -164,7 +164,7 @@ public:
   void GetPenetration(G4double energy,
                       G4ThreeVector& displacement);
 
-  double GetRmean(double energy);
+  G4double GetRmean(G4double energy);
 
 protected:
   const std::vector<G4double>* fpWaterDensity;

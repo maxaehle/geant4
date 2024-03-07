@@ -513,7 +513,7 @@ G4PhotonEvaporation::GenerateGamma(G4Fragment* nucleus)
     }
     nucleus->SetFloatingLevelNumber(fLevelManager->FloatingLevel(fIndex));
   }
-  // protection for floating levels
+  // protection for G4floating levels
   if(std::abs(efinal - eexc) <= Tolerance) { return result; }
 
   result = fTransition->SampleTransition(nucleus, efinal, ratio, JP1,
@@ -526,7 +526,7 @@ G4PhotonEvaporation::GenerateGamma(G4Fragment* nucleus)
   nucleus->SetSpin(0.5*JP2);
   if(fPolarization) { fPolarization->SetExcitationEnergy(efinal); }
 
-  // ignore the floating levels with zero energy and create ground state
+  // ignore the G4floating levels with zero energy and create ground state
   if(efinal == 0.0 && fIndex > 0) {
     fIndex = 0;
     nucleus->SetFloatingLevelNumber(fLevelManager->FloatingLevel(fIndex));

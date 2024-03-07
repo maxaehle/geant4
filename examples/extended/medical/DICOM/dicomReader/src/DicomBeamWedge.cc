@@ -33,8 +33,8 @@ DicomBeamWedge::DicomBeamWedge(DRTWedgeSequence::Item bwItem)
 {
   OFString fstr;
   Sint32 fint;
-  Float64 ffloat;
-  OFVector<Float64> fvfloat;
+  Float64 fG4float;
+  OFVector<Float64> fvG4float;
   OFCondition cond; 
   G4cout << " DicomBeamWedge::DicomBeamWedge " << G4endl;
 
@@ -43,12 +43,12 @@ DicomBeamWedge::DicomBeamWedge(DRTWedgeSequence::Item bwItem)
   theWedgeNumber = fint;
   G4cout << " Number " << fint << G4endl;
   bwItem.getWedgeType(fstr);
-  bwItem.getSourceToWedgeTrayDistance(ffloat);
-  theSourceToWedgeTrayDistance = ffloat;
+  bwItem.getSourceToWedgeTrayDistance(fG4float);
+  theSourceToWedgeTrayDistance = fG4float;
   bwItem.getWedgeAngle(fint);
   theWedgeAngle = fint;
-  bwItem.getWedgeFactor(ffloat);
-  bwItem.getWedgeOrientation(ffloat);
+  bwItem.getWedgeFactor(fG4float);
+  bwItem.getWedgeOrientation(fG4float);
 
 }
 

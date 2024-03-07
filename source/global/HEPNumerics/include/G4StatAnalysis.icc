@@ -215,7 +215,7 @@ void G4StatAnalysis::Add(const G4double& val, const G4double& weight)
   fSum1 += val * weight;
   fSum2 += val * val * weight;
   if(std::fabs(val * weight) <
-     std::fabs(GetMean() * std::numeric_limits<double>::epsilon()))
+     std::fabs(GetMean() * std::numeric_limits<G4double>::epsilon()))
     fZero += 1;
 }
 

@@ -110,9 +110,9 @@ G4MPIscorerMerger::~G4MPIscorerMerger() {
  *      [...] : THitsMap.keys()[0] : int
  *      ...
  *      [...] : THitsMap.keys()[mapSize-1] : int
- *      [...] : THitsMap.values()[0] : double
+ *      [...] : THitsMap.values()[0] : G4double
  *      ...
- *      [...] : THitsMap.values()[mapSize-1] : double  (**End Map**)
+ *      [...] : THitsMap.values()[mapSize-1] : G4double  (**End Map**)
  *      [...] : Next Map : repeat from (**Begin Map**)
  *      ...
  *      [...] : Next Mesh : repeat from (**Begin Mesh**)
@@ -180,8 +180,8 @@ void G4MPIscorerMerger::Merge() {
   if ( verbose > 0 && myrank == destinationRank ) {
       //Collect from ranks how much data was sent around
       G4cout<<"G4MPIscorerMerger::Merge() -data transfer performances: "
-                  <<double(total)/1000./elapsed<<" kB/s"
-                  <<" (Total Data Transfer= "<<double(total)/1000.<<" kB in "
+                  <<G4double(total)/1000./elapsed<<" kB/s"
+                  <<" (Total Data Transfer= "<<G4double(total)/1000.<<" kB in "
                   <<elapsed<<" s)."<<G4endl;
   }
   //ANDREA:->
@@ -521,7 +521,7 @@ G4int G4MPIscorerMerger::CalculatePackSize(const HitStatDoubleMap* map) const {
   const G4int numEls = map->GetSize();
   G4int size = sizeof(unsigned int);
   size += sizeof(G4int)*numEls;
-  //G4StatDouble: 5 doubles and 1 int
+  //G4StatDouble: 5 G4doubles and 1 int
   //Can I use sizeof(G4StatDouble)? NO sizeof(G4StatDouble)==56
   size += numEls*(sizeof(G4double)*5+sizeof(G4int));
   DMSG(3,"HitStatDoubleMap "<<map<<" size: "<<size<<" in "<<numEls<<" elements.");

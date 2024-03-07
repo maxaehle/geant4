@@ -20,16 +20,16 @@ namespace CLHEP  {
 
 // axis and angle
 
-HepRotation & HepRotation::set( const Hep3Vector & aaxis, double ddelta ) {
+HepRotation & HepRotation::set( const Hep3Vector & aaxis, G4double ddelta ) {
 
-  double sinDelta = std::sin(ddelta), cosDelta = std::cos(ddelta);
-  double oneMinusCosDelta = 1.0 - cosDelta;
+  G4double sinDelta = std::sin(ddelta), cosDelta = std::cos(ddelta);
+  G4double oneMinusCosDelta = 1.0 - cosDelta;
 
   Hep3Vector u = aaxis.unit();
 
-  double uX = u.getX();
-  double uY = u.getY();
-  double uZ = u.getZ();
+  G4double uX = u.getX();
+  G4double uY = u.getY();
+  G4double uZ = u.getZ();
 
   rxx = oneMinusCosDelta * uX * uX  +  cosDelta;
   rxy = oneMinusCosDelta * uX * uY  -  sinDelta * uZ;
@@ -47,7 +47,7 @@ HepRotation & HepRotation::set( const Hep3Vector & aaxis, double ddelta ) {
 
 } // HepRotation::set(axis, delta)
 
-HepRotation::HepRotation ( const Hep3Vector & aaxis, double ddelta ) 
+HepRotation::HepRotation ( const Hep3Vector & aaxis, G4double ddelta ) 
 {
   set( aaxis, ddelta );
 }  
@@ -59,9 +59,9 @@ HepRotation::HepRotation ( const HepAxisAngle & ax )
   set ( ax.axis(), ax.delta() );
 }
 
-double    HepRotation::delta() const {
+G4double    HepRotation::delta() const {
 
-  double cosdelta = (rxx + ryy + rzz - 1.0) / 2.0;
+  G4double cosdelta = (rxx + ryy + rzz - 1.0) / 2.0;
   if (cosdelta > 1.0) {
     return 0;
   } else if (cosdelta < -1.0) {
@@ -74,23 +74,23 @@ double    HepRotation::delta() const {
 
 Hep3Vector HepRotation::axis () const {
 
-  const double eps = 1e-15;
+  const G4double eps = 1e-15;
 
-  double Ux = rzy - ryz;
-  double Uy = rxz - rzx;
-  double Uz = ryx - rxy;
+  G4double Ux = rzy - ryz;
+  G4double Uy = rxz - rzx;
+  G4double Uz = ryx - rxy;
   if (std::abs(Ux) < eps && std::abs(Uy) < eps && std::abs(Uz) < eps) {
 
-    double cosdelta = (rxx + ryy + rzz - 1.0) / 2.0;
+    G4double cosdelta = (rxx + ryy + rzz - 1.0) / 2.0;
     if (cosdelta > 0.0) return Hep3Vector(0,0,1); // angle = 0, any axis is good
 
-    double mxx = (rxx + 1)/2;
-    double myy = (ryy + 1)/2;
-    double mzz = (rzz + 1)/2;
-    double mxy = (rxy + ryx)/4;
-    double mxz = (rxz + rzx)/4;
-    double myz = (ryz + rzy)/4;
-    double x, y, z;
+    G4double mxx = (rxx + 1)/2;
+    G4double myy = (ryy + 1)/2;
+    G4double mzz = (rzz + 1)/2;
+    G4double mxy = (rxy + ryx)/4;
+    G4double mxz = (rxz + rzx)/4;
+    G4double myz = (ryz + rzy)/4;
+    G4double x, y, z;
 
     if (mxx > ryy && mxx > rzz) {
       x = std::sqrt(mxx);
@@ -128,7 +128,7 @@ void HepRotation::setAxis (const Hep3Vector & aaxis) {
   set ( aaxis, delta() );
 }
 
-void HepRotation::setDelta (double ddelta) {
+void HepRotation::setDelta (G4double ddelta) {
   set ( axis(), ddelta );
 }
 

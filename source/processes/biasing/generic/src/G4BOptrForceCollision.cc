@@ -145,7 +145,7 @@ G4VBiasingOperation* G4BOptrForceCollision::ProposeOccurenceBiasingOperation(con
   // -- The track has been cloned in the previous step, it has now to be
   // -- forced for a free flight.
   // -- This track will fly with 0.0 weight during its forced flight:
-  // -- it is to forbid the double counting with the force interaction track.
+  // -- it is to forbid the G4double counting with the force interaction track.
   // -- Its weight is restored at the end of its free flight, this weight
   // -- being its initial weight * the weight for the free flight travel,
   // -- this last one being per process. The initial weight is common, and is

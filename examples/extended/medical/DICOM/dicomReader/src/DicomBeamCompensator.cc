@@ -33,8 +33,8 @@ DicomBeamCompensator::DicomBeamCompensator(DRTCompensatorSequence::Item bcompIte
 {
   OFString fstr;
   Sint32 fint;
-  Float64 ffloat;
-  OFVector<Float64> fvfloat;
+  Float64 fG4float;
+  OFVector<Float64> fvG4float;
   OFCondition cond; 
   G4cout << " DicomBeamCompensator::DicomBeamCompensator " << G4endl;
   cond = bcompItem.getCompensatorNumber(fint);
@@ -47,26 +47,26 @@ DicomBeamCompensator::DicomBeamCompensator(DRTCompensatorSequence::Item bcompIte
   theCompensatorRows = fint;
   //  first value is the spacing between the center of adjacent rows, and the second value
   // (column spacing) is the spacing between the center of adjacent columns.  
-  cond = bcompItem.getCompensatorPixelSpacing(fvfloat);
-  theCompensatorPixelSpacing = fvfloat;
+  cond = bcompItem.getCompensatorPixelSpacing(fvG4float);
+  theCompensatorPixelSpacing = fvG4float;
 
-  cond = bcompItem.getCompensatorPosition(fvfloat);
-  theCompensatorPosition = fvfloat;
+  cond = bcompItem.getCompensatorPosition(fvG4float);
+  theCompensatorPosition = fvG4float;
 
-  cond = bcompItem.getCompensatorTransmissionData(fvfloat);
-  if( cond.good() ) theCompensatorTransmissionData = fvfloat;
-  cond = bcompItem.getCompensatorThicknessData(fvfloat);
-  if( cond.good() ) theCompensatorThicknessData = fvfloat;
+  cond = bcompItem.getCompensatorTransmissionData(fvG4float);
+  if( cond.good() ) theCompensatorTransmissionData = fvG4float;
+  cond = bcompItem.getCompensatorThicknessData(fvG4float);
+  if( cond.good() ) theCompensatorThicknessData = fvG4float;
 
   cond = bcompItem.getCompensatorTrayID(fstr);
   cond = bcompItem.getCompensatorType(fstr);
 
   cond = bcompItem.getMaterialID(fstr);
   if( cond.good() ) theMaterialID = fstr;
-  cond = bcompItem.getSourceToCompensatorDistance(fvfloat);
-  if( cond.good() ) theSourceToCompensatorDistance = fvfloat;
-  cond = bcompItem.getSourceToCompensatorTrayDistance(ffloat);
-  theSourceToCompensatorTrayDistance = ffloat;
+  cond = bcompItem.getSourceToCompensatorDistance(fvG4float);
+  if( cond.good() ) theSourceToCompensatorDistance = fvG4float;
+  cond = bcompItem.getSourceToCompensatorTrayDistance(fG4float);
+  theSourceToCompensatorTrayDistance = fG4float;
 
   cond = bcompItem.getCompensatorDescription(fstr);
   cond = bcompItem.getCompensatorDivergence(fstr);

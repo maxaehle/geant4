@@ -46,7 +46,7 @@
 // 
 //      //----- Set functions of G4Text
 //      void G4Text::SetText ( const G4String& text ) ;
-//      void G4Text::SetOffset ( double dx, double dy ) ;
+//      void G4Text::SetOffset ( G4double dx, G4double dy ) ;
 // 
 //      //----- Get functions of G4Text
 //      G4String G4Text::GetText () const;
@@ -92,7 +92,7 @@ public: // With description
   void SetText   (const G4String& text);
   void SetLayout (Layout);
 
-  void SetOffset (double dx, double dy) ;   
+  void SetOffset (G4double dx, G4double dy) ;   
 
 private:
   G4String fText;

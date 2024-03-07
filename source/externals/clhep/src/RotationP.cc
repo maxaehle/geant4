@@ -26,25 +26,25 @@ void HepRotation::decompose(Hep3Vector & boost, HepAxisAngle & rotation)const {
   rotation = axisAngle();
 }
 
-double HepRotation::distance2( const HepRotation & r  ) const {
-  double sum = rxx * r.rxx + rxy * r.rxy + rxz * r.rxz
+G4double HepRotation::distance2( const HepRotation & r  ) const {
+  G4double sum = rxx * r.rxx + rxy * r.rxy + rxz * r.rxz
                 + ryx * r.ryx + ryy * r.ryy + ryz * r.ryz
                 + rzx * r.rzx + rzy * r.rzy + rzz * r.rzz;
-  double answer = 3.0 - sum;
+  G4double answer = 3.0 - sum;
   return (answer >= 0 ) ? answer : 0;
 }
 
-double HepRotation::howNear(   const HepRotation & r  ) const {
+G4double HepRotation::howNear(   const HepRotation & r  ) const {
   return  std::sqrt( distance2( r ) );
 }
 
 bool HepRotation::isNear(   const HepRotation & r,
-                                     double epsilon) const {
+                                     G4double epsilon) const {
  return  distance2( r ) <= epsilon*epsilon;
 }
 
-double HepRotation::norm2() const {
-  double answer = 3.0 - rxx - ryy - rzz;
+G4double HepRotation::norm2() const {
+  G4double answer = 3.0 - rxx - ryy - rzz;
   return (answer >= 0 ) ? answer : 0;
 }
 

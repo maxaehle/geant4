@@ -75,14 +75,14 @@ private:
 };
 
 // put these forward references here, and with a bogus typename to make swig
-template <typename float_type> class c2_composed_function_p;
-template <typename float_type> class c2_sum_p;
-template <typename float_type> class c2_diff_p;
-template <typename float_type> class c2_product_p;
-template <typename float_type> class c2_ratio_p;
-template <typename float_type> class c2_piecewise_function_p;
-template <typename float_type> class c2_quadratic_p;
-template <typename float_type> class c2_ptr;
+template <typename G4float_type> class c2_composed_function_p;
+template <typename G4float_type> class c2_sum_p;
+template <typename G4float_type> class c2_diff_p;
+template <typename G4float_type> class c2_product_p;
+template <typename G4float_type> class c2_ratio_p;
+template <typename G4float_type> class c2_piecewise_function_p;
+template <typename G4float_type> class c2_quadratic_p;
+template <typename G4float_type> class c2_ptr;
 /**
         \defgroup abstract_classes Abstract Classes
         \defgroup arithmetic_functions Arithmetic Functions
@@ -100,17 +100,17 @@ template <typename float_type> class c2_ptr;
 /// \brief structure used to hold evaluated function data at a point.  
 ///
 /// Contains all the information for the function at one point. 
-template <typename float_type> class c2_fblock 
+template <typename G4float_type> class c2_fblock 
 {        
 public:
         /// \brief the abscissa
-        float_type x;
+        G4float_type x;
         /// \brief the value of the function at \a x
-        float_type y;
+        G4float_type y;
         /// \brief the derivative at \a x
-        float_type yp;
+        G4float_type yp;
         /// \brief the second derivative at \a x
-        float_type ypp; 
+        G4float_type ypp; 
         /// flag, filled in by c2_function::fill_fblock(), 
         /// indicating the derivative is NaN of Inf
         bool ypbad;
@@ -143,7 +143,7 @@ public:
  For a discussion of memory management, see ref memory_management
  
  */
-template <typename float_type=double> class c2_function {
+template <typename G4float_type=G4double> class c2_function {
 public:    
     /// \brief get versioning information for the header file
     /// \return the CVS Id string
@@ -176,14 +176,14 @@ public:
   /// \param[out] yprime the first derivative (if pointer is non-null)
   /// \param[out] yprime2 the second derivative (if pointer is non-null)
   /// \return the value of the function
-  virtual float_type value_with_derivatives(float_type x, float_type *yprime, 
-    float_type *yprime2) const /* throw(c2_exception) */ =0 ; 
+  virtual G4float_type value_with_derivatives(G4float_type x, G4float_type *yprime, 
+    G4float_type *yprime2) const /* throw(c2_exception) */ =0 ; 
         
     /// \brief evaluate the function in the classic way, ignoring derivatives.
     /// \param x the point at which to evaluate
     /// \return the value of the function
-        inline float_type operator () (float_type x) const /* throw(c2_exception) */ 
-        { return value_with_derivatives(x, (float_type *)0, (float_type *)0); } 
+        inline G4float_type operator () (G4float_type x) const /* throw(c2_exception) */ 
+        { return value_with_derivatives(x, (G4float_type *)0, (G4float_type *)0); } 
 
         /// \brief get the value and derivatives. 
     ///
@@ -191,8 +191,8 @@ public:
     /// \param[out] yprime the first derivative (if pointer is non-null)
     /// \param[out] yprime2 the second derivative (if pointer is non-null)
     /// \return the value of the function
-    inline float_type operator () (float_type x, float_type *yprime, 
-                            float_type *yprime2) const /* throw(c2_exception) */ 
+    inline G4float_type operator () (G4float_type x, G4float_type *yprime, 
+                            G4float_type *yprime2) const /* throw(c2_exception) */ 
         { return value_with_derivatives(x, yprime, yprime2); } 
         
   /// \brief solve f(x)==value very efficiently, with explicit knowledge 
@@ -227,11 +227,11 @@ public:
   /// function at root
   /// \return the position of the root.
   /// \see ref rootfinder_subsec "Root finding sample" 
-  float_type find_root(float_type lower_bracket, float_type upper_bracket, 
-                       float_type start, 
-                       float_type value, int *error=0, 
-                       float_type *final_yprime=0, 
-                       float_type *final_yprime2=0 ) const /* throw(c2_exception) */; 
+  G4float_type find_root(G4float_type lower_bracket, G4float_type upper_bracket, 
+                       G4float_type start, 
+                       G4float_type value, int *error=0, 
+                       G4float_type *final_yprime=0, 
+                       G4float_type *final_yprime2=0 ) const /* throw(c2_exception) */; 
   /// solve f(x)=value
   /// partial_integrals uses a method with an error O(dx**10) with 
   /// full information from 
@@ -263,10 +263,10 @@ public:
   /// to reduce the error. \return sum of partial integrals, 
   /// which is the definite integral 
   /// from the first value in \a xgrid to the last.
-  float_type partial_integrals(std::vector<float_type> xgrid, 
-                               std::vector<float_type> *partials = 0,
-                               float_type abs_tol=1e-12, 
-                               float_type rel_tol=1e-12, 
+  G4float_type partial_integrals(std::vector<G4float_type> xgrid, 
+                               std::vector<G4float_type> *partials = 0,
+                               G4float_type abs_tol=1e-12, 
+                               G4float_type rel_tol=1e-12, 
                                int derivs=2, bool adapt=true, 
                                bool extrapolate=true) 
     const /* throw(c2_exception) */;
@@ -302,9 +302,9 @@ public:
   /// to reduce the error. \return sum of partial integrals, 
   /// which is the definite integral 
   /// from the first value in \a xgrid to the last.
-  float_type integral(float_type amin, float_type amax, 
-                      std::vector<float_type> *partials = 0,
-                      float_type abs_tol=1e-12, float_type rel_tol=1e-12, 
+  G4float_type integral(G4float_type amin, G4float_type amax, 
+                      std::vector<G4float_type> *partials = 0,
+                      G4float_type abs_tol=1e-12, G4float_type rel_tol=1e-12, 
                       int derivs=2, bool adapt=true, bool extrapolate=true) 
     const /* throw(c2_exception) */;
 
@@ -379,15 +379,15 @@ public:
   /// (if non-null)
   /// \return a new, sampled representation, if \a derivs is 2.  
   /// A null pointer if \a derivs is 0 or 1.
-  c2_piecewise_function_p<float_type> *adaptively_sample(
-                 float_type amin, float_type amax,
-                 float_type abs_tol=1e-12, float_type rel_tol=1e-12,
-                 int derivs=2, std::vector<float_type> *xvals=0, 
-                 std::vector<float_type> *yvals=0) const /* throw(c2_exception) */;
+  c2_piecewise_function_p<G4float_type> *adaptively_sample(
+                 G4float_type amin, G4float_type amax,
+                 G4float_type abs_tol=1e-12, G4float_type rel_tol=1e-12,
+                 int derivs=2, std::vector<G4float_type> *xvals=0, 
+                 std::vector<G4float_type> *yvals=0) const /* throw(c2_exception) */;
         
-  inline float_type xmin() const { return fXMin; }
-  inline float_type xmax() const { return fXMax; }
-  void set_domain(float_type amin, float_type amax) { fXMin=amin; fXMax=amax; }
+  inline G4float_type xmin() const { return fXMin; }
+  inline G4float_type xmax() const { return fXMax; }
+  void set_domain(G4float_type amin, G4float_type amax) { fXMin=amin; fXMax=amax; }
                 
   /// and sampler do increment it.
   /// \return number of evaluations logged since last reset.
@@ -404,7 +404,7 @@ public:
   /// \param message an informative string to include in an exception if 
   /// this throws c2_exception
   /// \return true if in decreasing order, false if increasing 
-  bool check_monotonicity(const std::vector<float_type> &data, 
+  bool check_monotonicity(const std::vector<G4float_type> &data, 
                           const char message[]) const /* throw(c2_exception) */;
         
   /// \brief establish a grid of 'interesting' points on the function.
@@ -423,20 +423,20 @@ public:
   /// \param grid a vector of abscissas.  
   /// The contents is copied into an internal vector, 
   /// so the \a grid can be discarded after passingin.
-  virtual void set_sampling_grid(const std::vector<float_type> &grid) 
+  virtual void set_sampling_grid(const std::vector<G4float_type> &grid) 
     /* throw(c2_exception) */; 
         
   /// \brief get the sampling grid, which may be a null pointer
   /// \return pointer to the sampling grid
-  std::vector<float_type> *get_sampling_grid_pointer() const { 
+  std::vector<G4float_type> *get_sampling_grid_pointer() const { 
     return sampling_grid; } 
 
-  virtual void get_sampling_grid(float_type amin, float_type amax, 
-                                 std::vector<float_type> &grid) const ;
+  virtual void get_sampling_grid(G4float_type amin, G4float_type amax, 
+                                 std::vector<G4float_type> &grid) const ;
         
   /// The grid is modified in place.
-  void preen_sampling_grid(std::vector<float_type> *result) const;
-  void refine_sampling_grid(std::vector<float_type> &grid, 
+  void preen_sampling_grid(std::vector<G4float_type> *result) const;
+  void refine_sampling_grid(std::vector<G4float_type> &grid, 
                             size_t refinement) const;
         
   /// \brief create a new c2_function from this one which 
@@ -445,13 +445,13 @@ public:
   /// \param amax upper bound of the domain for integration
   /// \param norm the desired integral for the function over the region
   /// \return a new c2_function with the desired \a norm.
-  c2_function<float_type> &normalized_function(
-      float_type amin, 
-      float_type amax, 
-      float_type norm=1.0) const /* throw(c2_exception) */;
-  c2_function<float_type> &square_normalized_function(
-      float_type amin, float_type amax, 
-      float_type norm=1.0) 
+  c2_function<G4float_type> &normalized_function(
+      G4float_type amin, 
+      G4float_type amax, 
+      G4float_type norm=1.0) const /* throw(c2_exception) */;
+  c2_function<G4float_type> &square_normalized_function(
+      G4float_type amin, G4float_type amax, 
+      G4float_type norm=1.0) 
     const /* throw(c2_exception) */;
   /// \brief create a new c2_function from this one which is square-normalized 
   /// with the provided \a weight on the interval 
@@ -460,45 +460,45 @@ public:
   /// \param weight a c2_function providing the weight
   /// \param norm the desired integral for the function over the region
   /// \return a new c2_function with the desired \a norm.
-  c2_function<float_type> &square_normalized_function(
-      float_type amin, float_type amax, const c2_function<float_type> &weight, 
-      float_type norm=1.0)
+  c2_function<G4float_type> &square_normalized_function(
+      G4float_type amin, G4float_type amax, const c2_function<G4float_type> &weight, 
+      G4float_type norm=1.0)
     const /* throw(c2_exception) */;
 
   /// \brief factory function to create a c2_sum_p from a regular 
   /// algebraic expression.
   /// \param rhs the right-hand term of the sum
   /// \return a new c2_function
-  c2_sum_p<float_type> &operator + (const c2_function<float_type> &rhs) const 
-  { return *new c2_sum_p<float_type>(*this, rhs); }
+  c2_sum_p<G4float_type> &operator + (const c2_function<G4float_type> &rhs) const 
+  { return *new c2_sum_p<G4float_type>(*this, rhs); }
   /// \brief factory function to create a c2_diff_p from a regular 
   /// algebraic expression.
   /// \param rhs the right-hand term of the difference
   /// \return a new c2_function
-  c2_diff_p<float_type> &operator - (const c2_function<float_type> &rhs) const 
-  { return *new c2_diff_p<float_type>(*this, rhs); }
+  c2_diff_p<G4float_type> &operator - (const c2_function<G4float_type> &rhs) const 
+  { return *new c2_diff_p<G4float_type>(*this, rhs); }
   /// \brief factory function to create a c2_product_p from a 
   /// regular algebraic expression.
   /// \param rhs the right-hand term of the product
   /// \return a new c2_function
-  c2_product_p<float_type> &operator * 
-  (const c2_function<float_type> &rhs) const 
-  { return *new c2_product_p<float_type>(*this, rhs); }
-  c2_ratio_p<float_type> &operator / (const c2_function<float_type> &rhs) const 
-  { return *new c2_ratio_p<float_type>(*this, rhs); }
+  c2_product_p<G4float_type> &operator * 
+  (const c2_function<G4float_type> &rhs) const 
+  { return *new c2_product_p<G4float_type>(*this, rhs); }
+  c2_ratio_p<G4float_type> &operator / (const c2_function<G4float_type> &rhs) const 
+  { return *new c2_ratio_p<G4float_type>(*this, rhs); }
   /// \brief compose this function outside another.
   /// \param inner the inner function
   /// \return the composed function
   /// \anchor compose_operator
-  c2_composed_function_p<float_type> & operator ()
-    (const c2_function<float_type> &inner) const 
-  { return *new c2_composed_function_p<float_type>((*this), inner); }
+  c2_composed_function_p<G4float_type> & operator ()
+    (const c2_function<G4float_type> &inner) const 
+  { return *new c2_composed_function_p<G4float_type>((*this), inner); }
 
   /// \brief Find out where a calculation ran into trouble, if it got a nan.
   /// If the most recent computation did not return a nan, this is undefined.
   /// \return \a x value of point at which something went wrong, if integrator 
   /// (or otherwise) returned a nan.
-  float_type get_trouble_point() const { return bad_x_point; }
+  G4float_type get_trouble_point() const { return bad_x_point; }
         
   /// \brief increment our reference count.  
   /// Destruction is only legal if the count is zero.
@@ -523,36 +523,36 @@ public:
   size_t count_owners() const { return owner_count; }
 
 protected:
-  c2_function(const c2_function<float_type>  &src) 
+  c2_function(const c2_function<G4float_type>  &src) 
   : sampling_grid(0),
     no_overwrite_grid(false),
     fXMin(src.fXMin), fXMax(src.fXMax), root_info(0), owner_count(0)
   {} // copy constructor only copies domain, and is only for internal use
   c2_function() : 
     sampling_grid(0), no_overwrite_grid(0), 
-    fXMin(-std::numeric_limits<float_type>::max()), 
-    fXMax(std::numeric_limits<float_type>::max()), root_info(0), owner_count(0)
+    fXMin(-std::numeric_limits<G4float_type>::max()), 
+    fXMax(std::numeric_limits<G4float_type>::max()), root_info(0), owner_count(0)
   {}
 
-  virtual void set_sampling_grid_pointer(std::vector<float_type> &grid) 
+  virtual void set_sampling_grid_pointer(std::vector<G4float_type> &grid) 
   { 
     if (sampling_grid && !no_overwrite_grid) delete sampling_grid; 
     sampling_grid=&grid; no_overwrite_grid=1; 
   }
         
-  std::vector<float_type> * sampling_grid;
+  std::vector<G4float_type> * sampling_grid;
   bool no_overwrite_grid;
         
-  float_type fXMin, fXMax;
+  G4float_type fXMin, fXMax;
   mutable size_t evaluations;
   /// \brief this point may be used to record where a calculation 
   /// ran into trouble
-  mutable float_type bad_x_point;
+  mutable G4float_type bad_x_point;
 public: 
-  /// \brief fill in a c2_fblock<float_type>... a 
+  /// \brief fill in a c2_fblock<G4float_type>... a 
   /// shortcut for the integrator & sampler
   /// \param [in,out] fb the block to fill in with information
-  inline void fill_fblock(c2_fblock<float_type> &fb) const /* throw(c2_exception) */ 
+  inline void fill_fblock(c2_fblock<G4float_type> &fb) const /* throw(c2_exception) */ 
   {
     fb.y=value_with_derivatives(fb.x, &fb.yp, &fb.ypp);
     fb.ypbad=c2_isnan(fb.yp) || !c2_isfinite(fb.yp);
@@ -564,8 +564,8 @@ private:
   /// \brief the data element for the internal recursion stack for 
   /// the sampler and integrator
   struct recur_item { 
-    c2_fblock<float_type> f1; size_t depth; 
-    float_type previous_estimate, abs_tol, step_sum; 
+    c2_fblock<G4float_type> f1; size_t depth; 
+    G4float_type previous_estimate, abs_tol, step_sum; 
     bool done; 
     size_t f0index, f2index;
   };
@@ -576,8 +576,8 @@ private:
   /// the \a abs_tol is scaled by a factor of two at each division.  
   /// Everything else is just passed down.
   struct c2_integrate_recur { 
-    c2_fblock<float_type> *f0, *f1;
-    float_type abs_tol, rel_tol, eps_scale, extrap_coef, extrap2, 
+    c2_fblock<G4float_type> *f0, *f1;
+    G4float_type abs_tol, rel_tol, eps_scale, extrap_coef, extrap2, 
       dx_tolerance, abs_tol_min;
     std::vector< recur_item > *rb_stack;
     int  derivs;
@@ -587,11 +587,11 @@ private:
   /// \brief structure used to pass information recursively in sampler.
   ///
   struct c2_sample_recur { 
-    c2_fblock<float_type> *f0, *f1;
-    float_type abs_tol, rel_tol, dx_tolerance, abs_tol_min;
+    c2_fblock<G4float_type> *f0, *f1;
+    G4float_type abs_tol, rel_tol, dx_tolerance, abs_tol_min;
     int derivs;
-    c2_piecewise_function_p<float_type> *out;
-    std::vector<float_type> *xvals, *yvals;
+    c2_piecewise_function_p<G4float_type> *out;
+    std::vector<G4float_type> *xvals, *yvals;
     std::vector< recur_item > *rb_stack;
     bool inited;
   };
@@ -599,7 +599,7 @@ private:
   /// \brief structure used to hold root bracketing information
   ///
   struct c2_root_info {
-    c2_fblock<float_type> lower, upper;
+    c2_fblock<G4float_type> lower, upper;
     bool inited;
   };
         
@@ -608,7 +608,7 @@ private:
   /// This passes information recursively through the \a recur block pointer
   /// to allow very efficient recursion.
   /// \param rb a pointer to the recur struct.
-  float_type integrate_step(struct c2_integrate_recur &rb) 
+  G4float_type integrate_step(struct c2_integrate_recur &rb) 
     const /* throw(c2_exception) */;
     
   /// \brief Carry out the recursive subdivision for sampling.
@@ -635,19 +635,19 @@ private:
 /// Mostly useful for sampling into interpolating functions.
 /// construct a reference to this with c2_classic_function()
 /// \ingroup containers
-template <typename float_type=double> class c2_classic_function_p 
-  : public c2_function<float_type> {
+template <typename G4float_type=G4double> class c2_classic_function_p 
+  : public c2_function<G4float_type> {
 public:
   /// \brief construct the container 
   /// \param c_func a pointer to a conventional c-style function
-  c2_classic_function_p(const float_type (*c_func)(float_type)) 
-    : c2_function<float_type>(), func(c_func)  {}
+  c2_classic_function_p(const G4float_type (*c_func)(G4float_type)) 
+    : c2_function<G4float_type>(), func(c_func)  {}
 
   /// \copydoc c2_function::value_with_derivatives
   /// Uses the internal function pointer set by set_function().
-  virtual float_type value_with_derivatives(
-    float_type x, float_type *yprime, 
-    float_type *yprime2) const /* throw(c2_exception) */ 
+  virtual G4float_type value_with_derivatives(
+    G4float_type x, G4float_type *yprime, 
+    G4float_type *yprime2) const /* throw(c2_exception) */ 
   {
     if(!func) 
       throw c2_exception("c2_classic_function called with null function");
@@ -659,7 +659,7 @@ public:
         
 protected:
   /// \brief pointer to our function
-  const float_type (*func)(float_type);
+  const G4float_type (*func)(G4float_type);
 };
 
 /// \brief create a container for a c2_function which handles the 
@@ -677,19 +677,19 @@ protected:
 /// This class contains a copy constructor and operator=, 
 /// to make it fairly easy to make 
 /// a std::vector of these objects, and have it work as expected.
-template <typename float_type> class c2_const_ptr {
+template <typename G4float_type> class c2_const_ptr {
 public:
   /// \brief construct the container with no function
   c2_const_ptr() : func(0)  {}
   /// \brief construct the container with a pre-defined function
   /// \param f the function to store
-  c2_const_ptr(const c2_function<float_type> &f) : func(0) 
+  c2_const_ptr(const c2_function<G4float_type> &f) : func(0) 
   { this->set_function(&f); }
   /// \brief copy constructor
   /// \param src the container to copy
-  c2_const_ptr(const c2_const_ptr<float_type> &src) : func(0)
+  c2_const_ptr(const c2_const_ptr<G4float_type> &src) : func(0)
   { this->set_function(src.get_ptr()); }
-  void set_function(const c2_function<float_type> *f) 
+  void set_function(const c2_function<G4float_type> *f) 
   { 
     if(func) func->release_ownership();
     func=f; 
@@ -698,13 +698,13 @@ public:
         
   /// \brief fill the container from another container
   /// \param f the container to copy
-  const c2_const_ptr<float_type> & operator =
-  (const c2_const_ptr<float_type> &f) 
+  const c2_const_ptr<G4float_type> & operator =
+  (const c2_const_ptr<G4float_type> &f) 
   { this->set_function(f.get_ptr()); return f; }
   /// \brief fill the container with a function
   /// \param f the function
-  const c2_function<float_type> & operator =
-  (const c2_function<float_type> &f) 
+  const c2_function<G4float_type> & operator =
+  (const c2_function<G4float_type> &f) 
   { this->set_function(&f); return f; }
   /// \brief release the function without destroying it, 
   /// so it can be returned from a function
@@ -731,28 +731,28 @@ public:
   ~c2_const_ptr() { this->set_function(0); }
         
   /// \brief get a reference to our owned function
-  inline const c2_function<float_type> &get() const /* throw(c2_exception) */ 
+  inline const c2_function<G4float_type> &get() const /* throw(c2_exception) */ 
   { 
     if(!func) throw c2_exception("c2_ptr accessed uninitialized");
     return *func;
   }
   /// \brief get an unchecked pointer to our owned function
-  inline const c2_function<float_type> *get_ptr() const { return func; }
+  inline const c2_function<G4float_type> *get_ptr() const { return func; }
   /// \brief get a checked pointer to our owned function
-  inline const c2_function<float_type> *operator -> () const 
+  inline const c2_function<G4float_type> *operator -> () const 
   { return &get(); }
   /// \brief check if we have a valid function
   bool valid() const { return func != 0; }
         
   /// \brief type coercion operator which lets us use a pointer as if it were 
   /// a const c2_function
-  operator const c2_function<float_type>& () const { return this->get(); }
+  operator const c2_function<G4float_type>& () const { return this->get(); }
         
   /// \brief convenience operator to make us look like a function
   /// \param x the value at which to evaluate the contained function
   /// \return the evaluated function
 
-  float_type operator()(float_type x) const /* throw(c2_exception) */ 
+  G4float_type operator()(G4float_type x) const /* throw(c2_exception) */ 
   { return get()(x); }
   /// \brief convenience operator to make us look like a function
   /// \param x the value at which to evaluate the contained function
@@ -760,140 +760,140 @@ public:
   /// \param yprime2 the second derivative
   /// \return the evaluated function
   /// \note If you using this repeatedly, 
-  /// do const c2_function<float_type> &func=ptr;
+  /// do const c2_function<G4float_type> &func=ptr;
   /// and use func(x).  Calling this operator wastes some time, 
   /// since it checks the alidity of the pointer every time.
-  float_type operator()(float_type x, float_type *yprime, 
-                        float_type *yprime2) const /* throw(c2_exception) */ 
+  G4float_type operator()(G4float_type x, G4float_type *yprime, 
+                        G4float_type *yprime2) const /* throw(c2_exception) */ 
   { return get().value_with_derivatives(x, yprime, yprime2); }
   /// \brief factory function to create a c2_sum_p from a regular 
   /// algebraic expression.
   /// \param rhs the right-hand term of the sum
   /// \return a new c2_function
-  c2_sum_p<float_type> &operator + (const c2_function<float_type> &rhs) 
+  c2_sum_p<G4float_type> &operator + (const c2_function<G4float_type> &rhs) 
     const /* throw(c2_exception) */
-  { return *new c2_sum_p<float_type>(get(), rhs); }
-  c2_diff_p<float_type> &operator - (const c2_function<float_type> &rhs)  
+  { return *new c2_sum_p<G4float_type>(get(), rhs); }
+  c2_diff_p<G4float_type> &operator - (const c2_function<G4float_type> &rhs)  
     const /* throw(c2_exception) */
-  { return *new c2_diff_p<float_type>(get(), rhs); }
-  c2_product_p<float_type> &operator * (const c2_function<float_type> &rhs) 
+  { return *new c2_diff_p<G4float_type>(get(), rhs); }
+  c2_product_p<G4float_type> &operator * (const c2_function<G4float_type> &rhs) 
     const /* throw(c2_exception) */
-  { return *new c2_product_p<float_type>(get(), rhs); }
-  c2_ratio_p<float_type> &operator / (const c2_function<float_type> &rhs)  
+  { return *new c2_product_p<G4float_type>(get(), rhs); }
+  c2_ratio_p<G4float_type> &operator / (const c2_function<G4float_type> &rhs)  
     const /* throw(c2_exception) */
-  { return *new c2_ratio_p<float_type>(get(), rhs); }
+  { return *new c2_ratio_p<G4float_type>(get(), rhs); }
   /// \brief compose this function outside another.
   /// \param inner the inner function
   /// \return the composed function
-  c2_composed_function_p<float_type> & 
-  operator ()(const c2_function<float_type> &inner) 
+  c2_composed_function_p<G4float_type> & 
+  operator ()(const c2_function<G4float_type> &inner) 
     const /* throw(c2_exception) */
-  { return *new c2_composed_function_p<float_type>(get(), inner); }
+  { return *new c2_composed_function_p<G4float_type>(get(), inner); }
         
 protected:
-  const c2_function<float_type> * func;
+  const c2_function<G4float_type> * func;
 };
 
-template <typename float_type> class c2_ptr : public c2_const_ptr<float_type >
+template <typename G4float_type> class c2_ptr : public c2_const_ptr<G4float_type >
 {
 public:
   /// \brief construct the container with no function
-  c2_ptr() : c2_const_ptr<float_type>()  {}
+  c2_ptr() : c2_const_ptr<G4float_type>()  {}
   /// \brief construct the container with a pre-defined function
   /// \param f the function to store
-  c2_ptr(c2_function<float_type> &f) : 
-    c2_const_ptr<float_type>() { this->set_function(&f); } 
+  c2_ptr(c2_function<G4float_type> &f) : 
+    c2_const_ptr<G4float_type>() { this->set_function(&f); } 
   /// \brief copy constructor
   /// \param src the container to copy
-  c2_ptr(const c2_ptr<float_type> &src) : 
-    c2_const_ptr<float_type>() { this->set_function(src.get_ptr()); }
+  c2_ptr(const c2_ptr<G4float_type> &src) : 
+    c2_const_ptr<G4float_type>() { this->set_function(src.get_ptr()); }
   /// \brief get a checked pointer to our owned function
-  inline c2_function<float_type> &get() const /* throw(c2_exception) */ 
-  { return *const_cast<c2_function<float_type>*>(
-      &c2_const_ptr<float_type>::get()); }
+  inline c2_function<G4float_type> &get() const /* throw(c2_exception) */ 
+  { return *const_cast<c2_function<G4float_type>*>(
+      &c2_const_ptr<G4float_type>::get()); }
   /// \brief get an unchecked pointer to our owned function
-  inline c2_function<float_type> *get_ptr() const 
-  { return const_cast<c2_function<float_type>*>(this->func); }
+  inline c2_function<G4float_type> *get_ptr() const 
+  { return const_cast<c2_function<G4float_type>*>(this->func); }
   /// \brief get a checked pointer to our owned function
-  inline c2_function<float_type> *operator -> () const 
+  inline c2_function<G4float_type> *operator -> () const 
   { return &get(); }
   /// \brief fill the container from another container
   /// \param f the container to copy
-  const c2_ptr<float_type> & operator =(const c2_ptr<float_type> &f) 
+  const c2_ptr<G4float_type> & operator =(const c2_ptr<G4float_type> &f) 
   { this->set_function(f.get_ptr()); return f; }
   /// \brief fill the container with a function
   /// \param f the function
-  c2_function<float_type> & operator =(c2_function<float_type> &f) 
+  c2_function<G4float_type> & operator =(c2_function<G4float_type> &f) 
   { this->set_function(&f); return f; }
 private:
   /// \brief hidden non-const-safe version of operator=
-  void operator =(const c2_const_ptr<float_type> &) { }
+  void operator =(const c2_const_ptr<G4float_type> &) { }
   /// \brief hidden non-const-safe version of operator=
-  void operator =(const c2_function<float_type> &) { }
+  void operator =(const c2_function<G4float_type> &) { }
 };
 
-template <typename float_type, template <typename> class c2_class > 
+template <typename G4float_type, template <typename> class c2_class > 
 class c2_typed_ptr 
-  : public c2_const_ptr<float_type> {
+  : public c2_const_ptr<G4float_type> {
 public:
   /// \brief construct the container with no function
-  c2_typed_ptr() : c2_ptr<float_type>()  {}
+  c2_typed_ptr() : c2_ptr<G4float_type>()  {}
   /// \brief construct the container with a pre-defined function
   /// \param f the function to store
-  c2_typed_ptr(c2_class<float_type> &f)
-    : c2_const_ptr<float_type>() { this->set_function(&f); }
+  c2_typed_ptr(c2_class<G4float_type> &f)
+    : c2_const_ptr<G4float_type>() { this->set_function(&f); }
   /// \brief copy constructor
   /// \param src the container to copy
-  c2_typed_ptr(const c2_typed_ptr<float_type, c2_class> &src) 
-    : c2_const_ptr<float_type>() { this->set_function(src.get_ptr()); }
+  c2_typed_ptr(const c2_typed_ptr<G4float_type, c2_class> &src) 
+    : c2_const_ptr<G4float_type>() { this->set_function(src.get_ptr()); }
         
   /// \brief get a reference to our owned function
-  inline c2_class<float_type> &get() const /* throw(c2_exception) */ 
+  inline c2_class<G4float_type> &get() const /* throw(c2_exception) */ 
   { 
-    return *static_cast<c2_class<float_type> *>
-      (const_cast<c2_function<float_type>*>(&c2_const_ptr<float_type>::get()));
+    return *static_cast<c2_class<G4float_type> *>
+      (const_cast<c2_function<G4float_type>*>(&c2_const_ptr<G4float_type>::get()));
   }
   /// \brief get a checked pointer to our owned function
-  inline c2_class<float_type> *operator -> () const 
+  inline c2_class<G4float_type> *operator -> () const 
                 { return &get(); }
   /// \brief get an unchecked pointer to our owned function
-  inline c2_class<float_type> *get_ptr() const 
-  { return static_cast<c2_class<float_type> *>(
-       const_cast<c2_function<float_type>*>(this->func)); }
+  inline c2_class<G4float_type> *get_ptr() const 
+  { return static_cast<c2_class<G4float_type> *>(
+       const_cast<c2_function<G4float_type>*>(this->func)); }
 
-  operator c2_class<float_type>&() const { return get(); }
+  operator c2_class<G4float_type>&() const { return get(); }
   /// \brief fill the container from another container
   /// \param f the container to copy
-  void operator =(const c2_typed_ptr<float_type, c2_class> &f) 
+  void operator =(const c2_typed_ptr<G4float_type, c2_class> &f) 
   { this->set_function(f.get_ptr()); }
   /// \brief fill the container with a function
   /// \param f the function
-  void operator =(c2_class<float_type> &f) 
+  void operator =(c2_class<G4float_type> &f) 
   { this->set_function(&f); }
 private:
-  void operator =(const c2_const_ptr<float_type> &) { }
-  void operator =(const c2_function<float_type> &) { }
+  void operator =(const c2_const_ptr<G4float_type> &) { }
+  void operator =(const c2_function<G4float_type> &) { }
 };
 
-template <typename float_type=double> class c2_plugin_function_p : 
-        public c2_function<float_type> {
+template <typename G4float_type=G4double> class c2_plugin_function_p : 
+        public c2_function<G4float_type> {
 public:
   /// \brief construct the container with no function
-  c2_plugin_function_p() : c2_function<float_type>(), func()  {}
+  c2_plugin_function_p() : c2_function<G4float_type>(), func()  {}
   /// \brief construct the container with a pre-defined function
-  c2_plugin_function_p(c2_function<float_type> &f) : 
-    c2_function<float_type>(),func(f)  { }
+  c2_plugin_function_p(c2_function<G4float_type> &f) : 
+    c2_function<G4float_type>(),func(f)  { }
 
-  void set_function(c2_function<float_type> *f) 
+  void set_function(c2_function<G4float_type> *f) 
   {
     func.set_function(f);
     if(f) this->set_domain(f->xmin(), f->xmax());
   }
   /// \copydoc c2_function::value_with_derivatives
   /// Uses the internal function pointer set by set_function().
-  virtual float_type value_with_derivatives(
-          float_type x, float_type *yprime, 
-          float_type *yprime2) const /* throw(c2_exception) */ 
+  virtual G4float_type value_with_derivatives(
+          G4float_type x, G4float_type *yprime, 
+          G4float_type *yprime2) const /* throw(c2_exception) */ 
   {
     if(!func.valid()) 
       throw c2_exception("c2_plugin_function_p called uninitialized");
@@ -905,44 +905,44 @@ public:
   /// \brief clear our function
   void unset_function() { func.unset_function(); }
         
-  virtual void get_sampling_grid(float_type amin, float_type amax, 
-                                 std::vector<float_type> &grid) const 
+  virtual void get_sampling_grid(G4float_type amin, G4float_type amax, 
+                                 std::vector<G4float_type> &grid) const 
   {        
     if(!func.valid()) 
       throw c2_exception("c2_plugin_function_p called uninitialized");
     if(this->sampling_grid) 
-      c2_function<float_type>::get_sampling_grid(amin, amax, grid);
+      c2_function<G4float_type>::get_sampling_grid(amin, amax, grid);
     else  func->get_sampling_grid(amin, amax, grid);
   }
 protected:
-        c2_ptr<float_type> func;
+        c2_ptr<G4float_type> func;
 };
 
-template <typename float_type=double> class c2_const_plugin_function_p 
-  : public c2_plugin_function_p<float_type> {
+template <typename G4float_type=G4double> class c2_const_plugin_function_p 
+  : public c2_plugin_function_p<G4float_type> {
 public:
   /// \brief construct the container with no function
-  c2_const_plugin_function_p() : c2_plugin_function_p<float_type>()  {}
+  c2_const_plugin_function_p() : c2_plugin_function_p<G4float_type>()  {}
   /// \brief construct the container with a pre-defined function
-  c2_const_plugin_function_p(const c2_function<float_type> &f) : 
-    c2_plugin_function_p<float_type>()  { this->set_function(&f); }
-  void set_function(const c2_function<float_type> *f) 
-  { c2_plugin_function_p<float_type>::set_function(
-       const_cast<c2_function<float_type>*>(f)); }
+  c2_const_plugin_function_p(const c2_function<G4float_type> &f) : 
+    c2_plugin_function_p<G4float_type>()  { this->set_function(&f); }
+  void set_function(const c2_function<G4float_type> *f) 
+  { c2_plugin_function_p<G4float_type>::set_function(
+       const_cast<c2_function<G4float_type>*>(f)); }
   /// \brief destructor
   virtual ~c2_const_plugin_function_p() { }
         
   /// \brief get a const reference to our owned function, for direct access
-  const c2_function<float_type> &get() const /* throw(c2_exception) */ 
+  const c2_function<G4float_type> &get() const /* throw(c2_exception) */ 
   { return this->func.get(); }
 };
 
-template <typename float_type=double> class c2_binary_function 
-  : public c2_function<float_type> {
+template <typename G4float_type=G4double> class c2_binary_function 
+  : public c2_function<G4float_type> {
 public:
-  virtual float_type value_with_derivatives(
-          float_type x, float_type *yprime, 
-          float_type *yprime2) const /* throw(c2_exception) */ 
+  virtual G4float_type value_with_derivatives(
+          G4float_type x, G4float_type *yprime, 
+          G4float_type *yprime2) const /* throw(c2_exception) */ 
   { 
     if(stub) 
       throw c2_exception("attempt to evaluate a c2_binary_function stub");
@@ -954,14 +954,14 @@ public:
   virtual ~c2_binary_function() { }
 
 protected:
-  c2_binary_function( float_type (*combiner)(
-     const c2_function<float_type> &left, 
-     const c2_function<float_type> &right, 
-     float_type x, float_type *yprime, 
-     float_type *yprime2),
-                      const c2_function<float_type> &left,  
-                      const c2_function<float_type> &right) : 
-    c2_function<float_type>(), combine(combiner), Left(left), 
+  c2_binary_function( G4float_type (*combiner)(
+     const c2_function<G4float_type> &left, 
+     const c2_function<G4float_type> &right, 
+     G4float_type x, G4float_type *yprime, 
+     G4float_type *yprime2),
+                      const c2_function<G4float_type> &left,  
+                      const c2_function<G4float_type> &right) : 
+    c2_function<G4float_type>(), combine(combiner), Left(left), 
     Right(right), stub(false)
   { 
     this->set_domain(
@@ -969,54 +969,54 @@ protected:
                      (left.xmax() < right.xmax()) ? left.xmax() : right.xmax()
                      );
   } 
-  c2_binary_function(float_type (*combiner)(
-      const c2_function<float_type> &left, 
-      const c2_function<float_type> &right, 
-      float_type x, float_type *yprime, float_type *yprime2)
-                     ) : c2_function<float_type>(), combine(combiner), 
+  c2_binary_function(G4float_type (*combiner)(
+      const c2_function<G4float_type> &left, 
+      const c2_function<G4float_type> &right, 
+      G4float_type x, G4float_type *yprime, G4float_type *yprime2)
+                     ) : c2_function<G4float_type>(), combine(combiner), 
     Left(), Right(), stub(true) { }
         
 public:
-  float_type (* const combine)(
-      const c2_function<float_type> &left, 
-      const c2_function<float_type> &right, 
-      float_type x, float_type *yprime, float_type *yprime2);
+  G4float_type (* const combine)(
+      const c2_function<G4float_type> &left, 
+      const c2_function<G4float_type> &right, 
+      G4float_type x, G4float_type *yprime, G4float_type *yprime2);
         
 protected:        
-  const c2_const_ptr<float_type> Left,  Right;
+  const c2_const_ptr<G4float_type> Left,  Right;
   bool stub;
 };
 
-template <typename float_type=double> class c2_scaled_function_p 
-  : public c2_function<float_type> {
+template <typename G4float_type=G4double> class c2_scaled_function_p 
+  : public c2_function<G4float_type> {
 public:
   /// \brief construct the function with its scale factor.
   ///
   /// \param outer the function to be scaled
   /// \param scale the multiplicative scale factor
-  c2_scaled_function_p(const c2_function<float_type> &outer, 
-                       float_type scale) : 
-    c2_function<float_type>(), func(outer), yscale(scale) { }
+  c2_scaled_function_p(const c2_function<G4float_type> &outer, 
+                       G4float_type scale) : 
+    c2_function<G4float_type>(), func(outer), yscale(scale) { }
         
   /// \brief set a new scale factor
   /// \param scale the new factor
-  void reset(float_type scale) { yscale=scale; }
+  void reset(G4float_type scale) { yscale=scale; }
         
-  virtual float_type value_with_derivatives(
-          float_type x, float_type *yprime, 
-          float_type *yprime2) const /* throw (c2_exception) */ 
+  virtual G4float_type value_with_derivatives(
+          G4float_type x, G4float_type *yprime, 
+          G4float_type *yprime2) const /* throw (c2_exception) */ 
   { 
-    float_type y=this->func->value_with_derivatives(x, yprime, yprime2); 
+    G4float_type y=this->func->value_with_derivatives(x, yprime, yprime2); 
     if(yprime) (*yprime)*=yscale; 
     if(yprime2) (*yprime2)*=yscale; 
     return y*yscale; 
   }
 
 protected:
-  c2_scaled_function_p(float_type scale) : func(), yscale(scale) {}
+  c2_scaled_function_p(G4float_type scale) : func(), yscale(scale) {}
   /// \brief the scaling factor for the function
-  const c2_const_ptr<float_type> func;
-  float_type yscale;
+  const c2_const_ptr<G4float_type> func;
+  G4float_type yscale;
 };
 
 /// \brief A container into which any other c2_function can be dropped.
@@ -1028,20 +1028,20 @@ protected:
 /// it returns the remembered values;
 /// otherwise, it re-evauates the function at the new point.
 ///
-template <typename float_type=double> class c2_cached_function_p 
-  : public c2_function<float_type> {
+template <typename G4float_type=G4double> class c2_cached_function_p 
+  : public c2_function<G4float_type> {
 public:
   /// \brief construct the container
   ///
   /// \param f the function to be cached
-  c2_cached_function_p(const c2_function<float_type> &f) 
-  : c2_function<float_type>(),
+  c2_cached_function_p(const c2_function<G4float_type> &f) 
+  : c2_function<G4float_type>(),
     func(f), init(false)  {}
   /// \copydoc c2_function::value_with_derivatives
   ///
-  virtual float_type value_with_derivatives(
-          float_type x, float_type *yprime, 
-          float_type *yprime2) const /* throw(c2_exception) */ 
+  virtual G4float_type value_with_derivatives(
+          G4float_type x, G4float_type *yprime, 
+          G4float_type *yprime2) const /* throw(c2_exception) */ 
   {
     if(!init || x != x0) {
       y=this->func->value_with_derivatives(x, &yp, &ypp);
@@ -1055,31 +1055,31 @@ public:
 
 protected:
   c2_cached_function_p() : func() {}
-  const c2_const_ptr<float_type> func;
+  const c2_const_ptr<G4float_type> func;
   mutable bool init;
-  mutable float_type x0, y, yp, ypp;
+  mutable G4float_type x0, y, yp, ypp;
         
 };
 
-template <typename float_type=double> class  c2_composed_function_p 
-  : public c2_binary_function<float_type> {
+template <typename G4float_type=G4double> class  c2_composed_function_p 
+  : public c2_binary_function<G4float_type> {
 public:
-  c2_composed_function_p(const c2_function<float_type> &outer, 
-                         const c2_function<float_type> &inner) : 
-    c2_binary_function<float_type>(combine, outer, inner) { 
+  c2_composed_function_p(const c2_function<G4float_type> &outer, 
+                         const c2_function<G4float_type> &inner) : 
+    c2_binary_function<G4float_type>(combine, outer, inner) { 
     this->set_domain(inner.xmin(), inner.xmax()); }
   /// \brief Create a stub just for the combiner to avoid statics. 
-  c2_composed_function_p() : c2_binary_function<float_type>(combine) {} 
+  c2_composed_function_p() : c2_binary_function<G4float_type>(combine) {} 
 
   /// \brief execute math necessary to do composition
-  static float_type combine(const c2_function<float_type> &left, 
-                            const c2_function<float_type> &right, 
-                            float_type x, float_type *yprime, 
-                            float_type *yprime2) /* throw(c2_exception) */
+  static G4float_type combine(const c2_function<G4float_type> &left, 
+                            const c2_function<G4float_type> &right, 
+                            G4float_type x, G4float_type *yprime, 
+                            G4float_type *yprime2) /* throw(c2_exception) */
   {
-    float_type y0, y1;
+    G4float_type y0, y1;
     if(yprime || yprime2) {
-      float_type yp0, ypp0, yp1, ypp1;
+      G4float_type yp0, ypp0, yp1, ypp1;
       y0=right.value_with_derivatives(x, &yp0, &ypp0);
       y1=left.value_with_derivatives(y0, &yp1, &ypp1);
       if(yprime) *yprime=yp1*yp0;
@@ -1092,27 +1092,27 @@ public:
   }        
 };
 
-template <typename float_type=double> class c2_sum_p 
-  : public c2_binary_function<float_type> {
+template <typename G4float_type=G4double> class c2_sum_p 
+  : public c2_binary_function<G4float_type> {
 public:        
   /// \brief construct \a left + \a right
   /// \param left the left function 
   /// \param right the right function
-  c2_sum_p(const c2_function<float_type> &left, 
-           const c2_function<float_type> &right) 
-    : c2_binary_function<float_type>(combine, left, right) {}
+  c2_sum_p(const c2_function<G4float_type> &left, 
+           const c2_function<G4float_type> &right) 
+    : c2_binary_function<G4float_type>(combine, left, right) {}
   /// \brief Create a stub just for the combiner to avoid statics. 
-  c2_sum_p() : c2_binary_function<float_type>(combine) {} ; 
+  c2_sum_p() : c2_binary_function<G4float_type>(combine) {} ; 
 
   /// \brief execute math necessary to do addition
-  static float_type combine(const c2_function<float_type> &left, 
-                            const c2_function<float_type> &right, 
-                            float_type x, float_type *yprime, 
-                            float_type *yprime2) /* throw(c2_exception) */
+  static G4float_type combine(const c2_function<G4float_type> &left, 
+                            const c2_function<G4float_type> &right, 
+                            G4float_type x, G4float_type *yprime, 
+                            G4float_type *yprime2) /* throw(c2_exception) */
   {
-    float_type y0, y1;
+    G4float_type y0, y1;
     if(yprime || yprime2) {
-      float_type yp0, ypp0, yp1, ypp1;
+      G4float_type yp0, ypp0, yp1, ypp1;
       y0=left.value_with_derivatives(x, &yp0, &ypp0);
       y1=right.value_with_derivatives(x, &yp1, &ypp1);
       if(yprime) *yprime=yp0+yp1;
@@ -1125,27 +1125,27 @@ public:
   }
 };
 
-template <typename float_type=double> class c2_diff_p 
-  : public c2_binary_function<float_type> {
+template <typename G4float_type=G4double> class c2_diff_p 
+  : public c2_binary_function<G4float_type> {
 public:        
   /// \brief construct \a left - \a right
   /// \param left the left function 
   /// \param right the right function
-  c2_diff_p(const c2_function<float_type> &left, 
-            const c2_function<float_type> &right) 
-    : c2_binary_function<float_type>(combine, left, right) {}
+  c2_diff_p(const c2_function<G4float_type> &left, 
+            const c2_function<G4float_type> &right) 
+    : c2_binary_function<G4float_type>(combine, left, right) {}
   /// \brief Create a stub just for the combiner to avoid statics. 
-  c2_diff_p() : c2_binary_function<float_type>(combine) {} ; 
+  c2_diff_p() : c2_binary_function<G4float_type>(combine) {} ; 
 
   /// \brief execute math necessary to do subtraction
-  static float_type combine(const c2_function<float_type> &left, 
-                            const c2_function<float_type> &right, 
-                            float_type x, float_type *yprime, 
-                            float_type *yprime2) /* throw(c2_exception) */
+  static G4float_type combine(const c2_function<G4float_type> &left, 
+                            const c2_function<G4float_type> &right, 
+                            G4float_type x, G4float_type *yprime, 
+                            G4float_type *yprime2) /* throw(c2_exception) */
   {
-    float_type y0, y1;
+    G4float_type y0, y1;
     if(yprime || yprime2) {
-      float_type yp0, ypp0, yp1, ypp1;
+      G4float_type yp0, ypp0, yp1, ypp1;
       y0=left.value_with_derivatives(x, &yp0, &ypp0);
       y1=right.value_with_derivatives(x, &yp1, &ypp1);
       if(yprime) *yprime=yp0-yp1;
@@ -1162,27 +1162,27 @@ public:
 /// \brief create a c2_function which is the product of two other c2_functions.
 /// \ingroup arithmetic_functions
 /// This should always be constructed using c2_function::operator*()
-template <typename float_type=double> class c2_product_p 
-  : public c2_binary_function<float_type> {
+template <typename G4float_type=G4double> class c2_product_p 
+  : public c2_binary_function<G4float_type> {
 public:        
   /// \brief construct \a left * \a right
   /// \param left the left function 
   /// \param right the right function
-  c2_product_p(const c2_function<float_type> &left, 
-               const c2_function<float_type> &right) 
-    : c2_binary_function<float_type>(combine, left, right) {}
+  c2_product_p(const c2_function<G4float_type> &left, 
+               const c2_function<G4float_type> &right) 
+    : c2_binary_function<G4float_type>(combine, left, right) {}
   /// \brief Create a stub just for the combiner to avoid statics. 
-  c2_product_p() : c2_binary_function<float_type>(combine) {} ; 
+  c2_product_p() : c2_binary_function<G4float_type>(combine) {} ; 
   
   /// \brief execute math necessary to do multiplication
-  static float_type combine(const c2_function<float_type> &left, 
-                            const c2_function<float_type> &right, 
-                            float_type x, float_type *yprime, 
-                            float_type *yprime2)  /* throw(c2_exception) */
+  static G4float_type combine(const c2_function<G4float_type> &left, 
+                            const c2_function<G4float_type> &right, 
+                            G4float_type x, G4float_type *yprime, 
+                            G4float_type *yprime2)  /* throw(c2_exception) */
     {
-      float_type y0, y1;
+      G4float_type y0, y1;
       if(yprime || yprime2) {
-        float_type yp0, ypp0, yp1, ypp1;
+        G4float_type yp0, ypp0, yp1, ypp1;
         y0=left.value_with_derivatives(x, &yp0, &ypp0);
         y1=right.value_with_derivatives(x, &yp1, &ypp1);
         if(yprime) *yprime=y1*yp0+y0*yp1;
@@ -1199,27 +1199,27 @@ public:
 /// \brief create a c2_function which is the ratio of two other c2_functions.
 /// \ingroup arithmetic_functions
 /// This should always be constructed using c2_function::operator/()
-template <typename float_type=double> class c2_ratio_p 
-  : public c2_binary_function<float_type> {
+template <typename G4float_type=G4double> class c2_ratio_p 
+  : public c2_binary_function<G4float_type> {
 public:        
   /// \brief construct \a left / \a right
   /// \param left the left function 
   /// \param right the right function
-  c2_ratio_p(const c2_function<float_type> &left, 
-             const c2_function<float_type> &right) 
-    : c2_binary_function<float_type>(combine, left, right) {}
+  c2_ratio_p(const c2_function<G4float_type> &left, 
+             const c2_function<G4float_type> &right) 
+    : c2_binary_function<G4float_type>(combine, left, right) {}
   /// \brief Create a stub just for the combiner to avoid statics. 
-  c2_ratio_p() : c2_binary_function<float_type>(combine) {} ; 
+  c2_ratio_p() : c2_binary_function<G4float_type>(combine) {} ; 
         
   /// \brief execute math necessary to do division
-  static float_type combine(const c2_function<float_type> &left, 
-                            const c2_function<float_type> &right, 
-                            float_type x, float_type *yprime, 
-                            float_type *yprime2) /* throw(c2_exception) */
+  static G4float_type combine(const c2_function<G4float_type> &left, 
+                            const c2_function<G4float_type> &right, 
+                            G4float_type x, G4float_type *yprime, 
+                            G4float_type *yprime2) /* throw(c2_exception) */
   {
-    float_type y0, y1;
+    G4float_type y0, y1;
     if(yprime || yprime2) {
-      float_type yp0, ypp0, yp1, ypp1;
+      G4float_type yp0, ypp0, yp1, ypp1;
       y0=left.value_with_derivatives(x, &yp0, &ypp0);
       y1=right.value_with_derivatives(x, &yp1, &ypp1);
       if(yprime) *yprime=(yp0*y1-y0*yp1)/(y1*y1); // first deriv of ratio
@@ -1237,23 +1237,23 @@ public:
 /// \ingroup parametric_functions
 ///
 /// The factory function c2_factory::constant() creates *new c2_constant_p()
-template <typename float_type> class c2_constant_p 
-  : public c2_function<float_type> {
+template <typename G4float_type> class c2_constant_p 
+  : public c2_function<G4float_type> {
 public:
-  c2_constant_p(float_type x) : c2_function<float_type>(), value(x) {}
-  void reset(float_type val) { value=val; }
-  virtual float_type value_with_derivatives(
-          float_type, float_type *yprime, 
-          float_type *yprime2) const /* throw(c2_exception) */ 
+  c2_constant_p(G4float_type x) : c2_function<G4float_type>(), value(x) {}
+  void reset(G4float_type val) { value=val; }
+  virtual G4float_type value_with_derivatives(
+          G4float_type, G4float_type *yprime, 
+          G4float_type *yprime2) const /* throw(c2_exception) */ 
   { if(yprime) *yprime=0; if(yprime2) *yprime2=0; return value; }
         
 private:
-  float_type value;
+  G4float_type value;
 };
 
 /// \brief a transformation of a coordinate, including an inverse
 /// \ingroup transforms
-template <typename float_type> class c2_transformation {
+template <typename G4float_type> class c2_transformation {
 public:
   /// \brief initialize all our function pointers
   /// \param transformed true if this function is not the identity
@@ -1262,10 +1262,10 @@ public:
   /// \param xinpp input X transform second derivative
   /// \param xout output X transform, which MUST be the inverse of \a xin
   c2_transformation(bool transformed,
-                    float_type (*xin)(float_type), 
-                    float_type (*xinp)(float_type), 
-                    float_type (*xinpp)(float_type), 
-                    float_type (*xout)(float_type)
+                    G4float_type (*xin)(G4float_type), 
+                    G4float_type (*xinp)(G4float_type), 
+                    G4float_type (*xinpp)(G4float_type), 
+                    G4float_type (*xout)(G4float_type)
                     ) :
     fTransformed(transformed), fHasStaticTransforms(true),
     pIn(xin), pInPrime(xinp), pInDPrime(xinpp), pOut(xout) { }
@@ -1290,49 +1290,49 @@ public:
   /// They are only used inside value_with_derivatives(), 
   /// which is assumed to be the most critical routine.
   /// \brief non-virtual pointer to input X transform
-  float_type (* const pIn)(float_type);
+  G4float_type (* const pIn)(G4float_type);
   /// \brief non-virtual pointer to input X transform derivative
-  float_type (* const pInPrime)(float_type);
+  G4float_type (* const pInPrime)(G4float_type);
   /// \brief non-virtual pointer to input X transform second derivative
-  float_type (* const pInDPrime)(float_type);
+  G4float_type (* const pInDPrime)(G4float_type);
   /// \brief non-virtual pointer to output X transform 
-  float_type (* const pOut)(float_type);
+  G4float_type (* const pOut)(G4float_type);
         
   /// \brief virtual input X transform
-  virtual float_type fIn(float_type x) const { return pIn(x); }
+  virtual G4float_type fIn(G4float_type x) const { return pIn(x); }
   /// \brief virtual input X transform derivative
-  virtual float_type fInPrime(float_type x) const { return pInPrime(x); }
+  virtual G4float_type fInPrime(G4float_type x) const { return pInPrime(x); }
   /// \brief virtual input X transform second derivative
-  virtual float_type fInDPrime(float_type x) const { return pInDPrime(x); }
+  virtual G4float_type fInDPrime(G4float_type x) const { return pInDPrime(x); }
   /// \brief virtual output X transform 
-  virtual float_type fOut(float_type x) const { return pOut(x); }
+  virtual G4float_type fOut(G4float_type x) const { return pOut(x); }
 
 protected:
   /// \brief utility function for unimplemented conversion
-  static float_type report_error(float_type x)  { 
+  static G4float_type report_error(G4float_type x)  { 
     throw c2_exception("use of improperly constructed axis transform"); 
     return x; }
   /// \brief utility function f(x)=x useful in axis transforms
-  static float_type ident(float_type x)  { return x; }
+  static G4float_type ident(G4float_type x)  { return x; }
   /// \brief utility function f(x)=1 useful in axis transforms
-  static float_type one(float_type)  { return 1; }
+  static G4float_type one(G4float_type)  { return 1; }
   /// \brief utility function f(x)=0 useful in axis transforms
-  static float_type zero(float_type)  { return 0; }
+  static G4float_type zero(G4float_type)  { return 0; }
   /// \brief utility function f(x)=1/x useful in axis transforms
-  static float_type recip(float_type x)  { return 1.0/x; }
+  static G4float_type recip(G4float_type x)  { return 1.0/x; }
   /// \brief utility function f(x)=-1/x**2 useful in axis transforms
-  static float_type recip_prime(float_type x)  { return -1/(x*x); }
+  static G4float_type recip_prime(G4float_type x)  { return -1/(x*x); }
   /// \brief utility function f(x)=2/x**3 useful in axis transforms
-  static float_type recip_prime2(float_type x)  { return 2/(x*x*x); }
+  static G4float_type recip_prime2(G4float_type x)  { return 2/(x*x*x); }
 };
 
 /// \brief the identity transform
 /// \ingroup transforms
-template <typename float_type> class c2_transformation_linear 
-  : public c2_transformation<float_type> {
+template <typename G4float_type> class c2_transformation_linear 
+  : public c2_transformation<G4float_type> {
 public:
   /// \brief constructor
-  c2_transformation_linear() : c2_transformation<float_type>(
+  c2_transformation_linear() : c2_transformation<G4float_type>(
      false, this->ident, 
      this->one, this->zero, 
      this->ident) { }
@@ -1341,11 +1341,11 @@ public:
 };
 /// \brief log axis transform
 /// \ingroup transforms
-template <typename float_type> class c2_transformation_log 
-  : public c2_transformation<float_type> {
+template <typename G4float_type> class c2_transformation_log 
+  : public c2_transformation<G4float_type> {
 public:
   /// \brief constructor
-  c2_transformation_log() : c2_transformation<float_type>(
+  c2_transformation_log() : c2_transformation<G4float_type>(
      true, std::log, this->recip, 
      this->recip_prime, std::exp) { }
   /// \brief destructor
@@ -1353,11 +1353,11 @@ public:
 };
 /// \brief reciprocal axis transform
 /// \ingroup transforms
-template <typename float_type> class c2_transformation_recip 
-  : public c2_transformation<float_type> {
+template <typename G4float_type> class c2_transformation_recip 
+  : public c2_transformation<G4float_type> {
 public:
   /// \brief constructor
-  c2_transformation_recip() : c2_transformation<float_type>(
+  c2_transformation_recip() : c2_transformation<G4float_type>(
      true, this->recip, 
      this->recip_prime, 
      this->recip_prime2, this->recip) { }
@@ -1374,39 +1374,39 @@ public:
 /// coordinates (with derivatives) into the 
 /// external representation
 /// \ingroup transforms
-template <typename float_type> 
+template <typename G4float_type> 
 class c2_function_transformation {
 public:
   /// \brief construct this from two c2_transformation instances
   /// \param xx the X axis transform
   /// \param yy the Y axis transform  
   c2_function_transformation(
-     const c2_transformation<float_type> &xx, 
-     const c2_transformation<float_type> &yy) :
+     const c2_transformation<G4float_type> &xx, 
+     const c2_transformation<G4float_type> &yy) :
     isIdentity(!(xx.fTransformed || yy.fTransformed)), X(xx), Y(yy) { }
   /// \brief destructor
   virtual ~c2_function_transformation() { delete &X; delete &Y; }
-  virtual float_type evaluate(
-          float_type xraw, 
-          float_type y, float_type yp0, float_type ypp0,
-          float_type *yprime, float_type *yprime2) const;
+  virtual G4float_type evaluate(
+          G4float_type xraw, 
+          G4float_type y, G4float_type yp0, G4float_type ypp0,
+          G4float_type *yprime, G4float_type *yprime2) const;
   const bool isIdentity;
   /// \brief the X axis transform
-  const c2_transformation<float_type> &X;
+  const c2_transformation<G4float_type> &X;
   /// \brief the Y axis transform 
-  const c2_transformation<float_type> &Y;
+  const c2_transformation<G4float_type> &Y;
 };
 
 /// \brief a transformation of a function in and out of lin-lin space
 ///
 /// \ingroup transforms
-template <typename float_type> class c2_lin_lin_function_transformation : 
-  public c2_function_transformation<float_type> {
+template <typename G4float_type> class c2_lin_lin_function_transformation : 
+  public c2_function_transformation<G4float_type> {
 public:
   c2_lin_lin_function_transformation() : 
-    c2_function_transformation<float_type>(
-       *new c2_transformation_linear<float_type>, 
-       *new c2_transformation_linear<float_type>
+    c2_function_transformation<G4float_type>(
+       *new c2_transformation_linear<G4float_type>, 
+       *new c2_transformation_linear<G4float_type>
                                            ) { }
   virtual ~c2_lin_lin_function_transformation() { }
 };
@@ -1414,13 +1414,13 @@ public:
 /// \brief a transformation of a function in and out of log-log space
 ///
 /// \ingroup transforms
-template <typename float_type> class c2_log_log_function_transformation : 
-        public c2_function_transformation<float_type> {
+template <typename G4float_type> class c2_log_log_function_transformation : 
+        public c2_function_transformation<G4float_type> {
 public:
         c2_log_log_function_transformation() : 
-                c2_function_transformation<float_type>(
-                        *new c2_transformation_log<float_type>, 
-                        *new c2_transformation_log<float_type>
+                c2_function_transformation<G4float_type>(
+                        *new c2_transformation_log<G4float_type>, 
+                        *new c2_transformation_log<G4float_type>
                 ) { }
         virtual ~c2_log_log_function_transformation() { }
 };
@@ -1428,13 +1428,13 @@ public:
 /// \brief a transformation of a function in and out of lin-log space
 ///
 /// \ingroup transforms
-template <typename float_type> class c2_lin_log_function_transformation : 
-        public c2_function_transformation<float_type> {
+template <typename G4float_type> class c2_lin_log_function_transformation : 
+        public c2_function_transformation<G4float_type> {
 public:
         c2_lin_log_function_transformation() : 
-                c2_function_transformation<float_type>(
-                        *new c2_transformation_linear<float_type>, 
-                        *new c2_transformation_log<float_type>
+                c2_function_transformation<G4float_type>(
+                        *new c2_transformation_linear<G4float_type>, 
+                        *new c2_transformation_log<G4float_type>
                 ) { }
         virtual ~c2_lin_log_function_transformation() { }
 };
@@ -1442,13 +1442,13 @@ public:
 /// \brief a transformation of a function in and out of log-lin space
 ///
 /// \ingroup transforms
-template <typename float_type> class c2_log_lin_function_transformation : 
-        public c2_function_transformation<float_type> {
+template <typename G4float_type> class c2_log_lin_function_transformation : 
+        public c2_function_transformation<G4float_type> {
 public:
         c2_log_lin_function_transformation() : 
-                c2_function_transformation<float_type>(
-                        *new c2_transformation_log<float_type>, 
-                        *new c2_transformation_linear<float_type>
+                c2_function_transformation<G4float_type>(
+                        *new c2_transformation_log<G4float_type>, 
+                        *new c2_transformation_linear<G4float_type>
                 ) { }
         virtual ~c2_log_lin_function_transformation() { }
 };
@@ -1457,13 +1457,13 @@ public:
 /// (1/x vs. log(y)) space
 ///
 /// \ingroup transforms
-template <typename float_type> class c2_arrhenius_function_transformation : 
-        public c2_function_transformation<float_type> {
+template <typename G4float_type> class c2_arrhenius_function_transformation : 
+        public c2_function_transformation<G4float_type> {
 public:
         c2_arrhenius_function_transformation() : 
-                c2_function_transformation<float_type>(
-                        *new c2_transformation_recip<float_type>, 
-                        *new c2_transformation_log<float_type>
+                c2_function_transformation<G4float_type>(
+                        *new c2_transformation_recip<G4float_type>, 
+                        *new c2_transformation_log<G4float_type>
                 ) { }
         virtual ~c2_arrhenius_function_transformation() { }
 };
@@ -1493,36 +1493,36 @@ public:
     using natural boundary conditions
     (vanishing second derivative), is created as: \n
     \code 
-        c2_ptr<double> c2p;
-        c2_factory<double> c2;
-    std::vector<double> xvals(10), yvals(10); 
+        c2_ptr<G4double> c2p;
+        c2_factory<G4double> c2;
+    std::vector<G4double> xvals(10), yvals(10); 
     // < fill in xvals and yvals >
     c2p myfunc=c2.interpolating_function().load(xvals, yvals,true,0,true,0);
     // and it can be evaluated at a point for its value only by: 
-    double y=myfunc(x); 
+    G4double y=myfunc(x); 
     // or it can be evaluated with its derivatives by
-    double yprime, yprime2; 
-    double y=myfunc(x,&yprime, &yprime2);
+    G4double yprime, yprime2; 
+    G4double y=myfunc(x,&yprime, &yprime2);
     \endcode
         
     The factory function c2_factory::interpolating_function() 
     creates *new interpolating_function_p()
 */
 
-template <typename float_type=double> class interpolating_function_p  
-  : public c2_function<float_type> {
+template <typename G4float_type=G4double> class interpolating_function_p  
+  : public c2_function<G4float_type> {
 public:
   /// \brief an empty linear-linear cubic-spline interpolating_function_p
   ///
-  interpolating_function_p() : c2_function<float_type>(), 
-    fTransform(*new  c2_lin_lin_function_transformation<float_type>) { } 
+  interpolating_function_p() : c2_function<G4float_type>(), 
+    fTransform(*new  c2_lin_lin_function_transformation<G4float_type>) { } 
 
   /// \brief an empty cubic-spline interpolating_function_p with a 
   /// specific transform
   ///
-  interpolating_function_p(const c2_function_transformation<float_type> &
+  interpolating_function_p(const c2_function_transformation<G4float_type> &
                            transform) 
-    : c2_function<float_type>(), 
+    : c2_function<G4float_type>(), 
       fTransform(transform) { } 
 
   /// \brief do the dirty work of constructing the spline from a function. 
@@ -1547,11 +1547,11 @@ public:
   /// \param splined if true (default), use cubic spline, 
   /// if false, use linear interpolation.
   /// \return the same interpolating function, filled
-  interpolating_function_p<float_type> & load(
-      const std::vector<float_type> &x, 
-      const std::vector<float_type> &f, 
-      bool lowerSlopeNatural, float_type lowerSlope, 
-      bool upperSlopeNatural, float_type upperSlope, bool splined=true
+  interpolating_function_p<G4float_type> & load(
+      const std::vector<G4float_type> &x, 
+      const std::vector<G4float_type> &f, 
+      bool lowerSlopeNatural, G4float_type lowerSlope, 
+      bool upperSlopeNatural, G4float_type upperSlope, bool splined=true
         ) /* throw(c2_exception) */;
 
   /// \brief do the dirty work of constructing the spline from a function. 
@@ -1569,10 +1569,10 @@ public:
   /// \param splined if true (default), use cubic spline, 
   /// if false, use linear interpolation.
   /// \return the same interpolating function, filled
-  interpolating_function_p<float_type> & load_pairs(
-     std::vector<std::pair<float_type, float_type> > &data,  
-     bool lowerSlopeNatural, float_type lowerSlope, 
-     bool upperSlopeNatural, float_type upperSlope, bool splined=true
+  interpolating_function_p<G4float_type> & load_pairs(
+     std::vector<std::pair<G4float_type, G4float_type> > &data,  
+     bool lowerSlopeNatural, G4float_type lowerSlope, 
+     bool upperSlopeNatural, G4float_type upperSlope, bool splined=true
                                                     ) /* throw(c2_exception) */;
 
   /// \brief do the dirty work of constructing the spline from a function.
@@ -1609,12 +1609,12 @@ public:
   /// on the log of a function 
   /// is the relative error
   /// on the function itself. 
-  interpolating_function_p<float_type> &  
-  sample_function(const c2_function<float_type> &func, 
-                  float_type amin, float_type amax, 
-                  float_type abs_tol, float_type rel_tol,
-                  bool lowerSlopeNatural, float_type lowerSlope, 
-                  bool upperSlopeNatural, float_type upperSlope
+  interpolating_function_p<G4float_type> &  
+  sample_function(const c2_function<G4float_type> &func, 
+                  G4float_type amin, G4float_type amax, 
+                  G4float_type abs_tol, G4float_type rel_tol,
+                  bool lowerSlopeNatural, G4float_type lowerSlope, 
+                  bool upperSlopeNatural, G4float_type upperSlope
                   ) /* throw(c2_exception) */;
         
   /// \brief initialize from a grid of points and a 
@@ -1641,79 +1641,79 @@ public:
   /// \return an initialized interpolator, which 
   /// if evaluated randomly with a uniform variate on [0,1] produces numbers
   /// distributed according to \a binheights
-  interpolating_function_p<float_type> & load_random_generator_function(
-     const std::vector<float_type> &bincenters, 
-     const c2_function<float_type> &binheights)
+  interpolating_function_p<G4float_type> & load_random_generator_function(
+     const std::vector<G4float_type> &bincenters, 
+     const c2_function<G4float_type> &binheights)
     /* throw(c2_exception) */;
 
-  interpolating_function_p<float_type> & load_random_generator_bins(
-    const std::vector<float_type> &bins, 
-    const std::vector<float_type> &binheights, 
+  interpolating_function_p<G4float_type> & load_random_generator_bins(
+    const std::vector<G4float_type> &bins, 
+    const std::vector<G4float_type> &binheights, 
     bool splined=true)
     /* throw(c2_exception) */;
         
-  virtual float_type value_with_derivatives(
-          float_type x, float_type *yprime, 
-          float_type *yprime2) const /* throw(c2_exception) */;
+  virtual G4float_type value_with_derivatives(
+          G4float_type x, G4float_type *yprime, 
+          G4float_type *yprime2) const /* throw(c2_exception) */;
         
   /// \brief destructor
   virtual ~interpolating_function_p() { delete &fTransform; } 
         
-  virtual interpolating_function_p<float_type> &clone() 
+  virtual interpolating_function_p<G4float_type> &clone() 
     const /* throw(c2_exception) */
-  {        return *new interpolating_function_p<float_type>(); }
+  {        return *new interpolating_function_p<G4float_type>(); }
         
-  void get_data(std::vector<float_type> &xvals, 
-                std::vector<float_type> &yvals) const /* throw() */ ;
+  void get_data(std::vector<G4float_type> &xvals, 
+                std::vector<G4float_type> &yvals) const /* throw() */ ;
         
   void get_internal_data(
-       std::vector<float_type> &xvals, 
-       std::vector<float_type> &yvals, 
-       std::vector<float_type> &y2vals) const 
+       std::vector<G4float_type> &xvals, 
+       std::vector<G4float_type> &yvals, 
+       std::vector<G4float_type> &y2vals) const 
   { xvals=X; yvals=F; y2vals=y2; }
 
-  void set_lower_extrapolation(float_type bound);
-  void set_upper_extrapolation(float_type bound);
+  void set_lower_extrapolation(G4float_type bound);
+  void set_upper_extrapolation(G4float_type bound);
         
-  interpolating_function_p <float_type> & 
-  unary_operator(const c2_function<float_type> &source) const;
+  interpolating_function_p <G4float_type> & 
+  unary_operator(const c2_function<G4float_type> &source) const;
 
-  interpolating_function_p <float_type> & 
-  binary_operator(const c2_function<float_type> &rhs,
-                  const c2_binary_function<float_type> *combining_stub
+  interpolating_function_p <G4float_type> & 
+  binary_operator(const c2_function<G4float_type> &rhs,
+                  const c2_binary_function<G4float_type> *combining_stub
                   ) const;
-  interpolating_function_p <float_type> & 
-  add_pointwise (const c2_function<float_type> &rhs) const { 
-    return binary_operator(rhs, new c2_sum_p<float_type>()); }
-  interpolating_function_p <float_type> & 
-  subtract_pointwise (const c2_function<float_type> &rhs) const {
-                return binary_operator(rhs, new c2_diff_p<float_type>()); }
-  interpolating_function_p <float_type> & 
-  multiply_pointwise (const c2_function<float_type> &rhs) const { 
-                return binary_operator(rhs, new c2_product_p<float_type>()); }
-  interpolating_function_p <float_type> & 
-  divide_pointwise (const c2_function<float_type> &rhs) const { 
-                return binary_operator(rhs, new c2_ratio_p<float_type>()); }
-  void clone_data(const interpolating_function_p <float_type> &rhs) {
+  interpolating_function_p <G4float_type> & 
+  add_pointwise (const c2_function<G4float_type> &rhs) const { 
+    return binary_operator(rhs, new c2_sum_p<G4float_type>()); }
+  interpolating_function_p <G4float_type> & 
+  subtract_pointwise (const c2_function<G4float_type> &rhs) const {
+                return binary_operator(rhs, new c2_diff_p<G4float_type>()); }
+  interpolating_function_p <G4float_type> & 
+  multiply_pointwise (const c2_function<G4float_type> &rhs) const { 
+                return binary_operator(rhs, new c2_product_p<G4float_type>()); }
+  interpolating_function_p <G4float_type> & 
+  divide_pointwise (const c2_function<G4float_type> &rhs) const { 
+                return binary_operator(rhs, new c2_ratio_p<G4float_type>()); }
+  void clone_data(const interpolating_function_p <G4float_type> &rhs) {
     Xraw=rhs.Xraw; X=rhs.X; F=rhs.F; y2=rhs.y2;
     set_sampling_grid_pointer(Xraw);
   }
 
-  const c2_function_transformation<float_type> &fTransform;
+  const c2_function_transformation<G4float_type> &fTransform;
         
 protected:    
   /// \brief create the spline coefficients
   void spline(
-              bool lowerSlopeNatural, float_type lowerSlope, 
-              bool upperSlopeNatural, float_type upperSlope
+              bool lowerSlopeNatural, G4float_type lowerSlope, 
+              bool upperSlopeNatural, G4float_type upperSlope
               ) /* throw(c2_exception) */;
 
-  static bool comp_pair(std::pair<float_type,float_type> const &i, 
-                        std::pair<float_type,float_type> const &j) 
+  static bool comp_pair(std::pair<G4float_type,G4float_type> const &i, 
+                        std::pair<G4float_type,G4float_type> const &j) 
   {return i.first<j.first;}
 
-  std::vector<float_type> Xraw, X, F, y2;
-  c2_const_ptr<float_type> sampler_function;
+  std::vector<G4float_type> Xraw, X, F, y2;
+  c2_const_ptr<G4float_type> sampler_function;
   bool xInverted;
   mutable size_t lastKLow;
 };
@@ -1721,18 +1721,18 @@ protected:
 /// \brief A spline with X transformed into log space.  
 /// \ingroup interpolators
 ///
-template <typename float_type=double> class log_lin_interpolating_function_p 
-  : public interpolating_function_p <float_type> {
+template <typename G4float_type=G4double> class log_lin_interpolating_function_p 
+  : public interpolating_function_p <G4float_type> {
 public:
   /// \brief an empty log-linear cubic-spline interpolating_function_p
   ///
   log_lin_interpolating_function_p() : 
-    interpolating_function_p<float_type>(
-       *new c2_log_lin_function_transformation<float_type>)
+    interpolating_function_p<G4float_type>(
+       *new c2_log_lin_function_transformation<G4float_type>)
   { }
-  virtual interpolating_function_p<float_type> &clone() 
+  virtual interpolating_function_p<G4float_type> &clone() 
     const /* throw(c2_exception) */
-  { return *new log_lin_interpolating_function_p<float_type>(); }
+  { return *new log_lin_interpolating_function_p<G4float_type>(); }
 };
 
 
@@ -1740,18 +1740,18 @@ public:
 /// \ingroup interpolators
 /// Most useful for functions looking like y=exp(x)
 ///
-template <typename float_type=double> class lin_log_interpolating_function_p 
-  : public interpolating_function_p <float_type> {
+template <typename G4float_type=G4double> class lin_log_interpolating_function_p 
+  : public interpolating_function_p <G4float_type> {
 public:
     /// \brief an empty linear-log cubic-spline interpolating_function_p
     ///
   lin_log_interpolating_function_p() 
-  : interpolating_function_p<float_type>(
-      *new c2_lin_log_function_transformation<float_type>)
+  : interpolating_function_p<G4float_type>(
+      *new c2_lin_log_function_transformation<G4float_type>)
   { } 
-  virtual interpolating_function_p<float_type> &clone() 
+  virtual interpolating_function_p<G4float_type> &clone() 
     const /* throw(c2_exception) */
-  { return *new lin_log_interpolating_function_p<float_type>(); }
+  { return *new lin_log_interpolating_function_p<G4float_type>(); }
 };
 
 
@@ -1760,18 +1760,18 @@ public:
 /// Most useful for functions looking like y=x^n or any other 
 /// function with a huge X and Y dynamic range.
 ///
-template <typename float_type=double> class log_log_interpolating_function_p 
-  : public interpolating_function_p <float_type> {
+template <typename G4float_type=G4double> class log_log_interpolating_function_p 
+  : public interpolating_function_p <G4float_type> {
 public:        
     /// \brief an empty log-log cubic-spline interpolating_function_p
     ///
   log_log_interpolating_function_p() : 
-    interpolating_function_p<float_type>(
-      *new c2_log_log_function_transformation<float_type>)
+    interpolating_function_p<G4float_type>(
+      *new c2_log_log_function_transformation<G4float_type>)
   { } 
-  virtual interpolating_function_p<float_type> &clone() 
+  virtual interpolating_function_p<G4float_type> &clone() 
     const /* throw(c2_exception) */
-  { return *new log_log_interpolating_function_p<float_type>(); }
+  { return *new log_log_interpolating_function_p<G4float_type>(); }
 };
 
 
@@ -1780,56 +1780,56 @@ public:
 /// Most useful for thermodynamic types of data where Y is roughly A*exp(-B/x). 
 /// Typical examples are reaction rate data, and thermistor calibration data.
 ///
-template <typename float_type=double> class arrhenius_interpolating_function_p 
-  : public interpolating_function_p <float_type> {
+template <typename G4float_type=G4double> class arrhenius_interpolating_function_p 
+  : public interpolating_function_p <G4float_type> {
 public:
     /// \brief an empty arrhenius cubic-spline interpolating_function_p
     ///
   arrhenius_interpolating_function_p() 
-  : interpolating_function_p<float_type>(
-      *new c2_arrhenius_function_transformation<float_type>)
+  : interpolating_function_p<G4float_type>(
+      *new c2_arrhenius_function_transformation<G4float_type>)
   { } 
-  virtual interpolating_function_p<float_type> &clone() 
+  virtual interpolating_function_p<G4float_type> &clone() 
     const /* throw(c2_exception) */
-  { return *new arrhenius_interpolating_function_p<float_type>(); }        
+  { return *new arrhenius_interpolating_function_p<G4float_type>(); }        
 };
 
 /// \brief compute sin(x) with its derivatives.
 /// \ingroup math_functions
 ///
 /// The factory function c2_factory::sin() creates *new c2_sin_p
-template <typename float_type=double> class c2_sin_p 
-  : public c2_function<float_type> {
+template <typename G4float_type=G4double> class c2_sin_p 
+  : public c2_function<G4float_type> {
 public:
   /// \brief constructor.
-  c2_sin_p() : c2_function<float_type>() {}
+  c2_sin_p() : c2_function<G4float_type>() {}
         
-  virtual float_type value_with_derivatives(
-          float_type x, float_type *yprime, 
-          float_type *yprime2) const /* throw(c2_exception) */
-  { float_type q=std::sin(x); 
+  virtual G4float_type value_with_derivatives(
+          G4float_type x, G4float_type *yprime, 
+          G4float_type *yprime2) const /* throw(c2_exception) */
+  { G4float_type q=std::sin(x); 
     if(yprime) *yprime=std::cos(x); 
     if(yprime2) *yprime2=-q; 
     return q; }
     
-  virtual void get_sampling_grid(float_type amin, float_type amax,  
-                                 std::vector<float_type> &grid) const; 
+  virtual void get_sampling_grid(G4float_type amin, G4float_type amax,  
+                                 std::vector<G4float_type> &grid) const; 
 };
 
 /// \brief compute cos(x) with its derivatives.
 /// \ingroup math_functions
 ///
 /// The factory function c2_factory::cos() creates *new c2_cos_p
-template <typename float_type=double> class c2_cos_p 
-  : public c2_sin_p<float_type> {
+template <typename G4float_type=G4double> class c2_cos_p 
+  : public c2_sin_p<G4float_type> {
 public:
   /// \brief constructor.
-  c2_cos_p() : c2_sin_p<float_type>() {}
+  c2_cos_p() : c2_sin_p<G4float_type>() {}
         
-  virtual float_type value_with_derivatives(
-          float_type x, float_type *yprime, 
-          float_type *yprime2) const /* throw(c2_exception) */
-  { float_type q=std::cos(x); 
+  virtual G4float_type value_with_derivatives(
+          G4float_type x, G4float_type *yprime, 
+          G4float_type *yprime2) const /* throw(c2_exception) */
+  { G4float_type q=std::cos(x); 
     if(yprime) *yprime=-std::sin(x); 
     if(yprime2) *yprime2=-q; 
     return q; }
@@ -1839,19 +1839,19 @@ public:
 /// \ingroup math_functions
 ///
 /// The factory function c2_factory::tan() creates *new c2_tan_p
-template <typename float_type=double> class c2_tan_p 
-  : public c2_function<float_type> {          
+template <typename G4float_type=G4double> class c2_tan_p 
+  : public c2_function<G4float_type> {          
 public:
   /// \brief constructor.
-  c2_tan_p() : c2_function<float_type>() {}
+  c2_tan_p() : c2_function<G4float_type>() {}
         
-  virtual float_type value_with_derivatives(
-          float_type x, float_type *yprime, 
-          float_type *yprime2) const /* throw(c2_exception) */
+  virtual G4float_type value_with_derivatives(
+          G4float_type x, G4float_type *yprime, 
+          G4float_type *yprime2) const /* throw(c2_exception) */
   {
-    float_type c=std::cos(x), ss=std::sin(x);
-    float_type t=ss/c;
-    float_type yp=1/(c*c);
+    G4float_type c=std::cos(x), ss=std::sin(x);
+    G4float_type t=ss/c;
+    G4float_type yp=1/(c*c);
     if(yprime) { *yprime=yp; } 
     if(yprime2){*yprime2=2*t*yp; } 
     return t; 
@@ -1862,15 +1862,15 @@ public:
 /// \ingroup math_functions
 ///
 /// The factory function c2_factory::log() creates *new c2_log_p
-template <typename float_type=double> class c2_log_p 
-  : public c2_function<float_type> {
+template <typename G4float_type=G4double> class c2_log_p 
+  : public c2_function<G4float_type> {
 public:
   /// \brief constructor.
-  c2_log_p() : c2_function<float_type>() {}
+  c2_log_p() : c2_function<G4float_type>() {}
 
-  virtual float_type value_with_derivatives(
-          float_type x, float_type *yprime, 
-          float_type *yprime2) const /* throw(c2_exception) */
+  virtual G4float_type value_with_derivatives(
+          G4float_type x, G4float_type *yprime, 
+          G4float_type *yprime2) const /* throw(c2_exception) */
   { if(yprime) *yprime=1.0/x; 
     if(yprime2) *yprime2=-1.0/(x*x); 
     return std::log(x); }        
@@ -1880,16 +1880,16 @@ public:
 /// \ingroup math_functions
 ///
 /// The factory function c2_factory::exp() creates *new c2_exp_p
-template <typename float_type=double>  class c2_exp_p 
-  : public c2_function<float_type> {
+template <typename G4float_type=G4double>  class c2_exp_p 
+  : public c2_function<G4float_type> {
 public:
   /// \brief constructor.
-  c2_exp_p() : c2_function<float_type>() {}
+  c2_exp_p() : c2_function<G4float_type>() {}
 
-  virtual float_type value_with_derivatives(
-          float_type x, float_type *yprime, 
-          float_type *yprime2) const /* throw(c2_exception) */
-  { float_type q=std::exp(x); 
+  virtual G4float_type value_with_derivatives(
+          G4float_type x, G4float_type *yprime, 
+          G4float_type *yprime2) const /* throw(c2_exception) */
+  { G4float_type q=std::exp(x); 
     if(yprime) *yprime=q; 
     if(yprime2) *yprime2=q; 
     return q; }
@@ -1899,16 +1899,16 @@ public:
 /// \ingroup math_functions
 ///
 /// The factory function c2_factory::sqrt() creates *new c2_sqrt_p()
-template <typename float_type=double> class c2_sqrt_p 
-  : public c2_function<float_type> {
+template <typename G4float_type=G4double> class c2_sqrt_p 
+  : public c2_function<G4float_type> {
 public:
   /// \brief constructor.
-  c2_sqrt_p() : c2_function<float_type>() {}
+  c2_sqrt_p() : c2_function<G4float_type>() {}
         
-  virtual float_type value_with_derivatives(
-          float_type x, float_type *yprime, 
-          float_type *yprime2) const /* throw(c2_exception) */
-  { float_type q=std::sqrt(x); 
+  virtual G4float_type value_with_derivatives(
+          G4float_type x, G4float_type *yprime, 
+          G4float_type *yprime2) const /* throw(c2_exception) */
+  { G4float_type q=std::sqrt(x); 
     if(yprime) *yprime=0.5/q; 
     if(yprime2) *yprime2=-0.25/(x*q); 
     return q; }
@@ -1918,42 +1918,42 @@ public:
 /// \ingroup parametric_functions
 ///
 /// The factory function c2_factory::recip() creates *new c2_recip_p
-template <typename float_type=double> class c2_recip_p 
-  : public c2_function<float_type> {
+template <typename G4float_type=G4double> class c2_recip_p 
+  : public c2_function<G4float_type> {
 public:
   /// \brief constructor.
-  c2_recip_p(float_type scale) : c2_function<float_type>(), rscale(scale) {}
+  c2_recip_p(G4float_type scale) : c2_function<G4float_type>(), rscale(scale) {}
         
-  virtual float_type value_with_derivatives(
-          float_type x, float_type *yprime, 
-          float_type *yprime2) const /* throw(c2_exception) */
+  virtual G4float_type value_with_derivatives(
+          G4float_type x, G4float_type *yprime, 
+          G4float_type *yprime2) const /* throw(c2_exception) */
   { 
-    float_type q=1.0/x; 
-    float_type y=rscale*q;
+    G4float_type q=1.0/x; 
+    G4float_type y=rscale*q;
     if(yprime) *yprime=-y*q; 
     if(yprime2) *yprime2=2*y*q*q; 
     return y; 
   }
   /// \brief reset the scale factor
   /// \param scale the new numerator
-  void reset(float_type scale) { rscale=scale; } 
+  void reset(G4float_type scale) { rscale=scale; } 
 private:
-  float_type rscale;
+  G4float_type rscale;
 };
 
 /// \brief compute x with its derivatives.
 /// \ingroup math_functions
 ///
 /// The factory function c2_factory::identity() creates *new c2_identity_p
-template <typename float_type=double> class c2_identity_p 
-  : public c2_function<float_type> {
+template <typename G4float_type=G4double> class c2_identity_p 
+  : public c2_function<G4float_type> {
 public:
   /// \brief constructor.
-  c2_identity_p() : c2_function<float_type>() {}
+  c2_identity_p() : c2_function<G4float_type>() {}
         
-  virtual float_type value_with_derivatives(
-          float_type x, float_type *yprime, 
-          float_type *yprime2) const /* throw(c2_exception) */
+  virtual G4float_type value_with_derivatives(
+          G4float_type x, G4float_type *yprime, 
+          G4float_type *yprime2) const /* throw(c2_exception) */
   { if(yprime) *yprime=1.0; if(yprime2) *yprime2=0; return x; }
 };
 
@@ -1962,36 +1962,36 @@ public:
  \ingroup parametric_functions
  for example, given a c2_function \a f 
  \code 
- c2_function<double> &F=c2_linear<double>(1.2, 2.0, 3.0)(f);
+ c2_function<G4double> &F=c2_linear<G4double>(1.2, 2.0, 3.0)(f);
  \endcode
  produces a new c2_function F=2.0+3.0*(\a f - 1.2) 
  
  The factory function c2_factory::linear() creates *new c2_linear_p
 */
-template <typename float_type=double> class c2_linear_p 
-  : public c2_function<float_type> {
+template <typename G4float_type=G4double> class c2_linear_p 
+  : public c2_function<G4float_type> {
 public:
   /// \brief Construct the operator f=y0 + slope * (x-x0)
   /// \param x0 the x offset
   /// \param y0 the y-intercept i.e. f(x0)
   /// \param slope the slope of the mapping
-  c2_linear_p(float_type x0, float_type y0, float_type slope) : 
-    c2_function<float_type>(), xint(x0), intercept(y0), m(slope) {}
+  c2_linear_p(G4float_type x0, G4float_type y0, G4float_type slope) : 
+    c2_function<G4float_type>(), xint(x0), intercept(y0), m(slope) {}
   /// \brief Change the slope and intercepts after construction.
   /// \param x0 the x offset
   /// \param y0 the y-intercept 
   /// \param slope the slope of the mapping
-  void reset(float_type x0, float_type y0, float_type slope) 
+  void reset(G4float_type x0, G4float_type y0, G4float_type slope) 
   { xint=x0; intercept=y0; m=slope; } 
-  virtual float_type value_with_derivatives(
-          float_type x, float_type *yprime, 
-          float_type *yprime2) const /* throw(c2_exception) */
+  virtual G4float_type value_with_derivatives(
+          G4float_type x, G4float_type *yprime, 
+          G4float_type *yprime2) const /* throw(c2_exception) */
   { if(yprime) *yprime=m; 
     if(yprime2) *yprime2=0; 
     return m*(x-xint)+intercept; }
         
 private:
-  float_type xint, intercept, m;
+  G4float_type xint, intercept, m;
 protected:
   c2_linear_p() {} 
 };
@@ -2001,7 +2001,7 @@ protected:
  \ingroup parametric_functions
  for example, given a c2_function \a f 
  \code 
- c2_function<double> &F=c2_quadratic<double>(1.2, 2.0, 3.0, 4.0)(f);
+ c2_function<G4double> &F=c2_quadratic<G4double>(1.2, 2.0, 3.0, 4.0)(f);
  \endcode
  produces a new c2_function F=2.0 + 3.0*(f-1.2) + 4.0*(f-1.2)^2 
 
@@ -2010,34 +2010,34 @@ protected:
 
  The factory function c2_factory::quadratic() creates *new c2_quadratic_p
  */
-template <typename float_type=double> class c2_quadratic_p 
-  : public c2_function<float_type> {
+template <typename G4float_type=G4double> class c2_quadratic_p 
+  : public c2_function<G4float_type> {
 public:
     /// \brief Construct the operator
     /// \param x0 the center around which the powers are computed
     /// \param y0 the value of the function at \a x = \a x0
     /// \param xcoef the scale on the (\a x - \a x0) term
     /// \param x2coef the scale on the (\a x - \a x0)^2 term
-  c2_quadratic_p(float_type x0, float_type y0, 
-                 float_type xcoef, float_type x2coef) : 
-    c2_function<float_type>(), intercept(y0), center(x0), a(x2coef), b(xcoef) {}
+  c2_quadratic_p(G4float_type x0, G4float_type y0, 
+                 G4float_type xcoef, G4float_type x2coef) : 
+    c2_function<G4float_type>(), intercept(y0), center(x0), a(x2coef), b(xcoef) {}
     /// \brief Modify the coefficients after construction
     /// \param x0 the new center around which the powers are computed
     /// \param y0 the new value of the function at \a x = \a x0
     /// \param xcoef the new scale on the (\a x - \a x0) term
     /// \param x2coef the new scale on the (\a x - \a x0)^2 term    
-  void reset(float_type x0, float_type y0, float_type xcoef,
-             float_type x2coef) { intercept=y0; center=x0; a=x2coef; b=xcoef; } 
-  virtual float_type value_with_derivatives(
-          float_type x, float_type *yprime, 
-          float_type *yprime2) const /* throw(c2_exception) */
-  { float_type dx=x-center; 
+  void reset(G4float_type x0, G4float_type y0, G4float_type xcoef,
+             G4float_type x2coef) { intercept=y0; center=x0; a=x2coef; b=xcoef; } 
+  virtual G4float_type value_with_derivatives(
+          G4float_type x, G4float_type *yprime, 
+          G4float_type *yprime2) const /* throw(c2_exception) */
+  { G4float_type dx=x-center; 
     if(yprime) *yprime=2*a*dx+b; 
     if(yprime2) *yprime2=2*a; 
     return a*dx*dx+b*dx+intercept; }
         
 private:
-  float_type intercept, center, a, b;
+  G4float_type intercept, center, a, b;
 protected:
   c2_quadratic_p() {} 
 };
@@ -2047,35 +2047,35 @@ protected:
  \ingroup parametric_functions
  for example, given a c2_function \a f 
  \code 
- c2_power_law_p<double> PLaw(1.2, 2.5);
- c2_composed_function_p<double> &F=PLaw(f); 
+ c2_power_law_p<G4double> PLaw(1.2, 2.5);
+ c2_composed_function_p<G4double> &F=PLaw(f); 
  \endcode
  produces a new c2_function F=1.2 * f^2.5 
  
  The factory function c2_factory::power_law() creates *new c2_power_law_p
  */
-template <typename float_type=double> class c2_power_law_p 
-  : public c2_function<float_type> {
+template <typename G4float_type=G4double> class c2_power_law_p 
+  : public c2_function<G4float_type> {
 public:
     /// \brief Construct the operator
     /// \param scale the multipler
     /// \param power the exponent
-  c2_power_law_p(float_type scale, float_type power) :
-    c2_function<float_type>(), a(scale), b(power) {}
+  c2_power_law_p(G4float_type scale, G4float_type power) :
+    c2_function<G4float_type>(), a(scale), b(power) {}
     /// \brief Modify the mapping after construction
     /// \param scale the new multipler
     /// \param power the new exponent
-  void reset(float_type scale, float_type power) { a=scale; b=power; }
-  virtual float_type value_with_derivatives(
-          float_type x, float_type *yprime, 
-          float_type *yprime2) const /* throw(c2_exception) */
-  { float_type q=a*std::pow(x,b-2); 
+  void reset(G4float_type scale, G4float_type power) { a=scale; b=power; }
+  virtual G4float_type value_with_derivatives(
+          G4float_type x, G4float_type *yprime, 
+          G4float_type *yprime2) const /* throw(c2_exception) */
+  { G4float_type q=a*std::pow(x,b-2); 
     if(yprime) *yprime=b*q*x; 
     if(yprime2) *yprime2=b*(b-1)*q; 
     return q*x*x; }
         
 private:
-  float_type a, b;
+  G4float_type a, b;
 protected:
   c2_power_law_p() {} 
 };
@@ -2085,7 +2085,7 @@ protected:
  \ingroup containers
  for example, given a c2_function \a f 
  \code 
- c2_inverse_function<double> inv(f);
+ c2_inverse_function<G4double> inv(f);
  a=f(x);
  x1=inv(a);
  \endcode
@@ -2097,22 +2097,22 @@ protected:
  \see ref combined_inversion_hinting_sampling
 
 */
-template <typename float_type=double> class c2_inverse_function_p 
-  : public c2_function<float_type> {
+template <typename G4float_type=G4double> class c2_inverse_function_p 
+  : public c2_function<G4float_type> {
 public:
   /// \brief Construct the operator
   /// \param source the function to be inverted
-  c2_inverse_function_p(const c2_function<float_type> &source);  
-  virtual float_type value_with_derivatives(
-          float_type x, float_type *yprime, 
-          float_type *yprime2) const /* throw(c2_exception) */;
+  c2_inverse_function_p(const c2_function<G4float_type> &source);  
+  virtual G4float_type value_with_derivatives(
+          G4float_type x, G4float_type *yprime, 
+          G4float_type *yprime2) const /* throw(c2_exception) */;
     
   /// \brief give the function a hint as to where to look for its inverse
   /// \param hint the likely value of the inverse, 
   /// which defaults to whatever the evaluation returned.
-    void set_start_hint(float_type hint) const { start_hint=hint; }
+    void set_start_hint(G4float_type hint) const { start_hint=hint; }
     
-    virtual float_type get_start_hint(float_type x) const 
+    virtual G4float_type get_start_hint(G4float_type x) const 
   { return hinting_function.valid()? hinting_function(x) : start_hint; } 
 
   /// \brief set or unset the approximate function used to start the root finder
@@ -2140,20 +2140,20 @@ public:
   /// \param hint_func the function that is an approximate inverse 
   /// of the parent of 
   /// this inverse_function
-  void set_hinting_function(const c2_function<float_type> *hint_func) 
+  void set_hinting_function(const c2_function<G4float_type> *hint_func) 
   { hinting_function.set_function(hint_func); }
   /// \brief set the hinting function from a pointer.
   /// 
   /// See \ref set_hinting_function_discussion "discussion"
   /// \param hint_func the container holding the function
-  void set_hinting_function(const c2_const_ptr<float_type> hint_func) 
+  void set_hinting_function(const c2_const_ptr<G4float_type> hint_func) 
   { hinting_function=hint_func; }
         
 protected:
   c2_inverse_function_p() {} 
-  mutable float_type start_hint;
-  const c2_const_ptr<float_type> func;
-  c2_const_ptr<float_type> hinting_function;
+  mutable G4float_type start_hint;
+  const c2_const_ptr<G4float_type> func;
+  c2_const_ptr<G4float_type> hinting_function;
 };
 
 /** 
@@ -2169,8 +2169,8 @@ protected:
   reversed accumulation (starting at the high end) 
 */
 
-template <typename float_type=double>  class accumulated_histogram 
-  : public interpolating_function_p <float_type> {
+template <typename G4float_type=G4double>  class accumulated_histogram 
+  : public interpolating_function_p <G4float_type> {
 public:
   /// \brief Construct the integrated histogram
   /// \param binedges the edges of the bins in \a binheights.  
@@ -2181,8 +2181,8 @@ public:
   /// and return inverse function for random generation
   /// \param drop_zeros eliminate null bins before integrating, 
   /// so integral is strictly monotonic. 
-  accumulated_histogram(const std::vector<float_type>binedges, 
-                        const std::vector<float_type> binheights,
+  accumulated_histogram(const std::vector<G4float_type>binedges, 
+                        const std::vector<G4float_type> binheights,
                         bool normalize=false, 
                         bool inverse_function=false, bool drop_zeros=true);
         
@@ -2211,8 +2211,8 @@ public:
 /// \see ref piecewise_applications_subsec "Sample Applications" 
 /// and \ref c2_function::adaptively_sample() "Adaptive sampling"
 ///
-template <typename float_type=double> class c2_connector_function_p 
-  : public c2_function<float_type> {
+template <typename G4float_type=G4double> class c2_connector_function_p 
+  : public c2_function<G4float_type> {
 public:        
   /// \brief construct the container from two functions
   /// \param x0 the point at which to match \a f1 and its derivatives
@@ -2224,9 +2224,9 @@ public:
   /// \param y1 the value to match at the midpoint, if \a auto_center is false
   /// \return a c2_function with domain (\a x0,\a x2) which smoothly 
   /// connects \a f0(x0) and \a f2(x2)
-  c2_connector_function_p(float_type x0, const c2_function<float_type> &f0, 
-                          float_type x2, const c2_function<float_type> &f2, 
-                        bool auto_center, float_type y1);
+  c2_connector_function_p(G4float_type x0, const c2_function<G4float_type> &f0, 
+                          G4float_type x2, const c2_function<G4float_type> &f2, 
+                        bool auto_center, G4float_type y1);
   /// \brief construct the container from numerical values
   /// \param x0 the position of the left edge
   /// \param y0 the function derivative on the left boundary
@@ -2243,10 +2243,10 @@ public:
   /// which smoothly connects the points described
   /// \anchor c2_connector_raw_init_docs
   c2_connector_function_p(
-                float_type x0, float_type y0, float_type yp0, float_type ypp0, 
-                float_type x2, float_type y2, float_type yp2, float_type ypp2, 
-                bool auto_center, float_type y1);
-  /// \brief construct the container from c2_fblock<float_type> objects
+                G4float_type x0, G4float_type y0, G4float_type yp0, G4float_type ypp0, 
+                G4float_type x2, G4float_type y2, G4float_type yp2, G4float_type ypp2, 
+                bool auto_center, G4float_type y1);
+  /// \brief construct the container from c2_fblock<G4float_type> objects
   /// \param fb0 the left edge
   /// \param fb2 the right edge
   /// \param auto_center if true, no midpoint value is specified.  
@@ -2255,23 +2255,23 @@ public:
   /// \return a c2_function with domain (\a fb0.x,\a fb2.x) which smoothly 
   /// connects \a fb0 and \a fb2
   c2_connector_function_p(
-                const c2_fblock<float_type> &fb0, 
-                const c2_fblock<float_type> &fb2, 
-                bool auto_center, float_type y1);
+                const c2_fblock<G4float_type> &fb0, 
+                const c2_fblock<G4float_type> &fb2, 
+                bool auto_center, G4float_type y1);
 
   /// \brief destructor
   virtual ~c2_connector_function_p();
-  virtual float_type value_with_derivatives(
-          float_type x, float_type *yprime, 
-          float_type *yprime2) const /* throw (c2_exception) */;
+  virtual G4float_type value_with_derivatives(
+          G4float_type x, G4float_type *yprime, 
+          G4float_type *yprime2) const /* throw (c2_exception) */;
 protected:
         /// \brief fill container numerically
         void init(
-                  const c2_fblock<float_type> &fb0, 
-                  const c2_fblock<float_type> &fb2, 
-                  bool auto_center, float_type y1);
+                  const c2_fblock<G4float_type> &fb0, 
+                  const c2_fblock<G4float_type> &fb2, 
+                  bool auto_center, G4float_type y1);
 
-  float_type fhinv, fy1, fa, fb, fc, fd, fe, ff;
+  G4float_type fhinv, fy1, fa, fb, fc, fd, fe, ff;
 };
 
 /// \brief create a c2_function which is a piecewise assembly 
@@ -2299,16 +2299,16 @@ protected:
 /// c2_connector_function_p page \n
 /// \ref c2_function::adaptively_sample() "Adaptive sampling"
 ///
-template <typename float_type=double> class c2_piecewise_function_p 
-  : public c2_function<float_type> {
+template <typename G4float_type=G4double> class c2_piecewise_function_p 
+  : public c2_function<G4float_type> {
 public:        
   /// \brief construct the container
   c2_piecewise_function_p();
   /// \brief destructor
   virtual ~c2_piecewise_function_p();
-  virtual float_type value_with_derivatives(
-          float_type x, float_type *yprime, 
-          float_type *yprime2) const /* throw (c2_exception) */;
+  virtual G4float_type value_with_derivatives(
+          G4float_type x, G4float_type *yprime, 
+          G4float_type *yprime2) const /* throw (c2_exception) */;
   /// \brief append a new function to the sequence
   ///
   /// This takes a c2_function, and appends it onto the end of 
@@ -2321,10 +2321,10 @@ public:
   /// in by linear interpolation.
   /// \param func a c2_function with a defined domain to be 
   /// appended to the collection
-  void append_function(const c2_function<float_type> &func) 
+  void append_function(const c2_function<G4float_type> &func) 
     /* throw (c2_exception) */;
 protected:
-  std::vector<c2_const_ptr<float_type> > functions;
+  std::vector<c2_const_ptr<G4float_type> > functions;
   mutable int lastKLow;
 };
 

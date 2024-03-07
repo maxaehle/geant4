@@ -65,7 +65,7 @@ class G4JpegCoder
         int mYBlock[4][64];
         int mCbBlock[64];
         int mCrBlock[64];
-        double mCosT[8][8];
+        G4double mCosT[8][8];
         int mDCTData[64];
         int mPreDC[3];
 

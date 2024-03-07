@@ -1,5 +1,5 @@
 
-TOOLS_GL2PSDLL_API tools_GLint tools_gl2psSetBackgroundColor(float a_r,float a_g,float a_b)
+TOOLS_GL2PSDLL_API tools_GLint tools_gl2psSetBackgroundColor(G4float a_r,G4float a_g,G4float a_b)
 {
   if(!tools_gl2ps_context) return TOOLS_GL2PS_UNINITIALIZED;
 

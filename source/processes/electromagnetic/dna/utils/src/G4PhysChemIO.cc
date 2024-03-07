@@ -284,7 +284,7 @@ void G4Analysis::CreateSolvatedElectron(const G4Track* electronTrack,
   
   //----------------------------------------------------------------------------
   const G4ThreeVector& parentPos = electronTrack->GetPosition();
-  const double i_nm = 1./nanometer;
+  const G4double i_nm = 1./nanometer;
   
   fpAnalysisManager->FillNtupleDColumn(fNtupleID,5, parentPos.x() *i_nm);
   fpAnalysisManager->FillNtupleDColumn(fNtupleID,6, parentPos.y() *i_nm);

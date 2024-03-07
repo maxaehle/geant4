@@ -76,10 +76,10 @@ void  CexmcRunAction::PrintResults(
                     G4int  nmbOfFalseHitsTriggeredRec )
 {
     /* there are 7 auxiliary columns:
-     * 1. acc real, [floating point number]
+     * 1. acc real, [G4floating point number]
      * 2. triggered real,
      * 3. total hits sampled and monitored,
-     * 4. acc reconstructed, [floating point number]
+     * 4. acc reconstructed, [G4floating point number]
      * 5. triggered reconstructed,
      * 6. total hits sampled and monitored (identical with #3),
      * 7. total hits sampled.
@@ -92,7 +92,7 @@ void  CexmcRunAction::PrintResults(
     for ( size_t  i( 0 ); i < nmbOfAuxColumns; ++i )
         maxSize[ i ] = 0;
 
-    /* addition of 2 (for '0.') for acceptances, that are floating point
+    /* addition of 2 (for '0.') for acceptances, that are G4floating point
      * numbers, is correct as far as ios::fixed will be used, and no negative
      * values are expected, and values will be less than 1. */
     maxSize[ 0 ] = prec + 2;

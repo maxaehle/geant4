@@ -28,7 +28,7 @@
 // Author: Tatsumi Koi (SLAC/SCCS), 2007
 // --------------------------------------------------------------------------
 
-#include <cfloat>
+#include <cG4float>
 #include <iostream>
 #include <numeric>
 

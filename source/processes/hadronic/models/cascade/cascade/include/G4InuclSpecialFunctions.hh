@@ -91,7 +91,7 @@ namespace G4InuclSpecialFunctions {
     paraMaker(G4int verbose=0);
     ~paraMaker();
 
-  // NOTE:  Passing Z as double here, to be used as interpolation argument
+  // NOTE:  Passing Z as G4double here, to be used as interpolation argument
     void getParams(G4double Z, std::pair<std::vector<G4double>,
 		                         std::vector<G4double> >& parms);
 

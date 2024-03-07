@@ -26,7 +26,7 @@
 // This avoids a bias in the generated numbers because the upper bits of the LCG
 // state, that is smaller than the modulus \f$ m = 2^{576} - 2^{240} + 1 \f$ (not
 // a power of 2!), have a higher probability of being 0 than 1. And finally, this
-// implementation draws 48 random bits for each generated floating point number
+// implementation draws 48 random bits for each generated G4floating point number
 // (instead of 52 bits as in the original generator) to maintain the theoretical
 // properties from understanding the original transition function of RANLUX as a
 // chaotic dynamical system.
@@ -108,19 +108,19 @@ uint64_t RanluxppEngine::nextRandomBits() {
   return bits;
 }
 
-double RanluxppEngine::flat() {
-  // RandomEngine wants a "double random values ranging between ]0,1[", so
+G4double RanluxppEngine::flat() {
+  // RandomEngine wants a "G4double random values ranging between ]0,1[", so
   // exclude all zero bits.
   uint64_t random;
   do {
     random = nextRandomBits();
   } while (random == 0);
 
-  static constexpr double div = 1.0 / (uint64_t(1) << kBits);
+  static constexpr G4double div = 1.0 / (uint64_t(1) << kBits);
   return random * div;
 }
 
-void RanluxppEngine::flatArray(const int size, double *vect) {
+void RanluxppEngine::flatArray(const int size, G4double *vect) {
   for (int i = 0; i < size; i++) {
     vect[i] = flat();
   }

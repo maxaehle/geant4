@@ -70,12 +70,12 @@ private:
 public:
   G4double LevelDensityParameter(G4int A, G4int Z, G4double U) const final;
 
-  void setAfanLow(const double a) { afanLow = a; UpdateAfanSlope(); }
-  void setAfanHigh(const double a) { afanHigh = a; UpdateAfanSlope(); }
+  void setAfanLow(const G4double a) { afanLow = a; UpdateAfanSlope(); }
+  void setAfanHigh(const G4double a) { afanHigh = a; UpdateAfanSlope(); }
   void setZLow(const int z) { ZLow = z; UpdateAfanSlope(); }
   void setZHigh(const int z) { ZHigh = z; UpdateAfanSlope(); }
-  double getAfanLow() const { return afanLow; }
-  double getAfanHigh() const { return afanHigh; }
+  G4double getAfanLow() const { return afanLow; }
+  G4double getAfanHigh() const { return afanHigh; }
   int getZLow() const { return ZLow; }
   int getZHigh() const { return ZHigh; }
 
@@ -85,9 +85,9 @@ private:
 
   G4NuclearLevelData* fNucData;
 
-  double afanLow, afanHigh;
+  G4double afanLow, afanHigh;
   int ZLow, ZHigh;
-  double afanSlope;
+  G4double afanSlope;
 
 };
 

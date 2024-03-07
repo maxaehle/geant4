@@ -453,7 +453,7 @@ void G4Reggeons::GetProbabilities(G4double B, G4int Mode,
   // Puprose of the method is a calculation of inelastic interaction probability     (Pint),
   //                                           probability of projectile diffraction (Pprd),
   //                                           probability of target diffraction     (Ptrd),
-  //                                           probability of double diffraction     (Pdd ),
+  //                                           probability of G4double diffraction     (Pdd ),
   //                                           probability of non-diffractive inter. (Pnd ),
   //                                           probability of quark-exc. inter.      (Pnvr),
   //                                           number of cutted pomerons             (NcutPomerons).
@@ -496,7 +496,7 @@ void G4Reggeons::GetProbabilities(G4double B, G4int Mode,
     Pint = Apr_Diff + Atr_Diff + ADiff + And;
     Pprd = Apr_Diff/Pint;                     // Probability of projectile diffraction
     Ptrd = Atr_Diff/Pint;                     // Probability of target diffraction 
-    Pdd  = ADiff   /Pint;                     // Probability of double diffraction
+    Pdd  = ADiff   /Pint;                     // Probability of G4double diffraction
     Pnd  = AndP    /Pint;                     // Probability of non-diffractive inelastic interaction
     Pnvr = AndR    /Pint;                     // Probability of non-vacuum reggeon (nvr) inelastic interaction
   }

@@ -31,7 +31,7 @@
 // functions. Integer argument should be in the interval 0-512, no
 // check is performed inside these methods for performance reasons.
 // For factorial integer argument should be in the interval 0-170
-// Computations with double arguments are fast for the interval
+// Computations with G4double arguments are fast for the interval
 // 0.002-511.5 for all functions except exponent, which is computed
 // for the interval 0-84.4, standard library is used in the opposite case
 

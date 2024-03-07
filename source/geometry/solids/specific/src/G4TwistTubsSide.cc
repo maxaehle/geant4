@@ -323,7 +323,7 @@ G4int G4TwistTubsSide::DistanceToSurface(const G4ThreeVector& gp,
    }
    else if (D > DBL_MIN)
    {
-      // double solutions
+      // G4double solutions
 
       D = std::sqrt(D);
       G4double      factor = 0.5/a;
@@ -665,7 +665,7 @@ G4int G4TwistTubsSide::DistanceToSurface(const G4ThreeVector& gp,
    }
 
    // Now, we chose correct diagonal.
-   // First try. divide quadrangle into double triangle by diagonal and 
+   // First try. divide quadrangle into G4double triangle by diagonal and 
    // calculate distance to both surfaces.
 
    G4ThreeVector xxacb;   // foot of normal from plane ACB to p
@@ -696,7 +696,7 @@ G4int G4TwistTubsSide::DistanceToSurface(const G4ThreeVector& gp,
    if (distToACB * distToCAD > 0 && distToACB < 0)
    {
       // both distToACB and distToCAD are negative.
-      // divide quadrangle into double triangle by diagonal
+      // divide quadrangle into G4double triangle by diagonal
       G4ThreeVector normal;
       distance[0] = DistanceToPlane(p, A, B, C, D, parity, xx, normal);
    }

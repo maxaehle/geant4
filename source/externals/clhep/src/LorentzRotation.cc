@@ -20,15 +20,15 @@ namespace CLHEP  {
 
 
 HepLorentzRotation & HepLorentzRotation::set
-				(double bx, double by, double bz) {
-  double bp2 = bx*bx + by*by + bz*bz;
+				(G4double bx, G4double by, G4double bz) {
+  G4double bp2 = bx*bx + by*by + bz*bz;
 //  if (bp2 >= 1) {
 //    std::cerr << "HepLorentzRotation::set() - "
 //      << "Boost Vector supplied to set HepLorentzRotation represents speed >= c."
 //      << std::endl;
 //  }    
-  double gamma = 1.0 / std::sqrt(1.0 - bp2);
-  double bgamma = gamma * gamma / (1.0 + gamma);
+  G4double gamma = 1.0 / std::sqrt(1.0 - bp2);
+  G4double bgamma = gamma * gamma / (1.0 + gamma);
   mxx = 1.0 + bgamma * bx * bx;
   myy = 1.0 + bgamma * by * by;
   mzz = 1.0 + bgamma * bz * bz;
@@ -60,7 +60,7 @@ HepLorentzRotation & HepLorentzRotation::set
 
 // ------------  Subscripting:
 
-double HepLorentzRotation::operator () (int i, int j) const {
+G4double HepLorentzRotation::operator () (int i, int j) const {
   if (i == 0) {
     if (j == 0) { return xx(); }
     if (j == 1) { return xy(); }
@@ -143,9 +143,9 @@ HepLorentzRotation::matrixMultiplication(const HepRep4x4 & m1) const {
     mtx*m1.xt_ + mty*m1.yt_ + mtz*m1.zt_ + mtt*m1.tt_ );
 }
 
-HepLorentzRotation & HepLorentzRotation::rotateX(double delta) {
-  double c1 = std::cos (delta);
-  double s1 = std::sin (delta);
+HepLorentzRotation & HepLorentzRotation::rotateX(G4double delta) {
+  G4double c1 = std::cos (delta);
+  G4double s1 = std::sin (delta);
   HepLorentzVector rowy = row2();
   HepLorentzVector rowz = row3();
   HepLorentzVector r2 = c1 * rowy - s1 * rowz;
@@ -155,9 +155,9 @@ HepLorentzRotation & HepLorentzRotation::rotateX(double delta) {
   return *this;
 }
 
-HepLorentzRotation & HepLorentzRotation::rotateY(double delta) {
-  double c1 = std::cos (delta);
-  double s1 = std::sin (delta);
+HepLorentzRotation & HepLorentzRotation::rotateY(G4double delta) {
+  G4double c1 = std::cos (delta);
+  G4double s1 = std::sin (delta);
   HepLorentzVector rowx = row1();
   HepLorentzVector rowz = row3();
   HepLorentzVector r1 =  c1 * rowx + s1 * rowz;
@@ -167,9 +167,9 @@ HepLorentzRotation & HepLorentzRotation::rotateY(double delta) {
   return *this;
 }
 
-HepLorentzRotation & HepLorentzRotation::rotateZ(double delta) {
-  double c1 = std::cos (delta);
-  double s1 = std::sin (delta);
+HepLorentzRotation & HepLorentzRotation::rotateZ(G4double delta) {
+  G4double c1 = std::cos (delta);
+  G4double s1 = std::sin (delta);
   HepLorentzVector rowx = row1();
   HepLorentzVector rowy = row2();
   HepLorentzVector r1 = c1 * rowx - s1 * rowy;
@@ -179,15 +179,15 @@ HepLorentzRotation & HepLorentzRotation::rotateZ(double delta) {
   return *this;
 }
 
-HepLorentzRotation & HepLorentzRotation::boostX(double beta) {
-  double b2 = beta*beta;
+HepLorentzRotation & HepLorentzRotation::boostX(G4double beta) {
+  G4double b2 = beta*beta;
 //  if (b2 >= 1) {
 //    std::cerr << "HepLorentzRotation::boostX() - "
 //      << "Beta supplied to HepLorentzRotation::boostX represents speed >= c."
 //      << std::endl;
 //  }    
-  double g1  = 1.0/std::sqrt(1.0-b2);
-  double bg = beta*g1;
+  G4double g1  = 1.0/std::sqrt(1.0-b2);
+  G4double bg = beta*g1;
   HepLorentzVector rowx = row1();
   HepLorentzVector rowt = row4();
   HepLorentzVector r1 =  g1 * rowx + bg * rowt;
@@ -197,15 +197,15 @@ HepLorentzRotation & HepLorentzRotation::boostX(double beta) {
   return *this;
 }
 
-HepLorentzRotation & HepLorentzRotation::boostY(double beta) {
-  double b2 = beta*beta;
+HepLorentzRotation & HepLorentzRotation::boostY(G4double beta) {
+  G4double b2 = beta*beta;
 //  if (b2 >= 1) {
 //    std::cerr << "HepLorentzRotation::boostY() - "
 //      << "Beta supplied to HepLorentzRotation::boostY represents speed >= c."
 //      << std::endl;
 //  }    
-  double g1  = 1.0/std::sqrt(1.0-b2);
-  double bg = beta*g1;
+  G4double g1  = 1.0/std::sqrt(1.0-b2);
+  G4double bg = beta*g1;
   HepLorentzVector rowy = row2();
   HepLorentzVector rowt = row4();
   HepLorentzVector r2 =  g1 * rowy + bg * rowt;
@@ -215,15 +215,15 @@ HepLorentzRotation & HepLorentzRotation::boostY(double beta) {
   return *this;
 }
 
-HepLorentzRotation & HepLorentzRotation::boostZ(double beta) {
-  double b2 = beta*beta;
+HepLorentzRotation & HepLorentzRotation::boostZ(G4double beta) {
+  G4double b2 = beta*beta;
 //  if (b2 >= 1) {
 //    std::cerr << "HepLorentzRotation::boostZ() - "
 //      << "Beta supplied to HepLorentzRotation::boostZ represents speed >= c."
 //      << std::endl;
 //  }    
-  double g1  = 1.0/std::sqrt(1.0-b2);
-  double bg = beta*g1;
+  G4double g1  = 1.0/std::sqrt(1.0-b2);
+  G4double bg = beta*g1;
   HepLorentzVector rowz = row3();
   HepLorentzVector rowt = row4();
   HepLorentzVector r3 =  g1 * rowz + bg * rowt;

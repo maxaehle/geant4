@@ -62,7 +62,7 @@ void DicomFileCT::BuildMaterials()
   }
      
   //  if( DicomVerb(debugVerb) ) G4cout << " BuildMaterials " << fFileName << G4endl;
-  double meanHV = 0.;
+  G4double meanHV = 0.;
   for( int ir = 0; ir < fNoVoxelsY; ir += fCompress ) {
     for( int ic = 0; ic < fNoVoxelsX; ic += fCompress ) {
       meanHV = 0.;
@@ -144,7 +144,7 @@ void DicomFileCT::BuildStructureIDs()
     }
   }
 
-  std::set<double> distInters;
+  std::set<G4double> distInters;
 
   //  std::fill_n(fStructure,fNoVoxelsX*fNoVoxelsY,0);
   //
@@ -174,10 +174,10 @@ void DicomFileCT::BuildStructureIDs()
            if( DicomFileMgr::verbose >= debugVerb ) G4cout << jj << " " << kk << " NPOINTS " 
                  << points.size() << G4endl;
           std::vector<G4ThreeVector> dirs = roic->GetDirections();
-          double minXc = DBL_MAX;
-          double maxXc = -DBL_MAX;
-          double minYc = DBL_MAX;
-          double maxYc = -DBL_MAX;
+          G4double minXc = DBL_MAX;
+          G4double maxXc = -DBL_MAX;
+          G4double minYc = DBL_MAX;
+          G4double maxYc = -DBL_MAX;
           for( size_t ll = 0; ll < points.size(); ll++ ){
             minXc = std::min(minXc,points[ll].x());
             maxXc = std::max(maxXc,points[ll].x());
@@ -222,11 +222,11 @@ void DicomFileCT::BuildStructureIDs()
                 for( int icy = 0; icy <= 1; icy++ ){
                   bOKs = 0;
                   if( bOK ) continue;
-                  double p0x = fMinX + fVoxelDimX*fCompress * (ix+icx);
-                  double p0y = fMinY + fVoxelDimY*fCompress * (iy+icy);
-                  double v0x = 1.;
+                  G4double p0x = fMinX + fVoxelDimX*fCompress * (ix+icx);
+                  G4double p0y = fMinY + fVoxelDimY*fCompress * (iy+icy);
+                  G4double v0x = 1.;
                   if( icx == 1 ) v0x = -1.;
-                  double v0y = 0.99*fVoxelDimY/fVoxelDimX*std::pow(-1.,icy);
+                  G4double v0y = 0.99*fVoxelDimY/fVoxelDimX*std::pow(-1.,icy);
                   if( DicomFileMgr::verbose >= testVerb ) G4cout << ix << " + " << icx << " " 
                       << iy << " + " << icy << " CORNER (" << p0x << "," << p0y << ") " 
                       << " DIR= (" << v0x << "," << v0y << ") " << G4endl;
@@ -239,20 +239,20 @@ void DicomFileCT::BuildStructureIDs()
                             << " TRYING WITH DIRECTION (" << " DIR= (" << v0x << "," 
                             << v0y << ") " << bOKs << G4endl;
                   for( size_t ll = 0; ll < points.size(); ll++ ){
-                    double d0x = points[ll].x() - p0x;
-                    double d0y = points[ll].y() - p0y;
-                    double w0x = dirs[ll].x();
-                    double w0y = dirs[ll].y();
-                    double fac1 = w0x*v0y - w0y*v0x;
+                    G4double d0x = points[ll].x() - p0x;
+                    G4double d0y = points[ll].y() - p0y;
+                    G4double w0x = dirs[ll].x();
+                    G4double w0y = dirs[ll].y();
+                    G4double fac1 = w0x*v0y - w0y*v0x;
                     if( fac1 == 0 ) { // parallel lines
                       continue;
                     }
-                    double fac2 = d0x*v0y - d0y*v0x;
-                    double fac3 = d0y*w0x - d0x*w0y;
-                    double lambdaq = -fac2/fac1;
+                    G4double fac2 = d0x*v0y - d0y*v0x;
+                    G4double fac3 = d0y*w0x - d0x*w0y;
+                    G4double lambdaq = -fac2/fac1;
                     if( lambdaq < 0. || lambdaq >= 1. ) continue; 
                               // intersection further than segment length
-                    double lambdap = fac3/fac1;
+                    G4double lambdap = fac3/fac1;
                     if( lambdap > 0. ) {
                       distInters.insert(lambdap);
                       if( DicomFileMgr::verbose >= testVerb ) G4cout << " !! GOOD INTERS " 

@@ -49,7 +49,7 @@ int main(int argc,char** argv)
  
   TIter next(fo.GetListOfKeys());
   TKey *key;
-  //double tot_en;
+  //G4double tot_en;
   while ((key=(TKey*)next()))
   {
     fo.GetObject(key->GetName(), hits);

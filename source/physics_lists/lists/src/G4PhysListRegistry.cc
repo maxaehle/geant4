@@ -78,7 +78,7 @@ G4PhysListRegistry* G4PhysListRegistry::Instance()
   theInstance->AddPhysicsExtension("EMZ","G4EmStandardPhysics_option4");
   theInstance->AddPhysicsExtension("LIV","G4EmLivermorePhysics");
   theInstance->AddPhysicsExtension("PEN","G4EmPenelopePhysics");
-  // the GS EM extension originally required double underscores
+  // the GS EM extension originally required G4double underscores
   // support either one or two as __GS is confusing to users
   // same for __SS
   theInstance->AddPhysicsExtension("GS" ,"G4EmStandardPhysicsGS");

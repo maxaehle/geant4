@@ -97,17 +97,17 @@ G4VPhysicalVolume* ExErrorDetectorConstruction::Construct()
   G4cout << *(G4Material::GetMaterialTable()) << G4endl;
   
   //--- Sizes of the principal geometrical components (solids)  --- (half lengths)
-  //double fXBEAM  = 5.*2.*cm;
-  //double fXCDET  = 90.*cm;
-  //double fXECAL  = 40.*cm;
-  //double fXSOLN  = 10.*cm;
-  //double fXHCAL  = 100.*cm;
-  //double fXMUON  = 50.*cm;
-  //double fNdivECAL  = 10;
-  //double fNdivHCAL  = 10;
-  //double fYZLength = 100.*cm;
+  //G4double fXBEAM  = 5.*2.*cm;
+  //G4double fXCDET  = 90.*cm;
+  //G4double fXECAL  = 40.*cm;
+  //G4double fXSOLN  = 10.*cm;
+  //G4double fXHCAL  = 100.*cm;
+  //G4double fXMUON  = 50.*cm;
+  //G4double fNdivECAL  = 10;
+  //G4double fNdivHCAL  = 10;
+  //G4double fYZLength = 100.*cm;
     
-  //  double fXWorldLength= fXBEAM + fXCDET + fXECAL + fXSOLN + fXHCAL + fXMUON;
+  //  G4double fXWorldLength= fXBEAM + fXCDET + fXECAL + fXSOLN + fXHCAL + fXMUON;
   
    
 //--------- Definitions of Solids, Logical Volumes, Physical Volumes ---------

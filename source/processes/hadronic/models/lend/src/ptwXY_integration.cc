@@ -4,7 +4,7 @@
 */
 
 #include <cmath>
-#include <float.h>
+#include <G4float.h>
 
 #include "ptwXY.h"
 #include <nf_Legendre.h>
@@ -22,19 +22,19 @@ typedef struct ptwXY_integrateWithFunctionInfo_s {
     ptwXY_createFromFunction_callback func;
     void *argList;
     ptwXY_interpolation interpolation;
-    double x1, x2, y1, y2;
+    G4double x1, x2, y1, y2;
 } ptwXY_integrateWithFunctionInfo;
 
-static nfu_status ptwXY_integrateWithFunction2( nf_Legendre_GaussianQuadrature_callback integrandFunction, void *argList, double x1,
-        double x2, double *integral );
-static nfu_status ptwXY_integrateWithFunction3( double x, double *y, void *argList );
+static nfu_status ptwXY_integrateWithFunction2( nf_Legendre_GaussianQuadrature_callback integrandFunction, void *argList, G4double x1,
+        G4double x2, G4double *integral );
+static nfu_status ptwXY_integrateWithFunction3( G4double x, G4double *y, void *argList );
 /*
 ************************************************************
 */
-nfu_status ptwXY_f_integrate( ptwXY_interpolation interpolation, double x1, double y1, double x2, double y2, double *value ) {
+nfu_status ptwXY_f_integrate( ptwXY_interpolation interpolation, G4double x1, G4double y1, G4double x2, G4double y2, G4double *value ) {
 
     nfu_status status = nfu_Okay;
-    double r;
+    G4double r;
 
     *value = 0.;
     switch( interpolation ) {
@@ -73,7 +73,7 @@ nfu_status ptwXY_f_integrate( ptwXY_interpolation interpolation, double x1, doub
             status = nfu_badIntegrationInput; }
         else {
             int i, n;
-            double a, z, lx, ly, s, f;
+            G4double a, z, lx, ly, s, f;
 
             r = y2 / y1;
             if( std::fabs( r - 1. ) < 1e-4 ) {
@@ -115,10 +115,10 @@ nfu_status ptwXY_f_integrate( ptwXY_interpolation interpolation, double x1, doub
 /*
 ************************************************************
 */
-double ptwXY_integrate( ptwXYPoints *ptwXY, double xMin, double xMax, nfu_status *status ) {
+G4double ptwXY_integrate( ptwXYPoints *ptwXY, G4double xMin, G4double xMax, nfu_status *status ) {
 
     int64_t i, n = ptwXY->length;
-    double sum = 0., dSum, x, y, x1, x2, y1, y2, _sign = 1.;
+    G4double sum = 0., dSum, x, y, x1, x2, y1, y2, _sign = 1.;
     ptwXYPoint *point;
 
     if( ( *status = ptwXY->status ) != nfu_Okay ) return( 0. );
@@ -146,7 +146,7 @@ double ptwXY_integrate( ptwXYPoints *ptwXY, double xMin, double xMax, nfu_status
             y1 = point[-1].y;
             if( ( *status = ptwXY_interpolatePoint( ptwXY->interpolation, xMin, &y, x1, y1, x2, y2 ) ) != nfu_Okay ) return( 0. );
             if( x2 > xMax ) {
-                double yMax;
+                G4double yMax;
 
                 if( ( *status = ptwXY_interpolatePoint( ptwXY->interpolation, xMax, &yMax, x1, y1, x2, y2 ) ) != nfu_Okay ) return( 0. );
                 if( ( *status = ptwXY_f_integrate( ptwXY->interpolation, xMin, y, xMax, yMax, &sum ) ) != nfu_Okay ) return( 0. );
@@ -178,7 +178,7 @@ double ptwXY_integrate( ptwXYPoints *ptwXY, double xMin, double xMax, nfu_status
 /*
 ************************************************************
 */
-double ptwXY_integrateDomain( ptwXYPoints *ptwXY, nfu_status *status ) {
+G4double ptwXY_integrateDomain( ptwXYPoints *ptwXY, nfu_status *status ) {
 
     if( ( *status = ptwXY->status ) != nfu_Okay ) return( 0. );
     if( ptwXY->length > 0 ) return( ptwXY_integrate( ptwXY, ptwXY_getXMin( ptwXY ), ptwXY_getXMax( ptwXY ), status ) );
@@ -194,7 +194,7 @@ nfu_status ptwXY_normalize( ptwXYPoints *ptwXY ) {
 
     int64_t i;
     nfu_status status; 
-    double sum = ptwXY_integrateDomain( ptwXY, &status );
+    G4double sum = ptwXY_integrateDomain( ptwXY, &status );
 
     if( status != nfu_Okay ) return( status );
     if( sum == 0. ) {
@@ -207,7 +207,7 @@ nfu_status ptwXY_normalize( ptwXYPoints *ptwXY ) {
 /*
 ************************************************************
 */
-double ptwXY_integrateDomainWithWeight_x( ptwXYPoints *ptwXY, nfu_status *status ) {
+G4double ptwXY_integrateDomainWithWeight_x( ptwXYPoints *ptwXY, nfu_status *status ) {
 
     if( ( *status = ptwXY->status ) != nfu_Okay ) return( 0. );
     if( ptwXY->length < 2 ) return( 0. );
@@ -216,10 +216,10 @@ double ptwXY_integrateDomainWithWeight_x( ptwXYPoints *ptwXY, nfu_status *status
 /*
 ************************************************************
 */
-double ptwXY_integrateWithWeight_x( ptwXYPoints *ptwXY, double xMin, double xMax, nfu_status *status ) {
+G4double ptwXY_integrateWithWeight_x( ptwXYPoints *ptwXY, G4double xMin, G4double xMax, nfu_status *status ) {
 
     int64_t i, n = ptwXY->length;
-    double sum = 0., x, y, x1, x2, y1, y2, _sign = 1.;
+    G4double sum = 0., x, y, x1, x2, y1, y2, _sign = 1.;
     ptwXYPoint *point;
 
     if( ( *status = ptwXY->status ) != nfu_Okay ) return( 0. );
@@ -281,7 +281,7 @@ double ptwXY_integrateWithWeight_x( ptwXYPoints *ptwXY, double xMin, double xMax
 /*
 ************************************************************
 */
-double ptwXY_integrateDomainWithWeight_sqrt_x( ptwXYPoints *ptwXY, nfu_status *status ) {
+G4double ptwXY_integrateDomainWithWeight_sqrt_x( ptwXYPoints *ptwXY, nfu_status *status ) {
 
     if( ( *status = ptwXY->status ) != nfu_Okay ) return( 0. );
     if( ptwXY->length < 2 ) return( 0. );
@@ -290,10 +290,10 @@ double ptwXY_integrateDomainWithWeight_sqrt_x( ptwXYPoints *ptwXY, nfu_status *s
 /*
 ************************************************************
 */
-double ptwXY_integrateWithWeight_sqrt_x( ptwXYPoints *ptwXY, double xMin, double xMax, nfu_status *status ) {
+G4double ptwXY_integrateWithWeight_sqrt_x( ptwXYPoints *ptwXY, G4double xMin, G4double xMax, nfu_status *status ) {
 
     int64_t i, n = ptwXY->length;
-    double sum = 0., x, y, x1, x2, y1, y2, _sign = 1., sqrt_x1, sqrt_x2, inv_apb, c;
+    G4double sum = 0., x, y, x1, x2, y1, y2, _sign = 1., sqrt_x1, sqrt_x2, inv_apb, c;
     ptwXYPoint *point;
 
     if( ( *status = ptwXY->status ) != nfu_Okay ) return( 0. );
@@ -363,7 +363,7 @@ double ptwXY_integrateWithWeight_sqrt_x( ptwXYPoints *ptwXY, double xMin, double
 ptwXPoints *ptwXY_groupOneFunction( ptwXYPoints *ptwXY, ptwXPoints *groupBoundaries, ptwXY_group_normType normType, ptwXPoints *ptwX_norm, nfu_status *status ) {
 
     int64_t i, igs, ngs;
-    double x1, y1, x2, y2, y2p, xg1, xg2, sum;
+    G4double x1, y1, x2, y2, y2p, xg1, xg2, sum;
     ptwXYPoints *f;
     ptwXPoints *groupedData = NULL;
 
@@ -436,7 +436,7 @@ ptwXPoints *ptwXY_groupTwoFunctions( ptwXYPoints *ptwXY1, ptwXYPoints *ptwXY2, p
         ptwXPoints *ptwX_norm, nfu_status *status ) {
 
     int64_t i, igs, ngs;
-    double x1, fy1, gy1, x2, fy2, gy2, fy2p, gy2p, xg1, xg2, sum;
+    G4double x1, fy1, gy1, x2, fy2, gy2, fy2p, gy2p, xg1, xg2, sum;
     ptwXYPoints *f = NULL, *ff, *g = NULL, *gg = NULL;
     ptwXPoints *groupedData = NULL;
 
@@ -529,7 +529,7 @@ ptwXPoints *ptwXY_groupThreeFunctions( ptwXYPoints *ptwXY1, ptwXYPoints *ptwXY2,
         ptwXY_group_normType normType, ptwXPoints *ptwX_norm, nfu_status *status ) {
 
     int64_t i, igs, ngs;
-    double x1, fy1, gy1, hy1, x2, fy2, gy2, hy2, fy2p, gy2p, hy2p, xg1, xg2, sum;
+    G4double x1, fy1, gy1, hy1, x2, fy2, gy2, hy2, fy2p, gy2p, hy2p, xg1, xg2, sum;
     ptwXYPoints *f = NULL, *ff, *fff = NULL, *g = NULL, *gg = NULL, *h = NULL, *hh = NULL;
     ptwXPoints *groupedData = NULL;
 
@@ -633,7 +633,7 @@ ptwXPoints *ptwXY_runningIntegral( ptwXYPoints *ptwXY, nfu_status *status ) {
 
     int i;
     ptwXPoints *runningIntegral = NULL;
-    double integral = 0., sum;
+    G4double integral = 0., sum;
 
     if( ( *status = ptwXY_simpleCoalescePoints( ptwXY ) ) != nfu_Okay ) return( NULL );
     if( ( runningIntegral = ptwX_new( ptwXY->length, status ) ) == NULL ) goto err;
@@ -654,12 +654,12 @@ err:
 /*
 ************************************************************
 */
-double ptwXY_integrateWithFunction( ptwXYPoints *ptwXY, ptwXY_createFromFunction_callback func, void *argList,
-        double xMin, double xMax, int degree, int recursionLimit, double tolerance, nfu_status *status ) {
+G4double ptwXY_integrateWithFunction( ptwXYPoints *ptwXY, ptwXY_createFromFunction_callback func, void *argList,
+        G4double xMin, G4double xMax, int degree, int recursionLimit, G4double tolerance, nfu_status *status ) {
 
     int64_t i1, i2, n1 = ptwXY->length;
     long evaluations;
-    double integral = 0., integral_, sign = -1., xa, xb;
+    G4double integral = 0., integral_, sign = -1., xa, xb;
     ptwXY_integrateWithFunctionInfo integrateWithFunctionInfo;
     ptwXYPoint *point;
 
@@ -715,8 +715,8 @@ double ptwXY_integrateWithFunction( ptwXYPoints *ptwXY, ptwXY_createFromFunction
 /*
 ************************************************************
 */
-static nfu_status ptwXY_integrateWithFunction2( nf_Legendre_GaussianQuadrature_callback integrandFunction, void *argList, double x1,
-        double x2, double *integral ) {
+static nfu_status ptwXY_integrateWithFunction2( nf_Legendre_GaussianQuadrature_callback integrandFunction, void *argList, G4double x1,
+        G4double x2, G4double *integral ) {
 
     ptwXY_integrateWithFunctionInfo *integrateWithFunctionInfo = (ptwXY_integrateWithFunctionInfo *) argList;
     nfu_status status;
@@ -727,9 +727,9 @@ static nfu_status ptwXY_integrateWithFunction2( nf_Legendre_GaussianQuadrature_c
 /*
 ************************************************************
 */
-static nfu_status ptwXY_integrateWithFunction3( double x, double *y, void *argList ) {
+static nfu_status ptwXY_integrateWithFunction3( G4double x, G4double *y, void *argList ) {
 
-    double yf;
+    G4double yf;
     ptwXY_integrateWithFunctionInfo *integrateWithFunctionInfo = (ptwXY_integrateWithFunctionInfo *) argList;
     nfu_status status;
 

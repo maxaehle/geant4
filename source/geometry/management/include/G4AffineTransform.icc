@@ -473,7 +473,7 @@ std::ostream& operator << (std::ostream& os, const G4AffineTransform& transf)
 
   os << "  Transformation: " << G4endl;
 
-  // double  a = std::max ( 1, 2, 3 ) ;
+  // G4double  a = std::max ( 1, 2, 3 ) ;
 
   G4bool UnitTr = ! transf.IsRotated();
   diagDeviation = std::max( std::fabs( transf[0] - 1.0 ) ,   //  |rxx - 1|

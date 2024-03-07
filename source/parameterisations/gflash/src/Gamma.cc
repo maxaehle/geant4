@@ -38,7 +38,7 @@ MyGamma::MyGamma(){}
 MyGamma::~MyGamma(){}
 
 //____________________________________________________________________________
-double MyGamma::Gamma(double z)
+G4double MyGamma::Gamma(G4double z)
 {
   if (z <= 0)
       return 0;
@@ -47,7 +47,7 @@ double MyGamma::Gamma(double z)
 }
 
 //____________________________________________________________________________
-double MyGamma::Gamma(double a,double x)
+G4double MyGamma::Gamma(G4double a,G4double x)
 {
   // Computation of the incomplete gamma function P(a,x)
   //
@@ -63,7 +63,7 @@ double MyGamma::Gamma(double a,double x)
 }
 
 //____________________________________________________________________________
-double MyGamma::GamCf(double a,double x)
+G4double MyGamma::GamCf(G4double a,G4double x)
 {
   // Computation of the incomplete gamma function P(a,x)
   // via its continued fraction representation.
@@ -74,19 +74,19 @@ double MyGamma::GamCf(double a,double x)
   //--- Nve 14-nov-1998 UU-SAP Utrecht
   
   int itmax    = 100;      // Maximum number of iterations
-  double eps   = 3.e-7;    // Relative accuracy
-  double fpmin = 1.e-30;   // Smallest double value allowed here
+  G4double eps   = 3.e-7;    // Relative accuracy
+  G4double fpmin = 1.e-30;   // Smallest G4double value allowed here
   
   if (a <= 0 || x <= 0) return 0;
   
-  double gln = LnGamma(a);
-  double b   = x+1-a;
-  double c   = 1/fpmin;
-  double d   = 1/b;
-  double h   = d;
-  double an,del;
+  G4double gln = LnGamma(a);
+  G4double b   = x+1-a;
+  G4double c   = 1/fpmin;
+  G4double d   = 1/b;
+  G4double h   = d;
+  G4double an,del;
   for (int i=1; i<=itmax; i++) {
-    an = double(-i)*(double(i)-a);
+    an = G4double(-i)*(G4double(i)-a);
     b += 2;
     d  = an*d+b;
     if (Abs(d) < fpmin) d = fpmin;
@@ -98,12 +98,12 @@ double MyGamma::GamCf(double a,double x)
     if (Abs(del-1) < eps) break;
     //if (i==itmax) cout << "*GamCf(a,x)* a too large or itmax too small" << endl;
   }
-  double v = Exp(-x+a*Log(x)-gln)*h;
+  G4double v = Exp(-x+a*Log(x)-gln)*h;
   return (1-v);
 }
 
 //____________________________________________________________________________
-double MyGamma::GamSer(double a,double x)
+G4double MyGamma::GamSer(G4double a,G4double x)
 {
   // Computation of the incomplete gamma function P(a,x)
   // via its series representation.
@@ -114,14 +114,14 @@ double MyGamma::GamSer(double a,double x)
   //--- Nve 14-nov-1998 UU-SAP Utrecht
   
   int itmax  = 100;   // Maximum number of iterations
-  double eps = 3.e-7; // Relative accuracy
+  G4double eps = 3.e-7; // Relative accuracy
   
   if (a <= 0 || x <= 0) return 0;
   
-  double gln = LnGamma(a);
-  double ap  = a;
-  double sum = 1/a;
-  double del = sum;
+  G4double gln = LnGamma(a);
+  G4double ap  = a;
+  G4double sum = 1/a;
+  G4double del = sum;
   for (int n=1; n<=itmax; n++) {
     ap  += 1;
     del  = del*x/ap;
@@ -129,12 +129,12 @@ double MyGamma::GamSer(double a,double x)
     if (MyGamma::Abs(del) < Abs(sum*eps)) break;
     //if (n==itmax) cout << "*GamSer(a,x)* a too large or itmax too small" << endl;
   }
-  double v = sum*Exp(-x+a*Log(x)-gln);
+  G4double v = sum*Exp(-x+a*Log(x)-gln);
   return v;
 }
 
 
-double MyGamma::LnGamma(double z)
+G4double MyGamma::LnGamma(G4double z)
 {
   if (z <= 0)
       return 0;

@@ -61,7 +61,7 @@ G4DNAMolecularReaction::G4DNAMolecularReaction(G4VDNAReactionModel* pReactionMod
 
 G4bool G4DNAMolecularReaction::TestReactibility(const G4Track &trackA,
                                                 const G4Track &trackB,
-                                                double currentStepTime,
+                                                G4double currentStepTime,
                                                 bool userStepTimeLimit) /*const*/
 {
     const auto pMoleculeA = GetMolecule(trackA)->GetMolecularConfiguration();
@@ -129,8 +129,8 @@ void G4DNAMolecularReaction::SetReactionModel(G4VDNAReactionModel* pReactionMode
 
 std::vector<std::unique_ptr<G4ITReactionChange>> G4DNAMolecularReaction::FindReaction(
     G4ITReactionSet* pReactionSet,
-    const double currentStepTime,
-    const double /*fGlobalTime*/,
+    const G4double currentStepTime,
+    const G4double /*fGlobalTime*/,
     const bool reachedUserStepTimeLimit)
 {
     std::vector<std::unique_ptr<G4ITReactionChange>> fReactionInfo;

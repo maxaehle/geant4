@@ -38,9 +38,9 @@ class RandBinomial : public HepRandom {
 public:
 
   inline RandBinomial ( HepRandomEngine& anEngine, long n=1,
-                                                     double p=0.5 );
+                                                     G4double p=0.5 );
   inline RandBinomial ( HepRandomEngine* anEngine, long n=1,
-                                                     double p=0.5 );
+                                                     G4double p=0.5 );
   // These constructors should be used to instantiate a RandBinomial
   // distribution object defining a local engine for it.
   // The static generator will be skipped using the non-static methods
@@ -55,37 +55,37 @@ public:
 
   // Static methods to shoot random values using the static generator
 
-  static inline double shoot();
+  static inline G4double shoot();
 
-  static double shoot( long n, double p );
+  static G4double shoot( long n, G4double p );
 
-  static void shootArray ( const int size, double* vect,
-                            long n=1, double p=0.5 );
+  static void shootArray ( const int size, G4double* vect,
+                            long n=1, G4double p=0.5 );
 
   //  Static methods to shoot random values using a given engine
   //  by-passing the static generator.
 
-  static inline double shoot( HepRandomEngine* anEngine );
+  static inline G4double shoot( HepRandomEngine* anEngine );
 
-  static double shoot( HepRandomEngine* anEngine, 
-                                  long n, double p );
+  static G4double shoot( HepRandomEngine* anEngine, 
+                                  long n, G4double p );
 
   static void shootArray ( HepRandomEngine* anEngine, const int size,
-                            double* vect, long n=1,
-                            double p=0.5 );
+                            G4double* vect, long n=1,
+                            G4double p=0.5 );
 
   //  Methods using the localEngine to shoot random values, by-passing
   //  the static generator.
 
-  inline double fire();
+  inline G4double fire();
 
-  double fire( long n, double p );
+  G4double fire( long n, G4double p );
   
-  void fireArray ( const int size, double* vect);
-  void fireArray ( const int size, double* vect,
-                   long n, double p );
-  inline double operator()();
-  inline double operator()( long n, double p );
+  void fireArray ( const int size, G4double* vect);
+  void fireArray ( const int size, G4double* vect,
+                   long n, G4double p );
+  inline G4double operator()();
+  inline G4double operator()( long n, G4double p );
 
   // Save and restore to/from streams
   
@@ -100,11 +100,11 @@ public:
 
 private:
 
-  static double genBinomial( HepRandomEngine *anEngine, long n, double p );
+  static G4double genBinomial( HepRandomEngine *anEngine, long n, G4double p );
 
   std::shared_ptr<HepRandomEngine> localEngine;
   long defaultN;
-  double defaultP;
+  G4double defaultP;
  
 };
 

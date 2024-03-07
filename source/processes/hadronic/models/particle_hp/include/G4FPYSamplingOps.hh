@@ -97,7 +97,7 @@ public:
     G4int G4SampleIntegerGaussian( G4double Mean,
                                    G4double StdDev,
                                    G4FFGEnumerations::GaussianRange Range );
-    /** Returns a double value taken from a Gaussian distribution about \p Mean
+    /** Returns a G4double value taken from a Gaussian distribution about \p Mean
      *  and with a standard deviation of \p StdDev.
      *  - Usage:
      *      - \p Mean: Mean about which the Gaussian distribution will be
@@ -109,7 +109,7 @@ public:
      */
     G4double G4SampleGaussian( G4double Mean,
                                G4double StdDev );
-    /** Returns a double value taken from a Gaussian distribution about \p Mean
+    /** Returns a G4double value taken from a Gaussian distribution about \p Mean
      *  and with a standard deviation of \p StdDev.
      *  - Usage:
      *      - \p Mean: Mean about which the Gaussian distribution will be
@@ -123,12 +123,12 @@ public:
     G4double G4SampleGaussian( G4double Mean,
                                G4double StdDev,
                                G4FFGEnumerations::GaussianRange Range );
-    /** Returns a double value evenly distributed in the range (0, 1].
+    /** Returns a G4double value evenly distributed in the range (0, 1].
      *  - Usage: No arguments required
      *  - Notes:
      */
     G4double G4SampleUniform( void );
-    /** Returns a double value evenly distributed in the range
+    /** Returns a G4double value evenly distributed in the range
      *  (\p Lower, \p Upper].
      *  - Usage:
      *      - \p Lower: Lower bounds of the distribution

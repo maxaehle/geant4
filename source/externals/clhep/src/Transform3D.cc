@@ -11,7 +11,7 @@
 // 24.09.96 E.Chernyaev - initial version
 
 #include <iostream>
-#include <cmath>	// double std::abs()
+#include <cmath>	// G4double std::abs()
 #include "CLHEP/Geometry/Transform3D.h"
 
 namespace HepGeom {
@@ -20,7 +20,7 @@ namespace HepGeom {
 
   //   T R A N S F O R M A T I O N -------------------------------------------
 
-  double Transform3D::operator () (int i, int j) const {
+  G4double Transform3D::operator () (int i, int j) const {
     if (i == 0) {
       if (j == 0) { return xx_; }
       if (j == 1) { return xy_; }
@@ -59,12 +59,12 @@ namespace HepGeom {
   }
 
   // -------------------------------------------------------------------------
-  Transform3D::Transform3D(const Point3D<double> & fr0,
-			   const Point3D<double> & fr1,
-			   const Point3D<double> & fr2,
-			   const Point3D<double> & to0,
-			   const Point3D<double> & to1,
-			   const Point3D<double> & to2)
+  Transform3D::Transform3D(const Point3D<G4double> & fr0,
+			   const Point3D<G4double> & fr1,
+			   const Point3D<G4double> & fr2,
+			   const Point3D<G4double> & to0,
+			   const Point3D<G4double> & to1,
+			   const Point3D<G4double> & to2)
   /***********************************************************************
    *                                                                     *
    * Name: Transform3D::Transform3D              Date:    24.09.96 *
@@ -77,7 +77,7 @@ namespace HepGeom {
    *                                                                     *
    ***********************************************************************/
   {
-    Vector3D<double> x1,y1,z1, x2,y2,z2;
+    Vector3D<G4double> x1,y1,z1, x2,y2,z2;
     x1 = (fr1 - fr0).unit();
     y1 = (fr2 - fr0).unit();
     x2 = (to1 - to0).unit();
@@ -85,7 +85,7 @@ namespace HepGeom {
     
     //   C H E C K   A N G L E S
     
-    double cos1, cos2;
+    G4double cos1, cos2;
     cos1 = x1*y1;
     cos2 = x2*y2;
     
@@ -106,30 +106,30 @@ namespace HepGeom {
       z2 = (x2.cross(y2)).unit();
       y2  = z2.cross(x2);
       
-      double detxx =  (y1.y()*z1.z() - z1.y()*y1.z());
-      double detxy = -(y1.x()*z1.z() - z1.x()*y1.z());
-      double detxz =  (y1.x()*z1.y() - z1.x()*y1.y());
-      double detyx = -(x1.y()*z1.z() - z1.y()*x1.z());
-      double detyy =  (x1.x()*z1.z() - z1.x()*x1.z());
-      double detyz = -(x1.x()*z1.y() - z1.x()*x1.y());
-      double detzx =  (x1.y()*y1.z() - y1.y()*x1.z());
-      double detzy = -(x1.x()*y1.z() - y1.x()*x1.z());
-      double detzz =  (x1.x()*y1.y() - y1.x()*x1.y());
+      G4double detxx =  (y1.y()*z1.z() - z1.y()*y1.z());
+      G4double detxy = -(y1.x()*z1.z() - z1.x()*y1.z());
+      G4double detxz =  (y1.x()*z1.y() - z1.x()*y1.y());
+      G4double detyx = -(x1.y()*z1.z() - z1.y()*x1.z());
+      G4double detyy =  (x1.x()*z1.z() - z1.x()*x1.z());
+      G4double detyz = -(x1.x()*z1.y() - z1.x()*x1.y());
+      G4double detzx =  (x1.y()*y1.z() - y1.y()*x1.z());
+      G4double detzy = -(x1.x()*y1.z() - y1.x()*x1.z());
+      G4double detzz =  (x1.x()*y1.y() - y1.x()*x1.y());
  
-      double txx = x2.x()*detxx + y2.x()*detyx + z2.x()*detzx; 
-      double txy = x2.x()*detxy + y2.x()*detyy + z2.x()*detzy; 
-      double txz = x2.x()*detxz + y2.x()*detyz + z2.x()*detzz; 
-      double tyx = x2.y()*detxx + y2.y()*detyx + z2.y()*detzx; 
-      double tyy = x2.y()*detxy + y2.y()*detyy + z2.y()*detzy; 
-      double tyz = x2.y()*detxz + y2.y()*detyz + z2.y()*detzz; 
-      double tzx = x2.z()*detxx + y2.z()*detyx + z2.z()*detzx; 
-      double tzy = x2.z()*detxy + y2.z()*detyy + z2.z()*detzy; 
-      double tzz = x2.z()*detxz + y2.z()*detyz + z2.z()*detzz; 
+      G4double txx = x2.x()*detxx + y2.x()*detyx + z2.x()*detzx; 
+      G4double txy = x2.x()*detxy + y2.x()*detyy + z2.x()*detzy; 
+      G4double txz = x2.x()*detxz + y2.x()*detyz + z2.x()*detzz; 
+      G4double tyx = x2.y()*detxx + y2.y()*detyx + z2.y()*detzx; 
+      G4double tyy = x2.y()*detxy + y2.y()*detyy + z2.y()*detzy; 
+      G4double tyz = x2.y()*detxz + y2.y()*detyz + z2.y()*detzz; 
+      G4double tzx = x2.z()*detxx + y2.z()*detyx + z2.z()*detzx; 
+      G4double tzy = x2.z()*detxy + y2.z()*detyy + z2.z()*detzy; 
+      G4double tzz = x2.z()*detxz + y2.z()*detyz + z2.z()*detzz; 
 
       //   S E T    T R A N S F O R M A T I O N 
 
-      double dx1 = fr0.x(), dy1 = fr0.y(), dz1 = fr0.z();
-      double dx2 = to0.x(), dy2 = to0.y(), dz2 = to0.z();
+      G4double dx1 = fr0.x(), dy1 = fr0.y(), dz1 = fr0.z();
+      G4double dx2 = to0.x(), dy2 = to0.y(), dz2 = to0.z();
 
       setTransform(txx, txy, txz, dx2-txx*dx1-txy*dy1-txz*dz1,
 		   tyx, tyy, tyz, dy2-tyx*dx1-tyy*dy1-tyz*dz1,
@@ -148,21 +148,21 @@ namespace HepGeom {
    *                                                                     *
    ***********************************************************************/
   {
-    double detxx = yy_*zz_-yz_*zy_;
-    double detxy = yx_*zz_-yz_*zx_;
-    double detxz = yx_*zy_-yy_*zx_;
-    double det   = xx_*detxx - xy_*detxy + xz_*detxz;
+    G4double detxx = yy_*zz_-yz_*zy_;
+    G4double detxy = yx_*zz_-yz_*zx_;
+    G4double detxz = yx_*zy_-yy_*zx_;
+    G4double det   = xx_*detxx - xy_*detxy + xz_*detxz;
     if (det == 0) {
       std::cerr << "Transform3D::inverse error: zero determinant" << std::endl;
       return Transform3D();
     }
     det = 1./det; detxx *= det; detxy *= det; detxz *= det;
-    double detyx = (xy_*zz_ - xz_*zy_)*det;
-    double detyy = (xx_*zz_ - xz_*zx_)*det;
-    double detyz = (xx_*zy_ - xy_*zx_)*det;
-    double detzx = (xy_*yz_ - xz_*yy_)*det;
-    double detzy = (xx_*yz_ - xz_*yx_)*det;
-    double detzz = (xx_*yy_ - xy_*yx_)*det;
+    G4double detyx = (xy_*zz_ - xz_*zy_)*det;
+    G4double detyy = (xx_*zz_ - xz_*zx_)*det;
+    G4double detyz = (xx_*zy_ - xy_*zx_)*det;
+    G4double detzx = (xy_*yz_ - xz_*yy_)*det;
+    G4double detzy = (xx_*yz_ - xz_*yx_)*det;
+    G4double detzz = (xx_*yy_ - xy_*yx_)*det;
     return Transform3D
       (detxx, -detyx,  detzx, -detxx*dx_+detyx*dy_-detzx*dz_,
       -detxy,  detyy, -detzy,  detxy*dx_-detyy*dy_+detzy*dz_,
@@ -185,9 +185,9 @@ namespace HepGeom {
    *                                                                     *
    ***********************************************************************/
   {
-    double sx = std::sqrt(xx_*xx_ + yx_*yx_ + zx_*zx_);
-    double sy = std::sqrt(xy_*xy_ + yy_*yy_ + zy_*zy_);
-    double sz = std::sqrt(xz_*xz_ + yz_*yz_ + zz_*zz_);
+    G4double sx = std::sqrt(xx_*xx_ + yx_*yx_ + zx_*zx_);
+    G4double sy = std::sqrt(xy_*xy_ + yy_*yy_ + zy_*zy_);
+    G4double sz = std::sqrt(xz_*xz_ + yz_*yz_ + zz_*zz_);
 
     if (xx_*(yy_*zz_-yz_*zy_) -
 	xy_*(yx_*zz_-yz_*zx_) +
@@ -200,7 +200,7 @@ namespace HepGeom {
   }
 
   // -------------------------------------------------------------------------
-  bool Transform3D::isNear(const Transform3D & t, double tolerance) const
+  bool Transform3D::isNear(const Transform3D & t, G4double tolerance) const
   { 
     return ( (std::abs(xx_ - t.xx_) <= tolerance) && 
 	     (std::abs(xy_ - t.xy_) <= tolerance) &&
@@ -227,9 +227,9 @@ namespace HepGeom {
 
   //   3 D   R O T A T I O N -------------------------------------------------
 
-  Rotate3D::Rotate3D(double a,
-		     const Point3D<double> & p1,
-		     const Point3D<double> & p2) : Transform3D()
+  Rotate3D::Rotate3D(G4double a,
+		     const Point3D<G4double> & p1,
+		     const Point3D<G4double> & p2) : Transform3D()
   /***********************************************************************
    *                                                                     *
    * Name: Rotate3D::Rotate3D                       Date:    24.09.96 *
@@ -242,27 +242,27 @@ namespace HepGeom {
   {
     if (a == 0) return;
 
-    double cx = p2.x()-p1.x(), cy = p2.y()-p1.y(), cz = p2.z()-p1.z();
-    double ll = std::sqrt(cx*cx + cy*cy + cz*cz); 
+    G4double cx = p2.x()-p1.x(), cy = p2.y()-p1.y(), cz = p2.z()-p1.z();
+    G4double ll = std::sqrt(cx*cx + cy*cy + cz*cz); 
     if (ll == 0) {
       std::cerr << "Rotate3D: zero axis" << std::endl;
     }else{
-      double cosa = std::cos(a), sina = std::sin(a);
+      G4double cosa = std::cos(a), sina = std::sin(a);
       cx /= ll; cy /= ll; cz /= ll;   
     
-      double txx = cosa + (1-cosa)*cx*cx;
-      double txy =        (1-cosa)*cx*cy - sina*cz;
-      double txz =        (1-cosa)*cx*cz + sina*cy;
+      G4double txx = cosa + (1-cosa)*cx*cx;
+      G4double txy =        (1-cosa)*cx*cy - sina*cz;
+      G4double txz =        (1-cosa)*cx*cz + sina*cy;
     
-      double tyx =        (1-cosa)*cy*cx + sina*cz;
-      double tyy = cosa + (1-cosa)*cy*cy; 
-      double tyz =        (1-cosa)*cy*cz - sina*cx;
+      G4double tyx =        (1-cosa)*cy*cx + sina*cz;
+      G4double tyy = cosa + (1-cosa)*cy*cy; 
+      G4double tyz =        (1-cosa)*cy*cz - sina*cx;
     
-      double tzx =        (1-cosa)*cz*cx - sina*cy;
-      double tzy =        (1-cosa)*cz*cy + sina*cx;
-      double tzz = cosa + (1-cosa)*cz*cz;
+      G4double tzx =        (1-cosa)*cz*cx - sina*cy;
+      G4double tzy =        (1-cosa)*cz*cy + sina*cx;
+      G4double tzz = cosa + (1-cosa)*cz*cz;
     
-      double tdx = p1.x(), tdy = p1.y(), tdz = p1.z(); 
+      G4double tdx = p1.x(), tdy = p1.y(), tdz = p1.z(); 
     
       setTransform(txx, txy, txz, tdx-txx*tdx-txy*tdy-txz*tdz,
 		   tyx, tyy, tyz, tdy-tyx*tdx-tyy*tdy-tyz*tdz,
@@ -272,7 +272,7 @@ namespace HepGeom {
 
   //   3 D   R E F L E C T I O N ---------------------------------------------
 
-  Reflect3D::Reflect3D(double a, double b, double c, double d)
+  Reflect3D::Reflect3D(G4double a, G4double b, G4double c, G4double d)
   /***********************************************************************
    *                                                                     *
    * Name: Reflect3D::Reflect3D                        Date:    24.09.96 *
@@ -282,13 +282,13 @@ namespace HepGeom {
    *                                                                     *
    ***********************************************************************/
   {
-    double ll = a*a+b*b+c*c;
+    G4double ll = a*a+b*b+c*c;
     if (ll == 0) {
       std::cerr << "Reflect3D: zero normal" << std::endl;
       setIdentity();
     }else{
       ll = 1/ll;
-      double aa = a*a*ll, ab = a*b*ll, ac = a*c*ll, ad = a*d*ll,
+      G4double aa = a*a*ll, ab = a*b*ll, ac = a*c*ll, ad = a*d*ll,
 	     bb = b*b*ll, bc = b*c*ll, bd = b*d*ll,
 	     cc = c*c*ll, cd = c*d*ll;
       setTransform(-aa+bb+cc, -ab-ab,    -ac-ac,    -ad-ad,

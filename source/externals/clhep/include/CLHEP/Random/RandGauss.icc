@@ -13,30 +13,30 @@
 
 namespace CLHEP {
 
-inline RandGauss::RandGauss(HepRandomEngine & anEngine, double mean,
-                                                        double stdDev )
+inline RandGauss::RandGauss(HepRandomEngine & anEngine, G4double mean,
+                                                        G4double stdDev )
 : HepRandom(), defaultMean(mean), defaultStdDev(stdDev),
   localEngine(&anEngine, do_nothing_deleter()), set(false), nextGauss(0.0){}
 
-inline RandGauss::RandGauss(HepRandomEngine * anEngine, double mean,
-                                                        double stdDev )
+inline RandGauss::RandGauss(HepRandomEngine * anEngine, G4double mean,
+                                                        G4double stdDev )
 : HepRandom(), defaultMean(mean), defaultStdDev(stdDev),
   localEngine(anEngine), set(false), nextGauss(0.0) {}
 
-inline double RandGauss::shoot(double mean, double stdDev) {
+inline G4double RandGauss::shoot(G4double mean, G4double stdDev) {
   return shoot()*stdDev + mean;
 }
 
-inline double RandGauss::shoot(HepRandomEngine* anEngine,
-                                  double mean, double stdDev) {
+inline G4double RandGauss::shoot(HepRandomEngine* anEngine,
+                                  G4double mean, G4double stdDev) {
   return shoot(anEngine)*stdDev + mean;
 }
 
-inline double RandGauss::fire() {
+inline G4double RandGauss::fire() {
   return normal()*defaultStdDev + defaultMean;
 }
 
-inline double RandGauss::fire(double mean, double stdDev) {
+inline G4double RandGauss::fire(G4double mean, G4double stdDev) {
   return normal()*stdDev + mean;
 }
 

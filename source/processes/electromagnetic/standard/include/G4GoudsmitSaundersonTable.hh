@@ -132,7 +132,7 @@ public:
   // set option to activate/inactivate PWA-correction
   void     SetOptionPWACorrection(G4bool val) { fIsPWACorrection = val; }
 
-  // this method returns with the scattering power correction (to avoid double counting of sub-threshold deflections)
+  // this method returns with the scattering power correction (to avoid G4double counting of sub-threshold deflections)
   // interpolated from tables prepared at initialisation
   G4double ComputeScatteringPowerCorrection(const G4MaterialCutsCouple *matcut, G4double ekin);
 
@@ -173,11 +173,11 @@ private:
    int      fNumSPCEbinPerDec;    // scattering power correction energy grid bins per decade
    struct SCPCorrection {
      bool   fIsUse;               //
-     double fPrCut;               // sec. e- production cut energy
-     double fLEmin;               // log min energy
-     double fILDel;               // inverse log delta kinetic energy
-     //std::vector<double> fVEkin;  // scattering power correction energies
-     std::vector<double> fVSCPC;  // scattering power correction vector
+     G4double fPrCut;               // sec. e- production cut energy
+     G4double fLEmin;               // log min energy
+     G4double fILDel;               // inverse log delta kinetic energy
+     //std::vector<G4double> fVEkin;  // scattering power correction energies
+     std::vector<G4double> fVSCPC;  // scattering power correction vector
    };
    std::vector<SCPCorrection*>  fSCPCPerMatCuts;
 
@@ -193,8 +193,8 @@ private:
    *   screened Rutherford cross section approximation. (These are used in
    *   G4GoudsmitSaundersonMscModel if fgIsUsePWATotalXsecData is FALSE.)
    */
-   static std::vector<double> gMoliereBc;
-   static std::vector<double> gMoliereXc2;
+   static std::vector<G4double> gMoliereBc;
+   static std::vector<G4double> gMoliereXc2;
    //
    //
    G4GSMottCorrection   *fMottCorrection;

@@ -97,9 +97,9 @@ class G4VAnalysisReader
     G4bool SetNtupleIColumn(const G4String& columnName,
                             std::vector<int>& vector);
     G4bool SetNtupleFColumn(const G4String& columnName,
-                            std::vector<float>& vector);
+                            std::vector<G4float>& vector);
     G4bool SetNtupleDColumn(const G4String& columnName,
-                            std::vector<double>& vector);
+                            std::vector<G4double>& vector);
     G4bool SetNtupleSColumn(const G4String& columnName,
                             std::vector<std::string>& vector);
     // Methods for ntuple with id > FirstNtupleId
@@ -115,9 +115,9 @@ class G4VAnalysisReader
     G4bool SetNtupleIColumn(G4int ntupleId, const G4String& columnName,
                             std::vector<int>& vector);
     G4bool SetNtupleFColumn(G4int ntupleId, const G4String& columnName,
-                            std::vector<float>& vector);
+                            std::vector<G4float>& vector);
     G4bool SetNtupleDColumn(G4int ntupleId, const G4String& columnName,
-                            std::vector<double>& vector);
+                            std::vector<G4double>& vector);
     G4bool SetNtupleSColumn(G4int ntupleId, const G4String& columnName,
                             std::vector<std::string>& vector);
 

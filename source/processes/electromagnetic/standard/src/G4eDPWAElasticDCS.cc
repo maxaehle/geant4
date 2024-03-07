@@ -151,7 +151,7 @@ void G4eDPWAElasticDCS::LoadGrid() {
   // - theta1 in [deg.] (247): we store mu(theta) = 0.5[1-cos(theta)]
   gTheMus1.resize(gNumThetas1);
   gTheU1.resize(gNumThetas1);
-  const double theA = 0.01;
+  const G4double theA = 0.01;
   for (std::size_t it=0; it<gNumThetas1; ++it) {
     infile >> dum;
     gTheMus1[it] = 0.5*(1.0-std::cos(dum*CLHEP::degree));
@@ -299,8 +299,8 @@ void G4eDPWAElasticDCS::ComputeCSPerAtom(G4int iz, G4double ekin, G4double& elcs
     const G4double del = (imu==iMuEnd)   ? mumax-low : theMuVector[imu+1]-low;
     ix = imu;
     for (std::size_t igl=0; igl<8; ++igl) {
-      const double mu  = low + del*gXGL[igl];
-      const double dcs = G4Exp(the2DDCS->Value(mu, lekin, ix, iy));
+      const G4double mu  = low + del*gXGL[igl];
+      const G4double dcs = G4Exp(the2DDCS->Value(mu, lekin, ix, iy));
       elcsPar  += gWGL[igl]*dcs;             // elastic
       tr1csPar += gWGL[igl]*dcs*mu;          // first transport
       tr2csPar += gWGL[igl]*dcs*mu*(1.0-mu); // second transport
@@ -409,7 +409,7 @@ G4eDPWAElasticDCS::SampleCosineTheta(std::size_t iz, G4double lekin, G4double r1
   const std::size_t     k = (std::size_t)rem;
   const std::size_t iekin = (r1 < rem-k) ? k+1 : k;
   // sample the mu(t)=0.5(1-cos(t))
-  const double mu    = SampleMu(iz, iekin, r2, r3);
+  const G4double mu    = SampleMu(iz, iekin, r2, r3);
   return std::max(-1.0, std::min(1.0, 1.0-2.0*mu));
 }
 

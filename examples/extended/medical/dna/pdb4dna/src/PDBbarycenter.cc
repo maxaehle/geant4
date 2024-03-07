@@ -55,10 +55,10 @@ fpNext(0)
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-Barycenter::Barycenter(int bNum,double x,double y,double z,
-    double Bx,double By, double Bz, //Base barycenter coordinates
-    double Sx,double Sy, double Sz, //Sugar barycenter coordinates
-    double Px,double Py, double Pz)//Phosphate barycenter coordinates
+Barycenter::Barycenter(int bNum,G4double x,G4double y,G4double z,
+    G4double Bx,G4double By, G4double Bz, //Base barycenter coordinates
+    G4double Sx,G4double Sy, G4double Sz, //Sugar barycenter coordinates
+    G4double Px,G4double Py, G4double Pz)//Phosphate barycenter coordinates
 {
   fBaryNum=bNum;//!<Barycenter number
   fRadius=0;
@@ -102,28 +102,28 @@ void Barycenter::SetNext(Barycenter *barycenterNext)
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void Barycenter::SetDistance(int i, double dist)
+void Barycenter::SetDistance(int i, G4double dist)
 {
   fDistanceTab[i]=dist;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-double Barycenter::GetDistance(int i)
+G4double Barycenter::GetDistance(int i)
 {
   return fDistanceTab[i];
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void Barycenter::SetRadius(double rds)
+void Barycenter::SetRadius(G4double rds)
 {
   fRadius=rds;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-double Barycenter::GetRadius()
+G4double Barycenter::GetRadius()
 {
   return fRadius;
 }

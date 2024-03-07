@@ -66,22 +66,22 @@ public:
 
   virtual G4ITModelHandler* GetModelHandler(){ return 0; }
 
-  virtual void RegisterModel(G4VITStepModel*, double){;}
+  virtual void RegisterModel(G4VITStepModel*, G4double){;}
 
-  virtual void SetEndTime(const double){;}
+  virtual void SetEndTime(const G4double){;}
 
-  virtual void SetTimeTolerance(double){;}
+  virtual void SetTimeTolerance(G4double){;}
   // Two tracks below the time tolerance are supposed to be
   // in the same time slice
-  virtual double GetTimeTolerance() const{ return -1;}
+  virtual G4double GetTimeTolerance() const{ return -1;}
 
   virtual void SetMaxZeroTimeAllowed(int){;}
   virtual int GetMaxZeroTimeAllowed() const{ return -1;}
 
-  virtual void SetTimeSteps(std::map<double, double>*){;}
-  virtual void AddTimeStep(double /*startingTime*/, double /*timeStep*/){;}
-  virtual void SetDefaultTimeStep(double){;}
-  virtual double GetLimitingTimeStep() const {return -1;}
+  virtual void SetTimeSteps(std::map<G4double, G4double>*){;}
+  virtual void AddTimeStep(G4double /*startingTime*/, G4double /*timeStep*/){;}
+  virtual void SetDefaultTimeStep(G4double){;}
+  virtual G4double GetLimitingTimeStep() const {return -1;}
   virtual G4int GetNbSteps() const {return -1;}
   virtual void SetMaxNbSteps(G4int) {;}
   virtual G4int GetMaxNbSteps() const {return 0;}

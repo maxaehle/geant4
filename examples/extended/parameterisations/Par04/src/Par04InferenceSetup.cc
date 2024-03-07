@@ -146,8 +146,8 @@ void Par04InferenceSetup::GetPositions(std::vector<G4ThreeVector>& aPositions, G
   // Calculate rotation matrix along the particle momentum direction
   // It will rotate the shower axes to match the incoming particle direction
   G4RotationMatrix rotMatrix = G4RotationMatrix();
-  double particleTheta       = direction.theta();
-  double particlePhi         = direction.phi();
+  G4double particleTheta       = direction.theta();
+  G4double particlePhi         = direction.phi();
   rotMatrix.rotateZ(-particlePhi);
   rotMatrix.rotateY(-particleTheta);
   G4RotationMatrix rotMatrixInv = CLHEP::inverseOf(rotMatrix);

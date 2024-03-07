@@ -131,7 +131,7 @@ void G4ParticleHPIsoData::Init(G4int A, G4int Z, G4int M,G4double abun, G4Partic
 	  theChannelData = new G4ParticleHPVector;
 	}
       theFissionData = theChannelData;
-      theChannelData = 0; // fast fix for double delete; revisit later. @@@@@@@
+      theChannelData = 0; // fast fix for G4double delete; revisit later. @@@@@@@
 
       dirName = baseName+"/Capture";
       //Init(A, Z, abun, dirName, "/CrossSection/");

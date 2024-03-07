@@ -144,7 +144,7 @@ void Par01PionShowerModel::Explode(const G4FastTrack& fastTrack)
   // shoot the energy spots:
   G4double Energy = fastTrack.GetPrimaryTrack()->GetKineticEnergy();
   G4int nSpot = 50;
-  G4double deposit = Energy/double(nSpot);
+  G4double deposit = Energy/G4double(nSpot);
   Par01EnergySpot eSpot;
   eSpot.SetEnergy(deposit);
   G4ThreeVector ePoint;

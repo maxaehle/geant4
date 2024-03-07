@@ -15,11 +15,11 @@
 
 namespace CLHEP  {
 
-double HepLorentzVector::tolerance = 
+G4double HepLorentzVector::tolerance = 
 				Hep3Vector::ToleranceTicks * 2.22045e-16;
-double HepLorentzVector::metric = 1.0;
+G4double HepLorentzVector::metric = 1.0;
 
-double HepLorentzVector::operator () (int i) const {
+G4double HepLorentzVector::operator () (int i) const {
   switch(i) {
   case X:
   case Y:
@@ -34,8 +34,8 @@ double HepLorentzVector::operator () (int i) const {
   return 0.;
 }  
 
-double & HepLorentzVector::operator () (int i) {
-  static double dummy;
+G4double & HepLorentzVector::operator () (int i) {
+  static G4double dummy;
   switch(i) {
   case X:
   case Y:
@@ -52,11 +52,11 @@ double & HepLorentzVector::operator () (int i) {
 }
 
 HepLorentzVector & HepLorentzVector::boost
-				(double bx, double by, double bz){
-  double b2 = bx*bx + by*by + bz*bz;
-  double ggamma = 1.0 / std::sqrt(1.0 - b2);
-  double bp = bx*x() + by*y() + bz*z();
-  double gamma2 = b2 > 0 ? (ggamma - 1.0)/b2 : 0.0;
+				(G4double bx, G4double by, G4double bz){
+  G4double b2 = bx*bx + by*by + bz*bz;
+  G4double ggamma = 1.0 / std::sqrt(1.0 - b2);
+  G4double bp = bx*x() + by*y() + bz*z();
+  G4double gamma2 = b2 > 0 ? (ggamma - 1.0)/b2 : 0.0;
 
   setX(x() + gamma2*bp*bx + ggamma*bx*t());
   setY(y() + gamma2*bp*by + ggamma*by*t());
@@ -65,15 +65,15 @@ HepLorentzVector & HepLorentzVector::boost
   return *this;
 }
 
-HepLorentzVector & HepLorentzVector::rotateX(double a) {
+HepLorentzVector & HepLorentzVector::rotateX(G4double a) {
   pp.rotateX(a); 
   return *this; 
 }
-HepLorentzVector & HepLorentzVector::rotateY(double a) { 
+HepLorentzVector & HepLorentzVector::rotateY(G4double a) { 
   pp.rotateY(a); 
   return *this; 
 }
-HepLorentzVector & HepLorentzVector::rotateZ(double a) { 
+HepLorentzVector & HepLorentzVector::rotateZ(G4double a) { 
   pp.rotateZ(a); 
   return *this; 
 }
@@ -96,7 +96,7 @@ std::istream & operator>> (std::istream & is, HepLorentzVector & v1) {
 // time component separated by semicolon. The four numbers are taken
 // as x, y, z, t.
 
-  double x, y, z, t;
+  G4double x, y, z, t;
   char c;
 
   is >> std::ws >> c;
@@ -145,27 +145,27 @@ std::istream & operator>> (std::istream & is, HepLorentzVector & v1) {
 
 // The following were added when ZOOM classes were merged in:
 
-HepLorentzVector & HepLorentzVector::operator /= (double c) {
+HepLorentzVector & HepLorentzVector::operator /= (G4double c) {
 //  if (c == 0) {
 //    std::cerr << "HepLorentzVector::operator /=() - "
 //      << "Attempt to do LorentzVector /= 0 -- \n"
 //      << "division by zero would produce infinite or NAN components"
 //      << std::endl;
 //  }
-  double oneOverC = 1.0/c;
+  G4double oneOverC = 1.0/c;
   pp *= oneOverC;
   ee *= oneOverC;
   return *this;
 } /* w /= c */
 
-HepLorentzVector operator / (const HepLorentzVector & w, double c) {
+HepLorentzVector operator / (const HepLorentzVector & w, G4double c) {
 //  if (c == 0) {
 //    std::cerr << "HepLorentzVector::operator /() - "
 //      << "Attempt to do LorentzVector / 0 -- \n"
 //      << "division by zero would produce infinite or NAN components"
 //      << std::endl;
 //  }
-  double oneOverC = 1.0/c;
+  G4double oneOverC = 1.0/c;
   return HepLorentzVector (w.getV() * oneOverC,
                         w.getT() * oneOverC);
 } /* LV = w / c */
@@ -190,59 +190,59 @@ Hep3Vector HepLorentzVector::boostVector() const {
 } /* boostVector */
 
 
-HepLorentzVector & HepLorentzVector::boostX (double bbeta){
-  double b2 = bbeta*bbeta;
+HepLorentzVector & HepLorentzVector::boostX (G4double bbeta){
+  G4double b2 = bbeta*bbeta;
   if (b2 >= 1) {
     std::cerr << "HepLorentzVector::boostX() - "
       << "boost along X with beta >= 1 (speed of light) -- \n"
       << "no boost done" << std::endl;
   } else {
-    double ggamma = std::sqrt(1./(1-b2));
-    double tt = ee;
+    G4double ggamma = std::sqrt(1./(1-b2));
+    G4double tt = ee;
     ee = ggamma*(ee + bbeta*pp.getX());
     pp.setX(ggamma*(pp.getX() + bbeta*tt));
   }
   return *this;
 } /* boostX */
 
-HepLorentzVector & HepLorentzVector::boostY (double bbeta){
-  double b2 = bbeta*bbeta;
+HepLorentzVector & HepLorentzVector::boostY (G4double bbeta){
+  G4double b2 = bbeta*bbeta;
   if (b2 >= 1) {
     std::cerr << "HepLorentzVector::boostY() - "
       << "boost along Y with beta >= 1 (speed of light) -- \n"
       << "no boost done" << std::endl;
   } else {
-    double ggamma = std::sqrt(1./(1-b2));
-    double tt = ee;
+    G4double ggamma = std::sqrt(1./(1-b2));
+    G4double tt = ee;
     ee = ggamma*(ee + bbeta*pp.getY());
     pp.setY(ggamma*(pp.getY() + bbeta*tt));
   }
   return *this;
 } /* boostY */
 
-HepLorentzVector & HepLorentzVector::boostZ (double bbeta){
-  double b2 = bbeta*bbeta;
+HepLorentzVector & HepLorentzVector::boostZ (G4double bbeta){
+  G4double b2 = bbeta*bbeta;
   if (b2 >= 1) {
     std::cerr << "HepLorentzVector::boostZ() - "
       << "boost along Z with beta >= 1 (speed of light) -- \n"
       << "no boost done" << std::endl;
   } else {
-    double ggamma = std::sqrt(1./(1-b2));
-    double tt = ee;
+    G4double ggamma = std::sqrt(1./(1-b2));
+    G4double tt = ee;
     ee = ggamma*(ee + bbeta*pp.getZ());
     pp.setZ(ggamma*(pp.getZ() + bbeta*tt));
   }
   return *this;
 } /* boostZ */
 
-double HepLorentzVector::setTolerance ( double tol ) {
+G4double HepLorentzVector::setTolerance ( G4double tol ) {
 // Set the tolerance for two LorentzVectors to be considered near each other
-  double oldTolerance (tolerance);
+  G4double oldTolerance (tolerance);
   tolerance = tol;
   return oldTolerance;
 }
 
-double HepLorentzVector::getTolerance ( ) {
+G4double HepLorentzVector::getTolerance ( ) {
 // Get the tolerance for two LorentzVectors to be considered near each other
   return tolerance;
 }

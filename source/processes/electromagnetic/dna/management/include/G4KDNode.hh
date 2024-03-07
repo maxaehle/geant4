@@ -66,7 +66,7 @@ public:
   // parent = 0, axis = 0, side = 0
   G4KDNode_Base(G4KDTree*, G4KDNode_Base* /*parent*/);
   virtual ~G4KDNode_Base();
-  virtual double operator[](size_t) const = 0;
+  virtual G4double operator[](size_t) const = 0;
   virtual void InactiveNode();
   virtual bool IsValid() const{ return true; }
 
@@ -146,7 +146,7 @@ template<typename PointT>
       return fPoint;
     }
 
-    virtual double operator[](size_t i) const
+    virtual G4double operator[](size_t i) const
     {
       if(fPoint == 0) abort();
       return (*fPoint)[i];
@@ -230,7 +230,7 @@ template<typename PointCopyT>
       return fPoint;
     }
 
-    virtual double operator[](size_t i) const
+    virtual G4double operator[](size_t i) const
     {
       return fPoint[i];
     }

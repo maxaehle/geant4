@@ -240,10 +240,10 @@ G4bool G4XmlRNtupleManager::GetTNtupleRow(
       tools::aida::to_vector<int>(*key, *value);
     }
     for ( auto [key, value] : ntupleDescription->fFVectorBindingMap) {
-      tools::aida::to_vector<float>(*key, *value);
+      tools::aida::to_vector<G4float>(*key, *value);
     }
     for ( auto [key, value] : ntupleDescription->fDVectorBindingMap) {
-      tools::aida::to_vector<double>(*key, *value);
+      tools::aida::to_vector<G4double>(*key, *value);
     }
     for ( auto [key, value] : ntupleDescription->fSVectorBindingMap) {
       tools::aida::to_vector<std::string>(*key, *value);

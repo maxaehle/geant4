@@ -31,8 +31,8 @@
 // It allows any kind of field (vector, scalar, tensor and any set of them)
 // to be defined by implementing the inquiry function interface.
 //
-// The key method is  GetFieldValue( const  double Point[4],
-//                    *************         double *fieldArr ) 
+// The key method is  GetFieldValue( const  G4double Point[4],
+//                    *************         G4double *fieldArr ) 
 // Given an input position/time vector 'Point', 
 // this method must return the value of the field in "fieldArr".
 //

@@ -20,7 +20,7 @@
 
 namespace CLHEP  {
 
-static inline double safe_acos (double x) {
+static inline G4double safe_acos (G4double x) {
   if (std::abs(x) <= 1.0) return std::acos(x);
   return ( (x>0) ? 0 : CLHEP::pi );
 }
@@ -29,11 +29,11 @@ static inline double safe_acos (double x) {
 
 // Euler angles
 
-HepRotation & HepRotation::set(double phi1, double theta1, double psi1) {
+HepRotation & HepRotation::set(G4double phi1, G4double theta1, G4double psi1) {
 
-  double sinPhi   = std::sin( phi1   ), cosPhi   = std::cos( phi1   );
-  double sinTheta = std::sin( theta1 ), cosTheta = std::cos( theta1 );
-  double sinPsi   = std::sin( psi1   ), cosPsi   = std::cos( psi1   );
+  G4double sinPhi   = std::sin( phi1   ), cosPhi   = std::cos( phi1   );
+  G4double sinTheta = std::sin( theta1 ), cosTheta = std::cos( theta1 );
+  G4double sinPsi   = std::sin( psi1   ), cosPsi   = std::cos( psi1   );
 
   rxx =   cosPsi * cosPhi - cosTheta * sinPhi * sinPsi;
   rxy =   cosPsi * sinPhi + cosTheta * cosPhi * sinPsi;
@@ -51,7 +51,7 @@ HepRotation & HepRotation::set(double phi1, double theta1, double psi1) {
 
 }  // Rotation::set(phi, theta, psi)
 
-HepRotation::HepRotation( double phi1, double theta1, double psi1 ) 
+HepRotation::HepRotation( G4double phi1, G4double theta1, G4double psi1 ) 
 {
   set (phi1, theta1, psi1);
 }
@@ -64,15 +64,15 @@ HepRotation::HepRotation ( const HepEulerAngles & e )
 }
 
  
-double HepRotation::phi  () const {
+G4double HepRotation::phi  () const {
 
-  double s2 =  1.0 - rzz*rzz;
+  G4double s2 =  1.0 - rzz*rzz;
   if (s2 < 0) {
     std::cerr << "HepRotation::phi() - "
         << "HepRotation::phi() finds | rzz | > 1 " << std::endl;
     s2 = 0;
   }
-  const double sinTheta = std::sqrt( s2 );
+  const G4double sinTheta = std::sqrt( s2 );
 
   if (sinTheta < .01) { // For theta close to 0 or PI, use the more stable
   			// algorithm to get all three Euler angles
@@ -80,14 +80,14 @@ double HepRotation::phi  () const {
     return ea.phi();
   }
   
-  const double cscTheta = 1/sinTheta;
-  double cosabsphi =  - rzy * cscTheta;
+  const G4double cscTheta = 1/sinTheta;
+  G4double cosabsphi =  - rzy * cscTheta;
   if ( std::fabs(cosabsphi) > 1 ) {	// NaN-proofing
     std::cerr << "HepRotation::phi() - "
       << "HepRotation::phi() finds | cos phi | > 1 " << std::endl;
     cosabsphi = 1;
   }
-  const double absPhi = std::acos ( cosabsphi );
+  const G4double absPhi = std::acos ( cosabsphi );
   if (rzx > 0) {
     return   absPhi;
   } else if (rzx < 0) {
@@ -98,15 +98,15 @@ double HepRotation::phi  () const {
 
 } // phi()
 
-double HepRotation::theta() const {
+G4double HepRotation::theta() const {
 
   return  safe_acos( rzz );
 
 } // theta()
 
-double HepRotation::psi  () const {
+G4double HepRotation::psi  () const {
 
-  double sinTheta;
+  G4double sinTheta;
   if ( std::fabs(rzz) > 1 ) {	// NaN-proofing
     std::cerr << "HepRotation::psi() - "
       << "HepRotation::psi() finds | rzz | > 1" << std::endl;
@@ -121,14 +121,14 @@ double HepRotation::psi  () const {
     return ea.psi();
   }
 
-  const double cscTheta = 1/sinTheta;
-  double cosabspsi =  ryz * cscTheta;
+  const G4double cscTheta = 1/sinTheta;
+  G4double cosabspsi =  ryz * cscTheta;
   if ( std::fabs(cosabspsi) > 1 ) {	// NaN-proofing
     std::cerr << "HepRotation::psi() - "
       << "HepRotation::psi() finds | cos psi | > 1" << std::endl;
     cosabspsi = 1;
   }
-  const double absPsi = std::acos ( cosabspsi );
+  const G4double absPsi = std::acos ( cosabspsi );
   if (rxz > 0) {
     return   absPsi;
   } else if (rxz < 0) {
@@ -142,7 +142,7 @@ double HepRotation::psi  () const {
 // Helpers for eulerAngles():
 
 static		     
-void correctByPi ( double& psi1, double& phi1 ) {
+void correctByPi ( G4double& psi1, G4double& phi1 ) {
   if (psi1 > 0) {
     psi1 -= CLHEP::pi;
   } else {
@@ -156,16 +156,16 @@ void correctByPi ( double& psi1, double& phi1 ) {
 }
 
 static
-void correctPsiPhi ( double rxz, double rzx, double ryz, double rzy, 
-		     double& psi1, double& phi1 ) {
+void correctPsiPhi ( G4double rxz, G4double rzx, G4double ryz, G4double rzy, 
+		     G4double& psi1, G4double& phi1 ) {
 
   // set up quatities which would be positive if sin and cosine of
   // psi1 and phi1 were positive:
-  double w[4];
+  G4double w[4];
   w[0] = rxz; w[1] = rzx; w[2] = ryz; w[3] = -rzy;
 
   // find biggest relevant term, which is the best one to use in correcting.
-  double maxw = std::abs(w[0]); 
+  G4double maxw = std::abs(w[0]); 
   int imax = 0;
   for (int i = 1; i < 4; ++i) {
     if (std::abs(w[i]) > maxw) {
@@ -199,8 +199,8 @@ HepEulerAngles HepRotation::eulerAngles() const {
 
   // Please see the mathematical justification in eulerAngleComputations.ps
 
-  double phi1, theta1, psi1;
-  double psiPlusPhi, psiMinusPhi;
+  G4double phi1, theta1, psi1;
+  G4double psiPlusPhi, psiMinusPhi;
   
   theta1 = safe_acos( rzz );
   
@@ -209,7 +209,7 @@ HepEulerAngles HepRotation::eulerAngles() const {
 //        << "HepRotation::eulerAngles() finds | rzz | > 1 " << std::endl;
 //  }
   
-  double cosTheta = rzz;
+  G4double cosTheta = rzz;
   if (cosTheta > 1)  cosTheta = 1;
   if (cosTheta < -1) cosTheta = -1;
 
@@ -223,8 +223,8 @@ HepEulerAngles HepRotation::eulerAngles() const {
     psiPlusPhi = std::atan2 ( rxy - ryx, rxx + ryy );
 
     // psi - phi is potentially more subtle, but when unstable it is moot
-    double s1 = -rxy - ryx; // sin (psi-phi) * (1 - cos theta)
-    double c1 =  rxx - ryy; // cos (psi-phi) * (1 - cos theta)
+    G4double s1 = -rxy - ryx; // sin (psi-phi) * (1 - cos theta)
+    G4double c1 =  rxx - ryy; // cos (psi-phi) * (1 - cos theta)
     psiMinusPhi = std::atan2 ( s1, c1 );
         
   } else if (cosTheta > -1) {
@@ -233,8 +233,8 @@ HepEulerAngles HepRotation::eulerAngles() const {
     psiMinusPhi = std::atan2 ( -rxy - ryx, rxx - ryy );
 
    // psi + phi is potentially more subtle, but when unstable it is moot
-    double s1 = rxy - ryx; // sin (psi+phi) * (1 + cos theta)
-    double c1 = rxx + ryy; // cos (psi+phi) * (1 + cos theta)
+    G4double s1 = rxy - ryx; // sin (psi+phi) * (1 + cos theta)
+    G4double c1 = rxx + ryy; // cos (psi+phi) * (1 + cos theta)
     psiPlusPhi = std::atan2 ( s1, c1 );
 
   } else { // cosTheta == -1
@@ -256,15 +256,15 @@ HepEulerAngles HepRotation::eulerAngles() const {
 } // eulerAngles()
 
 
-void HepRotation::setPhi (double phi1) {
+void HepRotation::setPhi (G4double phi1) {
   set ( phi1, theta(), psi() );
 }
 
-void HepRotation::setTheta (double theta1) {
+void HepRotation::setTheta (G4double theta1) {
   set ( phi(), theta1, psi() );
 }
 
-void HepRotation::setPsi (double psi1) {
+void HepRotation::setPsi (G4double psi1) {
   set ( phi(), theta(), psi1 );
 }
 

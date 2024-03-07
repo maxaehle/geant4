@@ -59,7 +59,7 @@ template<typename PointT> class G4KDNode;
 void InactiveNode(G4KDNode_Base*);
 void Free(G4KDNode_Base*&);
 //void* GetData(G4KDNode*);
-//const double* GetNodePosition(G4KDNode_Base*);
+//const G4double* GetNodePosition(G4KDNode_Base*);
 //__________________________________
 
 /**
@@ -121,8 +121,8 @@ public:
    */
   template<typename Position>
     G4KDTreeResultHandle NearestInRange(const Position& pos,
-                                        const double& range);
-  G4KDTreeResultHandle NearestInRange(G4KDNode_Base* node, const double& range);
+                                        const G4double& range);
+  G4KDTreeResultHandle NearestInRange(G4KDNode_Base* node, const G4double& range);
 
   void *operator new(size_t);
   void operator delete(void *);
@@ -136,8 +136,8 @@ protected:
     HyperRect(size_t dim)
     {
       fDim = dim;
-      fMin = new double[fDim];
-      fMax = new double[fDim];
+      fMin = new G4double[fDim];
+      fMax = new G4double[fDim];
     }
 
     template<typename Position>
@@ -159,8 +159,8 @@ protected:
     HyperRect(const HyperRect& rect)
     {
       fDim = rect.fDim;
-      fMin = new double[fDim];
-      fMax = new double[fDim];
+      fMin = new G4double[fDim];
+      fMax = new G4double[fDim];
 
       for (size_t i = 0; i < fDim; i++)
       {
@@ -186,9 +186,9 @@ protected:
       }
 
     template<typename Position>
-      bool CompareDistSqr(const Position& pos, const double* bestmatch)
+      bool CompareDistSqr(const Position& pos, const G4double* bestmatch)
       {
-        double result = 0;
+        G4double result = 0;
 
         for (size_t i = 0; i < fDim; i++)
         {
@@ -211,18 +211,18 @@ protected:
     {
       return fDim;
     }
-    double* GetMin()
+    G4double* GetMin()
     {
       return fMin;
     }
-    double* GetMax()
+    G4double* GetMax()
     {
       return fMax;
     }
 
   protected:
     size_t fDim;
-    double *fMin, *fMax; /* minimum/maximum coords */
+    G4double *fMin, *fMax; /* minimum/maximum coords */
 
   private:
     // should not be used
@@ -240,8 +240,8 @@ protected:
   template<typename Position>
     int __NearestInRange(G4KDNode_Base *node,
                          const Position& pos,
-                         const double& range_sq,
-                         const double& range,
+                         const G4double& range_sq,
+                         const G4double& range,
                          G4KDTreeResult& list,
                          int ordered,
                          G4KDNode_Base *source_node = 0);
@@ -250,7 +250,7 @@ protected:
     void __NearestToPosition(G4KDNode_Base *node,
                              const Position& pos,
                              G4KDNode_Base *&result,
-                             double *result_dist_sq,
+                             G4double *result_dist_sq,
                              HyperRect* fRect);
 
   template<typename Position>
@@ -258,7 +258,7 @@ protected:
                          G4KDNode_Base *node,
                          const Position& pos,
                          std::vector<G4KDNode_Base*>& result,
-                         double *result_dist_sq,
+                         G4double *result_dist_sq,
                          HyperRect* fRect,
                          int& nbresult);
 

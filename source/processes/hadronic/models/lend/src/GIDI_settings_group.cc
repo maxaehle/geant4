@@ -18,14 +18,14 @@ GIDI_settings_group::GIDI_settings_group( std::string const &label, int size1 ) 
 /*
 =========================================================
 */
-GIDI_settings_group::GIDI_settings_group( std::string const &label, int length, double const *boundaries ) {
+GIDI_settings_group::GIDI_settings_group( std::string const &label, int length, G4double const *boundaries ) {
 
     initialize( label, length, length, boundaries );
 }
 /*
 =========================================================
 */
-GIDI_settings_group::GIDI_settings_group( std::string const &label, std::vector<double> const &boundaries) {
+GIDI_settings_group::GIDI_settings_group( std::string const &label, std::vector<G4double> const &boundaries) {
 
     int size1 = (int) boundaries.size( );
 
@@ -41,7 +41,7 @@ GIDI_settings_group::GIDI_settings_group( GIDI_settings_group const &group ) {
 /*
 =========================================================
 */
-void GIDI_settings_group::initialize( std::string const &label, int size1, int length, double const *boundaries ) {
+void GIDI_settings_group::initialize( std::string const &label, int size1, int length, G4double const *boundaries ) {
 
     int i1;
 
@@ -69,7 +69,7 @@ GIDI_settings_group::~GIDI_settings_group( ) {
 /*
 =========================================================
 */
-int GIDI_settings_group::getGroupIndexFromEnergy( double energy, bool encloseOutOfRange ) const {
+int GIDI_settings_group::getGroupIndexFromEnergy( G4double energy, bool encloseOutOfRange ) const {
 
     int iMin = 0, iMid, iMax = (int) mBoundaries.size( ), iMaxM1 = iMax - 1;
 
@@ -153,7 +153,7 @@ void GIDI_settings_groups_from_bdfls::initialize( char const *fileName ) {
 void GIDI_settings_groups_from_bdfls::initialize2( cbdfls_file const *bdfls ) {
 
     int ng, ngbs, *gids;
-    double *boundaries;
+    G4double *boundaries;
     std::string label( "" );
     char cLabel[100];
 

@@ -307,7 +307,7 @@ void G4OpenGLQtExportDialog::textWidthChanged(
   if (ratioCheckBox->isChecked()){
     isChangingSize = true;
     QString tmp;
-  height->setText(tmp.setNum((int)(s.toInt()*(double)((double)originalHeight/(double)originalWidth))));
+  height->setText(tmp.setNum((int)(s.toInt()*(G4double)((G4double)originalHeight/(G4double)originalWidth))));
   isChangingSize = false;
   }
 }

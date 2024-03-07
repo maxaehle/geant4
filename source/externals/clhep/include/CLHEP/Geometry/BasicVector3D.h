@@ -55,10 +55,10 @@ namespace HepGeom {
     BasicVector3D(const BasicVector3D<T> &) = default;
 
     /**
-     * Constructor for BasicVector3D<double> from BasicVector3D<float>. */
+     * Constructor for BasicVector3D<G4double> from BasicVector3D<G4float>. */
     template<typename U = T,
-             typename = typename std::enable_if<!std::is_same<U,float>::value >::type>
-    BasicVector3D(const BasicVector3D<float> & v) {
+             typename = typename std::enable_if<!std::is_same<U,G4float>::value >::type>
+    BasicVector3D(const BasicVector3D<G4float> & v) {
       v_[0] = v.x(); v_[1] = v.y(); v_[2] = v.z();
     }
 
@@ -111,12 +111,12 @@ namespace HepGeom {
     }
     /**
      * Multiplication by scalar. */
-    BasicVector3D<T> & operator*=(double a) {
+    BasicVector3D<T> & operator*=(G4double a) {
       v_[0] *= a; v_[1] *= a; v_[2] *= a; return *this;
     }
     /**
      * Division by scalar. */
-    BasicVector3D<T> & operator/=(double a) {
+    BasicVector3D<T> & operator/=(G4double a) {
       v_[0] /= a; v_[1] /= a; v_[2] /= a; return *this;
     }
 
@@ -348,7 +348,7 @@ namespace HepGeom {
 
   /*************************************************************************
    *                                                                       *
-   * Non-member functions for BasicVector3D<float>                         *
+   * Non-member functions for BasicVector3D<G4float>                         *
    *                                                                       *
    *************************************************************************/
 
@@ -357,64 +357,64 @@ namespace HepGeom {
    * @relates BasicVector3D
    */
   std::ostream &
-  operator<<(std::ostream &, const BasicVector3D<float> &);
+  operator<<(std::ostream &, const BasicVector3D<G4float> &);
 
   /**
    * Input from stream.
    * @relates BasicVector3D
    */
   std::istream &
-  operator>>(std::istream &, BasicVector3D<float> &);
+  operator>>(std::istream &, BasicVector3D<G4float> &);
 
   /**
    * Unary plus.
    * @relates BasicVector3D
    */
-  inline BasicVector3D<float>
-  operator+(const BasicVector3D<float> & v) { return v; }
+  inline BasicVector3D<G4float>
+  operator+(const BasicVector3D<G4float> & v) { return v; }
 
   /**
    * Addition of two vectors.
    * @relates BasicVector3D
    */
-  inline BasicVector3D<float>
-  operator+(const BasicVector3D<float> & a, const BasicVector3D<float> & b) {
-    return BasicVector3D<float>(a.x()+b.x(), a.y()+b.y(), a.z()+b.z());
+  inline BasicVector3D<G4float>
+  operator+(const BasicVector3D<G4float> & a, const BasicVector3D<G4float> & b) {
+    return BasicVector3D<G4float>(a.x()+b.x(), a.y()+b.y(), a.z()+b.z());
   }
 
   /**
    * Unary minus.
    * @relates BasicVector3D
    */
-  inline BasicVector3D<float>
-  operator-(const BasicVector3D<float> & v) {
-    return BasicVector3D<float>(-v.x(), -v.y(), -v.z());
+  inline BasicVector3D<G4float>
+  operator-(const BasicVector3D<G4float> & v) {
+    return BasicVector3D<G4float>(-v.x(), -v.y(), -v.z());
   }
 
   /**
    * Subtraction of two vectors.
    * @relates BasicVector3D
    */
-  inline BasicVector3D<float>
-  operator-(const BasicVector3D<float> & a, const BasicVector3D<float> & b) {
-    return BasicVector3D<float>(a.x()-b.x(), a.y()-b.y(), a.z()-b.z());
+  inline BasicVector3D<G4float>
+  operator-(const BasicVector3D<G4float> & a, const BasicVector3D<G4float> & b) {
+    return BasicVector3D<G4float>(a.x()-b.x(), a.y()-b.y(), a.z()-b.z());
   }
 
   /**
    * Multiplication vector by scalar.
    * @relates BasicVector3D
    */
-  inline BasicVector3D<float>
-  operator*(const BasicVector3D<float> & v, double a) {
-    return BasicVector3D<float>(v.x()*static_cast<float>(a), v.y()*static_cast<float>(a), v.z()*static_cast<float>(a));
+  inline BasicVector3D<G4float>
+  operator*(const BasicVector3D<G4float> & v, G4double a) {
+    return BasicVector3D<G4float>(v.x()*static_cast<G4float>(a), v.y()*static_cast<G4float>(a), v.z()*static_cast<G4float>(a));
   }
 
   /**
    * Scalar product of two vectors.
    * @relates BasicVector3D
    */
-  inline float
-  operator*(const BasicVector3D<float> & a, const BasicVector3D<float> & b) {
+  inline G4float
+  operator*(const BasicVector3D<G4float> & a, const BasicVector3D<G4float> & b) {
     return a.dot(b);
   }
 
@@ -422,18 +422,18 @@ namespace HepGeom {
    * Multiplication scalar by vector.
    * @relates BasicVector3D
    */
-  inline BasicVector3D<float>
-  operator*(double a, const BasicVector3D<float> & v) {
-    return BasicVector3D<float>(static_cast<float>(a)*v.x(), static_cast<float>(a)*v.y(), static_cast<float>(a)*v.z());
+  inline BasicVector3D<G4float>
+  operator*(G4double a, const BasicVector3D<G4float> & v) {
+    return BasicVector3D<G4float>(static_cast<G4float>(a)*v.x(), static_cast<G4float>(a)*v.y(), static_cast<G4float>(a)*v.z());
   }
 
   /**
    * Division vector by scalar.
    * @relates BasicVector3D
    */
-  inline BasicVector3D<float>
-  operator/(const BasicVector3D<float> & v, double a) {
-    return BasicVector3D<float>(v.x()/static_cast<float>(a), v.y()/static_cast<float>(a), v.z()/static_cast<float>(a));
+  inline BasicVector3D<G4float>
+  operator/(const BasicVector3D<G4float> & v, G4double a) {
+    return BasicVector3D<G4float>(v.x()/static_cast<G4float>(a), v.y()/static_cast<G4float>(a), v.z()/static_cast<G4float>(a));
   }
 
   /**
@@ -441,7 +441,7 @@ namespace HepGeom {
    * @relates BasicVector3D
    */
   inline bool
-  operator==(const BasicVector3D<float> & a, const BasicVector3D<float> & b) {
+  operator==(const BasicVector3D<G4float> & a, const BasicVector3D<G4float> & b) {
     return (a.x()==b.x() && a.y()==b.y() && a.z()==b.z());
   }
 
@@ -450,13 +450,13 @@ namespace HepGeom {
    * @relates BasicVector3D
    */
   inline bool
-  operator!=(const BasicVector3D<float> & a, const BasicVector3D<float> & b) {
+  operator!=(const BasicVector3D<G4float> & a, const BasicVector3D<G4float> & b) {
     return (a.x()!=b.x() || a.y()!=b.y() || a.z()!=b.z());
   }
 
   /*************************************************************************
    *                                                                       *
-   * Non-member functions for BasicVector3D<double>                        *
+   * Non-member functions for BasicVector3D<G4double>                        *
    *                                                                       *
    *************************************************************************/
 
@@ -465,64 +465,64 @@ namespace HepGeom {
    * @relates BasicVector3D
    */
   std::ostream &
-  operator<<(std::ostream &, const BasicVector3D<double> &);
+  operator<<(std::ostream &, const BasicVector3D<G4double> &);
 
   /**
    * Input from stream.
    * @relates BasicVector3D
    */
   std::istream &
-  operator>>(std::istream &, BasicVector3D<double> &);
+  operator>>(std::istream &, BasicVector3D<G4double> &);
 
   /**
    * Unary plus.
    * @relates BasicVector3D
    */
-  inline BasicVector3D<double>
-  operator+(const BasicVector3D<double> & v) { return v; }
+  inline BasicVector3D<G4double>
+  operator+(const BasicVector3D<G4double> & v) { return v; }
 
   /**
    * Addition of two vectors.
    * @relates BasicVector3D
    */
-  inline BasicVector3D<double>
-  operator+(const BasicVector3D<double> & a,const BasicVector3D<double> & b) {
-    return BasicVector3D<double>(a.x()+b.x(), a.y()+b.y(), a.z()+b.z());
+  inline BasicVector3D<G4double>
+  operator+(const BasicVector3D<G4double> & a,const BasicVector3D<G4double> & b) {
+    return BasicVector3D<G4double>(a.x()+b.x(), a.y()+b.y(), a.z()+b.z());
   }
 
   /**
    * Unary minus.
    * @relates BasicVector3D
    */
-  inline BasicVector3D<double>
-  operator-(const BasicVector3D<double> & v) {
-    return BasicVector3D<double>(-v.x(), -v.y(), -v.z());
+  inline BasicVector3D<G4double>
+  operator-(const BasicVector3D<G4double> & v) {
+    return BasicVector3D<G4double>(-v.x(), -v.y(), -v.z());
   }
 
   /**
    * Subtraction of two vectors.
    * @relates BasicVector3D
    */
-  inline BasicVector3D<double>
-  operator-(const BasicVector3D<double> & a,const BasicVector3D<double> & b) {
-    return BasicVector3D<double>(a.x()-b.x(), a.y()-b.y(), a.z()-b.z());
+  inline BasicVector3D<G4double>
+  operator-(const BasicVector3D<G4double> & a,const BasicVector3D<G4double> & b) {
+    return BasicVector3D<G4double>(a.x()-b.x(), a.y()-b.y(), a.z()-b.z());
   }
 
   /**
    * Multiplication vector by scalar.
    * @relates BasicVector3D
    */
-  inline BasicVector3D<double>
-  operator*(const BasicVector3D<double> & v, double a) {
-    return BasicVector3D<double>(v.x()*a, v.y()*a, v.z()*a);
+  inline BasicVector3D<G4double>
+  operator*(const BasicVector3D<G4double> & v, G4double a) {
+    return BasicVector3D<G4double>(v.x()*a, v.y()*a, v.z()*a);
   }
 
   /**
    * Scalar product of two vectors.
    * @relates BasicVector3D
    */
-  inline double
-  operator*(const BasicVector3D<double> & a,const BasicVector3D<double> & b) {
+  inline G4double
+  operator*(const BasicVector3D<G4double> & a,const BasicVector3D<G4double> & b) {
     return a.dot(b);
   }
 
@@ -530,18 +530,18 @@ namespace HepGeom {
    * Multiplication scalar by vector.
    * @relates BasicVector3D
    */
-  inline BasicVector3D<double>
-  operator*(double a, const BasicVector3D<double> & v) {
-    return BasicVector3D<double>(a*v.x(), a*v.y(), a*v.z());
+  inline BasicVector3D<G4double>
+  operator*(G4double a, const BasicVector3D<G4double> & v) {
+    return BasicVector3D<G4double>(a*v.x(), a*v.y(), a*v.z());
   }
 
   /**
    * Division vector by scalar.
    * @relates BasicVector3D
    */
-  inline BasicVector3D<double>
-  operator/(const BasicVector3D<double> & v, double a) {
-    return BasicVector3D<double>(v.x()/a, v.y()/a, v.z()/a);
+  inline BasicVector3D<G4double>
+  operator/(const BasicVector3D<G4double> & v, G4double a) {
+    return BasicVector3D<G4double>(v.x()/a, v.y()/a, v.z()/a);
   }
 
   /**
@@ -549,7 +549,7 @@ namespace HepGeom {
    * @relates BasicVector3D
    */
   inline bool
-  operator==(const BasicVector3D<double> & a, const BasicVector3D<double> & b)
+  operator==(const BasicVector3D<G4double> & a, const BasicVector3D<G4double> & b)
   {
     return (a.x()==b.x() && a.y()==b.y() && a.z()==b.z());
   }
@@ -559,7 +559,7 @@ namespace HepGeom {
    * @relates BasicVector3D
    */
   inline bool
-  operator!=(const BasicVector3D<double> & a, const BasicVector3D<double> & b)
+  operator!=(const BasicVector3D<G4double> & a, const BasicVector3D<G4double> & b)
   {
     return (a.x()!=b.x() || a.y()!=b.y() || a.z()!=b.z());
   }

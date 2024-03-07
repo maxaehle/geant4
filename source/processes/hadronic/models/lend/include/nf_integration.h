@@ -16,11 +16,11 @@
 
 #define nf_GnG_adaptiveQuadrature_MaxMaxDepth 20
 
-typedef nfu_status (*nf_GnG_adaptiveQuadrature_callback)( nf_Legendre_GaussianQuadrature_callback integrandFunction, void *argList, double x1, 
-    double x2, double *integral );
+typedef nfu_status (*nf_GnG_adaptiveQuadrature_callback)( nf_Legendre_GaussianQuadrature_callback integrandFunction, void *argList, G4double x1, 
+    G4double x2, G4double *integral );
 
 nfu_status nf_GnG_adaptiveQuadrature( nf_GnG_adaptiveQuadrature_callback quadratureFunction, nf_Legendre_GaussianQuadrature_callback integrandFunction, 
-    void *argList, double x1, double x2, int maxDepth, double tolerance, double *integral, long *evaluations );
+    void *argList, G4double x1, G4double x2, int maxDepth, G4double tolerance, G4double *integral, long *evaluations );
 
 #if defined __cplusplus
     }

@@ -358,5 +358,5 @@ G4double G4AdjointComptonModel::AdjointCrossSection(
 
   Cross *= fCurrentMaterial->GetElectronDensity() * twopi_mc2_rcl2;
   fLastCS = Cross;
-  return double(Cross);
+  return G4double(Cross);
 }

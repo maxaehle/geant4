@@ -159,8 +159,8 @@ void G4MicroElecElasticModel::Initialise(const G4ParticleDefinition* /*particle*
 
   while(!eDiffCrossSection.eof())
     {
-      double tDummy;
-      double eDummy;
+      G4double tDummy;
+      G4double eDummy;
       eDiffCrossSection>>tDummy>>eDummy;
 
       if (tDummy != eTdummyVec.back())

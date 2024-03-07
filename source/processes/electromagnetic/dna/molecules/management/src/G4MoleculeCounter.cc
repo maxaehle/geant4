@@ -40,7 +40,7 @@ using namespace std;
 namespace G4{
 namespace MoleculeCounter {
 
-bool TimePrecision::operator()(const double& a, const double& b) const
+bool TimePrecision::operator()(const G4double& a, const G4double& b) const
 {
     if (std::fabs(a - b) < fPrecision)
     {
@@ -52,7 +52,7 @@ bool TimePrecision::operator()(const double& a, const double& b) const
     }
 }
 
-G4ThreadLocal double TimePrecision::fPrecision = 0.5 * picosecond;
+G4ThreadLocal G4double TimePrecision::fPrecision = 0.5 * picosecond;
 }
 }
 
@@ -96,7 +96,7 @@ void G4MoleculeCounter::Initialize()
 
 //------------------------------------------------------------------------------
 
-void G4MoleculeCounter::SetTimeSlice(double timeSlice)
+void G4MoleculeCounter::SetTimeSlice(G4double timeSlice)
 {
     G4::MoleculeCounter::TimePrecision::fPrecision = timeSlice;
 }
@@ -137,7 +137,7 @@ G4bool G4MoleculeCounter::SearchTimeMap(Reactant* molecule)
 
 //------------------------------------------------------------------------------
 
-int G4MoleculeCounter::SearchUpperBoundTime(double time,
+int G4MoleculeCounter::SearchUpperBoundTime(G4double time,
                                             bool sameTypeOfMolecule)
 {
     auto mol_it = fpLastSearch->fLastMoleculeSearched;
@@ -197,7 +197,7 @@ int G4MoleculeCounter::SearchUpperBoundTime(double time,
 //------------------------------------------------------------------------------
 
 int G4MoleculeCounter::GetNMoleculesAtTime(Reactant* molecule,
-                                           double time)
+                                           G4double time)
 {
     G4bool sameTypeOfMolecule = SearchTimeMap(molecule);
     return SearchUpperBoundTime(time, sameTypeOfMolecule);
@@ -240,7 +240,7 @@ void G4MoleculeCounter::AddAMoleculeAtTime(Reactant* molecule,
             // Case 1 = new time comes after last recorded data
             // Case 2 = new time is about the same as the last recorded one
         {
-            double newValue = end->second + number;
+            G4double newValue = end->second + number;
             counterMap_i->second[time] = newValue;
         }
         else
@@ -342,7 +342,7 @@ void G4MoleculeCounter::RemoveAMoleculeAtTime(const G4MolecularConfiguration* pM
                         errMsg);
         }
 
-        double finalN = it->second - number;
+        G4double finalN = it->second - number;
 
         if (finalN < 0)
         {

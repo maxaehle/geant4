@@ -138,7 +138,7 @@ void Run::EndOfRun()
   G4cout << G4endl;
 
   if (totalCount == 0) { G4cout.precision(dfprec);   return;};  
-  G4double ratio = double(survive)/totalCount;
+  G4double ratio = G4double(survive)/totalCount;
 
   G4cout << "\n Nb of incident particles unaltered after "
          << G4BestUnit(tickness,"Length") << " of "

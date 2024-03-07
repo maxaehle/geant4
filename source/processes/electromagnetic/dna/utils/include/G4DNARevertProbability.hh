@@ -43,14 +43,14 @@
 class G4DNARevertProbability
 {
 public:
-  double fXmax;
-  double fXmin;
-  double fXmaxDef;
-  double fXminDef;
-  double fToleranceProba;
-  double fIncreasingCumulativeFunction;
+  G4double fXmax;
+  G4double fXmin;
+  G4double fXmaxDef;
+  G4double fXminDef;
+  G4double fToleranceProba;
+  G4double fIncreasingCumulativeFunction;
 
-  G4DNARevertProbability(double toleranceY) :
+  G4DNARevertProbability(G4double toleranceY) :
       fToleranceProba(toleranceY)
   {
     fXmax = 0.;
@@ -60,12 +60,12 @@ public:
     fIncreasingCumulativeFunction = 0.;
   }
 
-  G4DNARevertProbability(double xmin, double xmax, double toleranceY) :
+  G4DNARevertProbability(G4double xmin, G4double xmax, G4double toleranceY) :
       fXmax(xmax), fXmin(xmin), fToleranceProba(toleranceY)
   {
     if(fXmax < fXmin)
     {
-      double tmp = fXmin;
+      G4double tmp = fXmin;
       fXmin = fXmax;
       fXmax = tmp;
     }
@@ -81,13 +81,13 @@ public:
     fXmax = fXmaxDef;
   }
 
-  void SetBoundaries(double xmin, double xmax)
+  void SetBoundaries(G4double xmin, G4double xmax)
   {
     fXmax = xmax;
     fXmin = xmin;
     if(fXmax < fXmin)
     {
-      double tmp = fXmin;
+      G4double tmp = fXmin;
       fXmin = fXmax;
       fXmax = tmp;
     }
@@ -96,15 +96,15 @@ public:
     fXmaxDef = fXmax;
   }
 
-  void SetTolerance(double toleranceY)
+  void SetTolerance(G4double toleranceY)
   {
     fToleranceProba = toleranceY;
   }
 
-  bool Propose(double proposedXValue,
-               double proposedProba,
-               double nextProba,
-               double& returnedValue)
+  bool Propose(G4double proposedXValue,
+               G4double proposedProba,
+               G4double nextProba,
+               G4double& returnedValue)
   {
     bool returnFlag = false;
 
@@ -165,20 +165,20 @@ public:
   // *** REVERT THE FUNCTION "FUNCT"
   // *********************************
 
-  double Revert(double probaForSearchedTime,
-                std::function<double(double)>& funct)
+  G4double Revert(G4double probaForSearchedTime,
+                std::function<G4double(G4double)>& funct)
   {
     Reset();
     bool notFound = true;
-    double proposedX;
-    double x = fXmax;
+    G4double proposedX;
+    G4double x = fXmax;
 
     fIncreasingCumulativeFunction = (funct(fXmax) - funct(fXmin))
         / (fXmax - fXmin);
 
     while(notFound)
     {
-      double newProba = funct(x);
+      G4double newProba = funct(x);
 
       if(Propose(x, newProba, probaForSearchedTime, proposedX))
       {

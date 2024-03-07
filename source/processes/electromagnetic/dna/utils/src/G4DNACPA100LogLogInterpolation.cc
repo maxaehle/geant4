@@ -70,7 +70,7 @@ G4double G4DNACPA100LogLogInterpolation::Calculate(G4double x, G4int bin,
       G4double e2 = points[bin+1];
       G4double d1 = data[bin];
       G4double d2 = data[bin+1];
-// Check of e1, e2, d1 and d2 values to avoid floating-point errors when estimating the interpolated value below -- S.I., Jun. 2008
+// Check of e1, e2, d1 and d2 values to avoid G4floating-point errors when estimating the interpolated value below -- S.I., Jun. 2008
       if ((d1 > 0.) && (d2 > 0.) && (e1 > 0.) && (e2 > 0.))
         {
 // Streamline the Log-Log Interpolation formula in order to reduce the required number of log10() function calls

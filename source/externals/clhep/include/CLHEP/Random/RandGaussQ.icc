@@ -19,45 +19,45 @@
 
 namespace CLHEP {
 
-RandGaussQ::RandGaussQ(HepRandomEngine & anEngine, double mean,
-                                                        double stdDev )
+RandGaussQ::RandGaussQ(HepRandomEngine & anEngine, G4double mean,
+                                                        G4double stdDev )
 : RandGauss(anEngine, mean, stdDev) {}
 
-RandGaussQ::RandGaussQ(HepRandomEngine * anEngine, double mean,
-                                                        double stdDev )
+RandGaussQ::RandGaussQ(HepRandomEngine * anEngine, G4double mean,
+                                                        G4double stdDev )
 : RandGauss(anEngine, mean, stdDev) {}
 
 // Getting a Gaussian deviate - static methods
 // -------------------------------------------
 
-double RandGaussQ::shoot()
+G4double RandGaussQ::shoot()
 {
   HepRandomEngine* anEngine = HepRandom::getTheEngine();
   return transformQuick (anEngine->flat());
 }
 
-double RandGaussQ::shoot( HepRandomEngine* anotherEngine )
+G4double RandGaussQ::shoot( HepRandomEngine* anotherEngine )
 { 
   return transformQuick  (anotherEngine->flat());
 }
 
-double RandGaussQ::shoot(double mean, double stdDev) {
+G4double RandGaussQ::shoot(G4double mean, G4double stdDev) {
   return shoot()*stdDev + mean;
 }
 
-double RandGaussQ::shoot(HepRandomEngine* anotherEngine,
-                                  double mean, double stdDev) {
+G4double RandGaussQ::shoot(HepRandomEngine* anotherEngine,
+                                  G4double mean, G4double stdDev) {
   return shoot(anotherEngine)*stdDev + mean;
 }
 
 // Getting a Gaussian deviate - instance methods
 // ---------------------------------------------
 
-double RandGaussQ::fire() {
+G4double RandGaussQ::fire() {
   return transformQuick(localEngine->flat()) * defaultStdDev + defaultMean;
 }
 
-double RandGaussQ::fire(double mean, double stdDev) {
+G4double RandGaussQ::fire(G4double mean, G4double stdDev) {
   return transformQuick(localEngine->flat()) * stdDev + mean;
 }
 

@@ -10,7 +10,7 @@
 #include "nf_utilities.h"
 
 #ifdef WIN32
-#include <float.h>
+#include <G4float.h>
 #define is_nan(a) _isnan(a)
 /*#define INFINITY (DBL_MAX+DBL_MAX)*/
 /*#define NAN (INFINITY-INFINITY)*/
@@ -51,21 +51,21 @@ static int nfu_debugging = 0;
 /*
 ************************************************************
 */
-double nfu_getNAN( void ) {
+G4double nfu_getNAN( void ) {
 
     return( NAN );
 }
 /*
 ************************************************************
 */
-int nfu_isNAN( double d ) {
+int nfu_isNAN( G4double d ) {
 
     return( is_nan( d ) );
 }
 /*
 ************************************************************
 */
-double nfu_getInfinity( double sign ) {
+G4double nfu_getInfinity( G4double sign ) {
 
     if( sign < 0 ) return( -INFINITY );
     return( INFINITY );

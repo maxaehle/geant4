@@ -168,9 +168,9 @@ protected:
   void CreateGLQtContext ();
   virtual void CreateMainWindow (QGLWidget*,const QString&);
   void G4manageContextMenuEvent(QContextMenuEvent *e);
-  void rotateQtScene(float, float);
-  void rotateQtSceneToggle(float, float);
-  void moveScene(float, float, float,bool);
+  void rotateQtScene(G4float, G4float);
+  void rotateQtSceneToggle(G4float, G4float);
+  void moveScene(G4float, G4float, G4float,bool);
   void FinishView();
   void updateKeyModifierState(const Qt::KeyboardModifiers&);
   void displaySceneTreeComponent();
@@ -236,7 +236,7 @@ private:
                                      const G4Colour& color);
   QString getModelShortName(const G4String& modelShortName);
   void cloneSceneTree(QTreeWidgetItem* rootItem);
-  void changeDepthOnSceneTreeItem(double lookForDepth,double currentDepth,QTreeWidgetItem* item);
+  void changeDepthOnSceneTreeItem(G4double lookForDepth,G4double currentDepth,QTreeWidgetItem* item);
   void updatePositivePoIndexSceneTreeWidgetQuickMap(int POindex,QTreeWidgetItem* item);
   void changeQColorForTreeWidgetItem(QTreeWidgetItem* item, const QColor&);
 
@@ -314,7 +314,7 @@ private:
 #endif
   int fSpinningDelay;
   int fNbMaxFramesPerSec;
-  float fNbMaxAnglePerSec;
+  G4float fNbMaxAnglePerSec;
   int fLaunchSpinDelay;
   QWidget* fUISceneTreeWidget;
   QWidget* fUIViewerPropertiesWidget;

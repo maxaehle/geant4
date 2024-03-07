@@ -494,8 +494,8 @@ void G4DNAPTBIonisationModel::ReadDiffCSFile(const G4String& materialName,
         std::istringstream iss(line);
 
         // Initialise the variables to be filled
-        double T;
-        double E;
+        G4double T;
+        G4double E;
 
         // Filled T and E with the first two numbers of each file line
         iss>>T>>E;
@@ -670,7 +670,7 @@ void G4DNAPTBIonisationModel::RandomizeEjectedElectronDirection(G4ParticleDefini
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
-double G4DNAPTBIonisationModel::DifferentialCrossSection(G4ParticleDefinition * particleDefinition,
+G4double G4DNAPTBIonisationModel::DifferentialCrossSection(G4ParticleDefinition * particleDefinition,
                                                          G4double k,
                                                          G4double energyTransfer,
                                                          G4int ionizationLevelIndex,
@@ -699,17 +699,17 @@ double G4DNAPTBIonisationModel::DifferentialCrossSection(G4ParticleDefinition * 
         if (particleDefinition == G4Electron::ElectronDefinition())
         {
             // k should be in eV and energy transfer eV also
-            std::vector<double>::iterator t2 = std::upper_bound(fTMapWithVec[materialName][particleName].begin(),fTMapWithVec[materialName][particleName].end(), k);
-            std::vector<double>::iterator t1 = t2-1;
+            std::vector<G4double>::iterator t2 = std::upper_bound(fTMapWithVec[materialName][particleName].begin(),fTMapWithVec[materialName][particleName].end(), k);
+            std::vector<G4double>::iterator t1 = t2-1;
 
             // SI : the following condition avoids situations where energyTransfer >last vector element
             if (kSE <= fEMapWithVector[materialName][particleName][(*t1)].back() && kSE <= fEMapWithVector[materialName][particleName][(*t2)].back() )
             {
-                std::vector<double>::iterator e12 = std::upper_bound(fEMapWithVector[materialName][particleName][(*t1)].begin(),fEMapWithVector[materialName][particleName][(*t1)].end(), kSE);
-                std::vector<double>::iterator e11 = e12-1;
+                std::vector<G4double>::iterator e12 = std::upper_bound(fEMapWithVector[materialName][particleName][(*t1)].begin(),fEMapWithVector[materialName][particleName][(*t1)].end(), kSE);
+                std::vector<G4double>::iterator e11 = e12-1;
 
-                std::vector<double>::iterator e22 = std::upper_bound(fEMapWithVector[materialName][particleName][(*t2)].begin(),fEMapWithVector[materialName][particleName][(*t2)].end(), kSE);
-                std::vector<double>::iterator e21 = e22-1;
+                std::vector<G4double>::iterator e22 = std::upper_bound(fEMapWithVector[materialName][particleName][(*t2)].begin(),fEMapWithVector[materialName][particleName][(*t2)].end(), kSE);
+                std::vector<G4double>::iterator e21 = e22-1;
 
                 valueT1  =*t1;
                 valueT2  =*t2;
@@ -728,14 +728,14 @@ double G4DNAPTBIonisationModel::DifferentialCrossSection(G4ParticleDefinition * 
         if (particleDefinition == G4Proton::ProtonDefinition())
         {
             // k should be in eV and energy transfer eV also
-            std::vector<double>::iterator t2 = std::upper_bound(fTMapWithVec[materialName][particleName].begin(),fTMapWithVec[materialName][particleName].end(), k);
-            std::vector<double>::iterator t1 = t2-1;
+            std::vector<G4double>::iterator t2 = std::upper_bound(fTMapWithVec[materialName][particleName].begin(),fTMapWithVec[materialName][particleName].end(), k);
+            std::vector<G4double>::iterator t1 = t2-1;
 
-            std::vector<double>::iterator e12 = std::upper_bound(fEMapWithVector[materialName][particleName][(*t1)].begin(),fEMapWithVector[materialName][particleName][(*t1)].end(), kSE);
-            std::vector<double>::iterator e11 = e12-1;
+            std::vector<G4double>::iterator e12 = std::upper_bound(fEMapWithVector[materialName][particleName][(*t1)].begin(),fEMapWithVector[materialName][particleName][(*t1)].end(), kSE);
+            std::vector<G4double>::iterator e11 = e12-1;
 
-            std::vector<double>::iterator e22 = std::upper_bound(fEMapWithVector[materialName][particleName][(*t2)].begin(),fEMapWithVector[materialName][particleName][(*t2)].end(), kSE);
-            std::vector<double>::iterator e21 = e22-1;
+            std::vector<G4double>::iterator e22 = std::upper_bound(fEMapWithVector[materialName][particleName][(*t2)].begin(),fEMapWithVector[materialName][particleName][(*t2)].end(), kSE);
+            std::vector<G4double>::iterator e21 = e22-1;
 
             valueT1  =*t1;
             valueT2  =*t2;
@@ -826,8 +826,8 @@ G4double G4DNAPTBIonisationModel::RandomizeEjectedElectronEnergyFromCumulated(G4
     // Since we already have a specific T energy value which could not be explicitly in the table, we must interpolate all the values.
 
     // First, we select the upper and lower T data values surrounding our T value (ie "k").
-    std::vector<double>::iterator k2 = std::upper_bound(fTMapWithVec[materialName][particleName].begin(),fTMapWithVec[materialName][particleName].end(), k);
-    std::vector<double>::iterator k1 = k2-1;
+    std::vector<G4double>::iterator k2 = std::upper_bound(fTMapWithVec[materialName][particleName].begin(),fTMapWithVec[materialName][particleName].end(), k);
+    std::vector<G4double>::iterator k1 = k2-1;
 
     // Check if we have found a k2 value (0 if we did not found it).
     // A missing k2 value can be caused by a energy to high for the data table,
@@ -850,13 +850,13 @@ G4double G4DNAPTBIonisationModel::RandomizeEjectedElectronEnergyFromCumulated(G4
     // But we need to do that for each T value (ie two T values) previously selected.
     //
     // First one.
-    std::vector<double>::iterator cumulCS12 = std::upper_bound(fProbaShellMap[materialName][particleName][ionizationLevelIndex][(*k1)].begin(),
+    std::vector<G4double>::iterator cumulCS12 = std::upper_bound(fProbaShellMap[materialName][particleName][ionizationLevelIndex][(*k1)].begin(),
             fProbaShellMap[materialName][particleName][ionizationLevelIndex][(*k1)].end(), random);
-    std::vector<double>::iterator cumulCS11 = cumulCS12-1;
+    std::vector<G4double>::iterator cumulCS11 = cumulCS12-1;
     // Second one.
-    std::vector<double>::iterator cumulCS22 = std::upper_bound(fProbaShellMap[materialName][particleName][ionizationLevelIndex][(*k2)].begin(),
+    std::vector<G4double>::iterator cumulCS22 = std::upper_bound(fProbaShellMap[materialName][particleName][ionizationLevelIndex][(*k2)].begin(),
             fProbaShellMap[materialName][particleName][ionizationLevelIndex][(*k2)].end(), random);
-    std::vector<double>::iterator cumulCS21 = cumulCS22-1;
+    std::vector<G4double>::iterator cumulCS21 = cumulCS22-1;
 
     // Now that we have the "values" through pointers, we access them.
     valueK1  = *k1;

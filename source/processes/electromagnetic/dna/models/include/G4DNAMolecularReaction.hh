@@ -71,11 +71,11 @@ public:
 
     G4bool TestReactibility(const G4Track&,
                             const G4Track&,
-                            double currentStepTime,
+                            G4double currentStepTime,
                             bool userStepTimeLimit) override;
 
     std::vector<std::unique_ptr<G4ITReactionChange>> FindReaction(G4ITReactionSet*,
-    		const double, const double, const bool) override;
+    		const G4double, const G4double, const bool) override;
     std::unique_ptr<G4ITReactionChange> MakeReaction(const G4Track&, const G4Track&) override;
 
     void SetReactionModel(G4VDNAReactionModel*);

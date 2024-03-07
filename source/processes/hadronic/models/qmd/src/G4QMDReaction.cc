@@ -736,7 +736,7 @@ G4double ptot , G4double etot , G4double bmax , G4ThreeVector boostToCM )
    G4double rmax = std::sqrt( rmax0*rmax0 + b*b );
 
    G4double ccoul = 0.001439767;
-   G4double pcca = 1.0 - double ( zp * zt ) * ccoul / eccm / rmax - ( b / rmax )*( b / rmax );
+   G4double pcca = 1.0 - G4double ( zp * zt ) * ccoul / eccm / rmax - ( b / rmax )*( b / rmax );
 
    G4double pccf = std::sqrt( pcca );
 
@@ -746,7 +746,7 @@ G4double ptot , G4double etot , G4double bmax , G4ThreeVector boostToCM )
 
    if ( zp != 0 )
    {
-      G4double aas = 2.0 * eccm * b / double ( zp * zt ) / ccoul;
+      G4double aas = 2.0 * eccm * b / G4double ( zp * zt ) / ccoul;
       bbs = 1.0 / std::sqrt ( 1.0 + aas*aas );
       aas1 = ( 1.0 + aas * b / rmax ) * bbs;
    }
@@ -811,11 +811,11 @@ G4double ptot , G4double etot , G4double bmax , G4ThreeVector boostToCM )
    G4double gammpr = epr / ( mass_proj );
    G4double gammta = eta / ( mass_targ );
       
-   pzta = pzta / double ( at );
-   pxta = pxta / double ( at );
+   pzta = pzta / G4double ( at );
+   pxta = pxta / G4double ( at );
       
-   pzpr = pzpr / double ( ap );
-   pxpr = pxpr / double ( ap );
+   pzpr = pzpr / G4double ( ap );
+   pxpr = pxpr / G4double ( ap );
 
    G4double zeroz = 0.0; 
 

@@ -24,7 +24,7 @@ namespace HepGeom {
   /**
    * Geometrical 3D Vector.
    * This is just a declaration of the class needed to define
-   * specializations Vector3D<float> and Vector3D<double>.
+   * specializations Vector3D<G4float> and Vector3D<G4double>.
    *
    * @ingroup geometry
    * @author Evgeni Chernyaev <Evgueni.Tcherniaev@cern.ch>
@@ -33,13 +33,13 @@ namespace HepGeom {
   class Vector3D : public BasicVector3D<T> {};
 
   /**
-   * Geometrical 3D Vector with components of float type.
+   * Geometrical 3D Vector with components of G4float type.
    *
    * @author Evgeni Chernyaev <Evgueni.Tcherniaev@cern.ch>
    * @ingroup geometry
    */
   template<>
-  class Vector3D<float> : public BasicVector3D<float> {
+  class Vector3D<G4float> : public BasicVector3D<G4float> {
   public:
     /**
      * Default constructor. */
@@ -47,24 +47,24 @@ namespace HepGeom {
 
     /**
      * Constructor from three numbers. */
-    Vector3D(float x1, float y1, float z1) : BasicVector3D<float>(x1,y1,z1) {}
+    Vector3D(G4float x1, G4float y1, G4float z1) : BasicVector3D<G4float>(x1,y1,z1) {}
 
     /**
-     * Constructor from array of floats. */
-    explicit Vector3D(const float * a)
-      : BasicVector3D<float>(a[0],a[1],a[2]) {}
+     * Constructor from array of G4floats. */
+    explicit Vector3D(const G4float * a)
+      : BasicVector3D<G4float>(a[0],a[1],a[2]) {}
 
     /**
      * Copy constructor. */
-    Vector3D(const Vector3D<float> &) = default;
+    Vector3D(const Vector3D<G4float> &) = default;
 
     /**
      * Move constructor. */
-    Vector3D(Vector3D<float> &&) = default;
+    Vector3D(Vector3D<G4float> &&) = default;
 
     /**
-     * Constructor from BasicVector3D<float>. */
-    Vector3D(const BasicVector3D<float> & v) : BasicVector3D<float>(v) {}
+     * Constructor from BasicVector3D<G4float>. */
+    Vector3D(const BasicVector3D<G4float> & v) : BasicVector3D<G4float>(v) {}
 
     /**
      * Destructor. */
@@ -72,39 +72,39 @@ namespace HepGeom {
 
     /**
      * Assignment. */
-    Vector3D<float> & operator=(const Vector3D<float> &) = default;
+    Vector3D<G4float> & operator=(const Vector3D<G4float> &) = default;
 
     /**
-     * Assignment from BasicVector3D<float>. */
-    Vector3D<float> & operator=(const BasicVector3D<float> & v) {
-      this->BasicVector3D<float>::operator=(v);
+     * Assignment from BasicVector3D<G4float>. */
+    Vector3D<G4float> & operator=(const BasicVector3D<G4float> & v) {
+      this->BasicVector3D<G4float>::operator=(v);
       return *this;
     }
 
     /**
      * Move assignment. */
-    Vector3D<float> & operator=(Vector3D<float> &&) = default;
+    Vector3D<G4float> & operator=(Vector3D<G4float> &&) = default;
 
     /**
      * Transformation by Transform3D. */
-    Vector3D<float> & transform(const Transform3D & m);
+    Vector3D<G4float> & transform(const Transform3D & m);
   };
 
   /**
-   * Transformation of Vector<float> by Transform3D.
+   * Transformation of Vector<G4float> by Transform3D.
    * @relates Vector3D
    */
-  Vector3D<float>
-  operator*(const Transform3D & m, const Vector3D<float> & v);
+  Vector3D<G4float>
+  operator*(const Transform3D & m, const Vector3D<G4float> & v);
 
   /**
-   * Geometrical 3D Vector with components of double type.
+   * Geometrical 3D Vector with components of G4double type.
    *
    * @author Evgeni Chernyaev <Evgueni.Tcherniaev@cern.ch>
    * @ingroup geometry
    */
   template<>
-  class Vector3D<double> : public BasicVector3D<double> {
+  class Vector3D<G4double> : public BasicVector3D<G4double> {
   public:
     /**
      * Default constructor. */
@@ -112,33 +112,33 @@ namespace HepGeom {
 
     /**
      * Constructor from three numbers. */
-    Vector3D(double x1, double y1, double z1) : BasicVector3D<double>(x1,y1,z1) {}
+    Vector3D(G4double x1, G4double y1, G4double z1) : BasicVector3D<G4double>(x1,y1,z1) {}
 
     /**
-     * Constructor from array of floats. */
-    explicit Vector3D(const float * a)
-      : BasicVector3D<double>(a[0],a[1],a[2]) {}
+     * Constructor from array of G4floats. */
+    explicit Vector3D(const G4float * a)
+      : BasicVector3D<G4double>(a[0],a[1],a[2]) {}
 
     /**
-     * Constructor from array of doubles. */
-    explicit Vector3D(const double * a)
-      : BasicVector3D<double>(a[0],a[1],a[2]) {}
+     * Constructor from array of G4doubles. */
+    explicit Vector3D(const G4double * a)
+      : BasicVector3D<G4double>(a[0],a[1],a[2]) {}
 
     /**
      * Copy constructor. */
-    Vector3D(const Vector3D<double> &) = default;
+    Vector3D(const Vector3D<G4double> &) = default;
 
     /**
      * Move constructor. */
-    Vector3D(Vector3D<double> &&) = default;
+    Vector3D(Vector3D<G4double> &&) = default;
 
     /**
-     * Constructor from BasicVector3D<float>. */
-    Vector3D(const BasicVector3D<float> & v) : BasicVector3D<double>(v) {}
+     * Constructor from BasicVector3D<G4float>. */
+    Vector3D(const BasicVector3D<G4float> & v) : BasicVector3D<G4double>(v) {}
 
     /**
-     * Constructor from BasicVector3D<double>. */
-    Vector3D(const BasicVector3D<double> & v) : BasicVector3D<double>(v) {}
+     * Constructor from BasicVector3D<G4double>. */
+    Vector3D(const BasicVector3D<G4double> & v) : BasicVector3D<G4double>(v) {}
 
     /**
      * Destructor. */
@@ -150,7 +150,7 @@ namespace HepGeom {
      * in principle should be absent.
      */
     Vector3D(const CLHEP::Hep3Vector & v)
-      : BasicVector3D<double>(v.x(),v.y(),v.z()) {}
+      : BasicVector3D<G4double>(v.x(),v.y(),v.z()) {}
 
     /**
      * Conversion (cast) to CLHEP::Hep3Vector.
@@ -161,37 +161,37 @@ namespace HepGeom {
 
     /**
      * Assignment. */
-    Vector3D<double> & operator=(const Vector3D<double> &) = default;
+    Vector3D<G4double> & operator=(const Vector3D<G4double> &) = default;
 
     /**
-     * Assignment from BasicVector3D<float>. */
-    Vector3D<double> & operator=(const BasicVector3D<float> & v) {
-      this->BasicVector3D<double>::operator=(v);
+     * Assignment from BasicVector3D<G4float>. */
+    Vector3D<G4double> & operator=(const BasicVector3D<G4float> & v) {
+      this->BasicVector3D<G4double>::operator=(v);
       return *this;
     }
 
     /**
-     * Assignment from BasicVector3D<double>. */
-    Vector3D<double> & operator=(const BasicVector3D<double> & v) {
-      this->BasicVector3D<double>::operator=(v);
+     * Assignment from BasicVector3D<G4double>. */
+    Vector3D<G4double> & operator=(const BasicVector3D<G4double> & v) {
+      this->BasicVector3D<G4double>::operator=(v);
       return *this;
     }
 
     /**
      * Move assignment. */
-    Vector3D<double> & operator=(Vector3D<double> &&) = default;
+    Vector3D<G4double> & operator=(Vector3D<G4double> &&) = default;
 
     /**
      * Transformation by Transform3D. */
-    Vector3D<double> & transform(const Transform3D & m);
+    Vector3D<G4double> & transform(const Transform3D & m);
   };
 
   /**
-   * Transformation of Vector<double> by Transform3D.
+   * Transformation of Vector<G4double> by Transform3D.
    * @relates Vector3D
    */
-  Vector3D<double>
-  operator*(const Transform3D & m, const Vector3D<double> & v);
+  Vector3D<G4double>
+  operator*(const Transform3D & m, const Vector3D<G4double> & v);
 
 } /* namespace HepGeom */
 

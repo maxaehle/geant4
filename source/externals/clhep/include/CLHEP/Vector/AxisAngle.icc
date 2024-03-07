@@ -44,11 +44,11 @@ inline HepAxisAngle & HepAxisAngle::setAxis( const Hep3Vector aaxis ) {
 }  // HepAxisAngle::setAxis()
 
 
-inline double HepAxisAngle::getDelta() const {
+inline G4double HepAxisAngle::getDelta() const {
   return  delta_;
 }  // HepAxisAngle::getDelta()
 
-inline double HepAxisAngle::delta() const {
+inline G4double HepAxisAngle::delta() const {
   return  delta_;
 }  // HepAxisAngle::delta()
 
@@ -107,12 +107,12 @@ inline bool HepAxisAngle::operator>=( const AA & aa ) const {
 }  // HepAxisAngle::operator>=()
 
 
-inline double HepAxisAngle::getTolerance() {
+inline G4double HepAxisAngle::getTolerance() {
   return tolerance;
 }  // HepAxisAngle::getTolerance()
 
 
-inline double HepAxisAngle::setTolerance( Scalar tol ) {
+inline G4double HepAxisAngle::setTolerance( Scalar tol ) {
   Scalar oldTolerance( tolerance );
   tolerance = tol;
   return oldTolerance;

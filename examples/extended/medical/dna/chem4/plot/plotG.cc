@@ -113,8 +113,8 @@ struct SpeciesInfoAOS
 
   int fNEvent;
   int fNumber;
-  double fG;
-  double fG2;
+  G4double fG;
+  G4double fG2;
   string fName;
 };
 
@@ -146,10 +146,10 @@ struct SpeciesInfoSOA
     return *this;
   }
 
-  std::vector<double> fG;
-  std::vector<double> fGerr;
-  std::vector<double> fTime;
-  double fRelatErr;
+  std::vector<G4double> fG;
+  std::vector<G4double> fGerr;
+  std::vector<G4double> fTime;
+  G4double fRelatErr;
   string fName;
 };
 
@@ -161,9 +161,9 @@ void ProcessSingleFile(TFile* file)
   int number;
   int nEvent;
   char speciesName[500];
-  double time;  // time
-  double sumG;  // sum of G over all events
-  double sumG2; // sum of G^2 over all events
+  G4double time;  // time
+  G4double sumG;  // sum of G over all events
+  G4double sumG2; // sum of G^2 over all events
 
   TTree* tree = (TTree*)file->Get("species");
   tree->SetBranchAddress("speciesID", &speciesID);
@@ -188,7 +188,7 @@ void ProcessSingleFile(TFile* file)
   // This first loop is used in case the processed ROOT file is issued from the
   // accumulation of several ROOT files (e.g. hadd)
 
-  std::map<int, std::map<double, SpeciesInfoAOS>> speciesTimeInfo;
+  std::map<int, std::map<G4double, SpeciesInfoAOS>> speciesTimeInfo;
 
   for (int j=0; j < nentries; j++)
   {
@@ -228,9 +228,9 @@ void ProcessSingleFile(TFile* file)
     {
       SpeciesInfoAOS& infoAOS = it2->second;
       
-      double _SumG2 = infoAOS.fG2;
-      double _MeanG = infoAOS.fG/infoAOS.fNEvent;
-      double _Gerr = sqrt((_SumG2/infoAOS.fNEvent - pow(_MeanG,2))
+      G4double _SumG2 = infoAOS.fG2;
+      G4double _MeanG = infoAOS.fG/infoAOS.fNEvent;
+      G4double _Gerr = sqrt((_SumG2/infoAOS.fNEvent - pow(_MeanG,2))
                           /(infoAOS.fNEvent-1) );
 
       info.fG[i2] = _MeanG;
@@ -281,7 +281,7 @@ void ProcessSingleFile(TFile* file)
     
     gSpecies->SetMarkerStyle(20+speciesID);
     gSpecies->SetMarkerColor(color);
-    info.fRelatErr /= (double)info.fG.size();
+    info.fRelatErr /= (G4double)info.fG.size();
 
     gSpecies->SetTitle((info.fName
                         + " - speciesID: "

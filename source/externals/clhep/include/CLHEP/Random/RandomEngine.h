@@ -17,7 +17,7 @@
 // simply making them inheriting from HepRandomEngine and defining the six
 // functions flat(), flatArray(), setSeed(), setSeeds(), saveStatus(),
 // restoreStatus() and showStatus() in such a way that flat() and
-// flatArray() return double random values ranging between ]0,1[.
+// flatArray() return G4double random values ranging between ]0,1[.
 // All the random engines have a default seed value already set but they
 // can be instantiated with a different seed value set up by the user.
 
@@ -62,11 +62,11 @@ public:
   inline bool operator!=(const HepRandomEngine& engine);
   // Overloaded operators, ==, !=
 
-  virtual double flat() = 0;
+  virtual G4double flat() = 0;
   // Should return a pseudo random number between 0 and 1 
   // (excluding the end points)
 
-  virtual void flatArray(const int size, double* vect) = 0;
+  virtual void flatArray(const int size, G4double* vect) = 0;
   // Fills an array "vect" of specified size with flat random values.
 
   virtual void setSeed(long seed, int) = 0;
@@ -115,18 +115,18 @@ public:
   const long* getSeeds() const { return theSeeds; }
   // Gets the current array of seeds.
 
-  virtual operator double();        // Returns same as flat()
-  virtual operator float();         // less precise flat, faster if possible
+  virtual operator G4double();        // Returns same as flat()
+  virtual operator G4float();         // less precise flat, faster if possible
   virtual operator unsigned int();     // 32-bit int flat, faster if possible
 
   // The above three conversion operators permit one to retrieve a pseudo-
-  // random number as either a double-precision float, a single-precision
-  // float, or a 32-bit unsigned integer. The usage, presuming an object
+  // random number as either a G4double-precision G4float, a single-precision
+  // G4float, or a 32-bit unsigned integer. The usage, presuming an object
   // of the respective engine class "e", is as follows:
 
   // Recommended:
-  //    float x;
-  //    x = float( e );
+  //    G4float x;
+  //    x = G4float( e );
 
   // Reasonable:
   //    x = e;
@@ -142,15 +142,15 @@ protected:
   long theSeed;
   const long* theSeeds;
 
-  static  inline double exponent_bit_32();
-  static  inline double mantissa_bit_12();
-  static  inline double mantissa_bit_24();
-  static  inline double mantissa_bit_32();
-  static  inline double twoToMinus_32();
-  static  inline double twoToMinus_48();
-  static  inline double twoToMinus_49();
-  static  inline double twoToMinus_53();
-  static  inline double nearlyTwoToMinus_54();
+  static  inline G4double exponent_bit_32();
+  static  inline G4double mantissa_bit_12();
+  static  inline G4double mantissa_bit_24();
+  static  inline G4double mantissa_bit_32();
+  static  inline G4double twoToMinus_32();
+  static  inline G4double twoToMinus_48();
+  static  inline G4double twoToMinus_49();
+  static  inline G4double twoToMinus_53();
+  static  inline G4double nearlyTwoToMinus_54();
 
   static bool checkFile (std::istream & file, 
   		         const std::string & filename, 

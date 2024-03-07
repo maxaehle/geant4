@@ -142,7 +142,7 @@ void G4UIparameter::SetDefaultUnit(const char* theDefaultUnit)
     switch(type)
     {
       case 'D':
-        ed << "double.";
+        ed << "G4double.";
         break;
       case 'I':
         ed << "integer.";
@@ -256,7 +256,7 @@ G4int G4UIparameter::TypeCheck(const char* newValue)
     case 'D':
       if(IsDouble(newValueString.data()) == 0)
       {
-        G4cerr << newValue << ": double value expected." << G4endl;
+        G4cerr << newValue << ": G4double value expected." << G4endl;
         return 0;
       }
       break;

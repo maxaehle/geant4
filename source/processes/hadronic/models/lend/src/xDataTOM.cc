@@ -304,7 +304,7 @@ int xDataTOME_convertAttributeToInteger( statusMessageReporting *smr, xDataTOM_e
 /*
 ************************************************************
 */
-int xDataTOME_convertAttributeToDouble( statusMessageReporting *smr, xDataTOM_element *element, char const *name, double *d ) {
+int xDataTOME_convertAttributeToDouble( statusMessageReporting *smr, xDataTOM_element *element, char const *name, G4double *d ) {
 
     return( xDataTOMAL_convertAttributeToDouble( smr, &(element->attributes), name, d ) );
 }
@@ -447,7 +447,7 @@ int xDataTOMAL_convertAttributeToInteger( statusMessageReporting *smr, xDataTOM_
 /*
 ************************************************************
 */
-int xDataTOMAL_convertAttributeToDouble( statusMessageReporting *smr, xDataTOM_attributionList *attributes, char const *name, double *d ) {
+int xDataTOMAL_convertAttributeToDouble( statusMessageReporting *smr, xDataTOM_attributionList *attributes, char const *name, G4double *d ) {
 
     char const *value = xDataTOMAL_getAttributesValue( attributes, name );
     char *e;
@@ -455,7 +455,7 @@ int xDataTOMAL_convertAttributeToDouble( statusMessageReporting *smr, xDataTOM_a
     if( value != NULL ) {
         *d = strtod( value, &e );
         if( *e == 0 ) return( 0 );
-        smr_setReportError2( smr, xDataTOM_smrLibraryID, 1, "could not convert attribute %s's values = '%s' to a double", name, value ); }
+        smr_setReportError2( smr, xDataTOM_smrLibraryID, 1, "could not convert attribute %s's values = '%s' to a G4double", name, value ); }
     else {
         smr_setReportError2( smr, xDataTOM_smrLibraryID, 1, "no attribute named '%s'", name );
     }

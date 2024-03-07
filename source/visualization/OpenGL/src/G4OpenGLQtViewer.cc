@@ -1266,7 +1266,7 @@ void G4OpenGLQtViewer::showMovieParametersDialog() {
 void G4OpenGLQtViewer::FinishView()
 {
  /* From Apple doc:
-  CGLFlushDrawable : Copies the back buffer of a double-buffered context to the front buffer.
+  CGLFlushDrawable : Copies the back buffer of a G4double-buffered context to the front buffer.
   If the backing store attribute is set to false, the buffers can be exchanged rather than copied
  */
   glFlush ();
@@ -1296,8 +1296,8 @@ void G4OpenGLQtViewer::G4MousePressEvent(QMouseEvent *evnt)
       if (fUiQt->IsIconZoomInSelected()) {  // zoomIn
         // Move click point to center of OGL
 
-        float deltaX = ((float)getWinWidth()/2-evnt->pos().x());
-        float deltaY = ((float)getWinHeight()/2-evnt->pos().y());
+        G4float deltaX = ((G4float)getWinWidth()/2-evnt->pos().x());
+        G4float deltaY = ((G4float)getWinHeight()/2-evnt->pos().y());
 
         G4double coefTrans = 0;
         coefTrans = ((G4double)getSceneNearWidth())/((G4double)getWinWidth());
@@ -1311,7 +1311,7 @@ void G4OpenGLQtViewer::G4MousePressEvent(QMouseEvent *evnt)
 
       } else if (fUiQt->IsIconZoomOutSelected()) {  // zoomOut
         // Move click point to center of OGL
-        moveScene(((float)getWinWidth()/2-evnt->pos().x()),((float)getWinHeight()/2-evnt->pos().y()),0,true);
+        moveScene(((G4float)getWinWidth()/2-evnt->pos().x()),((G4float)getWinHeight()/2-evnt->pos().y()),0,true);
 
         fVP.SetZoomFactor(0.75 * fVP.GetZoomFactor());
         updateQWidget();
@@ -1341,8 +1341,8 @@ void G4OpenGLQtViewer::G4MouseReleaseEvent(QMouseEvent *evnt)
   glGetIntegerv(GL_VIEWPORT, viewport);
 
   // factorX == factorY
-  double factorX =  ((double)viewport[2]/fGLWidget->width());
-  double factorY =  ((double)viewport[3]/fGLWidget->height());
+  G4double factorX =  ((G4double)viewport[2]/fGLWidget->width());
+  G4double factorY =  ((G4double)viewport[3]/fGLWidget->height());
   fSpinningDelay = fLastEventTime->elapsed();
   QPoint delta = (fLastPos3-fLastPos1)*factorX;
 
@@ -1368,20 +1368,20 @@ void G4OpenGLQtViewer::G4MouseReleaseEvent(QMouseEvent *evnt)
 #endif
     lastMoveTime.start();
     // try to addapt speed move/rotate looking to drawing speed
-    float correctionFactor = 5;
+    G4float correctionFactor = 5;
     while (fAutoMove) {
       if ( lastMoveTime.elapsed() >= (int)(1000/fNbMaxFramesPerSec)) {
-        float lTime = 1000/lastMoveTime.elapsed();
-        if (((((float)delta.x())/correctionFactor)*lTime > fNbMaxAnglePerSec) ||
-            ((((float)delta.x())/correctionFactor)*lTime < -fNbMaxAnglePerSec) ) {
-          correctionFactor = (float)delta.x()*(lTime/fNbMaxAnglePerSec);
+        G4float lTime = 1000/lastMoveTime.elapsed();
+        if (((((G4float)delta.x())/correctionFactor)*lTime > fNbMaxAnglePerSec) ||
+            ((((G4float)delta.x())/correctionFactor)*lTime < -fNbMaxAnglePerSec) ) {
+          correctionFactor = (G4float)delta.x()*(lTime/fNbMaxAnglePerSec);
           if (delta.x() <0 ) {
             correctionFactor = -correctionFactor;
           }
         }
-        if (((((float)delta.y())/correctionFactor)*lTime > fNbMaxAnglePerSec) ||
-            ((((float)delta.y())/correctionFactor)*lTime < -fNbMaxAnglePerSec) ) {
-          correctionFactor = (float)delta.y()*(lTime/fNbMaxAnglePerSec);
+        if (((((G4float)delta.y())/correctionFactor)*lTime > fNbMaxAnglePerSec) ||
+            ((((G4float)delta.y())/correctionFactor)*lTime < -fNbMaxAnglePerSec) ) {
+          correctionFactor = (G4float)delta.y()*(lTime/fNbMaxAnglePerSec);
           if (delta.y() <0 ) {
             correctionFactor = -correctionFactor;
           }
@@ -1415,13 +1415,13 @@ void G4OpenGLQtViewer::G4MouseReleaseEvent(QMouseEvent *evnt)
 
         if (rotate) {  // rotate
           if (fNoKeyPress) {
-            rotateQtScene(((float)delta.x())/correctionFactor,((float)delta.y())/correctionFactor);
+            rotateQtScene(((G4float)delta.x())/correctionFactor,((G4float)delta.y())/correctionFactor);
           } else if (fAltKeyPress) {
-            rotateQtSceneToggle(((float)delta.x())/correctionFactor,((float)delta.y())/correctionFactor);
+            rotateQtSceneToggle(((G4float)delta.x())/correctionFactor,((G4float)delta.y())/correctionFactor);
           }
 
         } else if (move) {  // move
-          moveScene(-((float)delta.x())/correctionFactor,-((float)delta.y())/correctionFactor,0,true);
+          moveScene(-((G4float)delta.x())/correctionFactor,-((G4float)delta.y())/correctionFactor,0,true);
         }
       }
       ((QApplication*)G4Qt::getInstance ())->processEvents();
@@ -1472,9 +1472,9 @@ void G4OpenGLQtViewer::G4MouseMoveEvent(QMouseEvent *evnt)
   if (!move) {  // rotate, pick, zoom...
     if (mButtons & Qt::LeftButton) {
       if (fNoKeyPress) {
-        rotateQtScene(((float)deltaX),((float)deltaY));
+        rotateQtScene(((G4float)deltaX),((G4float)deltaY));
       } else if (fAltKeyPress) {
-        rotateQtSceneToggle(((float)deltaX),((float)deltaY));
+        rotateQtSceneToggle(((G4float)deltaX),((G4float)deltaY));
       } else if (fShiftKeyPress) {
         unsigned int sizeWin;
         sizeWin = getWinWidth();
@@ -1483,15 +1483,15 @@ void G4OpenGLQtViewer::G4MouseMoveEvent(QMouseEvent *evnt)
         }
 
         // L.Garnier : 08/2010 100 is the good value, but don't ask me why !
-        float factor = ((float)100/(float)sizeWin) ;
-        moveScene(-(float)deltaX*factor,-(float)deltaY*factor,0,false);
+        G4float factor = ((G4float)100/(G4float)sizeWin) ;
+        moveScene(-(G4float)deltaX*factor,-(G4float)deltaY*factor,0,false);
       } else if (fControlKeyPress) {
-        fVP.SetZoomFactor(fVP.GetZoomFactor()*(1+((float)deltaY)));
+        fVP.SetZoomFactor(fVP.GetZoomFactor()*(1+((G4float)deltaY)));
       }
     }
   } else if (move) {  // move
     if (mButtons & Qt::LeftButton) {
-      moveScene(-(float)deltaX,-(float)deltaY,0,true);
+      moveScene(-(G4float)deltaX,-(G4float)deltaY,0,true);
     }
   }
 
@@ -1506,14 +1506,14 @@ void G4OpenGLQtViewer::G4MouseMoveEvent(QMouseEvent *evnt)
    @param mouseMove : true if event comes from a mouse move, false if event comes from key action
 */
 
-void G4OpenGLQtViewer::moveScene(float dx,float dy, float dz,bool mouseMove)
+void G4OpenGLQtViewer::moveScene(G4float dx,G4float dy, G4float dz,bool mouseMove)
 {
   if (fHoldMoveEvent)
     return;
   fHoldMoveEvent = true;
 
   G4double coefTrans = 0;
-  GLdouble coefDepth = 0;
+  GLG4double coefDepth = 0;
   if(mouseMove) {
     coefTrans = ((G4double)getSceneNearWidth())/((G4double)getWinWidth());
     if (getWinHeight() <getWinWidth()) {
@@ -1538,7 +1538,7 @@ void G4OpenGLQtViewer::moveScene(float dx,float dy, float dz,bool mouseMove)
    @param dy delta mouse y position
 */
 
-void G4OpenGLQtViewer::rotateQtScene(float dx, float dy)
+void G4OpenGLQtViewer::rotateQtScene(G4float dx, G4float dy)
 {
   if (fHoldRotateEvent)
     return;
@@ -1556,7 +1556,7 @@ void G4OpenGLQtViewer::rotateQtScene(float dx, float dy)
    @param dy delta mouse y position
 */
 
-void G4OpenGLQtViewer::rotateQtSceneToggle(float dx, float dy)
+void G4OpenGLQtViewer::rotateQtSceneToggle(G4float dx, G4float dy)
 {
   if (fHoldRotateEvent)
     return;
@@ -1581,11 +1581,11 @@ void G4OpenGLQtViewer::rescaleImage(
  int /* aWidth */
 ,int /* aHeight */
 ){
-  //  GLfloat* feedback_buffer;
+  //  GLG4float* feedback_buffer;
   //  GLint returned;
   //  FILE* file;
 
-  //   feedback_buffer = new GLfloat[size];
+  //   feedback_buffer = new GLG4float[size];
   //   glFeedbackBuffer (size, GL_3D_COLOR, feedback_buffer);
   //   glRenderMode (GL_FEEDBACK);
 
@@ -2980,7 +2980,7 @@ QTreeWidgetItem* G4OpenGLQtViewer::createTreeWidgetItem(
                          "Click here will only show/hide all child components");
   } else {
     // Set a tootip
-    newItem->setToolTip (0,QString("double-click to change the color"));
+    newItem->setToolTip (0,QString("G4double-click to change the color"));
   }
 
   // special case: if alpha=0, it is a totally transparent objet,
@@ -3530,13 +3530,13 @@ std::string G4OpenGLQtViewer::parseSceneTreeElementAndSaveState(QTreeWidgetItem*
     // save color
     const QColor& c = item->data(2,Qt::UserRole).value<QColor>();
     std::stringstream red;
-    red << ((double)c.red())/255;
+    red << ((G4double)c.red())/255;
     std::stringstream green;
-    green << (double)c.green()/255;
+    green << (G4double)c.green()/255;
     std::stringstream blue;
-    blue << ((double)c.blue())/255;
+    blue << ((G4double)c.blue())/255;
     std::stringstream alpha;
-    alpha << ((double)c.alpha())/255;
+    alpha << ((G4double)c.alpha())/255;
 
     commandLine += "/vis/geometry/set/colour " + item->text(3).toStdString() + " ! " + red.str() + " " + green.str() + " " + blue.str() + " " + alpha.str()+"\n";
 
@@ -3586,7 +3586,7 @@ void G4OpenGLQtViewer::changeDepthInSceneTree (int val){
   // 1         2         3         4
 
   // Get the depth :
-  double depth = 1 + ((double)val)/1000 * ((double)fSceneTreeDepth+1);
+  G4double depth = 1 + ((G4double)val)/1000 * ((G4double)fSceneTreeDepth+1);
 
   // lock update on scene tree items
   fCheckSceneTreeComponentSignalLock = true;
@@ -3792,11 +3792,11 @@ bool G4OpenGLQtViewer::isPVVolume(QTreeWidgetItem* item) {
 
 
 void G4OpenGLQtViewer::changeDepthOnSceneTreeItem(
- double lookForDepth
- ,double currentDepth
+ G4double lookForDepth
+ ,G4double currentDepth
  ,QTreeWidgetItem* item
 ) {
-  double transparencyLevel = 0.;
+  G4double transparencyLevel = 0.;
 
   // look for a 2.2 depth and we are at level 3
   // -> Set all theses items to Opaque
@@ -3835,7 +3835,7 @@ void G4OpenGLQtViewer::changeDepthOnSceneTreeItem(
       if ((item->text(3) != "")) {
         // FIXME : Should not test this here because of transparent
         // volume that will came after and with a different alpha level
-        // Good thing to do is to check and suppress doubles in changeDepthInSceneTree
+        // Good thing to do is to check and suppress G4doubles in changeDepthInSceneTree
         // and then check if last (transparents volumes) has to change alpha
 
         changeQColorForTreeWidgetItem(item,QColor((int)(color.GetRed()*255),

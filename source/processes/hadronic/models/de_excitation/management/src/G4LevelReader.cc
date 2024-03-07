@@ -271,7 +271,7 @@ G4LevelReader::LevelManager(G4int Z, G4int A, G4int nlev,
 
   G4int i;
   for(i=0; i<nlevels; ++i) {
-    infile >> i1 >> fPol;    // Level number and floating level
+    infile >> i1 >> fPol;    // Level number and G4floating level
     //G4cout << "New line: i1= " << i1 << "  fPol= <" << fPol << "> " << G4endl;
     if(infile.eof()) {
       if(fVerbose > 2) { 

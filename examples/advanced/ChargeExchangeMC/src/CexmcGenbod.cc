@@ -57,16 +57,16 @@ extern "C"
 extern struct  genbod_in_data
 {
     int    np;
-    float  tecm;
-    float  amass[ 18 ];
+    G4float  tecm;
+    G4float  amass[ 18 ];
     int    kgenev;
 }  genin_;
 
 
 extern struct  genbod_out_data
 {
-    float  pcm[ 18 ][ 5 ];
-    float  wt;
+    G4float  pcm[ 18 ][ 5 ];
+    G4float  wt;
 }  genout_;
 
 
@@ -86,10 +86,10 @@ G4bool  CexmcGenbod::CheckKinematics( void )
         totalEnergy += ( *k )->e();
     }
 
-    /* epsilon is needed to compensate float to fortran real cast accuracy,
+    /* epsilon is needed to compensate G4float to fortran real cast accuracy,
      * the value 3E-6 was found experimentally, maybe has to be made bigger,
      * but not smaller */
-    const float  epsilon( 3E-6 );
+    const G4float  epsilon( 3E-6 );
 
     return totalEnergy - totalMass > 0.0f + epsilon;
 }
@@ -101,7 +101,7 @@ G4double  CexmcGenbod::Generate( void )
 
     genbod_();
 
-    float ( *pcm )[ 5 ]( &genout_.pcm[ 0 ] );
+    G4float ( *pcm )[ 5 ]( &genout_.pcm[ 0 ] );
 
     for ( CexmcPhaseSpaceOutVector::iterator  k( outVec.begin() );
                                                         k != outVec.end(); ++k )
@@ -125,7 +125,7 @@ void  CexmcGenbod::ParticleChangeHook( void )
 
     genin_.np = nmbOfOutputParticles;
 
-    float *  amass( genin_.amass );
+    G4float *  amass( genin_.amass );
 
     for ( CexmcPhaseSpaceOutVector::const_iterator  k( outVec.begin() );
                                                         k != outVec.end(); ++k )

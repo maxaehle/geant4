@@ -440,8 +440,8 @@ void G4DiffuseElasticV2::BuildAngleTable()
 
   G4Integrator<G4DiffuseElasticV2,G4double(G4DiffuseElasticV2::*)(G4double)> integral;
   
-  fEnergyAngleVector = new std::vector<std::vector<double>*>;
-  fEnergySumVector = new std::vector<std::vector<double>*>;
+  fEnergyAngleVector = new std::vector<std::vector<G4double>*>;
+  fEnergySumVector = new std::vector<std::vector<G4double>*>;
   
   for( i = 0; i < fEnergyBin; i++)
   {
@@ -469,8 +469,8 @@ void G4DiffuseElasticV2::BuildAngleTable()
       fAddCoulomb = true;
     }
 
-    std::vector<double>* angleVector = new std::vector<double>(fAngleBin);
-    std::vector<double>* sumVector = new std::vector<double>(fAngleBin);
+    std::vector<G4double>* angleVector = new std::vector<G4double>(fAngleBin);
+    std::vector<G4double>* sumVector = new std::vector<G4double>(fAngleBin);
 
     
     G4double delth = alphaMax/fAngleBin;

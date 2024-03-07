@@ -149,19 +149,19 @@ int f1_RandBit_shootBit()
 }
 
 // RandGaussQ::shoot
-double f1_RandGaussQ_shoot()
+G4double f1_RandGaussQ_shoot()
 {
   return RandGaussQ::shoot();
 }
 
-double f2_RandGaussQ_shoot(double mean, double stdDev)
+G4double f2_RandGaussQ_shoot(G4double mean, G4double stdDev)
 {
   return RandGaussQ::shoot(mean, stdDev);
 }
 
 
 // G4UniformRand
-double f_G4UniformRand()
+G4double f_G4UniformRand()
 {
   return G4UniformRand();
 }

@@ -142,7 +142,7 @@ G4Qt::G4Qt (
   
   /*
    * On some non-English locale, comma is used for the decimal separator instead of dot
-   * bringing to weird behavior of strtod (string to double) function in user application.
+   * bringing to weird behavior of strtod (string to G4double) function in user application.
    * This is "by design" from Qt, see https://bugreports.qt-project.org/browse/QTBUG-10994
    *
    *      $ LC_NUMERIC=fr_FR.UTF-8 ./qtstrtod

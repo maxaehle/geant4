@@ -64,7 +64,7 @@ public:
     G4DNASecondOrderReaction& operator=(const G4DNASecondOrderReaction&);
     void StartTracking(G4Track*);
 
-    void SetReaction(const G4MolecularConfiguration*, const G4Material*, double /*reactionRate*/);
+    void SetReaction(const G4MolecularConfiguration*, const G4Material*, G4double /*reactionRate*/);
 
 public :
    virtual void BuildPhysicsTable(const G4ParticleDefinition&);
@@ -121,7 +121,7 @@ protected:
 
     G4double fReturnedValue;
 
-    const std::vector<double>* fpMoleculeDensity;
+    const std::vector<G4double>* fpMoleculeDensity;
     G4double fReactionRate;
     G4double fConcentration;
     G4double fMolarMassOfMaterial;

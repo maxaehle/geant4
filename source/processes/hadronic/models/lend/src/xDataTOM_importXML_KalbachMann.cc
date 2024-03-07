@@ -70,7 +70,7 @@ err:
 static int xDataXML_KalbachMannCoefficientsToTOM( statusMessageReporting *smr, xDataXML_element *XE, xDataTOM_KalbachMannCoefficients *coefficients ) {
 
     int index, length;
-    double value;
+    G4double value;
 
     coefficients->coefficients = NULL;
     if( xDataXML_convertAttributeTo_xDataTOM_Int( smr, XE, "index", &index, 1 ) != 0 ) return( 1 );
@@ -79,8 +79,8 @@ static int xDataXML_KalbachMannCoefficientsToTOM( statusMessageReporting *smr, x
     coefficients->index = index;
     coefficients->length = length;
     coefficients->value = value;
-    if( ( coefficients->coefficients = (double *) smr_malloc2( smr, length * sizeof( double ), 0, "coefficients->coefficients" ) ) == NULL ) goto err;
-    if( xDataXML_stringToDoubles( smr, XE, XE->text.text, length, (double *) coefficients->coefficients ) != 0 ) goto err;
+    if( ( coefficients->coefficients = (G4double *) smr_malloc2( smr, length * sizeof( G4double ), 0, "coefficients->coefficients" ) ) == NULL ) goto err;
+    if( xDataXML_stringToDoubles( smr, XE, XE->text.text, length, (G4double *) coefficients->coefficients ) != 0 ) goto err;
     return( 0 );
 
 err:

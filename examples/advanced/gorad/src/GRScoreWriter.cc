@@ -125,7 +125,7 @@ void GRScoreWriter::DumpQuantityToFile(const G4String& psName,
 
   // write quantity
   long count = 0;
-  ofile << std::setprecision(16); // for double value with 8 bytes
+  ofile << std::setprecision(16); // for G4double value with 8 bytes
   for(int x = 0; x < fNMeshSegments[0]; x++) {
     for(int y = 0; y < fNMeshSegments[1]; y++) {
       for(int z = 0; z < fNMeshSegments[2]; z++) {
@@ -241,7 +241,7 @@ void GRScoreWriter::DumpAllQuantitiesToFile(const G4String& fileName,
 
     // write quantity
     long count = 0;
-    ofile << std::setprecision(16); // for double value with 8 bytes
+    ofile << std::setprecision(16); // for G4double value with 8 bytes
     for(int x = 0; x < fNMeshSegments[0]; x++) {
       for(int y = 0; y < fNMeshSegments[1]; y++) {
         for(int z = 0; z < fNMeshSegments[2]; z++) {

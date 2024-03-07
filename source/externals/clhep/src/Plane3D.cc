@@ -18,14 +18,14 @@
 namespace HepGeom {
   //--------------------------------------------------------------------------
   std::ostream &
-  operator<<(std::ostream & os, const Plane3D<float> & p) {
+  operator<<(std::ostream & os, const Plane3D<G4float> & p) {
     return os
       << '(' << p.a() << ',' << p.b() << ',' << p.c() << ',' << p.d() << ')';
   }
 
   //--------------------------------------------------------------------------
   std::ostream &
-  operator<<(std::ostream & os, const Plane3D<double> & p) {
+  operator<<(std::ostream & os, const Plane3D<G4double> & p) {
     return os
       << '(' << p.a() << ',' << p.b() << ',' << p.c() << ',' << p.d() << ')';
   }

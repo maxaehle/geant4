@@ -108,7 +108,7 @@ G4QMDGroundStateNucleus::G4QMDGroundStateNucleus( G4int z , G4int a )
 
    }
 
-   G4double radious = r00 * G4Pow::GetInstance()->A13( double ( GetMassNumber() ) ); 
+   G4double radious = r00 * G4Pow::GetInstance()->A13( G4double ( GetMassNumber() ) ); 
 
    rt00 = radious - r01; 
    radm = radious - rada * ( gamm - 1.0 ) + radb;
@@ -305,7 +305,7 @@ void G4QMDGroundStateNucleus::packNucleons()
       meanfield->Cal2BodyQuantities();
 
       G4double totalPotentialE = meanfield->GetTotalPotential(); 
-      G4double ebinal = ( totalPotentialE + ekinal ) / double ( GetMassNumber() );
+      G4double ebinal = ( totalPotentialE + ekinal ) / G4double ( GetMassNumber() );
 
       //std::cout << "packNucleons totalPotentialE " << totalPotentialE << std::endl;
       //std::cout << "packNucleons ebinal " << ebinal << std::endl;
@@ -410,7 +410,7 @@ void G4QMDGroundStateNucleus::packNucleons()
          meanfield->Cal2BodyQuantities(); 
          totalPotentialE = meanfield->GetTotalPotential(); 
 
-         ebinal = ( totalPotentialE + ekinal ) / double ( GetMassNumber() );
+         ebinal = ( totalPotentialE + ekinal ) / G4double ( GetMassNumber() );
 
       }
       //std::cout << "isThisEAOK " << isThisEAOK << std::endl; 

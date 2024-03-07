@@ -54,7 +54,7 @@ public:
   void Print();
 
   G4double getEM() const;
-  void   setEM (double e);
+  void   setEM (G4double e);
   
   G4double getHadr() const;
   void   setHadr (G4double e);

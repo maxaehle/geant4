@@ -68,7 +68,7 @@ G4AdjointElectronFI* G4AdjointElectronFI::Definition()
   //             shortlived      subType    anti_encoding
 
   // use constants in CLHEP
-  //  static const double electron_mass_c2 = 0.51099906 * MeV;
+  //  static const G4double electron_mass_c2 = 0.51099906 * MeV;
 
   // NOTE  : electric charge and magnetic moment is opposite 
   //         compared with real electron, because adjoint particles

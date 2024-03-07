@@ -61,7 +61,7 @@ Par04OnnxInference::Par04OnnxInference(G4String modelPath, G4int profileFlag, G4
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void Par04OnnxInference::RunInference(vector<float> aGenVector, std::vector<G4double>& aEnergies,
+void Par04OnnxInference::RunInference(vector<G4float> aGenVector, std::vector<G4double>& aEnergies,
                                       int aSize)
 {
   // input nodes
@@ -104,13 +104,13 @@ void Par04OnnxInference::RunInference(vector<float> aGenVector, std::vector<G4do
   }
 
   // create input tensor object from data values
-  float genVector[(unsigned) (aGenVector.size())];
+  G4float genVector[(unsigned) (aGenVector.size())];
   for(int i = 0; i < (unsigned) (aGenVector.size()); i++)
     genVector[i] = aGenVector[i];
   int values_length         = sizeof(genVector) / sizeof(genVector[0]);
   std::vector<int64_t> dims = { 1, (unsigned) (aGenVector.size()) };
   Ort::Value Input_noise_tensor =
-    Ort::Value::CreateTensor<float>(fInfo, genVector, values_length, dims.data(), dims.size());
+    Ort::Value::CreateTensor<G4float>(fInfo, genVector, values_length, dims.data(), dims.size());
   assert(Input_noise_tensor.IsTensor());
   std::vector<Ort::Value> ort_inputs;
   ort_inputs.push_back(std::move(Input_noise_tensor));
@@ -118,11 +118,11 @@ void Par04OnnxInference::RunInference(vector<float> aGenVector, std::vector<G4do
   std::vector<Ort::Value> ort_outputs =
     fSession->Run(Ort::RunOptions{ nullptr }, fInames.data(), ort_inputs.data(), ort_inputs.size(),
                   output_node_names.data(), output_node_names.size());
-  // get pointer to output tensor float values
-  float* floatarr = ort_outputs.front().GetTensorMutableData<float>();
+  // get pointer to output tensor G4float values
+  G4float* G4floatarr = ort_outputs.front().GetTensorMutableData<G4float>();
   aEnergies.assign(aSize, 0);
   for(int i = 0; i < aSize; ++i)
-    aEnergies[i] = floatarr[i];
+    aEnergies[i] = G4floatarr[i];
 }
 
 #endif

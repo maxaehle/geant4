@@ -6,7 +6,7 @@
 // This file is a part of the CLHEP - a Class Library for High Energy Physics.
 //
 // Hep2Vector is a general 2-vector class defining vectors in two 
-// dimension using double components.   It comes from the ZOOM
+// dimension using G4double components.   It comes from the ZOOM
 // PlaneVector class (the PhysicsVectors PlaneVector.h will typedef
 // PlaneVector to Hep2Vector).
 //
@@ -30,10 +30,10 @@ namespace CLHEP {
 class Hep2Vector;
 std::ostream & operator << (std::ostream &, const Hep2Vector &);
 std::istream & operator >> (std::istream &, Hep2Vector &);
-inline double operator * (const Hep2Vector & a,const Hep2Vector & b);
-inline Hep2Vector operator * (const Hep2Vector & p, double a);
-inline Hep2Vector operator * (double a, const Hep2Vector & p);
-       Hep2Vector operator / (const Hep2Vector & p, double a);
+inline G4double operator * (const Hep2Vector & a,const Hep2Vector & b);
+inline Hep2Vector operator * (const Hep2Vector & p, G4double a);
+inline Hep2Vector operator * (G4double a, const Hep2Vector & p);
+       Hep2Vector operator / (const Hep2Vector & p, G4double a);
 inline Hep2Vector operator + (const Hep2Vector & a, const Hep2Vector & b);
 inline Hep2Vector operator - (const Hep2Vector & a, const Hep2Vector & b);
 
@@ -48,7 +48,7 @@ public:
   enum { X=0, Y=1, NUM_COORDINATES=2, SIZE=NUM_COORDINATES };
   // Safe indexing of the coordinates when using with matrices, arrays, etc.
 
-  inline Hep2Vector( double x = 0.0, double y = 0.0 );
+  inline Hep2Vector( G4double x = 0.0, G4double y = 0.0 );
   // The constructor.
 
   inline Hep2Vector(const Hep2Vector & p);
@@ -63,45 +63,45 @@ public:
   inline ~Hep2Vector();
   // The destructor.
 
-  inline double x() const;
-  inline double y() const;
+  inline G4double x() const;
+  inline G4double y() const;
   // The components in cartesian coordinate system.
 
-         double operator () (int i) const;
-  inline double operator [] (int i) const;
+         G4double operator () (int i) const;
+  inline G4double operator [] (int i) const;
   // Get components by index.  0-based.
 
-         double & operator () (int i);
-  inline double & operator [] (int i);
+         G4double & operator () (int i);
+  inline G4double & operator [] (int i);
   // Set components by index.  0-based.
 
-  inline void setX(double x);
-  inline void setY(double y);
-  inline void set (double x, double y);
+  inline void setX(G4double x);
+  inline void setY(G4double y);
+  inline void set (G4double x, G4double y);
   // Set the components in cartesian coordinate system.
 
-  inline double phi() const;
+  inline G4double phi() const;
   // The azimuth angle.
 
-  inline double mag2() const;
+  inline G4double mag2() const;
   // The magnitude squared.
 
-  inline double mag() const;
+  inline G4double mag() const;
   // The magnitude.
 
-  inline double r() const;
+  inline G4double r() const;
   // r in polar coordinates (r, phi):  equal to mag().
 
-  inline void setPhi(double phi);
+  inline void setPhi(G4double phi);
   // Set phi keeping mag constant.
 
-  inline void setMag(double r);
+  inline void setMag(G4double r);
   // Set magnitude keeping phi constant.
 
-  inline void setR(double r);
+  inline void setR(G4double r);
   // Set R keeping phi constant.  Same as setMag.
 
-  inline void setPolar(double r, double phi);
+  inline void setPolar(G4double r, G4double phi);
   // Set by polar coordinates.
 
   inline Hep2Vector & operator = (const Hep2Vector & p);
@@ -119,19 +119,19 @@ public:
   bool operator<= (const Hep2Vector & v) const;
   // dictionary ordering according to y, then x component
 
-  static inline double getTolerance();
-  static double setTolerance(double tol);
+  static inline G4double getTolerance();
+  static G4double setTolerance(G4double tol);
 
-  double howNear (const Hep2Vector &p) const;
-  bool isNear  (const Hep2Vector & p, double epsilon=tolerance) const;
+  G4double howNear (const Hep2Vector &p) const;
+  bool isNear  (const Hep2Vector & p, G4double epsilon=tolerance) const;
 
-  double howParallel (const Hep2Vector &p) const;
+  G4double howParallel (const Hep2Vector &p) const;
   bool isParallel 
-		(const Hep2Vector & p, double epsilon=tolerance) const;
+		(const Hep2Vector & p, G4double epsilon=tolerance) const;
 
-  double howOrthogonal (const Hep2Vector &p) const;
+  G4double howOrthogonal (const Hep2Vector &p) const;
   bool isOrthogonal
-		(const Hep2Vector & p, double epsilon=tolerance) const;
+		(const Hep2Vector & p, G4double epsilon=tolerance) const;
 
   inline Hep2Vector & operator += (const Hep2Vector &p);
   // Addition.
@@ -142,7 +142,7 @@ public:
   inline Hep2Vector operator - () const;
   // Unary minus.
 
-  inline Hep2Vector & operator *= (double a);
+  inline Hep2Vector & operator *= (G4double a);
   // Scaling with real numbers.
 
   inline Hep2Vector unit() const;
@@ -151,13 +151,13 @@ public:
   inline Hep2Vector orthogonal() const;
   // Vector orthogonal to this.
 
-  inline double dot(const Hep2Vector &p) const;
+  inline G4double dot(const Hep2Vector &p) const;
   // Scalar product.
 
-  inline double angle(const Hep2Vector &) const;
+  inline G4double angle(const Hep2Vector &) const;
   // The angle w.r.t. another 2-vector.
 
-  void rotate(double);
+  void rotate(G4double);
   // Rotates the Hep2Vector.
 
   operator Hep3Vector () const;
@@ -169,17 +169,17 @@ public:
   friend std::ostream & operator<< (std::ostream &, const Hep2Vector &);
   // Output to a stream.
 
-  inline friend double operator * (const Hep2Vector & a,
+  inline friend G4double operator * (const Hep2Vector & a,
 				   const Hep2Vector & b);
   // Scalar product.
 
-  inline friend Hep2Vector operator * (const Hep2Vector & p, double a);
+  inline friend Hep2Vector operator * (const Hep2Vector & p, G4double a);
   // v*c
 
-  inline friend Hep2Vector operator * (double a, const Hep2Vector & p);
+  inline friend Hep2Vector operator * (G4double a, const Hep2Vector & p);
   // c*v
 
-         friend Hep2Vector operator / (const Hep2Vector & p, double a);
+         friend Hep2Vector operator / (const Hep2Vector & p, G4double a);
   // v/c
 
   inline friend Hep2Vector operator + (const Hep2Vector & a,
@@ -194,11 +194,11 @@ public:
 
 private:
 
-  double dx;
-  double dy;
+  G4double dx;
+  G4double dy;
   // The components.
 
-  static double tolerance;
+  static G4double tolerance;
   // default tolerance criterion for isNear() to return true.
 
 };  // Hep2Vector

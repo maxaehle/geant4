@@ -102,7 +102,7 @@
     return p;
   }
 
-  tools::sg::plottable* plot_fit(const std::vector<std::string>& a_names,const std::vector<double>& a_output) {
+  tools::sg::plottable* plot_fit(const std::vector<std::string>& a_names,const std::vector<G4double>& a_output) {
     tools::sg::plottable* p = new tools::sg::fit2plot(a_names,a_output);
     m_plots.current_plotter().add_plottable(p);
     return p;

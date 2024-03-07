@@ -1089,7 +1089,7 @@ c       Clear BU_TAB (array of multifragmentation products)
                if(fimf==1){
 //            PRINT*,'IMF EMISSION FROM BU PRODUCTS'
 // IMF emission: Heavy partner is not allowed to fission or to emitt IMF.
-               //double FEE = EEBU;
+               //G4double FEE = EEBU;
                G4int FFBU1 = 0;
                G4int FIMFBU1 = 0;
                opt->optimfallowed = 0;  //  IMF is not allowed
@@ -1567,7 +1567,7 @@ c       Clear BU_TAB (array of multifragmentation products)
       G4int NbLamH=0;
       G4int NbLamimf=0;
       G4double pbH = (af-zf) / (af-zf+aimf-zimf);
-      //double pbL = aimf / (af+aimf);  
+      //G4double pbL = aimf / (af+aimf);  
       for(G4int i=0;i<NbLam0;i++){
        if(G4AblaRandom::flat()<pbH){
         NbLamH++;
@@ -6212,10 +6212,10 @@ G4double G4Abla::dint(G4double x)
   G4double value = 0.0;
 /*
   if(a < 0.0) {
-    value = double(std::ceil(a));
+    value = G4double(std::ceil(a));
   }
   else {
-    value = double(std::floor(a));
+    value = G4double(std::floor(a));
   }
 */
 	if(x-std::floor(x) <= std::ceil(x)-x) 
@@ -8163,14 +8163,14 @@ c      Delta_u2_shell.
       G4double eps1,eps2;
       G4double Z1UCD,Z2UCD;
       G4double beta=0.,beta1=0.,beta2=0.;
-     // double betacomplement;
+     // G4double betacomplement;
       G4double DN1_POL;
       /* shift of most probable neutron number for given Z,
             according to polarization */
       G4int i_help;
       G4double A_levdens;
             /* level-density parameter */
-     // double A_levdens_light1,A_levdens_light2;
+     // G4double A_levdens_light1,A_levdens_light2;
       G4double A_levdens_heavy1,A_levdens_heavy2;
 
       G4double R0=1.16;
@@ -8979,7 +8979,7 @@ void G4Abla::even_odd(G4double r_origin,G4double r_even_odd,G4int &i_out)
   }
 }
 
-double G4Abla::umass(G4double z,G4double n,G4double beta)
+G4double G4Abla::umass(G4double z,G4double n,G4double beta)
 {
   // liquid-drop mass, Myers & Swiatecki, Lysekil, 1967
   // pure liquid drop, without pairing and shell effects
@@ -9009,7 +9009,7 @@ double G4Abla::umass(G4double z,G4double n,G4double beta)
 }
 
 
-double G4Abla::ecoul(G4double z1,G4double n1,G4double beta1,G4double z2,G4double n2,G4double beta2,G4double d)
+G4double G4Abla::ecoul(G4double z1,G4double n1,G4double beta1,G4double z2,G4double n2,G4double beta2,G4double d)
 {
   // Coulomb potential between two nuclei
   // surfaces are in a distance of d
@@ -9471,8 +9471,8 @@ void G4Abla::unstable_nuclei(G4int AFP,G4int ZFP,G4int *AFPNEW,G4int *ZFPNEW,G4i
          if ((AFP==7) && (ZFP==5)){
 // 7B -> 6Be + p -> 4He + 3p
          for(int I = 0; I<= AFP-5;I++){
-         unstable_tke(double(AFP-I),double(ZFP-I),
-         double(AFP-I-1),double(ZFP-I-1),
+         unstable_tke(G4double(AFP-I),G4double(ZFP-I),
+         G4double(AFP-I-1),G4double(ZFP-I-1),
          VX,VY,VZ,
          &(*VP1X),&(*VP1Y),&(*VP1Z),&VP2X,&VP2Y,&VP2Z);
          BU_TAB_TEMP[*ILOOP][0] = 1.0;
@@ -10273,10 +10273,10 @@ void G4Abla::AMOMENT(G4double AABRA,G4double APRF, G4int IMULTIFR,G4double *PX,G
 
      // G4double R = 1.160 * pow(APRF,1.0/3.0);
 
-    //  G4double RNDT = double(haz(1));
+    //  G4double RNDT = G4double(haz(1));
     //  G4double CTET = 2.0*RNDT-1.0;
     //  G4double TETA = acos(CTET);
-    //  G4double RNDP = double(haz(1));
+    //  G4double RNDP = G4double(haz(1));
     //  G4double PHI = RNDP*2.0*PI;
     //  G4double STET = sqrt(1.0-CTET*CTET);
 //      RX = R * STET * DCOS(PHI)

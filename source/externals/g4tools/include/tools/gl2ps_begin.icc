@@ -8,13 +8,13 @@
 inline tools_GLboolean tools_dummy_glIsEnabled      (tools_GLenum) {return TOOLS_GL_FALSE;}
 inline void      tools_dummy_glBegin          (tools_GLenum) {}
 inline void      tools_dummy_glEnd            () {}
-inline void      tools_dummy_glGetFloatv      (tools_GLenum,tools_GLfloat*) {}
-inline void      tools_dummy_glVertex3f       (tools_GLfloat,tools_GLfloat,tools_GLfloat) {}
+inline void      tools_dummy_glGetFloatv      (tools_GLenum,tools_GLG4float*) {}
+inline void      tools_dummy_glVertex3f       (tools_GLG4float,tools_GLG4float,tools_GLG4float) {}
 inline void      tools_dummy_glGetBooleanv    (tools_GLenum,tools_GLboolean*) {}
 inline void      tools_dummy_glGetIntegerv    (tools_GLenum,tools_GLint*) {}
 inline tools_GLint     tools_dummy_glRenderMode     (tools_GLenum) {return 0;}
-inline void      tools_dummy_glFeedbackBuffer (tools_GLsizei,tools_GLenum,tools_GLfloat*) {}
-inline void      tools_dummy_glPassThrough    (tools_GLfloat ) {}
+inline void      tools_dummy_glFeedbackBuffer (tools_GLsizei,tools_GLenum,tools_GLG4float*) {}
+inline void      tools_dummy_glPassThrough    (tools_GLG4float ) {}
 
 inline tools_gl2ps_gl_funcs_t& tools_gl2ps_get_s_funcs() {
   static tools_gl2ps_gl_funcs_t s_gl_funcs = {

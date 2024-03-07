@@ -17,8 +17,8 @@
 
 namespace CLHEP  {
 
-void Hep3Vector::setMag(double ma) {
-  double factor = mag();
+void Hep3Vector::setMag(G4double ma) {
+  G4double factor = mag();
   if (factor == 0) {
     std::cerr << "Hep3Vector::setMag() - "
               << "zero vector can't be stretched" << std::endl;
@@ -33,16 +33,16 @@ void Hep3Vector::setMag(double ma) {
 Hep3Vector & Hep3Vector::rotateUz(const Hep3Vector& NewUzVector) {
   // NewUzVector must be normalized !
 
-  double u1 = NewUzVector.x();
-  double u2 = NewUzVector.y();
-  double u3 = NewUzVector.z();
-  double up = u1*u1 + u2*u2;
+  G4double u1 = NewUzVector.x();
+  G4double u2 = NewUzVector.y();
+  G4double u3 = NewUzVector.z();
+  G4double up = u1*u1 + u2*u2;
 
   if (up > 0) {
     up = std::sqrt(up);
-    double px = (u1 * u3 * x() - u2 * y()) / up + u1 * z();
-    double py = (u2 * u3 * x() + u1 * y()) / up + u2 * z();
-    double pz = -up * x() + u3 * z();
+    G4double px = (u1 * u3 * x() - u2 * y()) / up + u1 * z();
+    G4double py = (u2 * u3 * x() + u1 * y()) / up + u2 * z();
+    G4double pz = -up * x() + u3 * z();
     set(px, py, pz);
   } else if (u3 < 0.) {
     setX(-x());
@@ -52,8 +52,8 @@ Hep3Vector & Hep3Vector::rotateUz(const Hep3Vector& NewUzVector) {
   return *this;
 }
 
-double Hep3Vector::pseudoRapidity() const {
-  double m1 = mag();
+G4double Hep3Vector::pseudoRapidity() const {
+  G4double m1 = mag();
   if ( m1==  0   ) return  0.0;   
   if ( m1==  z() ) return  1.0E72;
   if ( m1== -z() ) return -1.0E72;
@@ -64,12 +64,12 @@ std::ostream & operator<< (std::ostream & os, const Hep3Vector & v) {
   return os << "(" << v.x() << "," << v.y() << "," << v.z() << ")";
 }
 
-void ZMinput3doubles ( std::istream & is, const char * type,
-                       double & x, double & y, double & z );
+void ZMinput3G4doubles ( std::istream & is, const char * type,
+                       G4double & x, G4double & y, G4double & z );
 
 std::istream & operator>>(std::istream & is, Hep3Vector & v) {
-  double x, y, z;
-  ZMinput3doubles ( is, "Hep3Vector", x, y, z );
+  G4double x, y, z;
+  ZMinput3G4doubles ( is, "Hep3Vector", x, y, z );
   v.set(x, y, z);
   return  is;
 }  // operator>>()
@@ -84,45 +84,45 @@ const Hep3Vector HepZHat(0.0, 0.0, 1.0);
 //
 //-------------------
 
-Hep3Vector & Hep3Vector::rotateX (double phi1) {
-  double sinphi = std::sin(phi1);
-  double cosphi = std::cos(phi1);
-  double ty = y() * cosphi - z() * sinphi;
-  double tz = z() * cosphi + y() * sinphi;
+Hep3Vector & Hep3Vector::rotateX (G4double phi1) {
+  G4double sinphi = std::sin(phi1);
+  G4double cosphi = std::cos(phi1);
+  G4double ty = y() * cosphi - z() * sinphi;
+  G4double tz = z() * cosphi + y() * sinphi;
   setY(ty);
   setZ(tz);
   return *this;
 } /* rotateX */
 
-Hep3Vector & Hep3Vector::rotateY (double phi1) {
-  double sinphi = std::sin(phi1);
-  double cosphi = std::cos(phi1);
-  double tx = x() * cosphi + z() * sinphi;
-  double tz = z() * cosphi - x() * sinphi;
+Hep3Vector & Hep3Vector::rotateY (G4double phi1) {
+  G4double sinphi = std::sin(phi1);
+  G4double cosphi = std::cos(phi1);
+  G4double tx = x() * cosphi + z() * sinphi;
+  G4double tz = z() * cosphi - x() * sinphi;
   setX(tx);
   setZ(tz);
   return *this;
 } /* rotateY */
 
-Hep3Vector & Hep3Vector::rotateZ (double phi1) {
-  double sinphi = std::sin(phi1);
-  double cosphi = std::cos(phi1);
-  double tx = x() * cosphi - y() * sinphi;
-  double ty = y() * cosphi + x() * sinphi;
+Hep3Vector & Hep3Vector::rotateZ (G4double phi1) {
+  G4double sinphi = std::sin(phi1);
+  G4double cosphi = std::cos(phi1);
+  G4double tx = x() * cosphi - y() * sinphi;
+  G4double ty = y() * cosphi + x() * sinphi;
   setX(tx);
   setY(ty);
   return *this;
 } /* rotateZ */
 
-bool Hep3Vector::isNear(const Hep3Vector & v, double epsilon) const {
-  double limit = dot(v)*epsilon*epsilon;
+bool Hep3Vector::isNear(const Hep3Vector & v, G4double epsilon) const {
+  G4double limit = dot(v)*epsilon*epsilon;
   return ( (*this - v).mag2() <= limit );
 } /* isNear() */
 
-double Hep3Vector::howNear(const Hep3Vector & v ) const {
+G4double Hep3Vector::howNear(const Hep3Vector & v ) const {
   // | V1 - V2 | **2  / V1 dot V2, up to 1
-  double d   = (*this - v).mag2();
-  double vdv = dot(v);
+  G4double d   = (*this - v).mag2();
+  G4double vdv = dot(v);
   if ( (vdv > 0) && (d < vdv)  ) {
     return std::sqrt (d/vdv);
   } else if ( (vdv == 0) && (d == 0) ) {
@@ -132,8 +132,8 @@ double Hep3Vector::howNear(const Hep3Vector & v ) const {
   }
 } /* howNear */
 
-double Hep3Vector::deltaPhi  (const Hep3Vector & v2) const {
-  double dphi = v2.getPhi() - getPhi();
+G4double Hep3Vector::deltaPhi  (const Hep3Vector & v2) const {
+  G4double dphi = v2.getPhi() - getPhi();
   if ( dphi > CLHEP::pi ) {
     dphi -= CLHEP::twopi;
   } else if ( dphi <= -CLHEP::pi ) {
@@ -142,15 +142,15 @@ double Hep3Vector::deltaPhi  (const Hep3Vector & v2) const {
   return dphi;
 } /* deltaPhi */
 
-double Hep3Vector::deltaR ( const Hep3Vector & v ) const {
-  double a = eta() - v.eta();
-  double b = deltaPhi(v); 
+G4double Hep3Vector::deltaR ( const Hep3Vector & v ) const {
+  G4double a = eta() - v.eta();
+  G4double b = deltaPhi(v); 
   return std::sqrt ( a*a + b*b );
 } /* deltaR */
 
-double Hep3Vector::cosTheta(const Hep3Vector & q) const {
-  double arg;
-  double ptot2 = mag2()*q.mag2();
+G4double Hep3Vector::cosTheta(const Hep3Vector & q) const {
+  G4double arg;
+  G4double ptot2 = mag2()*q.mag2();
   if(ptot2 <= 0) {
     arg = 0.0;
   }else{
@@ -161,14 +161,14 @@ double Hep3Vector::cosTheta(const Hep3Vector & q) const {
   return arg;
 }
 
-double Hep3Vector::cos2Theta(const Hep3Vector & q) const {
-  double arg;
-  double ptot2 = mag2();
-  double qtot2 = q.mag2();
+G4double Hep3Vector::cos2Theta(const Hep3Vector & q) const {
+  G4double arg;
+  G4double ptot2 = mag2();
+  G4double qtot2 = q.mag2();
   if ( ptot2 == 0 || qtot2 == 0 )  {
     arg = 1.0;
   }else{
-    double pdq = dot(q);
+    G4double pdq = dot(q);
     arg = (pdq/ptot2) * (pdq/qtot2);
         // More naive methods overflow on vectors which can be squared
         // but can't be raised to the 4th power.
@@ -177,9 +177,9 @@ double Hep3Vector::cos2Theta(const Hep3Vector & q) const {
  return arg;
 }
 
-void Hep3Vector::setEta (double eta1) {
-  double phi1 = 0;
-  double r1;
+void Hep3Vector::setEta (G4double eta1) {
+  G4double phi1 = 0;
+  G4double r1;
   if ( (x() == 0) && (y() == 0) ) {
     if (z() == 0) {
       std::cerr << "Hep3Vector::setEta() - "
@@ -195,17 +195,17 @@ void Hep3Vector::setEta (double eta1) {
     r1 = getR();
     phi1 = getPhi();
   }
-  double tanHalfTheta = std::exp ( -eta1 );
-  double cosTheta1 =
+  G4double tanHalfTheta = std::exp ( -eta1 );
+  G4double cosTheta1 =
         (1 - tanHalfTheta*tanHalfTheta) / (1 + tanHalfTheta*tanHalfTheta);
-  double rho1 = r1*std::sqrt(1 - cosTheta1*cosTheta1);
+  G4double rho1 = r1*std::sqrt(1 - cosTheta1*cosTheta1);
   setZ(r1 * cosTheta1);
   setY(rho1 * std::sin (phi1));
   setX(rho1 * std::cos (phi1));
   return;
 }
 
-void Hep3Vector::setCylTheta (double theta1) {
+void Hep3Vector::setCylTheta (G4double theta1) {
 
   // In cylindrical coords, set theta while keeping rho and phi fixed
 
@@ -237,8 +237,8 @@ void Hep3Vector::setCylTheta (double theta1) {
       << std::endl;
         // No special return needed if warning is ignored.
   }
-  double phi1 (getPhi());
-  double rho1 = getRho();
+  G4double phi1 (getPhi());
+  G4double rho1 = getRho();
   if ( (theta1 == 0) || (theta1 == CLHEP::pi) ) {
     std::cerr << "Hep3Vector::setCylTheta() - "
       << "Attempt to set cylindrical theta to 0 or PI "
@@ -253,11 +253,11 @@ void Hep3Vector::setCylTheta (double theta1) {
 
 } /* setCylTheta */
 
-void Hep3Vector::setCylEta (double eta1) {
+void Hep3Vector::setCylEta (G4double eta1) {
 
   // In cylindrical coords, set eta while keeping rho and phi fixed
 
-  double theta1 = 2 * std::atan ( std::exp (-eta1) );
+  G4double theta1 = 2 * std::atan ( std::exp (-eta1) );
 
         //-| The remaining code is similar to setCylTheta,  The reason for
         //-| using a copy is so as to be able to change the messages in the
@@ -286,8 +286,8 @@ void Hep3Vector::setCylEta (double eta1) {
     setZ(0.0);
     return;
   }
-  double phi1 (getPhi());
-  double rho1 = getRho();
+  G4double phi1 (getPhi());
+  G4double rho1 = getRho();
   setZ(rho1 / std::tan (theta1));
   setY(rho1 * std::sin (phi1));
   setX(rho1 * std::cos (phi1));
@@ -295,7 +295,7 @@ void Hep3Vector::setCylEta (double eta1) {
 } /* setCylEta */
 
 
-Hep3Vector operator/ ( const Hep3Vector & v1, double c ) {
+Hep3Vector operator/ ( const Hep3Vector & v1, G4double c ) {
 //  if (c == 0) {
 //    std::cerr << "Hep3Vector::operator/ () - "
 //      << "Attempt to divide vector by 0 -- "
@@ -304,7 +304,7 @@ Hep3Vector operator/ ( const Hep3Vector & v1, double c ) {
   return v1 * (1.0/c);
 } /* v / c */
 
-Hep3Vector & Hep3Vector::operator/= (double c) {
+Hep3Vector & Hep3Vector::operator/= (G4double c) {
 //  if (c == 0) {
 //    std::cerr << "Hep3Vector::operator/ () - "
 //      << "Attempt to do vector /= 0 -- "
@@ -315,6 +315,6 @@ Hep3Vector & Hep3Vector::operator/= (double c) {
   return *this;
 }
 
-double Hep3Vector::tolerance = Hep3Vector::ToleranceTicks * 2.22045e-16;
+G4double Hep3Vector::tolerance = Hep3Vector::ToleranceTicks * 2.22045e-16;
 
 }  // namespace CLHEP

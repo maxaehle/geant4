@@ -17,7 +17,7 @@ char const *xDataTOM_W_XYs_LegendreSeries_ID = "W_XYs_LegendreSeries";
 ************************************************************
 */
 int xDataTOM_W_XYs_LegendreSeries_initialize( statusMessageReporting *smr, xDataTOM_W_XYs_LegendreSeries *W_XYs_LegendreSeries, int index, 
-        int length, double value, enum xDataTOM_subAxesType subAxesType, xDataTOM_axes *axes, xDataTOM_interpolation *interpolation ) {
+        int length, G4double value, enum xDataTOM_subAxesType subAxesType, xDataTOM_axes *axes, xDataTOM_interpolation *interpolation ) {
 
     W_XYs_LegendreSeries->LegendreSeries = NULL;
     W_XYs_LegendreSeries->index = index;

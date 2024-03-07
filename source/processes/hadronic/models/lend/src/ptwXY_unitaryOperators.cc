@@ -4,7 +4,7 @@
 */
 
 #include <cmath>
-#include <float.h>
+#include <G4float.h>
 
 #include "ptwXY.h"
 

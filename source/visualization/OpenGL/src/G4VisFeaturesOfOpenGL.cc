@@ -40,7 +40,7 @@ G4String G4VisFeaturesOfOpenGLIX () {
 
 G4String G4VisFeaturesOfOpenGLSX () {
   return
-    "    Dumb double buffered X Window with Graphics Database."
+    "    Dumb G4double buffered X Window with Graphics Database."
     "\n    Advantages:    uses display lists as graphics database."
     "\n                   fastest possible redraw, e.g., on simple change"
     "\n                     of viewpoint."
@@ -65,7 +65,7 @@ G4String G4VisFeaturesOfOpenGLIXm () {
 
 G4String G4VisFeaturesOfOpenGLSXm () {
   return
-    "    Smart double buffered X Window with Graphics Database."
+    "    Smart G4double buffered X Window with Graphics Database."
     "\n    Advantages:    resizable, and has Motif-based view-control panel."
     "\n                   uses display lists as graphics database."
     "\n                   fastest possible redraw, e.g., on simple change"

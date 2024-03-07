@@ -57,7 +57,7 @@ class G4TSimpleHeum
 {
  public:  // with description
   constexpr static unsigned int gIntegratorOrder = 3;
-  static constexpr double IntegratorCorrection= 1.0 /
+  static constexpr G4double IntegratorCorrection= 1.0 /
                                                 ((1<<gIntegratorOrder) - 1);
 
   G4TSimpleHeum(T_Equation* EqRhs, unsigned int numberOfVariables = 6);

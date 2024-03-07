@@ -44,7 +44,7 @@ typedef enum {
 
 class SbPainterContext {
 public:
-  float fRed,fGreen,fBlue;
+  G4float fRed,fGreen,fBlue;
   int fLineWidth;
   SbLineStyle fLineStyle;
   int fMarkerSize;
@@ -63,14 +63,14 @@ public:
   void setWindowSize(int,int);
   void enableEdges(SbBool);
   virtual void beginTraversal() = 0;
-  virtual void clearColorBuffer(float,float,float) = 0;
+  virtual void clearColorBuffer(G4float,G4float,G4float) = 0;
   //virtual void drawPrimitive(SbPrimitiveType,
-  //                          int,float*,float*,float*,
+  //                          int,G4float*,G4float*,G4float*,
    //                        const SbPainterContext&) = 0;
   virtual void endTraversal() = 0;
 protected:
   int fWindowWidth,fWindowHeight;
-  float fRed,fGreen,fBlue;
+  G4float fRed,fGreen,fBlue;
   SbBool fEdges;
 };
 

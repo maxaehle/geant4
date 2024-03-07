@@ -217,7 +217,7 @@ IntegrateEneLongitudinal(G4double LongitudinalStep)
   G4double LongitudinalStepInX0 = LongitudinalStep / X0;
   G4float x1= Betah*LongitudinalStepInX0;
   G4float x2= Alphah;
-  float x3 =  gam(x1,x2);
+  G4float x3 =  gam(x1,x2);
   G4double DEne=x3;
   return DEne;
 }

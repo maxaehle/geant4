@@ -251,7 +251,7 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
   //track length
   //
   G4double trackLPerEvent = fTrackLength/nbEvents;
-  G4double nbStepPerEvent = double(fNbSteps)/nbEvents;
+  G4double nbStepPerEvent = G4double(fNbSteps)/nbEvents;
   G4double stepSize = fTrackLength/fNbSteps;
   
   G4cout 

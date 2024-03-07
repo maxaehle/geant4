@@ -90,7 +90,7 @@ class G4tgrUtils
       // Return the str without leading and trailing '"' and ' '
 
     static G4double GetDouble(const G4String& str, G4double unitval = 1.);
-      // Convert a G4String to a double, checking that it is really a number
+      // Convert a G4String to a G4double, checking that it is really a number
     static G4int GetInt(const G4String& str);
       // Convert a G4String to an integer, checking that it is really an int
     static G4bool GetBool(const G4String& str);

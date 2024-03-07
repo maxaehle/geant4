@@ -47,7 +47,7 @@ static struct ZSymbol ZSymbols[] = {    {   0, "n"  },  {   1, "H"  },  {   2, "
 
 static int MCGIDI_miscNameToZAm_getLevel( statusMessageReporting *smr, const char *name, const char *p );
 static ptwXYPoints *MCGIDI_misc_Data2ptwXYPointsInUnitsOf( statusMessageReporting *smr, ptwXY_interpolation interpolation, 
-    int length, double *data, char const *fromUnits[2], char const *toUnits[2] );
+    int length, G4double *data, char const *fromUnits[2], char const *toUnits[2] );
 /*
 ************************************************************
 */
@@ -225,7 +225,7 @@ int MCGIDI_misc_setMessageError_Element( statusMessageReporting *smr, void *user
 /*
 ************************************************************
 */
-xDataTOM_Int MCGIDI_misc_binarySearch( xDataTOM_Int n, double *ds, double d ) {
+xDataTOM_Int MCGIDI_misc_binarySearch( xDataTOM_Int n, G4double *ds, G4double d ) {
 /*
 *   Returns -2 is d < first point of ds, -1 if > last point of ds and the lower index of ds otherwise.
 */
@@ -327,7 +327,7 @@ enum xDataTOM_frame MCGIDI_misc_getProductFrame( statusMessageReporting *smr, xD
 /*
 ************************************************************
 */
-int MCGIDI_misc_PQUStringToDouble( statusMessageReporting *smr, char const *str, char const *unit, double conversion, double *value ) {
+int MCGIDI_misc_PQUStringToDouble( statusMessageReporting *smr, char const *str, char const *unit, G4double conversion, G4double *value ) {
 /*
 *   Currently, white spaces are not allowed after the unit.
 *
@@ -353,7 +353,7 @@ int MCGIDI_misc_PQUStringToDouble( statusMessageReporting *smr, char const *str,
 /*
 ************************************************************
 */
-int MCGIDI_misc_PQUStringToDoubleInUnitOf( statusMessageReporting *smr, char const *str, char const *toUnit, double *value ) {
+int MCGIDI_misc_PQUStringToDoubleInUnitOf( statusMessageReporting *smr, char const *str, char const *toUnit, G4double *value ) {
 /*
 *   Currently, white spaces are not allowed after the unit.
 *
@@ -361,7 +361,7 @@ int MCGIDI_misc_PQUStringToDoubleInUnitOf( statusMessageReporting *smr, char con
 */
     char const *s1 = str;
     char *e1;
-    double factor;
+    G4double factor;
 
     while( isspace( *s1 ) ) s1++; // Loop checking, 11.06.2015, T. Koi
     *value = strtod( s1, &e1 );
@@ -378,7 +378,7 @@ int MCGIDI_misc_PQUStringToDoubleInUnitOf( statusMessageReporting *smr, char con
 /*
 ************************************************************
 */
-double MCGIDI_misc_getUnitConversionFactor( statusMessageReporting *smr, char const *fromUnit, char const *toUnit ) {
+G4double MCGIDI_misc_getUnitConversionFactor( statusMessageReporting *smr, char const *fromUnit, char const *toUnit ) {
 /*
 *   This is a kludge until units are better supported.
 */
@@ -406,7 +406,7 @@ ptwXYPoints *MCGIDI_misc_dataFromXYs2ptwXYPointsInUnitsOf( statusMessageReportin
         ptwXY_interpolation interpolation, char const *toUnits[2] ) {
 
     int length;
-    double *data;
+    G4double *data;
     char const *fromUnits[2];
 
     fromUnits[0] = xDataTOM_subAxes_getUnit( smr, &(XYs->subAxes), 0 );
@@ -424,7 +424,7 @@ ptwXYPoints *MCGIDI_misc_dataFromXYs2ptwXYPointsInUnitsOf( statusMessageReportin
 ptwXYPoints *MCGIDI_misc_dataFromElement2ptwXYPointsInUnitsOf( statusMessageReporting *smr, xDataTOM_element *linear, char const *toUnits[2] ) {
 
     int length;
-    double *data;
+    G4double *data;
     xDataTOM_axes *axes = &(linear->xDataInfo.axes);
     char const *fromUnits[2];
     ptwXY_interpolation interpolation;
@@ -445,9 +445,9 @@ ptwXYPoints *MCGIDI_misc_dataFromElement2ptwXYPointsInUnitsOf( statusMessageRepo
 ************************************************************
 */
 static ptwXYPoints *MCGIDI_misc_Data2ptwXYPointsInUnitsOf( statusMessageReporting *smr, ptwXY_interpolation interpolation, 
-        int length, double *data, char const *fromUnits[2], char const *toUnits[2] ) {
+        int length, G4double *data, char const *fromUnits[2], char const *toUnits[2] ) {
 
-    double xFactor, yFactor;
+    G4double xFactor, yFactor;
     ptwXYPoints *ptwXY = NULL;
     nfu_status status;
 

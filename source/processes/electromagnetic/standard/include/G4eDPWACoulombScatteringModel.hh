@@ -48,7 +48,7 @@
 // `isscpcor` input argument of the CTR to false) when ionisation is described
 // with a classical, event by event based simulation model instead of usign the
 // condensed history approach (otherwise, the corresponding angular defelctions
-// will be "double counted").
+// will be "G4double counted").
 //
 // -------------------------------------------------------------------
 

@@ -28,7 +28,7 @@
 // Class description:
 //
 // Base Class for realisation of numerical methodes for integration of functions
-// with signature double f(double) by Gaussian quadrature methods
+// with signature G4double f(G4double) by Gaussian quadrature methods
 // Roots of ortogonal polynoms and corresponding weights are calculated based on
 // iteration method (by bisection Newton algorithm). Constant values for initial
 // approximations were derived from the book:

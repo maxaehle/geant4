@@ -357,7 +357,7 @@ G4bool G4BinaryLightIonReaction::EnergyAndMomentumCorrector(
 //****************************************************************************
 {
 	const int    nAttemptScale = 2500;
-	const double ErrLimit = 1.E-6;
+	const G4double ErrLimit = 1.E-6;
 	if (Output->empty())
 		return TRUE;
 	G4LorentzVector SumMom(0,0,0,0);

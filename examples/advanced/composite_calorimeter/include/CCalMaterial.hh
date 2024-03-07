@@ -63,7 +63,7 @@ public:
 protected:
   CCalMaterial(){} //Default constructor
   void computeDensity(int nconst,
-                      CCalMaterial** constituents, double* weights,
+                      CCalMaterial** constituents, G4double* weights,
                       FractionType ft);
   void closeMaterial(); //Closes material construction.
 

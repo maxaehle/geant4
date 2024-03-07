@@ -125,7 +125,7 @@ class G4ScoringMessenger : public G4UImessenger
   G4UIcommand* drawColumnCmd;
   G4UIdirectory* colorMapDir;
   G4UIcmdWithoutParameter* listColorMapCmd;
-  G4UIcmdWithAString* floatMinMaxCmd;
+  G4UIcmdWithAString* G4floatMinMaxCmd;
   G4UIcommand* colorMapMinMaxCmd;
   // G4UIcommand *             chartCmd;
   //

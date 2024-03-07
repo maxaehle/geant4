@@ -42,21 +42,21 @@ class HadrontherapyMagneticField3D
 {
   
   // Storage space for the table
-  std::vector< std::vector< std::vector< double > > > xField;
-  std::vector< std::vector< std::vector< double > > > yField;
-  std::vector< std::vector< std::vector< double > > > zField;
+  std::vector< std::vector< std::vector< G4double > > > xField;
+  std::vector< std::vector< std::vector< G4double > > > yField;
+  std::vector< std::vector< std::vector< G4double > > > zField;
   // The dimensions of the table
   int nx,ny,nz; 
   // The physical limits of the defined region
-  double minx, maxx, miny, maxy, minz, maxz;
+  G4double minx, maxx, miny, maxy, minz, maxz;
   // The physical extent of the defined region
-  double dx, dy, dz;
-  double fXoffset;
+  G4double dx, dy, dz;
+  G4double fXoffset;
   bool invertX, invertY, invertZ;
 
 public:
-  HadrontherapyMagneticField3D(const char* filename, double xOffset );
-  void  GetFieldValue( const  double Point[4],
-		       double *Bfield          ) const;
+  HadrontherapyMagneticField3D(const char* filename, G4double xOffset );
+  void  GetFieldValue( const  G4double Point[4],
+		       G4double *Bfield          ) const;
 };
 

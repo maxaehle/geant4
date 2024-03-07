@@ -85,25 +85,25 @@ void HepLorentzRotation::decompose
   return;
 }
 
-double HepLorentzRotation::distance2( const HepBoost & b ) const {
+G4double HepLorentzRotation::distance2( const HepBoost & b ) const {
   HepBoost    b1;
   HepRotation r1; 
   decompose( b1, r1 );
-  double db2 = b1.distance2( b );
-  double dr2 = r1.norm2(); 
+  G4double db2 = b1.distance2( b );
+  G4double dr2 = r1.norm2(); 
   return ( db2 + dr2 );
 }
 
-double HepLorentzRotation::distance2( const HepRotation & r ) const {
+G4double HepLorentzRotation::distance2( const HepRotation & r ) const {
   HepBoost    b1;
   HepRotation r1; 
   decompose( b1, r1 );
-  double db2 = b1.norm2( );
-  double dr2 = r1.distance2( r ); 
+  G4double db2 = b1.norm2( );
+  G4double dr2 = r1.distance2( r ); 
   return ( db2 + dr2 );
 }
 
-double HepLorentzRotation::distance2( 
+G4double HepLorentzRotation::distance2( 
 				   const HepLorentzRotation & lt  ) const {
   HepBoost    b1;
   HepRotation r1; 
@@ -111,64 +111,64 @@ double HepLorentzRotation::distance2(
   HepBoost    b2;
   HepRotation r2; 
   lt.decompose (b2, r2);
-  double db2 = b1.distance2( b2 );
-  double dr2 = r1.distance2( r2 ); 
+  G4double db2 = b1.distance2( b2 );
+  G4double dr2 = r1.distance2( r2 ); 
   return ( db2 + dr2 );
 }
 
-double HepLorentzRotation::howNear( const HepBoost & b ) const {
+G4double HepLorentzRotation::howNear( const HepBoost & b ) const {
   return std::sqrt( distance2( b ) );
 }
-double HepLorentzRotation::howNear( const HepRotation & r ) const {
+G4double HepLorentzRotation::howNear( const HepRotation & r ) const {
   return std::sqrt( distance2( r ) );
 }
-double HepLorentzRotation::howNear( const HepLorentzRotation & lt )const {
+G4double HepLorentzRotation::howNear( const HepLorentzRotation & lt )const {
   return std::sqrt( distance2( lt ) );
 }
 
 bool HepLorentzRotation::isNear(
-		const HepBoost & b, double epsilon ) const {
+		const HepBoost & b, G4double epsilon ) const {
   HepBoost    b1;
   HepRotation r1; 
   decompose( b1, r1 );
-  double db2 = b1.distance2(b);
+  G4double db2 = b1.distance2(b);
   if ( db2 > epsilon*epsilon ) {
      return false;       // Saves the time-consuming Rotation::norm2
   }
-  double dr2 = r1.norm2();
+  G4double dr2 = r1.norm2();
   return ( (db2 + dr2) <= epsilon*epsilon );
 }
 
 bool HepLorentzRotation::isNear(
-		const HepRotation & r, double epsilon ) const {
+		const HepRotation & r, G4double epsilon ) const {
   HepBoost    b1;
   HepRotation r1; 
   decompose( b1, r1 );
-  double db2 = b1.norm2();
+  G4double db2 = b1.norm2();
   if ( db2 > epsilon*epsilon ) {
      return false;       // Saves the time-consuming Rotation::distance2
   }
-  double dr2 = r1.distance2(r);
+  G4double dr2 = r1.distance2(r);
   return ( (db2 + dr2) <= epsilon*epsilon );
 }
 
 bool HepLorentzRotation::isNear(
-		const HepLorentzRotation & lt, double epsilon ) const {
+		const HepLorentzRotation & lt, G4double epsilon ) const {
   HepBoost    b1;
   HepRotation r1; 
   decompose( b1, r1 );
   HepBoost    b2;
   HepRotation r2; 
   lt.decompose (b2, r2);
-  double db2 = b1.distance2(b2);
+  G4double db2 = b1.distance2(b2);
   if ( db2 > epsilon*epsilon ) {
      return false;       // Saves the time-consuming Rotation::distance2
   }
-  double dr2 = r1.distance2(r2);
+  G4double dr2 = r1.distance2(r2);
   return ( (db2 + dr2) <= epsilon*epsilon );
 }
 
-double HepLorentzRotation::norm2() const {
+G4double HepLorentzRotation::norm2() const {
   HepBoost    b;
   HepRotation r;
   decompose( b, r );
@@ -188,7 +188,7 @@ void HepLorentzRotation::rectify() {
   // components of that, rectify that rotation and multiply back by the boost.
                     
   Hep3Vector beta (tx(), ty(), tz());
-  double gam = tt();			// NaN-proofing
+  G4double gam = tt();			// NaN-proofing
   if ( gam <= 0 ) {
     std::cerr << "HepLorentzRotation::rectify() - "
 	<< "rectify() on a transformation with tt() <= 0 - will not help!"

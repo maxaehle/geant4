@@ -108,7 +108,7 @@ void G4ITStepProcessor::DealWithSecondaries(G4int& counter)
 
 //_________________________________________________________________________
 
-void G4ITStepProcessor::DoIt(double timeStep)
+void G4ITStepProcessor::DoIt(G4double timeStep)
 
 // Call the process having the min step length or just propagate the track on the given time step
 
@@ -261,7 +261,7 @@ void G4ITStepProcessor::PushSecondaries()
 
 //______________________________________________________________________________
 
-void G4ITStepProcessor::Stepping(G4Track* track, const double & timeStep)
+void G4ITStepProcessor::Stepping(G4Track* track, const G4double & timeStep)
 {
 
 #ifdef DEBUG_MEM
@@ -801,7 +801,7 @@ void G4ITStepProcessor::InvokePSDIP(size_t np)
 
 void G4ITStepProcessor::FindTransportationStep()
 {
-  double physicalStep(0.);
+  G4double physicalStep(0.);
 
   fpTransportation = fpProcessInfo->fpTransportation;
   // dynamic_cast<G4ITTransportation*>((fpProcessInfo->fpAlongStepGetPhysIntVector)[MAXofAlongStepLoops-1]);

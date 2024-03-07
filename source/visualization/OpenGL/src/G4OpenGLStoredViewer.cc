@@ -182,7 +182,7 @@ void G4OpenGLStoredViewer::DrawDisplayLists () {
     for (size_t iCutaway = 0; iCutaway < nCutaways; ++iCutaway) {
       
       if (cutawayUnion) {
-        double a[4];
+        G4double a[4];
         a[0] = cutaways[iCutaway].a();
         a[1] = cutaways[iCutaway].b();
         a[2] = cutaways[iCutaway].c();

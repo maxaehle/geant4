@@ -34,56 +34,56 @@
 #include <limits>
 
 // If HIGH_PRECISION is defined to TRUE (ie. != 0) then the type "Float"
-// is typedefed to "double". If it is FALSE (ie. 0) it is typedefed
-// to "float".
+// is typedefed to "G4double". If it is FALSE (ie. 0) it is typedefed
+// to "G4float".
 //
 #ifndef HIGH_PRECISION
 #  define HIGH_PRECISION 1
 #endif
 
 #if HIGH_PRECISION
-typedef double Float;
+typedef G4double Float;
 #else
-typedef float Float;
+typedef G4float Float;
 #endif
 
 // Following values have been taken from limits.h
 // and temporarly defined for portability on HP-UX.
 
-#ifndef DBL_MIN /* Min decimal value of a double */
-#  define DBL_MIN std::numeric_limits<double>::min()  // 2.2250738585072014e-308
+#ifndef DBL_MIN /* Min decimal value of a G4double */
+#  define DBL_MIN std::numeric_limits<G4double>::min()  // 2.2250738585072014e-308
 #endif
 
-#ifndef DBL_DIG /* Digits of precision of a double */
-#  define DBL_DIG std::numeric_limits<double>::digits10  // 15
+#ifndef DBL_DIG /* Digits of precision of a G4double */
+#  define DBL_DIG std::numeric_limits<G4double>::digits10  // 15
 #endif
 
-#ifndef DBL_MAX /* Max decimal value of a double */
-#  define DBL_MAX std::numeric_limits<double>::max()  // 1.7976931348623157e+308
+#ifndef DBL_MAX /* Max decimal value of a G4double */
+#  define DBL_MAX std::numeric_limits<G4double>::max()  // 1.7976931348623157e+308
 #endif
 
 #ifndef DBL_EPSILON
-#  define DBL_EPSILON std::numeric_limits<double>::epsilon()
+#  define DBL_EPSILON std::numeric_limits<G4double>::epsilon()
 #endif  // 2.2204460492503131e-16
 
-#ifndef FLT_MIN /* Min decimal value of a float */
-#  define FLT_MIN std::numeric_limits<float>::min()  // 1.17549435e-38F
+#ifndef FLT_MIN /* Min decimal value of a G4float */
+#  define FLT_MIN std::numeric_limits<G4float>::min()  // 1.17549435e-38F
 #endif
 
-#ifndef FLT_DIG /* Digits of precision of a float */
-#  define FLT_DIG std::numeric_limits<float>::digits10  // 6
+#ifndef FLT_DIG /* Digits of precision of a G4float */
+#  define FLT_DIG std::numeric_limits<G4float>::digits10  // 6
 #endif
 
-#ifndef FLT_MAX /* Max decimal value of a float */
-#  define FLT_MAX std::numeric_limits<float>::max()  // 3.40282347e+38F
+#ifndef FLT_MAX /* Max decimal value of a G4float */
+#  define FLT_MAX std::numeric_limits<G4float>::max()  // 3.40282347e+38F
 #endif
 
 #ifndef FLT_EPSILON
-#  define FLT_EPSILON std::numeric_limits<float>::epsilon()
+#  define FLT_EPSILON std::numeric_limits<G4float>::epsilon()
 #endif  // 1.192092896e-07F
 
-#ifndef MAXFLOAT /* Max decimal value of a float */
-#  define MAXFLOAT std::numeric_limits<float>::max()  // 3.40282347e+38F
+#ifndef MAXFLOAT /* Max decimal value of a G4float */
+#  define MAXFLOAT std::numeric_limits<G4float>::max()  // 3.40282347e+38F
 #endif
 
 #ifndef INT_MAX /* Max decimal value of a int */

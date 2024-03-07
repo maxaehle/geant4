@@ -54,8 +54,8 @@ private:
   Entry**   table;          // Hash table: pointers to entries
   size_type cur_size;       // Number of entries
   size_type max_size;       // Bucket_count - current size of the table
-  float     max_load;       // Keep (n) <= (max_size * max_load)
-  float     grow;           // When necessary, resize(max_size * grow)
+  G4float     max_load;       // Keep (n) <= (max_size * max_load)
+  G4float     grow;           // When necessary, resize(max_size * grow)
   const T   default_value;  // Default value used by []
 
   size_type hash(const char * key) const {
@@ -96,7 +96,7 @@ public:
   }    
 
   // Sets load and grow parameters.
-  void set_load(float m = 0.7, float g = 1.7) { max_load = m; grow = g; } 
+  void set_load(G4float m = 0.7, G4float g = 1.7) { max_load = m; grow = g; } 
 
   // Returns number of elements.
   size_type size() const { return cur_size; }

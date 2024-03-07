@@ -95,12 +95,12 @@ void RE03UserScoreWriter::DumpQuantityToFile(const G4String & psName,
   ofile << fNMeshSegments[0] << " " << fNMeshSegments[1] << " " << G4endl;
 
   // declare xy array
-  std::vector<double> projy;
+  std::vector<G4double> projy;
   for(int y = 0; y < fNMeshSegments[1]; y++) projy.push_back(0.);
-  std::vector<std::vector<double> > projxy;
+  std::vector<std::vector<G4double> > projxy;
   for(int x = 0; x < fNMeshSegments[0]; x++) projxy.push_back(projy);
   // accumulate
-  ofile << std::setprecision(16); // for double value with 8 bytes
+  ofile << std::setprecision(16); // for G4double value with 8 bytes
   for(int x = 0; x < fNMeshSegments[0]; x++) {
     for(int y = 0; y < fNMeshSegments[1]; y++) {
       for(int z = 0; z < fNMeshSegments[2]; z++) {
@@ -115,7 +115,7 @@ void RE03UserScoreWriter::DumpQuantityToFile(const G4String & psName,
   } // x
 
   // write quantity
-  ofile << std::setprecision(16); // for double value with 8 bytes
+  ofile << std::setprecision(16); // for G4double value with 8 bytes
   for(int x = 0; x < fNMeshSegments[0]; x++) {
     for(int y = 0; y < fNMeshSegments[1]; y++) {
 

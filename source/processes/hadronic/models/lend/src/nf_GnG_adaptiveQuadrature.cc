@@ -3,7 +3,7 @@
 # <<END-copyright>>
 */
 
-#include <float.h>
+#include <G4float.h>
 
 #include "nf_integration.h"
 
@@ -17,24 +17,24 @@ typedef struct nf_GnG_adaptiveQuadrature_info_s {
     nf_Legendre_GaussianQuadrature_callback integrandFunction;
     void *argList;
     nf_GnG_adaptiveQuadrature_callback quadratureFunction;
-    double estimate;
+    G4double estimate;
     int evaluations, maxDepth, maxDepthReached;
 } nf_GnG_adaptiveQuadrature_info;
 
-static double initialPoints[] = { 0.2311, 0.4860, 0.6068, 0.8913, 0.9501 };
+static G4double initialPoints[] = { 0.2311, 0.4860, 0.6068, 0.8913, 0.9501 };
 static int numberOfInitialPoints = sizeof( initialPoints ) / sizeof( initialPoints[0] );
 
-static double nf_GnG_adaptiveQuadrature2( nf_GnG_adaptiveQuadrature_info *adaptiveQuadrature_info, double currentIntrgral, double x1, double x2, int depth );
+static G4double nf_GnG_adaptiveQuadrature2( nf_GnG_adaptiveQuadrature_info *adaptiveQuadrature_info, G4double currentIntrgral, G4double x1, G4double x2, int depth );
 /*
 ============================================================
 */
 nfu_status nf_GnG_adaptiveQuadrature( nf_GnG_adaptiveQuadrature_callback quadratureFunction, nf_Legendre_GaussianQuadrature_callback integrandFunction, 
-    void *argList, double x1, double x2, int maxDepth, double tolerance, double *integral, long *evaluations ) {
+    void *argList, G4double x1, G4double x2, int maxDepth, G4double tolerance, G4double *integral, long *evaluations ) {
 /*
 *   See W. Gander and W. Gautschi, "Adaptive quadrature--revisited", BIT 40 (2000), 84-101.
 */
     int i1;
-    double estimate = 0., y1, integral_, coarse;
+    G4double estimate = 0., y1, integral_, coarse;
     nfu_status status = nfu_Okay;
     nf_GnG_adaptiveQuadrature_info adaptiveQuadrature_info = { nfu_Okay, integrandFunction, argList, quadratureFunction, 0., 0, maxDepth, 0 };
 
@@ -76,9 +76,9 @@ nfu_status nf_GnG_adaptiveQuadrature( nf_GnG_adaptiveQuadrature_callback quadrat
 /*
 ============================================================
 */
-static double nf_GnG_adaptiveQuadrature2( nf_GnG_adaptiveQuadrature_info *adaptiveQuadrature_info, double coarse, double x1, double x2, int depth ) {
+static G4double nf_GnG_adaptiveQuadrature2( nf_GnG_adaptiveQuadrature_info *adaptiveQuadrature_info, G4double coarse, G4double x1, G4double x2, int depth ) {
 
-    double xm, intregral1, intregral2, fine, extrapolate;
+    G4double xm, intregral1, intregral2, fine, extrapolate;
 
     if( adaptiveQuadrature_info->status != nfu_Okay ) return( 0. );
     if( x1 == x2 ) return( 0. );

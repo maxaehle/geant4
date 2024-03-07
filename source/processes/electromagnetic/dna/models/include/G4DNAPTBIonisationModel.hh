@@ -127,17 +127,17 @@ private:
 
     G4DNAPTBIonisationStructure ptbStructure; /*!< ptbStructure class which contains the shell binding energies */
 
-    typedef std::map<G4String, std::map<G4String, std::map<double, std::map<double, std::map<double, double> > > > > TriDimensionMap;
+    typedef std::map<G4String, std::map<G4String, std::map<G4double, std::map<G4double, std::map<G4double, G4double> > > > > TriDimensionMap;
     TriDimensionMap diffCrossSectionData;
     TriDimensionMap fEnergySecondaryData;
-    std::map<G4String, std::map<G4String, std::vector<double> > > fTMapWithVec;
-    typedef std::map<G4String, std::map<G4String, std::map<double, std::vector<double> > > > VecMap;
+    std::map<G4String, std::map<G4String, std::vector<G4double> > > fTMapWithVec;
+    typedef std::map<G4String, std::map<G4String, std::map<G4double, std::vector<G4double> > > > VecMap;
     VecMap fEMapWithVector;
-    typedef std::map<G4String, std::map<G4String, std::map<double, std::map<double, std::vector<double> > > > > VecMapWithShell;
+    typedef std::map<G4String, std::map<G4String, std::map<G4double, std::map<G4double, std::vector<G4double> > > > > VecMapWithShell;
     VecMapWithShell fProbaShellMap;
 
     G4double RandomizeEjectedElectronEnergy(G4ParticleDefinition * aParticleDefinition, G4double incomingParticleEnergy, G4int shell, const G4String& materialName);
-    double DifferentialCrossSection(G4ParticleDefinition * aParticleDefinition, G4double k, G4double energyTransfer, G4int shell, const G4String &materialName);
+    G4double DifferentialCrossSection(G4ParticleDefinition * aParticleDefinition, G4double k, G4double energyTransfer, G4int shell, const G4String &materialName);
 
     /*!
      * \brief RandomizeEjectedElectronEnergyFromCumulated

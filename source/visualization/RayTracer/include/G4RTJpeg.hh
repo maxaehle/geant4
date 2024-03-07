@@ -42,9 +42,9 @@ typedef unsigned int	u_int;
 const char      JFIF[] = "JFIF";
 const char      JFXX[] = "JFXX";
 
-const double    Sqrt2 = 1.41421356;
-const double    DisSqrt2 = 1.0 / Sqrt2;
-const double    PaiDiv16 = 3.14159265 / 16;
+const G4double    Sqrt2 = 1.41421356;
+const G4double    DisSqrt2 = 1.0 / Sqrt2;
+const G4double    PaiDiv16 = 3.14159265 / 16;
 
 //Zigzag
 static const int Zigzag[64] = {

@@ -20,7 +20,7 @@ namespace CLHEP  {
 
 bool HepRotation::setCols 
     ( const Hep3Vector & u1, const Hep3Vector & u2, const Hep3Vector & u3,
-      double u1u2,
+      G4double u1u2,
       Hep3Vector & v1, Hep3Vector & v2, Hep3Vector & v3 ) const {
 
   if ( (1-std::fabs(u1u2)) <= Hep4RotationInterface::tolerance ) {
@@ -74,22 +74,22 @@ HepRotation & HepRotation::set( const Hep3Vector & ccolX,
   Hep3Vector ucolY = ccolY.unit();
   Hep3Vector ucolZ = ccolZ.unit();
 
-  double u1u2 = ucolX.dot(ucolY);
-  double f12  = std::fabs(u1u2);
+  G4double u1u2 = ucolX.dot(ucolY);
+  G4double f12  = std::fabs(u1u2);
   if ( f12 > Hep4RotationInterface::tolerance ) {
     std::cerr << "HepRotation::set() - "
       << "col's X and Y supplied for Rotation are not close to orthogonal"
       << std::endl;
   }
-  double u1u3 = ucolX.dot(ucolZ);
-  double f13  = std::fabs(u1u3);
+  G4double u1u3 = ucolX.dot(ucolZ);
+  G4double f13  = std::fabs(u1u3);
   if ( f13 > Hep4RotationInterface::tolerance ) {
     std::cerr << "HepRotation::set() - "
       << "col's X and Z supplied for Rotation are not close to orthogonal"
       << std::endl;
   }
-  double u2u3 = ucolY.dot(ucolZ);
-  double f23  = std::fabs(u2u3);
+  G4double u2u3 = ucolY.dot(ucolZ);
+  G4double f23  = std::fabs(u2u3);
   if ( f23 > Hep4RotationInterface::tolerance ) {
     std::cerr << "HepRotation::set() - "
       << "col's Y and Z supplied for Rotation are not close to orthogonal"
@@ -157,7 +157,7 @@ void HepRotation::rectify() {
   // formally extract the axis and delta (assuming the Rotation were true)
   // and re-setting the rotation according to those.
 
-  double det =  rxx * ryy * rzz +
+  G4double det =  rxx * ryy * rzz +
                    rxy * ryz * rzx +
                    rxz * ryx * rzy -
                    rxx * ryz * rzy -
@@ -168,18 +168,18 @@ void HepRotation::rectify() {
         << "Attempt to rectify a Rotation with determinant <= 0" << std::endl;
     return;
   }
-  double di = 1.0 / det;
+  G4double di = 1.0 / det;
 
   // xx, xy, ... are components of inverse matrix:
-  double xx1 = (ryy * rzz - ryz * rzy) * di;
-  double xy1 = (rzy * rxz - rzz * rxy) * di;
-  double xz1 = (rxy * ryz - rxz * ryy) * di;
-  double yx1 = (ryz * rzx - ryx * rzz) * di;
-  double yy1 = (rzz * rxx - rzx * rxz) * di;
-  double yz1 = (rxz * ryx - rxx * ryz) * di;
-  double zx1 = (ryx * rzy - ryy * rzx) * di;
-  double zy1 = (rzx * rxy - rzy * rxx) * di;
-  double zz1 = (rxx * ryy - rxy * ryx) * di;
+  G4double xx1 = (ryy * rzz - ryz * rzy) * di;
+  G4double xy1 = (rzy * rxz - rzz * rxy) * di;
+  G4double xz1 = (rxy * ryz - rxz * ryy) * di;
+  G4double yx1 = (ryz * rzx - ryx * rzz) * di;
+  G4double yy1 = (rzz * rxx - rzx * rxz) * di;
+  G4double yz1 = (rxz * ryx - rxx * ryz) * di;
+  G4double zx1 = (ryx * rzy - ryy * rzx) * di;
+  G4double zy1 = (rzx * rxy - rzy * rxx) * di;
+  G4double zz1 = (rxx * ryy - rxy * ryx) * di;
 
   // Now average with the TRANSPOSE of that:
   rxx = .5*(rxx + xx1);
@@ -193,7 +193,7 @@ void HepRotation::rectify() {
   rzz = .5*(rzz + zz1);
 
   // Now force feed this improved rotation
-  double del = delta();
+  G4double del = delta();
   Hep3Vector u = axis();
   u = u.unit(); // Because if the rotation is inexact, then the
                 // axis() returned will not have length 1!

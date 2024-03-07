@@ -775,8 +775,8 @@ void G4VRML2SCENEHANDLER::SendMarkerWorldPosition(const G4VMarker& mark)
 }
 
 void G4VRML2SCENEHANDLER::GetMarkerWorldPosition(const G4VMarker& mark,
-                                                 double* pX, double* pY,
-                                                 double* pZ)
+                                                 G4double* pX, G4double* pY,
+                                                 G4double* pZ)
 {
   G4Point3D point = mark.GetPosition();
 
@@ -793,13 +793,13 @@ G4double G4VRML2SCENEHANDLER::GetMarkerHalfSize(const G4VMarker& mark)
   G4double size = 1.0;  // initialization
 
   //----- parameters to calculate 3d size from 2d size
-  const double HALF_SCREEN_SIZE_2D = 300.0;  // pixels
-  double zoom_factor = fpViewer->GetViewParameters().GetZoomFactor();
+  const G4double HALF_SCREEN_SIZE_2D = 300.0;  // pixels
+  G4double zoom_factor = fpViewer->GetViewParameters().GetZoomFactor();
   if(zoom_factor <= 0.0)
   {
     zoom_factor = 1.0;
   }
-  double extent_radius_3d = GetScene()->GetExtent().GetExtentRadius();
+  G4double extent_radius_3d = GetScene()->GetExtent().GetExtentRadius();
   if(extent_radius_3d <= 0.0)
   {
     extent_radius_3d = 1.0;
@@ -814,7 +814,7 @@ G4double G4VRML2SCENEHANDLER::GetMarkerHalfSize(const G4VMarker& mark)
   else if(mark.GetScreenSize() > 0.0)
   {
     // local
-    double mark_radius_2d = 0.5 * mark.GetScreenSize();
+    G4double mark_radius_2d = 0.5 * mark.GetScreenSize();
 
     // get mark radius in 3D units
     size = extent_radius_3d * (mark_radius_2d / HALF_SCREEN_SIZE_2D);
@@ -823,7 +823,7 @@ G4double G4VRML2SCENEHANDLER::GetMarkerHalfSize(const G4VMarker& mark)
   else
   {
     // local
-    double mark_radius_2d =
+    G4double mark_radius_2d =
       fpViewer->GetViewParameters().GetDefaultMarker().GetScreenSize();
     mark_radius_2d *= 0.1;  // Magic number?
 

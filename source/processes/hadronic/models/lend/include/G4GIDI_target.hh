@@ -44,15 +44,15 @@ typedef struct G4GIDI_Product_s G4GIDI_Product;
 
 struct crossSectionData_s {
     int start, end;
-    std::vector<double> crossSection;
+    std::vector<G4double> crossSection;
 };
 
 #define channelID std::string
 
 struct G4GIDI_Product_s {
     int A, Z, m;
-    double kineticEnergy, px, py, pz;
-    double birthTimeSec;
+    G4double kineticEnergy, px, py, pz;
+    G4double birthTimeSec;
 };
 
 class G4GIDI_target {
@@ -68,7 +68,7 @@ class G4GIDI_target {
         int projectilesPOPID;
         std::string name;
         std::string sourceFilename;
-        double mass;
+        G4double mass;
         GIDI::MCGIDI_target *target;
 
         G4GIDI_target( const char *fileName );
@@ -80,8 +80,8 @@ class G4GIDI_target {
         int getZ( void );
         int getA( void );
         int getM( void );
-        double getMass( void );
-        int getTemperatures( double *temperatures );
+        G4double getMass( void );
+        int getTemperatures( G4double *temperatures );
         int readTemperature( int index );
         std::string getEqualProbableBinSampleMethod( void );
         int setEqualProbableBinSampleMethod( std::string method );
@@ -92,24 +92,24 @@ class G4GIDI_target {
         std::vector<channelID> *getChannelIDs( void );
         std::vector<channelID> *getProductionChannelIDs( void );
 
-        std::vector<double> *getEnergyGridAtTIndex( int index );
+        std::vector<G4double> *getEnergyGridAtTIndex( int index );
 
-        double getTotalCrossSectionAtE( double e_in, double temperature );
-        double getElasticCrossSectionAtE( double e_in, double temperature );
-        double getCaptureCrossSectionAtE( double e_in, double temperature );
-        double getFissionCrossSectionAtE( double e_in, double temperature );
-        double getOthersCrossSectionAtE( double e_in, double temperature );
-        double sumChannelCrossSectionAtE( int nIndices, int *indices, double e_in, double temperature );
-        int sampleChannelCrossSectionAtE( int nIndices, int *indices, double e_in, double temperature, double (*rng)( void * ), void *rngState );
+        G4double getTotalCrossSectionAtE( G4double e_in, G4double temperature );
+        G4double getElasticCrossSectionAtE( G4double e_in, G4double temperature );
+        G4double getCaptureCrossSectionAtE( G4double e_in, G4double temperature );
+        G4double getFissionCrossSectionAtE( G4double e_in, G4double temperature );
+        G4double getOthersCrossSectionAtE( G4double e_in, G4double temperature );
+        G4double sumChannelCrossSectionAtE( int nIndices, int *indices, G4double e_in, G4double temperature );
+        int sampleChannelCrossSectionAtE( int nIndices, int *indices, G4double e_in, G4double temperature, G4double (*rng)( void * ), void *rngState );
 
-        double getElasticFinalState( double e_in, double temperature, double (*rng)( void * ), void *rngState );
-        std::vector<G4GIDI_Product> *getCaptureFinalState( double e_in, double temperature, double (*rng)( void * ), void *rngState );
-        std::vector<G4GIDI_Product> *getFissionFinalState( double e_in, double temperature, double (*rng)( void * ), void *rngState );
-        std::vector<G4GIDI_Product> *getOthersFinalState( double e_in, double temperature, double (*rng)( void * ), void *rngState );
-        std::vector<G4GIDI_Product> *getFinalState( int nIndices, int *indices, double e_in, double temperature, double (*rng)( void * ), void *rngState );
+        G4double getElasticFinalState( G4double e_in, G4double temperature, G4double (*rng)( void * ), void *rngState );
+        std::vector<G4GIDI_Product> *getCaptureFinalState( G4double e_in, G4double temperature, G4double (*rng)( void * ), void *rngState );
+        std::vector<G4GIDI_Product> *getFissionFinalState( G4double e_in, G4double temperature, G4double (*rng)( void * ), void *rngState );
+        std::vector<G4GIDI_Product> *getOthersFinalState( G4double e_in, G4double temperature, G4double (*rng)( void * ), void *rngState );
+        std::vector<G4GIDI_Product> *getFinalState( int nIndices, int *indices, G4double e_in, G4double temperature, G4double (*rng)( void * ), void *rngState );
 
-        double getReactionsThreshold( int index );
-        double getReactionsDomain( int index, double *EMin, double *EMax );
+        G4double getReactionsThreshold( int index );
+        G4double getReactionsDomain( int index, G4double *EMin, G4double *EMax );
 };
 
 #endif      // End of G4GIDI_target_h_included

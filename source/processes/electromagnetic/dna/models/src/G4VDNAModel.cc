@@ -240,7 +240,7 @@ G4bool G4VDNAModel::IsMaterialDefine(const G4String& materialName)
 
     G4bool exist (false);
 
-    double matTableSize = G4Material::GetMaterialTable()->size();
+    G4double matTableSize = G4Material::GetMaterialTable()->size();
 
     for(int i=0;i<matTableSize;i++)
     {

@@ -28,7 +28,7 @@
 // Class description:
 //
 // A concrete class of G4UIcommand. The command defined by this class
-// takes three double values.
+// takes three G4double values.
 // General information of G4UIcommand is given in G4UIcommand.hh
 
 // Author: M.Asai, 1998
@@ -48,7 +48,7 @@ class G4UIcmdWith3Vector : public G4UIcommand
       // and the pointer to the messenger must be given
 
     static G4ThreeVector GetNew3VectorValue(const char* paramString);
-      // Convert string which represents three double values to
+      // Convert string which represents three G4double values to
       // G4ThreeVector
 
     void SetParameterName(const char* theNameX, const char* theNameY,

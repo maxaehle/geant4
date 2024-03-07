@@ -116,7 +116,7 @@ void G4MoleculeGun::DefineTracks()
 
 void G4MoleculeGun::AddMolecule(const G4String& name,
                                 const G4ThreeVector& position,
-                                double time)
+                                G4double time)
 {
   G4shared_ptr<G4MoleculeShoot> shoot(new TG4MoleculeShoot<G4Track>());
   shoot->fMoleculeName = name;
@@ -130,7 +130,7 @@ void G4MoleculeGun::AddMolecule(const G4String& name,
 void G4MoleculeGun::AddNMolecules(size_t n,
                                   const G4String& moleculeName,
                                   const G4ThreeVector& position,
-                                  double time)
+                                  G4double time)
 {
   G4shared_ptr<G4MoleculeShoot> shoot(new TG4MoleculeShoot<G4Track>());
   shoot->fNumber = n;
@@ -147,7 +147,7 @@ G4MoleculeGun::AddMoleculesRandomPositionInBox(size_t n,
                                                const G4String& moleculeName,
                                                const G4ThreeVector& boxCenter,
                                                const G4ThreeVector& boxSize,
-                                               double time)
+                                               G4double time)
 {
   G4shared_ptr<G4MoleculeShoot> shoot(new TG4MoleculeShoot<G4Track>());
   shoot->fNumber = n;
@@ -162,7 +162,7 @@ G4MoleculeGun::AddMoleculesRandomPositionInBox(size_t n,
 
 void G4MoleculeGun::BuildAndPushTrack(const G4String& name,
                                    const G4ThreeVector& position,
-                                   double time)
+                                   G4double time)
 {
   G4MolecularConfiguration* conf =
       G4MoleculeTable::Instance()->GetConfiguration(name);
@@ -220,7 +220,7 @@ G4MoleculeGun::AddMoleculeShoot(G4shared_ptr<G4MoleculeShoot> shoot)
 
 void G4MoleculeGun::AddMoleculeInCMRepresentation(size_t n,
                                                   const G4String& moleculeName,
-                                                  double time)
+                                                  G4double time)
 {
   G4shared_ptr<G4MoleculeShoot> shoot(new TG4MoleculeShoot<G4ContinuousMedium>());
   shoot->fNumber = n;

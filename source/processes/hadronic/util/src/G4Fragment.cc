@@ -211,16 +211,16 @@ G4bool G4Fragment::operator!=(const G4Fragment &right) const
 
 std::ostream& operator << (std::ostream &out, const G4Fragment &theFragment)
 {
-  std::ios::fmtflags old_floatfield = out.flags();
-  out.setf(std::ios::floatfield);
+  std::ios::fmtflags old_G4floatfield = out.flags();
+  out.setf(std::ios::G4floatfield);
 
   out << "Fragment: A = " << std::setw(3) << theFragment.theA 
       << ", Z = " << std::setw(3) << theFragment.theZ
       << ", numberOfLambdas = " << std::setw(3) << theFragment.theL ;
-  out.setf(std::ios::scientific,std::ios::floatfield);
+  out.setf(std::ios::scientific,std::ios::G4floatfield);
 
   // Store user's precision setting and reset to (3) here: back-compatibility
-  std::streamsize floatPrec = out.precision();
+  std::streamsize G4floatPrec = out.precision();
 
   out << std::setprecision(3)
       << ", U = " << theFragment.GetExcitationEnergy()/CLHEP::MeV 
@@ -241,7 +241,7 @@ std::ostream& operator << (std::ostream &out, const G4Fragment &theFragment)
       << G4endl;
 
   out << "    #spin= " << theFragment.GetSpin()
-      << "    #floatLevelNo= " << theFragment.GetFloatingLevelNumber() << "  ";
+      << "    #G4floatLevelNo= " << theFragment.GetFloatingLevelNumber() << "  ";
         
   if (theFragment.GetNumberOfExcitons() != 0) {
     out << "   " 
@@ -255,8 +255,8 @@ std::ostream& operator << (std::ostream &out, const G4Fragment &theFragment)
     out << *(theFragment.GetNuclearPolarization()); 
   }
   //out << G4endl;
-  out.setf(old_floatfield,std::ios::floatfield);
-  out.precision(floatPrec);
+  out.setf(old_G4floatfield,std::ios::G4floatfield);
+  out.precision(G4floatPrec);
 
   return out;
 }

@@ -28,7 +28,7 @@
 //
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //
-//  Stepping Verbose with units for all the applicable double values
+//  Stepping Verbose with units for all the applicable G4double values
 //  This class is ported from TestEm2 extended example
 //  Original author : Michel Maire (LAPP)
 //  Porting with addition of UI command : Makoto Asai (SLAC) Feb.23.2021

@@ -50,7 +50,7 @@
 #include <vector>
 
 #if defined WIN32-VC
-   #include <float.h>
+   #include <G4float.h>
 #endif
 
 class G4ParticleHPVector
@@ -176,7 +176,7 @@ class G4ParticleHPVector
     G4double y;
     if(e<theData[nEntries-1].GetX()) 
     {
-      // Protect against doubled-up x values
+      // Protect against G4doubled-up x values
       if( (theData[high].GetX()-theData[low].GetX())/theData[high].GetX() < 0.000001)
       {
         y = theData[low].GetY();

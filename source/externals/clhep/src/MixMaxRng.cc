@@ -269,16 +269,16 @@ constexpr int MixMaxRng::rng_get_SPECIALMUL()
    return SPECIALMUL;
 }
 
-double MixMaxRng::generate(int i)
+G4double MixMaxRng::generate(int i)
 {
    S.counter++;
 #if defined(__clang__) || defined(__llvm__)
-   return INV_M61*static_cast<double>(S.V[i]);
+   return INV_M61*static_cast<G4double>(S.V[i]);
 #elif defined(__GNUC__) && (__GNUC__ < 7) && (!defined(__ICC)) && defined(__x86_64__) && defined(__SSE2_MATH__)
    int64_t Z=S.V[i];
-   double F=0.0;
+   G4double F=0.0;
    //#warning Using the inline assembler
-    /* using SSE inline assemly to zero the xmm register, just before int64 -> double conversion,
+    /* using SSE inline assemly to zero the xmm register, just before int64 -> G4double conversion,
        not necessary in GCC-5 or better, but huge penalty on earlier compilers
     */
    __asm__ __volatile__(  "pxor %0, %0;"
@@ -289,11 +289,11 @@ double MixMaxRng::generate(int i)
    return F*INV_M61;
 #else
   //#warning other method
-   return convert1double(S.V[i]); //get_next_float_packbits();
+   return convert1G4double(S.V[i]); //get_next_G4float_packbits();
 #endif
 }
 
-double MixMaxRng::iterate()
+G4double MixMaxRng::iterate()
 {
    myuint_t* Y=S.V.data();
    myuint_t  tempP, tempV;
@@ -320,23 +320,23 @@ double MixMaxRng::iterate()
    S.sumtot = MIXMAX_MOD_MERSENNE(MIXMAX_MOD_MERSENNE(sumtot) + (ovflow <<3 ));
 
    S.counter=2;
-   return double(S.V[1])*INV_M61;
+   return G4double(S.V[1])*INV_M61;
 }
 
-void MixMaxRng::flatArray(const int size, double* vect )
+void MixMaxRng::flatArray(const int size, G4double* vect )
 {
    // fill_array( S, size, arrayDbl );
    for (int i=0; i<size; ++i) { vect[i] = flat(); }
 }
 
-MixMaxRng::operator double()
+MixMaxRng::operator G4double()
 {
   return flat();
 }
 
-MixMaxRng::operator float()
+MixMaxRng::operator G4float()
 {
-  return float( flat() );
+  return G4float( flat() );
 }
 
 MixMaxRng::operator unsigned int()
@@ -544,10 +544,10 @@ myuint_t MixMaxRng::precalc()
    return temp;
 }
             
-double MixMaxRng::get_next_float_packbits()
+G4double MixMaxRng::get_next_G4float_packbits()
 {
    myuint_t Z=get_next();
-   return convert1double(Z);
+   return convert1G4double(Z);
 }
         
 void MixMaxRng::seed_vielbein(unsigned int index)

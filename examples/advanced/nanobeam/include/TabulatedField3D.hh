@@ -43,16 +43,16 @@ public:
   
   TabulatedField3D(G4float gr1, G4float gr2, G4float gr3, G4float gr4, G4int quadModel);
   
-  void  GetFieldValue( const  double Point[4],
-		       double *Bfield          ) const;
+  void  GetFieldValue( const  G4double Point[4],
+		       G4double *Bfield          ) const;
 
 private:
     
-  std::vector< std::vector< std::vector< double > > > fXField;
+  std::vector< std::vector< std::vector< G4double > > > fXField;
   
-  std::vector< std::vector< std::vector< double > > > fYField;
+  std::vector< std::vector< std::vector< G4double > > > fYField;
   
-  std::vector< std::vector< std::vector< double > > > fZField;
+  std::vector< std::vector< std::vector< G4double > > > fZField;
   
   G4int fNx,fNy,fNz; 
   

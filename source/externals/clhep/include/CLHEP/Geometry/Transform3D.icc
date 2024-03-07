@@ -16,7 +16,7 @@ Transform3D::Transform3D_row::Transform3D_row
 (const Transform3D & r, int i) : rr(r), ii(i) {}
 
 inline
-double Transform3D::Transform3D_row::operator[](int jj) const {
+G4double Transform3D::Transform3D_row::operator[](int jj) const {
   return rr(ii,jj);
 }
 
@@ -59,16 +59,16 @@ Rotate3D::Rotate3D(const CLHEP::HepRotation & mt) {
 }
 
 inline
-Rotate3D::Rotate3D(double a, const Vector3D<double> & v) {
+Rotate3D::Rotate3D(G4double a, const Vector3D<G4double> & v) {
   *this =
-    Rotate3D(a, Point3D<double>(0,0,0), Point3D<double>(v.x(),v.y(),v.z()));
+    Rotate3D(a, Point3D<G4double>(0,0,0), Point3D<G4double>(v.x(),v.y(),v.z()));
 }
 
 inline
-Rotate3D::Rotate3D(const Point3D<double> & fr1, const Point3D<double> & fr2,
-		   const Point3D<double> & to1, const Point3D<double> & to2)
-  : Transform3D(Point3D<double>(0,0,0),fr1,fr2,
-		Point3D<double>(0,0,0),to1,to2) {}
+Rotate3D::Rotate3D(const Point3D<G4double> & fr1, const Point3D<G4double> & fr2,
+		   const Point3D<G4double> & to1, const Point3D<G4double> & to2)
+  : Transform3D(Point3D<G4double>(0,0,0),fr1,fr2,
+		Point3D<G4double>(0,0,0),to1,to2) {}
 
 //   I N L I N E S   F O R   T R A N S L A T I O N
 
@@ -79,7 +79,7 @@ Translate3D::Translate3D(const CLHEP::Hep3Vector & v)
 //   I N L I N E S   F O R   R E F L E C T I O N
 
 inline
-Reflect3D::Reflect3D(const Normal3D<double> & n, const Point3D<double> & p) {
+Reflect3D::Reflect3D(const Normal3D<G4double> & n, const Point3D<G4double> & p) {
   *this = Reflect3D(n.x(), n.y(), n.z(), -n*p);
 }
 

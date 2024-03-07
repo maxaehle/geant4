@@ -24,7 +24,7 @@ namespace HepGeom {
   /**
    * Geometrical 3D Point.
    * This is just a declaration of the class needed to define
-   * specializations Point3D<float> and Point3D<double>.
+   * specializations Point3D<G4float> and Point3D<G4double>.
    *
    * @ingroup geometry
    * @author Evgeni Chernyaev <Evgueni.Tcherniaev@cern.ch>
@@ -33,13 +33,13 @@ namespace HepGeom {
   class Point3D : public BasicVector3D<T> {};
 
   /**
-   * Geometrical 3D Point with components of float type.
+   * Geometrical 3D Point with components of G4float type.
    *
    * @author Evgeni Chernyaev <Evgueni.Tcherniaev@cern.ch>
    * @ingroup geometry
    */
   template<>
-  class Point3D<float> : public BasicVector3D<float> {
+  class Point3D<G4float> : public BasicVector3D<G4float> {
   public:
     /**
      * Default constructor. */
@@ -47,24 +47,24 @@ namespace HepGeom {
 
     /**
      * Constructor from three numbers. */
-    Point3D(float x1, float y1, float z1) : BasicVector3D<float>(x1,y1,z1) {}
+    Point3D(G4float x1, G4float y1, G4float z1) : BasicVector3D<G4float>(x1,y1,z1) {}
 
     /**
-     * Constructor from array of floats. */
-    explicit Point3D(const float * a)
-      : BasicVector3D<float>(a[0],a[1],a[2]) {}
+     * Constructor from array of G4floats. */
+    explicit Point3D(const G4float * a)
+      : BasicVector3D<G4float>(a[0],a[1],a[2]) {}
 
     /**
      * Copy constructor. */
-    Point3D(const Point3D<float> &) = default;
+    Point3D(const Point3D<G4float> &) = default;
 
     /**
      * Move constructor. */
-    Point3D(Point3D<float> &&) = default;
+    Point3D(Point3D<G4float> &&) = default;
 
     /**
-     * Constructor from BasicVector3D<float>. */
-    Point3D(const BasicVector3D<float> & v) : BasicVector3D<float>(v) {}
+     * Constructor from BasicVector3D<G4float>. */
+    Point3D(const BasicVector3D<G4float> & v) : BasicVector3D<G4float>(v) {}
 
     /**
      * Destructor. */
@@ -72,60 +72,60 @@ namespace HepGeom {
 
     /**
      * Assignment. */
-    Point3D<float> & operator=(const Point3D<float> &) = default;
+    Point3D<G4float> & operator=(const Point3D<G4float> &) = default;
 
     /**
-     * Assignment from BasicVector3D<float>. */
-    Point3D<float> & operator=(const BasicVector3D<float> & v) {
-      this->BasicVector3D<float>::operator=(v);
+     * Assignment from BasicVector3D<G4float>. */
+    Point3D<G4float> & operator=(const BasicVector3D<G4float> & v) {
+      this->BasicVector3D<G4float>::operator=(v);
       return *this;
     }
 
     /**
      * Move assignment. */
-    Point3D<float> & operator=(Point3D<float> &&) = default;
+    Point3D<G4float> & operator=(Point3D<G4float> &&) = default;
 
     /**
      * Returns distance to the origin squared. */
-    float distance2() const { return mag2(); }
+    G4float distance2() const { return mag2(); }
 
     /**
      * Returns distance to the point squared. */
-    float distance2(const Point3D<float> & p) const {
-      float dx = p.x()-x(), dy = p.y()-y(), dz = p.z()-z();
+    G4float distance2(const Point3D<G4float> & p) const {
+      G4float dx = p.x()-x(), dy = p.y()-y(), dz = p.z()-z();
       return dx*dx + dy*dy + dz*dz;
     }
 
     /**
      * Returns distance to the origin. */
-    float distance() const { return std::sqrt(distance2()); }
+    G4float distance() const { return std::sqrt(distance2()); }
 
     /**
      * Returns distance to the point. */
-    float distance(const Point3D<float> & p) const {
+    G4float distance(const Point3D<G4float> & p) const {
       return std::sqrt(distance2(p));
     }
 
     /**
      * Transformation by Transform3D. */
-    Point3D<float> & transform(const Transform3D & m);
+    Point3D<G4float> & transform(const Transform3D & m);
   };
 
   /**
-   * Transformation of Point3D<float> by Transform3D.
+   * Transformation of Point3D<G4float> by Transform3D.
    * @relates Point3D
    */
-  Point3D<float>
-  operator*(const Transform3D & m, const Point3D<float> & p);
+  Point3D<G4float>
+  operator*(const Transform3D & m, const Point3D<G4float> & p);
 
   /**
-   * Geometrical 3D Point with components of double type.
+   * Geometrical 3D Point with components of G4double type.
    *
    * @author Evgeni Chernyaev <Evgueni.Tcherniaev@cern.ch>
    * @ingroup geometry
    */
   template<>
-  class Point3D<double> : public BasicVector3D<double> {
+  class Point3D<G4double> : public BasicVector3D<G4double> {
   public:
     /**
      * Default constructor. */
@@ -133,33 +133,33 @@ namespace HepGeom {
 
     /**
      * Constructor from three numbers. */
-    Point3D(double x1, double y1, double z1) : BasicVector3D<double>(x1,y1,z1) {}
+    Point3D(G4double x1, G4double y1, G4double z1) : BasicVector3D<G4double>(x1,y1,z1) {}
 
     /**
-     * Constructor from array of floats. */
-    explicit Point3D(const float * a)
-      : BasicVector3D<double>(a[0],a[1],a[2]) {}
+     * Constructor from array of G4floats. */
+    explicit Point3D(const G4float * a)
+      : BasicVector3D<G4double>(a[0],a[1],a[2]) {}
 
     /**
-     * Constructor from array of doubles. */
-    explicit Point3D(const double * a)
-      : BasicVector3D<double>(a[0],a[1],a[2]) {}
+     * Constructor from array of G4doubles. */
+    explicit Point3D(const G4double * a)
+      : BasicVector3D<G4double>(a[0],a[1],a[2]) {}
 
     /**
      * Copy constructor. */
-    Point3D(const Point3D<double> &) = default;
+    Point3D(const Point3D<G4double> &) = default;
 
     /**
      * Move constructor. */
-    Point3D(Point3D<double> &&) = default;
+    Point3D(Point3D<G4double> &&) = default;
 
     /**
-     * Constructor from BasicVector3D<float>. */
-    Point3D(const BasicVector3D<float> & v) : BasicVector3D<double>(v) {}
+     * Constructor from BasicVector3D<G4float>. */
+    Point3D(const BasicVector3D<G4float> & v) : BasicVector3D<G4double>(v) {}
 
     /**
-     * Constructor from BasicVector3D<double>. */
-    Point3D(const BasicVector3D<double> & v) : BasicVector3D<double>(v) {}
+     * Constructor from BasicVector3D<G4double>. */
+    Point3D(const BasicVector3D<G4double> & v) : BasicVector3D<G4double>(v) {}
 
     /**
      * Destructor. */
@@ -171,7 +171,7 @@ namespace HepGeom {
      * in principle should be absent.
      */
     Point3D(const CLHEP::Hep3Vector & v)
-      : BasicVector3D<double>(v.x(),v.y(),v.z()) {}
+      : BasicVector3D<G4double>(v.x(),v.y(),v.z()) {}
 
     /**
      * Conversion (cast) to CLHEP::Hep3Vector.
@@ -182,58 +182,58 @@ namespace HepGeom {
 
     /**
      * Assignment. */
-    Point3D<double> & operator=(const Point3D<double> &) = default;
+    Point3D<G4double> & operator=(const Point3D<G4double> &) = default;
 
     /**
-     * Assignment from BasicVector3D<float>. */
-    Point3D<double> & operator=(const BasicVector3D<float> & v) {
-      this->BasicVector3D<double>::operator=(v);
+     * Assignment from BasicVector3D<G4float>. */
+    Point3D<G4double> & operator=(const BasicVector3D<G4float> & v) {
+      this->BasicVector3D<G4double>::operator=(v);
       return *this;
     }
 
     /**
-     * Assignment from BasicVector3D<double>. */
-    Point3D<double> & operator=(const BasicVector3D<double> & v) {
-      this->BasicVector3D<double>::operator=(v);
+     * Assignment from BasicVector3D<G4double>. */
+    Point3D<G4double> & operator=(const BasicVector3D<G4double> & v) {
+      this->BasicVector3D<G4double>::operator=(v);
       return *this;
     }
 
     /**
      * Move assignment. */
-    Point3D<double> & operator=(Point3D<double> &&) = default;
+    Point3D<G4double> & operator=(Point3D<G4double> &&) = default;
 
     /**
      * Returns distance to the origin squared. */
-    double distance2() const { return mag2(); }
+    G4double distance2() const { return mag2(); }
 
     /**
      * Returns distance to the point squared. */
-    double distance2(const Point3D<double> & p) const {
-      double dx = p.x()-x(), dy = p.y()-y(), dz = p.z()-z();
+    G4double distance2(const Point3D<G4double> & p) const {
+      G4double dx = p.x()-x(), dy = p.y()-y(), dz = p.z()-z();
       return dx*dx + dy*dy + dz*dz;
     }
 
     /**
      * Returns distance to the origin. */
-    double distance() const { return std::sqrt(distance2()); }
+    G4double distance() const { return std::sqrt(distance2()); }
 
     /**
      * Returns distance to the point. */
-    double distance(const Point3D<double> & p) const {
+    G4double distance(const Point3D<G4double> & p) const {
       return std::sqrt(distance2(p));
     }
 
     /**
      * Transformation by Transform3D. */
-    Point3D<double> & transform(const Transform3D & m);
+    Point3D<G4double> & transform(const Transform3D & m);
   };
 
   /**
-   * Transformation of Point3D<double> by Transform3D.
+   * Transformation of Point3D<G4double> by Transform3D.
    * @relates Point3D
    */
-  Point3D<double>
-  operator*(const Transform3D & m, const Point3D<double> & p);
+  Point3D<G4double>
+  operator*(const Transform3D & m, const Point3D<G4double> & p);
 
 } /* namespace HepGeom */
 

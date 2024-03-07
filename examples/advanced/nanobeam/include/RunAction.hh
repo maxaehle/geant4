@@ -52,10 +52,10 @@ public:
   G4int GetRow(){return fRow;}
   void AddRow() {fRow=fRow+1;}
   
-  void AddToXVector(float v) {fXVector(fRow)=v;}
-  void AddToYVector(float v) {fYVector(fRow)=v;}
-  void AddToThetaVector(float v) {fThetaVector(fRow)=v;}
-  void AddToPhiVector(float v) {fPhiVector(fRow)=v;}
+  void AddToXVector(G4float v) {fXVector(fRow)=v;}
+  void AddToYVector(G4float v) {fYVector(fRow)=v;}
+  void AddToThetaVector(G4float v) {fThetaVector(fRow)=v;}
+  void AddToPhiVector(G4float v) {fPhiVector(fRow)=v;}
     
 private:
 

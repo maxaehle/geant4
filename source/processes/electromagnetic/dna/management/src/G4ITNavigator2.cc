@@ -2539,7 +2539,7 @@ void G4ITNavigator2::GetRandomInCurrentVolume(G4ThreeVector& _rndmPoint) const
   G4VoxelLimits voxelLimits;  // Defaults to "infinite" limits.
   G4double vmin, vmax;
   G4AffineTransform dummy;
-  std::vector<std::vector<double> > fExtend;
+  std::vector<std::vector<G4double> > fExtend;
 
   solid->CalculateExtent(kXAxis,voxelLimits,dummy,vmin,vmax);
   fExtend[kXAxis][BoundingBox::kMin] = vmin;
@@ -2559,8 +2559,8 @@ void G4ITNavigator2::GetRandomInCurrentVolume(G4ThreeVector& _rndmPoint) const
   {
     for(size_t i = 0 ; i < 3 ; ++i)
     {
-      double min = fExtend[i][BoundingBox::kMin];
-      double max = fExtend[i][BoundingBox::kMax];
+      G4double min = fExtend[i][BoundingBox::kMin];
+      G4double max = fExtend[i][BoundingBox::kMax];
       rndmPos[i] = G4UniformRand()*(max-min)+min;
     }
 

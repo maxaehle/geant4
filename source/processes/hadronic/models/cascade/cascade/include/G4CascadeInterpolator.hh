@@ -32,7 +32,7 @@
 // optional flag whether to extrapolate (the default) or truncate values
 // beyond the bin boundaries.  
 //
-// The interpolation action returns a simple double: the integer part
+// The interpolation action returns a simple G4double: the integer part
 // is the bin index, and the fractional part is, obviously, the
 // fractional part.
 //
@@ -43,7 +43,7 @@
 #define G4CASCADE_INTERPOLATOR_HH
 
 #include "globals.hh"
-#include <cfloat>
+#include <cG4float>
 #include <iosfwd>
 
 

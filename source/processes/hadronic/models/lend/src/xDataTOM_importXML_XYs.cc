@@ -14,15 +14,15 @@ namespace GIDI {
 using namespace GIDI;
 #endif
 
-static int xDataXML_XYsDataToTOM2( statusMessageReporting *smr, xDataXML_element *XE, xDataTOM_xDataInfo *xDI, int index, int length, double value, 
-    double accuracy );
+static int xDataXML_XYsDataToTOM2( statusMessageReporting *smr, xDataXML_element *XE, xDataTOM_xDataInfo *xDI, int index, int length, G4double value, 
+    G4double accuracy );
 /*
 ************************************************************
 */
 int xDataXML_XYsToTOM( statusMessageReporting *smr, xDataXML_element *XE, xDataTOM_element *TE ) {
 
     int dataProcessed = 0, length;
-    double accuracy;
+    G4double accuracy;
     xDataTOM_xDataInfo *xDI = &(TE->xDataInfo);
     xDataXML_element *XMLChild;
 
@@ -54,8 +54,8 @@ err:
 /*
 ************************************************************
 */
-static int xDataXML_XYsDataToTOM2( statusMessageReporting *smr, xDataXML_element *XE, xDataTOM_xDataInfo *xDI, int index, int length, double value, 
-        double accuracy ) {
+static int xDataXML_XYsDataToTOM2( statusMessageReporting *smr, xDataXML_element *XE, xDataTOM_xDataInfo *xDI, int index, int length, G4double value, 
+        G4double accuracy ) {
 
     xDataTOM_XYs *XYs;
 
@@ -73,7 +73,7 @@ err:
 /*
 ************************************************************
 */
-int xDataXML_XYsDataToTOM( statusMessageReporting *smr, xDataXML_element *XE, xDataTOM_XYs *XYs, int index, int length, double value, double accuracy, 
+int xDataXML_XYsDataToTOM( statusMessageReporting *smr, xDataXML_element *XE, xDataTOM_XYs *XYs, int index, int length, G4double value, G4double accuracy, 
         enum xDataTOM_subAxesType subAxesType, int axesOffest, xDataTOM_axes *axes, xDataTOM_interpolation *interpolation ) {
 
     XYs->index = index;
@@ -81,9 +81,9 @@ int xDataXML_XYsDataToTOM( statusMessageReporting *smr, xDataXML_element *XE, xD
     XYs->value = value;
     XYs->accuracy = accuracy;
     if( xDataTOM_subAxes_initialize( smr, &(XYs->subAxes), subAxesType, axesOffest, axes, interpolation ) != 0 ) return( 1 );
-    if( ( XYs->data = (double *) smr_malloc2( smr, 2 * length * sizeof( double ), 0, "XYs->data" ) ) == NULL ) goto err;
+    if( ( XYs->data = (G4double *) smr_malloc2( smr, 2 * length * sizeof( G4double ), 0, "XYs->data" ) ) == NULL ) goto err;
 
-    if( xDataXML_stringToDoubles( smr, XE, XE->text.text, 2 * length, (double *) XYs->data ) != 0 ) goto err;
+    if( xDataXML_stringToDoubles( smr, XE, XE->text.text, 2 * length, (G4double *) XYs->data ) != 0 ) goto err;
     return( 0 );
 
 err:
@@ -93,13 +93,13 @@ err:
 /*
 ************************************************************
 */
-int xDataXML_stringToDoubles( statusMessageReporting *smr,  xDataXML_element *XE, char const *s1, int length, double *d1 ) {
+int xDataXML_stringToDoubles( statusMessageReporting *smr,  xDataXML_element *XE, char const *s1, int length, G4double *d1 ) {
 
     char *e1 = (char *) s1;
     int i1;
 
     for( i1 = 0; i1 < length; i1++, d1++, s1 = e1 ) {
-        if( xDataXML_stringTo_double( smr, xDataXML_get_smrUserInterfaceFromElement( XE ), s1, d1, " \n", &e1 ) ) return( 1 );
+        if( xDataXML_stringTo_G4double( smr, xDataXML_get_smrUserInterfaceFromElement( XE ), s1, d1, " \n", &e1 ) ) return( 1 );
     }
     while( isspace( *e1 ) ) e1++;     /* There should be nothing but white spaces left in the string. */ // Loop checking, 11.06.2015, T. Koi
     if( *e1 != 0 ) {

@@ -757,7 +757,7 @@ G4bool G4PolyPhiFace::InsideEdgesExact( G4double r, G4double z,
 // This routine can be made a zillion times quicker by implementing
 // better code, for example:
 //
-//    int pnpoly(int npol, float *xp, float *yp, float x, float y)
+//    int pnpoly(int npol, G4float *xp, G4float *yp, G4float x, G4float y)
 //    {
 //      int i, j, c = 0;
 //      for (i = 0, j = npol-1; i < npol; j = i++) {
