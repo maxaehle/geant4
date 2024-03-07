@@ -157,7 +157,7 @@ class G4UIparameter
     G4int Eval2(yystype arg1, G4int op, yystype arg2);
     G4int CompareInt(G4int arg1, G4int op, G4int arg2);
     G4int CompareLong(G4long arg1, G4int op, G4long arg2);
-    G4int CompareDouble(double arg1, G4int op, double arg2);
+    G4int CompareDouble(G4double arg1, G4int op, G4double arg2);
     //  utility
     tokenNum Yylex(void);        // returns next token
     G4int G4UIpGetc(void);       // read one char from rangeBuf

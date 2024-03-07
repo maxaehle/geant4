@@ -58,7 +58,7 @@ ComputeStructureFactor(G4double kScatteringVector,
     G4complex SF = G4complex(0.,0.);
 
     for(auto anElement: *(fMaterial->GetElementVector())){
-        G4double AFF = G4AtomicFormFactor::GetManager()->Get(kScatteringVector,anElement->GetZ());
+        G4double AFF = G4AtomicFormFactor::GetManager()->Get(kScatteringVector,G4int(anElement->GetZ()));
         
         G4complex GFS = G4complex(0.,0.);
         

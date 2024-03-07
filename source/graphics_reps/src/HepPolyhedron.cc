@@ -505,7 +505,7 @@ void HepPolyhedron::RotateAroundZ(G4int nstep, G4double phi, G4double dphi,
   G4bool ifWholeCircle = (std::abs(dphi-wholeCircle) < perMillion) ? true : false;
   G4double delPhi = ifWholeCircle ? wholeCircle : dphi;
   G4int nSphi = nstep;
-  if (nSphi <= 0) nSphi = GetNumberOfRotationSteps()*delPhi/wholeCircle + 0.5;
+  if (nSphi <= 0) nSphi = (G4int)(GetNumberOfRotationSteps()*delPhi/wholeCircle + 0.5);
   if (nSphi == 0) nSphi = 1;
   G4int nVphi = ifWholeCircle ? nSphi : nSphi + 1;
   G4bool ifClosed = np1 > 0 ? false : true; // true if external polyline is closed

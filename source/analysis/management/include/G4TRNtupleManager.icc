@@ -185,7 +185,7 @@ G4bool
 G4TRNtupleManager<NT>::SetNtupleFColumn(
   G4int ntupleId, const G4String& columnName, G4float& value)
 {
-  return SetNtupleTColumn<float>(ntupleId, columnName, value);
+  return SetNtupleTColumn<G4float>(ntupleId, columnName, value);
 }
 
 //_____________________________________________________________________________
@@ -194,7 +194,7 @@ G4bool
 G4TRNtupleManager<NT>::SetNtupleDColumn(
   G4int ntupleId, const G4String& columnName, G4double& value)
 {
-  return SetNtupleTColumn<double>(ntupleId, columnName, value);
+  return SetNtupleTColumn<G4double>(ntupleId, columnName, value);
 }
 
 //_____________________________________________________________________________
@@ -212,7 +212,7 @@ G4bool
 G4TRNtupleManager<NT>::SetNtupleFColumn(
   G4int ntupleId, const G4String& columnName, std::vector<G4float>& vector)
 {
-  return SetNtupleTColumn<float>(ntupleId, columnName, vector);
+  return SetNtupleTColumn<G4float>(ntupleId, columnName, vector);
 }
 
 //_____________________________________________________________________________
@@ -221,7 +221,7 @@ G4bool
 G4TRNtupleManager<NT>::SetNtupleDColumn(
   G4int ntupleId, const G4String& columnName, std::vector<G4double>& vector)
 {
-  return SetNtupleTColumn<double>(ntupleId, columnName, vector);
+  return SetNtupleTColumn<G4double>(ntupleId, columnName, vector);
 }
 
 //_____________________________________________________________________________
