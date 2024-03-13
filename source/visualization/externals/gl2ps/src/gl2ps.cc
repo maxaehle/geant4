@@ -66,7 +66,7 @@
 #include <sys/types.h>
 #include <stdarg.h>
 #include <time.h>
-#include <G4float.h>
+#include <float.h>
 #include <limits.h>
 
 #if defined(GL2PS_HAVE_ZLIB)

@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <cmath>
 #include <cstdlib>   //for std::abs(int)
-#include <G4float.h>
+#include <float.h>
 
 #include "ptwX.h"
 

@@ -9,7 +9,7 @@
 #include "nf_utilities.h"
 
 #ifdef WIN32
-  #include <G4float.h>
+  #include <float.h>
   #define isfinite _finite
 #else
   #define isfinite std::isfinite

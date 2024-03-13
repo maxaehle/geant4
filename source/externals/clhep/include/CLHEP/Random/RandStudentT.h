@@ -11,7 +11,7 @@
 // Default values are used for operator()().
 
 // Valid input values are a > 0.  When invalid values are presented, the
-// code silently returns DBL_MAX from <G4float.h> which is the same as
+// code silently returns DBL_MAX from <float.h> which is the same as
 // MAXDOUBLE in <values.h> on systems where the latter exists.
 
 // =======================================================================

@@ -4,7 +4,7 @@
 */
 
 #include <cmath>
-#include <G4float.h>
+#include <float.h>
 
 #include "ptwXY.h"
 #include <nf_Legendre.h>

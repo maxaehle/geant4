@@ -43,7 +43,7 @@
 #define G4CASCADE_INTERPOLATOR_HH
 
 #include "globals.hh"
-#include <cG4float>
+#include <cfloat>
 #include <iosfwd>
 
 

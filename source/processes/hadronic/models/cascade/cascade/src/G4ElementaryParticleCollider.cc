@@ -125,7 +125,7 @@
 #include "G4VTwoBodyAngDst.hh"
 #include "Randomize.hh"
 #include <algorithm>
-#include <cG4float>
+#include <cfloat>
 #include <vector>
 
 using namespace G4InuclParticleNames;

@@ -2,7 +2,7 @@
 // ---------------------------------------------------------------------------
 
 #include <cmath>
-#include <G4float.h>
+#include <float.h>
 #include <iostream>
 #include "CLHEP/Geometry/BasicVector3D.h"
 

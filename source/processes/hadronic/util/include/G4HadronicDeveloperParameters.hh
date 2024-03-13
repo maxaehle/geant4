@@ -30,7 +30,7 @@
 
 #include<map>
 #include<string>
-#include<cG4float>
+#include<cfloat>
 
 
 class G4HadronicDeveloperParameters

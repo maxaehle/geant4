@@ -50,7 +50,7 @@
 #include <vector>
 
 #if defined WIN32-VC
-   #include <G4float.h>
+   #include <float.h>
 #endif
 
 class G4ParticleHPVector

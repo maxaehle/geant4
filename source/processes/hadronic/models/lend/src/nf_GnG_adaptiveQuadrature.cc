@@ -3,7 +3,7 @@
 # <<END-copyright>>
 */
 
-#include <G4float.h>
+#include <float.h>
 
 #include "nf_integration.h"
 

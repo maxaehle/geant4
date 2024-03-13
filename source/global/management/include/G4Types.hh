@@ -80,11 +80,11 @@
 // Typedefs to decouple from library classes
 // Typedefs for numeric types
 //
-//#include "easyAD.hpp"
+#include "easyAD.hpp"
 //template<typename T>
 //T ForwardIfPossible(T x){ return x; }
-using G4double  = G4double;
-using G4float   = G4float;
+using G4double  = Forward;
+using G4float   = Forward;
 using G4int     = int;
 using G4bool    = bool;
 using G4long    = long;

@@ -4,7 +4,7 @@
 
 #define _USE_MATH_DEFINES
 #include <iostream>
-#include <cG4float>
+#include <cfloat>
 #include <cmath>
 #include <fstream>
 #include <string>

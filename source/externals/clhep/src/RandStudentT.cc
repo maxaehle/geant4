@@ -16,7 +16,7 @@
 //			4/14/05
 // =======================================================================
 
-#include <G4float.h>
+#include <float.h>
 #include "CLHEP/Random/RandStudentT.h"
 #include "CLHEP/Random/DoubConv.h"
 

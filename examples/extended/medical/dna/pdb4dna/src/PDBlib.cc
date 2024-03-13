@@ -49,7 +49,7 @@
 #define G4cerr std::cerr 
 #define G4endl std::endl 
 #define G4String std::string // string included in PDBatom.hh
-#include <cG4float>
+#include <cfloat>
 #endif
 #include <fstream>
 #include <iostream>

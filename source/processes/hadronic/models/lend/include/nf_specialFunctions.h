@@ -7,7 +7,7 @@
 #define specialFunctions_h_included
 
 #include <math.h>
-#include <G4float.h>
+#include <float.h>
 #include <nf_utilities.h>
 
 #ifdef WIN32

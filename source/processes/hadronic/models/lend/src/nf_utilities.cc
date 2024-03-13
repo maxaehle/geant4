@@ -10,7 +10,7 @@
 #include "nf_utilities.h"
 
 #ifdef WIN32
-#include <G4float.h>
+#include <float.h>
 #define is_nan(a) _isnan(a)
 /*#define INFINITY (DBL_MAX+DBL_MAX)*/
 /*#define NAN (INFINITY-INFINITY)*/
