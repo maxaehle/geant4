@@ -86,7 +86,7 @@ void G4HtmlPPReporter::SparseOption(const G4String& option)
   //--- open index file -----
   G4String fileName = baseDir + "index.html";
   std::ofstream outFile(fileName, std::ios::out );
-  outFile.setf( std::ios:: scientific, std::ios::G4floatfield );
+  outFile.setf( std::ios:: scientific, std::ios::floatfield );
   
   // header
   PrintHeader(outFile);
@@ -173,7 +173,7 @@ void G4HtmlPPReporter::SparseOption(const G4String& option)
   // exception
   if (name == "J/psi") fileName = baseDir +"jpsi.html";
   std::ofstream outFile(fileName, std::ios::out );
-  outFile.setf( std::ios:: scientific, std::ios::G4floatfield );
+  outFile.setf( std::ios:: scientific, std::ios::floatfield );
   outFile << std::setprecision(7) << G4endl;
 
   PrintHeader(outFile);

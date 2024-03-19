@@ -338,7 +338,7 @@ void Run::EndOfRun()
     analysis->ScaleH1(ih,norm/MeV);
   }
   
-  G4cout.setf(mode,std::ios::G4floatfield);
+  G4cout.setf(mode,std::ios::floatfield);
   G4cout.precision(prec);
 }
 

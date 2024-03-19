@@ -140,7 +140,7 @@ G4bool G4Isotope::operator!=(const G4Isotope &right) const
 std::ostream& operator<<(std::ostream& flux, const G4Isotope* isotope)
 {
   std::ios::fmtflags mode = flux.flags();
-  flux.setf(std::ios::fixed,std::ios::G4floatfield);
+  flux.setf(std::ios::fixed,std::ios::floatfield);
   G4long prec = flux.precision(3);
     
   flux
@@ -151,7 +151,7 @@ std::ostream& operator<<(std::ostream& flux, const G4Isotope* isotope)
     << (isotope->fA)/(g/mole) << " g/mole";
 
   flux.precision(prec);       
-  flux.setf(mode,std::ios::G4floatfield);       
+  flux.setf(mode,std::ios::floatfield);
   return flux;
 }
 

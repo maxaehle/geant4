@@ -116,7 +116,7 @@ Run::~Run()
 void Run::EndOfRun()
 { // Only call by Master thread
     std::ios::fmtflags mode = G4cout.flags();
-    G4cout.setf(std::ios::fixed,std::ios::G4floatfield);
+    G4cout.setf(std::ios::fixed,std::ios::floatfield);
 
     if (numberOfEvent == 0) return;
 
@@ -294,7 +294,7 @@ void Run::EndOfRun()
     G4cout << G4endl;
 
      // reset default formats
-    G4cout.setf(mode,std::ios::G4floatfield);
+    G4cout.setf(mode,std::ios::floatfield);
     G4cout.precision(prec);
 
     // delete and remove all contents in fProcCounter
@@ -338,7 +338,7 @@ void Run::SurveyConvergence(G4int NbofEvents)
   fOldDose = doseOverBeam;
 
   std::ios::fmtflags mode = G4cout.flags();
-  G4cout.setf(std::ios::fixed,std::ios::G4floatfield);
+  G4cout.setf(std::ios::fixed,std::ios::floatfield);
   G4int prec = G4cout.precision(3);
 
   G4cout << " ---> NbofEvents= " << NbofEvents
@@ -351,7 +351,7 @@ void Run::SurveyConvergence(G4int NbofEvents)
          << G4endl;
 
   // reset default formats
-  G4cout.setf(mode,std::ios::G4floatfield);
+  G4cout.setf(mode,std::ios::floatfield);
   G4cout.precision(prec);
 }
 

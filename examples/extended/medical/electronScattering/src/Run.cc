@@ -258,7 +258,7 @@ void Run::PrintFluence(G4int TotEvents)
   std::ofstream File(fileName, std::ios::out);
   
   std::ios::fmtflags mode = File.flags();  
-  File.setf( std::ios::scientific, std::ios::G4floatfield );
+  File.setf( std::ios::scientific, std::ios::floatfield );
   G4int prec = File.precision(3);
       
   File << "  Fluence density distribution \n " 
@@ -277,7 +277,7 @@ void Run::PrintFluence(G4int TotEvents)
   }
     
   // restaure default formats
-  File.setf(mode,std::ios::G4floatfield);
+  File.setf(mode,std::ios::floatfield);
   File.precision(prec);         
 }
 

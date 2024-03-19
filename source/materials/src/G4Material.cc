@@ -775,7 +775,7 @@ G4double G4Material::GetA() const
 std::ostream& operator<<(std::ostream& flux, const G4Material* material)
 {
   std::ios::fmtflags mode = flux.flags();
-  flux.setf(std::ios::fixed,std::ios::G4floatfield);
+  flux.setf(std::ios::fixed,std::ios::floatfield);
   G4long prec = flux.precision(3);
   
   flux
@@ -807,7 +807,7 @@ std::ostream& operator<<(std::ostream& flux, const G4Material* material)
       << " % \n";
   }
   flux.precision(prec);    
-  flux.setf(mode,std::ios::G4floatfield);
+  flux.setf(mode,std::ios::floatfield);
 
   if(material->IsExtended())
   { static_cast<const G4ExtendedMaterial*>(material)->Print(flux); }

@@ -94,7 +94,7 @@ void  G4TextPPReporter::GeneratePropertyTable(const G4ParticleDefinition* partic
   if (name == "J/psi") fileName = baseDir +"jpsi.txt";
 
   std::ofstream outFile(fileName, std::ios::out );
-  outFile.setf( std::ios:: scientific, std::ios::G4floatfield );
+  outFile.setf( std::ios:: scientific, std::ios::floatfield );
   outFile << std::setprecision(7) << G4endl;
 
   // particle name  encoding

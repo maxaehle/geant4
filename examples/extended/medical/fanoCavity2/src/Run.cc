@@ -101,7 +101,7 @@ Run::Run(DetectorConstruction* det,PrimaryGeneratorAction *kin,bool isMaster)
 
 
     std::ios::fmtflags mode = G4cout.flags();
-    G4cout.setf(std::ios::fixed,std::ios::G4floatfield);
+    G4cout.setf(std::ios::fixed,std::ios::floatfield);
     G4int prec = G4cout.precision(3);
 
     G4cout << "\n ===================== run conditions =====================\n";
@@ -165,7 +165,7 @@ Run::Run(DetectorConstruction* det,PrimaryGeneratorAction *kin,bool isMaster)
 
 
     // reset default formats
-    G4cout.setf(mode,std::ios::G4floatfield);
+    G4cout.setf(mode,std::ios::floatfield);
     G4cout.precision(prec);
 
     //histograms
@@ -223,7 +223,7 @@ void Run::SurveyConvergence(G4int NbofEvents)
   G4double err = 100*(ratio-1.);
 
   std::ios::fmtflags mode = G4cout.flags();
-  G4cout.setf(std::ios::fixed,std::ios::G4floatfield);
+  G4cout.setf(std::ios::fixed,std::ios::floatfield);
   G4int prec = G4cout.precision(5);
 
   G4cout << "--->evntNb= " << NbofEvents
@@ -236,7 +236,7 @@ void Run::SurveyConvergence(G4int NbofEvents)
          << G4endl;
 
   // reset default formats
-  G4cout.setf(mode,std::ios::G4floatfield);
+  G4cout.setf(mode,std::ios::floatfield);
   G4cout.precision(prec);
 }
 
@@ -247,7 +247,7 @@ void Run::EndOfRun()
 
 
   std::ios::fmtflags mode = G4cout.flags();
-  G4cout.setf(std::ios::fixed,std::ios::G4floatfield);
+  G4cout.setf(std::ios::fixed,std::ios::floatfield);
   G4int prec = G4cout.precision(3);
   
 
@@ -351,7 +351,7 @@ void Run::EndOfRun()
   G4cout << G4endl;
   
    // reset default formats
-  G4cout.setf(mode,std::ios::G4floatfield);
+  G4cout.setf(mode,std::ios::floatfield);
   G4cout.precision(prec);
   
   // delete and remove all contents in fProcCounter 

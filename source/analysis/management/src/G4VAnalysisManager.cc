@@ -167,7 +167,7 @@ G4bool G4VAnalysisManager::WriteAscii(const G4String& fileName)
       fkClass, "WriteAscii");
     return false;
   }
-  output.setf( std::ios::scientific, std::ios::G4floatfield );
+  output.setf( std::ios::scientific, std::ios::floatfield );
 
   result &= fVH1Manager->WriteOnAscii(output);
   result &= fVH2Manager->WriteOnAscii(output);

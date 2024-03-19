@@ -139,7 +139,7 @@ void Run::Merge(const G4Run* run)
 void Run::EndOfRun() 
 {
   std::ios::fmtflags mode = G4cout.flags();
-  G4cout.setf(std::ios::fixed,std::ios::G4floatfield);
+  G4cout.setf(std::ios::fixed,std::ios::floatfield);
   G4int prec = G4cout.precision(2);
   
   //run conditions  
@@ -157,7 +157,7 @@ void Run::EndOfRun()
     << G4BestUnit(density,"Volumic Mass") << ")" << G4endl;    
 
   if (numberOfEvent == 0) {
-    G4cout.setf(mode,std::ios::G4floatfield);
+    G4cout.setf(mode,std::ios::floatfield);
     G4cout.precision(prec);  
     return;
   }
@@ -215,7 +215,7 @@ void Run::EndOfRun()
     fclose (myFile);
 
   // reset default formats
-  G4cout.setf(mode,std::ios::G4floatfield);
+  G4cout.setf(mode,std::ios::floatfield);
   G4cout.precision(prec);
     
 }

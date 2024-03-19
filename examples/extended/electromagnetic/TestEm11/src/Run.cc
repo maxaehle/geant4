@@ -208,7 +208,7 @@ if (fTotEdep[2] < max) fTotEdep[2] = max;
 void Run::EndOfRun() 
 {
   std::ios::fmtflags mode = G4cout.flags();
-  G4cout.setf(std::ios::fixed,std::ios::G4floatfield);
+  G4cout.setf(std::ios::fixed,std::ios::floatfield);
   G4int prec = G4cout.precision(2);
   
   //run conditions
@@ -232,7 +232,7 @@ void Run::EndOfRun()
   }         
 
   if (numberOfEvent == 0) {
-    G4cout.setf(mode,std::ios::G4floatfield);
+    G4cout.setf(mode,std::ios::floatfield);
     G4cout.precision(prec);  
     return;
   }
@@ -340,7 +340,7 @@ void Run::EndOfRun()
     analysisManager->ScaleH1(ih,fac);
     
    // reset default formats
-  G4cout.setf(mode,std::ios::G4floatfield);
+  G4cout.setf(mode,std::ios::floatfield);
   G4cout.precision(prec);
 }
 

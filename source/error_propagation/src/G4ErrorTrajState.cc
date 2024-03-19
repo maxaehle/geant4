@@ -163,7 +163,7 @@ void G4ErrorTrajState::DumpPosMomError(std::ostream& out) const
 //--------------------------------------------------------------------------
 std::ostream& operator<<(std::ostream& out, const G4ErrorTrajState& ts)
 {
-  //  long mode = out.setf(std::ios::fixed,std::ios::G4floatfield);
+  //  long mode = out.setf(std::ios::fixed,std::ios::floatfield);
   out << " G4ErrorTrajState of type " << ts.theTSType
       << " : partycle: " << ts.fParticleType << "  position: " << std::setw(6)
       << ts.fPosition << "              momentum: " << ts.fMomentum

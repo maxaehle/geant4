@@ -210,7 +210,7 @@ std::ostream& operator<<(std::ostream& out, const G4ErrorFreeTrajState& ts)
 {
   std::ios::fmtflags orig_flags = out.flags();
 
-  out.setf(std::ios::fixed, std::ios::G4floatfield);
+  out.setf(std::ios::fixed, std::ios::floatfield);
 
   ts.DumpPosMomError(out);
 

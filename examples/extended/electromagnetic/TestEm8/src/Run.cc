@@ -140,7 +140,7 @@ void Run::EndOfRun()
   G4cout << " bin nb      Elow      entries     normalized " << G4endl;
 
   std::ofstream fileOut("distribution.out", std::ios::out );
-  fileOut.setf( std::ios::scientific, std::ios::G4floatfield );
+  fileOut.setf( std::ios::scientific, std::ios::floatfield );
 
   x1 = 0.0;
 

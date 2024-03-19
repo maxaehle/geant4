@@ -519,7 +519,7 @@ void Run::EndOfRun()
          << fTotalSurface - sum << G4endl;
 
   G4cout << "---------------------------------\n";
-  G4cout.setf(mode, std::ios::G4floatfield);
+  G4cout.setf(mode, std::ios::floatfield);
   G4cout.precision(prec);
 
   G4int histo_id_trans = analysisMan->GetH1Id("Transmitted");

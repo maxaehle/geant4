@@ -75,7 +75,7 @@ G4UIcontrolMessenger::G4UIcontrolMessenger()
   G4UIparameter* param4 = new G4UIparameter("finalValue", 'd', false);
   loopCommand->SetParameter(param4);
   G4UIparameter* param5 = new G4UIparameter("stepSize", 'd', true);
-  param5->SetDefaultValue(1.0);
+  param5->SetDefaultValue((passivedouble)1.0);
   loopCommand->SetParameter(param5);
   loopCommand->SetToBeBroadcasted(false);
 

@@ -127,7 +127,7 @@ G4double G4Timer::GetRealElapsed() const
     G4Exception("G4Timer::GetRealElapsed()", "InvalidCondition", FatalException,
                 "Timer not stopped or times not recorded!");
   }
-  std::chrono::duration<G4double> diff = fEndRealTime - fStartRealTime;
+  std::chrono::duration<passivedouble> diff = fEndRealTime - fStartRealTime;
   return diff.count();
 }
 

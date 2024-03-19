@@ -75,7 +75,7 @@ void G4DriverReporter::PrintStatus(const G4FieldTrack& StartFT,
 {
     G4int verboseLevel= 2; // fVerboseLevel;
     G4int oldPrec= G4cout.precision(noPrecision);
-    // G4cout.setf(ios_base::fixed,ios_base::G4floatfield);
+    // G4cout.setf(ios_base::fixed,ios_base::floatfield);
         
     const G4ThreeVector StartPosition=       StartFT.GetPosition();
     const G4ThreeVector StartUnitVelocity=   StartFT.GetMomentumDir();

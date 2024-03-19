@@ -847,7 +847,7 @@ void G4OldMagIntDriver::PrintStatus(const G4FieldTrack& StartFT,
     G4int verboseLevel= fVerboseLevel;
     const G4int noPrecision = 5;
     G4int oldPrec= G4cout.precision(noPrecision);
-    // G4cout.setf(ios_base::fixed,ios_base::G4floatfield);
+    // G4cout.setf(ios_base::fixed,ios_base::floatfield);
 
     const G4ThreeVector StartPosition=       StartFT.GetPosition();
     const G4ThreeVector StartUnitVelocity=   StartFT.GetMomentumDir();

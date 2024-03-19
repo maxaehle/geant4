@@ -452,7 +452,7 @@ void DetectorConstruction::PrintGeometry()
    
   // choose printing format
   std::ios::fmtflags mode = G4cout.flags();
-  G4cout.setf(std::ios::fixed,std::ios::G4floatfield);
+  G4cout.setf(std::ios::fixed,std::ios::floatfield);
   G4int prec = G4cout.precision(6);
   
   G4cout << "\n \t \t" << "Material \t" << "Z_front \t" << "Thickness \n";  
@@ -491,7 +491,7 @@ void DetectorConstruction::PrintGeometry()
          << "\t" << G4BestUnit(fThickness_Frame,"Length") << "\n" << G4endl;
          
   // restaure default formats
-  G4cout.setf(mode,std::ios::G4floatfield);
+  G4cout.setf(mode,std::ios::floatfield);
   G4cout.precision(prec);             
 }
 
