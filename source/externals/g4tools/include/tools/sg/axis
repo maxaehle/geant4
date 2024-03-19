@@ -901,7 +901,7 @@ protected:
     std::vector<G4float> tick_values;
     std::vector<std::string> tick_labels;
 
-    // need include <G4float.h> which does not exist on some system
+    // need include <float.h> which does not exist on some system
     //NUM_FUZZ DBL_EPSILON*4
     G4float NUM_FUZZ = 0.01f;
 

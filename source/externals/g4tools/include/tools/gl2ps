@@ -54,7 +54,7 @@
 #include <sys/types.h>
 #include <stdarg.h>
 #include <time.h>
-#include <G4float.h>
+#include <float.h>
 
 #if defined(TOOLS_GL2PS_HAVE_ZLIB)
 #include <zlib.h>

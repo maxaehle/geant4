@@ -26,7 +26,7 @@
 #include <cstring>
 #include <ctime>
 #include <cmath>
-#include <cG4float>
+#include <cfloat>
 
 namespace tools {
 namespace hplot {
@@ -1888,7 +1888,7 @@ private:
   L20:
      awidth = (AH-AL)/G4double(ntemp);
      timemulti = 1;
-     if (awidth >= FLT_MAX) goto LOK;  //in G4float.h
+     if (awidth >= FLT_MAX) goto LOK;  //in float.h
      if (awidth <= 0)       goto LOK;
 
   //      If time representation, bin width should be rounded to seconds

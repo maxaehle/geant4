@@ -49,7 +49,7 @@
 #include "lina/vec3f"
 #include "lina/vec2f"
 #include "mathf"
-#include <cG4float> // for FLT_MAX
+#include <cfloat> // for FLT_MAX
 
 namespace tools {
 

@@ -85,12 +85,12 @@ void G4H2Messenger::CreateH2Cmd()
   auto h2xValMin0 = new G4UIparameter("xvalMin0", 'd', true);
   h2xValMin0->SetGuidance("Minimum x-value, expressed in unit (default = 0.)");
   h2xValMin0->SetGuidance("Can be reset with /analysis/h2/set command");
-  h2xValMin0->SetDefaultValue(0.);
+  h2xValMin0->SetDefaultValue((G4double)0.);
 
   auto h2xValMax0 = new G4UIparameter("xvalMax0", 'd', true);
   h2xValMax0->SetGuidance("Maximum x-value, expressed in unit (default = 1.)");
   h2xValMax0->SetGuidance("Can be reset with /analysis/h2/set command");
-  h2xValMax0->SetDefaultValue(1.);
+  h2xValMax0->SetDefaultValue((G4double)1.);
 
   auto h2xValUnit0 = new G4UIparameter("xvalUnit0", 's', true);
   h2xValUnit0->SetGuidance("The unit applied to filled x-values and xvalMin0, xvalMax0");
@@ -116,12 +116,12 @@ void G4H2Messenger::CreateH2Cmd()
   auto h2yValMin0 = new G4UIparameter("yvalMin0", 'd', true);
   h2yValMin0->SetGuidance("Minimum y-value, expressed in unit (default = 0.)");
   h2yValMin0->SetGuidance("Can be reset with /analysis/h2/set command");
-  h2yValMin0->SetDefaultValue(0.);
+  h2yValMin0->SetDefaultValue((G4double)0.);
 
   auto h2yValMax0 = new G4UIparameter("yvalMax0", 'd', true);
   h2yValMax0->SetGuidance("Maximum y-value, expressed in unit (default = 1.)");
   h2yValMax0->SetGuidance("Can be reset with /analysis/h2/set command");
-  h2yValMax0->SetDefaultValue(1.);
+  h2yValMax0->SetDefaultValue((G4double)1.);
 
   auto h2yValUnit0 = new G4UIparameter("yvalUnit0", 's', true);
   h2yValUnit0->SetGuidance("The unit applied to filled y-values and yvalMin0, yvalMax0");

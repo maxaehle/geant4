@@ -6,7 +6,7 @@
 
 #include "../mnmx"
 
-#include <cG4float> // FLT_MAX
+#include <cfloat> // FLT_MAX
 
 namespace tools {
 

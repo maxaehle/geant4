@@ -10,7 +10,7 @@
 #include "style_parser"
 
 #include <string>
-#include <cG4float> //FLT_MAX
+#include <cfloat> //FLT_MAX
 
 namespace tools {
 namespace sg {

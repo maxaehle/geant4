@@ -4,7 +4,7 @@
 #ifndef tools_zb_buffer
 #define tools_zb_buffer
 
-#include <cG4float> //DBL_MAX
+#include <cfloat> //DBL_MAX
 
 #include "polygon"
 

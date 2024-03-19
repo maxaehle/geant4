@@ -6,7 +6,7 @@
 
 #include "box3"
 #include "vec3f"
-#include <cG4float> //FLT_MAX
+#include <cfloat> //FLT_MAX
 
 namespace tools {
 
