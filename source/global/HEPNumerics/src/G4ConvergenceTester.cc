@@ -513,7 +513,7 @@ void G4ConvergenceTester::check_stat_history(std::ostream& out)
   second_ally.resize(N);
 
   G4double sum_of_var =
-    std::accumulate(var_history.begin(), var_history.end(), 0.0);
+    std::accumulate(var_history.begin(), var_history.end(), (G4double)0.0);
   if(sum_of_var == 0.0)
   {
     out << "Variances in all historical grids are zero." << G4endl;

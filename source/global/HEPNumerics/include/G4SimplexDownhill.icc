@@ -97,7 +97,7 @@ G4double G4SimplexDownhill<T>::GetMinimum()
   // G4cout << "End Second Trials" << G4endl;
 
   G4double sum =
-    std::accumulate(currentHeights.begin(), currentHeights.end(), 0.0);
+    std::accumulate(currentHeights.begin(), currentHeights.end(), (G4double)0.0);
   G4double average = sum / (numberOfVariable + 1);
   G4double minimum = average;
 
@@ -206,7 +206,7 @@ G4bool G4SimplexDownhill<T>::isItGoodEnough()
   G4bool result = false;
 
   G4double sum =
-    std::accumulate(currentHeights.begin(), currentHeights.end(), 0.0);
+    std::accumulate(currentHeights.begin(), currentHeights.end(), (G4double)0.0);
   G4double average = sum / (numberOfVariable + 1);
 
   G4double delta = 0.0;
