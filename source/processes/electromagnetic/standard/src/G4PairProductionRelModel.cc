@@ -543,7 +543,7 @@ void G4PairProductionRelModel::InitialiseElementData()
 // s goes up to 2 with ds = 0.01 be default 
 void G4PairProductionRelModel::InitLPMFunctions() {
   if (!gLPMFuncs.fIsInitialized) {
-    const G4int num = gLPMFuncs.fSLimit*gLPMFuncs.fISDelta+1;
+    const G4int num = (G4int)(gLPMFuncs.fSLimit*gLPMFuncs.fISDelta+1);
     gLPMFuncs.fLPMFuncG.resize(num);
     gLPMFuncs.fLPMFuncPhi.resize(num);
     for (G4int i=0; i<num; ++i) {

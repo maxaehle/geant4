@@ -118,9 +118,9 @@ G4double G4StrawTubeXTRadiator::GetStackFactor(G4double energy, G4double gamma,
   G4complex Z2 = GetPlateComplexFZ(energy, gamma, varAngle);
   G4complex Z3 = GetGasComplexFZ(energy, gamma, varAngle);
 
-  G4complex R = (Z1 - Z2) * (Z1 - Z2) * (1. - H2 * H) +
-                (Z2 - Z3) * (Z2 - Z3) * (1. - H3) +
-                2. * (Z1 - Z2) * (Z2 - Z3) * H2 * (1. - H3);
+  G4complex R = (Z1 - Z2) * (Z1 - Z2) * (G4double(1.) - H2 * H) +
+                (Z2 - Z3) * (Z2 - Z3) * (G4double(1.) - H3) +
+                G4double(2.) * (Z1 - Z2) * (Z2 - Z3) * H2 * (G4double(1.) - H3);
 
   result = 2.0 * std::real(R) * (varAngle * energy / hbarc / hbarc);
 

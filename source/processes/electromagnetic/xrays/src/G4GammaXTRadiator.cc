@@ -88,10 +88,10 @@ G4double G4GammaXTRadiator::GetStackFactor(G4double energy, G4double gamma,
   G4complex Hb = std::pow(Cb, -fAlphaGas);
   G4complex H  = Ha * Hb;
 
-  G4complex F1 = (1.0 - Ha) * (1.0 - Hb) / (1.0 - H) * G4double(fPlateNumber);
+  G4complex F1 = (G4double(1.0) - Ha) * (G4double(1.0) - Hb) / (G4double(1.0) - H) * G4double(fPlateNumber);
 
-  G4complex F2 = (1.0 - Ha) * (1.0 - Ha) * Hb / (1.0 - H) / (1.0 - H) *
-                 (1.0 - std::pow(H, fPlateNumber));
+  G4complex F2 = (G4double(1.0) - Ha) * (G4double(1.0) - Ha) * Hb / (G4double(1.0) - H) / (G4double(1.0) - H) *
+                 (G4double(1.0) - std::pow(H, fPlateNumber));
 
   G4complex R = (F1 + F2) * OneInterfaceXTRdEdx(energy, gamma, varAngle);
 

@@ -90,9 +90,9 @@ G4double G4XTRGammaRadModel::GetStackFactor(G4double energy, G4double gamma,
   G4complex Hb = std::pow(Cb, -fAlphaGas);
   G4complex H  = Ha * Hb;
 
-  G4complex F1 = (0.5 * (1 + Qa) * (1.0 + H) - Ha - Qa * Hb) / (1.0 - H);
+  G4complex F1 = ((G4double)0.5 * ((G4double)1.0 + Qa) * ((G4double)1.0 + H) - Ha - Qa * Hb) / ((G4double)1.0 - H);
 
-  G4complex F2 = (1.0 - Ha) * (Qa - Ha) * Hb / (1.0 - H) / (Q - H);
+  G4complex F2 = ((G4double)1.0 - Ha) * (Qa - Ha) * Hb / ((G4double)1.0 - H) / (Q - H);
 
   F2 *= std::pow(Q, G4double(fPlateNumber)) - std::pow(H, fPlateNumber);
 
@@ -100,7 +100,7 @@ G4double G4XTRGammaRadModel::GetStackFactor(G4double energy, G4double gamma,
 
   G4complex stack = result * F1;
   stack += F2;
-  stack *= 2.0 * OneInterfaceXTRdEdx(energy, gamma, varAngle);
+  stack *= G4double(2.0) * OneInterfaceXTRdEdx(energy, gamma, varAngle);
 
   result = std::real(stack);
 

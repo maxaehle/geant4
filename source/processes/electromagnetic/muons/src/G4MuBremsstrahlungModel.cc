@@ -403,7 +403,7 @@ void G4MuBremsstrahlungModel::SampleSecondaries(
   // angles of the emitted gamma using general interface
 
   G4ThreeVector gamDir = 
-    GetAngularDistribution()->SampleDirection(dp, gEnergy, Z, 
+    GetAngularDistribution()->SampleDirection(dp, gEnergy, (G4int)Z,
                                               couple->GetMaterial());
   // create G4DynamicParticle object for the Gamma
   G4DynamicParticle* gamma = new G4DynamicParticle(theGamma, gamDir, gEnergy);

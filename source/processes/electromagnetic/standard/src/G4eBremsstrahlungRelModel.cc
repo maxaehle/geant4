@@ -746,7 +746,7 @@ void G4eBremsstrahlungRelModel::ComputeLPMGsPhis(G4double& funcGS,
 void G4eBremsstrahlungRelModel::InitLPMFunctions()
 {
   if (!gLPMFuncs.fIsInitialized) {
-    const G4int num = gLPMFuncs.fSLimit*gLPMFuncs.fISDelta+1;
+    const G4int num = (G4int)(gLPMFuncs.fSLimit*gLPMFuncs.fISDelta+1);
     gLPMFuncs.fLPMFuncG.resize(num);
     gLPMFuncs.fLPMFuncPhi.resize(num);
     for (G4int i = 0; i < num; ++i) {

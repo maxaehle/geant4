@@ -140,12 +140,12 @@ G4double G4TransparentRegXTRadiator::GetStackFactor(G4double energy,
   G4complex Hb(Qb * std::cos(bZb), -Qb * std::sin(bZb));
   G4complex H  = Ha * Hb;
   G4complex Hs = conj(H);
-  D            = 1.0 / ((1 - Q) * (1 - Q) +
-             4 * Q * std::sin(0.5 * (aZa + bZb)) * std::sin(0.5 * (aZa + bZb)));
+  D            = (G4double)1.0 / ((1 - Q) * (1 - Q) +
+             4 * Q * std::sin((G4double)0.5 * (aZa + bZb)) * std::sin((G4double)0.5 * (aZa + bZb)));
   G4complex F1 =
-    (1.0 - Ha) * (1.0 - Hb) * (1.0 - Hs) * G4double(fPlateNumber) * D;
-  G4complex F2 = (1.0 - Ha) * (1.0 - Ha) * Hb * (1.0 - Hs) * (1.0 - Hs) *
-                 (1.0 - std::exp(-0.5 * fPlateNumber * sigma)) * D * D;
+    ((G4double)1.0 - Ha) * ((G4double)1.0 - Hb) * ((G4double)1.0 - Hs) * G4double(fPlateNumber) * D;
+  G4complex F2 = ((G4double)1.0 - Ha) * ((G4double)1.0 - Ha) * Hb * ((G4double)1.0 - Hs) * ((G4double)1.0 - Hs) *
+                 ((G4double)1.0 - std::exp(-0.5 * fPlateNumber * sigma)) * D * D;
   G4complex R = (F1 + F2) * OneInterfaceXTRdEdx(energy, gamma, varAngle);
   result      = 2.0 * std::real(R);
   return result;

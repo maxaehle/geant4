@@ -299,7 +299,7 @@ void G4JAEAPolarizedElasticScatteringModel::SampleSecondaries(
   G4int Z = G4lrint(elm->GetZ());
 
   //Getting the corresponding distrbution
-  G4int energyindex=round(100*photonEnergy0)-1;
+  G4int energyindex=(G4int)(round(100*photonEnergy0)-1);
   G4double a1=0, a2=0, a3=0,a4=0;
   for (G4int i=0;i<=180;++i)
     {
@@ -315,7 +315,7 @@ void G4JAEAPolarizedElasticScatteringModel::SampleSecondaries(
   G4double theta = CLHEP::pi*GenThetaDist.shoot();
   //G4double theta =45.*CLHEP::pi/180.;
   //Theta is in degree to call scattering amplitudes
-  G4int theta_in_degree =round(theta*180./CLHEP::pi);
+  G4int theta_in_degree =(G4int)round(theta*180./CLHEP::pi);
 
   //theta_in_degree=45;
 

@@ -344,7 +344,7 @@ G4double G4GoudsmitSaundersonTable::SampleGSSRCosTheta(const GSMSCAngularDtr *gs
   G4double delta  = 1.0/ndatm1;
   // determine lower cumulative bin inidex
   G4double rndm   = G4UniformRand();
-  G4int indxl     = rndm*ndatm1;
+  G4int indxl     = (G4int)(rndm*ndatm1);
   G4double  aval  = rndm-indxl*delta;
   G4double  dum0  = delta*aval;
 

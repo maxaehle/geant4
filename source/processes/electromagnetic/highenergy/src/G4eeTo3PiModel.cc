@@ -160,8 +160,8 @@ void G4eeTo3PiModel::SampleSecondaries(std::vector<G4DynamicParticle*>* newp,
     G4double pz = px1*py2 - px2*py1;
 
     gg = (px*px + py*py + pz*pz)*
-      norm( 1.0/cross->DpRho(m01) +  1.0/cross->DpRho(m02)
-	    + 1.0/cross->DpRho(m12) );
+      norm( ((G4double)1.0)/cross->DpRho(m01) +  ((G4double)1.0)/cross->DpRho(m02)
+            + ((G4double)1.0)/cross->DpRho(m12) );
 
     if(gg > gmax) {
       G4cout << "G4eeTo3PiModel::SampleSecondaries WARNING matrix element g= "

@@ -467,7 +467,7 @@ G4VParticleChange* G4Scintillation::PostStepDoIt(const G4Track& aTrack,
       }
       else
       {
-        numPhot = yield1 / sum_yields * fNumPhotons;
+        numPhot = (size_t)(yield1 / sum_yields * fNumPhotons);
       }
       scintTime = MPT->GetConstProperty(kSCINTILLATIONTIMECONSTANT1);
       if(fFiniteRiseTime)
@@ -483,11 +483,11 @@ G4VParticleChange* G4Scintillation::PostStepDoIt(const G4Track& aTrack,
       // to be consistent with old version (due to G4double->int conversion)
       if(N_timeconstants == 2)
       {
-        numPhot = fNumPhotons - numPhot;
+        numPhot = (size_t)(fNumPhotons - numPhot);
       }
       else
       {
-        numPhot = yield2 / sum_yields * fNumPhotons;
+        numPhot = (size_t)(yield2 / sum_yields * fNumPhotons);
       }
       scintTime = MPT->GetConstProperty(kSCINTILLATIONTIMECONSTANT2);
       if(fFiniteRiseTime)
@@ -500,7 +500,7 @@ G4VParticleChange* G4Scintillation::PostStepDoIt(const G4Track& aTrack,
     }
     else if(scnt == 2)
     {
-      numPhot   = yield3 / sum_yields * fNumPhotons;
+      numPhot   = (size_t)(yield3 / sum_yields * fNumPhotons);
       scintTime = MPT->GetConstProperty(kSCINTILLATIONTIMECONSTANT3);
       if(fFiniteRiseTime)
       {

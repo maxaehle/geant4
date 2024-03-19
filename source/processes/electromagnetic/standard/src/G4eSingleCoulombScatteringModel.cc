@@ -182,7 +182,7 @@ G4double G4eSingleCoulombScatteringModel::ComputeCrossSectionPerAtom(
   DefineMaterial(CurrentCouple());
 
   //Total Cross section
-  Mottcross->SetupKinematic(kinEnergy, Z);
+  Mottcross->SetupKinematic(kinEnergy, (G4int)Z);
   cross = Mottcross->NuclearCrossSection(FormFactor,XSectionModel);
 
   //cout<< "Compute Cross Section....cross "<<G4BestUnit(cross,"Surface") << " cm2 "<< cross/cm2 <<" Z: "<<Z<<" kinEnergy: "<<kinEnergy<<endl;

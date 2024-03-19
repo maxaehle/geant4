@@ -206,11 +206,11 @@ G4double G4GaussXTRadiator::GetStackFactor(G4double energy,
   
   // G4complex F1 = ( 1.0 - Ha ) * ( 1.0 - Hb ) * ( 1.0 - Hs ) * G4double(fPlateNumber) * D;
   
-  G4complex F1 = ( 1.0 - Ha ) * ( 1.0 - Hb ) * nn / ( 1. - H );
+  G4complex F1 = ( G4double(1.) - Ha ) * ( G4double(1.) - Hb ) * nn / ( G4double(1.) - H );
   
   // G4complex F2 = ( 1.0 - Ha ) * ( 1.0 - Ha ) * Hb * ( 1.0 - Hs ) * ( 1.0 - Hs ) * (1.0 - std::exp( -0.5 * fPlateNumber * sigma) ) * D * D;
 
-  G4complex F2 = ( 1.0 - Ha ) * ( 1.0 - Ha ) * Hb * ( 1. - Hn ) / ( 1. - H ) / ( 1. - H );
+  G4complex F2 = ( G4double(1.) - Ha ) * ( G4double(1.) - Ha ) * Hb * ( G4double(1.) - Hn ) / ( G4double(1.) - H ) / ( G4double(1.) - H );
   
   G4complex R = (F1 + F2) * OneInterfaceXTRdEdx(energy, gamma, varAngle);
   

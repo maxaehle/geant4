@@ -717,7 +717,7 @@ G4bool G4MuPairProductionModel::RetrieveTables()
       delete pv;
       return false; 
     }
-    fElementData->InitialiseForElement(Z, pv);
+    fElementData->InitialiseForElement((G4int)Z, pv);
   }
   return true;
 }

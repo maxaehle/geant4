@@ -542,7 +542,7 @@ G4double G4AtimaEnergyLossModel::sezi_dedx_e(const G4double zp, const G4double e
 G4double G4AtimaEnergyLossModel::sezi_p_se(const G4double energy, const G4double at, const G4double zt){
   G4double sp = 0.;
   G4double e = 1000*energy; //e in keV/u
-  G4int i = zt - 1;
+  G4int i = (G4int)(zt - 1);
     
   if(e<=25)e=25;
    G4double sl = (proton_stopping_coef[i][0]*g4calc->powA(e,proton_stopping_coef[i][1])) + (proton_stopping_coef[i][2]*g4calc->powA(e,proton_stopping_coef[i][3]));

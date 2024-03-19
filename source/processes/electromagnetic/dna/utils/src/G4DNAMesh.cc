@@ -130,20 +130,20 @@ void G4DNAMesh::SetVoxelMapList(const Key& key, G4Voxel::MapList&& mapList)
 
 G4Voxel::Index G4DNAMesh::GetIndex(const G4ThreeVector& position) const
 {
-  int dx = std::floor((position.x() - fpBoundingMesh->Getxlo()) / fResolution);
-  int dy = std::floor((position.y() - fpBoundingMesh->Getylo()) / fResolution);
-  int dz = std::floor((position.z() - fpBoundingMesh->Getzlo()) / fResolution);
+  int dx = (int)std::floor((position.x() - fpBoundingMesh->Getxlo()) / fResolution);
+  int dy = (int)std::floor((position.y() - fpBoundingMesh->Getylo()) / fResolution);
+  int dz = (int)std::floor((position.z() - fpBoundingMesh->Getzlo()) / fResolution);
   assert(dx >= 0 && dy >= 0 && dz >= 0);
   return G4Voxel::Index{ dx, dy, dz };
 }
 G4Voxel::Index G4DNAMesh::GetIndex(const Index& index, int pixels) const
 {
   int xmax =
-    std::floor((fpBoundingMesh->Getxhi() - fpBoundingMesh->Getxlo()) / fResolution);
+    (int)std::floor((fpBoundingMesh->Getxhi() - fpBoundingMesh->Getxlo()) / fResolution);
   int ymax =
-    std::floor((fpBoundingMesh->Getyhi() - fpBoundingMesh->Getylo()) / fResolution);
+    (int)std::floor((fpBoundingMesh->Getyhi() - fpBoundingMesh->Getylo()) / fResolution);
   int zmax =
-    std::floor((fpBoundingMesh->Getzhi() - fpBoundingMesh->Getzlo()) / fResolution);
+    (int)std::floor((fpBoundingMesh->Getzhi() - fpBoundingMesh->Getzlo()) / fResolution);
   int dx = (int) (index.x * pixels / xmax);
   int dy = (int) (index.y * pixels / ymax);
   int dz = (int) (index.z * pixels / zmax);
@@ -166,9 +166,9 @@ G4DNABoundingBox G4DNAMesh::GetBoundingBox(const Index& index)
 G4Voxel::Index G4DNAMesh::GetIndex(Key key) const
 {
   G4int xmax =
-    std::floor((fpBoundingMesh->Getxhi() - fpBoundingMesh->Getxlo()) / fResolution);
+    (G4int)std::floor((fpBoundingMesh->Getxhi() - fpBoundingMesh->Getxlo()) / fResolution);
   G4int ymax =
-    std::floor((fpBoundingMesh->Getyhi() - fpBoundingMesh->Getylo()) / fResolution);
+    (G4int)std::floor((fpBoundingMesh->Getyhi() - fpBoundingMesh->Getylo()) / fResolution);
   G4int id = key;
   G4int x_ = id % xmax;
   id /= xmax;
@@ -349,5 +349,5 @@ G4DNAMesh::Key G4DNAMesh::GetKey(const G4ThreeVector& position) const
     std::floor((fpBoundingMesh->Getxhi() - fpBoundingMesh->Getxlo()) / fResolution);
   auto ymax =
     std::floor((fpBoundingMesh->Getyhi() - fpBoundingMesh->Getylo()) / fResolution);
-  return dz * ymax * xmax + dy * xmax + dx;
+  return (unsigned int)(dz * ymax * xmax + dy * xmax + dx);
 }

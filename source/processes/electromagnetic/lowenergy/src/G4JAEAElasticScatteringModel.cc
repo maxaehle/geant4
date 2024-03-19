@@ -328,7 +328,7 @@ void G4JAEAElasticScatteringModel::SampleSecondaries(
   const G4Element* elm = SelectRandomAtom(couple,particle,photonEnergy0);
   G4int Z = G4lrint(elm->GetZ());
 
-  G4int energyindex=round(100*photonEnergy0)-1;
+  G4int energyindex=(G4int)(round(100*photonEnergy0)-1);
   /*
     Getting the normalized probablity distrbution function and
     normalization factor to create the probability distribution function

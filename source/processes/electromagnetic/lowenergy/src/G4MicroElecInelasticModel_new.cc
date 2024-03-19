@@ -687,7 +687,7 @@ void G4MicroElecInelasticModel_new::SampleSecondaries(std::vector<G4DynamicParti
       //if (k<bindingEnergy) return;
       if (k<limitEnergy) return;
       //	G4cout << currentMaterial << G4endl;
-      G4int Z = currentMaterialStructure->GetZ(Shell);     
+      G4int Z = (G4int)currentMaterialStructure->GetZ(Shell);
       G4int shellEnum = currentMaterialStructure->GetEADL_Enumerator(Shell);
       if (currentMaterialStructure->IsShellWeaklyBound(Shell)) { shellEnum = -1; }
       

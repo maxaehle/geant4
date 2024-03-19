@@ -146,7 +146,7 @@ G4double G4XTRRegularRadModel::GetStackFactor(G4double energy, G4double gamma,
   G4complex H  = Ha * Hb;
   G4complex Hs = std::conj(H);
 
-  G4complex F2 = (1.0 - Ha) * (Qa - Ha) * Hb * (1.0 - Hs) * (Q - Hs);
+  G4complex F2 = ((G4double)1.0 - Ha) * (Qa - Ha) * Hb * ((G4double)1.0 - Hs) * (Q - Hs);
   F2 *= std::pow(Q, G4double(fPlateNumber)) - std::pow(H, fPlateNumber);
 
   G4double result = (1. - std::pow(Q, G4double(fPlateNumber))) / (1. - Q);

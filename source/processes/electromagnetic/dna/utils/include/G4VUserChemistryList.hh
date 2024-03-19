@@ -1,4 +1,5 @@
 #include "CommonHeader.h"
+#include "G4Types.hh"
 
 //
 // ********************************************************************
@@ -95,7 +96,7 @@ public:
 
 protected:
   void RegisterTimeStepModel(G4VITStepModel* timeStepModel,
-                             G4double startingTime = 0);
+                             G4double startingTime = (G4double)0.);
   void BuildPhysicsTable(G4MoleculeDefinition*);
 
   int verboseLevel;

@@ -148,7 +148,7 @@ void G4WaterStopping::Initialise(G4EmCorrections* corr)
 
   if(nullptr != corr) {
     for(G4int i=0; i<17; ++i) {
-      corr->AddStoppingData(Z[i], A[i], "G4_WATER", dedx[i]);
+      corr->AddStoppingData(Z[i], (G4int)A[i], "G4_WATER", dedx[i]);
     }
   }
 }

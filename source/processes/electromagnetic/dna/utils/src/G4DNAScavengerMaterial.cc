@@ -218,7 +218,7 @@ void G4DNAScavengerMaterial::Reset()
     fScavengerTable[containedConf] =
       floor(Avogadro * concentration * pConfinedBox->Volume());
     fCounterMap[containedConf][1 * picosecond] =
-      floor(Avogadro * concentration * pConfinedBox->Volume());
+      (G4int)floor(Avogadro * concentration * pConfinedBox->Volume());
   }
   PrintInfo();
 }
@@ -254,7 +254,7 @@ void G4DNAScavengerMaterial::AddAMoleculeAtTime(
                                G4::MoleculeCounter::TimePrecision::fPrecision)
     {
       G4double newValue            = end->second + number;
-      counterMap_i->second[time] = newValue;
+      counterMap_i->second[time] = (G4int)newValue;
       if(newValue != (floor)(fScavengerTable[molecule]))  // protection
       {
         assert(false);
@@ -345,7 +345,7 @@ void G4DNAScavengerMaterial::RemoveAMoleculeAtTime(
       G4Exception("G4DNAScavengerMaterial::RemoveAMoleculeAtTime", "N_INF_0",
                   FatalException, errMsg);
     }
-    nbMolPerTime[time] = finalN;
+    nbMolPerTime[time] = (G4int)finalN;
 
     if(finalN != (floor)(fScavengerTable[pMolecule]))  // protection
     {

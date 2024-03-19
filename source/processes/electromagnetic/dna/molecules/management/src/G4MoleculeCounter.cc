@@ -243,7 +243,7 @@ void G4MoleculeCounter::AddAMoleculeAtTime(Reactant* molecule,
             // Case 2 = new time is about the same as the last recorded one
         {
             G4double newValue = end->second + number;
-            counterMap_i->second[time] = newValue;
+            counterMap_i->second[time] = (G4int)newValue;
         }
         else
         {
@@ -363,7 +363,7 @@ void G4MoleculeCounter::RemoveAMoleculeAtTime(const G4MolecularConfiguration* pM
                         FatalException, errMsg);
         }
 
-        nbMolPerTime[time] = finalN;
+        nbMolPerTime[time] = (G4int)finalN;
     }
 }
 
