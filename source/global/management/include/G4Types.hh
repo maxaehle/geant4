@@ -86,7 +86,12 @@
 //template<typename T>
 //T ForwardIfPossible(T x){ return x; }
 using G4double  = Forward;
-using G4float   = Forward;
+//using G4float   = Forward;
+struct G4float : public Forward {
+  template<typename...Args>
+  G4float(Args&&...args): Forward(std::forward<Args>(args)...) {}
+};
+
 using G4int     = int;
 using G4bool    = bool;
 using G4long    = long;
