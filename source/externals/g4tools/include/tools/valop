@@ -297,7 +297,7 @@ public:
     return *this;
   }
 public:
-  static valop def() {return valop(REAL,0.0);}
+  static valop def() {return valop(REAL,(G4double)0.0);}
 
   valop* copy() const {return new valop(*this);}
 

@@ -72,7 +72,7 @@ public:
     return !operator==(a_value);
   }
 
-  operator const T& () const {return m_value;}
+  //operator const T& () const {return m_value;}
   operator T() {return m_value;}
 
 /* does not work with qrot

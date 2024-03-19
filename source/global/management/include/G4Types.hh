@@ -90,6 +90,7 @@ using G4double  = Forward;
 struct G4float : public Forward {
   template<typename...Args>
   G4float(Args&&...args): Forward(std::forward<Args>(args)...) {}
+  G4float() = default;
 };
 // math functions to make mat4f etc. happy
 inline G4float cosf(G4float a){
@@ -109,6 +110,12 @@ inline G4float fabsf(G4float a){
 }
 inline G4float acosf(G4float a){
   return {acos(a.val), -1./sqrt(1-a.val*a.val) * a.dot};
+}
+inline G4float floorf(G4float a){
+  return {floor(a.val), 0.0};
+}
+inline G4float ceilf(G4float a){
+  return {ceil(a.val), 0.0};
 }
 
 

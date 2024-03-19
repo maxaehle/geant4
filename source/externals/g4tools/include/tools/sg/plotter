@@ -887,7 +887,7 @@ public: //style
       } else if(key=="value_bins_with_entries") {
         G4float v;
         if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
-        value_bins_with_entries = v;
+        value_bins_with_entries = (passivefloat)v;
       } else if(key=="infos_width") {
         G4float v;
         if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}

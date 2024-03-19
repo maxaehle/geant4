@@ -60,7 +60,7 @@ public:
   ,m_camera_znear(1)
   ,m_camera_zfar(10)
   ,m_camera_position(vec3f(0,0,1))
-  ,m_camera_orientation(rotf(vec3f(0,0,1),0))
+  ,m_camera_orientation(rotf(vec3f(0,0,1),(G4float)0.))
   //,m_camera_near_height(0)
   ,m_camera_lrbt(0,0,0,0)
   {
