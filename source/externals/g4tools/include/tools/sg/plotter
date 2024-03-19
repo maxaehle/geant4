@@ -5683,7 +5683,7 @@ protected: //vis bins
     if(m_shape==xyz) zz = -depth*0.5f;
 
    {rgba* mat = new rgba();
-    if(m_background_style.line_width) { //there is a border.
+    if((G4float)m_background_style.line_width) { //there is a border.
       mat->color = m_background_style.color; //then border color !
     } else {
       mat->color = m_background_style.back_color;
@@ -5701,7 +5701,7 @@ protected: //vis bins
     vtxs->add( w2, h2,zz);
     vtxs->add(-w2, h2,zz);}
 
-    if(m_background_style.line_width) { //border
+    if((G4float)m_background_style.line_width) { //border
       //WARNING : line_width should be in percent of width.
 
       //NOTE : border is done by drawing a front smaller polygon.

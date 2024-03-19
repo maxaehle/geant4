@@ -192,7 +192,7 @@ public:
   ,divisions(510) //Same as ROOT/TAttAxis
   ,rotation_steps(24) //Same as SbPolyhedron default.
   ,spacing(0.05F)
-  ,angle(fpi()/4.0F)
+  ,angle((G4float)(fpi()/4.0F))
   ,scale(1)
   ,offset(0)
   ,strip_width(0)

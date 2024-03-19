@@ -46,9 +46,9 @@ inline void hls_to_rgb(T hue,T light,T satur,T& a_r,T& a_g,T& a_b){
   rm1 = 2*rl - rm2;
 
   if (!rs) { a_r = rl; a_g = rl; a_b = rl; return; }
-  a_r = hls_to_rgb2(rm1, rm2, rh+120);
+  a_r = hls_to_rgb2(rm1, rm2, (T)(rh+120));
   a_g = hls_to_rgb2(rm1, rm2, rh);
-  a_b = hls_to_rgb2(rm1, rm2, rh-120);
+  a_b = hls_to_rgb2(rm1, rm2, (T)(rh-120));
 }
 
 template <class T>
