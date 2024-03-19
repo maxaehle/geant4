@@ -122,7 +122,7 @@ void G4P2Messenger::CreateP2Cmd()
   auto p2yValMax0 = new G4UIparameter("yvalMax0", 'd', true);
   p2yValMax0->SetGuidance("Maximum y-value, expressed in unit (default = 1.)");
   p2yValMax0->SetGuidance("Can be reset with /analysis/p2/set command");
-  p2yValMax0->SetDefaultValue(1.);
+  p2yValMax0->SetDefaultValue((G4double)1.);
 
   auto p2yValUnit0 = new G4UIparameter("yvalUnit0", 's', true);
   p2yValUnit0->SetGuidance("The unit applied to filled y-values and yvalMin0, yvalMax0");

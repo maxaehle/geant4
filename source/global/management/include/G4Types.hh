@@ -95,7 +95,7 @@ struct G4float : public Forward {
 inline G4float cosf(G4float a){
   return {cos(a.val), -sin(a.val) * a.dot};
 }
-inline G4float sin(G4float a){
+inline G4float sinf(G4float a){
   return {sin(a.val), cos(a.val) * a.dot};
 }
 inline G4float sqrtf(G4float a){
@@ -104,6 +104,13 @@ inline G4float sqrtf(G4float a){
 inline G4float atan2f(G4float a, G4float b){
   return {atan2(a.val,b.val), -b.val/(a.val*a.val + b.val*b.val) * a.dot + a.val/(a.val*a.val + b.val*b.val) * b.dot};
 }
+inline G4float fabsf(G4float a){
+  return {fabs(a.val), (a.val>0?1.:-1.) * a.dot};
+}
+inline G4float acosf(G4float a){
+  return {acos(a.val), -1./sqrt(1-a.val*a.val) * a.dot};
+}
+
 
 using G4int     = int;
 using G4bool    = bool;

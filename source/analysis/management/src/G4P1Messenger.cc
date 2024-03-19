@@ -83,12 +83,12 @@ void G4P1Messenger::CreateP1Cmd()
   auto p1xValMin0 = new G4UIparameter("xvalMin0", 'd', true);
   p1xValMin0->SetGuidance("Minimum x-value, expressed in unit (default = 0.)");
   p1xValMin0->SetGuidance("Can be reset with /analysis/p1/set command");
-  p1xValMin0->SetDefaultValue(0.);
+  p1xValMin0->SetDefaultValue((G4double)0.);
 
   auto p1xValMax0 = new G4UIparameter("xvalMax0", 'd', true);
   p1xValMax0->SetGuidance("Maximum x-value, expressed in unit (default = 1.)");
   p1xValMax0->SetGuidance("Can be reset with /analysis/p1/set command");
-  p1xValMax0->SetDefaultValue(1.);
+  p1xValMax0->SetDefaultValue((G4double)1.);
 
   auto p1xValUnit0 = new G4UIparameter("xvalUnit0", 's', true);
   p1xValUnit0->SetGuidance("The unit applied to filled x-values and xvalMin0, xvalMax0");
@@ -114,12 +114,12 @@ void G4P1Messenger::CreateP1Cmd()
   auto p1yValMin0 = new G4UIparameter("yvalMin0", 'd', true);
   p1yValMin0->SetGuidance("Minimum y-value, expressed in unit (default = 0.)");
   p1yValMin0->SetGuidance("Can be reset with /analysis/p1/set command");
-  p1yValMin0->SetDefaultValue(0.);
+  p1yValMin0->SetDefaultValue((G4double)0.);
 
   auto p1yValMax0 = new G4UIparameter("yvalMax0", 'd', true);
   p1yValMax0->SetGuidance("Maximum y-value, expressed in unit (default = 1.)");
   p1yValMax0->SetGuidance("Can be reset with /analysis/p1/set command");
-  p1yValMax0->SetDefaultValue(1.);
+  p1yValMax0->SetDefaultValue((G4double)1.);
 
   auto p1yValUnit0 = new G4UIparameter("yvalUnit0", 's', true);
   p1yValUnit0->SetGuidance("The unit applied to filled y-values and yvalMin0, yvalMax0");

@@ -69,7 +69,7 @@ inline G4double dsqrt(const G4double& a_x) {return ::sqrt(a_x);}
 
 //long G4double
 #ifndef ANDROID
-inline long G4double ldfabs(const long G4double& a_x) {return ::fabsl(a_x);}
+inline G4double ldfabs(const G4double& a_x) {return ::fabs(a_x);}
 #endif
 
 inline bool dpow(const G4double& a_x,const G4double& a_y,G4double& a_v) {
