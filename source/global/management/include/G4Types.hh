@@ -91,6 +91,19 @@ struct G4float : public Forward {
   template<typename...Args>
   G4float(Args&&...args): Forward(std::forward<Args>(args)...) {}
 };
+// math functions to make mat4f etc. happy
+inline G4float cosf(G4float a){
+  return {cos(a.val), -sin(a.val) * a.dot};
+}
+inline G4float sin(G4float a){
+  return {sin(a.val), cos(a.val) * a.dot};
+}
+inline G4float sqrtf(G4float a){
+  return {sqrt(a.val), 0.5/sqrt(a.val) * a.dot};
+}
+inline G4float atan2f(G4float a, G4float b){
+  return {atan2(a.val,b.val), -b.val/(a.val*a.val + b.val*b.val) * a.dot + a.val/(a.val*a.val + b.val*b.val) * b.dot};
+}
 
 using G4int     = int;
 using G4bool    = bool;
