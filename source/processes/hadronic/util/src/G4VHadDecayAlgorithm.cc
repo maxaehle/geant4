@@ -71,12 +71,12 @@ IsDecayAllowed(G4double initialMass,
 	       const std::vector<G4double>& masses) const {
   G4bool okay =
     (initialMass > 0. && masses.size() >= 2 &&
-     initialMass >= std::accumulate(masses.begin(),masses.end(),0.));
+     initialMass >= std::accumulate(masses.begin(),masses.end(),(G4double)0.));
 
   if (verboseLevel) {
     G4cout << GetName() << "::IsDecayAllowed? initialMass " << initialMass
 	   << " " << masses.size() << " masses sum "
-	   << std::accumulate(masses.begin(),masses.end(),0.) << G4endl;
+	   << std::accumulate(masses.begin(),masses.end(),(G4double)0.) << G4endl;
 
     if (verboseLevel>1) PrintVector(masses," ",G4cout);
 

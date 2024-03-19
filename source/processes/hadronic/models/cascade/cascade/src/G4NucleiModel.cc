@@ -381,7 +381,7 @@ void G4NucleiModel::generateModel(G4int a, G4int z) {
   zone_potentials.push_back(hp);
 
   nuclei_radius = zone_radii.back();
-  nuclei_volume = std::accumulate(zone_volumes.begin(),zone_volumes.end(),0.);
+  nuclei_volume = std::accumulate(zone_volumes.begin(),zone_volumes.end(),(G4double)0.);
 
   if (verboseLevel > 3) printModel();
 }

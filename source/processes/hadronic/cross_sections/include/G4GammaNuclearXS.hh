@@ -123,7 +123,7 @@ private:
   static const G4int MAXZGAMMAXS = 95;
   static G4ElementData* data;
   // Upper limit of the linear transition between IAEA database and CHIPS model
-  static const G4int rTransitionBound = 150.*CLHEP::MeV; 
+  static const G4int rTransitionBound = (150.*CLHEP::MeV).val; // TODO cast is not constexpr
   // The list of elements with non-linear parametrisation for better precision 
   const G4int freeVectorException[11] = {4, 6, 7, 8, 27, 39, 45, 65, 67, 69, 73}; 
   // CHIPS photonuclear model had a problem with high energy parametrisation 

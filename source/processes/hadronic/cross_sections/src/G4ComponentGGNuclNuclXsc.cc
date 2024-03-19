@@ -242,7 +242,7 @@ G4double G4ComponentGGNuclNuclXsc::ComputeCoulombBarier(
 		     G4double pTkin, G4int Z, G4int A,
 		     G4double pR, G4double tR)
 {
-  G4int pZ = aParticle->GetPDGCharge()*inve;
+  G4int pZ = (G4int)(aParticle->GetPDGCharge()*inve);
   G4double pM = aParticle->GetPDGMass();
   G4double tM = G4NucleiProperties::GetNuclearMass(A, Z); 
   G4double pElab = pTkin + pM;

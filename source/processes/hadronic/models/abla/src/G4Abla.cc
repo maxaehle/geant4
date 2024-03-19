@@ -6038,7 +6038,7 @@ void G4Abla::FillData(G4int IMULTBU,G4int IEV_TAB){
  
     G4int iz = nint(EV_TAB[i][0]);
     G4int ia = nint(EV_TAB[i][1]);
-    G4int is = EV_TAB[i][5];
+    G4int is = (G4int)EV_TAB[i][5];
 
     varntp->itypcasc[intp] = 0;
 
@@ -7874,8 +7874,8 @@ G4double G4Abla::gethyperbinding(G4double A, G4double Z, G4int ny){
  k = 17.,
  c = 30.,
  D = 0.;
- if(mod(N,2) == 1 && mod(Z,2) == 1)D = -12./std::sqrt(A);
- if(mod(N,2) == 0 && mod(Z,2) == 0)D = 12./std::sqrt(A);
+ if(mod((G4int)N,2) == 1 && mod((G4int)Z,2) == 1)D = -12./std::sqrt(A);
+ if(mod((G4int)N,2) == 0 && mod((G4int)Z,2) == 0)D = 12./std::sqrt(A);
 //
  G4double deltanew = (1.-std::exp(-1.*A/c))*D;
 //
@@ -8503,7 +8503,7 @@ c         versa.  */
       }
   // even-odd effect
   // Parametrization from Rejmund et al. 
-     if (mod(Z,2.0)== 0)
+     if (mod((G4int)Z,2.0)== 0)
       r_e_o = std::pow(10.0,-0.0170 * (E_saddle_scission + Eld)*(E_saddle_scission + Eld));
      else
       r_e_o = 0.0;
@@ -9157,7 +9157,7 @@ G4double G4Abla::eflmac_profi(G4double ia, G4double iz)
 
   z   = G4double(iz);
   a   = G4double(ia);
-  in  = ia - iz;                                                       
+  in  = (G4int)(ia - iz);
   n   = G4double(in);
 
   

@@ -65,7 +65,7 @@ public:
   { 
     Clean(); 
     fPolarization.resize(1); 
-    fPolarization[0].push_back(1.0); 
+    fPolarization[0].push_back((G4double)1.0);
   }
   
   inline void SetPolarization(std::vector< std::vector<G4complex> >& p) 

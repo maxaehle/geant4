@@ -255,7 +255,7 @@ G4ElementaryParticleCollider::collide(G4InuclParticle* bullet,
     const G4ParticleDefinition* tDef = target->getDefinition();
 
     G4int initBaryonNumber = bDef->GetBaryonNumber() + tDef->GetBaryonNumber();
-    G4int initCharge = bullet->getCharge() + target->getCharge();
+    G4int initCharge = (G4int)(bullet->getCharge() + target->getCharge());
     G4int initStrangeness = bDef->GetQuarkContent(3) - bDef->GetAntiQuarkContent(3) +
                             tDef->GetQuarkContent(3) - tDef->GetAntiQuarkContent(3);
 
@@ -265,7 +265,7 @@ G4ElementaryParticleCollider::collide(G4InuclParticle* bullet,
 
     for (ipart = particles.begin(); ipart != particles.end(); ipart++) {
       finalBaryonNumber += ipart->baryon();
-      finalCharge += ipart->getCharge();
+      finalCharge += (G4int)(ipart->getCharge());
       finalStrangeness += ipart->getStrangeness();
     }
 

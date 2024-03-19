@@ -894,7 +894,7 @@ inline G4complex G4hhElastic::GetAQQ()
 
 inline G4complex G4hhElastic::GetAqQ()
 {
-  G4complex z = 0.5*( GetAqq() + GetAQQ() );
+  G4complex z = G4double(0.5)*( GetAqq() + GetAQQ() );
   return z;
 }
 
@@ -904,7 +904,7 @@ inline G4complex G4hhElastic::GetAqQ()
 
 inline G4double G4hhElastic::GetCofS1()
 {
-  G4complex z = 1./( GetAqQ() + 4.*fLambda/9. );
+  G4complex z = G4double(1.)/( GetAqQ() + 4.*fLambda/9. );
   G4double result = real(z);
   result /= 4.*CLHEP::pi*CLHEP::hbarc*CLHEP::hbarc;
   result *= fSigmaTot*fCofF2;
@@ -917,7 +917,7 @@ inline G4double G4hhElastic::GetCofS1()
 
 inline G4double G4hhElastic::GetCofS2()
 {
-  G4complex z = 1./( GetAqq() + GetAqQ() - 4.*fLambda/9. );
+  G4complex z = G4double(1.)/( GetAqq() + GetAqQ() - 4.*fLambda/9. );
   G4double result = real(z);
   result /= 4.*CLHEP::pi*CLHEP::hbarc*CLHEP::hbarc;
   result *= fSigmaTot*fCofF3;
@@ -930,7 +930,7 @@ inline G4double G4hhElastic::GetCofS2()
 
 inline G4double G4hhElastic::GetCofS3()
 {
-  G4complex z = 1./( GetAQQ() + GetAqQ() + 2.*fLambda/9. );
+  G4complex z = G4double(1.)/( GetAQQ() + GetAqQ() + 2.*fLambda/9. );
   G4double result = real(z);
   result /= 4.*CLHEP::pi*CLHEP::hbarc*CLHEP::hbarc;
   result *= fSigmaTot*fCofF3;
@@ -992,8 +992,8 @@ inline void G4hhElastic::CalculateBQ(G4double b1)
   // roots of the incomplete 3rd equation
 
   G4complex y1 = A + B;
-  G4complex y2 = -0.5*(A + B) + 0.5*std::sqrt(3.)*(A - B)*G4complex(0.,1.);
-  G4complex y3 = -0.5*(A + B) - 0.5*std::sqrt(3.)*(A - B)*G4complex(0.,1.);
+  G4complex y2 = -G4double(0.5)*(A + B) + G4double(0.5)*std::sqrt(3.)*(A - B)*G4complex(0.,1.);
+  G4complex y3 = -G4double(0.5)*(A + B) - G4double(0.5)*std::sqrt(3.)*(A - B)*G4complex(0.,1.);
  
   G4complex x1 = y1 - b/a/3.;
   G4complex x2 = y2 - b/a/3.;
@@ -1061,10 +1061,10 @@ inline G4complex G4hhElastic::GetF2(G4double t)
   G4double p = std::sqrt(0.25*fSpp - CLHEP::proton_mass_c2*CLHEP::proton_mass_c2);
   G4double  k   = p/CLHEP::hbarc;
   G4complex z1  = GetAqq()*GetAQQ() - 16.*fLambda*fLambda/81.;
-            z1 /= 2.*(GetAqQ() + 4.*fLambda/9.);
+            z1 /= G4double(2.)*(GetAqQ() + 4.*fLambda/9.);
   G4complex exp1 = std::exp(-z1*t);
 
-  G4complex z2 = 0.5*( GetAqQ() - 4.*fLambda/9.);
+  G4complex z2 = G4double(0.5)*( GetAqQ() - 4.*fLambda/9.);
 
   G4complex exp2 = std::exp(-z2*t);
 

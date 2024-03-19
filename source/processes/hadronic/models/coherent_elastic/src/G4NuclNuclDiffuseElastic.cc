@@ -2014,9 +2014,9 @@ G4complex G4NuclNuclDiffuseElastic::GammaLogarithm(G4complex zz)
                              24.01409824083091,      -1.231739572450155,
                               0.1208650973866179e-2, -0.5395239384953e-5  } ;
   G4int j;
-  G4complex z = zz - 1.0;
-  G4complex tmp = z + 5.5;
-  tmp -= (z + 0.5) * std::log(tmp);
+  G4complex z = zz - G4double(1.0);
+  G4complex tmp = z + G4double(5.5);
+  tmp -= (z + G4double(0.5)) * std::log(tmp);
   G4complex ser = G4complex(1.000000000190015,0.);
 
   for ( j = 0; j <= 5; j++ )
@@ -2024,7 +2024,7 @@ G4complex G4NuclNuclDiffuseElastic::GammaLogarithm(G4complex zz)
     z += 1.0;
     ser += cof[j]/z;
   }
-  return -tmp + std::log(2.5066282746310005*ser);
+  return -tmp + std::log(((G4double)2.5066282746310005)*ser);
 }
 
 /////////////////////////////////////////////////////////////
