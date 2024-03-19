@@ -16,27 +16,27 @@ namespace sg {
 class plots : public node {
   TOOLS_NODE(plots,tools::sg::plots,node)
 public:
-  sf<float> width;
-  sf<float> height;
+  sf<G4float> width;
+  sf<G4float> height;
   sf<unsigned int> cols; //must never be 0.
   sf<unsigned int> rows; //must never be 0.
   sf<bool> view_border; //current plotter border
-  sf<float> plotter_scale; //scale factor applied to each plotter.
+  sf<G4float> plotter_scale; //scale factor applied to each plotter.
 
   sf<bool> border_visible;
-  sf<float> border_width;
-  sf<float> border_height;
-  sf<float> border_z;
-  sf<float> border_scale;
-  sf_vec<colorf,float> border_color;
+  sf<G4float> border_width;
+  sf<G4float> border_height;
+  sf<G4float> border_z;
+  sf<G4float> border_scale;
+  sf_vec<colorf,G4float> border_color;
 
   // for gopaw :
-  sf<float> left_margin;
-  sf<float> right_margin;
-  sf<float> top_margin;
-  sf<float> bottom_margin;
-  sf<float> horizontal_spacing;
-  sf<float> vertical_spacing;
+  sf<G4float> left_margin;
+  sf<G4float> right_margin;
+  sf<G4float> top_margin;
+  sf<G4float> bottom_margin;
+  sf<G4float> horizontal_spacing;
+  sf<G4float> vertical_spacing;
 public:
   virtual const desc_fields& node_desc_fields() const {
     TOOLS_FIELD_DESC_NODE_CLASS(tools::sg::plots)
@@ -270,7 +270,7 @@ public:
 
   void adjust_size(unsigned int a_ww,unsigned int a_wh) {
     if(!a_ww||!a_wh) return;
-    float aspect = float(a_ww)/float(a_wh);
+    G4float aspect = G4float(a_ww)/G4float(a_wh);
     width = height * aspect;
   }
 
@@ -401,7 +401,7 @@ public:
 
 /*
   bool find_plotter(unsigned int a_ww,unsigned int a_wh,
-                    float a_x,float a_y,
+                    G4float a_x,G4float a_y,
                     unsigned int& a_index) {
     update_if_touched();
 
@@ -410,28 +410,28 @@ public:
     if(!a_ww) return false;
     if(!a_wh) return false;
 
-    float aspect = float(a_ww)/float(a_wh);
+    G4float aspect = G4float(a_ww)/G4float(a_wh);
 
     // one plotter in pixels :
-    unsigned int rw = (unsigned int)(float(a_ww)/float(cols.value()));
-    unsigned int rh = (unsigned int)(float(a_wh)/float(rows.value()));
-    float ra = float(rw)/float(rh);
+    unsigned int rw = (unsigned int)(G4float(a_ww)/G4float(cols.value()));
+    unsigned int rh = (unsigned int)(G4float(a_wh)/G4float(rows.value()));
+    G4float ra = G4float(rw)/G4float(rh);
 
     // all window wc :
-    float wh_wc = 1;
-    float ww_wc = wh_wc * aspect;
+    G4float wh_wc = 1;
+    G4float ww_wc = wh_wc * aspect;
 
     // plotter size in window wc :
-    float rh_wc = wh_wc/rows;
-    float rw_wc = rh_wc*ra;
+    G4float rh_wc = wh_wc/rows;
+    G4float rw_wc = rh_wc*ra;
 
     unsigned int _number = m_sep.size();
     for(unsigned int index=0;index<_number;index++) {
       unsigned int row = index/cols;
       unsigned int col = index-cols*row;
 
-      float x = -ww_wc*0.5f + col * rw_wc + rw_wc * 0.5f;
-      float y =  wh_wc*0.5f - row * rh_wc - rh_wc * 0.5f;
+      G4float x = -ww_wc*0.5f + col * rw_wc + rw_wc * 0.5f;
+      G4float y =  wh_wc*0.5f - row * rh_wc - rh_wc * 0.5f;
 
       if( ((x-rw_wc*0.5f)<a_x)&&(a_x<(x+rw_wc*0.5f)) &&
           ((y-rh_wc*0.5f)<a_y)&&(a_y<(y+rh_wc*0.5f)) ){
@@ -521,7 +521,7 @@ public:
   //////////////////////////////////////////////////////////////////////
   //// styling methods : ///////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
-  void set_line_width(float a_line_width) {
+  void set_line_width(G4float a_line_width) {
     update_if_touched();
     size_t _number = m_sep.size();
     for(size_t index=0;index<_number;index++) {
@@ -589,27 +589,27 @@ public:
     border_visible = true;
   }
 
-  void adjust_scales(float a_plotter_scale = 1) {
+  void adjust_scales(G4float a_plotter_scale = 1) {
     // Rescale some plotter parameters (for example margins) according to the number of plots.
     // We assume that these parameters had been set previously according to one plot per page.
     // Then this function must be applied after all the styles had been applied (because
     // a plotting style may set these parameters).
 
-    float ww_wc = width.value();
-    float wh_wc = height.value();
-    float rw_wc = ww_wc/cols.value();
-    float rh_wc = wh_wc/rows.value();
+    G4float ww_wc = width.value();
+    G4float wh_wc = height.value();
+    G4float rw_wc = ww_wc/cols.value();
+    G4float rh_wc = wh_wc/rows.value();
 
-    float cooking = 1.2f; //if increased the data area is diminished.
+    G4float cooking = 1.2f; //if increased the data area is diminished.
 
-    float wfac = (rw_wc/ww_wc)*cooking;
-    float hfac = (rh_wc/wh_wc)*cooking;
+    G4float wfac = (rw_wc/ww_wc)*cooking;
+    G4float hfac = (rh_wc/wh_wc)*cooking;
 
-    float label_cooking = 1.6f; //if increased the labels are bigger.
+    G4float label_cooking = 1.6f; //if increased the labels are bigger.
 
     if((cols.value()>=4)&&(cols.value()>rows.value())) label_cooking = 0.9f;
 
-    float title_cooking = 1.1f; //extra title cooking.
+    G4float title_cooking = 1.1f; //extra title cooking.
 
     plotter_scale = a_plotter_scale;
 
@@ -641,16 +641,16 @@ public:
     m_origins.clear();
     m_sizes.clear();
 
-    float wvp = float(a_ww); //pixels.
-    float hvp = float(a_wh); //pixels.
+    G4float wvp = G4float(a_ww); //pixels.
+    G4float hvp = G4float(a_wh); //pixels.
     if( (wvp<=0)||(hvp<=0)||(width.value()<=0)||(height.value()<=0) ) return;
 
     unsigned int _cols = cols.value();
     unsigned int _rows = rows.value();
     if((!_cols)||(!_rows)) return;
 
-    float wdata = (width.value()-left_margin.value()-right_margin.value()-(_cols-1)*horizontal_spacing.value())/_cols;
-    float hdata = (height.value()-bottom_margin.value()-top_margin.value()-(_rows-1)*vertical_spacing.value())/_rows;
+    G4float wdata = (width.value()-left_margin.value()-right_margin.value()-(_cols-1)*horizontal_spacing.value())/_cols;
+    G4float hdata = (height.value()-bottom_margin.value()-top_margin.value()-(_rows-1)*vertical_spacing.value())/_rows;
 
     if((wdata<=0)||(hdata<=0)) return;
 
@@ -658,10 +658,10 @@ public:
     //    wpix = w * wvp pixels
     //    hpix = h * hvp pixels
     //  wpix/hpix = cst = (w * wvp) / (h * hvp) = width / height
-    float h,w,xo,yo;
+    G4float h,w,xo,yo;
     h = w = xo = yo = 0;
-    float waspect = wvp/hvp;
-    float paspect = width.value()/height.value();
+    G4float waspect = wvp/hvp;
+    G4float paspect = width.value()/height.value();
     if(waspect>=paspect) {
       h = 1;
       w = paspect * h * (hvp/wvp);
@@ -673,8 +673,8 @@ public:
       xo = 0;
       yo = (1-h)/2;
     }
-    float xfac = w / width.value();
-    float yfac = h / height.value();
+    G4float xfac = w / width.value();
+    G4float yfac = h / height.value();
 */
 
     unsigned int _num = number();
@@ -683,7 +683,7 @@ public:
       unsigned int row = iregion/_cols;
       unsigned int col = iregion - row * _cols;
 
-      float wr,hr,x,y,lm,rm,bm,tm;
+      G4float wr,hr,x,y,lm,rm,bm,tm;
       wr = hr = x = y = 0;
       lm = rm = bm = tm = 0;
 
@@ -693,9 +693,9 @@ public:
         lm = left_margin.value();
         rm = right_margin.value();
       } else {
-        float wrl = left_margin.value()+wdata+horizontal_spacing.value()/2;
-        float wrr = right_margin.value()+wdata+horizontal_spacing.value()/2;
-        float wri = wdata+horizontal_spacing.value();
+        G4float wrl = left_margin.value()+wdata+horizontal_spacing.value()/2;
+        G4float wrr = right_margin.value()+wdata+horizontal_spacing.value()/2;
+        G4float wri = wdata+horizontal_spacing.value();
         if(col==0) {
           wr = wrl;
           x = 0;
@@ -720,9 +720,9 @@ public:
         tm = top_margin.value();
         bm = bottom_margin.value();
       } else {
-        float hrt = top_margin.value()+hdata+vertical_spacing.value()/2; //top
-        float hrb = bottom_margin.value()+hdata+vertical_spacing.value()/2;	//bottom
-        float hri = hdata+vertical_spacing.value();
+        G4float hrt = top_margin.value()+hdata+vertical_spacing.value()/2; //top
+        G4float hrb = bottom_margin.value()+hdata+vertical_spacing.value()/2;	//bottom
+        G4float hri = hdata+vertical_spacing.value();
         if(row==0) { //top row.
           hr = hrt;
           y = height.value()-hrt;
@@ -757,10 +757,10 @@ public:
       _plotter->bottom_margin = bm;
 
       // ignore margins and spacings :
-      //float wr = w/_cols;
-      //float hr = h/_rows;
-      //float x = xo + col * wr;
-      //float y = yo + (rows-1-row) * hr;
+      //G4float wr = w/_cols;
+      //G4float hr = h/_rows;
+      //G4float x = xo + col * wr;
+      //G4float y = yo + (rows-1-row) * hr;
       //viewportRegion->setPositionPercent(x,y);
       //viewportRegion->setSizePercent(wr,hr);
 
@@ -772,8 +772,8 @@ public:
     m_extras_origins.clear();
     m_extras_sizes.clear();
 
-    float wvp = float(a_ww); //pixels.
-    float hvp = float(a_wh); //pixels.
+    G4float wvp = G4float(a_ww); //pixels.
+    G4float hvp = G4float(a_wh); //pixels.
     if( (wvp<=0)||(hvp<=0)||(width.value()<=0)||(height.value()<=0) ) return;
 
     tools_vforcit(extra,m_extras,it) {
@@ -783,8 +783,8 @@ public:
       unsigned int _rows = _extra.m_rows;
       if((!_cols)||(!_rows)) continue;
 
-      float wdata = (width.value()-left_margin.value()-right_margin.value()-(_cols-1)*horizontal_spacing.value())/_cols;
-      float hdata = (height.value()-bottom_margin.value()-top_margin.value()-(_rows-1)*vertical_spacing.value())/_rows;
+      G4float wdata = (width.value()-left_margin.value()-right_margin.value()-(_cols-1)*horizontal_spacing.value())/_cols;
+      G4float hdata = (height.value()-bottom_margin.value()-top_margin.value()-(_rows-1)*vertical_spacing.value())/_rows;
 
       if((wdata<=0)||(hdata<=0)) continue;
 
@@ -792,7 +792,7 @@ public:
       unsigned int row = iregion/_cols;
       unsigned int col = iregion - row * _cols;
 
-      float wr,hr,x,y,lm,rm,bm,tm;
+      G4float wr,hr,x,y,lm,rm,bm,tm;
       wr = hr = x = y = 0;
       lm = rm = bm = tm = 0;
 
@@ -802,9 +802,9 @@ public:
         lm = left_margin.value();
         rm = right_margin.value();
       } else {
-        float wrl = left_margin.value()+wdata+horizontal_spacing.value()/2;
-        float wrr = right_margin.value()+wdata+horizontal_spacing.value()/2;
-        float wri = wdata+horizontal_spacing.value();
+        G4float wrl = left_margin.value()+wdata+horizontal_spacing.value()/2;
+        G4float wrr = right_margin.value()+wdata+horizontal_spacing.value()/2;
+        G4float wri = wdata+horizontal_spacing.value();
         if(col==0) {
           wr = wrl;
           x = 0;
@@ -829,9 +829,9 @@ public:
         tm = top_margin.value();
         bm = bottom_margin.value();
       } else {
-        float hrt = top_margin.value()+hdata+vertical_spacing.value()/2; //top
-        float hrb = bottom_margin.value()+hdata+vertical_spacing.value()/2;	//bottom
-        float hri = hdata+vertical_spacing.value();
+        G4float hrt = top_margin.value()+hdata+vertical_spacing.value()/2; //top
+        G4float hrb = bottom_margin.value()+hdata+vertical_spacing.value()/2;	//bottom
+        G4float hri = hdata+vertical_spacing.value();
         if(row==0) { //top row.
           hr = hrt;
           y = height.value()-hrt;
@@ -866,10 +866,10 @@ public:
       _plotter->bottom_margin = bm;
 
       // ignore margins and spacings :
-      //float wr = w/_cols;
-      //float hr = h/_rows;
-      //float x = xo + col * wr;
-      //float y = yo + (rows-1-row) * hr;
+      //G4float wr = w/_cols;
+      //G4float hr = h/_rows;
+      //G4float x = xo + col * wr;
+      //G4float y = yo + (rows-1-row) * hr;
       //viewportRegion->setPositionPercent(x,y);
       //viewportRegion->setSizePercent(wr,hr);
 
@@ -975,12 +975,12 @@ protected:
       bool configure = (m_origins.size()==_number)&&(m_sizes.size()==_number)?true:false;
 
       // all window wc :
-      float ww_wc = width;
-      float wh_wc = height;
+      G4float ww_wc = width;
+      G4float wh_wc = height;
 
       // plotter size in window wc :
-      //float rw_wc = ww_wc/cols;
-      //float rh_wc = wh_wc/rows;
+      //G4float rw_wc = ww_wc/cols;
+      //G4float rh_wc = wh_wc/rows;
 
       for(size_t index=0;index<_number;index++) {
         separator* sep = (separator*)m_sep[index];
@@ -1028,7 +1028,7 @@ protected:
     return true;
   }
 
-  static void create_plotter_border(_switch& a_parent,float a_w,float a_h) {
+  static void create_plotter_border(_switch& a_parent,G4float a_w,G4float a_h) {
     a_parent.clear();
 
     group* sep = new group;
@@ -1049,8 +1049,8 @@ protected:
     vtxs->mode = gl::line_strip();
     sep->add(vtxs);
 
-    float dw = a_w*0.5f;
-    float dh = a_h*0.5f;
+    G4float dw = a_w*0.5f;
+    G4float dh = a_h*0.5f;
     vtxs->add(-dw,-dh,0);
     vtxs->add( dw,-dh,0);
     vtxs->add( dw, dh,0);
@@ -1091,21 +1091,21 @@ protected:
       m_border_sep.add(_m);
     }
 
-    float bw = border_width;
-    float bh = border_height;
+    G4float bw = border_width;
+    G4float bh = border_height;
 
     // do it with four externals back_area.
 
-    float zz = border_z.value();
+    G4float zz = border_z.value();
 
     // top :
    {separator* sep = new separator;
     m_border_sep.add(sep);
 
-    float wba = width+2*bw;
-    float hba = bh;
-    float x = 0;
-    float y = height*0.5f+bh*0.5f;
+    G4float wba = width+2*bw;
+    G4float hba = bh;
+    G4float x = 0;
+    G4float y = height*0.5f+bh*0.5f;
 
     matrix* _m = new matrix;
     _m->set_translate(x,y,zz);
@@ -1122,10 +1122,10 @@ protected:
    {separator* sep = new separator;
     m_border_sep.add(sep);
 
-    float wba = width+2*bw;
-    float hba = bh;
-    float x = 0;
-    float y = -height*0.5f-bh*0.5f;
+    G4float wba = width+2*bw;
+    G4float hba = bh;
+    G4float x = 0;
+    G4float y = -height*0.5f-bh*0.5f;
 
     matrix* _m = new matrix;
     _m->set_translate(x,y,zz);
@@ -1142,10 +1142,10 @@ protected:
    {separator* sep = new separator;
     m_border_sep.add(sep);
 
-    float wba = bw;
-    float hba = height+2*bh;
-    float x = -width*0.5f-bw*0.5f;
-    float y = 0;
+    G4float wba = bw;
+    G4float hba = height+2*bh;
+    G4float x = -width*0.5f-bw*0.5f;
+    G4float y = 0;
 
     matrix* _m = new matrix;
     _m->set_translate(x,y,zz);
@@ -1162,10 +1162,10 @@ protected:
    {separator* sep = new separator;
     m_border_sep.add(sep);
 
-    float wba = bw;
-    float hba = height+2*bh;
-    float x = width*0.5f+bw*0.5f;
-    float y = 0;
+    G4float wba = bw;
+    G4float hba = height+2*bh;
+    G4float x = width*0.5f+bw*0.5f;
+    G4float y = 0;
 
     matrix* _m = new matrix;
     _m->set_translate(x,y,zz);
@@ -1230,8 +1230,8 @@ protected:
     if(height.value()<=0) return;
 
     // all window wc :
-    float ww_wc = width;
-    float wh_wc = height;
+    G4float ww_wc = width;
+    G4float wh_wc = height;
 
     size_t _number = m_extras.size();
 
@@ -1251,13 +1251,13 @@ protected:
 protected:
   static void set_plotter_layout(separator& a_sep,size_t a_index,bool a_configure,
                           unsigned int a_cols,unsigned int a_rows,
-                          float a_ww_wc,float a_wh_wc,
-                          const std::vector<vec2f>& a_origins,const std::vector<vec2f>& a_sizes,float a_scale) {
+                          G4float a_ww_wc,G4float a_wh_wc,
+                          const std::vector<vec2f>& a_origins,const std::vector<vec2f>& a_sizes,G4float a_scale) {
     size_t row = a_index/a_cols;
     size_t col = a_index-a_cols*row;
 
-    float rw_wc = a_ww_wc/a_cols;
-    float rh_wc = a_wh_wc/a_rows;
+    G4float rw_wc = a_ww_wc/a_cols;
+    G4float rh_wc = a_wh_wc/a_rows;
 
     matrix* _matrix = (matrix*)(a_sep)[MATRIX()];
     plotter* _plotter = (plotter*)(a_sep)[PLOTTER()];
@@ -1265,12 +1265,12 @@ protected:
     if(a_configure) {
       _plotter->width = a_sizes[a_index].x();
       _plotter->height = a_sizes[a_index].y();
-      float x = -a_ww_wc*0.5f + a_origins[a_index].x() + _plotter->width*0.5f;
-      float y = -a_wh_wc*0.5f + a_origins[a_index].y() + _plotter->height*0.5f;
+      G4float x = -a_ww_wc*0.5f + a_origins[a_index].x() + _plotter->width*0.5f;
+      G4float y = -a_wh_wc*0.5f + a_origins[a_index].y() + _plotter->height*0.5f;
       _matrix->set_translate(x,y,0);
     } else {
-      float x = -a_ww_wc*0.5f + col * rw_wc + rw_wc * 0.5f;
-      float y =  a_wh_wc*0.5f - row * rh_wc - rh_wc * 0.5f;
+      G4float x = -a_ww_wc*0.5f + col * rw_wc + rw_wc * 0.5f;
+      G4float y =  a_wh_wc*0.5f - row * rh_wc - rh_wc * 0.5f;
       _matrix->set_translate(x,y,0);
     }
     _matrix->mul_scale(a_scale,a_scale,1); //applied first.

@@ -70,8 +70,8 @@ public:
       vec3f omn,omx;
       mnmx(m_out,*tft,omn,omx);
 
-      float odx = omx[0]-omn[0];
-      float xmargin = odx*0.1f;
+      G4float odx = omx[0]-omn[0];
+      G4float xmargin = odx*0.1f;
 
       op_tsf->mul_translate(-omn[0]+mx1[0]+xmargin,0,0);
 
@@ -80,7 +80,7 @@ public:
     } else if( (a_type==valop::ASIDE) ||
                (a_type==valop::NVMUL) ){
 
-      float xspace = (mx1[0]-mn1[0])*0.1f;
+      G4float xspace = (mx1[0]-mn1[0])*0.1f;
 
       tsf2->mul_translate(-mn2[0]+mx1[0]+xspace,0,0);
 
@@ -89,8 +89,8 @@ public:
       // the bar :
       sg::vertices* vtcs = new sg::vertices;
       op_sep->add(vtcs);
-      float w2 = 0.5f;
-      float h = 0.101f;
+      G4float w2 = 0.5f;
+      G4float h = 0.101f;
       vtcs->add(-w2,0,0);
       vtcs->add( w2,0,0);
       vtcs->add( w2,h,0);
@@ -102,23 +102,23 @@ public:
         vtcs->mode = gl::triangle_fan();
       }
 
-      float ymargin = h;
+      G4float ymargin = h;
 
-      float osx = mx(mx1[0]-mn1[0],mx2[0]-mn2[0]);
+      G4float osx = mx(mx1[0]-mn1[0],mx2[0]-mn2[0]);
       osx *= 1.1f;
 
       op_tsf->mul_scale(osx,1,1);
 
       //put a_1 symbol in the middle of the bar.
       //put a_1 symbol on top of the bar (with an ymargin).
-      float dx1 = -(mn1[0]+mx1[0])*0.5f;
-      float dy1 = -mn1[1]+h+ymargin;
+      G4float dx1 = -(mn1[0]+mx1[0])*0.5f;
+      G4float dy1 = -mn1[1]+h+ymargin;
       tsf1->mul_translate(dx1,dy1,0);
 
       //put a_2 symbol in the middle of the bar.
       //put a_2 symbol under the bar (with an ymargin).
-      float dx2 = -(mn2[0]+mx2[0])*0.5f;
-      float dy2 = -mx2[1]-ymargin;
+      G4float dx2 = -(mn2[0]+mx2[0])*0.5f;
+      G4float dy2 = -mx2[1]-ymargin;
       tsf2->mul_translate(dx2,dy2,0);
 
     } else if(a_type==valop::SUPS) {
@@ -128,15 +128,15 @@ public:
         return false;
       }
 
-      float s2 = 0.5f*(mx1[0]-mn1[0])/(mx2[0]-mn2[0]); //half a_1 horiz size.
+      G4float s2 = 0.5f*(mx1[0]-mn1[0])/(mx2[0]-mn2[0]); //half a_1 horiz size.
       tsf2->set_scale(s2,s2,1);
       mnmx(m_out,*sep2,mn2,mx2);
 
-      float xshift = (mx1[0]-mn1[0])*0.1f;
-      float dx2 = -mn2[0]+mx1[0]+xshift;
+      G4float xshift = (mx1[0]-mn1[0])*0.1f;
+      G4float dx2 = -mn2[0]+mx1[0]+xshift;
 
-      float yshift = (mx1[1]-mn1[1])*0.3f;
-      float dy2 = -mn2[1]+mx1[1]-yshift;
+      G4float yshift = (mx1[1]-mn1[1])*0.3f;
+      G4float dy2 = -mn2[1]+mx1[1]-yshift;
 
       tsf2->set_translate(dx2,dy2,0);
       tsf2->mul_scale(s2,s2,1); //applied first
@@ -148,15 +148,15 @@ public:
         return false;
       }
 
-      float s2 = 0.5f*(mx1[0]-mn1[0])/(mx2[0]-mn2[0]); //half a_1 horiz size.
+      G4float s2 = 0.5f*(mx1[0]-mn1[0])/(mx2[0]-mn2[0]); //half a_1 horiz size.
       tsf2->set_scale(s2,s2,1);
       mnmx(m_out,*sep2,mn2,mx2);
 
-      float xshift = (mx1[0]-mn1[0])*0.1f;
-      float dx2 = -mn2[0]+mx1[0]+xshift;
+      G4float xshift = (mx1[0]-mn1[0])*0.1f;
+      G4float dx2 = -mn2[0]+mx1[0]+xshift;
 
-      float yshift = (mx1[1]-mn1[1])*0.3f;
-      float dy2 = -mn2[1]-yshift;
+      G4float yshift = (mx1[1]-mn1[1])*0.3f;
+      G4float dy2 = -mn2[1]-yshift;
 
       tsf2->set_translate(dx2,dy2,0);
       tsf2->mul_scale(s2,s2,1); //applied first
@@ -204,8 +204,8 @@ public:
       vec3f omn,omx;
       mnmx(m_out,*tft,omn,omx);
 
-      float odx = omx[0]-omn[0];
-      float xmargin = odx*0.1f;
+      G4float odx = omx[0]-omn[0];
+      G4float xmargin = odx*0.1f;
 
       //push a_1 at right of minus symbol
       tsf1->mul_translate(-mn1[0]+omx[0]+xmargin,0,0);
@@ -314,10 +314,10 @@ public:
       // upper bar :
       sg::vertices* vtcs = new sg::vertices;
       op_sep->add(vtcs);
-      float dx = 0.05f; //to cover the top of the sqrt symbol.
-      float w = mx1[0]-mn1[0];
+      G4float dx = 0.05f; //to cover the top of the sqrt symbol.
+      G4float w = mx1[0]-mn1[0];
       w *= 1.05f;
-      float h = 0.09f;
+      G4float h = 0.09f;
       vtcs->add(omx[0]-dx ,omx[1]-h,0);
       vtcs->add(omx[0]+w  ,omx[1]-h,0);
       vtcs->add(omx[0]+w  ,omx[1]  ,0);
@@ -329,16 +329,16 @@ public:
         vtcs->mode = gl::triangle_fan();
       }
 
-      //float odx = omx[0]-omn[0];
-      //float xmargin = odx*0.1f;
-      float xmargin = 0;
+      //G4float odx = omx[0]-omn[0];
+      //G4float xmargin = odx*0.1f;
+      G4float xmargin = 0;
 
       //push  sqrt-symbol at left of a_1
       //scale sqrt-symbol to match a_1 y height.
       //y translate sqrt-symbol so that a_1 is under the bar :
 
-      float osy = (mx1[1]-mn1[1])/(omx[1]-omn[1]);
-      float ody = -omn[1]*osy + mn1[1];
+      G4float osy = (mx1[1]-mn1[1])/(omx[1]-omn[1]);
+      G4float ody = -omn[1]*osy + mn1[1];
 
       osy *= 1.2f;
 
@@ -381,9 +381,9 @@ public:
       mnmx(m_out,*tft,omn,omx);
 
       //push func-symbol at left of a_1 :
-      //float odx = omx[0]-omn[0];
-      //float xmargin = odx*0.1f;
-      float xmargin = 0;
+      //G4float odx = omx[0]-omn[0];
+      //G4float xmargin = odx*0.1f;
+      G4float xmargin = 0;
       op_tsf->mul_translate(-omx[0]+mn1[0]-xmargin,0,0);
       } //end left op
 
@@ -403,9 +403,9 @@ public:
       mnmx(m_out,*tft,omn,omx);
 
       //push func-symbol at right of a_1 :
-      //float odx = omx[0]-omn[0];
-      //float xmargin = odx*0.1f;
-      float xmargin = 0;
+      //G4float odx = omx[0]-omn[0];
+      //G4float xmargin = odx*0.1f;
+      G4float xmargin = 0;
       op_tsf->mul_translate(-omn[0]+mx1[0]+xmargin,0,0);
       } //end right op
 
@@ -446,7 +446,7 @@ public:
       }
       mnmx(m_out,*sep2,mn2,mx2);}
 
-      float s2 = 0.5f*(mx1[0]-mn1[0])/(mx2[0]-mn2[0]); //half a_1 horiz size.
+      G4float s2 = 0.5f*(mx1[0]-mn1[0])/(mx2[0]-mn2[0]); //half a_1 horiz size.
       if(mx2[0]==mn2[0]) {
         delete sep;
         return false;
@@ -454,11 +454,11 @@ public:
       tsf2->set_scale(s2,s2,1);
       mnmx(m_out,*sep2,mn2,mx2);
 
-      float xshift = (mx1[0]-mn1[0])*0.1f;
-      float dx2 = -mn2[0]+mx1[0]+xshift;
+      G4float xshift = (mx1[0]-mn1[0])*0.1f;
+      G4float dx2 = -mn2[0]+mx1[0]+xshift;
 
-      float yshift = (mx1[1]-mn1[1])*0.3f;
-      float dy2 = -mn2[1]+mx1[1]-yshift;
+      G4float yshift = (mx1[1]-mn1[1])*0.3f;
+      G4float dy2 = -mn2[1]+mx1[1]-yshift;
 
       tsf2->set_identity();
       tsf2->mul_translate(dx2,dy2,0);
@@ -515,16 +515,16 @@ public:
       mnmx(m_out,*tft,omn,omx);
 
       //push func-symbol at left of a_1 :
-      //float odx = omx[0]-omn[0];
-      //float xmargin = odx*0.1f;
-      float xmargin = 0;
+      //G4float odx = omx[0]-omn[0];
+      //G4float xmargin = odx*0.1f;
+      G4float xmargin = 0;
       op_tsf->mul_translate(-omx[0]+mn1[0]-xmargin,0,0);
       } //end left op
 
       ////////////////////////////////////////////////////////
       /// ,                                      /////////////
       ////////////////////////////////////////////////////////
-      float xend2 = 0;
+      G4float xend2 = 0;
      {sg::separator* op_sep = new sg::separator;
       sep->add(op_sep);
       sg::matrix* op_tsf = new sg::matrix;
@@ -538,11 +538,11 @@ public:
       mnmx(m_out,*tft,omn,omx);
 
       //push comma-symbol at right of a_1 :
-      float odx = omx[0]-omn[0];
-      float xmargin = odx*0.1f;
+      G4float odx = omx[0]-omn[0];
+      G4float xmargin = odx*0.1f;
       op_tsf->mul_translate(-omn[0]+mx1[0]+xmargin,0,0);
 
-      float xendcomma = mx1[0]+xmargin+(omx[0]-omn[0]);
+      G4float xendcomma = mx1[0]+xmargin+(omx[0]-omn[0]);
 
       tsf2->mul_translate(-mn2[0]+xendcomma+xmargin,0,0);
 
@@ -565,9 +565,9 @@ public:
       mnmx(m_out,*tft,omn,omx);
 
       //push ")" at right of a_2 :
-      //float odx = omx[0]-omn[0];
-      //float xmargin = odx*0.1f;
-      float xmargin = 0;
+      //G4float odx = omx[0]-omn[0];
+      //G4float xmargin = odx*0.1f;
+      G4float xmargin = 0;
       op_tsf->mul_translate(-omn[0]+xend2+xmargin,0,0);
       } //end right op
 

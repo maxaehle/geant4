@@ -33,7 +33,7 @@ public:
   }
 public:
   sf<bool> show_border;
-  sf<float> height;
+  sf<G4float> height;
 public:
   virtual const desc_fields& node_desc_fields() const {
     TOOLS_FIELD_DESC_NODE_CLASS(tools::sg::tex_rect)
@@ -132,7 +132,7 @@ public:
 #endif
       f12 nms;
       _front(xyzs,nms);
-      float tcs[8];
+      G4float tcs[8];
       set_tcs(tcs);
       a_action.draw_vertex_normal_array_texture(gl::triangle_fan(),12,xyzs,nms,_id,tcs);
     }
@@ -166,16 +166,16 @@ public:
     const img_byte& _img = img.value();
     if(_img.is_empty()) {a_s.clear();return false;}
 
-    float aspect = float(_img.width())/float(_img.height());
-    float h2 = height.value()*0.5f;
-    float w2 = aspect*h2;
+    G4float aspect = G4float(_img.width())/G4float(_img.height());
+    G4float h2 = height.value()*0.5f;
+    G4float w2 = aspect*h2;
 
     plane<vec3f> plane(vec3f(w2,h2,0),vec3f(-w2,h2,0),vec3f(-w2,-h2,0));
     vec3f p;
     if(!plane.intersect(a_line,p)) {a_s.clear();return false;}
 
-    float imw = (float)_img.width();
-    float imh = (float)_img.height();
+    G4float imw = (G4float)_img.width();
+    G4float imh = (G4float)_img.height();
 
     //image coordinates :
     int ix = int((imw*p.x()/w2+imw)*0.5f);
@@ -188,7 +188,7 @@ public:
     a_s.clear();
     for(unsigned int ipix=0;ipix<pixel.size();ipix++) {
       if(ipix) a_s += " ";
-      if(!numas<float>(float(pixel[ipix])/255.0f,a_s)){}
+      if(!numas<G4float>(G4float(pixel[ipix])/255.0f,a_s)){}
     }
 
     return true;
@@ -245,11 +245,11 @@ protected:
   }
 protected:
 
-  typedef float f12[12];
-  void _front(f12& front,f12& nms,float a_epsil = 0.0f) { //[12]
-    float aspect = float(img.value().width())/float(img.value().height());
-    float h2 = height*0.5f;
-    float w2 = aspect*h2;
+  typedef G4float f12[12];
+  void _front(f12& front,f12& nms,G4float a_epsil = 0.0f) { //[12]
+    G4float aspect = G4float(img.value().width())/G4float(img.value().height());
+    G4float h2 = height*0.5f;
+    G4float w2 = aspect*h2;
 
     h2 += a_epsil;
     w2 += a_epsil;
@@ -288,10 +288,10 @@ protected:
   }
 
   void _back(f12& back) { //[12]
-    float aspect = float(img.value().width())/float(img.value().height());
-    float h2 = height*0.5f;
-    float w2 = aspect*h2;
-    float d2 = 0;
+    G4float aspect = G4float(img.value().width())/G4float(img.value().height());
+    G4float h2 = height*0.5f;
+    G4float w2 = aspect*h2;
+    G4float d2 = 0;
 
     back[0] =  w2;back[ 1] = -h2;back[ 2] = d2;
     back[3] = -w2;back[ 4] = -h2;back[ 5] = d2;
@@ -299,7 +299,7 @@ protected:
     back[9] =  w2;back[10] =  h2;back[11] = d2;
   }
 
-  typedef float f18[18];
+  typedef G4float f18[18];
   void _tris(f18& tris,f18& nms){
     f12 back;
     _back(back);

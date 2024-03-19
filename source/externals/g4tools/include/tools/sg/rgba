@@ -16,7 +16,7 @@ namespace sg {
 class rgba : public node {
   TOOLS_NODE(rgba,tools::sg::rgba,node)
 public:
-  sf_vec<colorf,float> color;
+  sf_vec<colorf,G4float> color;
 public:
   virtual const desc_fields& node_desc_fields() const {
     TOOLS_FIELD_DESC_NODE_CLASS(tools::sg::rgba)
@@ -35,7 +35,7 @@ public:
     //         ::glEnable(GL_COLOR_MATERIAL) and ::glColor.
 
     //if(a_action.state().m_GL_LIGHTING) {
-    //  float params[4];
+    //  G4float params[4];
     //  params[0] = rgb.value().r();
     //  params[1] = rgb.value().g();
     //  params[2] = rgb.value().b();

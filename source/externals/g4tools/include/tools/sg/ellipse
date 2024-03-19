@@ -27,10 +27,10 @@ public:
     return node::cast(a_class);
   }
 public:
-  sf<float> rx;
-  sf<float> ry;
-  sf<float> phi_min;  //radians
-  sf<float> phi_max;  //radians
+  sf<G4float> rx;
+  sf<G4float> ry;
+  sf<G4float> phi_min;  //radians
+  sf<G4float> phi_max;  //radians
   sf<unsigned int> steps;
 public:
   virtual const desc_fields& node_desc_fields() const {
@@ -53,16 +53,16 @@ private:
     add_field(&steps);
   }
 public: //curve
-  virtual bool pos_tan_nor(float /*a_s*/,
+  virtual bool pos_tan_nor(G4float /*a_s*/,
                            vec3f& a_pos,
                            vec3f& a_tan,
                            vec3f& a_nor) const {
 
-    //float r = radius.value();
-    //float cs = fcos(a_s);
-    //float sn = fsin(a_s);
+    //G4float r = radius.value();
+    //G4float cs = fcos(a_s);
+    //G4float sn = fsin(a_s);
 
-    float x,y,z;
+    G4float x,y,z;
 
    {//x = r*cs;y = r*sn;z = 0;
     x = 0;y = 0;z = 0;
@@ -164,26 +164,26 @@ protected:
     unsigned int num = steps.value();
 
    //set number of points approximatively proportional to the ellipse circumference
-   //float circ = kPI*(r1+r2)*(phi2-phi1)/360;
+   //G4float circ = kPI*(r1+r2)*(phi2-phi1)/360;
    //Int_t n = (Int_t)(np*circ/((gPad->GetX2()-gPad->GetX1())+(gPad->GetY2()-gPad->GetY1())));
    //if (n < 8) n= 8;
    //if (n > np) n = np;
 
     m_xyzs.resize((num+1)*3);
 
-    float phimin = phi_min.value();
-    float phimax = phi_max.value();
-    float r1 = rx.value();
-    float r2 = ry.value();
+    G4float phimin = phi_min.value();
+    G4float phimax = phi_max.value();
+    G4float r1 = rx.value();
+    G4float r2 = ry.value();
 
-    float phi1 = mn<float>(phimin,phimax);
-    float phi2 = mx<float>(phimin,phimax);
+    G4float phi1 = mn<G4float>(phimin,phimax);
+    G4float phi2 = mx<G4float>(phimin,phimax);
 
-    float angle,dx,dy;
-    float dphi = (phi2-phi1)/float(num);
+    G4float angle,dx,dy;
+    G4float dphi = (phi2-phi1)/G4float(num);
     size_t pos = 0;
     for(unsigned int i=0;i<=num;i++) {
-      angle = phi1 + float(i)*dphi;
+      angle = phi1 + G4float(i)*dphi;
       dx    = r1*fcos(angle);
       dy    = r2*fsin(angle);
       m_xyzs[pos]  = dx;pos++;
@@ -212,7 +212,7 @@ protected:
   }
 
 protected:
-  std::vector<float> m_xyzs;
+  std::vector<G4float> m_xyzs;
 };
 
 }}

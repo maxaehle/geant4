@@ -19,13 +19,13 @@ namespace sg {
 class style : public node {
   TOOLS_NODE(style,tools::sg::style,node)
 public:
-  sf_vec<colorf,float> color;
-  sf_vec<colorf,float> highlight_color;
-  sf_vec<colorf,float> back_color;
-  sf<float> line_width;
-  sf<float> marker_size;
-  sf<float> point_size;
-  sf<float> font_size;
+  sf_vec<colorf,G4float> color;
+  sf_vec<colorf,G4float> highlight_color;
+  sf_vec<colorf,G4float> back_color;
+  sf<G4float> line_width;
+  sf<G4float> marker_size;
+  sf<G4float> point_size;
+  sf<G4float> font_size;
   sf_enum<sg::font_modeling> font_modeling;
   sf_enum<winding_type> front_face;
   sf<lpat> line_pattern;
@@ -45,14 +45,14 @@ public:
   sf<int> multi_node_limit;
   sf<int> divisions;
   sf<unsigned int> rotation_steps;
-  sf<float> spacing;
-  sf<float> angle;
-  sf<float> scale;
-  sf<float> offset;
-  sf<float> strip_width;
+  sf<G4float> spacing;
+  sf<G4float> angle;
+  sf<G4float> scale;
+  sf<G4float> offset;
+  sf<G4float> strip_width;
   sf<bool> visible;
-  sf<float> bar_offset;
-  sf<float> bar_width;
+  sf<G4float> bar_offset;
+  sf<G4float> bar_width;
   sf<bool> editable;
   sf<bool> pickable;
   sf<bool> automated;

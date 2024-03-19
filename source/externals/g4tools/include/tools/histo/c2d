@@ -25,25 +25,25 @@ public:
   bool reset();
   unsigned int entries() const { return m_histo ? m_histo->all_entries() : (unsigned int)m_ws.size();}
 public:
-  double sum_of_weights() const { return (m_histo ? m_histo->sum_bin_heights() : m_Sw);}
+  G4double sum_of_weights() const { return (m_histo ? m_histo->sum_bin_heights() : m_Sw);}
   bool convert_to_histogram();
   bool is_converted() const {return m_histo ? true : false;}
-  bool scale(double);
+  bool scale(G4double);
 public:
-  bool fill(double,double,double = 1);
-  double lower_edge_x() const {return m_histo ? m_histo->axis_x().lower_edge() : m_lower_x;}
-  double lower_edge_y() const { return m_histo ? m_histo->axis_y().lower_edge() : m_lower_y;}
-  double upper_edge_x() const { return m_histo ? m_histo->axis_x().upper_edge() : m_upper_x;}
-  double upper_edge_y() const { return m_histo ? m_histo->axis_y().upper_edge() : m_upper_y;}
-  double value_x(unsigned int a_index) const { return m_histo ? 0 : m_xs[a_index];}
-  double value_y(unsigned int a_index) const { return m_histo ? 0 : m_ys[a_index];}
-  double weight(unsigned int a_index) const { return m_histo ? 0 : m_ws[a_index];}
-  double mean_x() const {return m_histo ? m_histo->mean_x() : (m_Sw?m_Sxw/m_Sw:0);}
-  double mean_y() const {return m_histo ? m_histo->mean_y() : (m_Sw?m_Syw/m_Sw:0);}
-  double rms_x() const;
-  double rms_y() const;
-  bool convert(unsigned int,double,double,unsigned int,double,double);
-  bool convert(const std::vector<double>&,const std::vector<double>&);
+  bool fill(G4double,G4double,G4double = 1);
+  G4double lower_edge_x() const {return m_histo ? m_histo->axis_x().lower_edge() : m_lower_x;}
+  G4double lower_edge_y() const { return m_histo ? m_histo->axis_y().lower_edge() : m_lower_y;}
+  G4double upper_edge_x() const { return m_histo ? m_histo->axis_x().upper_edge() : m_upper_x;}
+  G4double upper_edge_y() const { return m_histo ? m_histo->axis_y().upper_edge() : m_upper_y;}
+  G4double value_x(unsigned int a_index) const { return m_histo ? 0 : m_xs[a_index];}
+  G4double value_y(unsigned int a_index) const { return m_histo ? 0 : m_ys[a_index];}
+  G4double weight(unsigned int a_index) const { return m_histo ? 0 : m_ws[a_index];}
+  G4double mean_x() const {return m_histo ? m_histo->mean_x() : (m_Sw?m_Sxw/m_Sw:0);}
+  G4double mean_y() const {return m_histo ? m_histo->mean_y() : (m_Sw?m_Syw/m_Sw:0);}
+  G4double rms_x() const;
+  G4double rms_y() const;
+  bool convert(unsigned int,G4double,G4double,unsigned int,G4double,G4double);
+  bool convert(const std::vector<G4double>&,const std::vector<G4double>&);
   const histo::h2d& histogram() const;
   template <class HISTO>
   bool fill_histogram(HISTO& a_histo) const {
@@ -53,7 +53,7 @@ public:
     }
     return true;
   }
-  bool set_conversion_parameters(unsigned int,double,double,unsigned int,double,double);
+  bool set_conversion_parameters(unsigned int,G4double,G4double,unsigned int,G4double,G4double);
 
   bool set_histogram(h2d* a_histo){ //we take ownership of a_histo.
     reset();
@@ -117,32 +117,32 @@ public:
     return *this;
   }
 public: //AIDA API
-  double lowerEdgeX() const {return lower_edge_x();}
-  double lowerEdgeY() const {return lower_edge_y();}
-  double upperEdgeX() const {return upper_edge_x();}
-  double upperEdgeY() const {return upper_edge_y();}
+  G4double lowerEdgeX() const {return lower_edge_x();}
+  G4double lowerEdgeY() const {return lower_edge_y();}
+  G4double upperEdgeX() const {return upper_edge_x();}
+  G4double upperEdgeY() const {return upper_edge_y();}
   template <class HISTO>
   bool fillHistogram(HISTO& a_histo) const {return fill_histogram<HISTO>(a_histo);}
 protected:
   void clear();
 protected:
-  std::vector<double> m_xs;
-  std::vector<double> m_ys;
-  double m_lower_x;
-  double m_upper_x;
-  double m_lower_y;
-  double m_upper_y;
-  double m_Sxw;
-  double m_Sx2w;
-  double m_Syw;
-  double m_Sy2w;
+  std::vector<G4double> m_xs;
+  std::vector<G4double> m_ys;
+  G4double m_lower_x;
+  G4double m_upper_x;
+  G4double m_lower_y;
+  G4double m_upper_y;
+  G4double m_Sxw;
+  G4double m_Sx2w;
+  G4double m_Syw;
+  G4double m_Sy2w;
   //
   unsigned int m_cnv_x_num;
-  double m_cnv_x_min;
-  double m_cnv_x_max;
+  G4double m_cnv_x_min;
+  G4double m_cnv_x_max;
   unsigned int m_cnv_y_num;
-  double m_cnv_y_min;
-  double m_cnv_y_max;
+  G4double m_cnv_y_min;
+  G4double m_cnv_y_max;
   histo::h2d* m_histo;
 };
 
@@ -211,8 +211,8 @@ void c2d::clear(){
 
 inline
 bool c2d::convert(
- unsigned int a_bins_x,double a_lower_edge_x,double a_upper_edge_x
-,unsigned int a_bins_y,double a_lower_edge_y,double a_upper_edge_y
+ unsigned int a_bins_x,G4double a_lower_edge_x,G4double a_upper_edge_x
+,unsigned int a_bins_y,G4double a_lower_edge_y,G4double a_upper_edge_y
 ) {
   if(m_histo) return true; // Done.
   m_histo = new histo::h2d(base_cloud::title(),
@@ -228,8 +228,8 @@ inline
 bool c2d::convert_to_histogram(){
   if( (m_cnv_x_num<=0) || (m_cnv_x_max<=m_cnv_x_min) ||
       (m_cnv_y_num<=0) || (m_cnv_y_max<=m_cnv_y_min) ) {
-    double dx = 0.01 * (upper_edge_x() - lower_edge_x())/BINS();
-    double dy = 0.01 * (upper_edge_y() - lower_edge_y())/BINS();
+    G4double dx = 0.01 * (upper_edge_x() - lower_edge_x())/BINS();
+    G4double dy = 0.01 * (upper_edge_y() - lower_edge_y())/BINS();
     return convert(BINS(),lower_edge_x(),upper_edge_x()+dx,
                    BINS(),lower_edge_y(),upper_edge_y()+dy);
   } else {
@@ -247,7 +247,7 @@ bool c2d::set_title(const std::string& a_title){
 }
 
 inline
-bool c2d::scale(double a_scale) {
+bool c2d::scale(G4double a_scale) {
   if(m_histo) {
     return m_histo->scale(a_scale);
   } else {
@@ -271,7 +271,7 @@ bool c2d::reset() {
 }
 
 inline
-bool c2d::fill(double aX,double aY,double aW){
+bool c2d::fill(G4double aX,G4double aY,G4double aW){
   if(!m_histo && (m_limit!=UNLIMITED()) && ((int)m_xs.size()>=m_limit)){
     convert_to_histogram();
   }
@@ -280,15 +280,15 @@ bool c2d::fill(double aX,double aY,double aW){
     return m_histo->fill(aX,aY,aW);
   } else {
     if(m_xs.size()) {
-      m_lower_x = mn<double>(aX,m_lower_x);
-      m_upper_x = mx<double>(aX,m_upper_x);
+      m_lower_x = mn<G4double>(aX,m_lower_x);
+      m_upper_x = mx<G4double>(aX,m_upper_x);
     } else {
       m_lower_x = aX;
       m_upper_x = aX;
     }
     if(m_ys.size()) {
-      m_lower_y = mn<double>(aY,m_lower_y);
-      m_upper_y = mx<double>(aY,m_upper_y);
+      m_lower_y = mn<G4double>(aY,m_lower_y);
+      m_upper_y = mx<G4double>(aY,m_upper_y);
     } else {
       m_lower_y = aY;
       m_upper_y = aY;
@@ -297,10 +297,10 @@ bool c2d::fill(double aX,double aY,double aW){
     m_ys.push_back(aY);
     m_ws.push_back(aW);
     m_Sw += aW;
-    double xw = aX * aW;
+    G4double xw = aX * aW;
     m_Sxw += xw;
     m_Sx2w += aX * xw;
-    double yw = aY * aW;
+    G4double yw = aY * aW;
     m_Syw += yw;
     m_Sy2w += aY * yw;
     return true;
@@ -308,7 +308,7 @@ bool c2d::fill(double aX,double aY,double aW){
 }
 
 inline
-bool c2d::convert(const std::vector<double>& a_edges_x,const std::vector<double>& a_edges_y) {
+bool c2d::convert(const std::vector<G4double>& a_edges_x,const std::vector<G4double>& a_edges_y) {
   if(m_histo) return true;
   m_histo = new histo::h2d(base_cloud::title(),
                            a_edges_x,a_edges_y);
@@ -320,8 +320,8 @@ bool c2d::convert(const std::vector<double>& a_edges_x,const std::vector<double>
 
 inline
 bool c2d::set_conversion_parameters(
- unsigned int aCnvXnumber,double aCnvXmin,double aCnvXmax
-,unsigned int aCnvYnumber,double aCnvYmin,double aCnvYmax
+ unsigned int aCnvXnumber,G4double aCnvXmin,G4double aCnvXmax
+,unsigned int aCnvYnumber,G4double aCnvYmin,G4double aCnvYmax
 ){
   m_cnv_x_num = aCnvXnumber;
   m_cnv_x_min = aCnvXmin;
@@ -339,28 +339,28 @@ const h2d& c2d::histogram() const {
 }
 
 inline
-double c2d::rms_x() const {
-  double rms = 0; //FIXME nan.
+G4double c2d::rms_x() const {
+  G4double rms = 0; //FIXME nan.
   if(m_histo) {
     rms = m_histo->rms_x();
   } else {
     if(m_Sw==0) {
     } else {
-      double mean = m_Sxw / m_Sw;
+      G4double mean = m_Sxw / m_Sw;
       rms = ::sqrt(::fabs( (m_Sx2w / m_Sw) - mean * mean));
     }
   }
   return rms;
 }
 inline
-double c2d::rms_y() const {
-  double rms = 0; //FIXME nan.
+G4double c2d::rms_y() const {
+  G4double rms = 0; //FIXME nan.
   if(m_histo) {
     rms = m_histo->rms_y();
   } else {
     if(m_Sw==0) {
     } else {
-      double mean = m_Syw / m_Sw;
+      G4double mean = m_Syw / m_Sw;
       rms = ::sqrt(::fabs( (m_Sy2w / m_Sw) - mean * mean));
     }
   }

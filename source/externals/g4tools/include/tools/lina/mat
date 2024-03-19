@@ -85,7 +85,7 @@ protected:
   T m_vec[D*D];
 #endif
 
-private:static void check_instantiation() {mat<float,2> dummy;}
+private:static void check_instantiation() {mat<G4float,2> dummy;}
 };
 
 template <class T>
@@ -152,7 +152,7 @@ protected:
   unsigned int m_D;
   unsigned int m_D2;
   T* m_vec;
-private:static void check_instantiation() {nmat<float> dummy(2);}
+private:static void check_instantiation() {nmat<G4float> dummy(2);}
 };
 
 template <class T,unsigned int D>
@@ -257,8 +257,8 @@ inline bool decomplex(const CMAT& a_c,RMAT& a_r,
   //  CMAT = X+iY
   //  RMAT = |  X  Y |
   //         | -Y  X |
-  typedef typename CMAT::elem_t CT; //std::complex<double>
-  typedef typename RMAT::elem_t RT; //double
+  typedef typename CMAT::elem_t CT; //std::complex<G4double>
+  typedef typename RMAT::elem_t RT; //G4double
 
   unsigned int cdim = a_c.dimension();
   if(a_r.dimension()!=2*cdim) {a_r.set_zero();return false;}

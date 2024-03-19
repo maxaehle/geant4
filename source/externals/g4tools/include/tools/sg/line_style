@@ -18,8 +18,8 @@ class line_style : public node {
   TOOLS_NODE(line_style,tools::sg::line_style,node)
 public:
   sf<bool> visible;
-  sf_vec<colorf,float> color;
-  sf<float> width;
+  sf_vec<colorf,G4float> color;
+  sf<G4float> width;
   sf<lpat> pattern;
 public:
   virtual const desc_fields& node_desc_fields() const {

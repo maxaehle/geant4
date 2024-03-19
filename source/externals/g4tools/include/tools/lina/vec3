@@ -309,7 +309,7 @@ public:
 protected:
   T m_data[3];
 
-private:static void check_instantiation() {vec3<float> v;}
+private:static void check_instantiation() {vec3<G4float> v;}
 };
 
 //for sf, mf :

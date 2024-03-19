@@ -27,16 +27,16 @@ public:
   static unsigned int max_poly() { return 8;} //font special reaches 8
   static unsigned int max_point() {return 160;} // 40 * 4
 
-  static void special_char_points(char a_char,float a_scale, //input
+  static void special_char_points(char a_char,G4float a_scale, //input
                                          int& a_number,int* a_mx_point,
-                                         float* aX,float* aY,float& a_width){
+                                         G4float* aX,G4float* aY,G4float& a_width){
     // PAW special characters.
     extract(H_SPECIAL,H_UPPER,a_char,a_scale,a_number,a_mx_point,aX,aY,a_width);
   }
 
-  static void latin_char_points(char a_char,float a_scale, //input
+  static void latin_char_points(char a_char,G4float a_scale, //input
                                        int& a_number,int* a_mx_point,
-                                       float* aX,float* aY,float& a_width){
+                                       G4float* aX,G4float* aY,G4float& a_width){
 
     // Latin correspondance with HPLSOF
     // ABCDEFGHIJKLMNOPQRSTUVWXYZ  done with H_ROMAN UPPER
@@ -158,9 +158,9 @@ public:
     }
   }
 
-  static void greek_char_points(char a_char,float a_scale, //input
+  static void greek_char_points(char a_char,G4float a_scale, //input
                                        int& a_number,int* a_mx_point,
-                                       float* aX,float* aY,float& a_width){
+                                       G4float* aX,G4float* aY,G4float& a_width){
     switch(a_char) {
     case 'A':extract(H_GREEK,H_UPPER,'A',a_scale,a_number,a_mx_point,aX,aY,a_width);break;
     case 'B':extract(H_GREEK,H_UPPER,'B',a_scale,a_number,a_mx_point,aX,aY,a_width);break;
@@ -221,13 +221,13 @@ public:
   }
 
 private:
-  static void extract(int aType,int aCase,char aC,float a_scale, //input
+  static void extract(int aType,int aCase,char aC,G4float a_scale, //input
                              int& aN,int* a_mx_point,
-                             float* aX,float* aY,float& a_width){
+                             G4float* aX,G4float* aY,G4float& a_width){
     int   count;
     int   npoly,ichr,iw,idif,ibit,kx,ky,iy0,ix0,dky,ipoint;
-    float scale,size;
-    float max_x;
+    G4float scale,size;
+    G4float max_x;
 
     ichr = 1;
     if    (aType==H_DIGIT) {

@@ -244,8 +244,8 @@ public:
       else TOOLS_WCSV_NTUPLE_CREATE_COL(int)
       else TOOLS_WCSV_NTUPLE_CREATE_COL(int64)
 
-      else TOOLS_WCSV_NTUPLE_CREATE_COL(float)
-      else TOOLS_WCSV_NTUPLE_CREATE_COL(double)
+      else TOOLS_WCSV_NTUPLE_CREATE_COL(G4float)
+      else TOOLS_WCSV_NTUPLE_CREATE_COL(G4double)
 
       else TOOLS_WCSV_NTUPLE_CREATE_COL(byte)
       else TOOLS_WCSV_NTUPLE_CREATE_COL(ushort)
@@ -260,8 +260,8 @@ public:
       else TOOLS_WCSV_NTUPLE_CREATE_VEC_COL(int)
       else TOOLS_WCSV_NTUPLE_CREATE_VEC_COL(int64)
 
-      else TOOLS_WCSV_NTUPLE_CREATE_VEC_COL(float)
-      else TOOLS_WCSV_NTUPLE_CREATE_VEC_COL(double)
+      else TOOLS_WCSV_NTUPLE_CREATE_VEC_COL(G4float)
+      else TOOLS_WCSV_NTUPLE_CREATE_VEC_COL(G4double)
 
       else TOOLS_WCSV_NTUPLE_CREATE_VEC_COL(uchar)
       else TOOLS_WCSV_NTUPLE_CREATE_VEC_COL(ushort)

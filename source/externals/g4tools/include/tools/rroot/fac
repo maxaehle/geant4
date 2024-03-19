@@ -51,10 +51,10 @@ public: //ifac
       return new leaf<int>(m_out,*this);
 
     } else if(a_class=="TLeafF") {
-      return new leaf<float>(m_out,*this);
+      return new leaf<G4float>(m_out,*this);
 
     } else if(a_class=="TLeafD") {
-      return new leaf<double>(m_out,*this);
+      return new leaf<G4double>(m_out,*this);
 
     } else if(a_class=="TLeafO") {
       return new leaf<bool>(m_out,*this);
@@ -93,10 +93,10 @@ public: //ifac
       return new stl_vector<unsigned int>();
     } else if(a_class=="vector<int>") {
       return new stl_vector<int>();
-    } else if(a_class=="vector<float>") {
-      return new stl_vector<float>();
-    } else if(a_class=="vector<double>") {
-      return new stl_vector<double>();
+    } else if(a_class=="vector<G4float>") {
+      return new stl_vector<G4float>();
+    } else if(a_class=="vector<G4double>") {
+      return new stl_vector<G4double>();
 
     } else if(a_class=="vector<unsigned long>") { //beurk
       return new stl_vector<uint64>(); //is it ok to map to an uint64 ?
@@ -112,10 +112,10 @@ public: //ifac
       return new stl_vector_vector<unsigned int>();
     } else if(a_class=="vector<vector<int> >") {
       return new stl_vector_vector<int>();
-    } else if(a_class=="vector<vector<float> >") {
-      return new stl_vector_vector<float>();
-    } else if(a_class=="vector<vector<double> >") {
-      return new stl_vector_vector<double>();
+    } else if(a_class=="vector<vector<G4float> >") {
+      return new stl_vector_vector<G4float>();
+    } else if(a_class=="vector<vector<G4double> >") {
+      return new stl_vector_vector<G4double>();
 
     } else if(a_class=="TBranchRef") {
       return new dummy();

@@ -260,7 +260,7 @@ public: //for inlib/sg/sf_vec
   const T* data() const {return m_data;}
 protected:
   T m_data[4];
-private:static void check_instantiation() {vec4<float> v;}
+private:static void check_instantiation() {vec4<G4float> v;}
 };
 
 //for sf, mf :

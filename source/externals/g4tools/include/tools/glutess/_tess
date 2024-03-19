@@ -20,7 +20,7 @@ enum TessState { T_DORMANT, T_IN_POLYGON, T_IN_CONTOUR };
 #define GLU_TESS_MAX_CACHE 100
 
 typedef struct CachedVertex {
-  GLUdouble	coords[3];
+  GLUG4double	coords[3];
   void		*data;
 } CachedVertex;
 
@@ -38,13 +38,13 @@ struct GLUtesselator {
 
   /*** state needed for projecting onto the sweep plane ***/
 
-  GLUdouble	normal[3];	/* user-specified normal (if provided) */
-  GLUdouble	sUnit[3];	/* unit vector in s-direction (debugging) */
-  GLUdouble	tUnit[3];	/* unit vector in t-direction (debugging) */
+  GLUG4double	normal[3];	/* user-specified normal (if provided) */
+  GLUG4double	sUnit[3];	/* unit vector in s-direction (debugging) */
+  GLUG4double	tUnit[3];	/* unit vector in t-direction (debugging) */
 
   /*** state needed for the line sweep ***/
 
-  GLUdouble	relTolerance;	/* tolerance for merging features */
+  GLUG4double	relTolerance;	/* tolerance for merging features */
   GLUenum	windingRule;	/* rule for determining polygon interior */
   GLUboolean	fatalError;	/* fatal error: needed combine callback */
 
@@ -52,8 +52,8 @@ struct GLUtesselator {
   PriorityQ	*pq;		/* priority queue of vertex events */
   GLUvertex	*event;		/* current sweep event being processed */
 
-  void		(GLUAPIENTRY *callCombine)( GLUdouble coords[3], void *data[4],
-			        GLUfloat weight[4], void **outData );
+  void		(GLUAPIENTRY *callCombine)( GLUG4double coords[3], void *data[4],
+			        GLUG4float weight[4], void **outData );
 
   /*** state needed for rendering callbacks (see render.c) ***/
 
@@ -82,8 +82,8 @@ struct GLUtesselator {
   void		(GLUAPIENTRY *callVertexData)( void *data, void *polygonData );
   void		(GLUAPIENTRY *callEndData)( void *polygonData );
   void		(GLUAPIENTRY *callErrorData)( GLUenum errnum, void *polygonData );
-  void		(GLUAPIENTRY *callCombineData)( GLUdouble coords[3], void *data[4],
-				    GLUfloat weight[4], void **outData,
+  void		(GLUAPIENTRY *callCombineData)( GLUG4double coords[3], void *data[4],
+				    GLUG4float weight[4], void **outData,
 				    void *polygonData );
 
   jmp_buf env;			/* place to jump to when memAllocs fail */
@@ -96,8 +96,8 @@ void GLUAPIENTRY __gl_noEdgeFlagData( GLUboolean boundaryEdge, void *polygonData
 void GLUAPIENTRY __gl_noVertexData( void *data, void *polygonData );
 void GLUAPIENTRY __gl_noEndData( void *polygonData );
 void GLUAPIENTRY __gl_noErrorData( GLUenum errnum, void *polygonData );
-void GLUAPIENTRY __gl_noCombineData( GLUdouble coords[3], void *data[4],
-			 GLUfloat weight[4], void **outData,
+void GLUAPIENTRY __gl_noCombineData( GLUG4double coords[3], void *data[4],
+			 GLUG4float weight[4], void **outData,
 			 void *polygonData );
 
 #define CALL_BEGIN_OR_BEGIN_DATA(a) \

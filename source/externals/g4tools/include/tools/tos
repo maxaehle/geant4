@@ -76,13 +76,13 @@ inline std::string tos(int64 a_value){
   return s;
 }
 
-inline std::string tos(float a_value){
+inline std::string tos(G4float a_value){
   std::string s;
   sprintf(s,32,"%g",a_value);
   return s;
 }
 
-inline std::string tos(double a_value){
+inline std::string tos(G4double a_value){
   std::string s;
   sprintf(s,32,"%g",a_value);
   return s;

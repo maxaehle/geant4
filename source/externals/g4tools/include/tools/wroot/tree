@@ -39,14 +39,14 @@ public: //iobject
     if(!AttFill_stream(a_buffer)) return false;
     if(!AttMarker_stream(a_buffer)) return false;
 
-    double fEntries = (double)m_entries;
+    G4double fEntries = (G4double)m_entries;
     if(!a_buffer.write(fEntries)) return false;
 
-    double fTotBytes = (double)m_tot_bytes;
-    double fZipBytes = (double)m_zip_bytes;
+    G4double fTotBytes = (G4double)m_tot_bytes;
+    G4double fZipBytes = (G4double)m_zip_bytes;
     if(!a_buffer.write(fTotBytes)) return false;
     if(!a_buffer.write(fZipBytes)) return false;
-    if(!a_buffer.write((double)0)) return false; //fSavedBytes
+    if(!a_buffer.write((G4double)0)) return false; //fSavedBytes
     if(!a_buffer.write((int)0)) return false;    //fTimerInterval
     if(!a_buffer.write((int)25)) return false;   //fScanField (25)
     if(!a_buffer.write((int)0)) return false;    //fUpdate
@@ -70,7 +70,7 @@ public: //iobject
     m_leaves.clear();} //WARNING : important.
 
     // fIndexValues (TArrayD).
-    if(!a_buffer.write_array(std::vector<double>())) return false; //TArrayD
+    if(!a_buffer.write_array(std::vector<G4double>())) return false; //TArrayD
     // fIndex (TArrayI).
     if(!a_buffer.write_array(std::vector<int>())) return false; //TArrayI
 

@@ -9,8 +9,8 @@
 namespace tools {
 namespace histo {
 
-class p1d : public p1<double,unsigned int,unsigned int,double,double,double> {
-  typedef p1<double,unsigned int,unsigned int,double,double,double> parent;
+class p1d : public p1<G4double,unsigned int,unsigned int,G4double,G4double,G4double> {
+  typedef p1<G4double,unsigned int,unsigned int,G4double,G4double,G4double> parent;
 public:
   static const std::string& s_class() {
     static const std::string s_v("tools::histo::p1d");
@@ -20,19 +20,19 @@ public:
 public:
   p1d():parent("",10,0,1){} //for I/O when reading.
 
-  p1d(const std::string& a_title,unsigned int aXnumber,double aXmin,double aXmax)
+  p1d(const std::string& a_title,unsigned int aXnumber,G4double aXmin,G4double aXmax)
   :parent(a_title,aXnumber,aXmin,aXmax)
   {}
 
-  p1d(const std::string& a_title,unsigned int aXnumber,double aXmin,double aXmax,double aVmin,double aVmax)
+  p1d(const std::string& a_title,unsigned int aXnumber,G4double aXmin,G4double aXmax,G4double aVmin,G4double aVmax)
   :parent(a_title,aXnumber,aXmin,aXmax,aVmin,aVmax)
   {}
 
-  p1d(const std::string& a_title,const std::vector<double>& a_edges)
+  p1d(const std::string& a_title,const std::vector<G4double>& a_edges)
   :parent(a_title,a_edges)
   {}
 
-  p1d(const std::string& a_title,const std::vector<double>& a_edges,double aVmin,double aVmax)
+  p1d(const std::string& a_title,const std::vector<G4double>& a_edges,G4double aVmin,G4double aVmax)
   :parent(a_title,a_edges,aVmin,aVmax)
   {}
 

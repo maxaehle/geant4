@@ -148,7 +148,7 @@ inline bool AttFill_stream(buffer& a_buffer){
 inline bool AttMarker_stream(buffer& a_buffer) {
   short fMarkerColor = 1;
   short fMarkerStyle = 1;
-  float fMarkerWidth = 1;
+  G4float fMarkerWidth = 1;
   unsigned int c;
   if(!a_buffer.write_version(1,c)) return false;
   if(!a_buffer.write(fMarkerColor)) return false;

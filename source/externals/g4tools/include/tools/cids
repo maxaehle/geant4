@@ -17,8 +17,8 @@ inline cid _cid(unsigned short) {return 3;}
 inline cid _cid(short)          {return 4;}
 inline cid _cid(unsigned int)   {return 5;}
 inline cid _cid(int)            {return 6;}
-inline cid _cid(float)          {return 7;}
-inline cid _cid(double)         {return 8;}
+inline cid _cid(G4float)          {return 7;}
+inline cid _cid(G4double)         {return 8;}
 inline cid _cid(bool)           {return 9;}
 
 // not compiler types :
@@ -69,8 +69,8 @@ inline bool cid2s(cid a_id,std::string& a_s) {
        if(a_id==_cid(char(0)))       {a_s = "char";return true;}
   else if(a_id==_cid(short(0)))      {a_s = "short";return true;}
   else if(a_id==_cid(int(0)))        {a_s = "int";return true;}
-  else if(a_id==_cid(float(0)))      {a_s = "float";return true;}
-  else if(a_id==_cid(double(0)))     {a_s = "double";return true;}
+  else if(a_id==_cid(G4float(0)))      {a_s = "G4float";return true;}
+  else if(a_id==_cid(G4double(0)))     {a_s = "G4double";return true;}
   else if(a_id==_cid(std::string())) {a_s = "string";return true;}
 
   // NOTE : the below do not follow the AIDA convention.
@@ -84,8 +84,8 @@ inline bool cid2s(cid a_id,std::string& a_s) {
   else if(a_id==_cid_std_vector<char>())        {a_s = "char[]";return true;}
   else if(a_id==_cid_std_vector<short>())       {a_s = "short[]";return true;}
   else if(a_id==_cid_std_vector<int>())         {a_s = "int[]";return true;}
-  else if(a_id==_cid_std_vector<float>())       {a_s = "float[]";return true;}
-  else if(a_id==_cid_std_vector<double>())      {a_s = "double[]";return true;}
+  else if(a_id==_cid_std_vector<G4float>())       {a_s = "G4float[]";return true;}
+  else if(a_id==_cid_std_vector<G4double>())      {a_s = "G4double[]";return true;}
   else if(a_id==_cid_std_vector<std::string>()) {a_s = "string[]";return true;}
 
   else if(a_id==_cid_std_vector<unsigned char>())        {a_s = "uchar[]";return true;}

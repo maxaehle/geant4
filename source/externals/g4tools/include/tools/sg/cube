@@ -17,9 +17,9 @@ namespace sg {
 class cube : public node, public render_gstos {
   TOOLS_NODE(cube,tools::sg::cube,node)
 public:
-  sf<float> width;
-  sf<float> height;
-  sf<float> depth;
+  sf<G4float> width;
+  sf<G4float> height;
+  sf<G4float> depth;
 public:
   virtual const desc_fields& node_desc_fields() const {
     TOOLS_FIELD_DESC_NODE_CLASS(tools::sg::cube)
@@ -113,13 +113,13 @@ public:
     return *this;
   }
 protected:
-  void _faces(float front[],float back[],   //[12]
-              float right[],float left[],
-              float   top[],float bottom[]){
+  void _faces(G4float front[],G4float back[],   //[12]
+              G4float right[],G4float left[],
+              G4float   top[],G4float bottom[]){
 
-    float wh = width.value()*0.5f;
-    float hh = height.value()*0.5f;
-    float dh = depth.value()*0.5f;
+    G4float wh = width.value()*0.5f;
+    G4float hh = height.value()*0.5f;
+    G4float dh = depth.value()*0.5f;
 
     front[0] =  wh;front[ 1] = -hh;front[ 2] = dh;
     front[3] =  wh;front[ 4] =  hh;front[ 5] = dh;
@@ -152,13 +152,13 @@ protected:
     bottom[9] =  wh;bottom[10] = -hh;bottom[11] = -dh;
   }
 
-  void _tris(float tris[],float nms[]){ //[108]
-    float front[12];
-    float back[12];
-    float right[12];
-    float left[12];
-    float top[12];
-    float bottom[12];
+  void _tris(G4float tris[],G4float nms[]){ //[108]
+    G4float front[12];
+    G4float back[12];
+    G4float right[12];
+    G4float left[12];
+    G4float top[12];
+    G4float bottom[12];
 
     _faces(front,back,right,left,top,bottom);
 
@@ -465,13 +465,13 @@ protected:
     /////////////////////
   }
 
-  void _lines(float lines[]) { //[144]
-    float front[12];
-    float back[12];
-    float right[12];
-    float left[12];
-    float top[12];
-    float bottom[12];
+  void _lines(G4float lines[]) { //[144]
+    G4float front[12];
+    G4float back[12];
+    G4float right[12];
+    G4float left[12];
+    G4float top[12];
+    G4float bottom[12];
 
     _faces(front,back,right,left,top,bottom);
 
@@ -648,10 +648,10 @@ protected:
     lines[143] = bottom[2];
   }
 
-  void _points(float points[]) { //[24]
-    float wh = width.value()*0.5f;
-    float hh = height.value()*0.5f;
-    float dh = depth.value()*0.5f;
+  void _points(G4float points[]) { //[24]
+    G4float wh = width.value()*0.5f;
+    G4float hh = height.value()*0.5f;
+    G4float dh = depth.value()*0.5f;
 
     points[0] =  wh;points[ 1] = -hh;points[ 2] = dh;
     points[3] =  wh;points[ 4] =  hh;points[ 5] = dh;
@@ -667,17 +667,17 @@ protected:
   template <class T>
   void visit(T& a_visitor,draw_type a_style){
     if(a_style==draw_points) {
-      float points[24];
+      G4float points[24];
       _points(points);
       a_visitor.add_points(24,points);
 
     } else if(a_style==draw_lines) {
-      float lines[144]; //segments
+      G4float lines[144]; //segments
       _lines(lines);
       a_visitor.add_lines(144,lines);
 
     } else if(a_style==draw_filled) {
-      float tris[108];float nms[108];
+      G4float tris[108];G4float nms[108];
       _tris(tris,nms);
       a_visitor.add_triangles_normal(108,tris,nms);
     }

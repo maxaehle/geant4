@@ -394,9 +394,9 @@ protected:
   }
 protected:
   static bool s2type(const std::string& a_s,value::e_type& a_type){
-           if(a_s=="float") {
+           if(a_s=="G4float") {
       a_type = value::FLOAT;
-    } else if(a_s=="double") {
+    } else if(a_s=="G4double") {
       a_type = value::DOUBLE;
     //} else if(a_s=="char") {
     //  a_type = value::CHAR;
@@ -413,9 +413,9 @@ protected:
     //} else if(a_s=="byte") {
     //  a_type = value::UNSIGNED_CHAR;
 
-    } else if(a_s=="float[]") {
+    } else if(a_s=="G4float[]") {
       a_type = value::ARRAY_FLOAT;
-    } else if(a_s=="double[]") {
+    } else if(a_s=="G4double[]") {
       a_type = value::ARRAY_DOUBLE;
     //} else if(a_s=="char[]") {
     //  a_type = value::ARRAY_CHAR;
@@ -448,12 +448,12 @@ protected:
   }
   static value* new_value(value::e_type a_type,const std::string& a_v) {
            if(a_type==value::FLOAT) {
-      float v = 0;
-      if(a_v.size()) {if(!to<float>(a_v,v)) return 0;}
+      G4float v = 0;
+      if(a_v.size()) {if(!to<G4float>(a_v,v)) return 0;}
       return new value(v);
     } else if(a_type==value::DOUBLE) {
-      double v = 0;
-      if(a_v.size()) {if(!to<double>(a_v,v)) return 0;}
+      G4double v = 0;
+      if(a_v.size()) {if(!to<G4double>(a_v,v)) return 0;}
       return new value(v);
     //} else if(a_type==value::CHAR) {
     //  char v = 0;

@@ -26,30 +26,30 @@ public:
   }
 public:
   bool set_is_log(bool a_v) {if(m_is_log==a_v) return false;m_is_log = a_v;return true;}
-  bool set_min_value(float a_v) {if(m_min_value==a_v) return false;m_min_value = a_v;return true;}
-  bool set_max_value(float a_v) {if(m_max_value==a_v) return false;m_max_value = a_v;return true;}
+  bool set_min_value(G4float a_v) {if(m_min_value==a_v) return false;m_min_value = a_v;return true;}
+  bool set_max_value(G4float a_v) {if(m_max_value==a_v) return false;m_max_value = a_v;return true;}
 #ifdef tools_data_axis  //g4tools backcomp :
   bool is_log(bool a_v) {if(m_is_log==a_v) return false;m_is_log = a_v;return true;}
-  bool min_value(float a_v) {if(m_min_value==a_v) return false;m_min_value = a_v;return true;}
-  bool max_value(float a_v) {if(m_max_value==a_v) return false;m_max_value = a_v;return true;}
+  bool min_value(G4float a_v) {if(m_min_value==a_v) return false;m_min_value = a_v;return true;}
+  bool max_value(G4float a_v) {if(m_max_value==a_v) return false;m_max_value = a_v;return true;}
 #endif
-  float min_value() const {return m_min_value;}
-  float max_value() const {return m_max_value;}
+  G4float min_value() const {return m_min_value;}
+  G4float max_value() const {return m_max_value;}
   bool is_log() const {return m_is_log;}
 
   void adjust() { //from hippodraw.
     int _axis = 0;
-    float step;
-    float mylow, myhigh;
+    G4float step;
+    G4float mylow, myhigh;
     int N_NICE = 4;
-    static const float nice[/*N_NICE*/4] = { 1.0,2.0,2.5,5.0 };
+    static const G4float nice[/*N_NICE*/4] = { 1.0,2.0,2.5,5.0 };
 
     if (m_min_value > m_max_value) {
-      float low = m_min_value;
+      G4float low = m_min_value;
       m_min_value = m_max_value;
       m_max_value = low;
     } else if (m_min_value == m_max_value) {
-      float value = m_min_value;
+      G4float value = m_min_value;
       m_min_value = value - 1;
       m_max_value = value + 1;
       return;
@@ -64,8 +64,8 @@ public:
     // If this is being done for an axis (ie m_steps was 0 , then
     // we don't have to go > *m_max_value.
     //
-    float w = (m_max_value - m_min_value)/((float)m_steps);
-    float mag = ffloor(flog10(w));
+    G4float w = (m_max_value - m_min_value)/((G4float)m_steps);
+    G4float mag = ffloor(flog10(w));
     int i = 0;
     do {
       step   = nice[i] * fpow(10.0,mag);
@@ -78,7 +78,7 @@ public:
     while ( ( (_axis==1) && (myhigh < m_max_value)) ||
             ( (_axis==0) && (myhigh <= m_max_value)) );
 
-    float range = myhigh - mylow;
+    G4float range = myhigh - mylow;
 
     // we now have decided on a range. Try to move
     // m_min_value/m_max_value a little
@@ -126,8 +126,8 @@ public:
     m_max_value = myhigh;
   }
 protected:
-  float m_min_value;
-  float m_max_value;
+  G4float m_min_value;
+  G4float m_max_value;
   //int m_steps;
   bool m_is_log;
 };

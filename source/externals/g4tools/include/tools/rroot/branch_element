@@ -210,34 +210,34 @@ public: //branch
       if(fStreamerType==kDouble32) {
         int ndata = fBranchCount->get_ndata();
 #ifdef TOOLS_RROOT_BRANCH_ELEMENT_DUMP
-        ::printf("debug : %s : fID %d : double32 : ndata %d\n",m_name.c_str(),fID,ndata);
+        ::printf("debug : %s : fID %d : G4double32 : ndata %d\n",m_name.c_str(),fID,ndata);
 #endif
-        stl_vector<double>* vec = 0;
+        stl_vector<G4double>* vec = 0;
         if(!m_obj) {
-          vec = new stl_vector<double>;
+          vec = new stl_vector<G4double>;
           m_obj = vec;
         } else {
-          vec = id_cast<iro, stl_vector<double> >(*m_obj);
+          vec = id_cast<iro, stl_vector<G4double> >(*m_obj);
           if(!vec) {
             m_out << "tools::rroot::branch_element::read_leaves : " << sout(m_name) << " :"
-                  << " read(kDouble32) : m_obj is not a stl_vector<double>."
+                  << " read(kDouble32) : m_obj is not a stl_vector<G4double>."
                   << std::endl;
             return false;
           }
         }
 
         vec->resize(ndata);
-        float afloat;
+        G4float aG4float;
         for(int ii=0;ii<ndata;ii++) {
-          if(!a_buffer.read(afloat)) {
+          if(!a_buffer.read(aG4float)) {
             m_out << "tools::rroot::branch_element::read_leaves : " << sout(m_name) << " :"
-                  << " read(float) failed."
+                  << " read(G4float) failed."
                   << std::endl;
             vec->clear();
             return false;
           }
-          //::printf("debug : zzzz %g\n",afloat);
-          (*vec)[ii] = afloat;
+          //::printf("debug : zzzz %g\n",aG4float);
+          (*vec)[ii] = aG4float;
         }
 
         return true;
@@ -245,27 +245,27 @@ public: //branch
       } else if(fStreamerType==kDouble) {
         int ndata = fBranchCount->get_ndata();
 #ifdef TOOLS_RROOT_BRANCH_ELEMENT_DUMP
-        ::printf("debug : %s : fID %d : double : ndata %d\n",m_name.c_str(),fID,ndata);
+        ::printf("debug : %s : fID %d : G4double : ndata %d\n",m_name.c_str(),fID,ndata);
 #endif
-        stl_vector<double>* vec = 0;
+        stl_vector<G4double>* vec = 0;
         if(!m_obj) {
-          vec = new stl_vector<double>;
+          vec = new stl_vector<G4double>;
           m_obj = vec;
         } else {
-          vec = id_cast<iro, stl_vector<double> >(*m_obj);
+          vec = id_cast<iro, stl_vector<G4double> >(*m_obj);
           if(!vec) {
             m_out << "tools::rroot::branch_element::read_leaves : " << sout(m_name) << " :"
-                  << " read(kDouble) : m_obj is not a stl_vector<double>."
+                  << " read(kDouble) : m_obj is not a stl_vector<G4double>."
                   << std::endl;
             return false;
           }
         }
 
         vec->resize(ndata);
-        double* _value = vec_data(*vec);
+        G4double* _value = vec_data(*vec);
         if(!a_buffer.read_fast_array(_value,ndata)) {
           m_out << "tools::rroot::branch_element::read_leaves : " << sout(m_name) << " :"
-                << " read_fast_array(double) failed."
+                << " read_fast_array(G4double) failed."
                 << std::endl;
           vec->clear();
           return false;
@@ -344,9 +344,9 @@ public: //branch
         return false;
       }
 	/*
-        //m_obj = clones_array<float>(m_fac,true,false);  //true = owner of objects.
+        //m_obj = clones_array<G4float>(m_fac,true,false);  //true = owner of objects.
         uint32 ndata = 1;
-        float* _value = new float[ndata];
+        G4float* _value = new G4float[ndata];
         if(!a_buffer.read_fast_array(_value,ndata)) {
           m_out << "tools::rroot::branch_element::read_leaves : \"" << name() << "\" :"
                 << " read_fast_array failed."
@@ -745,9 +745,9 @@ protected:
           case 15:  {b.ReadFastArray((Long64_t*)fAddress, n); break;}
           case 16:  {b.ReadFastArray((ULong64_t*)fAddress, n); break;}
 		  case  9:  {Double_t *xx = (Double_t*)fAddress;
-			            Float_t afloat;
+			            Float_t aG4float;
 						for (Int_t ii=0;ii<n;ii++) {
-				            b>> afloat; xx[ii] = Double_t(afloat);
+				            b>> aG4float; xx[ii] = Double_t(aG4float);
 						} break;}
 */
 /* 6.12.06 version 10 : fStreamerType : from meta/inc/TVirtualStreamerInfo.h :

@@ -174,7 +174,7 @@ public:
       return false;
     }
     wps.PS_BEGIN_PAGE();
-    wps.PS_PAGE_SCALE(float(a_width),float(a_height));
+    wps.PS_PAGE_SCALE(G4float(a_width),G4float(a_height));
     wps.PS_IMAGE(a_width,a_height,wps::rgb_4,sg::zb_action::get_rgb,&action);
     wps.PS_END_PAGE();
     wps.close_file();
@@ -199,7 +199,7 @@ public:
     action.zbuffer().clear_depth_buffer();
     sg().render(action);
     m_wps.PS_BEGIN_PAGE();
-    m_wps.PS_PAGE_SCALE(float(a_width),float(a_height));
+    m_wps.PS_PAGE_SCALE(G4float(a_width),G4float(a_height));
     m_wps.PS_IMAGE(a_width,a_height,wps::rgb_4,sg::zb_action::get_rgb,&action);
     m_wps.PS_END_PAGE();
     return true;
@@ -222,7 +222,7 @@ protected:
     m_sg.clear();
 
     m_camera.height = 1;
-    float z = 10*1;
+    G4float z = 10*1;
     m_camera.znear = 0.1f*z;
     m_camera.zfar = 10*z; //100*z induces problems with lego rendering.
     m_camera.position = vec3f(0,0,z);

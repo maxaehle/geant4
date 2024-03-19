@@ -25,34 +25,34 @@ public:
   bool reset();
   unsigned int entries() const;
 public:
-  double sum_of_weights() const;
+  G4double sum_of_weights() const;
   bool convert_to_histogram();
   bool is_converted() const;
-  bool scale(double);
+  bool scale(G4double);
 public:
-  bool fill(double,double,double,double = 1);
-  double lower_edge_x() const;
-  double upper_edge_x() const;
-  double lower_edge_y() const;
-  double upper_edge_y() const;
-  double lower_edge_z() const;
-  double upper_edge_z() const;
-  double value_x(unsigned int) const;
-  double value_y(unsigned int) const;
-  double value_z(unsigned int) const;
-  double weight(unsigned int) const;
-  double mean_x() const;
-  double mean_y() const;
-  double mean_z() const;
-  double rms_x() const;
-  double rms_y() const;
-  double rms_z() const;
-  bool convert(unsigned int,double,double,
-               unsigned int,double,double,
-               unsigned int,double,double);
-  bool convert(const std::vector<double>&,
-                       const std::vector<double>&,
-                       const std::vector<double>&);
+  bool fill(G4double,G4double,G4double,G4double = 1);
+  G4double lower_edge_x() const;
+  G4double upper_edge_x() const;
+  G4double lower_edge_y() const;
+  G4double upper_edge_y() const;
+  G4double lower_edge_z() const;
+  G4double upper_edge_z() const;
+  G4double value_x(unsigned int) const;
+  G4double value_y(unsigned int) const;
+  G4double value_z(unsigned int) const;
+  G4double weight(unsigned int) const;
+  G4double mean_x() const;
+  G4double mean_y() const;
+  G4double mean_z() const;
+  G4double rms_x() const;
+  G4double rms_y() const;
+  G4double rms_z() const;
+  bool convert(unsigned int,G4double,G4double,
+               unsigned int,G4double,G4double,
+               unsigned int,G4double,G4double);
+  bool convert(const std::vector<G4double>&,
+                       const std::vector<G4double>&,
+                       const std::vector<G4double>&);
   const histo::h3d& histogram() const;
   bool fill_histogram(histo::h3d& a_histo) const {
     size_t number = m_xs.size();
@@ -61,9 +61,9 @@ public:
     }
     return true;
   }
-  bool set_conversion_parameters(unsigned int,double,double,
-                                 unsigned int,double,double,
-                                 unsigned int,double,double);
+  bool set_conversion_parameters(unsigned int,G4double,G4double,
+                                 unsigned int,G4double,G4double,
+                                 unsigned int,G4double,G4double);
 
   bool set_histogram(h3d* a_histo){ //we take ownership of a_histo.
     reset();
@@ -146,31 +146,31 @@ public:
 protected:
   void clear();
 protected:
-  std::vector<double> m_xs;
-  std::vector<double> m_ys;
-  std::vector<double> m_zs;
-  double m_lower_x;
-  double m_upper_x;
-  double m_lower_y;
-  double m_upper_y;
-  double m_lower_z;
-  double m_upper_z;
-  double m_Sxw;
-  double m_Sx2w;
-  double m_Syw;
-  double m_Sy2w;
-  double m_Szw;
-  double m_Sz2w;
+  std::vector<G4double> m_xs;
+  std::vector<G4double> m_ys;
+  std::vector<G4double> m_zs;
+  G4double m_lower_x;
+  G4double m_upper_x;
+  G4double m_lower_y;
+  G4double m_upper_y;
+  G4double m_lower_z;
+  G4double m_upper_z;
+  G4double m_Sxw;
+  G4double m_Sx2w;
+  G4double m_Syw;
+  G4double m_Sy2w;
+  G4double m_Szw;
+  G4double m_Sz2w;
   //
   unsigned int m_cnv_x_num;
-  double m_cnv_x_min;
-  double m_cnv_x_max;
+  G4double m_cnv_x_min;
+  G4double m_cnv_x_max;
   unsigned int m_cnv_y_num;
-  double m_cnv_y_min;
-  double m_cnv_y_max;
+  G4double m_cnv_y_min;
+  G4double m_cnv_y_max;
   unsigned int m_cnv_z_num;
-  double m_cnv_z_min;
-  double m_cnv_z_max;
+  G4double m_cnv_z_min;
+  G4double m_cnv_z_max;
   histo::h3d* m_histo;
 };
 
@@ -261,9 +261,9 @@ void c3d::clear(){
 
 inline
 bool c3d::convert(
- unsigned int a_bins_x,double a_lower_edge_x,double a_upper_edge_x
-,unsigned int a_bins_y,double a_lower_edge_y,double a_upper_edge_y
-,unsigned int a_bins_z,double a_lower_edge_z,double a_upper_edge_z
+ unsigned int a_bins_x,G4double a_lower_edge_x,G4double a_upper_edge_x
+,unsigned int a_bins_y,G4double a_lower_edge_y,G4double a_upper_edge_y
+,unsigned int a_bins_z,G4double a_lower_edge_z,G4double a_upper_edge_z
 ) {
   if(m_histo) return true; // Done.
   m_histo = new histo::h3d(base_cloud::title(),
@@ -281,9 +281,9 @@ bool c3d::convert_to_histogram(){
   if( (m_cnv_x_num<=0) || (m_cnv_x_max<=m_cnv_x_min) ||
       (m_cnv_y_num<=0) || (m_cnv_y_max<=m_cnv_y_min) ||
       (m_cnv_z_num<=0) || (m_cnv_z_max<=m_cnv_z_min) ) {
-    double dx = 0.01 * (upper_edge_x() - lower_edge_x())/BINS();
-    double dy = 0.01 * (upper_edge_y() - lower_edge_y())/BINS();
-    double dz = 0.01 * (upper_edge_z() - lower_edge_z())/BINS();
+    G4double dx = 0.01 * (upper_edge_x() - lower_edge_x())/BINS();
+    G4double dy = 0.01 * (upper_edge_y() - lower_edge_y())/BINS();
+    G4double dz = 0.01 * (upper_edge_z() - lower_edge_z())/BINS();
     return convert(BINS(),lower_edge_x(),upper_edge_x()+dx,
                    BINS(),lower_edge_y(),upper_edge_y()+dy,
                    BINS(),lower_edge_z(),upper_edge_z()+dz);
@@ -302,7 +302,7 @@ bool c3d::set_title(const std::string& a_title){
 }
 
 inline
-bool c3d::scale(double a_scale) {
+bool c3d::scale(G4double a_scale) {
   if(m_histo) {
     return m_histo->scale(a_scale);
   } else {
@@ -321,9 +321,9 @@ bool c3d::scale(double a_scale) {
 
 inline
 bool c3d::set_conversion_parameters(
- unsigned int aCnvXnumber,double aCnvXmin,double aCnvXmax
-,unsigned int aCnvYnumber,double aCnvYmin,double aCnvYmax
-,unsigned int aCnvZnumber,double aCnvZmin,double aCnvZmax
+ unsigned int aCnvXnumber,G4double aCnvXmin,G4double aCnvXmax
+,unsigned int aCnvYnumber,G4double aCnvYmin,G4double aCnvYmax
+,unsigned int aCnvZnumber,G4double aCnvZmin,G4double aCnvZmax
 ){
   m_cnv_x_num = aCnvXnumber;
   m_cnv_x_min = aCnvXmin;
@@ -353,7 +353,7 @@ bool c3d::reset() {
 }
 
 inline
-bool c3d::fill(double aX,double aY,double aZ,double aW){
+bool c3d::fill(G4double aX,G4double aY,G4double aZ,G4double aW){
   if(!m_histo && (m_limit!=UNLIMITED()) && ((int)m_xs.size()>=m_limit)){
     convert_to_histogram();
   }
@@ -362,22 +362,22 @@ bool c3d::fill(double aX,double aY,double aZ,double aW){
     return m_histo->fill(aX,aY,aZ,aW);
   } else {
     if(m_xs.size()) {
-      m_lower_x = mn<double>(aX,m_lower_x);
-      m_upper_x = mx<double>(aX,m_upper_x);
+      m_lower_x = mn<G4double>(aX,m_lower_x);
+      m_upper_x = mx<G4double>(aX,m_upper_x);
     } else {
       m_lower_x = aX;
       m_upper_x = aX;
     }
     if(m_ys.size()) {
-      m_lower_y = mn<double>(aY,m_lower_y);
-      m_upper_y = mx<double>(aY,m_upper_y);
+      m_lower_y = mn<G4double>(aY,m_lower_y);
+      m_upper_y = mx<G4double>(aY,m_upper_y);
     } else {
       m_lower_y = aY;
       m_upper_y = aY;
     }
     if(m_zs.size()) {
-      m_lower_z = mn<double>(aZ,m_lower_z);
-      m_upper_z = mx<double>(aZ,m_upper_z);
+      m_lower_z = mn<G4double>(aZ,m_lower_z);
+      m_upper_z = mx<G4double>(aZ,m_upper_z);
     } else {
       m_lower_z = aZ;
       m_upper_z = aZ;
@@ -387,13 +387,13 @@ bool c3d::fill(double aX,double aY,double aZ,double aW){
     m_zs.push_back(aZ);
     m_ws.push_back(aW);
     m_Sw += aW;
-    double xw = aX * aW;
+    G4double xw = aX * aW;
     m_Sxw += xw;
     m_Sx2w += aX * xw;
-    double yw = aY * aW;
+    G4double yw = aY * aW;
     m_Syw += yw;
     m_Sy2w += aY * yw;
-    double zw = aZ * aW;
+    G4double zw = aZ * aW;
     m_Szw += zw;
     m_Sz2w += aZ * zw;
     return true;
@@ -402,9 +402,9 @@ bool c3d::fill(double aX,double aY,double aZ,double aW){
 
 inline
 bool c3d::convert(
- const std::vector<double>& a_edges_x
-,const std::vector<double>& a_edges_y
-,const std::vector<double>& a_edges_z
+ const std::vector<G4double>& a_edges_x
+,const std::vector<G4double>& a_edges_y
+,const std::vector<G4double>& a_edges_z
 ) {
   if(m_histo) return true;
   m_histo = new histo::h3d(base_cloud::title(),
@@ -416,7 +416,7 @@ bool c3d::convert(
 }
 
 inline
-double c3d::sum_of_weights() const {
+G4double c3d::sum_of_weights() const {
   return (m_histo ? m_histo->sum_bin_heights() : m_Sw);
 }
 
@@ -426,94 +426,94 @@ unsigned int c3d::entries() const {
 }
 
 inline
-double c3d::lower_edge_x() const {
+G4double c3d::lower_edge_x() const {
   return m_histo ? m_histo->axis_x().lower_edge() : m_lower_x;
 }
 inline
-double c3d::lower_edge_y() const {
+G4double c3d::lower_edge_y() const {
   return m_histo ? m_histo->axis_y().lower_edge() : m_lower_y;
 }
 inline
-double c3d::lower_edge_z() const {
+G4double c3d::lower_edge_z() const {
   return m_histo ? m_histo->axis_z().lower_edge() : m_lower_z;
 }
 inline
-double c3d::upper_edge_x() const {
+G4double c3d::upper_edge_x() const {
   return m_histo ? m_histo->axis_x().upper_edge() : m_upper_x;
 }
 inline
-double c3d::upper_edge_y() const {
+G4double c3d::upper_edge_y() const {
   return m_histo ? m_histo->axis_y().upper_edge() : m_upper_y;
 }
 inline
-double c3d::upper_edge_z() const {
+G4double c3d::upper_edge_z() const {
   return m_histo ? m_histo->axis_z().upper_edge() : m_upper_z;
 }
 inline
-double c3d::value_x(unsigned int a_index) const {
+G4double c3d::value_x(unsigned int a_index) const {
   return m_histo ? 0 : m_xs[a_index];
 }
 inline
-double c3d::value_y(unsigned int a_index) const {
+G4double c3d::value_y(unsigned int a_index) const {
   return m_histo ? 0 : m_ys[a_index];
 }
 inline
-double c3d::value_z(unsigned int a_index) const {
+G4double c3d::value_z(unsigned int a_index) const {
   return m_histo ? 0 : m_zs[a_index];
 }
 inline
-double c3d::weight(unsigned int a_index) const {
+G4double c3d::weight(unsigned int a_index) const {
   return m_histo ? 0 : m_ws[a_index];
 }
 inline
-double c3d::mean_x() const {
+G4double c3d::mean_x() const {
   return m_histo ? m_histo->mean_x() : (m_Sw?m_Sxw/m_Sw:0);
 }
 inline
-double c3d::mean_y() const {
+G4double c3d::mean_y() const {
   return m_histo ? m_histo->mean_y() : (m_Sw?m_Syw/m_Sw:0);
 }
 inline
-double c3d::mean_z() const {
+G4double c3d::mean_z() const {
   return m_histo ? m_histo->mean_z() : (m_Sw?m_Szw/m_Sw:0);
 }
 inline
-double c3d::rms_x() const {
-  double rms = 0; //FIXME nan.
+G4double c3d::rms_x() const {
+  G4double rms = 0; //FIXME nan.
   if(m_histo) {
     rms = m_histo->rms_x();
   } else {
     if(m_Sw==0) {
     } else {
-      double mean = m_Sxw / m_Sw;
+      G4double mean = m_Sxw / m_Sw;
       rms = ::sqrt(::fabs( (m_Sx2w / m_Sw) - mean * mean));
     }
   }
   return rms;
 }
 inline
-double c3d::rms_y() const {
-  double rms = 0; //FIXME nan.
+G4double c3d::rms_y() const {
+  G4double rms = 0; //FIXME nan.
   if(m_histo) {
     rms = m_histo->rms_y();
   } else {
     if(m_Sw==0) {
     } else {
-      double mean = m_Syw / m_Sw;
+      G4double mean = m_Syw / m_Sw;
       rms = ::sqrt(::fabs( (m_Sy2w / m_Sw) - mean * mean));
     }
   }
   return rms;
 }
 inline
-double c3d::rms_z() const {
-  double rms = 0; //FIXME nan.
+G4double c3d::rms_z() const {
+  G4double rms = 0; //FIXME nan.
   if(m_histo) {
     rms = m_histo->rms_z();
   } else {
     if(m_Sw==0) {
     } else {
-      double mean = m_Szw / m_Sw;
+      G4double mean = m_Szw / m_Sw;
       rms = ::sqrt(::fabs( (m_Sz2w / m_Sw) - mean * mean));
     }
   }

@@ -6,8 +6,8 @@
 
 /* NOTE : bof, no big improvement.
 #include <cstring> //memcpy
-inline void vec_copy(double* a_to,const double* a_from,unsigned int a_number) {
-  ::memcpy(a_to,a_from,a_number*sizeof(double));
+inline void vec_copy(G4double* a_to,const G4double* a_from,unsigned int a_number) {
+  ::memcpy(a_to,a_from,a_number*sizeof(G4double));
 }
 
 template <class T>
@@ -21,10 +21,10 @@ inline void vec_copy(T* a_to,const T* a_from,unsigned int a_number) {
 /*NOTE : bof, no big improvement.
 #include <Accelerate/Accelerate.h>
 
-inline void vec_add(const float* a_1,const float* a_2,float* a_res,unsigned int a_number) {
+inline void vec_add(const G4float* a_1,const G4float* a_2,G4float* a_res,unsigned int a_number) {
   ::vDSP_vadd(a_1,1,a_2,1,a_res,1,a_number);
 }
-inline void vec_sub(const float* a_1,const float* a_2,float* a_res,unsigned int a_number) {
+inline void vec_sub(const G4float* a_1,const G4float* a_2,G4float* a_res,unsigned int a_number) {
   ::vDSP_vsub(a_1,1,a_2,1,a_res,1,a_number);
 }
 */
@@ -576,7 +576,7 @@ public:\
   }\
 \
   T determinant(unsigned int a_tmp_rs[],unsigned int a_tmp_cs[]) const { /*[rord=dim-1]*/ \
-    return determinant_prec<double>(a_tmp_rs,a_tmp_cs,0,zero_fabs);\
+    return determinant_prec<G4double>(a_tmp_rs,a_tmp_cs,0,zero_fabs);\
   }\
 \
   T determinant() const {\
@@ -807,11 +807,11 @@ public:\
   }\
 \
   bool invert(TOOLS_MAT_CLASS& a_res,unsigned int a_tmp_rs[],unsigned int a_tmp_cs[]) const { /*[rord=dim-1]*/ \
-    return invert_prec<double>(a_res,a_tmp_rs,a_tmp_cs,0,zero_fabs);\
+    return invert_prec<G4double>(a_res,a_tmp_rs,a_tmp_cs,0,zero_fabs);\
   }\
 \
   bool invert(TOOLS_MAT_CLASS& a_res) const {\
-    return invert_prec<double>(a_res,0,zero_fabs);\
+    return invert_prec<G4double>(a_res,0,zero_fabs);\
   }\
 \
   void power(unsigned int a_n,TOOLS_MAT_CLASS& a_res) const {\
@@ -925,7 +925,7 @@ public:\
 \
   template <class MAT>\
   bool copy(const MAT& a_from) {\
-    /*for exa from a double matrix to a symbol matrix*/\
+    /*for exa from a G4double matrix to a symbol matrix*/\
     unsigned int _D = dimension();\
     if(a_from.dimension()!=_D) return false;\
     for(unsigned int r=0;r<_D;r++) {\
@@ -1133,6 +1133,6 @@ protected:\
     return det;\
   }\
 \
-  static double zero_fabs(const T& a_number) {return a_number==zero()?0:1000000;}
+  static G4double zero_fabs(const T& a_number) {return a_number==zero()?0:1000000;}
 
 #endif

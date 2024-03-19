@@ -10,7 +10,7 @@
 #include "style_parser"
 
 #include <string>
-#include <cfloat> //FLT_MAX
+#include <cG4float> //FLT_MAX
 
 namespace tools {
 namespace sg {
@@ -23,7 +23,7 @@ class base_colormap {
   }
 #endif
 public:
-  virtual void get_color(float,colorf&) const = 0;
+  virtual void get_color(G4float,colorf&) const = 0;
   virtual void* cast(const std::string&) const = 0;
 public:
   base_colormap(){
@@ -55,18 +55,18 @@ public:
     if(a_index>=n) return colorf(0.5F,0.5F,0.5F);
     return m_colors[a_index];
   }
-  float value(size_t a_index) const {
+  G4float value(size_t a_index) const {
     size_t n = m_values.size();
     if(a_index>=n) return 0;
     return m_values[a_index];
   }
 public:
   // helper :
-  void set_colors(void(*aGet)(float,colorf&),size_t a_ncell) {
+  void set_colors(void(*aGet)(G4float,colorf&),size_t a_ncell) {
     m_colors.clear();
     m_colors.resize(a_ncell);
     if(!a_ncell) return;
-    float d = 1.0F/(a_ncell-1);
+    G4float d = 1.0F/(a_ncell-1);
     for(size_t index=0;index<a_ncell;index++) {
       aGet(d*index,m_colors[index]);
     }
@@ -79,9 +79,9 @@ public:
     } else if(_valn>=2) {
       //CERN/PAW coloring :
       if(m_values[0]==0) m_values[0] = 10e-5F;
-      float vmin = take_log(m_values[0]);
-      float vmax = take_log(m_values[_valn-1]);
-      float dv = (vmax-vmin)/(_valn-1);
+      G4float vmin = take_log(m_values[0]);
+      G4float vmax = take_log(m_values[_valn-1]);
+      G4float dv = (vmax-vmin)/(_valn-1);
       for(size_t count=0;count<_valn;count++) {
         m_values[count] = vmin + dv * count;
       }
@@ -89,7 +89,7 @@ public:
   }
 
 protected:
-  static float take_log(float aVal){
+  static G4float take_log(G4float aVal){
     if(aVal<=0) {
       return -FLT_MAX;
     } else {
@@ -98,7 +98,7 @@ protected:
   }
 
 protected:
-  std::vector<float> m_values;
+  std::vector<G4float> m_values;
   std::vector<colorf> m_colors;
 };
 
@@ -106,7 +106,7 @@ class by_value_colormap : public base_colormap {
 public:
   TOOLS_SCLASS(tools::sg::by_value_colormap)
 public:
-  virtual void get_color(float a_value,colorf& a_col) const{
+  virtual void get_color(G4float a_value,colorf& a_col) const{
     get_by_value(a_value,m_values,m_colors,a_col);
   }
   virtual void* cast(const std::string& a_class) const {
@@ -129,7 +129,7 @@ protected:
   static void set_by_value(std::ostream& a_out,
                            const sg::cmaps_t& a_cmaps,
                            const std::string& aString,
-                           std::vector<float>& aValues,
+                           std::vector<G4float>& aValues,
                            std::vector<colorf>& aColors) {
     //  The given string is of the format :
     //      [<color name> <value>] <color name>
@@ -156,7 +156,7 @@ protected:
       //   <col> <num> <col> ... <num> <col>
       // or :
       //   <num> <col> <num> ... <col> <num>
-      // FIXME : case of <col> being three floats ?
+      // FIXME : case of <col> being three G4floats ?
       colorf c;
       if(sg::find_color(a_cmaps,ws[0],c)) {
         // <col> <num> <col> ... <num> <col>
@@ -233,8 +233,8 @@ protected:
     }
   }
 
-  static void get_by_value(float aValue,
-                           const std::vector<float>& aValues,
+  static void get_by_value(G4float aValue,
+                           const std::vector<G4float>& aValues,
                            const std::vector<colorf>& aColors,
                            colorf& a_col){
     // There are aValuen (n) entries in aValues and (n+1) aColors
@@ -293,7 +293,7 @@ class grey_scale_colormap : public base_colormap {
 public:
   TOOLS_SCLASS(tools::sg::grey_scale_colormap)
 public:
-  virtual void get_color(float a_value,colorf& a_col) const { //a_value in [0,1]
+  virtual void get_color(G4float a_value,colorf& a_col) const { //a_value in [0,1]
     get_grey(a_value,a_col);
   }
   virtual void* cast(const std::string& a_class) const {
@@ -302,7 +302,7 @@ public:
   }
 public:
   grey_scale_colormap() {}  //if not drawn in sg::plotter.
-  grey_scale_colormap(float a_min,float a_max,size_t a_ncell){
+  grey_scale_colormap(G4float a_min,G4float a_max,size_t a_ncell){
     //note : a_min, a_max, a_ncell (and then m_colors, m_values) are used by sg::plotter::update_cmap().
     m_values.resize(2);
     m_values[0] = a_min;
@@ -316,7 +316,7 @@ public:
   }
   virtual ~grey_scale_colormap(){}
 protected:
-  static void get_grey(float a_ratio,colorf& a_col) {
+  static void get_grey(G4float a_ratio,colorf& a_col) {
     if(a_ratio<0.0F) a_ratio = 0;
     if(a_ratio>1.0F) a_ratio = 1;
     a_col.set_value(a_ratio,a_ratio,a_ratio,1);
@@ -327,7 +327,7 @@ class grey_scale_inverse_colormap : public base_colormap {
 public:
   TOOLS_SCLASS(tools::sg::grey_scale_inverse_colormap)
 public:
-  virtual void get_color(float a_value,colorf& a_col) const { //a_value in [0,1]
+  virtual void get_color(G4float a_value,colorf& a_col) const { //a_value in [0,1]
     get_grey_inverse(a_value,a_col);
   }
   virtual void* cast(const std::string& a_class) const {
@@ -336,7 +336,7 @@ public:
   }
 public:
   grey_scale_inverse_colormap() {}  //if not drawn in sg::plotter.
-  grey_scale_inverse_colormap(float a_min,float a_max,size_t a_ncell){
+  grey_scale_inverse_colormap(G4float a_min,G4float a_max,size_t a_ncell){
     //note : a_min, a_max, a_ncell (and then m_colors, m_values) are used by sg::plotter::update_cmap().
     m_values.resize(2);
     m_values[0] = a_min;
@@ -350,7 +350,7 @@ public:
   }
   virtual ~grey_scale_inverse_colormap(){}
 protected:
-  static void get_grey_inverse(float a_ratio,colorf& a_col){
+  static void get_grey_inverse(G4float a_ratio,colorf& a_col){
     if(a_ratio<0.0F) a_ratio = 0;
     if(a_ratio>1.0F) a_ratio = 1;
     a_ratio = 1 - a_ratio;
@@ -362,7 +362,7 @@ class violet_to_red_colormap : public base_colormap {
 public:
   TOOLS_SCLASS(tools::sg::violet_to_red_colormap)
 public:
-  virtual void get_color(float a_value,colorf& a_col) const { //a_value in [0,1]
+  virtual void get_color(G4float a_value,colorf& a_col) const { //a_value in [0,1]
     get_violet_to_red(a_value,a_col);
   }
   virtual void* cast(const std::string& a_class) const {
@@ -371,7 +371,7 @@ public:
   }
 public:
   violet_to_red_colormap() {}  //if not drawn in sg::plotter.
-  violet_to_red_colormap(float a_min,float a_max,size_t a_ncell){
+  violet_to_red_colormap(G4float a_min,G4float a_max,size_t a_ncell){
     //note : a_min, a_max, a_ncell (and then m_colors, m_values) are used by sg::plotter::update_cmap().
     set(a_min,a_max,a_ncell);
   }
@@ -382,14 +382,14 @@ public:
   }
   virtual ~violet_to_red_colormap(){}
 public:
-  void set(float a_min,float a_max,size_t a_ncell){
+  void set(G4float a_min,G4float a_max,size_t a_ncell){
     m_values.resize(2);
     m_values[0] = a_min;
     m_values[1] = a_max;
     set_colors(get_violet_to_red,a_ncell);
   }
 protected:
-  static void get_violet_to_red(float a_ratio,colorf& a_col){
+  static void get_violet_to_red(G4float a_ratio,colorf& a_col){
     if(a_ratio<0.0F) a_ratio = 0;
     if(a_ratio>1.0F) a_ratio = 1;
     // a_ratio in [0,1]
@@ -400,12 +400,12 @@ protected:
     // Fixing the saturation and lightness we can scan through the
     // spectrum of visible light by using "hue" alone.
     // In Root hue takes values from 0 to 360.
-    float saturation = 1;
-    float lightness = 0.5;
-    float hue_mn = 0;
-    float hue_mx = 280;
-    float hue = hue_mx - a_ratio * (hue_mx-hue_mn);
-    float r,g,b;
+    G4float saturation = 1;
+    G4float lightness = 0.5;
+    G4float hue_mn = 0;
+    G4float hue_mx = 280;
+    G4float hue = hue_mx - a_ratio * (hue_mx-hue_mn);
+    G4float r,g,b;
     hls_to_rgb(hue,lightness,saturation,r,g,b);
     a_col.set_value(r,g,b,1);
   }
@@ -416,7 +416,7 @@ class const_colormap : public base_colormap {
 public:
   TOOLS_SCLASS(tools::sg::const_colormap)
 public:
-  virtual void get_color(float,colorf& a_col) const { //a_value in [0,1]
+  virtual void get_color(G4float,colorf& a_col) const { //a_value in [0,1]
     a_col = m_colors[0];
   }
   virtual void* cast(const std::string& a_class) const {

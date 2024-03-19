@@ -4,16 +4,16 @@
 #ifndef tools_histo_h1df
 #define tools_histo_h1df
 
-// coord is in double.
-// weight is in float.
+// coord is in G4double.
+// weight is in G4float.
 
 #include "h1"
 
 namespace tools {
 namespace histo {
 
-class h1df : public h1<double,unsigned int,unsigned int,float,float> {
-  typedef h1<double,unsigned int,unsigned int,float,float> parent;
+class h1df : public h1<G4double,unsigned int,unsigned int,G4float,G4float> {
+  typedef h1<G4double,unsigned int,unsigned int,G4float,G4float> parent;
 public:
   static const std::string& s_class() {
     static const std::string s_v("tools::histo::h1df");
@@ -21,10 +21,10 @@ public:
   }
   const std::string& s_cls() const {return s_class();}
 public:
-  h1df(const std::string& a_title,unsigned int aXnumber,float aXmin,float aXmax)
+  h1df(const std::string& a_title,unsigned int aXnumber,G4float aXmin,G4float aXmax)
   :parent(a_title,aXnumber,aXmin,aXmax){}
 
-  h1df(const std::string& a_title,const std::vector<double>& a_edges)
+  h1df(const std::string& a_title,const std::vector<G4double>& a_edges)
   :parent(a_title,a_edges){}
 
   virtual ~h1df(){}

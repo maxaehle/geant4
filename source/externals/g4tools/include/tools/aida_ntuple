@@ -196,7 +196,7 @@ public:
     //  tuple.start();
     //  while(tuple.next()) {
     //    ...
-    //    double v;
+    //    G4double v;
     //    if(!col->get_entry(v)) {}
     //    ...
     //  }
@@ -259,12 +259,12 @@ inline const std::string& s_aida_type(int) {
   static const std::string s_v("int");
   return s_v;
 }
-inline const std::string& s_aida_type(float) {
-  static const std::string s_v("float");
+inline const std::string& s_aida_type(G4float) {
+  static const std::string s_v("G4float");
   return s_v;
 }
-inline const std::string& s_aida_type(double) {
-  static const std::string s_v("double");
+inline const std::string& s_aida_type(G4double) {
+  static const std::string s_v("G4double");
   return s_v;
 }
 
@@ -288,8 +288,8 @@ inline const std::string& s_aida_type(int64) {
   return s_v;
 }
 /*
-inline const std::string& s_aida_type(const std::vector<double>&) {
-  static const std::string s_v("double[]");
+inline const std::string& s_aida_type(const std::vector<G4double>&) {
+  static const std::string s_v("G4double[]");
   return s_v;
 }
 */
@@ -381,11 +381,11 @@ inline bool s__fill(const std::string& a_s,int64& a_v) {
 inline bool s__fill(const std::string& a_s,uint64& a_v) {
   return to<uint64>(a_s,a_v);
 }
-inline bool s__fill(const std::string& a_s,float& a_v) {
-  return to<float>(a_s,a_v);
+inline bool s__fill(const std::string& a_s,G4float& a_v) {
+  return to<G4float>(a_s,a_v);
 }
-inline bool s__fill(const std::string& a_s,double& a_v) {
-  return to<double>(a_s,a_v);
+inline bool s__fill(const std::string& a_s,G4double& a_v) {
+  return to<G4double>(a_s,a_v);
 }
 
 template <class T>
@@ -766,9 +766,9 @@ inline bool create_cols_from_vals(ntuple& a_ntu,
                       << std::endl;
         }
 
-        //   char,short,int,float,double
+        //   char,short,int,G4float,G4double
         //   byte,boolean,string,long(for int64)
-        //   double[]
+        //   G4double[]
 
         base_col* col = 0;
       /*if((*it).type()==value::CHAR) {
@@ -780,9 +780,9 @@ inline bool create_cols_from_vals(ntuple& a_ntu,
         } else if((*it).type()==value::INT64) {
           col = a_ntu.create_col<int64>((*it).label(),(*it).get_int64());
         } else if((*it).type()==value::FLOAT) {
-          col = a_ntu.create_col<float>((*it).label(),(*it).get_float());
+          col = a_ntu.create_col<G4float>((*it).label(),(*it).get_G4float());
         } else if((*it).type()==value::DOUBLE) {
-          col = a_ntu.create_col<double>((*it).label(),(*it).get_double());
+          col = a_ntu.create_col<G4double>((*it).label(),(*it).get_G4double());
 
         //} else if((*it).type()==value::UNSIGNED_CHAR) {
         //  col = a_ntu.create_col<unsigned char>((*it).label(),(*it).get_unsigned_char());
@@ -889,16 +889,16 @@ inline bool create_col(ntuple& a_ntu,
       return false;
     }
 
-  } else if(a_type==s_aida_type((float)0)) {
-    float v = 0;
-    if(a_s.size()&&!to<float>(a_s,v)) {
+  } else if(a_type==s_aida_type((G4float)0)) {
+    G4float v = 0;
+    if(a_s.size()&&!to<G4float>(a_s,v)) {
       a_ntu.out() << "tools::aida::create_col :"
                   << " can't convert def " << sout(a_s)
                   << " to a " << a_type
                   << std::endl;
       return false;
     }
-    if(!a_ntu.create_col<float>(a_name,v)) {
+    if(!a_ntu.create_col<G4float>(a_name,v)) {
       a_ntu.out() << "tools::aida::create_col :"
                   << " can't create column of type " << sout(a_type)
                   << std::endl;
@@ -906,16 +906,16 @@ inline bool create_col(ntuple& a_ntu,
     }
 
 
-  } else if(a_type==s_aida_type((double)0)) {
-    double v = 0;
-    if(a_s.size()&&!to<double>(a_s,v)) {
+  } else if(a_type==s_aida_type((G4double)0)) {
+    G4double v = 0;
+    if(a_s.size()&&!to<G4double>(a_s,v)) {
       a_ntu.out() << "tools::aida::create_col :"
                   << " can't convert def " << sout(a_s)
                   << " to a " << a_type
                   << std::endl;
       return false;
     }
-    if(!a_ntu.create_col<double>(a_name,v)) {
+    if(!a_ntu.create_col<G4double>(a_name,v)) {
       a_ntu.out() << "tools::aida::create_col :"
                   << " can't create column of type " << sout(a_type)
                   << std::endl;
@@ -1075,7 +1075,7 @@ inline bool create_col(ntuple& a_ntu,
     columns::delete_columns(vars);
     a_ntu.add_column(col_ntu);
 
-    //FIXME : double[]
+    //FIXME : G4double[]
 
   } else {
     a_ntu.out() << "tools::aida::create_col :"
@@ -1384,7 +1384,7 @@ inline base_col* find_leaf_column(const base_ntu& a_ntu,const std::string& a_nam
 }
 
 template <class T>
-inline bool to_vector(base_ntu& a_ntu,std::vector<double>& a_vec,unsigned int a_col = 0) {
+inline bool to_vector(base_ntu& a_ntu,std::vector<G4double>& a_vec,unsigned int a_col = 0) {
   a_vec.clear();
   const std::vector<base_col*>& cols = a_ntu.columns();
   if(cols.empty()) return false;

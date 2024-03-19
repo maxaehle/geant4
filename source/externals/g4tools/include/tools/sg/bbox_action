@@ -15,91 +15,91 @@ namespace sg {
 class bbox_action : public matrix_action,public primitive_visitor {
   TOOLS_ACTION(bbox_action,tools::sg::bbox_action,matrix_action)
 protected:
-  virtual bool project(float& a_x,float& a_y,float& a_z,float& a_w) {
+  virtual bool project(G4float& a_x,G4float& a_y,G4float& a_z,G4float& a_w) {
     model_point(a_x,a_y,a_z,a_w);
     return true;
   }
 
-  virtual bool add_point(float a_x,float a_y,float a_z,float) {
+  virtual bool add_point(G4float a_x,G4float a_y,G4float a_z,G4float) {
     m_box.extend_by(a_x,a_y,a_z);
     return true;
   }
 
-  virtual bool add_point(float a_x,float a_y,float a_z,float,
-                         float,float,float,float) {
+  virtual bool add_point(G4float a_x,G4float a_y,G4float a_z,G4float,
+                         G4float,G4float,G4float,G4float) {
     m_box.extend_by(a_x,a_y,a_z);
     return true;
   }
 
-  virtual bool add_line(float a_bx,float a_by,float a_bz,float,
-                        float a_ex,float a_ey,float a_ez,float) {
+  virtual bool add_line(G4float a_bx,G4float a_by,G4float a_bz,G4float,
+                        G4float a_ex,G4float a_ey,G4float a_ez,G4float) {
     m_box.extend_by(a_bx,a_by,a_bz);
     m_box.extend_by(a_ex,a_ey,a_ez);
     return true;
   }
 
-  virtual bool add_line(float a_bx,float a_by,float a_bz,float a_bw,
-                        float,float,float,float,
-                        float a_ex,float a_ey,float a_ez,float a_ew,
-                        float,float,float,float) {
+  virtual bool add_line(G4float a_bx,G4float a_by,G4float a_bz,G4float a_bw,
+                        G4float,G4float,G4float,G4float,
+                        G4float a_ex,G4float a_ey,G4float a_ez,G4float a_ew,
+                        G4float,G4float,G4float,G4float) {
     return add_line(a_bx,a_by,a_bz,a_bw,
                     a_ex,a_ey,a_ez,a_ew);
   }
 
-  virtual bool add_triangle(float a_p1x,float a_p1y,float a_p1z,float,
-                            float a_p2x,float a_p2y,float a_p2z,float,
-                            float a_p3x,float a_p3y,float a_p3z,float){
+  virtual bool add_triangle(G4float a_p1x,G4float a_p1y,G4float a_p1z,G4float,
+                            G4float a_p2x,G4float a_p2y,G4float a_p2z,G4float,
+                            G4float a_p3x,G4float a_p3y,G4float a_p3z,G4float){
     m_box.extend_by(a_p1x,a_p1y,a_p1z);
     m_box.extend_by(a_p2x,a_p2y,a_p2z);
     m_box.extend_by(a_p3x,a_p3y,a_p3z);
     return true;
   }
 
-  virtual bool add_triangle(float a_p1x,float a_p1y,float a_p1z,float a_p1w,
-                            float,float,float,float,
-                            float a_p2x,float a_p2y,float a_p2z,float a_p2w,
-                            float,float,float,float,
-                            float a_p3x,float a_p3y,float a_p3z,float a_p3w,
-                            float,float,float,float){
+  virtual bool add_triangle(G4float a_p1x,G4float a_p1y,G4float a_p1z,G4float a_p1w,
+                            G4float,G4float,G4float,G4float,
+                            G4float a_p2x,G4float a_p2y,G4float a_p2z,G4float a_p2w,
+                            G4float,G4float,G4float,G4float,
+                            G4float a_p3x,G4float a_p3y,G4float a_p3z,G4float a_p3w,
+                            G4float,G4float,G4float,G4float){
     return bbox_action::add_triangle(a_p1x,a_p1y,a_p1z,a_p1w,
                                      a_p2x,a_p2y,a_p2z,a_p2w,
                                      a_p3x,a_p3y,a_p3z,a_p3w);
   }
 
-  virtual bool project_normal(float&,float&,float&) {return true;}
-  virtual bool add_point_normal(float a_x,float a_y,float a_z,float a_w,
-                                float,float,float) {
+  virtual bool project_normal(G4float&,G4float&,G4float&) {return true;}
+  virtual bool add_point_normal(G4float a_x,G4float a_y,G4float a_z,G4float a_w,
+                                G4float,G4float,G4float) {
     return bbox_action::add_point(a_x,a_y,a_z,a_w);
   }
 
-  virtual bool add_point_normal(float a_x,float a_y,float a_z,float a_w,
-                                float,float,float,
-                                float,float,float,float) {
+  virtual bool add_point_normal(G4float a_x,G4float a_y,G4float a_z,G4float a_w,
+                                G4float,G4float,G4float,
+                                G4float,G4float,G4float,G4float) {
     return bbox_action::add_point(a_x,a_y,a_z,a_w);
   }
 
-  virtual bool add_line_normal(float a_bx,float a_by,float a_bz,float a_bw, float,float,float,
-                               float a_ex,float a_ey,float a_ez,float a_ew, float,float,float) {
+  virtual bool add_line_normal(G4float a_bx,G4float a_by,G4float a_bz,G4float a_bw, G4float,G4float,G4float,
+                               G4float a_ex,G4float a_ey,G4float a_ez,G4float a_ew, G4float,G4float,G4float) {
     return bbox_action::add_line(a_bx,a_by,a_bz,a_bw,a_ex,a_ey,a_ez,a_ew);
   }
-  virtual bool add_line_normal(float a_bx,float a_by,float a_bz,float a_bw, float,float,float, float,float,float,float,
-                               float a_ex,float a_ey,float a_ez,float a_ew, float,float,float, float,float,float,float) {
+  virtual bool add_line_normal(G4float a_bx,G4float a_by,G4float a_bz,G4float a_bw, G4float,G4float,G4float, G4float,G4float,G4float,G4float,
+                               G4float a_ex,G4float a_ey,G4float a_ez,G4float a_ew, G4float,G4float,G4float, G4float,G4float,G4float,G4float) {
     return bbox_action::add_line(a_bx,a_by,a_bz,a_bw,a_ex,a_ey,a_ez,a_ew);
   }
 
-  virtual bool add_triangle_normal(float a_p1x,float a_p1y,float a_p1z,float a_p1w, float,float,float,
-                                   float a_p2x,float a_p2y,float a_p2z,float a_p2w, float,float,float,
-                                   float a_p3x,float a_p3y,float a_p3z,float a_p3w, float,float,float) {
+  virtual bool add_triangle_normal(G4float a_p1x,G4float a_p1y,G4float a_p1z,G4float a_p1w, G4float,G4float,G4float,
+                                   G4float a_p2x,G4float a_p2y,G4float a_p2z,G4float a_p2w, G4float,G4float,G4float,
+                                   G4float a_p3x,G4float a_p3y,G4float a_p3z,G4float a_p3w, G4float,G4float,G4float) {
     return bbox_action::add_triangle(a_p1x,a_p1y,a_p1z,a_p1w,
                                      a_p2x,a_p2y,a_p2z,a_p2w,
                                      a_p3x,a_p3y,a_p3z,a_p3w);
   }
-  virtual bool add_triangle_normal(float a_p1x,float a_p1y,float a_p1z,float a_p1w,
-                                   float,float,float, float,float,float,float,
-                                   float a_p2x,float a_p2y,float a_p2z,float a_p2w,
-                                   float,float,float, float,float,float,float,
-                                   float a_p3x,float a_p3y,float a_p3z,float a_p3w,
-                                   float,float,float, float,float,float,float) {
+  virtual bool add_triangle_normal(G4float a_p1x,G4float a_p1y,G4float a_p1z,G4float a_p1w,
+                                   G4float,G4float,G4float, G4float,G4float,G4float,G4float,
+                                   G4float a_p2x,G4float a_p2y,G4float a_p2z,G4float a_p2w,
+                                   G4float,G4float,G4float, G4float,G4float,G4float,G4float,
+                                   G4float a_p3x,G4float a_p3y,G4float a_p3z,G4float a_p3w,
+                                   G4float,G4float,G4float, G4float,G4float,G4float,G4float) {
     return bbox_action::add_triangle(a_p1x,a_p1y,a_p1z,a_p1w,
                                      a_p2x,a_p2y,a_p2z,a_p2w,
                                      a_p3x,a_p3y,a_p3z,a_p3w);

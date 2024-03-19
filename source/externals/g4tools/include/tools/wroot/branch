@@ -46,10 +46,10 @@ public: //ibo
     if(!a_buffer.write(fOffset)) return false;
     if(!a_buffer.write(m_max_baskets)) return false;
     if(!a_buffer.write(fSplitLevel)) return false;
-    double fEntries = (double)m_entries;
+    G4double fEntries = (G4double)m_entries;
     if(!a_buffer.write(fEntries)) return false;
-    double fTotBytes = (double)m_tot_bytes;
-    double fZipBytes = (double)m_zip_bytes;
+    G4double fTotBytes = (G4double)m_tot_bytes;
+    G4double fZipBytes = (G4double)m_zip_bytes;
     if(!a_buffer.write(fTotBytes)) return false;
     if(!a_buffer.write(fZipBytes)) return false;
 

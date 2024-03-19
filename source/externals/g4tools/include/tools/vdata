@@ -54,7 +54,7 @@ inline TYPE* _vec_data(std::vector<TYPE>& a_v,bool& a_to_delete) {
 }
 */
 
-inline void tools_vdata_check_compile() {std::vector<double> v;vec_data(v);}
+inline void tools_vdata_check_compile() {std::vector<G4double> v;vec_data(v);}
 
 }
 

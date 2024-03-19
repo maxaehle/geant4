@@ -19,11 +19,11 @@ public:
 public:
   virtual bool begin_render(int,int,                      //drawing area pos
                             unsigned int,unsigned int,    //drawing area size
-                            float,float,float,float,bool a_clear = true) = 0; //back color
+                            G4float,G4float,G4float,G4float,bool a_clear = true) = 0; //back color
   virtual void end_render() = 0;
 
   virtual unsigned int create_texture(const img_byte&,bool /*a_NEAREST*/) = 0;
-  virtual unsigned int create_gsto_from_data(size_t,const float*) = 0;
+  virtual unsigned int create_gsto_from_data(size_t,const G4float*) = 0;
 
   virtual bool is_gsto_id_valid(unsigned int) const = 0;
   virtual void delete_gsto(unsigned int) = 0;
@@ -38,8 +38,8 @@ public:
 public:
   virtual ~render_manager(){}
 public:
-  unsigned int create_gsto_from_data(const std::vector<float>& a_xyzs){
-    const float* _xyzs = vec_data<float>(a_xyzs);
+  unsigned int create_gsto_from_data(const std::vector<G4float>& a_xyzs){
+    const G4float* _xyzs = vec_data<G4float>(a_xyzs);
     return create_gsto_from_data(a_xyzs.size(),_xyzs);
   }
 };

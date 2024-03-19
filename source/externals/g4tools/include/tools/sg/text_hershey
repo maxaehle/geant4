@@ -101,14 +101,14 @@ private:
   }
 protected: //gstos
   virtual unsigned int create_gsto(std::ostream&,sg::render_manager& a_mgr) {
-    std::vector<float> gsto_data;
+    std::vector<G4float> gsto_data;
 
    {size_t npts = m_segs.size()/2;  //2 coords
     size_t ngsto = npts*3;     //3 coords.
     size_t sz = gsto_data.size();
     gsto_data.resize(sz+ngsto);
-    float* pxyz = vec_data<float>(gsto_data)+sz;
-    const float* data = vec_data<float>(m_segs);
+    G4float* pxyz = vec_data<G4float>(gsto_data)+sz;
+    const G4float* data = vec_data<G4float>(m_segs);
     gl::cvt_2to3(npts,data,pxyz);}
 
     m_gsto_sz = gsto_data.size();
@@ -158,8 +158,8 @@ public:
       reset_touched();
     }
 
-    float x,y;
-    std::vector<float>::const_iterator it;
+    G4float x,y;
+    std::vector<G4float>::const_iterator it;
     for(it=m_segs.begin();it!=m_segs.end();) {
       x = *it;it++;
       y = *it;it++;
@@ -195,54 +195,54 @@ public:
     return *this;
   }
 public: //sg::base_text :
-  virtual void get_bounds(float a_height,
-                          float& a_mn_x,float& a_mn_y,float& a_mn_z,
-                          float& a_mx_x,float& a_mx_y,float& a_mx_z) const {
+  virtual void get_bounds(G4float a_height,
+                          G4float& a_mn_x,G4float& a_mn_y,G4float& a_mn_z,
+                          G4float& a_mx_x,G4float& a_mx_y,G4float& a_mx_z) const {
     get_bounds(a_height,encoding.value(),font.value(),
                strings.values(),
                a_mn_x,a_mn_y,a_mn_z,
                a_mx_x,a_mx_y,a_mx_z);
   }
-  virtual float ascent(float a_height) const {
+  virtual G4float ascent(G4float a_height) const {
     // '/' seems to be the char with the max ascent.
     // NOTE : If 'A', the ascent = height.value().
-    float mn_x,mn_y,mn_z;
-    float mx_x,mx_y,mx_z;
+    G4float mn_x,mn_y,mn_z;
+    G4float mx_x,mx_y,mx_z;
     get_char_bound('/',sg::latin,a_height,false,
                    mn_x,mn_y,mn_z,
                    mx_x,mx_y,mx_z);
     return mx_y;
   }
-  virtual float y_advance(float a_height) const {
-    float HEIGHT = a_height;
+  virtual G4float y_advance(G4float a_height) const {
+    G4float HEIGHT = a_height;
     return 2 * HEIGHT; //Y_ADVANCE
   }
 
 public:
-  virtual float descent(float a_height) const {return _descent(a_height);}
+  virtual G4float descent(G4float a_height) const {return _descent(a_height);}
 
-  virtual bool truncate(const std::string& a_string,float a_height,float a_cut_width,std::string& a_out) const {
+  virtual bool truncate(const std::string& a_string,G4float a_height,G4float a_cut_width,std::string& a_out) const {
     return _truncate(a_string,a_height,font.value(),a_cut_width,a_out);
   }
 
 public:
-  static void get_bounds(float a_height,
+  static void get_bounds(G4float a_height,
                          const std::string& a_encoding,
                          font_type a_font,
                          const std::vector<std::string>& a_ss,
-                         float& a_mn_x,float& a_mn_y,float& a_mn_z,
-                         float& a_mx_x,float& a_mx_y,float& a_mx_z){
+                         G4float& a_mn_x,G4float& a_mn_y,G4float& a_mn_z,
+                         G4float& a_mx_x,G4float& a_mx_y,G4float& a_mx_z){
     if(a_ss.size()) {
-      float HEIGHT = a_height;
-      float Y_ADVANCE = 2 * HEIGHT;
-      float width = 0;
-      float Y = 0;
-      std::vector<float> dummy;
+      G4float HEIGHT = a_height;
+      G4float Y_ADVANCE = 2 * HEIGHT;
+      G4float width = 0;
+      G4float Y = 0;
+      std::vector<G4float> dummy;
       tools_vforcit(std::string,a_ss,it) {
-        float XL = 0;
+        G4float XL = 0;
         string_segs(false,*it,a_height,a_encoding,a_font,XL,Y,dummy,false);
         Y -= Y_ADVANCE;
-        width = mx<float>(width,XL);
+        width = mx<G4float>(width,XL);
       }
 
       a_mn_x = 0;
@@ -256,21 +256,21 @@ public:
     }
   }
 
-  static void get_bounds(float a_height,
+  static void get_bounds(G4float a_height,
                          const std::string& a_encoding,
                          font_type a_font,
                          const std::string& a_s,
-                         float& a_mn_x,float& a_mn_y,float& a_mn_z,
-                         float& a_mx_x,float& a_mx_y,float& a_mx_z){
-    float HEIGHT = a_height;
-    float Y_ADVANCE = 2 * HEIGHT;
-    float width = 0;
-    float Y = 0;
-    std::vector<float> dummy;
-    float XL = 0;
+                         G4float& a_mn_x,G4float& a_mn_y,G4float& a_mn_z,
+                         G4float& a_mx_x,G4float& a_mx_y,G4float& a_mx_z){
+    G4float HEIGHT = a_height;
+    G4float Y_ADVANCE = 2 * HEIGHT;
+    G4float width = 0;
+    G4float Y = 0;
+    std::vector<G4float> dummy;
+    G4float XL = 0;
     string_segs(false,a_s,a_height,a_encoding,a_font,XL,Y,dummy,false);
     Y -= Y_ADVANCE;
-    width = mx<float>(width,XL);
+    width = mx<G4float>(width,XL);
 
     a_mn_x = 0;
     a_mn_y = -_descent(a_height);
@@ -287,15 +287,15 @@ protected:
     get_segments(m_segs);
   }
 
-  void get_segments(std::vector<float>& a_segs) const {
+  void get_segments(std::vector<G4float>& a_segs) const {
 
-    float Y = 0;
+    G4float Y = 0;
     if( (vjust.value()==sg::middle) ||
         (vjust.value()==sg::top) ){
-      float mn_x,mn_y,mn_z;
-      float mx_x,mx_y,mx_z;
+      G4float mn_x,mn_y,mn_z;
+      G4float mx_x,mx_y,mx_z;
       get_bounds(height.value(),mn_x,mn_y,mn_z,mx_x,mx_y,mx_z);
-      float szy = mx_y - mn_y;
+      G4float szy = mx_y - mn_y;
 
       if(vjust.value()==sg::middle) {
         Y -= 0.5F * szy;
@@ -304,22 +304,22 @@ protected:
       }
     }
 
-    float HEIGHT = height.value();
-    float Y_ADVANCE = 2 * HEIGHT;
+    G4float HEIGHT = height.value();
+    G4float Y_ADVANCE = 2 * HEIGHT;
 
     const std::string& encod = encoding.value();
 
     const std::vector<std::string>& ss = strings.values();
     tools_vforcit(std::string,ss,it) {
 
-      float X = 0;
+      G4float X = 0;
       if( (hjust.value()==sg::center) ||
           (hjust.value()==sg::right)  ){
-        float mn_x,mn_y,mn_z;
-        float mx_x,mx_y,mx_z;
+        G4float mn_x,mn_y,mn_z;
+        G4float mx_x,mx_y,mx_z;
         get_bounds(height,encoding.value(),font,*it,
                    mn_x,mn_y,mn_z,mx_x,mx_y,mx_z);
-        float szx = mx_x - mn_x;
+        G4float szx = mx_x - mn_x;
 
         if(hjust.value()==sg::center) {
           X -= 0.5F * szx;
@@ -333,10 +333,10 @@ protected:
     }
   }
 protected:
-  static float _descent(float a_height) {
+  static G4float _descent(G4float a_height) {
     // '/' seems to be the char with the max descent.
-    float mn_x,mn_y,mn_z;
-    float mx_x,mx_y,mx_z;
+    G4float mn_x,mn_y,mn_z;
+    G4float mx_x,mx_y,mx_z;
     get_char_bound('/',sg::latin,a_height,false,
                    mn_x,mn_y,mn_z,
                    mx_x,mx_y,mx_z);
@@ -344,25 +344,25 @@ protected:
   }
 
   static bool _truncate(const std::string& a_string,
-                        float a_height,
-                        font_type a_font,float a_cut_width,
+                        G4float a_height,
+                        font_type a_font,G4float a_cut_width,
                         std::string& a_out) {
     //It does not take into account encoding.
 
     a_out.clear();
 
-    float width = 0;
+    G4float width = 0;
 
     const unsigned int mx_poly = 4;
     const unsigned int mx_point = 160;
 
     int max_point[mx_poly];
-    float xp[mx_point];
-    float yp[mx_point];
+    G4float xp[mx_point];
+    G4float yp[mx_point];
 
     tools_sforcit(a_string,it) {
 
-      float cwidth;
+      G4float cwidth;
       int number;
       if (a_font==sg::greek) {
         hershey::greek_char_points(*it,a_height,number,max_point,xp,yp,cwidth);
@@ -372,7 +372,7 @@ protected:
         hershey::latin_char_points(*it,a_height,number,max_point,xp,yp,cwidth);
       }
 
-      float advance = cwidth + a_height * 0.01F;
+      G4float advance = cwidth + a_height * 0.01F;
 
       if((width+cwidth)>=a_cut_width) return true;
       a_out += *it;
@@ -384,20 +384,20 @@ protected:
 
   static void get_char_bound(char a_char,
                              font_type a_font,
-                             float a_scale,bool a_bar,
-                             float& a_mn_x,float& a_mn_y,float& a_mn_z,
-                             float& a_mx_x,float& a_mx_y,float& a_mx_z){
+                             G4float a_scale,bool a_bar,
+                             G4float& a_mn_x,G4float& a_mn_y,G4float& a_mn_z,
+                             G4float& a_mx_x,G4float& a_mx_y,G4float& a_mx_z){
     box_3f_make_empty(a_mn_x,a_mn_y,a_mn_z,a_mx_x,a_mx_y,a_mx_z);
 
     const unsigned int mx_poly = 4;
     const unsigned int mx_point = 160;
 
     int max_point[mx_poly];
-    float xp[mx_point];
-    float yp[mx_point];
+    G4float xp[mx_point];
+    G4float yp[mx_point];
 
     int number;
-    float width;
+    G4float width;
     if (a_font==sg::greek) {
       hershey::greek_char_points(a_char,a_scale,number,max_point,xp,yp,width);
     } else if (a_font==sg::special) {
@@ -406,17 +406,17 @@ protected:
       hershey::latin_char_points(a_char,a_scale,number,max_point,xp,yp,width);
     }
 
-    float ymax = 0;
+    G4float ymax = 0;
 
     int ipoint = 0;
     for (int ipoly=0;ipoly<number;ipoly++) {
       int pointn  = max_point[ipoly];
       if(pointn>0) {
         for(int count=0;count<pointn-1;count++) {
-          ymax = mx<float>(ymax,yp[ipoint]);
+          ymax = mx<G4float>(ymax,yp[ipoint]);
           box_3f_extend_by(a_mn_x,a_mn_y,a_mn_z,a_mx_x,a_mx_y,a_mx_z,xp[ipoint],yp[ipoint],0);
 
-          ymax = mx<float>(ymax,yp[ipoint+1]);
+          ymax = mx<G4float>(ymax,yp[ipoint+1]);
           box_3f_extend_by(a_mn_x,a_mn_y,a_mn_z,a_mx_x,a_mx_y,a_mx_z,xp[ipoint+1],yp[ipoint+1],0);
 
           ipoint ++;
@@ -426,8 +426,8 @@ protected:
     }
 
     if(a_bar) { //Draw a bar on top of the character.
-      float xbar = 0;
-      float ybar = ymax * 1.3F;
+      G4float xbar = 0;
+      G4float ybar = ymax * 1.3F;
       box_3f_extend_by(a_mn_x,a_mn_y,a_mn_z,a_mx_x,a_mx_y,a_mx_z,xbar,ybar,0);
       box_3f_extend_by(a_mn_x,a_mn_y,a_mn_z,a_mx_x,a_mx_y,a_mx_z,xbar+width,ybar,0);
     }
@@ -436,16 +436,16 @@ protected:
   static void string_segs(
    bool aGEN_POINTS // false = advance only.
   ,const std::string& a_string
-  ,float a_height
+  ,G4float a_height
   ,const std::string& a_encoding
   ,font_type a_font
-  ,float& aX
-  ,float& aY
-  ,std::vector<float>& a_segs
+  ,G4float& aX
+  ,G4float& aY
+  ,std::vector<G4float>& a_segs
   ,bool a_fill_segs
   ){
-    float oldX = 0;
-    float HEIGHT = a_height;
+    G4float oldX = 0;
+    G4float HEIGHT = a_height;
 
     bool encod_PAW = (a_encoding==encoding_PAW()?true:false);
 
@@ -463,8 +463,8 @@ protected:
         hershey_font = a_font;
       }
 
-      float scale = HEIGHT;
-      float ymove = 0;
+      G4float scale = HEIGHT;
+      G4float ymove = 0;
       if(hc.m_y_move==hchar::up) {
         scale = HEIGHT*0.6F;
         ymove = HEIGHT*0.6F;
@@ -477,7 +477,7 @@ protected:
       //FIXME : bar
       aY += ymove;
 
-      float advance = char_segs(aGEN_POINTS,hc.m_char,hershey_font,scale,hc.m_bar,aX,aY,a_segs,a_fill_segs) + HEIGHT * 0.01F;
+      G4float advance = char_segs(aGEN_POINTS,hc.m_char,hershey_font,scale,hc.m_bar,aX,aY,a_segs,a_fill_segs) + HEIGHT * 0.01F;
 
       aX += advance;
 
@@ -485,26 +485,26 @@ protected:
     }
   }
 
-  static float char_segs(
+  static G4float char_segs(
    bool aGEN_POINTS // false = advance only.
   ,char a_char
   ,font_type a_font
-  ,float a_scale
+  ,G4float a_scale
   ,bool aBar
-  ,float aX
-  ,float aY
-  ,std::vector<float>& a_segs
+  ,G4float aX
+  ,G4float aY
+  ,std::vector<G4float>& a_segs
   ,bool a_fill_segs
   ){
     const unsigned int mx_poly = 8;
     const unsigned int mx_point = 160;
 
     int max_point[mx_poly];
-    float xp[mx_point];
-    float yp[mx_point];
+    G4float xp[mx_point];
+    G4float yp[mx_point];
 
     int number;
-    float width;
+    G4float width;
     if (a_font==sg::greek) {
       hershey::greek_char_points(a_char,a_scale,number,max_point,xp,yp,width);
     } else if (a_font==sg::special) {
@@ -514,7 +514,7 @@ protected:
     }
     if(!aGEN_POINTS) return width;
 
-    float ymax = 0;
+    G4float ymax = 0;
 
     int ipoint = 0;
     int pointn;
@@ -522,12 +522,12 @@ protected:
       pointn  = max_point[ipoly];
       if(pointn>0) {
         for(int count=0;count<pointn-1;count++) {
-          ymax = mx<float>(ymax,yp[ipoint]);
+          ymax = mx<G4float>(ymax,yp[ipoint]);
           if(a_fill_segs) {
             a_segs.push_back(aX+xp[ipoint]);
             a_segs.push_back(aY+yp[ipoint]);
           }
-          ymax = mx<float>(ymax,yp[ipoint+1]);
+          ymax = mx<G4float>(ymax,yp[ipoint+1]);
           if(a_fill_segs) {
             a_segs.push_back(aX+xp[ipoint+1]);
             a_segs.push_back(aY+yp[ipoint+1]);
@@ -539,8 +539,8 @@ protected:
     }
 
     if(aBar) { //Draw a bar on top of the character.
-      float xbar = 0;
-      float ybar = ymax * 1.3F;
+      G4float xbar = 0;
+      G4float ybar = ymax * 1.3F;
 
       if(a_fill_segs) {
         a_segs.push_back(aX+xbar);
@@ -644,7 +644,7 @@ protected:
   }
 
 protected:
-  std::vector<float> m_segs; //list of [begin,end]
+  std::vector<G4float> m_segs; //list of [begin,end]
   size_t m_gsto_sz;
 };
 

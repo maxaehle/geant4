@@ -172,7 +172,7 @@ public:
   }
 };
 
-//exa mf_vec<colorf,float>
+//exa mf_vec<colorf,G4float>
 
 ///////////////////////////////////////////////////////////
 //the three below funcs are for :
@@ -237,7 +237,7 @@ public:
     typedef typename std::vector<vec_t>::iterator _it_t;
     for(_it_t it=vec_vec.begin();it!=vec_vec.end();++it) {
       T x;
-      // x colorf, *it = std::vector<float>
+      // x colorf, *it = std::vector<G4float>
       // x vecs, *it = std::vector<std::string>
       if(!set_from_vec(x,*it)) {vec.clear();return false;}
       vec.push_back(x);

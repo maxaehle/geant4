@@ -281,7 +281,7 @@ public:
 
     //guess sep from first data line :
     std::istringstream strm(sfirst.c_str());
-    double d;
+    G4double d;
     strm >> d;
     std::streampos pos = strm.tellg();
     if(pos==std::streampos(-1)) {
@@ -386,7 +386,7 @@ public:
     } else {
       //guess sep from first data line :
       std::istringstream strm(sfirst.c_str());
-      double d;
+      G4double d;
       strm >> d;
       std::streampos pos = strm.tellg();
       if(pos==std::streampos(-1)) {
@@ -456,19 +456,19 @@ public:
           name = labels[index];
         }
       }
-      double d;
-      if(to<double>(*it,d)) {
+      G4double d;
+      if(to<G4double>(*it,d)) {
         if(a_verbose) a_out << "number " << d << std::endl;
-        create_column<double>(name);
+        create_column<G4double>(name);
       } else {
         time_t time;
         if(s2time(*it,time)) {
           create_column<csv_time>(name);
         } else {
-          std::vector<double> v;
+          std::vector<G4double> v;
           std::string vec_sep;vec_sep += m_vec_sep;
-          if(snums<double>(*it,vec_sep,v)&&v.size()) {
-            create_column< std::vector<double> >(name);
+          if(snums<G4double>(*it,vec_sep,v)&&v.size()) {
+            create_column< std::vector<G4double> >(name);
           } else {
             create_column<std::string>(name);
           }
@@ -508,8 +508,8 @@ public:
     else TOOLS_RCSV_NTUPLE_IF_CID(int,int)
     else TOOLS_RCSV_NTUPLE_IF_CID(int64,int64)
 
-    else TOOLS_RCSV_NTUPLE_IF_CID(float,float)
-    else TOOLS_RCSV_NTUPLE_IF_CID(double,double)
+    else TOOLS_RCSV_NTUPLE_IF_CID(G4float,G4float)
+    else TOOLS_RCSV_NTUPLE_IF_CID(G4double,G4double)
 
     else TOOLS_RCSV_NTUPLE_IF_CID(uchar,uchar)
     else TOOLS_RCSV_NTUPLE_IF_CID(ushort,ushort)
@@ -532,8 +532,8 @@ public:
     else TOOLS_RCSV_NTUPLE_IF_VEC_CID(int,int)
     else TOOLS_RCSV_NTUPLE_IF_VEC_CID(int64,int64)
 
-    else TOOLS_RCSV_NTUPLE_IF_VEC_CID(float,float)
-    else TOOLS_RCSV_NTUPLE_IF_VEC_CID(double,double)
+    else TOOLS_RCSV_NTUPLE_IF_VEC_CID(G4float,G4float)
+    else TOOLS_RCSV_NTUPLE_IF_VEC_CID(G4double,G4double)
 
     else TOOLS_RCSV_NTUPLE_IF_VEC_CID(uchar,uchar)
     else TOOLS_RCSV_NTUPLE_IF_VEC_CID(ushort,ushort)
@@ -615,8 +615,8 @@ public:
            if(type=="char")   create_column<char>(name,a_bd.find_variable<char>(name));
       else if(type=="short")  create_column<short>(name,a_bd.find_variable<short>(name));
       else if(type=="int")    create_column<int>(name,a_bd.find_variable<int>(name));
-      else if(type=="float")  create_column<float>(name,a_bd.find_variable<float>(name));
-      else if(type=="double") create_column<double>(name,a_bd.find_variable<double>(name));
+      else if(type=="G4float")  create_column<G4float>(name,a_bd.find_variable<G4float>(name));
+      else if(type=="G4double") create_column<G4double>(name,a_bd.find_variable<G4double>(name));
       else if(type=="string") create_column<std::string>(name,a_bd.find_variable<std::string>(name));
 
       else if(type=="uchar")  create_column<unsigned char>(name,a_bd.find_variable<unsigned char>(name));
@@ -629,8 +629,8 @@ public:
       else TOOLS_RCSV_NTUPLE_CREATE_VEC_COL(char,char)
       else TOOLS_RCSV_NTUPLE_CREATE_VEC_COL(short,short)
       else TOOLS_RCSV_NTUPLE_CREATE_VEC_COL(int,int)
-      else TOOLS_RCSV_NTUPLE_CREATE_VEC_COL(float,float)
-      else TOOLS_RCSV_NTUPLE_CREATE_VEC_COL(double,double)
+      else TOOLS_RCSV_NTUPLE_CREATE_VEC_COL(G4float,G4float)
+      else TOOLS_RCSV_NTUPLE_CREATE_VEC_COL(G4double,G4double)
 
       else if(type=="string[]") create_column< std::vector<std::string> >(name,a_bd.find_variable< std::vector<std::string> >(name));
 
@@ -871,7 +871,7 @@ protected:
   static bool _read(std::istream& a_reader,std::streampos,char,T& a_v) {
     a_reader >> a_v;
     if(a_reader.tellg()==std::streampos(-1)) {a_v = 0;return false;}
-    //std::cout << "debug : _read(double) " << a_v << std::endl;
+    //std::cout << "debug : _read(G4double) " << a_v << std::endl;
     return true;
   }
   static bool _read_time(std::istream& a_reader,std::streampos a_sz,char a_sep,time_t& a_v) {
@@ -935,8 +935,8 @@ protected:
     typedef ntuple::column<char> col_char;
     typedef ntuple::column<short> col_short;
     typedef ntuple::column<int> col_int;
-    typedef ntuple::column<float> col_float;
-    typedef ntuple::column<double> col_double;
+    typedef ntuple::column<G4float> col_G4float;
+    typedef ntuple::column<G4double> col_G4double;
     typedef std::string string_t;
     typedef ntuple::column<string_t> col_string_t;
 
@@ -952,8 +952,8 @@ protected:
     typedef ntuple::column< std::vector<char> > col_vec_char;
     typedef ntuple::column< std::vector<short> > col_vec_short;
     typedef ntuple::column< std::vector<int32> > col_vec_int;
-    typedef ntuple::column< std::vector<float> > col_vec_float;
-    typedef ntuple::column< std::vector<double> > col_vec_double;
+    typedef ntuple::column< std::vector<G4float> > col_vec_G4float;
+    typedef ntuple::column< std::vector<G4double> > col_vec_G4double;
     typedef ntuple::column< std::vector<std::string> > col_vec_string_t;
 
     typedef ntuple::column< std::vector<uchar> > col_vec_uchar;
@@ -989,8 +989,8 @@ protected:
            TOOLS_RCSV_NTUPLE_IF_COL(char)
       else TOOLS_RCSV_NTUPLE_IF_COL(short)
       else TOOLS_RCSV_NTUPLE_IF_COL(int)
-      else TOOLS_RCSV_NTUPLE_IF_COL(float)
-      else TOOLS_RCSV_NTUPLE_IF_COL(double)
+      else TOOLS_RCSV_NTUPLE_IF_COL(G4float)
+      else TOOLS_RCSV_NTUPLE_IF_COL(G4double)
       else TOOLS_RCSV_NTUPLE_IF_COL(string_t)
 
       else TOOLS_RCSV_NTUPLE_IF_COL(uchar)
@@ -1010,8 +1010,8 @@ protected:
       else TOOLS_RCSV_NTUPLE_IF_VEC_COL(char)
       else TOOLS_RCSV_NTUPLE_IF_VEC_COL(short)
       else TOOLS_RCSV_NTUPLE_IF_VEC_COL(int)
-      else TOOLS_RCSV_NTUPLE_IF_VEC_COL(float)
-      else TOOLS_RCSV_NTUPLE_IF_VEC_COL(double)
+      else TOOLS_RCSV_NTUPLE_IF_VEC_COL(G4float)
+      else TOOLS_RCSV_NTUPLE_IF_VEC_COL(G4double)
       else TOOLS_RCSV_NTUPLE_IF_VEC_COL(string_t)
 
       else TOOLS_RCSV_NTUPLE_IF_VEC_COL(uchar)

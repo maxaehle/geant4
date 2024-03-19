@@ -75,7 +75,7 @@ public:
   bool end() const {return m_cur==0?true:false;}
   int cur() const {return m_cur;}
 
-  bool project_point(float& a_x,float& a_y,float& a_z,float& a_w) {
+  bool project_point(G4float& a_x,G4float& a_y,G4float& a_z,G4float& a_w) {
     a_w = 1;
     model_matrix().mul_4f(a_x,a_y,a_z,a_w);
     projection_matrix().mul_4f(a_x,a_y,a_z,a_w);
@@ -86,23 +86,23 @@ public:
     return true;
   }
 
-//  bool project_normal(float& a_x,float& a_y,float& a_z) {
+//  bool project_normal(G4float& a_x,G4float& a_y,G4float& a_z) {
 //    model_matrix().mul_dir_3f(a_x,a_y,a_z);
 //    projection_matrix().mul_dir_3f(a_x,a_y,a_z);
 //    return true;
 //  }
 
-  void model_point(float& a_x,float& a_y,float& a_z,float& a_w) {
+  void model_point(G4float& a_x,G4float& a_y,G4float& a_z,G4float& a_w) {
     a_w = 1;
     model_matrix().mul_4f(a_x,a_y,a_z,a_w);
   }
 
   // for marker rendering :
-  void projected_origin(float& a_x,float& a_y,float& a_z) {
+  void projected_origin(G4float& a_x,G4float& a_y,G4float& a_z) {
     a_x = 0;
     a_y = 0;
     a_z = 0;
-    float w;
+    G4float w;
     project_point(a_x,a_y,a_z,w); //if render : in [-1,1][-1,1]
   }
 

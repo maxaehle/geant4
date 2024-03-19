@@ -10,14 +10,14 @@
 
 namespace tools {
 
-class vec2f : public vec2<float> {
-  typedef vec2<float> parent;
+class vec2f : public vec2<G4float> {
+  typedef vec2<G4float> parent;
 public:
   TOOLS_SCLASS(tools::vec2f) //for stype()
 public:
   vec2f():parent(){}
-  vec2f(const float a_vec[2]):parent(a_vec){}
-  vec2f(float a0,float a1):parent(a0,a1){}
+  vec2f(const G4float a_vec[2]):parent(a_vec){}
+  vec2f(G4float a0,G4float a1):parent(a0,a1){}
   virtual ~vec2f() {}
 public:
   vec2f(const vec2f& a_from): parent(a_from){}
@@ -29,7 +29,7 @@ public:
   vec2f(const parent& a_from):parent(a_from){}
 
 public: //operators
-  vec2f operator*(float a_v) const {
+  vec2f operator*(G4float a_v) const {
     return vec2f(m_data[0]*a_v,
                  m_data[1]*a_v);
   }
@@ -46,7 +46,7 @@ public: //operators
     m_data[1] += a_v.m_data[1];
     return *this;
   }
-  vec2f& operator*=(float a_v) {
+  vec2f& operator*=(G4float a_v) {
     m_data[0] *= a_v;
     m_data[1] *= a_v;
     return *this;
@@ -57,24 +57,24 @@ public: //operators
 public:
 #define TOOLS_VEC2F_MORE_PREC
 #ifdef TOOLS_VEC2F_MORE_PREC
-  float length() const {
-    return float(::sqrt(m_data[0]*m_data[0]+m_data[1]*m_data[1]));
+  G4float length() const {
+    return G4float(::sqrt(m_data[0]*m_data[0]+m_data[1]*m_data[1]));
   }
-  float normalize() {
-    float norme = length();
+  G4float normalize() {
+    G4float norme = length();
     if(!norme) return 0;
     divide(norme);
     return norme;
   }
 #else
-  float length() const {return parent::length(::sqrtf);}
-  float normalize() {return parent::normalize(::sqrtf);}
+  G4float length() const {return parent::length(::sqrtf);}
+  G4float normalize() {return parent::normalize(::sqrtf);}
 #endif
 public: //iv2sg
-  bool equals(const vec2f& a_v,const float a_epsil) const {
+  bool equals(const vec2f& a_v,const G4float a_epsil) const {
     //if(a_epsil<0.0f))
-    float d0 = m_data[0]-a_v.m_data[0];
-    float d1 = m_data[1]-a_v.m_data[1];
+    G4float d0 = m_data[0]-a_v.m_data[0];
+    G4float d1 = m_data[1]-a_v.m_data[1];
     return ((d0*d0+d1*d1)<=a_epsil);
   }
   void negate() {
@@ -85,7 +85,7 @@ public: //iv2sg
 private:static void check_instantiation() {vec2f v(0,0);v.set_value(1,1);}
 };
 
-inline vec2f operator*(float a_f,const vec2f& a_v) {
+inline vec2f operator*(G4float a_f,const vec2f& a_v) {
   vec2f res(a_v);
   res *= a_f;
   return res;
@@ -99,7 +99,7 @@ namespace tools {
 
 #ifndef SWIG
 //for sf, mf :
-inline bool set_from_vec(vec2f& a_v,const std::vector<float>& a_sv) {
+inline bool set_from_vec(vec2f& a_v,const std::vector<G4float>& a_sv) {
   if(a_sv.size()!=2) return false;
   a_v[0] = a_sv[0];
   a_v[1] = a_sv[1];

@@ -26,7 +26,7 @@ public:
 public:
   virtual void copy(curve*&) const = 0;
 public:
-  virtual bool pos_tan_nor(float a_s,
+  virtual bool pos_tan_nor(G4float a_s,
                            vec3f& a_pos,
                            vec3f& a_tan,
                            vec3f& a_nor) const = 0;

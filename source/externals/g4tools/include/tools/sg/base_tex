@@ -26,7 +26,7 @@ public:
   }
 public:
   sf_img<byte> img;
-  sf_vec<colorf,float> back_color;
+  sf_vec<colorf,G4float> back_color;
   sf<bool> expand;
   sf<unsigned int> limit;
   sf<bool> nearest; //for glTexParameteri. See exlib/sg/GL_manager. default=true for astro images.
@@ -201,7 +201,7 @@ protected:
     }
   }
 
-  void set_tcs(float a_tcs[8]) {
+  void set_tcs(G4float a_tcs[8]) {
     const img_byte& _img = img.value();
 
     a_tcs[0] = 0;a_tcs[1] = 0;
@@ -209,21 +209,21 @@ protected:
     a_tcs[4] = 1;a_tcs[5] = 1;
     a_tcs[6] = 0;a_tcs[7] = 1;
 
-    float ax = 1;
-    float bx = 0;
-    float ay = 1;
-    float by = 0;
+    G4float ax = 1;
+    G4float bx = 0;
+    G4float ay = 1;
+    G4float by = 0;
    {unsigned int iw = _img.width();
     unsigned int ih = _img.height();
     unsigned int rw = m_img.width();
     unsigned int rh = m_img.height();
     if(rw>iw) {
-      float part = float(iw)/float(rw);
+      G4float part = G4float(iw)/G4float(rw);
       ax = part;
       bx = 0.5f*(1-part);
     }
     if(rh>ih) {
-      float part = float(ih)/float(rh);
+      G4float part = G4float(ih)/G4float(rh);
       ay = part;
       by = 0.5f*(1-part);
     }}

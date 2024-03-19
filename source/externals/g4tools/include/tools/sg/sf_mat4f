@@ -15,8 +15,8 @@
 namespace tools {
 namespace sg {
 
-class sf_mat4f : public sf_vec<mat4f,float> {
-  typedef sf_vec<mat4f,float> pr;
+class sf_mat4f : public sf_vec<mat4f,G4float> {
+  typedef sf_vec<mat4f,G4float> pr;
   TOOLS_HEADER(sf_mat4f,tools::sg::sf_mat4f,pr)
 public:
   sf_mat4f():parent(){}
@@ -38,7 +38,7 @@ public:
     m_value.set_identity();
     m_touched = true;
   }
-  void set_translate(float a_x,float a_y,float a_z) {
+  void set_translate(G4float a_x,G4float a_y,G4float a_z) {
     m_value.set_translate(a_x,a_y,a_z);
     m_touched = true; //FIXME : should check for a change !
   }
@@ -46,29 +46,29 @@ public:
     m_value.set_translate(a_v.x(),a_v.y(),a_v.z());
     m_touched = true; //FIXME : should check for a change !
   }
-  void set_scale(float a_x,float a_y,float a_z) {
+  void set_scale(G4float a_x,G4float a_y,G4float a_z) {
     m_value.set_scale(a_x,a_y,a_z);
     m_touched = true; //FIXME : should check for a change !
   }
-  void set_scale(float a_s) {
+  void set_scale(G4float a_s) {
     m_value.set_scale(a_s);
     m_touched = true; //FIXME : should check for a change !
   }
-  void set_rotate(float a_x,float a_y,float a_z,float a_angle) {
+  void set_rotate(G4float a_x,G4float a_y,G4float a_z,G4float a_angle) {
     m_value.set_rotate(a_x,a_y,a_z,a_angle);
     m_touched = true; //FIXME : should check for a change !
   }
-  void set_rotate(const vec3f& a_v,float a_angle) {
+  void set_rotate(const vec3f& a_v,G4float a_angle) {
     m_value.set_rotate(a_v.x(),a_v.y(),a_v.z(),a_angle);
     m_touched = true; //FIXME : should check for a change !
   }
 
-  void mul_mtx(const mat4f& a_m,float a_tmp[]) {
+  void mul_mtx(const mat4f& a_m,G4float a_tmp[]) {
     m_value.mul_mtx(a_m,a_tmp);
     m_touched = true;
   }
 
-  void mul_translate(float a_x,float a_y,float a_z) {
+  void mul_translate(G4float a_x,G4float a_y,G4float a_z) {
     m_value.mul_translate(a_x,a_y,a_z);
     m_touched = true;
   }
@@ -76,36 +76,36 @@ public:
     m_value.mul_translate(a_v.x(),a_v.y(),a_v.z());
     m_touched = true;
   }
-  void mul_scale(float a_x,float a_y,float a_z) {
+  void mul_scale(G4float a_x,G4float a_y,G4float a_z) {
     m_value.mul_scale(a_x,a_y,a_z);
     m_touched = true;
   }
-  void mul_scale(float a_s) {
+  void mul_scale(G4float a_s) {
     m_value.mul_scale(a_s);
     m_touched = true;
   }
 
-  void mul_rotate(float a_x,float a_y,float a_z,float a_angle) {
+  void mul_rotate(G4float a_x,G4float a_y,G4float a_z,G4float a_angle) {
     m_value.mul_rotate(a_x,a_y,a_z,a_angle);
     m_touched = true;
   }
 
-  void mul_rotate(const vec3f& a_axis,float a_angle) {
+  void mul_rotate(const vec3f& a_axis,G4float a_angle) {
     m_value.mul_rotate(a_axis.x(),a_axis.y(),a_axis.z(),a_angle);
     m_touched = true;
   }
 
-  void left_mul_rotate(float a_x,float a_y,float a_z,float a_angle) {
+  void left_mul_rotate(G4float a_x,G4float a_y,G4float a_z,G4float a_angle) {
     m_value.left_mul_rotate(a_x,a_y,a_z,a_angle);
     m_touched = true;
   }
 
-  void left_mul_scale(float a_x,float a_y,float a_z) {
+  void left_mul_scale(G4float a_x,G4float a_y,G4float a_z) {
     m_value.left_mul_scale(a_x,a_y,a_z);
     m_touched = true;
   }
 
-  void left_mul_translate(float a_x,float a_y,float a_z) {
+  void left_mul_translate(G4float a_x,G4float a_y,G4float a_z) {
     m_value.left_mul_translate(a_x,a_y,a_z);
     m_touched = true;
   }
@@ -115,7 +115,7 @@ public:
     m_touched = true;
   }
 
-  bool set_rotate(const vec3f& a_from,const vec3f& a_to,float []) {
+  bool set_rotate(const vec3f& a_from,const vec3f& a_to,G4float []) {
     rotf qr;
     if(!qr.set_value(a_from,a_to)) return false;
     qr.value(m_value);
@@ -123,7 +123,7 @@ public:
     return true;
   }
 
-  bool mul_rotate(const vec3f& a_from,const vec3f& a_to,float a_tmp[]) {
+  bool mul_rotate(const vec3f& a_from,const vec3f& a_to,G4float a_tmp[]) {
     rotf qr;
     if(!qr.set_value(a_from,a_to)) return false;
     mat4f rot;

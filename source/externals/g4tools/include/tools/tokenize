@@ -9,7 +9,7 @@
 
 namespace tools {
 
-inline bool double_quotes_get_token(const std::string& a_cmd,std::string::size_type a_begIdx,
+inline bool G4double_quotes_get_token(const std::string& a_cmd,std::string::size_type a_begIdx,
                                     std::string::size_type& a_endIdx,std::string& a_token) {
   while ( a_cmd[a_begIdx] == ' ') ++a_begIdx; // Loop checking, 23.06.2015, I. Hrivnacova
   if ( a_cmd[a_begIdx] == '"' ) {
@@ -26,8 +26,8 @@ inline bool double_quotes_get_token(const std::string& a_cmd,std::string::size_t
   return ( a_token.length() > 0 );
 }
 
-//  From a string, double_quotes_tokenize permits to get arguments
-// by taking into account strings enclosed by double quotes and potentially
+//  From a string, G4double_quotes_tokenize permits to get arguments
+// by taking into account strings enclosed by G4double quotes and potentially
 // containing spaces (for example to specify a file path containing spaces).
 //  Example:
 //    if a_cmd is the string: aa bbb "ccc ddd" ee "fff gg"
@@ -35,12 +35,12 @@ inline bool double_quotes_get_token(const std::string& a_cmd,std::string::size_t
 //    "aa", "bb", "ccc ddd", "ee", "fff gg"
 //  Algorithm from Geant4/G4AnalysisUtilities.cc/Tokenize() done by Ivana Hrivnacova.
 
-inline void double_quotes_tokenize(const std::string& a_cmd, std::vector<std::string>& a_args) {
+inline void G4double_quotes_tokenize(const std::string& a_cmd, std::vector<std::string>& a_args) {
   std::string::size_type begIdx = 0;
   std::string::size_type endIdx = 0;
   std::string token;
   do {
-    if ( double_quotes_get_token(a_cmd, begIdx, endIdx, token) ) {
+    if ( G4double_quotes_get_token(a_cmd, begIdx, endIdx, token) ) {
       a_args.push_back(token);
     }
     begIdx = endIdx + 1;

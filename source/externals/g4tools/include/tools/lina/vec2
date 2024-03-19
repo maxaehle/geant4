@@ -196,7 +196,7 @@ public: //for iv2sg
 protected:
   T m_data[2];
 
-private:static void check_instantiation() {vec2<float> v;}
+private:static void check_instantiation() {vec2<G4float> v;}
 };
 
 //for sf, mf :

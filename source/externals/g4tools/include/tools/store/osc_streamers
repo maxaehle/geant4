@@ -95,17 +95,17 @@ protected:
     return local->Axis::visit(a_v); //IMPORTANT : have Axis::
   }
 public:
-  Axis(const histo::axis<double,unsigned int>& a_axis):m_axis(a_axis){}
+  Axis(const histo::axis<G4double,unsigned int>& a_axis):m_axis(a_axis){}
   virtual ~Axis(){}
 private:
   Axis(const Axis& a_from):istorable(a_from),m_axis(a_from.m_axis){}
   Axis& operator=(const Axis&){return *this;}
 protected:
-  const histo::axis<double,unsigned int>& m_axis;
+  const histo::axis<G4double,unsigned int>& m_axis;
 };
 
 
-inline bool Axis_read(iobj_visitor& a_visitor,histo::axis<double,unsigned int>& a_axis){
+inline bool Axis_read(iobj_visitor& a_visitor,histo::axis<G4double,unsigned int>& a_axis){
   //if(!a_visitor.begin(*this)) return false;
 
   int version;
@@ -322,7 +322,7 @@ inline void map2vec(const std::map<std::string,std::string>& a_in,std::vector<It
   }
 }
 
-typedef histo::histo_data<double,unsigned int,unsigned int,double> hd_data;
+typedef histo::histo_data<G4double,unsigned int,unsigned int,G4double> hd_data;
 
 template <class HIST>
 class BaseHistogram : public virtual istorable {
@@ -403,11 +403,11 @@ inline bool visitHistogram(const HIST& a_hist,iobj_const_visitor& a_visitor){
  {int dummy = 0;
   if(!a_visitor.visit("fMode",dummy)) return false;} //m_mode
   if(!a_visitor.visit("fProfile",false)) return false;
- {std::vector<double> dummy;
+ {std::vector<G4double> dummy;
   if(!a_visitor.visit("fBinSvw",dummy)) return false;
   if(!a_visitor.visit("fBinSv2w",dummy)) return false;}
   if(!a_visitor.visit("fCutV",false)) return false;
- {double dummy = 0;
+ {G4double dummy = 0;
   if(!a_visitor.visit("fMinV",dummy)) return false;
   if(!a_visitor.visit("fMaxV",dummy)) return false;}
   // Not written :
@@ -436,7 +436,7 @@ inline bool readHistogram(hd_data& aData,iobj_visitor& a_visitor){
   if(!a_visitor.visit(aData.m_bin_Sx2w)) return false;
   aData.m_axes.clear();
   for(unsigned int iaxis=0;iaxis<aData.m_dimension;iaxis++) {
-    histo::axis<double,unsigned int> baxis;
+    histo::axis<G4double,unsigned int> baxis;
     if(!Axis_read(a_visitor,baxis)) return false;
     aData.m_axes.push_back(baxis);
   }
@@ -446,19 +446,19 @@ inline bool readHistogram(hd_data& aData,iobj_visitor& a_visitor){
  {bool dummy;
   if(!a_visitor.visit(dummy)) return false;} //m_is_profile
 
- {std::vector<double> dummy;
+ {std::vector<G4double> dummy;
   if(!a_visitor.visit(dummy)) return false;} //m_bin_Svw
 
- {std::vector<double> dummy;
+ {std::vector<G4double> dummy;
   if(!a_visitor.visit(dummy)) return false;} //m_bin_Sv2w
 
  {bool dummy;
   if(!a_visitor.visit(dummy)) return false;} //m_cut_v
 
- {double dummy;
+ {G4double dummy;
   if(!a_visitor.visit(dummy)) return false;} //aData.m_min_v
 
- {double dummy;
+ {G4double dummy;
   if(!a_visitor.visit(dummy)) return false;} //aData.m_max_v
 
   //aData.fDoubles
@@ -623,7 +623,7 @@ inline bool read(iobj_visitor& a_visitor,histo::h3d& a_histo){
   return true;
 }
 
-typedef histo::profile_data<double,unsigned int,unsigned int,double,double> pd_data;
+typedef histo::profile_data<G4double,unsigned int,unsigned int,G4double,G4double> pd_data;
 
 template <class PROF>
 inline bool visitProfile(const PROF& a_prof,iobj_const_visitor& a_visitor){
@@ -731,7 +731,7 @@ inline bool readProfile(pd_data& aData,iobj_visitor& a_visitor){
   if(!a_visitor.visit(aData.m_bin_Sx2w)) return false;
   aData.m_axes.clear();
   for(unsigned int iaxis=0;iaxis<aData.m_dimension;iaxis++) {
-    histo::axis<double,unsigned int> baxis;
+    histo::axis<G4double,unsigned int> baxis;
     if(!Axis_read(a_visitor,baxis)) return false;
     aData.m_axes.push_back(baxis);
   }

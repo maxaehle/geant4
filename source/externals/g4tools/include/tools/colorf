@@ -17,9 +17,9 @@ public:
 public:
   colorf():parent(0,0,0,1){}
 #ifdef TOOLS_MEM
-  colorf(float a_r,float a_g,float a_b,float a_a = 1,bool a_inc = true):parent(a_r,a_g,a_b,a_a,a_inc){}
+  colorf(G4float a_r,G4float a_g,G4float a_b,G4float a_a = 1,bool a_inc = true):parent(a_r,a_g,a_b,a_a,a_inc){}
 #else
-  colorf(float a_r,float a_g,float a_b,float a_a = 1):parent(a_r,a_g,a_b,a_a){}
+  colorf(G4float a_r,G4float a_g,G4float a_b,G4float a_a = 1):parent(a_r,a_g,a_b,a_a){}
 #endif
   virtual ~colorf() {}
 public:
@@ -29,15 +29,15 @@ public:
     return *this;
   }
 public:
-  float r() const {return v0();}
-  float g() const {return v1();}
-  float b() const {return v2();}
-  float a() const {return v3();}
+  G4float r() const {return v0();}
+  G4float g() const {return v1();}
+  G4float b() const {return v2();}
+  G4float a() const {return v3();}
 
-  void set_r(float a_v) {m_data[0] = a_v;}
-  void set_g(float a_v) {m_data[1] = a_v;}
-  void set_b(float a_v) {m_data[2] = a_v;}
-  void set_a(float a_v) {m_data[3] = a_v;}
+  void set_r(G4float a_v) {m_data[0] = a_v;}
+  void set_g(G4float a_v) {m_data[1] = a_v;}
+  void set_b(G4float a_v) {m_data[2] = a_v;}
+  void set_a(G4float a_v) {m_data[3] = a_v;}
 
   uchar ruchar() const {return uchar(255.0f*m_data[0]);}
   uchar guchar() const {return uchar(255.0f*m_data[1]);}

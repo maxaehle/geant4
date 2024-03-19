@@ -37,7 +37,7 @@ inline int __gl_vertLeq( GLUvertex *u, GLUvertex *v )
   return VertLeq( u, v );
 }
 
-inline GLUdouble __gl_edgeEval( GLUvertex *u, GLUvertex *v, GLUvertex *w )
+inline GLUG4double __gl_edgeEval( GLUvertex *u, GLUvertex *v, GLUvertex *w )
 {
   /* Given three vertices u,v,w such that VertLeq(u,v) && VertLeq(v,w),
    * evaluates the t-coord of the edge uw at the s-coord of the vertex v.
@@ -49,7 +49,7 @@ inline GLUdouble __gl_edgeEval( GLUvertex *u, GLUvertex *v, GLUvertex *w )
    * let r be the negated result (this evaluates (uw)(v->s)), then
    * r is guaranteed to satisfy MIN(u->t,w->t) <= r <= MAX(u->t,w->t).
    */
-  GLUdouble gapL, gapR;
+  GLUG4double gapL, gapR;
 
   assert( VertLeq( u, v ) && VertLeq( v, w ));
   
@@ -67,13 +67,13 @@ inline GLUdouble __gl_edgeEval( GLUvertex *u, GLUvertex *v, GLUvertex *w )
   return 0;
 }
 
-inline GLUdouble __gl_edgeSign( GLUvertex *u, GLUvertex *v, GLUvertex *w )
+inline GLUG4double __gl_edgeSign( GLUvertex *u, GLUvertex *v, GLUvertex *w )
 {
   /* Returns a number whose sign matches EdgeEval(u,v,w) but which
    * is cheaper to evaluate.  Returns > 0, == 0 , or < 0
    * as v is above, on, or below the edge uw.
    */
-  GLUdouble gapL, gapR;
+  GLUG4double gapL, gapR;
 
   /*
 #define VertLeq(u,v)	(((u)->s < (v)->s) ||			\
@@ -96,7 +96,7 @@ inline GLUdouble __gl_edgeSign( GLUvertex *u, GLUvertex *v, GLUvertex *w )
  * Define versions of EdgeSign, EdgeEval with s and t transposed.
  */
 
-inline GLUdouble __gl_transEval( GLUvertex *u, GLUvertex *v, GLUvertex *w )
+inline GLUG4double __gl_transEval( GLUvertex *u, GLUvertex *v, GLUvertex *w )
 {
   /* Given three vertices u,v,w such that TransLeq(u,v) && TransLeq(v,w),
    * evaluates the t-coord of the edge uw at the s-coord of the vertex v.
@@ -108,7 +108,7 @@ inline GLUdouble __gl_transEval( GLUvertex *u, GLUvertex *v, GLUvertex *w )
    * let r be the negated result (this evaluates (uw)(v->t)), then
    * r is guaranteed to satisfy MIN(u->s,w->s) <= r <= MAX(u->s,w->s).
    */
-  GLUdouble gapL, gapR;
+  GLUG4double gapL, gapR;
 
   assert( TransLeq( u, v ) && TransLeq( v, w ));
   
@@ -126,13 +126,13 @@ inline GLUdouble __gl_transEval( GLUvertex *u, GLUvertex *v, GLUvertex *w )
   return 0;
 }
 
-inline GLUdouble __gl_transSign( GLUvertex *u, GLUvertex *v, GLUvertex *w )
+inline GLUG4double __gl_transSign( GLUvertex *u, GLUvertex *v, GLUvertex *w )
 {
   /* Returns a number whose sign matches TransEval(u,v,w) but which
    * is cheaper to evaluate.  Returns > 0, == 0 , or < 0
    * as v is above, on, or below the edge uw.
    */
-  GLUdouble gapL, gapR;
+  GLUG4double gapL, gapR;
 
   assert( TransLeq( u, v ) && TransLeq( v, w ));
   
@@ -150,7 +150,7 @@ inline GLUdouble __gl_transSign( GLUvertex *u, GLUvertex *v, GLUvertex *w )
 inline int __gl_vertCCW( GLUvertex *u, GLUvertex *v, GLUvertex *w )
 {
   /* For almost-degenerate situations, the results are not reliable.
-   * Unless the floating-point arithmetic can be performed without
+   * Unless the G4floating-point arithmetic can be performed without
    * rounding errors, *any* implementation will give incorrect results
    * on some degenerate inputs, so the client must have some way to
    * handle this situation.
@@ -183,7 +183,7 @@ inline void __gl_edgeIntersect( GLUvertex *o1, GLUvertex *d1,
  * bounding rectangles defined by each edge.
  */
 {
-  GLUdouble z1, z2;
+  GLUG4double z1, z2;
 
   /* This is certainly not the most efficient way to find the intersection
    * of two line segments, but it is very numerically stable.

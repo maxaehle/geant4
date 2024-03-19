@@ -28,7 +28,7 @@ public:
     mem::increment(s_class().c_str());
 #endif
   }
-  measurement(double a_value,double a_error_plus,double a_error_minus)
+  measurement(G4double a_value,G4double a_error_plus,G4double a_error_minus)
   :m_value(a_value)
   ,m_error_plus(a_error_plus)
   ,m_error_minus(a_error_minus)
@@ -60,16 +60,16 @@ public:
     return *this;
   }
 public:
-  double value() const {return m_value;}
-  double error_plus() const {return m_error_plus;}
-  double error_minus() const {return m_error_minus;}
-  void set_value(double a_v) {m_value = a_v;}
-  void set_error_plus(double a_v) {m_error_plus = a_v;}
-  void set_error_minus(double a_v) {m_error_minus = a_v;}
+  G4double value() const {return m_value;}
+  G4double error_plus() const {return m_error_plus;}
+  G4double error_minus() const {return m_error_minus;}
+  void set_value(G4double a_v) {m_value = a_v;}
+  void set_error_plus(G4double a_v) {m_error_plus = a_v;}
+  void set_error_minus(G4double a_v) {m_error_minus = a_v;}
 protected:
-  double m_value;
-  double m_error_plus;
-  double m_error_minus;
+  G4double m_value;
+  G4double m_error_plus;
+  G4double m_error_minus;
 };
 
 class data_point {
@@ -177,7 +177,7 @@ public:
     return done;
   }
 
-  bool lower_extent(unsigned int a_coord,double& a_value) const {
+  bool lower_extent(unsigned int a_coord,G4double& a_value) const {
     if(m_points.empty()||(a_coord>=m_dim)){
       a_value = 0;
       return false;
@@ -186,12 +186,12 @@ public:
     a_value = (*it).coordinate(a_coord).value();
     ++it;
     for(;it!=m_points.end();++it) {
-      a_value = mn<double>(a_value,(*it).coordinate(a_coord).value());
+      a_value = mn<G4double>(a_value,(*it).coordinate(a_coord).value());
     }
     return true;
   }
 
-  bool upper_extent(unsigned int a_coord,double& a_value) const {
+  bool upper_extent(unsigned int a_coord,G4double& a_value) const {
     if(m_points.empty()||(a_coord>=m_dim)){
       a_value = 0;
       return false;
@@ -200,12 +200,12 @@ public:
     a_value = (*it).coordinate(a_coord).value();
     ++it;
     for(;it!=m_points.end();++it) {
-      a_value = mx<double>(a_value,(*it).coordinate(a_coord).value());
+      a_value = mx<G4double>(a_value,(*it).coordinate(a_coord).value());
     }
     return true;
   }
 
-  void scale(double a_scale) {
+  void scale(G4double a_scale) {
     std::vector<data_point>::iterator it;
     for(it=m_points.begin();it!=m_points.end();++it) {
       for(unsigned int coord=0;coord<m_dim;coord++) {
@@ -217,7 +217,7 @@ public:
     }
   }
 
-  void scale_value(double a_scale) {
+  void scale_value(G4double a_scale) {
     std::vector<data_point>::iterator it;
     for(it=m_points.begin();it!=m_points.end();++it) {
       for(unsigned int coord=0;coord<m_dim;coord++) {
@@ -227,7 +227,7 @@ public:
     }
   }
 
-  void scale_errors(double a_scale) {
+  void scale_errors(G4double a_scale) {
     std::vector<data_point>::iterator it;
     for(it=m_points.begin();it!=m_points.end();++it) {
       for(unsigned int coord=0;coord<m_dim;coord++) {

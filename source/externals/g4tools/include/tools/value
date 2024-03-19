@@ -66,12 +66,12 @@ public:
   static e_type type(int)            {return INT;}
   static e_type type(uint64)         {return UNSIGNED_INT64;}
   static e_type type(int64)          {return INT64;}
-  static e_type type(float)          {return FLOAT;}
-  static e_type type(double)         {return DOUBLE;}
+  static e_type type(G4float)          {return FLOAT;}
+  static e_type type(G4double)         {return DOUBLE;}
   static e_type type(bool)           {return BOOL;}
   static e_type type(void*)          {return VOID_STAR;}
-  static e_type type(double*)        {return DOUBLE_STAR;}
-  static e_type type(float*)         {return FLOAT_STAR;}
+  static e_type type(G4double*)        {return DOUBLE_STAR;}
+  static e_type type(G4float*)         {return FLOAT_STAR;}
   static e_type type(int*)           {return INT_STAR;}
   //static e_type type(const std::string&) {return STRING;}
 */
@@ -126,19 +126,19 @@ public:
     m_type = UNSIGNED_INT64;
     u.m_unsigned_int64 = a_value;
   }
-  value(float a_value):m_label(0),m_itag(0) {
+  value(G4float a_value):m_label(0),m_itag(0) {
 #ifdef TOOLS_MEM
     mem::increment(s_class().c_str());
 #endif
     m_type = FLOAT;
-    u.m_float = a_value;
+    u.m_G4float = a_value;
   }
-  value(double a_value):m_label(0),m_itag(0) {
+  value(G4double a_value):m_label(0),m_itag(0) {
 #ifdef TOOLS_MEM
     mem::increment(s_class().c_str());
 #endif
     m_type = DOUBLE;
-    u.m_double = a_value;
+    u.m_G4double = a_value;
   }
 
 //  value(unsigned char a_value):m_label(0),m_itag(0) {
@@ -169,19 +169,19 @@ public:
     m_type = VOID_STAR;
     u.m_void_star = a_value;
   }
-  value(double* a_value):m_label(0),m_itag(0) {
+  value(G4double* a_value):m_label(0),m_itag(0) {
 #ifdef TOOLS_MEM
     mem::increment(s_class().c_str());
 #endif
     m_type = DOUBLE_STAR;
-    u.m_double_star = a_value;
+    u.m_G4double_star = a_value;
   }
-  value(float* a_value):m_label(0),m_itag(0) {
+  value(G4float* a_value):m_label(0),m_itag(0) {
 #ifdef TOOLS_MEM
     mem::increment(s_class().c_str());
 #endif
     m_type = FLOAT_STAR;
-    u.m_float_star = a_value;
+    u.m_G4float_star = a_value;
   }
   value(int* a_value):m_label(0),m_itag(0) {
 #ifdef TOOLS_MEM
@@ -235,8 +235,8 @@ public:
   TOOLS_VALUE_CSTOR(int,m_array_int,ARRAY_INT)
   TOOLS_VALUE_CSTOR(uint64,m_array_unsigned_int64,ARRAY_UNSIGNED_INT64)
   TOOLS_VALUE_CSTOR(int64,m_array_int64,ARRAY_INT64)
-  TOOLS_VALUE_CSTOR(float,m_array_float,ARRAY_FLOAT)
-  TOOLS_VALUE_CSTOR(double,m_array_double,ARRAY_DOUBLE)
+  TOOLS_VALUE_CSTOR(G4float,m_array_G4float,ARRAY_FLOAT)
+  TOOLS_VALUE_CSTOR(G4double,m_array_G4double,ARRAY_DOUBLE)
   TOOLS_VALUE_CSTOR(bool,m_array_bool,ARRAY_BOOL)
   TOOLS_VALUE_CSTOR(std::string,m_array_string,ARRAY_STRING)
 
@@ -265,8 +265,8 @@ public:
   TOOLS_VALUE_CSTORA(int,m_array_int,ARRAY_INT)
   TOOLS_VALUE_CSTORA(uint64,m_array_unsigned_int64,ARRAY_UNSIGNED_INT64)
   TOOLS_VALUE_CSTORA(int64,m_array_int64,ARRAY_INT64)
-  TOOLS_VALUE_CSTORA(float,m_array_float,ARRAY_FLOAT)
-  TOOLS_VALUE_CSTORA(double,m_array_double,ARRAY_DOUBLE)
+  TOOLS_VALUE_CSTORA(G4float,m_array_G4float,ARRAY_FLOAT)
+  TOOLS_VALUE_CSTORA(G4double,m_array_G4double,ARRAY_DOUBLE)
   TOOLS_VALUE_CSTORA(bool,m_array_bool,ARRAY_BOOL)
   TOOLS_VALUE_CSTORA(std::string,m_array_string,ARRAY_STRING)
 
@@ -318,10 +318,10 @@ public:
       u.m_array_int64 = new array<int64>(*a_from.u.m_array_int64);
 
     } else if(a_from.m_type==ARRAY_FLOAT) {
-      u.m_array_float = new array<float>(*a_from.u.m_array_float);
+      u.m_array_G4float = new array<G4float>(*a_from.u.m_array_G4float);
 
     } else if(a_from.m_type==ARRAY_DOUBLE) {
-      u.m_array_double = new array<double>(*a_from.u.m_array_double);
+      u.m_array_G4double = new array<G4double>(*a_from.u.m_array_G4double);
 
     } else if(a_from.m_type==ARRAY_BOOL) {
       u.m_array_bool = new array<bool>(*a_from.u.m_array_bool);
@@ -375,10 +375,10 @@ public:
       u.m_array_int64 = new array<int64>(*a_from.u.m_array_int64);
 
     } else if(a_from.m_type==ARRAY_FLOAT) {
-      u.m_array_float = new array<float>(*a_from.u.m_array_float);
+      u.m_array_G4float = new array<G4float>(*a_from.u.m_array_G4float);
 
     } else if(a_from.m_type==ARRAY_DOUBLE) {
-      u.m_array_double = new array<double>(*a_from.u.m_array_double);
+      u.m_array_G4double = new array<G4double>(*a_from.u.m_array_G4double);
 
     } else if(a_from.m_type==ARRAY_BOOL) {
       u.m_array_bool = new array<bool>(*a_from.u.m_array_bool);
@@ -451,12 +451,12 @@ public:
     case INT:       u.m_int = 0;break;
     case UNSIGNED_INT64:   u.m_unsigned_int64 =0;break;
     case INT64:     u.m_int64 = 0;break;
-    case FLOAT:     u.m_float = 0;break;
-    case DOUBLE:    u.m_double = 0;break;
+    case FLOAT:     u.m_G4float = 0;break;
+    case DOUBLE:    u.m_G4double = 0;break;
     case BOOL:      u.m_bool = false;break;
     case VOID_STAR:        u.m_void_star = 0;break;
-    case DOUBLE_STAR:      u.m_double_star = 0;break;
-    case FLOAT_STAR:       u.m_float_star = 0;break;
+    case DOUBLE_STAR:      u.m_G4double_star = 0;break;
+    case FLOAT_STAR:       u.m_G4float_star = 0;break;
     case INT_STAR:         u.m_int_star = 0;break;
     case STRING:       u.m_string = new std::string("");break;
     //case ARRAY_UNSIGNED_CHAR:
@@ -474,8 +474,8 @@ public:
       u.m_array_unsigned_int64 = new array<uint64>();break;
     case ARRAY_INT64:u.m_array_int64 = new array<int64>();break;
 
-    case ARRAY_FLOAT:u.m_array_float = new array<float>();break;
-    case ARRAY_DOUBLE:u.m_array_double = new array<double>();break;
+    case ARRAY_FLOAT:u.m_array_G4float = new array<G4float>();break;
+    case ARRAY_DOUBLE:u.m_array_G4double = new array<G4double>();break;
     case ARRAY_BOOL:u.m_array_bool = new array<bool>();break;
     case ARRAY_STRING:u.m_array_string = new array<std::string>();break;
     }
@@ -526,15 +526,15 @@ public:
     m_type = UNSIGNED_INT64;
     u.m_unsigned_int64 = a_value;
   }
-  void set(float a_value) {
+  void set(G4float a_value) {
     reset();
     m_type = FLOAT;
-    u.m_float = a_value;
+    u.m_G4float = a_value;
   }
-  void set(double a_value) {
+  void set(G4double a_value) {
     reset();
     m_type = DOUBLE;
-    u.m_double = a_value;
+    u.m_G4double = a_value;
   }
   void set(bool a_value) {
     reset();
@@ -560,15 +560,15 @@ public:
     u.m_void_star = a_value;
   }
 
-  void set(double* a_value) {
+  void set(G4double* a_value) {
     reset();
     m_type = DOUBLE_STAR;
-    u.m_double_star = a_value;
+    u.m_G4double_star = a_value;
   }
-  void set(float* a_value) {
+  void set(G4float* a_value) {
     reset();
     m_type = FLOAT_STAR;
-    u.m_float_star = a_value;
+    u.m_G4float_star = a_value;
   }
   void set(int* a_value) {
     reset();
@@ -586,11 +586,11 @@ public:
 
   unsigned short get_unsigned_short() const{return u.m_unsigned_short;}
   short get_short() const {return u.m_short;}
-  float get_float() const {return u.m_float;}
-  double get_double() const {return u.m_double;}
+  G4float get_G4float() const {return u.m_G4float;}
+  G4double get_G4double() const {return u.m_G4double;}
   void* get_void_star() const {return u.m_void_star;}
-  double* get_double_star() const {return u.m_double_star;}
-  float* get_float_star() const {return u.m_float_star;}
+  G4double* get_G4double_star() const {return u.m_G4double_star;}
+  G4float* get_G4float_star() const {return u.m_G4float_star;}
   int* get_int_star() const {return u.m_int_star;}
   bool get_bool() const {return u.m_bool;}
 
@@ -612,8 +612,8 @@ public:
   TOOLS_VALUE_SET(int,m_array_int,ARRAY_INT)
   TOOLS_VALUE_SET(uint64,m_array_unsigned_int64,ARRAY_UNSIGNED_INT64)
   TOOLS_VALUE_SET(int64,m_array_int64,ARRAY_INT64)
-  TOOLS_VALUE_SET(float,m_array_float,ARRAY_FLOAT)
-  TOOLS_VALUE_SET(double,m_array_double,ARRAY_DOUBLE)
+  TOOLS_VALUE_SET(G4float,m_array_G4float,ARRAY_FLOAT)
+  TOOLS_VALUE_SET(G4double,m_array_G4double,ARRAY_DOUBLE)
   TOOLS_VALUE_SET(bool,m_array_bool,ARRAY_BOOL)
   TOOLS_VALUE_SET(std::string,m_array_string,ARRAY_STRING)
 
@@ -637,8 +637,8 @@ public:
   TOOLS_VALUE_SET2(int,m_array_int,ARRAY_INT)
   TOOLS_VALUE_SET2(uint64,m_array_unsigned_int64,ARRAY_UNSIGNED_INT64)
   TOOLS_VALUE_SET2(int64,m_array_int64,ARRAY_INT64)
-  TOOLS_VALUE_SET2(float,m_array_float,ARRAY_FLOAT)
-  TOOLS_VALUE_SET2(double,m_array_double,ARRAY_DOUBLE)
+  TOOLS_VALUE_SET2(G4float,m_array_G4float,ARRAY_FLOAT)
+  TOOLS_VALUE_SET2(G4double,m_array_G4double,ARRAY_DOUBLE)
   TOOLS_VALUE_SET2(bool,m_array_bool,ARRAY_BOOL)
   TOOLS_VALUE_SET2(std::string,m_array_string,ARRAY_STRING)
 
@@ -658,8 +658,8 @@ public:
   TOOLS_VALUE_GET(int,get_array_int,m_array_int)
   TOOLS_VALUE_GET(uint64,get_array_unsigned_int64,m_array_unsigned_int64)
   TOOLS_VALUE_GET(int64,get_array_int64,m_array_int64)
-  TOOLS_VALUE_GET(float,get_array_float,m_array_float)
-  TOOLS_VALUE_GET(double,get_array_double,m_array_double)
+  TOOLS_VALUE_GET(G4float,get_array_G4float,m_array_G4float)
+  TOOLS_VALUE_GET(G4double,get_array_G4double,m_array_G4double)
   TOOLS_VALUE_GET(bool,get_array_bool,m_array_bool)
   TOOLS_VALUE_GET(std::string,get_array_string,m_array_string)
 
@@ -739,19 +739,19 @@ public:
       sprintf(a_s,32,int64_format(),a_v.u.m_int64);
       return true;
     case FLOAT:
-      sprintf(a_s,32,"%g",a_v.u.m_float);
+      sprintf(a_s,32,"%g",a_v.u.m_G4float);
       return true;
     case DOUBLE:
-      sprintf(a_s,32,"%g",a_v.u.m_double);
+      sprintf(a_s,32,"%g",a_v.u.m_G4double);
       return true;
     case VOID_STAR:
       sprintf(a_s,32,upointer_format_x(),(upointer)a_v.u.m_void_star);
       return true;
     case DOUBLE_STAR:
-      sprintf(a_s,32,upointer_format_x(),(upointer)a_v.u.m_double_star);
+      sprintf(a_s,32,upointer_format_x(),(upointer)a_v.u.m_G4double_star);
       return true;
     case FLOAT_STAR:
-      sprintf(a_s,32,upointer_format_x(),(upointer)a_v.u.m_float_star);
+      sprintf(a_s,32,upointer_format_x(),(upointer)a_v.u.m_G4float_star);
       return true;
     case INT_STAR:
       sprintf(a_s,32,upointer_format_x(),(upointer)a_v.u.m_int_star);
@@ -783,9 +783,9 @@ public:
       return nums2s<int64>(a_v.u.m_array_int64->vector(),a_s);
 
     case ARRAY_FLOAT:
-      return nums2s<float>(a_v.u.m_array_float->vector(),a_s);
+      return nums2s<G4float>(a_v.u.m_array_G4float->vector(),a_s);
     case ARRAY_DOUBLE:
-      return nums2s<double>(a_v.u.m_array_double->vector(),a_s);
+      return nums2s<G4double>(a_v.u.m_array_G4double->vector(),a_s);
     case ARRAY_BOOL:
       b2s(a_v.u.m_array_bool->vector(),a_s);
       return true;
@@ -841,13 +841,13 @@ public:
   }
 */
 
-  bool to_double(double& a_d) const {
+  bool to_G4double(G4double& a_d) const {
     switch(m_type) {
     case INT:
       a_d = u.m_int;
       return true;
     case DOUBLE:
-      a_d = u.m_double;
+      a_d = u.m_G4double;
       return true;
     case UNSIGNED_SHORT:
       a_d = u.m_unsigned_short;
@@ -859,13 +859,13 @@ public:
       a_d = u.m_short;
       return true;
     case INT64:
-      a_d = (double)u.m_int64;
+      a_d = (G4double)u.m_int64;
       return true;
     case UNSIGNED_INT64:
-      a_d = (double)u.m_unsigned_int64;
+      a_d = (G4double)u.m_unsigned_int64;
       return true;
     case FLOAT:
-      a_d = u.m_float;
+      a_d = u.m_G4float;
       return true;
     //case UNSIGNED_CHAR:
     //  a_d = u.m_unsigned_char;
@@ -974,9 +974,9 @@ public:
     case ARRAY_INT64:
       return u.m_array_int64->size();
     case ARRAY_FLOAT:
-      return u.m_array_float->size();
+      return u.m_array_G4float->size();
     case ARRAY_DOUBLE:
-      return u.m_array_double->size();
+      return u.m_array_G4double->size();
     case ARRAY_BOOL:
       return u.m_array_bool->size();
     case ARRAY_STRING:
@@ -997,8 +997,8 @@ public:
   TOOLS_ARRAY_VEC(int,array_int,m_array_int)
   TOOLS_ARRAY_VEC(uint64,array_unsigned_int64,m_array_unsigned_int64)
   TOOLS_ARRAY_VEC(int64,array_int64,m_array_int64)
-  TOOLS_ARRAY_VEC(float,array_float,m_array_float)
-  TOOLS_ARRAY_VEC(double,array_double,m_array_double)
+  TOOLS_ARRAY_VEC(G4float,array_G4float,m_array_G4float)
+  TOOLS_ARRAY_VEC(G4double,array_G4double,m_array_G4double)
   TOOLS_ARRAY_VEC(bool,array_bool,m_array_bool)
   TOOLS_ARRAY_VEC(std::string,array_string,m_array_string)
 
@@ -1068,7 +1068,7 @@ public: // for valop :
   static bool if_and(value&,const value&,std::string&);
   static bool if_or(value&,const value&,std::string&);
 
-  static bool to_double(const value&,double&);
+  static bool to_G4double(const value&,G4double&);
   static bool cxx_type(const value&,std::string&);
 
   //static bool i_set(value&,const Slash::Core::Ivalue&);
@@ -1105,10 +1105,10 @@ protected:
       delete u.m_array_int64;u.m_array_int64 = 0;
 
     } else if(m_type==ARRAY_FLOAT) {
-      delete u.m_array_float;u.m_array_float = 0;
+      delete u.m_array_G4float;u.m_array_G4float = 0;
 
     } else if(m_type==ARRAY_DOUBLE) {
-      delete u.m_array_double;u.m_array_double = 0;
+      delete u.m_array_G4double;u.m_array_G4double = 0;
 
     } else if(m_type==ARRAY_BOOL) {
       delete u.m_array_bool;u.m_array_bool = 0;
@@ -1131,15 +1131,15 @@ protected:
     int m_int;
     short m_short;
     int64 m_int64;
-    float m_float;
-    double m_double;
+    G4float m_G4float;
+    G4double m_G4double;
     //unsigned char m_unsigned_char;
     unsigned short m_unsigned_short;
     unsigned int m_unsigned_int;
     uint64 m_unsigned_int64;
     void* m_void_star;
-    double* m_double_star;
-    float* m_float_star;
+    G4double* m_G4double_star;
+    G4float* m_G4float_star;
     int* m_int_star;
     std::string* m_string;
 
@@ -1151,8 +1151,8 @@ protected:
     array<int64>* m_array_int64;
     array<unsigned int>* m_array_unsigned_int;
     array<int>* m_array_int;
-    array<float>* m_array_float;
-    array<double>* m_array_double;
+    array<G4float>* m_array_G4float;
+    array<G4double>* m_array_G4double;
     array<bool>* m_array_bool;
     array<std::string>* m_array_string;
   } u;

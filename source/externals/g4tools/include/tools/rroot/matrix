@@ -61,7 +61,7 @@ public:
     if(!a_buffer.read(ColLwb)) return false;
 
     //Real_t* Elements; //[fNelems]
-    if(!dummy_array_stream<float>(a_buffer,Nelems)) return false;
+    if(!dummy_array_stream<G4float>(a_buffer,Nelems)) return false;
 
     if(!a_buffer.check_byte_count(s,c,s_store_class())) return false;
     return true;

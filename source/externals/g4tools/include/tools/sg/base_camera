@@ -24,8 +24,8 @@ namespace sg {
 class base_camera : public node {
   TOOLS_HEADER(base_camera,tools::sg::base_camera,node)
 public:
-  sf<float> znear;
-  sf<float> zfar;
+  sf<G4float> znear;
+  sf<G4float> zfar;
   sf_vec3f position;
   //Camera orientation specified as a rotation value from the default
   //orientation where the camera is pointing along the negative z-axis,
@@ -33,10 +33,10 @@ public:
   sf_rotf orientation;
 
   //for viewers :
-  sf<float> dx;
-  sf<float> da;
-  sf<float> ds;
-  sf<float> focal;
+  sf<G4float> dx;
+  sf<G4float> da;
+  sf<G4float> ds;
+  sf<G4float> focal;
 public:
   virtual const desc_fields& node_desc_fields() const {
     TOOLS_FIELD_DESC_NODE_CLASS(tools::sg::base_camera)
@@ -65,11 +65,11 @@ private:
     add_field(&focal);
   }
 public:
-  virtual float near_height() const = 0;
-  virtual void zoom(float) = 0;
+  virtual G4float near_height() const = 0;
+  virtual void zoom(G4float) = 0;
   virtual camera_type type() const = 0;
   virtual void get_lrbt(unsigned int,unsigned int,
-                        float&,float&,float&,float&) = 0;
+                        G4float&,G4float&,G4float&,G4float&) = 0;
 public:
   virtual void render(render_action& a_action) {
     _mult_matrix(a_action);
@@ -166,21 +166,21 @@ public:
     orientation.value().mul_vec(vec3f(0,0,-1),a_dir);
   }
 
-  void rotate_around_direction(float a_delta) {
+  void rotate_around_direction(G4float a_delta) {
   //vec3f dir;
   //orientation.value().mul_vec(vec3f(0,0,-1),dir);
   //orientation.value(rotf(dir,a_delta) * orientation.value());
     orientation.value(rotf(vec3f(0,0,-1),a_delta) * orientation.value());
   }
 
-  void rotate_around_z(float a_delta) {
+  void rotate_around_z(G4float a_delta) {
   //vec3f z;
   //orientation.value().mul_vec(vec3f(0,0,1),z);
   //orientation.value(rotf(z,a_delta) * orientation.value());
     orientation.value(rotf(vec3f(0,0,1),a_delta) * orientation.value());
   }
 
-  void rotate_around_up(float a_delta){
+  void rotate_around_up(G4float a_delta){
     vec3f up;
     orientation.value().mul_vec(vec3f(0,1,0),up);
   //orientation.value(rotf(up,a_delta) * orientation.value());
@@ -189,11 +189,11 @@ public:
     orientation.value(orientation.value() * rotf(up,a_delta));
   }
 
-  void rotate_around_x(float a_delta){
+  void rotate_around_x(G4float a_delta){
     orientation.value(rotf(vec3f(1,0,0),a_delta) * orientation.value());
   }
 
-  void rotate_around_x_at_focal(float a_delta){
+  void rotate_around_x_at_focal(G4float a_delta){
     //from coin SoGuiExaminerViewerP::rotXWheelMotion.
     vec3f dir;
     orientation.value().mul_vec(vec3f(0,0,-1),dir);
@@ -203,7 +203,7 @@ public:
     position = focalpoint - focal * dir;
   }
 
-  void rotate_around_y_at_focal(float a_delta){
+  void rotate_around_y_at_focal(G4float a_delta){
     //from coin SoGuiExaminerViewerP::rotYWheelMotion.
     vec3f dir;
     orientation.value().mul_vec(vec3f(0,0,-1),dir);
@@ -213,7 +213,7 @@ public:
     position = focalpoint - focal * dir;
   }
 
-  void rotate_around_z_at_focal(float a_delta){
+  void rotate_around_z_at_focal(G4float a_delta){
     //from coin SoGuiExaminerViewerP::rotYWheelMotion.
     vec3f dir;
     orientation.value().mul_vec(vec3f(0,0,-1),dir);
@@ -246,7 +246,7 @@ public:
     //check that dir is on a_dir :
    {vec3f dir;
     orientation.value().mul_vec(vec3f(0,0,-1),dir);
-    float cos_angle; //it should be 1
+    G4float cos_angle; //it should be 1
     if(!dir.cos_angle(a_dir,cos_angle)) {
       ::printf("debug : can't get angle\n");
       return;
@@ -255,7 +255,7 @@ public:
 */
   }
 
-  void pane_to(float a_x,float a_y,float a_z){
+  void pane_to(G4float a_x,G4float a_y,G4float a_z){
     //translate in view plane so that (a_x,a_y,a_z) is on direction.
 
     vec3f dir;
@@ -271,7 +271,7 @@ public:
     position.value(pos);
   }
 
-  void translate_along_side(float a_delta){
+  void translate_along_side(G4float a_delta){
     vec3f dir;
     orientation.value().mul_vec(vec3f(0,0,-1),dir);
     vec3f up;
@@ -280,7 +280,7 @@ public:
     vec3f pos = position.value() + side * a_delta;
     position.value(pos);
   }
-  void translate_along_up(float a_delta){
+  void translate_along_up(G4float a_delta){
     vec3f dir;
     orientation.value().mul_vec(vec3f(0,0,-1),dir);
     vec3f up;
@@ -288,7 +288,7 @@ public:
     vec3f pos = position.value() + up * a_delta;
     position.value(pos);
   }
-  void translate_along_dir(float a_delta){
+  void translate_along_dir(G4float a_delta){
     vec3f dir;
     orientation.value().mul_vec(vec3f(0,0,-1),dir);
     vec3f pos = position.value() + dir * a_delta;
@@ -338,7 +338,7 @@ public:
 
   bool is_type_ortho() const {return type()==camera_ortho?true:false;}
 
-  bool height_at_focal(float& a_h) const {
+  bool height_at_focal(G4float& a_h) const {
     if(is_type_ortho()) {
       a_h = near_height();
     } else {
@@ -348,7 +348,7 @@ public:
     return true;
   }
 
-  void astro_orientation(float a_ra,float a_dec/*,const vec3f&  a_center*/) {
+  void astro_orientation(G4float a_ra,G4float a_dec/*,const vec3f&  a_center*/) {
     // a_ra, a_dec are in decimal degrees.
 
     // Camera default point toward -z with up along +y and +x at right.
@@ -379,9 +379,9 @@ public:
   }
 
   bool update_motion(int a_move) {
-    float _dx = dx;
-    float _da = da;
-    float _ds = ds;
+    G4float _dx = dx;
+    G4float _da = da;
+    G4float _ds = ds;
 
     if(a_move==move_rotate_right) { //should match camera_yaw().
       rotate_around_up(_da);
@@ -475,12 +475,12 @@ protected:
   void update_sg(std::ostream& a_out) {
 
    {const vec4f& v = m_lrbt.value();
-    float l = v[0];
-    float r = v[1];
-    float b = v[2];
-    float t = v[3];
-    float n = znear.value();
-    float f = zfar.value();
+    G4float l = v[0];
+    G4float r = v[1];
+    G4float b = v[2];
+    G4float t = v[3];
+    G4float n = znear.value();
+    G4float f = zfar.value();
     if(is_type_ortho()) {
       m_proj.set_ortho(l,r,b,t,n,f);
     } else {
@@ -505,7 +505,7 @@ protected:
   }
 
   void _mult_matrix(matrix_action& a_action) {
-    float l,r,b,t;
+    G4float l,r,b,t;
     get_lrbt(a_action.ww(),a_action.wh(),l,r,b,t);
     m_lrbt.set_value(l,r,b,t);
 
@@ -531,16 +531,16 @@ protected:
   }
 
 #if defined(TOOLS_MEM) && !defined(TOOLS_MEM_ATEXIT)
-  static const vec4<float>& id_orientation() {static const vec4<float> s_v(0,0,0,1,false);return s_v;}
+  static const vec4<G4float>& id_orientation() {static const vec4<G4float> s_v(0,0,0,1,false);return s_v;}
 #else
-  static const vec4<float>& id_orientation() {static const vec4<float> s_v(0,0,0,1);return s_v;}
+  static const vec4<G4float>& id_orientation() {static const vec4<G4float> s_v(0,0,0,1);return s_v;}
 #endif
 
 protected:
   //OPTIMIZATION :
   sf_vec4f m_lrbt;
   mat4f m_proj;
-  float m_tmp[16];
+  G4float m_tmp[16];
 };
 
 }}

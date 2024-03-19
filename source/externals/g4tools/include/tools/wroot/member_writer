@@ -35,8 +35,8 @@ public:
     return false; //FIXME
   }
 
-  virtual bool visit(const std::string&,float a_v){return m_buf.write(a_v);}
-  virtual bool visit(const std::string&,double a_v){return m_buf.write(a_v);}
+  virtual bool visit(const std::string&,G4float a_v){return m_buf.write(a_v);}
+  virtual bool visit(const std::string&,G4double a_v){return m_buf.write(a_v);}
 
   virtual bool visit(const std::string&,const std::string& a_v) {return m_buf.write(a_v);}
 
@@ -66,15 +66,15 @@ public:
     return false;
   }
 
-  virtual bool visit(const std::string&,const std::vector<float>& a_v) {return m_buf.write_array(a_v);}
+  virtual bool visit(const std::string&,const std::vector<G4float>& a_v) {return m_buf.write_array(a_v);}
 
-  virtual bool visit(const std::string&,const std::vector<double>& a_v) {return m_buf.write_array(a_v);}
+  virtual bool visit(const std::string&,const std::vector<G4double>& a_v) {return m_buf.write_array(a_v);}
 
 //virtual bool visit(const std::string&,const std::vector<unsigned char>& a_v) {return m_buf.write_array(a_v);}
 
   virtual bool visit(const std::string&,const std::vector<std::string>& a_v) {return m_buf.write(a_v);}
 
-  virtual bool visit(const std::string&,const std::vector< std::vector<double> >& a_v){
+  virtual bool visit(const std::string&,const std::vector< std::vector<G4double> >& a_v){
     return m_buf.write_array2(a_v);
   }
 

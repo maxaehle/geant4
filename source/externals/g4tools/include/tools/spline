@@ -18,7 +18,7 @@ namespace spline {
 class base_poly {
 public:
   base_poly():fX(0),fY(0) {}
-  base_poly(double x,double y):fX(x),fY(y) {}
+  base_poly(G4double x,G4double y):fX(x),fY(y) {}
   virtual ~base_poly(){}
 public:
   base_poly(base_poly const &a_from):fX(a_from.fX),fY(a_from.fY) {}
@@ -29,19 +29,19 @@ public:
     return *this;
   }
 public:
-  const double& X() const {return fX;}
-  const double& Y() const {return fY;}
-  double &X() {return fX;}
-  double &Y() {return fY;}
+  const G4double& X() const {return fX;}
+  const G4double& Y() const {return fY;}
+  G4double &X() {return fX;}
+  G4double &Y() {return fY;}
 protected:
-  double fX;     // abscissa
-  double fY;     // constant term
+  G4double fX;     // abscissa
+  G4double fY;     // constant term
 };
 
 class cubic_poly : public base_poly {
 public:
   cubic_poly():fB(0), fC(0), fD(0) {}
-  cubic_poly(double x, double y, double b, double c, double d):base_poly(x,y), fB(b), fC(c), fD(d) {}
+  cubic_poly(G4double x, G4double y, G4double b, G4double c, G4double d):base_poly(x,y), fB(b), fC(c), fD(d) {}
 public:
   cubic_poly(cubic_poly const &a_from)
   :base_poly(a_from), fB(a_from.fB), fC(a_from.fC), fD(a_from.fD) {}
@@ -54,20 +54,20 @@ public:
     return *this;
   }
 public:
-  double &B() {return fB;}
-  double &C() {return fC;}
-  double &D() {return fD;}
-  double eval(double x) const {double dx=x-fX;return (fY+dx*(fB+dx*(fC+dx*fD)));}
+  G4double &B() {return fB;}
+  G4double &C() {return fC;}
+  G4double &D() {return fD;}
+  G4double eval(G4double x) const {G4double dx=x-fX;return (fY+dx*(fB+dx*(fC+dx*fD)));}
 protected:
-  double fB; // first order expansion coefficient :  fB*1! is the first derivative at x
-  double fC; // second order expansion coefficient : fC*2! is the second derivative at x
-  double fD; // third order expansion coefficient :  fD*3! is the third derivative at x
+  G4double fB; // first order expansion coefficient :  fB*1! is the first derivative at x
+  G4double fC; // second order expansion coefficient : fC*2! is the second derivative at x
+  G4double fD; // third order expansion coefficient :  fD*3! is the third derivative at x
 };
 
 class quintic_poly : public base_poly {
 public:
   quintic_poly():fB(0), fC(0), fD(0), fE(0), fF(0) {}
-  quintic_poly(double x, double y, double b, double c, double d, double e, double f)
+  quintic_poly(G4double x, G4double y, G4double b, G4double c, G4double d, G4double e, G4double f)
   :base_poly(x,y), fB(b), fC(c), fD(d), fE(e), fF(f) {}
 public:
   quintic_poly(quintic_poly const &a_from)
@@ -84,18 +84,18 @@ public:
     return *this;
   }
 public:
-  double &B() {return fB;}
-  double &C() {return fC;}
-  double &D() {return fD;}
-  double &E() {return fE;}
-  double &F() {return fF;}
-  double eval(double x) const {double dx=x-fX;return (fY+dx*(fB+dx*(fC+dx*(fD+dx*(fE+dx*fF)))));}
+  G4double &B() {return fB;}
+  G4double &C() {return fC;}
+  G4double &D() {return fD;}
+  G4double &E() {return fE;}
+  G4double &F() {return fF;}
+  G4double eval(G4double x) const {G4double dx=x-fX;return (fY+dx*(fB+dx*(fC+dx*(fD+dx*(fE+dx*fF)))));}
 protected:
-  double fB; // first order expansion coefficient :  fB*1! is the first derivative at x
-  double fC; // second order expansion coefficient : fC*2! is the second derivative at x
-  double fD; // third order expansion coefficient :  fD*3! is the third derivative at x
-  double fE; // fourth order expansion coefficient : fE*4! is the fourth derivative at x
-  double fF; // fifth order expansion coefficient :  fF*5! is the fifth derivative at x
+  G4double fB; // first order expansion coefficient :  fB*1! is the first derivative at x
+  G4double fC; // second order expansion coefficient : fC*2! is the second derivative at x
+  G4double fD; // third order expansion coefficient :  fD*3! is the third derivative at x
+  G4double fE; // fourth order expansion coefficient : fE*4! is the fourth derivative at x
+  G4double fF; // fifth order expansion coefficient :  fF*5! is the fifth derivative at x
 };
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -105,7 +105,7 @@ class base_spline {
 protected:
   base_spline(std::ostream& a_out):m_out(a_out), fDelta(-1), fXmin(0), fXmax(0), fNp(0), fKstep(false) {}
 public:
-  base_spline(std::ostream& a_out,double delta, double xmin, double xmax, size_t np, bool step)
+  base_spline(std::ostream& a_out,G4double delta, G4double xmin, G4double xmax, size_t np, bool step)
   :m_out(a_out),fDelta(delta), fXmin(xmin),fXmax(xmax), fNp(np), fKstep(step)
   {}
   virtual ~base_spline() {}
@@ -124,9 +124,9 @@ protected:
   }
 protected:
   std::ostream& m_out;
-  double  fDelta;     // Distance between equidistant knots
-  double  fXmin;      // Minimum value of abscissa
-  double  fXmax;      // Maximum value of abscissa
+  G4double  fDelta;     // Distance between equidistant knots
+  G4double  fXmin;      // Minimum value of abscissa
+  G4double  fXmax;      // Maximum value of abscissa
   size_t  fNp;        // Number of knots
   bool    fKstep;     // True of equidistant knots
 };
@@ -146,7 +146,7 @@ class cubic : public base_spline {
 protected:
   cubic(std::ostream& a_out) : base_spline(a_out) , fPoly(0), fValBeg(0), fValEnd(0), fBegCond(-1), fEndCond(-1) {}
 public:
-  cubic(std::ostream& a_out,size_t a_n,double a_x[], double a_y[], double a_valbeg = 0, double a_valend = 0)
+  cubic(std::ostream& a_out,size_t a_n,G4double a_x[], G4double a_y[], G4double a_valbeg = 0, G4double a_valend = 0)
   :base_spline(a_out,-1,0,0,a_n,false)
   ,fValBeg(a_valbeg), fValEnd(a_valend), fBegCond(0), fEndCond(0)
   {
@@ -179,7 +179,7 @@ public:
     return *this;
   }
 public:
-  double eval(double x) const {
+  G4double eval(G4double x) const {
     if(!fNp) return 0;
     // Eval this spline at x
     size_t klow = find_x(x);
@@ -200,9 +200,9 @@ protected:
     }
     return i;
   }
-  static int TMath_FloorNint(double x) { return TMath_Nint(::floor(x)); }
+  static int TMath_FloorNint(G4double x) { return TMath_Nint(::floor(x)); }
 
-  size_t find_x(double x) const {
+  size_t find_x(G4double x) const {
     int klow=0, khig=fNp-1;
     //
     // If out of boundaries, extrapolate
@@ -272,7 +272,7 @@ protected:
     ///        and k=4.
 
     int j, l;
-    double   divdf1,divdf3,dtau,g=0;
+    G4double   divdf1,divdf3,dtau,g=0;
     // ***** a tridiagonal linear system for the unknown slopes s(i) of
     //  f  at tau(i), i=1,...,n, is generated and then solved by gauss elim-
     //  ination, with s(i) ending up in c(2,i), all i.
@@ -397,8 +397,8 @@ protected:
 
 protected:
   std::vector<cubic_poly> fPoly; //[fNp] Array of polynomial terms
-  double        fValBeg;     // Initial value of first or second derivative
-  double        fValEnd;     // End value of first or second derivative
+  G4double        fValBeg;     // Initial value of first or second derivative
+  G4double        fValEnd;     // End value of first or second derivative
   int           fBegCond;    // 0=no beg cond, 1=first derivative, 2=second derivative
   int           fEndCond;    // 0=no end cond, 1=first derivative, 2=second derivative
 };
@@ -409,7 +409,7 @@ protected:
 //                                                                      //
 // Class to create quintic natural splines to interpolate knots         //
 // Arbitrary conditions can be introduced for first and second          //
-// derivatives using double knots (see build_coeff) for more on this.    //
+// derivatives using G4double knots (see build_coeff) for more on this.    //
 // Double knots are automatically introduced at ending points           //
 //                                                                      //
 //////////////////////////////////////////////////////////////////////////
@@ -417,7 +417,7 @@ class quintic : public base_spline {
 protected:
   quintic(std::ostream& a_out):base_spline(a_out),fPoly() {}
 public:
-  quintic(std::ostream& a_out,size_t a_n ,double a_x[], double a_y[])
+  quintic(std::ostream& a_out,size_t a_n ,G4double a_x[], G4double a_y[])
   :base_spline(a_out,-1,0,0,a_n,false) {
     if(!a_n) {
       m_out << "tools::spline::quintic : a_np is null." << std::endl;
@@ -441,10 +441,10 @@ public:
     return *this;
   }
 public:
-  double eval(double x) const {if(!fNp) return 0;size_t klow=find_x(x);return fPoly[klow].eval(x);}
+  G4double eval(G4double x) const {if(!fNp) return 0;size_t klow=find_x(x);return fPoly[klow].eval(x);}
 
 protected:
-  size_t find_x(double x) const {
+  size_t find_x(G4double x) const {
     int klow=0;
 
     // If out of boundaries, extrapolate
@@ -522,11 +522,11 @@ protected:
     ///     if x(j) = x(j+1) then s(x(j)) = y(j) and s'(x(j)) = y(j+1),
     ///     if x(j) = x(j+1) = x(j+2) then in addition s"(x(j)) = y(j+2).
     ///
-    ///     note that s""(x) is discontinuous at a double knot and, in
+    ///     note that s""(x) is discontinuous at a G4double knot and, in
     ///     addition, s"'(x) is discontinuous at a triple knot.  the
     ///     subroutine assigns y(i) to y(i+1) in these cases and also to
     ///     y(i+2) at a triple knot.  the representation (*) remains
-    ///     valid in each open interval (x(i),x(i+1)).  at a double knot,
+    ///     valid in each open interval (x(i),x(i+1)).  at a G4double knot,
     ///     x(j) = x(j+1), the output coefficients have the following values:
     ///       y(j) = s(x(j))          = y(j+1)
     ///       b(j) = s'(x(j))         = b(j+1)
@@ -544,7 +544,7 @@ protected:
     ///       f(j) = s""'(x(j)-0)/120  f(j+1) = 0  f(j+2) = s""'(x(j)+0)/120
 
     size_t i, m;
-    double pqqr, p, q, r, s, t, u, v,
+    G4double pqqr, p, q, r, s, t, u, v,
        b1, p2, p3, q2, q3, r2, pq, pr, qr;
 
     if (fNp <= 2) return;
@@ -591,7 +591,7 @@ protected:
 
     //     First and second order divided differences of the given function
     //     values, stored in b from 2 to n and in c from 3 to n
-    //     respectively. care is taken of double and triple knots.
+    //     respectively. care is taken of G4double and triple knots.
     for (i = 1; i < fNp; ++i) {
        if (fPoly[i].X() != fPoly[i-1].X()) {
           fPoly[i].B() =

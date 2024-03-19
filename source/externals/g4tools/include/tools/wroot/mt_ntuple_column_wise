@@ -125,7 +125,7 @@ public:
   ,m_nev(a_nev)
   {
     if(m_row_mode) {
-      if(!m_nev) m_nev = 4000;  //4000*sizeof(double) = 32000 = default basket size.
+      if(!m_nev) m_nev = 4000;  //4000*sizeof(G4double) = 32000 = default basket size.
     } else {
       m_nev = 0;
     }

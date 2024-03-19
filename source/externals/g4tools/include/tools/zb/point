@@ -8,7 +8,7 @@ namespace tools {
 namespace zb {
 
 typedef int    ZPos;
-typedef double ZZ;
+typedef G4double ZZ;
 
 class point {
 public:

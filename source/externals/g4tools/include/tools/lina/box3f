@@ -6,13 +6,13 @@
 
 #include "box3"
 #include "vec3f"
-#include <cfloat> //FLT_MAX
+#include <cG4float> //FLT_MAX
 
 namespace tools {
 
 class box3f : public box3<vec3f> {
   typedef box3<vec3f> parent;
-  static float num_max() {return FLT_MAX;}
+  static G4float num_max() {return FLT_MAX;}
 public:
   box3f():parent(){make_empty();}
   virtual ~box3f() {}
@@ -27,7 +27,7 @@ public:
     m_min.set_value( num_max(),  num_max(),  num_max());
     m_max.set_value(-num_max(), -num_max(), -num_max());
   }
-  bool get_cube_size(float& a_dx,float& a_dy,float& a_dz) const {
+  bool get_cube_size(G4float& a_dx,G4float& a_dy,G4float& a_dz) const {
     return parent::get_cube_size(a_dx,a_dy,a_dz,::sqrtf);
   }
 };

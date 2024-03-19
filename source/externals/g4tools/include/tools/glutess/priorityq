@@ -44,7 +44,7 @@
 /* Since we support deletion the data structure is a little more
  * complicated than an ordinary heap.  "nodes" is the heap itself;
  * active nodes are stored in the range 1..pq->size.  When the
- * heap exceeds its allocated size (pq->max), its size doubles.
+ * heap exceeds its allocated size (pq->max), its size G4doubles.
  * The children of node i are nodes 2i and 2i+1.
  *
  * Each node stores an index into an array "handles".  Each handle
@@ -199,7 +199,7 @@ inline PQhandle pqInsert( PriorityQ *pq, PQkey keyNew )
     PQnode *saveNodes= pq->nodes;
     PQhandleElem *saveHandles= pq->handles;
 
-    /* If the heap overflows, double its size. */
+    /* If the heap overflows, G4double its size. */
     pq->max <<= 1;
     pq->nodes = (PQnode *)memRealloc( pq->nodes, 
 				     (size_t) 
@@ -334,7 +334,7 @@ inline void pqDelete( PriorityQ *pq, PQhandle hCurr )
 /* Since we support deletion the data structure is a little more
  * complicated than an ordinary heap.  "nodes" is the heap itself;
  * active nodes are stored in the range 1..pq->size.  When the
- * heap exceeds its allocated size (pq->max), its size doubles.
+ * heap exceeds its allocated size (pq->max), its size G4doubles.
  * The children of node i are nodes 2i and 2i+1.
  *
  * Each node stores an index into an array "handles".  Each handle
@@ -491,7 +491,7 @@ inline PQhandle pqInsert( PriorityQ *pq, PQkey keyNew )
   if( ++ pq->size >= pq->max ) {
     PQkey *saveKey= pq->keys;
 
-    /* If the heap overflows, double its size. */
+    /* If the heap overflows, G4double its size. */
     pq->max <<= 1;
     pq->keys = (PQHeapKey *)memRealloc( pq->keys, 
 	 	                        (size_t)

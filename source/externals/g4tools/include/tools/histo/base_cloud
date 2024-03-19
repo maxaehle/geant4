@@ -61,8 +61,8 @@ protected:
 protected:
   std::string m_title;
   int m_limit;
-  double m_Sw;
-  std::vector<double> m_ws;
+  G4double m_Sw;
+  std::vector<G4double> m_ws;
 };
 
 }}

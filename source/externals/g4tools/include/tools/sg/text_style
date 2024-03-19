@@ -20,20 +20,20 @@ class text_style : public node {
   TOOLS_NODE(text_style,tools::sg::text_style,node)
 public:
   sf<bool> visible;
-  sf_vec<colorf,float> color;
-  sf_vec<colorf,float> back_color;
-  sf<float> back_shadow;
+  sf_vec<colorf,G4float> color;
+  sf_vec<colorf,G4float> back_color;
+  sf<G4float> back_shadow;
 
   sf_string modeling;
   sf_string font;
-  sf<float> font_size;
+  sf<G4float> font_size;
   sf_enum<sg::font_modeling> font_modeling;
   sf_string encoding;
   sf<bool> smoothing;
   sf<bool> hinting;
   sf_enum<sg::hjust> hjust;
   sf_enum<sg::vjust> vjust;
-  sf<float> scale;
+  sf<G4float> scale;
   // For 3D text :
   sf_vec3f x_orientation;
   sf_vec3f y_orientation;
@@ -41,7 +41,7 @@ public:
   sf<bool> rotated;
 
   // for text_hershey :
-  sf<float> line_width;
+  sf<G4float> line_width;
   sf<lpat> line_pattern;
   sf<bool> enforced;
   sf_vec3f translation;

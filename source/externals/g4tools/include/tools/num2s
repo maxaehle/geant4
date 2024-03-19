@@ -53,11 +53,11 @@ inline bool num2s(int64 a_value,std::string& a_s){
   return print2s(a_s,32,int64_format(),a_value);
 }
 
-inline bool num2s(float a_value,std::string& a_s){
+inline bool num2s(G4float a_value,std::string& a_s){
   return print2s(a_s,32,"%g",a_value);
 }
 
-inline bool num2s(double a_value,std::string& a_s){
+inline bool num2s(G4double a_value,std::string& a_s){
   return print2s(a_s,32,"%g",a_value);
 }
 
@@ -119,7 +119,7 @@ template <class T>
 class num_out : public std::string {
   typedef std::string parent;
 private:
-  //typedef typename std::enable_if<std::is_floating_point<T>::value, T>::type type_t;
+  //typedef typename std::enable_if<std::is_G4floating_point<T>::value, T>::type type_t;
   //typedef typename std::enable_if<std::is_integral<T>::value, T>::type type_t;
   //typedef typename std::enable_if<std::is_arithmetic<T>::value, T>::type type_t;
 public:

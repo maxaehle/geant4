@@ -12,10 +12,10 @@ namespace sg {
 class atb_vertices : public vertices {
   TOOLS_NODE(atb_vertices,tools::sg::atb_vertices,vertices)
 public:
-  mf<float> rgbas;
-  mf<float> nms;
+  mf<G4float> rgbas;
+  mf<G4float> nms;
   sf<bool> do_back;
-  sf<float> epsilon;
+  sf<G4float> epsilon;
   sf<bool> draw_edges;
 public:
   virtual const desc_fields& node_desc_fields() const {
@@ -47,7 +47,7 @@ protected: //gstos
     //unsigned int npt = xyzs.values().size()/3;
     //::printf("debug : atb_vertices : %lu : create_gsto : %u\n",this,npt);
 
-    std::vector<float> gsto_data;
+    std::vector<G4float> gsto_data;
 
     if(rgbas.size()) {
       if(nms.size()) {
@@ -67,8 +67,8 @@ protected: //gstos
           size_t pos_edges = gsto_data.size();
           append(gsto_data,xyzs.values());
           append(gsto_data,xyzs.values());
-          float* pxyz = vec_data<float>(xyzs.values());
-          float* pedges = vec_data<float>(gsto_data)+pos_edges;
+          G4float* pxyz = vec_data<G4float>(xyzs.values());
+          G4float* pedges = vec_data<G4float>(gsto_data)+pos_edges;
           size_t npt = xyzs.values().size()/3;
           size_t ntri = npt/3;
           for(size_t itri=0;itri<ntri;itri++) {
@@ -124,7 +124,7 @@ public:
       if(do_back.value()) gen_back();
       if(draw_edges.value()) gen_edges();
       m_all_a_one = true;
-     {tools_vforcit_npp(float,rgbas.values(),it) {
+     {tools_vforcit_npp(G4float,rgbas.values(),it) {
         if(*(it+3)!=1) {m_all_a_one = false;break;}
         it += 4;
       }}
@@ -156,17 +156,17 @@ public:
            {size_t sz = npt*3;
             if(do_back.value()) {
               pos_xyzs = 0;
-              pos_nms = pos_xyzs+sz*sizeof(float);  //bytes
-              pos_back_xyzs = pos_nms+sz*sizeof(float);
-              pos_back_nms = pos_back_xyzs+sz*sizeof(float);
-              pos_rgbas = pos_back_nms+sz*sizeof(float);
+              pos_nms = pos_xyzs+sz*sizeof(G4float);  //bytes
+              pos_back_xyzs = pos_nms+sz*sizeof(G4float);
+              pos_back_nms = pos_back_xyzs+sz*sizeof(G4float);
+              pos_rgbas = pos_back_nms+sz*sizeof(G4float);
             } else {
               pos_xyzs = 0;
-              pos_nms = pos_xyzs+sz*sizeof(float);
-              pos_rgbas = pos_nms+sz*sizeof(float);
+              pos_nms = pos_xyzs+sz*sizeof(G4float);
+              pos_rgbas = pos_nms+sz*sizeof(G4float);
             }}
             if(draw_edges.value()) {
-              pos_edges = pos_rgbas+npt*4*sizeof(float);
+              pos_edges = pos_rgbas+npt*4*sizeof(G4float);
             }
             if(gl::is_line(mode.value())) {
               //Same logic as Inventor SoLightModel.model = BASE_COLOR.
@@ -197,7 +197,7 @@ public:
           } else {
             size_t npt = xyzs.values().size()/3;
             bufpos pos_xyzs = 0;
-            bufpos pos_rgbas = npt*3*sizeof(float);
+            bufpos pos_rgbas = npt*3*sizeof(G4float);
             if(gl::is_line(mode.value())) {
               //Same logic as Inventor SoLightModel.model = BASE_COLOR.
               a_action.set_lighting(false);
@@ -214,7 +214,7 @@ public:
           if(nms.size()) {
             size_t npt = xyzs.values().size()/3;
             bufpos pos_xyzs = 0;
-            bufpos pos_nms = npt*3*sizeof(float);
+            bufpos pos_nms = npt*3*sizeof(G4float);
             if(gl::is_line(mode.value())) {
               //Same logic as Inventor SoLightModel.model = BASE_COLOR.
               a_action.set_lighting(false);
@@ -369,7 +369,7 @@ public:
     return *this;
   }
 public:
-  void add_pos_color(float a_x,float a_y,float a_z,float a_r,float a_g,float a_b,float a_a) {
+  void add_pos_color(G4float a_x,G4float a_y,G4float a_z,G4float a_r,G4float a_g,G4float a_b,G4float a_a) {
     xyzs.add(a_x);
     xyzs.add(a_y);
     xyzs.add(a_z);
@@ -380,7 +380,7 @@ public:
   }
 
   template <class COLOR>
-  void add_pos_color(float a_x,float a_y,float a_z,const COLOR& a_col) {
+  void add_pos_color(G4float a_x,G4float a_y,G4float a_z,const COLOR& a_col) {
     xyzs.add(a_x);
     xyzs.add(a_y);
     xyzs.add(a_z);
@@ -410,12 +410,12 @@ public:
 
   template <class VEC,class COLOR>
   void add_pos_color_allocated(const VEC& a_pos,const COLOR& a_col) {
-   {std::vector<float>& v = xyzs.values();
+   {std::vector<G4float>& v = xyzs.values();
     v[m_xyzs_pos] = a_pos.x();m_xyzs_pos++;
     v[m_xyzs_pos] = a_pos.y();m_xyzs_pos++;
     v[m_xyzs_pos] = a_pos.z();m_xyzs_pos++;
     xyzs.touch();}
-   {std::vector<float>& v = rgbas.values();
+   {std::vector<G4float>& v = rgbas.values();
     v[m_rgbas_pos] = a_col.r();m_rgbas_pos++;
     v[m_rgbas_pos] = a_col.g();m_rgbas_pos++;
     v[m_rgbas_pos] = a_col.b();m_rgbas_pos++;
@@ -448,25 +448,25 @@ public:
 
   template <class VEC,class COLOR>
   void add_pos_color_normal_allocated(const VEC& a_pos,const COLOR& a_col,const VEC& a_nm) {
-   {std::vector<float>& v = xyzs.values();
+   {std::vector<G4float>& v = xyzs.values();
     v[m_xyzs_pos] = a_pos.x();m_xyzs_pos++;
     v[m_xyzs_pos] = a_pos.y();m_xyzs_pos++;
     v[m_xyzs_pos] = a_pos.z();m_xyzs_pos++;
     xyzs.touch();}
-   {std::vector<float>& v = rgbas.values();
+   {std::vector<G4float>& v = rgbas.values();
     v[m_rgbas_pos] = a_col.r();m_rgbas_pos++;
     v[m_rgbas_pos] = a_col.g();m_rgbas_pos++;
     v[m_rgbas_pos] = a_col.b();m_rgbas_pos++;
     v[m_rgbas_pos] = a_col.a();m_rgbas_pos++;
     rgbas.touch();}
-   {std::vector<float>& v = nms.values();
+   {std::vector<G4float>& v = nms.values();
     v[m_nms_pos] = a_nm.x();m_nms_pos++;
     v[m_nms_pos] = a_nm.y();m_nms_pos++;
     v[m_nms_pos] = a_nm.z();m_nms_pos++;
     nms.touch();}
   }
 
-  void add_rgba(float a_r,float a_g,float a_b,float a_a) {
+  void add_rgba(G4float a_r,G4float a_g,G4float a_b,G4float a_a) {
     rgbas.add(a_r);
     rgbas.add(a_g);
     rgbas.add(a_b);
@@ -479,7 +479,7 @@ public:
     rgbas.add(a_col.a());
   }
 
-  void add_normal(float a_x,float a_y,float a_z) {
+  void add_normal(G4float a_x,G4float a_y,G4float a_z) {
     nms.add(a_x);
     nms.add(a_y);
     nms.add(a_z);
@@ -491,16 +491,16 @@ public:
     nms.add(a_nm.z());
   }
 
-  void add_rgba_allocated(size_t& a_pos,float a_r,float a_g,float a_b,float a_a) {
-    std::vector<float>& v = rgbas.values();
+  void add_rgba_allocated(size_t& a_pos,G4float a_r,G4float a_g,G4float a_b,G4float a_a) {
+    std::vector<G4float>& v = rgbas.values();
     v[a_pos] = a_r;a_pos++;
     v[a_pos] = a_g;a_pos++;
     v[a_pos] = a_b;a_pos++;
     v[a_pos] = a_a;a_pos++;
     rgbas.touch();
   }
-  void add_normal_allocated(size_t& a_pos,float a_x,float a_y,float a_z) {
-    std::vector<float>& v = nms.values();
+  void add_normal_allocated(size_t& a_pos,G4float a_x,G4float a_y,G4float a_z) {
+    std::vector<G4float>& v = nms.values();
     v[a_pos] = a_x;a_pos++;
     v[a_pos] = a_y;a_pos++;
     v[a_pos] = a_z;a_pos++;
@@ -517,10 +517,10 @@ public:
     nms.add(a_nm.z());
   }
 
-  bool add_dashed_line_rgba(float a_bx,float a_by,float a_bz,
-                            float a_ex,float a_ey,float a_ez,
+  bool add_dashed_line_rgba(G4float a_bx,G4float a_by,G4float a_bz,
+                            G4float a_ex,G4float a_ey,G4float a_ez,
                             unsigned int a_num_dash,
-                            float a_r,float a_g,float a_b,float a_a) {
+                            G4float a_r,G4float a_g,G4float a_b,G4float a_a) {
     if(!parent::add_dashed_line(a_bx,a_by,a_bz,a_ex,a_ey,a_ez,a_num_dash)) return false;
     for(unsigned int index=0;index<a_num_dash;index++) {
       add_rgba(a_r,a_g,a_b,a_a);
@@ -558,15 +558,15 @@ protected:
 
     clean_gstos(); //must reset for all render_manager.
 
-    std::vector<float>& _xyzs = xyzs.values();
-    std::vector<float>& _nms = nms.values();
+    std::vector<G4float>& _xyzs = xyzs.values();
+    std::vector<G4float>& _nms = nms.values();
 
     if(_xyzs.empty()) return;
 
     m_back_xyzs.resize(_xyzs.size(),0);
     m_back_nms.resize(_nms.size(),0);
 
-    float epsil = epsilon.value();
+    G4float epsil = epsilon.value();
 
     if(mode.value()==gl::triangle_fan()) { //reverse after first point.
 
@@ -574,10 +574,10 @@ protected:
       m_back_xyzs[1] = _xyzs[1] - _nms[1] * epsil;
       m_back_xyzs[2] = _xyzs[2] - _nms[2] * epsil;
 
-     {std::vector<float>::const_iterator it = _xyzs.begin()+3;
-      std::vector<float>::const_iterator _end = _xyzs.end();
-      std::vector<float>::const_iterator itn = _nms.begin()+3;
-      std::vector<float>::reverse_iterator it2 = m_back_xyzs.rbegin();
+     {std::vector<G4float>::const_iterator it = _xyzs.begin()+3;
+      std::vector<G4float>::const_iterator _end = _xyzs.end();
+      std::vector<G4float>::const_iterator itn = _nms.begin()+3;
+      std::vector<G4float>::reverse_iterator it2 = m_back_xyzs.rbegin();
       for(;it!=_end;it2+=3) {
         *(it2+2) = *it - *itn * epsil; it++;itn++; //x
         *(it2+1) = *it - *itn * epsil; it++;itn++; //y
@@ -588,9 +588,9 @@ protected:
       m_back_nms[1] = _nms[1] * -1.0f;
       m_back_nms[2] = _nms[2] * -1.0f;
 
-     {std::vector<float>::const_iterator it = _nms.begin()+3;
-      std::vector<float>::const_iterator _end = _nms.end();
-      std::vector<float>::reverse_iterator it2 = m_back_nms.rbegin();
+     {std::vector<G4float>::const_iterator it = _nms.begin()+3;
+      std::vector<G4float>::const_iterator _end = _nms.end();
+      std::vector<G4float>::reverse_iterator it2 = m_back_nms.rbegin();
       for(;it!=_end;it2+=3) {
         *(it2+2) = *it * -1.0f; it++;
         *(it2+1) = *it * -1.0f; it++;
@@ -599,19 +599,19 @@ protected:
 
     } else {
 
-     {std::vector<float>::const_iterator it = _xyzs.begin();
-      std::vector<float>::const_iterator _end = _xyzs.end();
-      std::vector<float>::const_iterator itn = _nms.begin();
-      std::vector<float>::reverse_iterator it2 = m_back_xyzs.rbegin();
+     {std::vector<G4float>::const_iterator it = _xyzs.begin();
+      std::vector<G4float>::const_iterator _end = _xyzs.end();
+      std::vector<G4float>::const_iterator itn = _nms.begin();
+      std::vector<G4float>::reverse_iterator it2 = m_back_xyzs.rbegin();
       for(;it!=_end;it2+=3) {
         *(it2+2) = *it - *itn * epsil; it++;itn++; //x
         *(it2+1) = *it - *itn * epsil; it++;itn++; //y
         *(it2+0) = *it - *itn * epsil; it++;itn++; //z
       }}
 
-     {std::vector<float>::const_iterator it = _nms.begin();
-      std::vector<float>::const_iterator _end = _nms.end();
-      std::vector<float>::reverse_iterator it2 = m_back_nms.rbegin();
+     {std::vector<G4float>::const_iterator it = _nms.begin();
+      std::vector<G4float>::const_iterator _end = _nms.end();
+      std::vector<G4float>::reverse_iterator it2 = m_back_nms.rbegin();
       for(;it!=_end;it2+=3) {
         *(it2+2) = *it * -1.0f; it++;
         *(it2+1) = *it * -1.0f; it++;
@@ -626,13 +626,13 @@ protected:
 
     clean_gstos(); //must reset for all render_manager.
 
-    std::vector<float>& _xyzs = xyzs.values();
+    std::vector<G4float>& _xyzs = xyzs.values();
     if(_xyzs.empty()) return;
 
     m_edges.resize(2*_xyzs.size(),0);
 
-    float* pxyz = vec_data<float>(xyzs.values());
-    float* pedges = vec_data<float>(m_edges);
+    G4float* pxyz = vec_data<G4float>(xyzs.values());
+    G4float* pedges = vec_data<G4float>(m_edges);
 
     size_t npt = xyzs.values().size()/3;
     size_t ntri = npt/3;
@@ -676,7 +676,7 @@ protected:
     if(state.m_GL_BLEND) {
     /*
       bool all_a_one = true;
-      tools_vforcit_npp(float,rgbas.values(),it) {
+      tools_vforcit_npp(G4float,rgbas.values(),it) {
         if(*(it+3)!=1) {all_a_one = false;break;}
         it += 4;
       }
@@ -694,9 +694,9 @@ protected:
   }
 #endif
 protected:
-  std::vector<float> m_back_xyzs;
-  std::vector<float> m_back_nms;
-  std::vector<float> m_edges;
+  std::vector<G4float> m_back_xyzs;
+  std::vector<G4float> m_back_nms;
+  std::vector<G4float> m_edges;
 protected:
   size_t m_xyzs_pos;
   size_t m_rgbas_pos;

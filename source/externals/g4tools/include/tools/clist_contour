@@ -58,19 +58,19 @@ protected: //G.Barrand
 	void DumpPlane(unsigned int iPlane) const;
 
 	// Area given by this function can be positive or negative depending on the winding direction of the contour.
-	double Area(cline_strip* Line);
+	G4double Area(cline_strip* Line);
 
-	double EdgeWeight(cline_strip* pLine, double R);
+	G4double EdgeWeight(cline_strip* pLine, G4double R);
 	//bool   PrintContour(std::ostream& a_out);
 protected:
 	// Merges pStrip1 with pStrip2 if they have a common end point
 	bool MergeStrips(cline_strip* pStrip1, cline_strip* pStrip2);
 	// Merges the two strips with a welding threshold.
-	bool ForceMerge(cline_strip* pStrip1, cline_strip* pStrip2,double);
+	bool ForceMerge(cline_strip* pStrip1, cline_strip* pStrip2,G4double);
 	// returns true if contour is touching boundary
 	bool OnBoundary(cline_strip* pStrip);
         // L.Garnier : check specials case for CompactStrip
-        bool SpecialCompactStripCase(double,double,double,double,double);
+        bool SpecialCompactStripCase(G4double,G4double,G4double,G4double,G4double);
 
 private:
 	// array of line strips
@@ -219,7 +219,7 @@ inline void clist_contour::ExportLine(int iPlane,int x1, int y1, int x2, int y2)
 	m_vStripLists[iPlane].insert(m_vStripLists[iPlane].begin(),pStrip);
 }
 
-inline bool clist_contour::ForceMerge(cline_strip* pStrip1, cline_strip* pStrip2,double aHeight)
+inline bool clist_contour::ForceMerge(cline_strip* pStrip1, cline_strip* pStrip2,G4double aHeight)
 {
 
 	cline_strip::iterator pos;
@@ -228,7 +228,7 @@ inline bool clist_contour::ForceMerge(cline_strip* pStrip1, cline_strip* pStrip2
 	if (pStrip2->empty())
 		return false;
 
-	double x[4], y[4], weldDist;
+	G4double x[4], y[4], weldDist;
 	int index;
 	index = pStrip1->front();
 	x[0] = get_xi(index);
@@ -380,12 +380,12 @@ inline bool clist_contour::compact_strips ()
 	cline_strip_list newList;
 	bool again, changed;
 
-	const double weldDist = 10*(m_dDx*m_dDx+m_dDy*m_dDy);
+	const G4double weldDist = 10*(m_dDx*m_dDx+m_dDy*m_dDy);
 
 	if(!_ASSERT_RET_(m_vStripLists.size() == get_number_of_planes(),"clist_contour::compact_strips ::0")) return false;
 	for (i=0;i<get_number_of_planes();i++)
 	{
-		double planeHeight = get_plane(i);
+		G4double planeHeight = get_plane(i);
 		again=true;
 		while(again)
 		{
@@ -464,7 +464,7 @@ inline bool clist_contour::compact_strips ()
 
 		Nstrip = m_vStripLists[i].size();
 		std::vector<bool> closed(Nstrip);
-		double x,y;
+		G4double x,y;
 
 		// First let's find the open and closed lists in m_vStripLists
 		for(pos2 = m_vStripLists[i].begin(), j=0, count=0; pos2 != m_vStripLists[i].end(); pos2++, j++)
@@ -665,7 +665,7 @@ inline bool clist_contour::OnBoundary(cline_strip* pStrip)
 	bool e1,e2;
 
 	int index = pStrip->front();
-	double x = get_xi(index), y = get_yi(index);
+	G4double x = get_xi(index), y = get_yi(index);
 	if (x==m_pLimits[0] || x == m_pLimits[1] ||
 		y == m_pLimits[2] || y == m_pLimits[3])
 		e1 = true;
@@ -705,11 +705,11 @@ inline void clist_contour::DumpPlane(UINT iPlane) const
 	}
 }
 
-inline double clist_contour::Area(cline_strip* Line)
+inline G4double clist_contour::Area(cline_strip* Line)
 {
 	// if Line is not closed, return 0;
 
-	double Ar = 0, x, y, x0,y0,x1, y1;
+	G4double Ar = 0, x, y, x0,y0,x1, y1;
 	int index;
 
 	cline_strip::iterator pos;
@@ -747,11 +747,11 @@ inline double clist_contour::Area(cline_strip* Line)
 	return Ar;
 }
 
-inline double clist_contour:: EdgeWeight(cline_strip* pLine, double R)
+inline G4double clist_contour:: EdgeWeight(cline_strip* pLine, G4double R)
 {
 	cline_strip::iterator pos;
 	int count = 0,index;
-	double x,y;
+	G4double x,y;
 	for(pos = pLine->begin(); pos!=pLine->end(); pos++)
 	{
 		index = (*pos);
@@ -760,7 +760,7 @@ inline double clist_contour:: EdgeWeight(cline_strip* pLine, double R)
 		if (fabs(x) > R || fabs(y) > R)
 			count ++;
 	}
-	return (double)count/pLine->size();
+	return (G4double)count/pLine->size();
 }
 
 /*
@@ -800,7 +800,7 @@ inline cline_strip_list* clist_contour::get_lines(unsigned int iPlane)	{
 }
 
 // Added by L.Garnier
-inline bool clist_contour::SpecialCompactStripCase(double aXfront,double aXback,double aYfront,double aYback,double actualHeight)
+inline bool clist_contour::SpecialCompactStripCase(G4double aXfront,G4double aXback,G4double aYfront,G4double aYback,G4double actualHeight)
 {
   // To solve the case of a list of strips
   // which appeared to be open but should correspond to a closed
@@ -815,10 +815,10 @@ inline bool clist_contour::SpecialCompactStripCase(double aXfront,double aXback,
   // the line (and return true), if not we do nothing (and return false).
 
   // check if we could realy close it
-  float marge = 1; // *m_dDy or *m_dDx. 1 seems to be good and normal, but why
+  G4float marge = 1; // *m_dDy or *m_dDx. 1 seems to be good and normal, but why
                    // not 2 in certain cases???
 
-  double distToNext =0;
+  G4double distToNext =0;
   // try to get the correct hight
   if (get_plane(0)>= actualHeight) {
     return false;
@@ -830,10 +830,10 @@ inline bool clist_contour::SpecialCompactStripCase(double aXfront,double aXback,
   }
 
   if ((aYback-aYfront) == 0) {
-    double temp;
-    double av;
-    double eg;
-    double ap;
+    G4double temp;
+    G4double av;
+    G4double eg;
+    G4double ap;
 
     if (aXfront==m_pLimits[0] && aXback == m_pLimits[1]) return false;
     if (aXfront==m_pLimits[1] && aXback == m_pLimits[0]) return false;
@@ -843,7 +843,7 @@ inline bool clist_contour::SpecialCompactStripCase(double aXfront,double aXback,
       aXfront = aXback;
       aXback = temp;
     }
-    for(double check=aXfront+m_dDx;
+    for(G4double check=aXfront+m_dDx;
         check<aXback;
         check+=m_dDx) {
       av = ((*m_pFieldFcn)(check,aYback-marge*m_dDy,m_pFieldFcnData)-actualHeight);
@@ -858,10 +858,10 @@ inline bool clist_contour::SpecialCompactStripCase(double aXfront,double aXback,
     }
     return true;
   } else if ((aXback-aXfront) == 0) {
-    double temp;
-    double av;
-    double eg;
-    double ap;
+    G4double temp;
+    G4double av;
+    G4double eg;
+    G4double ap;
     if (aYfront==m_pLimits[3] && aYback == m_pLimits[2]) return false;
     if (aYfront==m_pLimits[2] && aYback == m_pLimits[3]) return false;
 
@@ -871,7 +871,7 @@ inline bool clist_contour::SpecialCompactStripCase(double aXfront,double aXback,
       aYback = temp;
     }
 
-    for(double check=aYfront+m_dDy;
+    for(G4double check=aYfront+m_dDy;
         check<aYback;
         check+=m_dDy) {
       av = ((*m_pFieldFcn)(aXback-marge*m_dDx,check,m_pFieldFcnData)-actualHeight);

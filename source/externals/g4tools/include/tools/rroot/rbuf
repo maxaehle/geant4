@@ -169,17 +169,17 @@ public:
     return true;
   }
 
-  bool read(float& a_x) {
-    if(!_check_eob<float>(a_x)) return false;
+  bool read(G4float& a_x) {
+    if(!_check_eob<G4float>(a_x)) return false;
     m_r_4_func(m_pos,(char*)&a_x);
-    m_pos += sizeof(float);
+    m_pos += sizeof(G4float);
     return true;
   }
 
-  bool read(double& a_x) {
-    if(!_check_eob<double>(a_x)) return false;
+  bool read(G4double& a_x) {
+    if(!_check_eob<G4double>(a_x)) return false;
     m_r_8_func(m_pos,(char*)&a_x);
-    m_pos += sizeof(double);
+    m_pos += sizeof(G4double);
     return true;
   }
 

@@ -301,15 +301,15 @@ public:
       return false;
     }
 
-    double* pixels = new double[m_n]; //for mean value.
+    G4double* pixels = new G4double[m_n]; //for mean value.
     if(!pixels) {
       delete [] rb;
       a_res.make_empty();
       return false;
     }
 
-    unsigned int wfac = double(m_w)/double(a_w);
-    unsigned int hfac = double(m_h)/double(a_h);
+    unsigned int wfac = G4double(m_w)/G4double(a_w);
+    unsigned int hfac = G4double(m_h)/G4double(a_h);
     if(!wfac) wfac = 1;
     if(!hfac) hfac = 1;
 
@@ -327,7 +327,7 @@ public:
           for(unsigned int fc=0;fc<wfac;fc++) {
             pos = hpos + (i*wfac+fc)*m_n;
             for(unsigned int ipix=0;ipix<m_n;ipix++) {
-              pixels[ipix] += double(*pos)/double(wfac_hfac);pos++;
+              pixels[ipix] += G4double(*pos)/G4double(wfac_hfac);pos++;
             }
           }
         }
@@ -368,7 +368,7 @@ public:
       return false;
     }
 
-    double* pixels = new double[m_n]; //for mean value.
+    G4double* pixels = new G4double[m_n]; //for mean value.
     if(!pixels) {
       delete [] rb;
       a_res.make_empty();
@@ -376,16 +376,16 @@ public:
     }
    {for(unsigned int ipix=0;ipix<m_n;ipix++) pixels[ipix] = 0;}
 
-    unsigned int wfac = (unsigned int)(double(m_w)/double(a_w));
-    unsigned int hfac = (unsigned int)(double(m_h)/double(a_h));
+    unsigned int wfac = (unsigned int)(G4double(m_w)/G4double(a_w));
+    unsigned int hfac = (unsigned int)(G4double(m_h)/G4double(a_h));
     if(!wfac) wfac = 1;
     if(!hfac) hfac = 1;
 
-    double wfac_hfac = wfac*hfac;
+    G4double wfac_hfac = wfac*hfac;
 
     //::printf("debug : %d %d, %d %d\n",a_h,a_w,hfac,wfac);
 
-    T* hpos;T* pos;T* hrpos;T* rpos;T* hhpos;T* _pos;double* ppos;
+    T* hpos;T* pos;T* hrpos;T* rpos;T* hhpos;T* _pos;G4double* ppos;
     unsigned int i,j,fr,fc,ipix,i0;
     unsigned int astride = a_w * m_n;
     unsigned int mstride = m_w * m_n;
@@ -407,8 +407,8 @@ public:
             pos = _pos;
             ppos = pixels;
             for(ipix=0;ipix<m_n;ipix++,pos++,ppos++) {
-              *ppos += double(*pos)/wfac_hfac;
-//              *ppos += double(*pos); //NOTE : doing the wfac_hfac division in the below loop is slower !
+              *ppos += G4double(*pos)/wfac_hfac;
+//              *ppos += G4double(*pos); //NOTE : doing the wfac_hfac division in the below loop is slower !
             }
           }
         }
@@ -887,7 +887,7 @@ protected:
   T* m_buffer;
   bool m_owner;
 
-private: static void check_instantiation() {img<float> dummy;}
+private: static void check_instantiation() {img<G4float> dummy;}
 };
 
 

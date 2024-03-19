@@ -336,7 +336,7 @@ inline int SIGN_INCONSISTENT() {
   return s_value;
 }
 
-inline/*static*/ int static_ComputeNormal( GLUtesselator *tess, GLUdouble norm[3], int check )
+inline/*static*/ int static_ComputeNormal( GLUtesselator *tess, GLUG4double norm[3], int check )
 /*
  * If check==TOOLS_GLU_FALSE, we compute the polygon normal and place it in norm[].
  * If check==TOOLS_GLU_TRUE, we check that each triangle in the fan from v0 has a
@@ -349,7 +349,7 @@ inline/*static*/ int static_ComputeNormal( GLUtesselator *tess, GLUdouble norm[3
   CachedVertex *v0 = tess->cache;
   CachedVertex *vn = v0 + tess->cacheCount;
   CachedVertex *vc;
-  GLUdouble dot, xc, yc, zc, xp, yp, zp, n[3];
+  GLUG4double dot, xc, yc, zc, xp, yp, zp, n[3];
   int sign = 0;
 
   /* Find the polygon normal.  It is important to get a reasonable
@@ -420,7 +420,7 @@ inline GLUboolean __gl_renderCache( GLUtesselator *tess )
   CachedVertex *v0 = tess->cache;
   CachedVertex *vn = v0 + tess->cacheCount;
   CachedVertex *vc;
-  GLUdouble norm[3];
+  GLUG4double norm[3];
   int sign;
 
   if( tess->cacheCount < 3 ) {

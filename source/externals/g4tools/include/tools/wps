@@ -18,7 +18,7 @@ class wps {
   typedef unsigned int  Uint;
 
 public:
-  typedef float VCol;
+  typedef G4float VCol;
   typedef bool(*rgb_func)(void*,unsigned int,unsigned int,VCol&,VCol&,VCol&);
 public:
   wps(std::ostream& a_out):m_out(a_out){
@@ -134,20 +134,20 @@ public:
     return true;
   }
 
-  void PS_PAGE_SCALE(float a_width,float a_height,bool a_portrait = true){
+  void PS_PAGE_SCALE(G4float a_width,G4float a_height,bool a_portrait = true){
     //NOTE : no check done on [a_width,a_height]<=0
 
     PS_SCALE(1/METAFILE_SCALE(),1/METAFILE_SCALE());
     PS_TRANSLATE(m_deviceWidth/20,m_deviceHeight/30);
 
-    float scale;
+    G4float scale;
     if(m_deviceWidth<=m_deviceHeight) {
       scale = (a_height<=a_width?m_deviceWidth/a_width:m_deviceWidth/a_height);
     } else {
       scale = (a_height<=a_width?m_deviceHeight/a_width:m_deviceHeight/a_height);
     }
 
-   {float xtra,ytra;
+   {G4float xtra,ytra;
     if(a_portrait) {
       xtra = (m_deviceWidth  - scale * a_width)/2;
       ytra = (m_deviceHeight - scale * a_height)/2;
@@ -162,15 +162,15 @@ public:
     PS_SCALE(scale,scale);
   }
 
-  void PS_SCALE(float a_x,float a_y) {
+  void PS_SCALE(G4float a_x,G4float a_y) {
     in_buffer("%.2f %.2f scale ",a_x,a_y);
   }
 
-  void PS_TRANSLATE(float a_x,float a_y){
+  void PS_TRANSLATE(G4float a_x,G4float a_y){
     in_buffer("%.2f %.2f translate ",a_x,a_y);
   }
 
-  void PS_ROTATE(float a_x){in_buffer("%.2f rotate ",a_x);}
+  void PS_ROTATE(G4float a_x){in_buffer("%.2f rotate ",a_x);}
 
   void PS_SAVE(){in_buffer("gsave ");m_gsave++;}
 
@@ -344,7 +344,7 @@ public:
 protected:
   static size_t METAFILE_RECORD_LENGTH() {return 80;}
 
-  static float METAFILE_SCALE() {return 1.0f;}
+  static G4float METAFILE_SCALE() {return 1.0f;}
 
   static char* get_date(){
     char*  string;
@@ -423,10 +423,10 @@ protected:
 
 protected:
   std::ostream& m_out;
-  float         m_deviceWidth;
-  float         m_deviceHeight;
+  G4float         m_deviceWidth;
+  G4float         m_deviceHeight;
   unsigned int  m_pageNumber;
-//double        m_markSize;
+//G4double        m_markSize;
   FILE*         m_file;
   std::string   m_fname;
   std::string   m_string;
@@ -450,8 +450,8 @@ protected:
     shade_black_white = 2
   };
 
-  void PS_BACKGROUND(double a_r,double a_g,double a_b,
-                     double a_width,double a_height,
+  void PS_BACKGROUND(G4double a_r,G4double a_g,G4double a_b,
+                     G4double a_width,G4double a_height,
                      bool a_do_back = true){
     PS_NEWPATH();
     PS_MOVE       (0.,0.);
@@ -469,7 +469,7 @@ protected:
     in_buffer("clip ");
   }
 
-  void PS_RGB(double a_r,double a_g,double a_b){
+  void PS_RGB(G4double a_r,G4double a_g,G4double a_b){
     if(m_param.shade==shade_color)
       in_buffer("%.2f %.2f %.2f rgb ",a_r,a_g,a_b);
     else if(m_param.shade==shade_grey)
@@ -478,22 +478,22 @@ protected:
       in_buffer("0. setgray ",rgb2grey(a_r,a_g,a_b));
   }
 
-  void PS_LINE_WIDTH(int a_width){in_buffer("%.1f lw ",float(a_width));}
+  void PS_LINE_WIDTH(int a_width){in_buffer("%.1f lw ",G4float(a_width));}
 
   void PS_NEWPATH() {in_buffer("n ");}
   void PS_STROKE() {in_buffer("s ");}
   void PS_FILL() {in_buffer("f ");}
   void PS_CLOSEPATH() {in_buffer("cl ");}
-  void PS_CAP(double a_x) {in_buffer ("%1d lc ",a_x);}
-  void PS_RLINETO(double a_x,double a_y) {
+  void PS_CAP(G4double a_x) {in_buffer ("%1d lc ",a_x);}
+  void PS_RLINETO(G4double a_x,G4double a_y) {
     in_buffer ("%.2f %.2f rl ",a_x,a_y);
   }
-  void PS_MOVE(double a_x,double a_y) {
+  void PS_MOVE(G4double a_x,G4double a_y) {
     in_buffer ("%.2f %.2f m ",a_x,a_y);
   }
 
-  void PS_FRAME(double a_r,double a_g,double a_b,
-                double a_width,double a_height){
+  void PS_FRAME(G4double a_r,G4double a_g,G4double a_b,
+                G4double a_width,G4double a_height){
     PS_NEWPATH   ();
     PS_MOVE      (0.,0.);
     PS_RLINETO   (a_width,0.);

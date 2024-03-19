@@ -352,8 +352,8 @@ inline void fill_infos_core(obj_list<streamer_info>& a_infos,std::ostream& a_out
   fill_vec(a_infos,"unsigned char",streamer__info::UNSIGNED_CHAR);
   fill_vec(a_infos,"unsigned short",streamer__info::UNSIGNED_SHORT);
   fill_vec(a_infos,"unsigned int",streamer__info::UNSIGNED_INT);
-  fill_vec(a_infos,"float",streamer__info::FLOAT);
-  fill_vec(a_infos,"double",streamer__info::DOUBLE);
+  fill_vec(a_infos,"G4float",streamer__info::FLOAT);
+  fill_vec(a_infos,"G4double",streamer__info::DOUBLE);
   fill_vec(a_infos,"bool",streamer__info::BOOL);
 
 }
@@ -933,8 +933,8 @@ inline void fill_infos_tree(obj_list<streamer_info>& a_infos,std::ostream& a_out
   // Elements :
   int ofs = 0;
   info->add(new streamer_base("TLeaf","Leaf: description of a Branch data type",ofs,TLeaf_version));ofs += size_TLeaf();
-  info->add(new streamer_float(ofs,"fMinimum","Minimum value if leaf range is specified"));
-  info->add(new streamer_float(ofs,"fMaximum","Maximum value if leaf range is specified"));
+  info->add(new streamer_G4float(ofs,"fMinimum","Minimum value if leaf range is specified"));
+  info->add(new streamer_G4float(ofs,"fMaximum","Maximum value if leaf range is specified"));
   //size_TLeafF = ofs;
   }
 
@@ -958,8 +958,8 @@ inline void fill_infos_tree(obj_list<streamer_info>& a_infos,std::ostream& a_out
   // Elements :
   int ofs = 0;
   info->add(new streamer_base("TLeaf","Leaf: description of a Branch data type",ofs,TLeaf_version));ofs += size_TLeaf();
-  info->add(new streamer_double(ofs,"fMinimum","Minimum value if leaf range is specified"));
-  info->add(new streamer_double(ofs,"fMaximum","Maximum value if leaf range is specified"));
+  info->add(new streamer_G4double(ofs,"fMinimum","Minimum value if leaf range is specified"));
+  info->add(new streamer_G4double(ofs,"fMaximum","Maximum value if leaf range is specified"));
 
   }
 
@@ -1131,11 +1131,11 @@ inline void fill_infos_histo(obj_list<streamer_info>& a_infos,std::ostream& a_ou
   info->add(new sbt("fAxisColor","color of the line axis",ofs,streamer__info::SHORT,"Color_t"));ofs += size_SHORT;
   info->add(new sbt("fLabelColor","color of labels",ofs,streamer__info::SHORT,"Color_t"));ofs += size_SHORT;
   info->add(new sbt("fLabelFont","font for labels",ofs,streamer__info::SHORT,"Style_t"));ofs += size_SHORT;
-  info->add(new streamer_float(ofs,"fLabelOffset","offset of labels"));
-  info->add(new streamer_float(ofs,"fLabelSize","size of labels"));
-  info->add(new streamer_float(ofs,"fTickLength","length of tick marks"));
-  info->add(new streamer_float(ofs,"fTitleOffset","offset of axis title"));
-  info->add(new streamer_float(ofs,"fTitleSize","size of axis title"));
+  info->add(new streamer_G4float(ofs,"fLabelOffset","offset of labels"));
+  info->add(new streamer_G4float(ofs,"fLabelSize","size of labels"));
+  info->add(new streamer_G4float(ofs,"fTickLength","length of tick marks"));
+  info->add(new streamer_G4float(ofs,"fTitleOffset","offset of axis title"));
+  info->add(new streamer_G4float(ofs,"fTitleSize","size of axis title"));
   info->add(new sbt("fTitleColor","color of axis title",ofs,streamer__info::SHORT,"Color_t"));ofs += size_SHORT;
   info->add(new sbt("fTitleFont","font for axis title",ofs,streamer__info::SHORT,"Style_t"));ofs += size_SHORT;
   //uuuu ofs += 2; //alignement ???
@@ -1277,9 +1277,9 @@ inline void fill_infos_histo(obj_list<streamer_info>& a_infos,std::ostream& a_ou
   info->add(new streamer_stat_t(ofs,"fTsumw2","Total Sum of squares of weights"));
   info->add(new streamer_stat_t(ofs,"fTsumwx","Total Sum of weight*X"));
   info->add(new streamer_stat_t(ofs,"fTsumwx2","Total Sum of weight*X*X"));
-  info->add(new streamer_double(ofs,"fMaximum","Maximum value for plotting"));
-  info->add(new streamer_double(ofs,"fMinimum","Minimum value for plotting"));
-  info->add(new streamer_double(ofs,"fNormFactor","Normalization factor"));
+  info->add(new streamer_G4double(ofs,"fMaximum","Maximum value for plotting"));
+  info->add(new streamer_G4double(ofs,"fMinimum","Minimum value for plotting"));
+  info->add(new streamer_G4double(ofs,"fNormFactor","Normalization factor"));
   info->add(new streamer_object_any("fContour","Array to display contour levels",ofs,"TArrayD"));ofs += size_TArrayD;
   info->add(new streamer_object_any("fSumw2","Array of sum of squares of weights",ofs,"TArrayD"));ofs += size_TArrayD;
   info->add(new streamer_string(ofs,"fOption","histogram options"));
@@ -1306,7 +1306,7 @@ inline void fill_infos_histo(obj_list<streamer_info>& a_infos,std::ostream& a_ou
   a_infos.push_back(info);
   int ofs = 0;
   info->add(new streamer_base("TH1","1-Dim histogram base class",ofs,TH1_version));ofs += size_TH1();
-  info->add(new streamer_base("TArrayF","Array of floats",ofs,TArrayF_version));ofs += size_TArrayF;
+  info->add(new streamer_base("TArrayF","Array of G4floats",ofs,TArrayF_version));ofs += size_TArrayF;
  }
 
   int size_TH1D = 0;
@@ -1322,7 +1322,7 @@ inline void fill_infos_histo(obj_list<streamer_info>& a_infos,std::ostream& a_ou
   a_infos.push_back(info);
   int ofs = 0;
   info->add(new streamer_base("TH1","1-Dim histogram base class",ofs,TH1_version));ofs += size_TH1();
-  info->add(new streamer_base("TArrayD","Array of doubles",ofs,TArrayD_version));ofs += size_TArrayD;
+  info->add(new streamer_base("TArrayD","Array of G4doubles",ofs,TArrayD_version));ofs += size_TArrayD;
   size_TH1D = ofs; //580
 
   //v3-05-07 : 588 = 576 + 12 = ok
@@ -1356,13 +1356,13 @@ inline void fill_infos_histo(obj_list<streamer_info>& a_infos,std::ostream& a_ou
   a_infos.push_back(info);
 
   int ofs = 0;
-  info->add(new streamer_base("TH1D","1-Dim histograms (one double per channel)",ofs,TH1D_version));ofs += size_TH1D;
+  info->add(new streamer_base("TH1D","1-Dim histograms (one G4double per channel)",ofs,TH1D_version));ofs += size_TH1D;
   info->add(new streamer_object_any("fBinEntries","number of entries per bin",ofs,"TArrayD"));ofs += size_TArrayD;
   info->add(new streamer_basic_type("fErrorMode","Option to compute errors",ofs,streamer__info::INT,"EErrorType"));ofs += size_INT;
-  info->add(new streamer_double(ofs,"fYmin","Lower limit in Y (if set)"));
-  info->add(new streamer_double(ofs,"fYmax","Upper limit in Y (if set)"));
-  info->add(new streamer_double(ofs,"fTsumwy","Total Sum of weight*Y"));
-  info->add(new streamer_double(ofs,"fTsumwy2","Total Sum of weight*Y*Y"));
+  info->add(new streamer_G4double(ofs,"fYmin","Lower limit in Y (if set)"));
+  info->add(new streamer_G4double(ofs,"fYmax","Upper limit in Y (if set)"));
+  info->add(new streamer_G4double(ofs,"fTsumwy","Total Sum of weight*Y"));
+  info->add(new streamer_G4double(ofs,"fTsumwy2","Total Sum of weight*Y*Y"));
   //628
 
   //v3-05-07 : 624 = 612 + 4 + 8 (diff TH1D) = ok
@@ -1415,7 +1415,7 @@ inline void fill_infos_histo(obj_list<streamer_info>& a_infos,std::ostream& a_ou
 
   int ofs = 0;
   info->add(new streamer_base("TH2","2-Dim histogram base class",ofs,TH2_version));ofs += size_TH2();
-  info->add(new streamer_base("TArrayF","Array of floats",ofs,TArrayF_version));ofs += size_TArrayF;
+  info->add(new streamer_base("TArrayF","Array of G4floats",ofs,TArrayF_version));ofs += size_TArrayF;
   //612
 
   }
@@ -1433,7 +1433,7 @@ inline void fill_infos_histo(obj_list<streamer_info>& a_infos,std::ostream& a_ou
 
   int ofs = 0;
   info->add(new streamer_base("TH2","2-Dim histogram base class",ofs,TH2_version));ofs += size_TH2();
-  info->add(new streamer_base("TArrayD","Array of doubles",ofs,TArrayD_version));ofs += size_TArrayD;
+  info->add(new streamer_base("TArrayD","Array of G4doubles",ofs,TArrayD_version));ofs += size_TArrayD;
   if(ofs!=size_TH2D()) {
     a_out << "tools::wroot::fill_infos :"
           << " TH2D " << ofs << " (" << size_TH2D() << " expected.)"
@@ -1468,13 +1468,13 @@ inline void fill_infos_histo(obj_list<streamer_info>& a_infos,std::ostream& a_ou
   a_infos.push_back(info);
 
   int ofs = 0;
-  info->add(new streamer_base("TH2D","2-Dim histograms (one double per channel)",ofs,TH2D_version));ofs += size_TH2D();
+  info->add(new streamer_base("TH2D","2-Dim histograms (one G4double per channel)",ofs,TH2D_version));ofs += size_TH2D();
   info->add(new streamer_object_any("fBinEntries","number of entries per bin",ofs,"TArrayD"));ofs += size_TArrayD;
   info->add(new sbt("fErrorMode","Option to compute errors",ofs,streamer__info::INT,"EErrorType"));ofs += size_INT;
-  info->add(new streamer_double(ofs,"fZmin","Lower limit in Z (if set)"));
-  info->add(new streamer_double(ofs,"fZmax","Upper limit in Z (if set)"));
-  info->add(new streamer_double(ofs,"fTsumwz","Total Sum of weight*Z"));
-  info->add(new streamer_double(ofs,"fTsumwz2","Total Sum of weight*Z*Z"));
+  info->add(new streamer_G4double(ofs,"fZmin","Lower limit in Z (if set)"));
+  info->add(new streamer_G4double(ofs,"fZmax","Upper limit in Z (if set)"));
+  info->add(new streamer_G4double(ofs,"fTsumwz","Total Sum of weight*Z"));
+  info->add(new streamer_G4double(ofs,"fTsumwz2","Total Sum of weight*Z*Z"));
   //660
 
   }
@@ -1511,14 +1511,14 @@ inline void fill_infos_histo(obj_list<streamer_info>& a_infos,std::ostream& a_ou
   int ofs = 0;
   info->add(new streamer_base("TH1","1-Dim histogram base class",ofs,TH1_version));ofs += size_TH1();
   info->add(new streamer_base("TAtt3D","3D attributes",ofs,TAtt3D_version));ofs += 0;
-  info->add(new streamer_double(ofs,"fTsumwy","Total Sum of weight*Y"));
-  info->add(new streamer_double(ofs,"fTsumwy2","Total Sum of weight*Y*Y"));
-  info->add(new streamer_double(ofs,"fTsumwxy","Total Sum of weight*X*Y"));
+  info->add(new streamer_G4double(ofs,"fTsumwy","Total Sum of weight*Y"));
+  info->add(new streamer_G4double(ofs,"fTsumwy2","Total Sum of weight*Y*Y"));
+  info->add(new streamer_G4double(ofs,"fTsumwxy","Total Sum of weight*X*Y"));
 
-  info->add(new streamer_double(ofs,"fTsumwz","Total Sum of weight*Z"));
-  info->add(new streamer_double(ofs,"fTsumwz2","Total Sum of weight*Z*Z"));
-  info->add(new streamer_double(ofs,"fTsumwxz","Total Sum of weight*X*Z"));
-  info->add(new streamer_double(ofs,"fTsumwyz","Total Sum of weight*Y*Z"));
+  info->add(new streamer_G4double(ofs,"fTsumwz","Total Sum of weight*Z"));
+  info->add(new streamer_G4double(ofs,"fTsumwz2","Total Sum of weight*Z*Z"));
+  info->add(new streamer_G4double(ofs,"fTsumwxz","Total Sum of weight*X*Z"));
+  info->add(new streamer_G4double(ofs,"fTsumwyz","Total Sum of weight*Y*Z"));
   size_TH3 = ofs; //624
 
   //v4-00-02 : <to be checked>
@@ -1536,7 +1536,7 @@ inline void fill_infos_histo(obj_list<streamer_info>& a_infos,std::ostream& a_ou
 
   int ofs = 0;
   info->add(new streamer_base("TH3","3-Dim histogram base class",ofs,TH3_version));ofs += size_TH3;
-  info->add(new streamer_base("TArrayF","Array of floats",ofs,TArrayF_version));ofs += size_TArrayF;
+  info->add(new streamer_base("TArrayF","Array of G4floats",ofs,TArrayF_version));ofs += size_TArrayF;
   //636
 
   }
@@ -1553,7 +1553,7 @@ inline void fill_infos_histo(obj_list<streamer_info>& a_infos,std::ostream& a_ou
 
   int ofs = 0;
   info->add(new streamer_base("TH3","3-Dim histogram base class",ofs,TH3_version));ofs += size_TH3;
-  info->add(new streamer_base("TArrayD","Array of doubles",ofs,TArrayD_version));ofs += size_TArrayD;
+  info->add(new streamer_base("TArrayD","Array of G4doubles",ofs,TArrayD_version));ofs += size_TArrayD;
   //636
 
   }

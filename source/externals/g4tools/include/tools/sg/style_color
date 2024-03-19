@@ -30,7 +30,7 @@ public:
     mem::increment(s_class().c_str());
 #endif
   }
-  style_color(const std::string& a_name,float a_r,float a_g,float a_b):parent(a_name,colorf(a_r,a_g,a_b)) {
+  style_color(const std::string& a_name,G4float a_r,G4float a_g,G4float a_b):parent(a_name,colorf(a_r,a_g,a_b)) {
 #ifdef TOOLS_MEM
     mem::increment(s_class().c_str());
 #endif
@@ -53,7 +53,7 @@ public:
   }
 public:
   void set_name(const std::string& a_name) {first = a_name;}
-  void set_value(float a_r,float a_g,float a_b,float a_a) {second.set_value(a_r,a_g,a_b,a_a);}
+  void set_value(G4float a_r,G4float a_g,G4float a_b,G4float a_a) {second.set_value(a_r,a_g,a_b,a_a);}
 };
 
 }}

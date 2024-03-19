@@ -17,14 +17,14 @@ class sf_rotf : public bsf<rotf> {
   TOOLS_HEADER(sf_rotf,tools::sg::sf_rotf,bsf<rotf>)
 public:
   virtual bool write(io::iwbuf& a_buffer) {
-    const vec4<float>& vec = m_value.quat();
-    const float* d = get_data(vec);
+    const vec4<G4float>& vec = m_value.quat();
+    const G4float* d = get_data(vec);
     return a_buffer.write_vec(vec.size(),d);
   }
   virtual bool read(io::irbuf& a_buffer) {
-    vec4<float>& vec = m_value.quat();
+    vec4<G4float>& vec = m_value.quat();
     uint32 n;
-    float* v;
+    G4float* v;
     if(!a_buffer.read_vec(n,v)) return false;
     if(n!=vec.size()) {
       delete [] v;
@@ -62,7 +62,7 @@ public:
     return *this;
   }
 public: //iv2ps
-  void setValue(const vec3f& a_axis,float a_angle) {
+  void setValue(const vec3f& a_axis,G4float a_angle) {
     value(rotf(a_axis,a_angle));
   }
   void setValue(const rotf& a_value) {

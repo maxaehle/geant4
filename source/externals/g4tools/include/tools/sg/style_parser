@@ -485,26 +485,26 @@ translation %g %g %g"
   void back_color(const colorf& a_v){m_back_color = a_v;}
   colorf back_color() const {return m_back_color;}
 
-  void width(float a_v){m_width = a_v;}
-  float width() const {return m_width;}
+  void width(G4float a_v){m_width = a_v;}
+  G4float width() const {return m_width;}
 
-  void line_width(float a_v){m_line_width = a_v;}
-  float line_width() const {return m_line_width;}
+  void line_width(G4float a_v){m_line_width = a_v;}
+  G4float line_width() const {return m_line_width;}
 
-  float back_shadow() const {return m_back_shadow;}
-  void back_shadow(float a_v) {m_back_shadow = a_v;}
+  G4float back_shadow() const {return m_back_shadow;}
+  void back_shadow(G4float a_v) {m_back_shadow = a_v;}
 
   void marker_style(sg::marker_style a_v){m_marker_style = a_v;}
   sg::marker_style marker_style() const {return m_marker_style;}
 
-  void marker_size(float a_v){m_marker_size = a_v;}
-  float marker_size() const {return m_marker_size;}
+  void marker_size(G4float a_v){m_marker_size = a_v;}
+  G4float marker_size() const {return m_marker_size;}
 
-  void point_size(float a_v){m_point_size = a_v;}
-  float point_size() const {return m_point_size;}
+  void point_size(G4float a_v){m_point_size = a_v;}
+  G4float point_size() const {return m_point_size;}
 
-  void font_size(float a_v){m_font_size = a_v;}
-  float font_size() const {return m_font_size;}
+  void font_size(G4float a_v){m_font_size = a_v;}
+  G4float font_size() const {return m_font_size;}
 
   void font_modeling(sg::font_modeling a_v){m_font_modeling = a_v;}
   sg::font_modeling font_modeling() const {return m_font_modeling;}
@@ -554,29 +554,29 @@ translation %g %g %g"
   void rotation_steps(unsigned int a_v){m_rotation_steps = a_v;}
   unsigned int rotation_steps() const {return m_rotation_steps;}
 
-  void offset(float a_v){m_offset = a_v;}
-  float offset() const {return m_offset;}
+  void offset(G4float a_v){m_offset = a_v;}
+  G4float offset() const {return m_offset;}
 
-  void strip_width(float a_v){m_strip_width = a_v;}
-  float strip_width() const {return m_strip_width;}
+  void strip_width(G4float a_v){m_strip_width = a_v;}
+  G4float strip_width() const {return m_strip_width;}
 
-  void angle(float a_v){m_angle = a_v;}
-  float angle() const {return m_angle;}
+  void angle(G4float a_v){m_angle = a_v;}
+  G4float angle() const {return m_angle;}
 
-  void scale(float a_v){m_scale = a_v;}
-  float scale() const {return m_scale;}
+  void scale(G4float a_v){m_scale = a_v;}
+  G4float scale() const {return m_scale;}
 
-  void bar_offset(float a_v){m_bar_offset = a_v;}
-  float bar_offset() const {return m_bar_offset;}
+  void bar_offset(G4float a_v){m_bar_offset = a_v;}
+  G4float bar_offset() const {return m_bar_offset;}
 
-  void bar_width(float a_v){m_bar_width = a_v;}
-  float bar_width() const {return m_bar_width;}
+  void bar_width(G4float a_v){m_bar_width = a_v;}
+  G4float bar_width() const {return m_bar_width;}
 
   void multi_node_limit(int a_v){m_multi_node_limit = a_v;}
   int multi_node_limit() const {return m_multi_node_limit;}
 
-  void spacing(float a_v){m_spacing = a_v;}
-  float spacing() const {return m_spacing;}
+  void spacing(G4float a_v){m_spacing = a_v;}
+  G4float spacing() const {return m_spacing;}
 
   void visible(bool a_v){m_visible = a_v;}
   bool visible() const{return m_visible;}
@@ -659,8 +659,8 @@ public:
           }
         } else if (wordn==4) {
           const std::string& rs = ws[1];
-          float r;
-          if(!to<float>(rs,r))  {
+          G4float r;
+          if(!to<G4float>(rs,r))  {
             a_out << "style_parser::parse :"
                   << " in " << sout(a_s)
                   << " : " << sout(rs)
@@ -669,8 +669,8 @@ public:
             return false;
           }
           const std::string& gs = ws[2];
-          float g;
-          if(!to<float>(gs,g))  {
+          G4float g;
+          if(!to<G4float>(gs,g))  {
             a_out << "style_parser::parse :"
                   << " in " << sout(a_s)
                   << " : " << sout(gs)
@@ -679,8 +679,8 @@ public:
             return false;
           }
           const std::string& bs = ws[3];
-          float b;
-          if(!to<float>(bs,b))  {
+          G4float b;
+          if(!to<G4float>(bs,b))  {
             a_out << "style_parser::parse :"
                   << " in " << sout(a_s)
                   << " : " << sout(bs)
@@ -692,8 +692,8 @@ public:
 
         } else if (wordn==5) {
           const std::string& rs = ws[1];
-          float r;
-          if(!to<float>(rs,r))  {
+          G4float r;
+          if(!to<G4float>(rs,r))  {
             a_out << "style_parser::parse :"
                   << " in " << sout(a_s)
                   << " : " << sout(rs)
@@ -702,8 +702,8 @@ public:
             return false;
           }
           const std::string& gs = ws[2];
-          float g;
-          if(!to<float>(gs,g))  {
+          G4float g;
+          if(!to<G4float>(gs,g))  {
             a_out << "style_parser::parse :"
                   << " in " << sout(a_s)
                   << " : " << sout(gs)
@@ -712,8 +712,8 @@ public:
             return false;
           }
           const std::string& bs = ws[3];
-          float b;
-          if(!to<float>(bs,b))  {
+          G4float b;
+          if(!to<G4float>(bs,b))  {
             a_out << "style_parser::parse :"
                   << " in " << sout(a_s)
                   << " : " << sout(bs)
@@ -722,8 +722,8 @@ public:
             return false;
           }
           const std::string& as = ws[4];
-          float a;
-          if(!to<float>(as,a))  {
+          G4float a;
+          if(!to<G4float>(as,a))  {
             a_out << "style_parser::parse :"
                   << " in " << sout(a_s)
                   << " : " << sout(as)
@@ -755,8 +755,8 @@ public:
           }
         } else if (wordn==4) {
           const std::string& rs = ws[1];
-          float r;
-          if(!to<float>(rs,r))  {
+          G4float r;
+          if(!to<G4float>(rs,r))  {
             a_out << "style_parser::parse :"
                   << " in " << sout(a_s)
                   << " : " << sout(rs)
@@ -765,8 +765,8 @@ public:
             return false;
           }
           const std::string& gs = ws[2];
-          float g;
-          if(!to<float>(gs,g))  {
+          G4float g;
+          if(!to<G4float>(gs,g))  {
             a_out << "style_parser::parse :"
                   << " in " << sout(a_s)
                   << " : " << sout(gs)
@@ -775,8 +775,8 @@ public:
             return false;
           }
           const std::string& bs = ws[3];
-          float b;
-          if(!to<float>(bs,b))  {
+          G4float b;
+          if(!to<G4float>(bs,b))  {
             a_out << "style_parser::parse :"
                   << " in " << sout(a_s)
                   << " : " << sout(bs)
@@ -788,8 +788,8 @@ public:
 
         } else if (wordn==5) {
           const std::string& rs = ws[1];
-          float r;
-          if(!to<float>(rs,r))  {
+          G4float r;
+          if(!to<G4float>(rs,r))  {
             a_out << "style_parser::parse :"
                   << " in " << sout(a_s)
                   << " : " << sout(rs)
@@ -798,8 +798,8 @@ public:
             return false;
           }
           const std::string& gs = ws[2];
-          float g;
-          if(!to<float>(gs,g))  {
+          G4float g;
+          if(!to<G4float>(gs,g))  {
             a_out << "style_parser::parse :"
                   << " in " << sout(a_s)
                   << " : " << sout(gs)
@@ -808,8 +808,8 @@ public:
             return false;
           }
           const std::string& bs = ws[3];
-          float b;
-          if(!to<float>(bs,b))  {
+          G4float b;
+          if(!to<G4float>(bs,b))  {
             a_out << "style_parser::parse :"
                   << " in " << sout(a_s)
                   << " : " << sout(bs)
@@ -818,8 +818,8 @@ public:
             return false;
           }
           const std::string& as = ws[4];
-          float a;
-          if(!to<float>(as,a))  {
+          G4float a;
+          if(!to<G4float>(as,a))  {
             a_out << "style_parser::parse :"
                   << " in " << sout(a_s)
                   << " : " << sout(as)
@@ -851,8 +851,8 @@ public:
           }
         } else if (wordn==4) {
           const std::string& rs = ws[1];
-          float r;
-          if(!to<float>(rs,r))  {
+          G4float r;
+          if(!to<G4float>(rs,r))  {
             a_out << "style_parser::parse :"
                   << " in " << sout(a_s)
                   << " : " << sout(rs)
@@ -861,8 +861,8 @@ public:
             return false;
           }
           const std::string& gs = ws[2];
-          float g;
-          if(!to<float>(gs,g))  {
+          G4float g;
+          if(!to<G4float>(gs,g))  {
             a_out << "style_parser::parse :"
                   << " in " << sout(a_s)
                   << " : " << sout(gs)
@@ -871,8 +871,8 @@ public:
             return false;
           }
           const std::string& bs = ws[3];
-          float b;
-          if(!to<float>(bs,b))  {
+          G4float b;
+          if(!to<G4float>(bs,b))  {
             a_out << "style_parser::parse :"
                   << " in " << sout(a_s)
                   << " : " << sout(bs)
@@ -884,8 +884,8 @@ public:
 
         } else if (wordn==5) {
           const std::string& rs = ws[1];
-          float r;
-          if(!to<float>(rs,r))  {
+          G4float r;
+          if(!to<G4float>(rs,r))  {
             a_out << "style_parser::parse :"
                   << " in " << sout(a_s)
                   << " : " << sout(rs)
@@ -894,8 +894,8 @@ public:
             return false;
           }
           const std::string& gs = ws[2];
-          float g;
-          if(!to<float>(gs,g))  {
+          G4float g;
+          if(!to<G4float>(gs,g))  {
             a_out << "style_parser::parse :"
                   << " in " << sout(a_s)
                   << " : " << sout(gs)
@@ -904,8 +904,8 @@ public:
             return false;
           }
           const std::string& bs = ws[3];
-          float b;
-          if(!to<float>(bs,b))  {
+          G4float b;
+          if(!to<G4float>(bs,b))  {
             a_out << "style_parser::parse :"
                   << " in " << sout(a_s)
                   << " : " << sout(bs)
@@ -914,8 +914,8 @@ public:
             return false;
           }
           const std::string& as = ws[4];
-          float a;
-          if(!to<float>(as,a))  {
+          G4float a;
+          if(!to<G4float>(as,a))  {
             a_out << "style_parser::parse :"
                   << " in " << sout(a_s)
                   << " : " << sout(as)
@@ -1067,28 +1067,28 @@ public:
         font(ws[1]);
       } else if(word0=="width") {
         if(!check_2(wordn,a_s,line,a_out)) return false;
-        float value;
-        if(!check_float(ws[1],a_s,a_out,value)) return false;
+        G4float value;
+        if(!check_G4float(ws[1],a_s,a_out,value)) return false;
         m_width = value;
       } else if(word0=="line_width") {
         if(!check_2(wordn,a_s,line,a_out)) return false;
-        float value;
-        if(!check_float(ws[1],a_s,a_out,value)) return false;
+        G4float value;
+        if(!check_G4float(ws[1],a_s,a_out,value)) return false;
         m_line_width = value;
       } else if(word0=="marker_size") {
         if(!check_2(wordn,a_s,line,a_out)) return false;
-        float value;
-        if(!check_float(ws[1],a_s,a_out,value)) return false;
+        G4float value;
+        if(!check_G4float(ws[1],a_s,a_out,value)) return false;
         m_marker_size = value;
       } else if(word0=="point_size") {
         if(!check_2(wordn,a_s,line,a_out)) return false;
-        float value;
-        if(!check_float(ws[1],a_s,a_out,value)) return false;
+        G4float value;
+        if(!check_G4float(ws[1],a_s,a_out,value)) return false;
         m_point_size = value;
       } else if(word0=="font_size") {
         if(!check_2(wordn,a_s,line,a_out)) return false;
-        float value;
-        if(!check_float(ws[1],a_s,a_out,value)) return false;
+        G4float value;
+        if(!check_G4float(ws[1],a_s,a_out,value)) return false;
         m_font_size = value;
       } else if(word0=="font_modeling") {
         if(!check_2(wordn,a_s,line,a_out)) return false;
@@ -1105,8 +1105,8 @@ public:
         }
       } else if(word0=="back_shadow") {
         if(!check_2(wordn,a_s,line,a_out)) return false;
-        float value;
-        if(!check_float(ws[1],a_s,a_out,value)) return false;
+        G4float value;
+        if(!check_G4float(ws[1],a_s,a_out,value)) return false;
         if(value<0.F) value = 0.F;
         m_back_shadow = value;
       } else if(word0=="multi_node_limit") {
@@ -1126,28 +1126,28 @@ public:
         m_rotation_steps = value;
       } else if(word0=="angle") {
         if(!check_2(wordn,a_s,line,a_out)) return false;
-        float value;
-        if(!check_float(ws[1],a_s,a_out,value)) return false;
+        G4float value;
+        if(!check_G4float(ws[1],a_s,a_out,value)) return false;
         m_angle = value;
       } else if(word0=="scale") {
         if(!check_2(wordn,a_s,line,a_out)) return false;
-        float value;
-        if(!check_float(ws[1],a_s,a_out,value)) return false;
+        G4float value;
+        if(!check_G4float(ws[1],a_s,a_out,value)) return false;
         m_scale = value;
       } else if(word0=="offset") {
         if(!check_2(wordn,a_s,line,a_out)) return false;
-        float value;
-        if(!check_float(ws[1],a_s,a_out,value)) return false;
+        G4float value;
+        if(!check_G4float(ws[1],a_s,a_out,value)) return false;
         m_offset = value;
       } else if(word0=="strip_width") {
         if(!check_2(wordn,a_s,line,a_out)) return false;
-        float value;
-        if(!check_float(ws[1],a_s,a_out,value)) return false;
+        G4float value;
+        if(!check_G4float(ws[1],a_s,a_out,value)) return false;
         m_strip_width = value;
       } else if(word0=="spacing") {
         if(!check_2(wordn,a_s,line,a_out)) return false;
-        float value;
-        if(!check_float(ws[1],a_s,a_out,value)) return false;
+        G4float value;
+        if(!check_G4float(ws[1],a_s,a_out,value)) return false;
         m_spacing = value;
       } else if(word0=="visible") {
         if(!check_2(wordn,a_s,line,a_out)) return false;
@@ -1171,20 +1171,20 @@ public:
         m_automated = value;
       } else if(word0=="bar_offset") {
         if(!check_2(wordn,a_s,line,a_out)) return false;
-        float value;
-        if(!check_float(ws[1],a_s,a_out,value)) return false;
+        G4float value;
+        if(!check_G4float(ws[1],a_s,a_out,value)) return false;
         m_bar_offset = value;
       } else if(word0=="bar_width") {
         if(!check_2(wordn,a_s,line,a_out)) return false;
-        float value;
-        if(!check_float(ws[1],a_s,a_out,value)) return false;
+        G4float value;
+        if(!check_G4float(ws[1],a_s,a_out,value)) return false;
         m_bar_width = value;
 
       } else if(word0=="translation") {
         if (wordn==4) {
           const std::string& sx = ws[1];
-          float x;
-          if(!to<float>(sx,x))  {
+          G4float x;
+          if(!to<G4float>(sx,x))  {
             a_out << "style_parser::parse :"
                   << " in " << sout(a_s)
                   << " : " << sout(sx)
@@ -1193,8 +1193,8 @@ public:
             return false;
           }
           const std::string& sy = ws[2];
-          float y;
-          if(!to<float>(sy,y))  {
+          G4float y;
+          if(!to<G4float>(sy,y))  {
             a_out << "style_parser::parse :"
                   << " in " << sout(a_s)
                   << " : " << sout(sy)
@@ -1203,8 +1203,8 @@ public:
             return false;
           }
           const std::string& sz = ws[3];
-          float z;
-          if(!to<float>(sz,z))  {
+          G4float z;
+          if(!to<G4float>(sz,z))  {
             a_out << "style_parser::parse :"
                   << " in " << sout(a_s)
                   << " : " << sout(sz)
@@ -1335,13 +1335,13 @@ protected:
     return true;
   }
 
-  static bool check_float(const std::string& a_w,
-                const std::string& a_s,std::ostream& a_out,float& a_v) {
-    if(!to<float>(a_w,a_v)){
+  static bool check_G4float(const std::string& a_w,
+                const std::string& a_s,std::ostream& a_out,G4float& a_v) {
+    if(!to<G4float>(a_w,a_v)){
       a_out << "style_parser::parse :"
             << " in " << sout(a_s)
             << " : " << sout(a_w)
-            << " not a float."
+            << " not a G4float."
             << std::endl;
       return false;
     }
@@ -1352,11 +1352,11 @@ protected:
   colorf m_color;
   colorf m_highlight_color;
   colorf m_back_color;
-  float m_width;
-  float m_line_width;
-  float m_marker_size;
-  float m_point_size;
-  float m_font_size;
+  G4float m_width;
+  G4float m_line_width;
+  G4float m_marker_size;
+  G4float m_point_size;
+  G4float m_font_size;
   sg::font_modeling m_font_modeling;
   lpat m_pattern;
   lpat m_line_pattern;
@@ -1376,15 +1376,15 @@ protected:
   int m_multi_node_limit; //could be no_limit = -1.
   int m_divisions;
   unsigned int m_rotation_steps;
-  float m_back_shadow;
-  float m_spacing;
-  float m_angle;
-  float m_scale;
-  float m_offset;
-  float m_strip_width;
+  G4float m_back_shadow;
+  G4float m_spacing;
+  G4float m_angle;
+  G4float m_scale;
+  G4float m_offset;
+  G4float m_strip_width;
   bool m_visible;
-  float m_bar_offset;
-  float m_bar_width;
+  G4float m_bar_offset;
+  G4float m_bar_width;
   bool m_editable;
   bool m_automated;
   std::string m_options;

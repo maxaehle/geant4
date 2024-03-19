@@ -286,40 +286,40 @@ public:
   streamer_uint& operator=(const streamer_uint& a_from){streamer_basic_type::operator=(a_from);return *this;}
 };
 
-class streamer_float : public streamer_basic_type {
+class streamer_G4float : public streamer_basic_type {
 public: //streamer_element
-  virtual streamer_element* copy() const {return new streamer_float(*this);}
+  virtual streamer_element* copy() const {return new streamer_G4float(*this);}
 public:
-  streamer_float(const std::string& aName,const std::string& aTitle,int aOffset)
+  streamer_G4float(const std::string& aName,const std::string& aTitle,int aOffset)
   :streamer_basic_type(aName,aTitle,aOffset,streamer__info::FLOAT,"Float_t")
   {}
-  streamer_float(int& aOffset,const std::string& aName,const std::string& aTitle)
+  streamer_G4float(int& aOffset,const std::string& aName,const std::string& aTitle)
   :streamer_basic_type(aName,aTitle,aOffset,streamer__info::FLOAT,"Float_t")
   {
     aOffset += streamer__info::size_FLOAT;
   }
-  virtual ~streamer_float(){}
+  virtual ~streamer_G4float(){}
 public:
-  streamer_float(const streamer_float& a_from):ibo(a_from),streamer_basic_type(a_from){}
-  streamer_float& operator=(const streamer_float& a_from){streamer_basic_type::operator=(a_from);return *this;}
+  streamer_G4float(const streamer_G4float& a_from):ibo(a_from),streamer_basic_type(a_from){}
+  streamer_G4float& operator=(const streamer_G4float& a_from){streamer_basic_type::operator=(a_from);return *this;}
 };
 
-class streamer_double : public streamer_basic_type {
+class streamer_G4double : public streamer_basic_type {
 public: //streamer_element
-  virtual streamer_element* copy() const {return new streamer_double(*this);}
+  virtual streamer_element* copy() const {return new streamer_G4double(*this);}
 public:
-  streamer_double(const std::string& aName,const std::string& aTitle,int aOffset)
+  streamer_G4double(const std::string& aName,const std::string& aTitle,int aOffset)
   :streamer_basic_type(aName,aTitle,aOffset,streamer__info::DOUBLE,"Double_t")
   {}
-  streamer_double(int& aOffset,const std::string& aName,const std::string& aTitle)
+  streamer_G4double(int& aOffset,const std::string& aName,const std::string& aTitle)
   :streamer_basic_type(aName,aTitle,aOffset,streamer__info::DOUBLE,"Double_t")
   {
     aOffset += streamer__info::size_DOUBLE;
   }
-  virtual ~streamer_double(){}
+  virtual ~streamer_G4double(){}
 public:
-  streamer_double(const streamer_double& a_from):ibo(a_from),streamer_basic_type(a_from){}
-  streamer_double& operator=(const streamer_double& a_from){streamer_basic_type::operator=(a_from);return *this;}
+  streamer_G4double(const streamer_G4double& a_from):ibo(a_from),streamer_basic_type(a_from){}
+  streamer_G4double& operator=(const streamer_G4double& a_from){streamer_basic_type::operator=(a_from);return *this;}
 };
 
 class streamer_stat_t : public streamer_basic_type {

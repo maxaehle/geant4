@@ -11,9 +11,9 @@
 namespace tools {
 
 typedef struct {
-  double pointA[3];
-  double pointB[3];
-  double pointC[3];
+  G4double pointA[3];
+  G4double pointB[3];
+  G4double pointC[3];
 } tess_triangle;
 
 class tess_contour {
@@ -55,7 +55,7 @@ public:
       if(aContour[a].size()<=1) continue; //should not happen.
       size_t vecSize = aContour[a].size()-1;
 
-      typedef GLUdouble point[3];
+      typedef GLUG4double point[3];
       point* tab = new point[vecSize];
 
       ::gluTessBeginPolygon(tobj, this);
@@ -88,9 +88,9 @@ protected:
   void resetVertex() {m_vertex_number = 0;}
   void setBeginType(gl::mode_t aType) {m_begin_type = aType;}
   void setError(bool aError) {m_error = aError;}
-  std::vector<double*>& combineTmps(){return m_combine_tmps;}
+  std::vector<G4double*>& combineTmps(){return m_combine_tmps;}
 
-  void addVertex(const double* vertex) {
+  void addVertex(const G4double* vertex) {
     // GLU_TRIANGLE_STRIP
     // Draws a connected group of triangles. One triangle is defined for each
     // vertex presented after the first two vertices. For odd n, vertices n,
@@ -209,20 +209,20 @@ protected:
 #endif
   vertexCallback(GLUvoid *vertex,GLUvoid* aThis) {
     tess_contour* This = (tess_contour*)aThis;
-    This->addVertex((double*)vertex);
+    This->addVertex((G4double*)vertex);
   }
 
   static void
 #ifdef TOOLS_TESS_CONTOUR_STDCALL
   __stdcall
 #endif
-  combineCallback(GLUdouble coords[3],
+  combineCallback(GLUG4double coords[3],
                               void* /*vertex_data*/[4],
-                              GLUfloat /*weight*/[4],
+                              GLUG4float /*weight*/[4],
                               void** dataOut,
                               void* aThis) {
     tess_contour* This = (tess_contour*)aThis;
-    double* vertex = new double[3];
+    G4double* vertex = new G4double[3];
     vertex[0] = coords[0];
     vertex[1] = coords[1];
     vertex[2] = coords[2];
@@ -237,7 +237,7 @@ protected:
   unsigned int m_vertex_number;
   gl::mode_t m_begin_type;
   bool m_error;
-  std::vector<double*> m_combine_tmps;
+  std::vector<G4double*> m_combine_tmps;
 };
 
 }

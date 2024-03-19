@@ -27,21 +27,21 @@ public:
     return corner_top_right()|corner_top_left()|corner_bottom_right()|corner_bottom_left();
   }
 public:
-  sf<float> width;
-  sf<float> height;
+  sf<G4float> width;
+  sf<G4float> height;
 
-  sf_vec<colorf,float> color;
+  sf_vec<colorf,G4float> color;
 
   sf<bool> gradient;
-  sf_vec<colorf,float> color_top;
+  sf_vec<colorf,G4float> color_top;
 
   sf<bool> border_visible;
-  sf_vec<colorf,float> border_color;
-  sf<float> border_line_width;
+  sf_vec<colorf,G4float> border_color;
+  sf<G4float> border_line_width;
 
-  sf<float> shadow; //in percent of width.
+  sf<G4float> shadow; //in percent of width.
 
-  sf<float> corner_radius; //percent of height.
+  sf<G4float> corner_radius; //percent of height.
   sf<unsigned int> corner_steps;
   sf<unsigned int> corner_mask;
 public:
@@ -166,18 +166,18 @@ protected:
     if(width.value()<=0) return;
     if(height.value()<=0) return;
 
-    float xb = -width*0.5f;
-    float xe =  width*0.5f;
-    float yb = -height*0.5f;
+    G4float xb = -width*0.5f;
+    G4float xe =  width*0.5f;
+    G4float yb = -height*0.5f;
 
-  //float zshadow = -0.05f;
-    float zshadow = -0.005f; //ok with gopaw and ROOT_default.
-    float zback = 0;
-    float zborder = 0.01f;
+  //G4float zshadow = -0.05f;
+    G4float zshadow = -0.005f; //ok with gopaw and ROOT_default.
+    G4float zback = 0;
+    G4float zborder = 0.01f;
 
     if(shadow.value()) {
-      float zz = zback+zshadow;
-      float ye = height*0.5f;
+      G4float zz = zback+zshadow;
+      G4float ye = height*0.5f;
 
       sg::rgba* mat = new sg::rgba();
       mat->color = colorf_black();
@@ -191,8 +191,8 @@ protected:
       vtxs->mode = gl::triangle_fan();
       m_back_sep.add(vtxs);
 
-      float dx = width*shadow;
-      float dy = -dx;
+      G4float dx = width*shadow;
+      G4float dy = -dx;
       vtxs->add(xb+dx,yb+dy,zz);
       vtxs->add(xe+dx,yb+dy,zz);
       vtxs->add(xe+dx,ye+dy,zz);
@@ -212,19 +212,19 @@ protected:
       vtxs->mode = gl::triangle_strip();
       m_back_sep.add(vtxs);
 
-      float zz = zback;
+      G4float zz = zback;
 
       unsigned int ncol = 50;
-      float dy = height/ncol;
-      float ye = yb+dy;
+      G4float dy = height/ncol;
+      G4float ye = yb+dy;
 
       colorf col_beg = color.value();
       colorf col_end = color_top.value();
 
-      float dr = (col_end.r()-col_beg.r())/ncol;
-      float dg = (col_end.g()-col_beg.g())/ncol;
-      float db = (col_end.b()-col_beg.b())/ncol;
-      float da = (col_end.a()-col_beg.a())/ncol;
+      G4float dr = (col_end.r()-col_beg.r())/ncol;
+      G4float dg = (col_end.g()-col_beg.g())/ncol;
+      G4float db = (col_end.b()-col_beg.b())/ncol;
+      G4float da = (col_end.a()-col_beg.a())/ncol;
       vec4f dcol(dr,dg,db,da);
 
       colorf col = col_beg;
@@ -248,8 +248,8 @@ protected:
 
     } else {
 
-      float zz = zback;
-      float ye =  height*0.5f;
+      G4float zz = zback;
+      G4float ye =  height*0.5f;
 
       sg::rgba* mat = new sg::rgba();
       mat->color = color;
@@ -259,11 +259,11 @@ protected:
       vtxs->mode = gl::triangle_fan();
       m_back_sep.add(vtxs);
 
-      float r = height*corner_radius;
+      G4float r = height*corner_radius;
       if((r>(0.5f*height.value()))||(r>(0.5f*width.value()))) r = 0;
 
       if((r>0) && corner_steps.value()) {
-        float dangle = fhalf_pi()/float(corner_steps);
+        G4float dangle = fhalf_pi()/G4float(corner_steps);
         unsigned int nslice = corner_steps;
 
         vtxs->add(0,0,zz);
@@ -271,10 +271,10 @@ protected:
         vtxs->add(xe,ye-r,zz);
 
         // top-right :
-        float angle = dangle;
+        G4float angle = dangle;
         if(corner_mask.value() & corner_top_right()) {
-          float xc = xe-r;
-          float yc = ye-r;
+          G4float xc = xe-r;
+          G4float yc = ye-r;
           for(unsigned int i=0;i<nslice;i++,angle+=dangle) {
             vtxs->add(r*fcos(angle)+xc,r*fsin(angle)+yc,zz);
           }
@@ -288,8 +288,8 @@ protected:
 
         // top-left :
         if(corner_mask.value() & corner_top_left()) {
-          float xc = xb+r;
-          float yc = ye-r;
+          G4float xc = xb+r;
+          G4float yc = ye-r;
           for(unsigned int i=0;i<nslice;i++,angle+=dangle) {
             vtxs->add(r*fcos(angle)+xc,r*fsin(angle)+yc,zz);
           }
@@ -303,8 +303,8 @@ protected:
 
         // bottom-left :
         if(corner_mask.value() & corner_bottom_left()) {
-          float xc = xb+r;
-          float yc = yb+r;
+          G4float xc = xb+r;
+          G4float yc = yb+r;
           for(unsigned int i=0;i<nslice;i++,angle+=dangle) {
             vtxs->add(r*fcos(angle)+xc,r*fsin(angle)+yc,zz);
           }
@@ -318,8 +318,8 @@ protected:
 
         // bottom-right :
         if(corner_mask.value() & corner_bottom_right()) {
-          float xc = xe-r;
-          float yc = yb+r;
+          G4float xc = xe-r;
+          G4float yc = yb+r;
           for(unsigned int i=0;i<nslice;i++,angle+=dangle) {
             vtxs->add(r*fcos(angle)+xc,r*fsin(angle)+yc,zz);
           }
@@ -339,8 +339,8 @@ protected:
     }}
 
     if(border_visible.value()){
-      float zz = zborder;
-      float ye = height*0.5f;
+      G4float zz = zborder;
+      G4float ye = height*0.5f;
 
       sg::rgba* mat = new sg::rgba();
       mat->color = border_color;
@@ -355,21 +355,21 @@ protected:
       vtxs->mode = gl::line_strip();
       m_back_sep.add(vtxs);
 
-      float r = height*corner_radius;
+      G4float r = height*corner_radius;
       if((r>(0.5f*height.value()))||(r>(0.5f*width.value()))) r = 0;
 
       if((r>0) && corner_steps.value()) {
-        float dangle = fhalf_pi()/float(corner_steps);
+        G4float dangle = fhalf_pi()/G4float(corner_steps);
         unsigned int nslice = corner_steps;
 
         vtxs->add(xe,yb+r,zz);
         vtxs->add(xe,ye-r,zz);
 
         // top-right :
-        float angle = dangle;
+        G4float angle = dangle;
         if(corner_mask.value() & corner_top_right()) {
-          float xc = xe-r;
-          float yc = ye-r;
+          G4float xc = xe-r;
+          G4float yc = ye-r;
           for(unsigned int i=0;i<nslice;i++,angle+=dangle) {
             vtxs->add(r*fcos(angle)+xc,r*fsin(angle)+yc,zz);
           }
@@ -383,8 +383,8 @@ protected:
 
         // top-left :
         if(corner_mask.value() & corner_top_left()) {
-          float xc = xb+r;
-          float yc = ye-r;
+          G4float xc = xb+r;
+          G4float yc = ye-r;
           for(unsigned int i=0;i<nslice;i++,angle+=dangle) {
             vtxs->add(r*fcos(angle)+xc,r*fsin(angle)+yc,zz);
           }
@@ -398,8 +398,8 @@ protected:
 
         // bottom-left :
         if(corner_mask.value() & corner_bottom_left()) {
-          float xc = xb+r;
-          float yc = yb+r;
+          G4float xc = xb+r;
+          G4float yc = yb+r;
           for(unsigned int i=0;i<nslice;i++,angle+=dangle) {
             vtxs->add(r*fcos(angle)+xc,r*fsin(angle)+yc,zz);
           }
@@ -413,8 +413,8 @@ protected:
 
         // bottom-right :
         if(corner_mask.value() & corner_bottom_right()) {
-          float xc = xe-r;
-          float yc = yb+r;
+          G4float xc = xe-r;
+          G4float yc = yb+r;
           for(unsigned int i=0;i<nslice;i++,angle+=dangle) {
             vtxs->add(r*fcos(angle)+xc,r*fsin(angle)+yc,zz);
           }

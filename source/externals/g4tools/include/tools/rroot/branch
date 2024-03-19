@@ -91,15 +91,15 @@ public:
       if(!a_buffer.read(fMaxBaskets)) return false;
       if(!a_buffer.read(m_write_basket)) return false;
       if(!a_buffer.read(m_entry_number)) return false;
-     {double v;
+     {G4double v;
       if(!a_buffer.read(v)) return false;
       //m_entries = uint64(v);
       }
-     {double v;
+     {G4double v;
       if(!a_buffer.read(v)) return false;
       //m_tot_bytes = uint64(v);
       }
-     {double v;
+     {G4double v;
       if(!a_buffer.read(v)) return false;
       //m_zip_bytes = uint64(v);
       }
@@ -113,15 +113,15 @@ public:
       if(!a_buffer.read(m_entry_number)) return false;
       if(!a_buffer.read(fOffset)) return false;
       if(!a_buffer.read(fMaxBaskets)) return false;
-     {double v;
+     {G4double v;
       if(!a_buffer.read(v)) return false;
       //m_entries = uint64(v);
       }
-     {double v;
+     {G4double v;
       if(!a_buffer.read(v)) return false;
       //m_tot_bytes = uint64(v);
       }
-     {double v;
+     {G4double v;
       if(!a_buffer.read(v)) return false;
       //m_zip_bytes = uint64(v);
       }
@@ -135,15 +135,15 @@ public:
       if(!a_buffer.read(fOffset)) return false;
       if(!a_buffer.read(fMaxBaskets)) return false;
       if(!a_buffer.read(fSplitLevel)) return false;
-     {double v;
+     {G4double v;
       if(!a_buffer.read(v)) return false;
       //m_entries = uint64(v);
       }
-     {double v;
+     {G4double v;
       if(!a_buffer.read(v)) return false;
       //m_tot_bytes = uint64(v);
       }
-     {double v;
+     {G4double v;
       if(!a_buffer.read(v)) return false;
       //m_zip_bytes = uint64(v);
       }
@@ -159,15 +159,15 @@ public:
       if(!a_buffer.read(fOffset)) return false;
       if(!a_buffer.read(fMaxBaskets)) return false;
       if(!a_buffer.read(fSplitLevel)) return false;
-     {double v;
+     {G4double v;
       if(!a_buffer.read(v)) return false;
       //m_entries = uint64(v);
       }
-     {double v;
+     {G4double v;
       if(!a_buffer.read(v)) return false;
       //m_tot_bytes = uint64(v);
       }
-     {double v;
+     {G4double v;
       if(!a_buffer.read(v)) return false;
       //m_zip_bytes = uint64(v);
       }

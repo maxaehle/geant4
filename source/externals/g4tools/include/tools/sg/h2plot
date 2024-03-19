@@ -71,25 +71,25 @@ public: //plottable
         if(a_sinfos.size()) a_sinfos += f_lf;
         a_sinfos += "Mean";
         a_sinfos += f_lf;
-        if(!numas<double>(m_data.mean(),a_sinfos)) {}
+        if(!numas<G4double>(m_data.mean(),a_sinfos)) {}
 
       } else if((*it)=="rms") {
         if(a_sinfos.size()) a_sinfos += f_lf;
         a_sinfos += "RMS";
         a_sinfos += f_lf;
-        if(!numas<double>(m_data.rms(),a_sinfos)) {}
+        if(!numas<G4double>(m_data.rms(),a_sinfos)) {}
 
       } else if((*it)=="underflow") {
         if(a_sinfos.size()) a_sinfos += f_lf;
         a_sinfos += "UDFLW";
         a_sinfos += f_lf;
-        if(!numas<double>(m_data.bin_height(histo::axis_UNDERFLOW_BIN),a_sinfos)){}
+        if(!numas<G4double>(m_data.bin_height(histo::axis_UNDERFLOW_BIN),a_sinfos)){}
 
       } else if((*it)=="overflow") {
         if(a_sinfos.size()) a_sinfos += f_lf;
         a_sinfos += "OVFLW";
         a_sinfos += f_lf;
-        if(!numas<double>(m_data.bin_height(histo::axis_OVERFLOW_BIN),a_sinfos)){}
+        if(!numas<G4double>(m_data.bin_height(histo::axis_OVERFLOW_BIN),a_sinfos)){}
 
 /*
       } else if((*it)=="fit_quality") {
@@ -138,30 +138,30 @@ public: //plottable
     }
   }
 public: //bins1D
-  virtual void bins_Sw_range(float& a_mn,float& a_mx,bool a_with_entries) const {
+  virtual void bins_Sw_range(G4float& a_mn,G4float& a_mx,bool a_with_entries) const {
     if(a_with_entries && m_data.has_entries_per_bin()) {
-      double mn,mx;
+      G4double mn,mx;
       m_data.min_bin_height_with_entries(mn);
       m_data.max_bin_height_with_entries(mx);
-      a_mn = float(mn);
-      a_mx = float(mx);
+      a_mn = G4float(mn);
+      a_mx = G4float(mx);
     } else {
-      a_mn = (float)m_data.min_bin_height();
-      a_mx = (float)m_data.max_bin_height();
+      a_mn = (G4float)m_data.min_bin_height();
+      a_mx = (G4float)m_data.max_bin_height();
     }
   }
   virtual unsigned int bins() const {return m_data.axis().bins();}
-  virtual float axis_min() const {return (float)m_data.axis().lower_edge();}
-  virtual float axis_max() const {return (float)m_data.axis().upper_edge();}
-  virtual float bin_lower_edge(int aI) const {return (float)m_data.axis().bin_lower_edge(aI);}
-  virtual float bin_upper_edge(int aI) const {return (float)m_data.axis().bin_upper_edge(aI);}
+  virtual G4float axis_min() const {return (G4float)m_data.axis().lower_edge();}
+  virtual G4float axis_max() const {return (G4float)m_data.axis().upper_edge();}
+  virtual G4float bin_lower_edge(int aI) const {return (G4float)m_data.axis().bin_lower_edge(aI);}
+  virtual G4float bin_upper_edge(int aI) const {return (G4float)m_data.axis().bin_upper_edge(aI);}
 
   virtual bool has_entries_per_bin() const {return m_data.has_entries_per_bin();}
   virtual unsigned int bin_entries(int aI) const {return m_data.bin_entries(aI);}
 
-  virtual float bin_Sw(int aI) const {return (float)m_data.bin_height(aI);}
+  virtual G4float bin_Sw(int aI) const {return (G4float)m_data.bin_height(aI);}
 
-  virtual float bin_error(int aI) const {return (float)m_data.bin_error(aI);}
+  virtual G4float bin_error(int aI) const {return (G4float)m_data.bin_error(aI);}
   virtual bool is_profile() const {return false;}
 public:
   h1d2plot(const histo::h1d& a_data):m_data(a_data) {
@@ -235,53 +235,53 @@ public: //plottable
       } else if((*it)=="mean") {
         if(a_sinfos.size()) a_sinfos += f_lf;
         a_sinfos += "MeanX\n";
-        if(!numas<double>(m_data.mean_x(),a_sinfos)) {}
+        if(!numas<G4double>(m_data.mean_x(),a_sinfos)) {}
         a_sinfos += f_lf;
         a_sinfos += "MeanY\n";
-        if(!numas<double>(m_data.mean_y(),a_sinfos)) {}
+        if(!numas<G4double>(m_data.mean_y(),a_sinfos)) {}
 
       } else if((*it)=="rms") {
         if(a_sinfos.size()) a_sinfos += f_lf;
         a_sinfos += "RMS X\n";
-        if(!numas<double>(m_data.rms_x(),a_sinfos)) {}
+        if(!numas<G4double>(m_data.rms_x(),a_sinfos)) {}
         a_sinfos += f_lf;
         a_sinfos += "RMS Y\n";
-        if(!numas<double>(m_data.rms_y(),a_sinfos)) {}
+        if(!numas<G4double>(m_data.rms_y(),a_sinfos)) {}
 
       }
     }
   }
 public: //bins2D
-  virtual void bins_Sw_range(float& a_mn,float& a_mx,bool a_with_entries) const {
+  virtual void bins_Sw_range(G4float& a_mn,G4float& a_mx,bool a_with_entries) const {
     if(a_with_entries && m_data.has_entries_per_bin()) {
-      double mn,mx;
+      G4double mn,mx;
       m_data.min_bin_height_with_entries(mn);
       m_data.max_bin_height_with_entries(mx);
-      a_mn = float(mn);
-      a_mx = float(mx);
+      a_mn = G4float(mn);
+      a_mx = G4float(mx);
     } else {
-      a_mn = (float)m_data.min_bin_height();
-      a_mx = (float)m_data.max_bin_height();
+      a_mn = (G4float)m_data.min_bin_height();
+      a_mx = (G4float)m_data.max_bin_height();
     }
   }
   virtual unsigned int x_bins() const {return m_data.axis_x().bins();}
   virtual unsigned int y_bins() const {return m_data.axis_y().bins();}
-  virtual float x_axis_min() const {return (float)m_data.axis_x().lower_edge();}
-  virtual float x_axis_max() const {return (float)m_data.axis_x().upper_edge();}
-  virtual float y_axis_min() const {return (float)m_data.axis_y().lower_edge();}
-  virtual float y_axis_max() const {return (float)m_data.axis_y().upper_edge();}
+  virtual G4float x_axis_min() const {return (G4float)m_data.axis_x().lower_edge();}
+  virtual G4float x_axis_max() const {return (G4float)m_data.axis_x().upper_edge();}
+  virtual G4float y_axis_min() const {return (G4float)m_data.axis_y().lower_edge();}
+  virtual G4float y_axis_max() const {return (G4float)m_data.axis_y().upper_edge();}
 
-  virtual float bin_lower_edge_x(int aI) const {return (float)m_data.axis_x().bin_lower_edge(aI);}
-  virtual float bin_upper_edge_x(int aI) const {return (float)m_data.axis_x().bin_upper_edge(aI);}
-  virtual float bin_lower_edge_y(int aI) const {return (float)m_data.axis_y().bin_lower_edge(aI);}
-  virtual float bin_upper_edge_y(int aI) const {return (float)m_data.axis_y().bin_upper_edge(aI);}
+  virtual G4float bin_lower_edge_x(int aI) const {return (G4float)m_data.axis_x().bin_lower_edge(aI);}
+  virtual G4float bin_upper_edge_x(int aI) const {return (G4float)m_data.axis_x().bin_upper_edge(aI);}
+  virtual G4float bin_lower_edge_y(int aI) const {return (G4float)m_data.axis_y().bin_lower_edge(aI);}
+  virtual G4float bin_upper_edge_y(int aI) const {return (G4float)m_data.axis_y().bin_upper_edge(aI);}
 
   virtual bool has_entries_per_bin() const {return m_data.has_entries_per_bin();}
   virtual unsigned int bin_entries(int aI,int aJ) const {return m_data.bin_entries(aI,aJ);}
 
-  virtual float bin_Sw(int aI,int aJ) const {return (float)m_data.bin_height(aI,aJ);}
+  virtual G4float bin_Sw(int aI,int aJ) const {return (G4float)m_data.bin_height(aI,aJ);}
 
-  virtual float bin_error(int aI,int aJ) const {return (float)m_data.bin_error(aI,aJ);}
+  virtual G4float bin_error(int aI,int aJ) const {return (G4float)m_data.bin_error(aI,aJ);}
 public:
   h2d2plot(const histo::h2d& a_data)
   :m_data(a_data)
@@ -354,11 +354,11 @@ public:
       } else if((*it)=="mean") {
         if(a_sinfos.size()) a_sinfos += f_lf;
         a_sinfos += "Mean\n";
-        if(!numas<double>(m_data.mean(),a_sinfos)) {}
+        if(!numas<G4double>(m_data.mean(),a_sinfos)) {}
       } else if((*it)=="rms") {
         if(a_sinfos.size()) a_sinfos += f_lf;
         a_sinfos += "RMS\n";
-        if(!numas<double>(m_data.rms(),a_sinfos)) {}
+        if(!numas<G4double>(m_data.rms(),a_sinfos)) {}
 
       }
     }
@@ -366,30 +366,30 @@ public:
 public:
   virtual unsigned int bins() const {return m_data.axis().bins();}
 
-  virtual void bins_Sw_range(float& a_mn,float& a_mx,bool a_with_entries) const {
+  virtual void bins_Sw_range(G4float& a_mn,G4float& a_mx,bool a_with_entries) const {
     if(a_with_entries && m_data.has_entries_per_bin()) {
-      double mn,mx;
+      G4double mn,mx;
       m_data.min_bin_height_with_entries(mn);
       m_data.max_bin_height_with_entries(mx);
-      a_mn = float(mn);
-      a_mx = float(mx);
+      a_mn = G4float(mn);
+      a_mx = G4float(mx);
     } else {
-      a_mn = (float)m_data.min_bin_height();
-      a_mx = (float)m_data.max_bin_height();
+      a_mn = (G4float)m_data.min_bin_height();
+      a_mx = (G4float)m_data.max_bin_height();
     }
   }
 
-  virtual float axis_min() const {return (float)m_data.axis().lower_edge();}
-  virtual float axis_max() const {return (float)m_data.axis().upper_edge();}
-  virtual float bin_lower_edge(int aI) const {return (float)m_data.axis().bin_lower_edge(aI);}
-  virtual float bin_upper_edge(int aI) const {return (float)m_data.axis().bin_upper_edge(aI);}
+  virtual G4float axis_min() const {return (G4float)m_data.axis().lower_edge();}
+  virtual G4float axis_max() const {return (G4float)m_data.axis().upper_edge();}
+  virtual G4float bin_lower_edge(int aI) const {return (G4float)m_data.axis().bin_lower_edge(aI);}
+  virtual G4float bin_upper_edge(int aI) const {return (G4float)m_data.axis().bin_upper_edge(aI);}
 
   virtual bool has_entries_per_bin() const {return m_data.has_entries_per_bin();}
   virtual unsigned int bin_entries(int aI) const {return m_data.bin_entries(aI);}
 
-  virtual float bin_Sw(int aI) const {return (float)m_data.bin_height(aI);}
+  virtual G4float bin_Sw(int aI) const {return (G4float)m_data.bin_height(aI);}
 
-  virtual float bin_error(int aI) const {return (float)m_data.bin_error(aI);}
+  virtual G4float bin_error(int aI) const {return (G4float)m_data.bin_error(aI);}
 
   virtual bool is_profile() const {return true;}
 public:
@@ -430,36 +430,36 @@ public:
   virtual int getDimension() const{return 2;}
   virtual const char* title(){return m_data.title();}
 public: //SbPlottableBins2D
-  virtual void getBinsSumOfWeightsRange(float& a_mn,float& a_mx) const {
-    a_mn = (float)m_data.min_bin_height();
-    a_mx = (float)m_data.max_bin_height();
+  virtual void getBinsSumOfWeightsRange(G4float& a_mn,G4float& a_mx) const {
+    a_mn = (G4float)m_data.min_bin_height();
+    a_mx = (G4float)m_data.max_bin_height();
   }
   virtual int getAxisNumberOfBinsX() const {return m_data.axis_x().bins();}
   virtual int getAxisNumberOfBinsY() const {return m_data.axis_y().bins();}
-  virtual float getAxisMinimumX() const {return (float)m_data.axis_x().lower_edge();}
-  virtual float getAxisMaximumX() const {return (float)m_data.axis_x().upper_edge();}
-  virtual float getAxisMinimumY() const {return (float)m_data.axis_y().lower_edge();}
-  virtual float getAxisMaximumY() const {return (float)m_data.axis_y().upper_edge();}
-  virtual float getBinLowerEdgeX(int aI) const {
-    return (float)m_data.axis_x().bin_lower_edge(aI);
+  virtual G4float getAxisMinimumX() const {return (G4float)m_data.axis_x().lower_edge();}
+  virtual G4float getAxisMaximumX() const {return (G4float)m_data.axis_x().upper_edge();}
+  virtual G4float getAxisMinimumY() const {return (G4float)m_data.axis_y().lower_edge();}
+  virtual G4float getAxisMaximumY() const {return (G4float)m_data.axis_y().upper_edge();}
+  virtual G4float getBinLowerEdgeX(int aI) const {
+    return (G4float)m_data.axis_x().bin_lower_edge(aI);
   }
-  virtual float bin_upper_edgeX(int aI) const {
-    return (float)m_data.axis_x().bin_upper_edge(aI);
+  virtual G4float bin_upper_edgeX(int aI) const {
+    return (G4float)m_data.axis_x().bin_upper_edge(aI);
   }
-  virtual float getBinLowerEdgeY(int aI) const {
-    return (float)m_data.axis_y().bin_lower_edge(aI);
+  virtual G4float getBinLowerEdgeY(int aI) const {
+    return (G4float)m_data.axis_y().bin_lower_edge(aI);
   }
-  virtual float bin_upper_edgeY(int aI) const {
-    return (float)m_data.axis_y().bin_upper_edge(aI);
+  virtual G4float bin_upper_edgeY(int aI) const {
+    return (G4float)m_data.axis_y().bin_upper_edge(aI);
   }
   virtual int getBinNumberOfEntries(int aI,int aJ) const {
     return m_data.bin_entries(aI,aJ);
   }
-  virtual float getBinSumOfWeights(int aI,int aJ) const {
-    return (float)m_data.bin_height(aI,aJ);
+  virtual G4float getBinSumOfWeights(int aI,int aJ) const {
+    return (G4float)m_data.bin_height(aI,aJ);
   }
-  virtual float getBinBar(int aI,int aJ) const {
-    return (float)m_data.bin_error(aI,aJ);
+  virtual G4float getBinBar(int aI,int aJ) const {
+    return (G4float)m_data.bin_error(aI,aJ);
   }
 
   virtual void infos(const std::string& a_opts,std::string& a_sinfos) const {
@@ -481,17 +481,17 @@ public: //SbPlottableBins2D
       } else if((*it)=="mean") {
         if(a_sinfos.size()) a_sinfos += f_lf;
         a_sinfos += "MeanX\n";
-        if(!numas<double>(m_data.mean_x(),a_sinfos)) {}
+        if(!numas<G4double>(m_data.mean_x(),a_sinfos)) {}
         a_sinfos += f_lf;
         a_sinfos += "MeanY\n";
-        if(!numas<double>(m_data.mean_y(),a_sinfos)) {}
+        if(!numas<G4double>(m_data.mean_y(),a_sinfos)) {}
       } else if((*it)=="rms") {
         if(a_sinfos.size()) a_sinfos += f_lf;
         a_sinfos += "RMS X\n";
-        if(!numas<double>(m_data.rms_x(),a_sinfos)) {}
+        if(!numas<G4double>(m_data.rms_x(),a_sinfos)) {}
         a_sinfos += f_lf;
         a_sinfos += "RMS Y\n";
-        if(!numas<double>(m_data.rms_y(),a_sinfos)) {}
+        if(!numas<G4double>(m_data.rms_y(),a_sinfos)) {}
 
       }
     }

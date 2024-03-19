@@ -23,11 +23,11 @@ inline const std::string& leaf_store_class(int) {
   static const std::string s_v("TLeafI");
   return s_v;
 }
-inline const std::string& leaf_store_class(float) {
+inline const std::string& leaf_store_class(G4float) {
   static const std::string s_v("TLeafF");
   return s_v;
 }
-inline const std::string& leaf_store_class(double) {
+inline const std::string& leaf_store_class(G4double) {
   static const std::string s_v("TLeafD");
   return s_v;
 }
@@ -36,12 +36,12 @@ inline const std::string& leaf_store_class(bool) {
   return s_v;
 }
 
-inline const std::string& leaf_float_cls() {
-  static const std::string s_v("tools::rroot::leaf<float>");
+inline const std::string& leaf_G4float_cls() {
+  static const std::string s_v("tools::rroot::leaf<G4float>");
   return s_v;
 }
-inline const std::string& leaf_double_cls() {
-  static const std::string s_v("tools::rroot::leaf<double>");
+inline const std::string& leaf_G4double_cls() {
+  static const std::string s_v("tools::rroot::leaf<G4double>");
   return s_v;
 }
 inline const std::string& leaf_int_cls() {
@@ -480,8 +480,8 @@ protected:
 
 // for SWIG :
 inline leaf<int>*    cast_leaf_int(base_leaf& a_leaf) {return safe_cast<base_leaf, leaf<int> >(a_leaf);}
-inline leaf<float>*  cast_leaf_float(base_leaf& a_leaf) {return safe_cast<base_leaf, leaf<float> >(a_leaf);}
-inline leaf<double>* cast_leaf_double(base_leaf& a_leaf) {return safe_cast<base_leaf, leaf<double> >(a_leaf);}
+inline leaf<G4float>*  cast_leaf_G4float(base_leaf& a_leaf) {return safe_cast<base_leaf, leaf<G4float> >(a_leaf);}
+inline leaf<G4double>* cast_leaf_G4double(base_leaf& a_leaf) {return safe_cast<base_leaf, leaf<G4double> >(a_leaf);}
 
 }}
 

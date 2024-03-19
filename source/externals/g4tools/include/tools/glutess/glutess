@@ -13,9 +13,9 @@ GLUAPI void GLUAPIENTRY gluTessBeginPolygon (GLUtesselator* tess, GLUvoid* data)
 GLUAPI void GLUAPIENTRY gluTessCallback (GLUtesselator* tess, GLUenum which, _GLUfuncptr CallBackFunc);
 GLUAPI void GLUAPIENTRY gluTessEndContour (GLUtesselator* tess);
 GLUAPI void GLUAPIENTRY gluTessEndPolygon (GLUtesselator* tess);
-GLUAPI void GLUAPIENTRY gluTessNormal (GLUtesselator* tess, GLUdouble valueX, GLUdouble valueY, GLUdouble valueZ);
-GLUAPI void GLUAPIENTRY gluTessProperty (GLUtesselator* tess, GLUenum which, GLUdouble data);
-GLUAPI void GLUAPIENTRY gluTessVertex (GLUtesselator* tess, GLUdouble *location, GLUvoid* data);
+GLUAPI void GLUAPIENTRY gluTessNormal (GLUtesselator* tess, GLUG4double valueX, GLUG4double valueY, GLUG4double valueZ);
+GLUAPI void GLUAPIENTRY gluTessProperty (GLUtesselator* tess, GLUenum which, GLUG4double data);
+GLUAPI void GLUAPIENTRY gluTessVertex (GLUtesselator* tess, GLUG4double *location, GLUvoid* data);
 
 #include "mesh"
 #include "normal"
@@ -31,8 +31,8 @@ GLUAPI void GLUAPIENTRY gluTessVertex (GLUtesselator* tess, GLUdouble *location,
 /*ARGSUSED*/ inline/*static*/ void GLUAPIENTRY static_noVertex( void * /*data*/ ) {}
 /*ARGSUSED*/ inline/*static*/ void GLUAPIENTRY static_noEnd( void ) {}
 /*ARGSUSED*/ inline/*static*/ void GLUAPIENTRY static_noError( GLUenum /*errnum*/ ) {}
-/*ARGSUSED*/ inline/*static*/ void GLUAPIENTRY static_noCombine( GLUdouble /*coords*/[3], void* /*data*/[4],
-								 GLUfloat /*weight*/[4], void** /*dataOut*/ ) {}
+/*ARGSUSED*/ inline/*static*/ void GLUAPIENTRY static_noCombine( GLUG4double /*coords*/[3], void* /*data*/[4],
+								 GLUG4float /*weight*/[4], void** /*dataOut*/ ) {}
 /*ARGSUSED*/ inline/*static*/ void GLUAPIENTRY static_noMesh( GLUmesh* /*mesh*/ ) {}
 
 
@@ -41,9 +41,9 @@ inline /*ARGSUSED*/ void GLUAPIENTRY __gl_noEdgeFlagData( GLUboolean /*boundaryE
 inline /*ARGSUSED*/ void GLUAPIENTRY __gl_noVertexData( void* /*data*/, void* /*polygonData*/ ) {}
 inline /*ARGSUSED*/ void GLUAPIENTRY __gl_noEndData( void* /*polygonData*/ ) {}
 inline /*ARGSUSED*/ void GLUAPIENTRY __gl_noErrorData( GLUenum /*errnum*/, void* /*polygonData*/ ) {}
-inline /*ARGSUSED*/ void GLUAPIENTRY __gl_noCombineData( GLUdouble /*coords*/[3],
+inline /*ARGSUSED*/ void GLUAPIENTRY __gl_noCombineData( GLUG4double /*coords*/[3],
 							 void* /*data*/[4],
-							 GLUfloat /*weight*/[4],
+							 GLUG4float /*weight*/[4],
 							 void** /*outData*/,
 							 void* /*polygonData*/ ) {}
 
@@ -165,7 +165,7 @@ gluDeleteTess( GLUtesselator *tess )
 
 
 inline void GLUAPIENTRY
-gluTessProperty( GLUtesselator *tess, GLUenum which, GLUdouble value )
+gluTessProperty( GLUtesselator *tess, GLUenum which, GLUG4double value )
 {
   GLUenum windingRule;
 
@@ -205,7 +205,7 @@ gluTessProperty( GLUtesselator *tess, GLUenum which, GLUdouble value )
 
 /* Returns tessellator property */
 inline void GLUAPIENTRY
-gluGetTessProperty( GLUtesselator *tess, GLUenum which, GLUdouble *value )
+gluGetTessProperty( GLUtesselator *tess, GLUenum which, GLUG4double *value )
 {
    switch (which) {
    case GLU_TESS_TOLERANCE:
@@ -233,7 +233,7 @@ gluGetTessProperty( GLUtesselator *tess, GLUenum which, GLUdouble *value )
 } /* gluGetTessProperty() */
 
 inline void GLUAPIENTRY
-gluTessNormal( GLUtesselator *tess, GLUdouble x, GLUdouble y, GLUdouble z )
+gluTessNormal( GLUtesselator *tess, GLUG4double x, GLUG4double y, GLUG4double z )
 {
   tess->normal[0] = x;
   tess->normal[1] = y;
@@ -260,7 +260,7 @@ gluTessCallback_GLU_TESS_ERROR_DATA(GLUtesselator *tess,void (GLUAPIENTRY* a_fn)
 }
 inline void GLUAPIENTRY
 gluTessCallback_GLU_TESS_COMBINE_DATA(GLUtesselator *tess,
-                                      void (GLUAPIENTRY* a_fn)(GLUdouble [3],void *[4],GLUfloat [4],void **,void *)) {
+                                      void (GLUAPIENTRY* a_fn)(GLUG4double [3],void *[4],GLUG4float [4],void **,void *)) {
   tess->callCombineData = (a_fn == NULL) ? &__gl_noCombineData : a_fn;
 }
 // G.Barrand : end : g++-8.1.0.
@@ -316,13 +316,13 @@ gluTessCallback( GLUtesselator *tess, GLUenum which, _GLUfuncptr fn)
     return;
   case GLU_TESS_COMBINE:
     tess->callCombine = (fn == NULL) ? &static_noCombine :
-	(void (GLUAPIENTRY *)(GLUdouble [3],void *[4], GLUfloat [4], void ** )) fn;
+	(void (GLUAPIENTRY *)(GLUG4double [3],void *[4], GLUG4float [4], void ** )) fn;
     return;
   case GLU_TESS_COMBINE_DATA:
     tess->callCombineData = (fn == NULL) ? &__gl_noCombineData :
-					   (void (GLUAPIENTRY *)(GLUdouble [3],
+					   (void (GLUAPIENTRY *)(GLUG4double [3],
 						     void *[4],
-						     GLUfloat [4],
+						     GLUG4float [4],
 						     void **,
 						     void *)) fn;
     return;
@@ -335,7 +335,7 @@ gluTessCallback( GLUtesselator *tess, GLUenum which, _GLUfuncptr fn)
   }
 }
 
-inline/*static*/ int static_AddVertex( GLUtesselator *tess, GLUdouble coords[3], void *data )
+inline/*static*/ int static_AddVertex( GLUtesselator *tess, GLUG4double coords[3], void *data )
 {
   GLUhalfEdge *e;
 
@@ -374,7 +374,7 @@ inline/*static*/ int static_AddVertex( GLUtesselator *tess, GLUdouble coords[3],
 }
 
 
-inline/*static*/ void static_CacheVertex( GLUtesselator *tess, GLUdouble coords[3], void *data )
+inline/*static*/ void static_CacheVertex( GLUtesselator *tess, GLUG4double coords[3], void *data )
 {
   CachedVertex *v = &tess->cache[tess->cacheCount];
 
@@ -405,10 +405,10 @@ inline/*static*/ int static_EmptyCache( GLUtesselator *tess )
 
 
 inline void GLUAPIENTRY
-gluTessVertex( GLUtesselator *tess, GLUdouble coords[3], void *data )
+gluTessVertex( GLUtesselator *tess, GLUG4double coords[3], void *data )
 {
   int i, tooLarge = TOOLS_GLU_FALSE;
-  GLUdouble x, clamped[3];
+  GLUG4double x, clamped[3];
 
   RequireState( tess, T_IN_CONTOUR );
 

@@ -267,14 +267,14 @@ public:
     //   Fixing the saturation and lightness we can scan through the
     //   spectrum of visible light by using "hue" alone.
     //   In Root hue takes values from 0 to 360.
-   {float saturation = 1;
-    float lightness = 0.5;
-    float MaxHue = 280;
-    float MinHue = 0;
+   {G4float saturation = 1;
+    G4float lightness = 0.5;
+    G4float MaxHue = 280;
+    G4float MinHue = 0;
     unsigned int MaxPretty = 50;
 
     // from index 51 to 100.
-    float r,g,b,hue;
+    G4float r,g,b,hue;
     std::string head("Color");
     for(unsigned int i=0 ; i<MaxPretty ; i++) {
       hue = MaxHue-(i+1)*((MaxHue-MinHue)/MaxPretty);
@@ -282,7 +282,7 @@ public:
       new_TColor(i+51, r, g, b,head,i+51);
     }}
 
-    double h,l,s,r,g,b;
+    G4double h,l,s,r,g,b;
 
     // dark colors (index 101 to 150) :
     // NOTE : 100 = "dark black" would overlap with "pretty 49" !
@@ -292,8 +292,8 @@ public:
       //if(it==end()) {}
       const std::string& nam = (*it).second.first;
       const colorf& col = (*it).second.second;
-      rgb_to_hls<double>(col.r(),col.g(),col.b(),h,l,s);
-      hls_to_rgb<double>(h,0.7*l,s, r, g, b);
+      rgb_to_hls<G4double>(col.r(),col.g(),col.b(),h,l,s);
+      hls_to_rgb<G4double>(h,0.7*l,s, r, g, b);
       new_TColor(i+100, r, g, b, nam+"_dark");
     }}
 
@@ -305,8 +305,8 @@ public:
       //if(it==end()) {}
       const std::string& nam = (*it).second.first;
       const colorf& col = (*it).second.second;
-      rgb_to_hls<double>(col.r(),col.g(),col.b(),h,l,s);
-      hls_to_rgb<double>(h,1.2*l,s, r, g, b);
+      rgb_to_hls<G4double>(col.r(),col.g(),col.b(),h,l,s);
+      hls_to_rgb<G4double>(h,1.2*l,s, r, g, b);
       new_TColor(i+150, r, g, b, nam+"_bright");
     }}
 
@@ -356,12 +356,12 @@ public:
 
 protected:
   void new_TColor(unsigned int a_i,
-                  double a_r,double a_g,double a_b,
+                  G4double a_r,G4double a_g,G4double a_b,
                   const std::string& a_n) {
-    (*this)[a_i] = style_color(a_n,float(a_r),float(a_g),float(a_b));
+    (*this)[a_i] = style_color(a_n,G4float(a_r),G4float(a_g),G4float(a_b));
   }
   void new_TColor(unsigned int a_i,
-                  double a_r,double a_g,double a_b,
+                  G4double a_r,G4double a_g,G4double a_b,
                   const std::string& a_head,unsigned int a_index) {
     std::string stmp;
     if(!num2s(a_index,stmp)) {}
@@ -576,7 +576,7 @@ inline bool find_color(const cmaps_t& a_cmaps,const std::string& a_s,colorf& a_c
       s += a_s.substr(5,2);
       if(!to_ulong(s,bb)) return false;}
 
-      a_col = colorf(((float)rr)/255,((float)gg)/255,((float)bb)/255);
+      a_col = colorf(((G4float)rr)/255,((G4float)gg)/255,((G4float)bb)/255);
       return true;
     }
 
@@ -586,20 +586,20 @@ inline bool find_color(const cmaps_t& a_cmaps,const std::string& a_s,colorf& a_c
    {std::vector<std::string> ws;
     words(a_s," ",false,ws);
     if(ws.size()==3) {
-      float r,g,b;
-      if( to<float>(ws[0],r) && ((0<=r)&&(r<=1)) &&
-          to<float>(ws[1],g) && ((0<=g)&&(g<=1)) &&
-          to<float>(ws[2],b) && ((0<=b)&&(b<=1)) ){
+      G4float r,g,b;
+      if( to<G4float>(ws[0],r) && ((0<=r)&&(r<=1)) &&
+          to<G4float>(ws[1],g) && ((0<=g)&&(g<=1)) &&
+          to<G4float>(ws[2],b) && ((0<=b)&&(b<=1)) ){
         a_col = colorf(r,g,b);
         return true;
       }
 
     } else if(ws.size()==4) {
-      float r,g,b,a;
-      if( to<float>(ws[0],r) && ((0<=r)&&(r<=1)) &&
-          to<float>(ws[1],g) && ((0<=g)&&(g<=1)) &&
-          to<float>(ws[2],b) && ((0<=b)&&(b<=1)) &&
-          to<float>(ws[3],a) && ((0<=a)&&(a<=1)) ){
+      G4float r,g,b,a;
+      if( to<G4float>(ws[0],r) && ((0<=r)&&(r<=1)) &&
+          to<G4float>(ws[1],g) && ((0<=g)&&(g<=1)) &&
+          to<G4float>(ws[2],b) && ((0<=b)&&(b<=1)) &&
+          to<G4float>(ws[3],a) && ((0<=a)&&(a<=1)) ){
         a_col = colorf(r,g,b,a);
         return true;
       }

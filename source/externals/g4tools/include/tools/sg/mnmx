@@ -34,8 +34,8 @@ namespace tools {
 inline bool center_adjust(std::ostream& a_out,
                           sg::node& a_node,sg::matrix& a_tsf,
                           unsigned int a_ww,unsigned int a_wh,
-                          float a_height,
-                          float& a_dx,float& a_dy,float& a_dz,
+                          G4float a_height,
+                          G4float& a_dx,G4float& a_dy,G4float& a_dz,
                           bool a_verbose = true) {
   //NOTE : we assume an ortho camera.
   if(!a_ww||!a_wh) {
@@ -77,11 +77,11 @@ inline bool center_adjust(std::ostream& a_out,
     a_dx = 0;a_dy = 0;a_dz = 0;
     return false;
   }
-  float vp_aspect = float(a_ww)/float(a_wh);
-  float scene_aspect = float(a_dx)/float(a_dy);
+  G4float vp_aspect = G4float(a_ww)/G4float(a_wh);
+  G4float scene_aspect = G4float(a_dx)/G4float(a_dy);
   //::printf("debug : set_tsf : %d %d : %g %g %g : %g %g\n",
   //    a_ww,a_wh,a_dx,a_dy,a_dz,vp_aspect,scene_aspect);
-  float scale;
+  G4float scale;
   if(vp_aspect>=scene_aspect) {
     scale = a_height/a_dy;
   } else {
@@ -95,8 +95,8 @@ inline bool center_adjust(std::ostream& a_out,
 inline bool center_adjust(std::ostream& a_out,
                           sg::node& a_node,sg::matrix& a_tsf,
                           unsigned int a_ww,unsigned int a_wh,
-                          float a_height,bool a_verbose = true) {
-  float dx,dy,dz;
+                          G4float a_height,bool a_verbose = true) {
+  G4float dx,dy,dz;
   return center_adjust(a_out,a_node,a_tsf,a_ww,a_wh,a_height,
                        dx,dy,dz,a_verbose);
 }

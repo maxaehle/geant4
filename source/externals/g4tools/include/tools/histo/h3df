@@ -4,16 +4,16 @@
 #ifndef tools_histo_h3df
 #define tools_histo_h3df
 
-// coord is in double.
-// weight is in float.
+// coord is in G4double.
+// weight is in G4float.
 
 #include "h3"
 
 namespace tools {
 namespace histo {
 
-class h3df : public h3<double,unsigned int,unsigned int,float,float> {
-  typedef h3<double,unsigned int,unsigned int,float,float> parent;
+class h3df : public h3<G4double,unsigned int,unsigned int,G4float,G4float> {
+  typedef h3<G4double,unsigned int,unsigned int,G4float,G4float> parent;
 public:
   static const std::string& s_class() {
     static const std::string s_v("tools::histo::h3df");
@@ -24,18 +24,18 @@ public:
   h3df():parent("",10,0,1,10,0,1,10,0,1){} //for I/O when reading.
 
   h3df(const std::string& a_title,
-      unsigned int aXnumber,float aXmin,float aXmax,
-      unsigned int aYnumber,float aYmin,float aYmax,
-      unsigned int aZnumber,float aZmin,float aZmax)
+      unsigned int aXnumber,G4float aXmin,G4float aXmax,
+      unsigned int aYnumber,G4float aYmin,G4float aYmax,
+      unsigned int aZnumber,G4float aZmin,G4float aZmax)
   :parent(a_title,aXnumber,aXmin,aXmax,
                   aYnumber,aYmin,aYmax,
                   aZnumber,aZmin,aZmax)
   {}
 
   h3df(const std::string& a_title,
-      const std::vector<double>& a_edges_x,
-      const std::vector<double>& a_edges_y,
-      const std::vector<double>& a_edges_z)
+      const std::vector<G4double>& a_edges_x,
+      const std::vector<G4double>& a_edges_y,
+      const std::vector<G4double>& a_edges_z)
   :parent(a_title,a_edges_x,a_edges_y,a_edges_z)
   {}
 

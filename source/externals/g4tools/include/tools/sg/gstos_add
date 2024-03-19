@@ -22,76 +22,76 @@ public:
 public:
   void clear() {m_xyzs.clear();m_nms.clear();}
 
-  void add_points(size_t a_floatn,const float* a_xyzs) {
-    append(m_xyzs,a_floatn,a_xyzs);
+  void add_points(size_t a_G4floatn,const G4float* a_xyzs) {
+    append(m_xyzs,a_G4floatn,a_xyzs);
   }
-  void add_lines(size_t a_floatn,const float* a_xyzs) {
-    append(m_xyzs,a_floatn,a_xyzs);
+  void add_lines(size_t a_G4floatn,const G4float* a_xyzs) {
+    append(m_xyzs,a_G4floatn,a_xyzs);
   }
-  void add_line_strip(size_t a_floatn,const float* a_xyzs) {
-    size_t num = a_floatn/3;
+  void add_line_strip(size_t a_G4floatn,const G4float* a_xyzs) {
+    size_t num = a_G4floatn/3;
     if(num<2) return;
     size_t nxyzs = (num-1)*2*3;
     size_t offset = m_xyzs.size();
     m_xyzs.resize(offset+nxyzs);
-    float* pxyzs = vec_data<float>(m_xyzs)+offset;
+    G4float* pxyzs = vec_data<G4float>(m_xyzs)+offset;
     gl::line_strip_to_lines(num,a_xyzs,pxyzs);
   }
-  void add_line_loop(size_t a_floatn,const float* a_xyzs) {
-    size_t num = a_floatn/3;
+  void add_line_loop(size_t a_G4floatn,const G4float* a_xyzs) {
+    size_t num = a_G4floatn/3;
     if(num<2) return;
     size_t nxyzs = num*2*3;
     size_t offset = m_xyzs.size();
     m_xyzs.resize(offset+nxyzs);
-    float* pxyzs = vec_data<float>(m_xyzs)+offset;
+    G4float* pxyzs = vec_data<G4float>(m_xyzs)+offset;
     gl::line_loop_to_lines(num,a_xyzs,pxyzs);
   }
-  void add_triangles_normal(size_t a_floatn,const float* a_xyzs,const float* a_nms) {
-    append(m_xyzs,a_floatn,a_xyzs);
-    append(m_nms,a_floatn,a_nms);
+  void add_triangles_normal(size_t a_G4floatn,const G4float* a_xyzs,const G4float* a_nms) {
+    append(m_xyzs,a_G4floatn,a_xyzs);
+    append(m_nms,a_G4floatn,a_nms);
   }
-  void add_triangle_strip_normal(size_t a_floatn,const float* a_xyzs,const float* a_nms) {
-    size_t num = a_floatn/3;
+  void add_triangle_strip_normal(size_t a_G4floatn,const G4float* a_xyzs,const G4float* a_nms) {
+    size_t num = a_G4floatn/3;
     if(num<3) return;
     size_t nxyzs = (num-2)*3*3;
     size_t offset = m_xyzs.size();
     m_xyzs.resize(offset+nxyzs);
-    float* pxyzs = vec_data<float>(m_xyzs)+offset;
+    G4float* pxyzs = vec_data<G4float>(m_xyzs)+offset;
     offset = m_nms.size();
     m_nms.resize(offset+nxyzs);
-    float* pnms = vec_data<float>(m_nms)+offset;
+    G4float* pnms = vec_data<G4float>(m_nms)+offset;
     gl::triangle_strip_to_triangles_nms(num,a_xyzs,a_nms,pxyzs,pnms);
   }
-  void add_triangle_fan_normal(size_t a_floatn,const float* a_xyzs,const float* a_nms) {
-    size_t num = a_floatn/3;
+  void add_triangle_fan_normal(size_t a_G4floatn,const G4float* a_xyzs,const G4float* a_nms) {
+    size_t num = a_G4floatn/3;
     if(num<3) return;
     size_t nxyzs = (num-2)*3*3;
     size_t offset = m_xyzs.size();
     m_xyzs.resize(offset+nxyzs);
-    float* pxyzs = vec_data<float>(m_xyzs)+offset;
+    G4float* pxyzs = vec_data<G4float>(m_xyzs)+offset;
     offset = m_nms.size();
     m_nms.resize(offset+nxyzs);
-    float* pnms = vec_data<float>(m_nms)+offset;
+    G4float* pnms = vec_data<G4float>(m_nms)+offset;
     gl::triangle_fan_to_triangles_nms(num,a_xyzs,a_nms,pxyzs,pnms);
   }
 
-  void add_triangle_strip_as_triangles(size_t a_floatn,const float* a_xyzs,const float* a_nms) { //used in sg::sphere, icosahedron_sphere.
-    add_triangle_strip_normal(a_floatn,a_xyzs,a_nms);
+  void add_triangle_strip_as_triangles(size_t a_G4floatn,const G4float* a_xyzs,const G4float* a_nms) { //used in sg::sphere, icosahedron_sphere.
+    add_triangle_strip_normal(a_G4floatn,a_xyzs,a_nms);
   }
 /*
   /////////////////////////////////////////////////////////
   /// for sg::markers and gstos : /////////////////////////
   /////////////////////////////////////////////////////////
-  void add_lines(const std::vector<float>& a_xyzs) {
+  void add_lines(const std::vector<G4float>& a_xyzs) {
     append(m_xyzs,a_xyzs.size(),vec_data(a_xyzs));
   }
-  void add_triangles_normal(const std::vector<float>& a_xyzs,const std::vector<float>& a_nms) { //for sg::markers.
+  void add_triangles_normal(const std::vector<G4float>& a_xyzs,const std::vector<G4float>& a_nms) { //for sg::markers.
     if(a_xyzs.size()!=a_nms.size()) return;
     append(m_xyzs,a_xyzs.size(),vec_data(a_xyzs));
     append(m_nms,a_nms.size(),vec_data(a_nms));
   }
   bool project_point(const mat4f& a_model_matrix,const mat4f& a_projection_matrix,
-                     float& a_x,float& a_y,float& a_z,float& a_w) {
+                     G4float& a_x,G4float& a_y,G4float& a_z,G4float& a_w) {
     a_w = 1;
     a_model_matrix.mul_4f(a_x,a_y,a_z,a_w);
     a_projection_matrix.mul_4f(a_x,a_y,a_z,a_w);
@@ -106,8 +106,8 @@ public:
   /////////////////////////////////////////////////////////
 */
 public:
-  std::vector<float> m_xyzs;
-  std::vector<float> m_nms;
+  std::vector<G4float> m_xyzs;
+  std::vector<G4float> m_nms;
 
   size_t m_gsto_points_sz;
   size_t m_gsto_lines_sz;

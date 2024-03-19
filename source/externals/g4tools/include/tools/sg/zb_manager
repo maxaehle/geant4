@@ -24,7 +24,7 @@ public:
     else return 0;
   }
 public:
-  virtual bool begin_render(int,int,unsigned int,unsigned int,float,float,float,float,bool = true) {return true;}
+  virtual bool begin_render(int,int,unsigned int,unsigned int,G4float,G4float,G4float,G4float,bool = true) {return true;}
   virtual void end_render() {}
 
   virtual unsigned int create_texture(const img_byte& a_img,bool /*a_NEAREST*/) {
@@ -33,7 +33,7 @@ public:
     return m_gen_id;
   }
 
-  virtual unsigned int create_gsto_from_data(size_t,const float*) {return 0;}
+  virtual unsigned int create_gsto_from_data(size_t,const G4float*) {return 0;}
 
   virtual bool is_gsto_id_valid(unsigned int a_id) const {
     gstos_t::const_iterator it = m_gstos.find(a_id);

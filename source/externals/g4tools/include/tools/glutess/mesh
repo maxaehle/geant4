@@ -86,8 +86,8 @@ struct GLUvertex {
   void		*data;		/* client's data */
 
   /* Internal data (keep hidden) */
-  GLUdouble	coords[3];	/* vertex location in 3D */
-  GLUdouble	s, t;		/* projection onto the sweep plane */
+  GLUG4double	coords[3];	/* vertex location in 3D */
+  GLUG4double	s, t;		/* projection onto the sweep plane */
   long		pqHandle;	/* to allow deletion from priority queue */
 };
 

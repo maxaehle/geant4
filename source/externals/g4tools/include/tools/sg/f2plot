@@ -52,15 +52,15 @@ public: //plottable
     }
   }
 public: //func1D
-  virtual bool value(float a_x,float& a_v) const {
+  virtual bool value(G4float a_x,G4float& a_v) const {
     if(!m_data.in_domain(a_x)) {a_v = 0;return false;}
-    a_v = (float)m_data.value(a_x);
+    a_v = (G4float)m_data.value(a_x);
     return true;
   }
 
   virtual unsigned int x_steps() const {return m_data.xdomain_number_of_steps();}
-  virtual float x_min() const {return (float)m_data.xdomain_min();}
-  virtual float x_max() const {return (float)m_data.xdomain_max();}
+  virtual G4float x_min() const {return (G4float)m_data.xdomain_min();}
+  virtual G4float x_max() const {return (G4float)m_data.xdomain_max();}
 
 public:
   f1d2plot(const T& a_data):m_data(a_data){
@@ -161,18 +161,18 @@ public: //plottable
     }
   }
 public: //func2D
-  virtual bool value(float a_x,float a_y,float& a_v) const {
+  virtual bool value(G4float a_x,G4float a_y,G4float& a_v) const {
     if(!m_data.in_domain(a_x,a_y)) {a_v = 0;return false;}
-    a_v = (float)m_data.value(a_x,a_y);
+    a_v = (G4float)m_data.value(a_x,a_y);
     return true;
   }
 
   virtual unsigned int x_steps() const {return m_data.xdomain_number_of_steps();}
-  virtual float x_min() const {return m_data.xdomain_min();}
-  virtual float x_max() const {return m_data.xdomain_max();}
+  virtual G4float x_min() const {return m_data.xdomain_min();}
+  virtual G4float x_max() const {return m_data.xdomain_max();}
   virtual unsigned int y_steps() const {return m_data.ydomain_number_of_steps();}
-  virtual float y_min() const {return m_data.ydomain_min();}
-  virtual float y_max() const {return m_data.ydomain_max();}
+  virtual G4float y_min() const {return m_data.ydomain_min();}
+  virtual G4float y_max() const {return m_data.ydomain_max();}
 public:
   f2d2plot(const T& a_data):m_data(a_data){
 #ifdef TOOLS_MEM

@@ -49,7 +49,7 @@
 #include "lina/vec3f"
 #include "lina/vec2f"
 #include "mathf"
-#include <cfloat> // for FLT_MAX
+#include <cG4float> // for FLT_MAX
 
 namespace tools {
 
@@ -133,13 +133,13 @@ public:
   */
   bool check_polyline(vec3f* listPoints,unsigned int number);
 
-  void set_spacing(float a) {fShift = a;}       //set the spacing for this hatch.
-  void set_angle(float a) {fDirAngle = a;}      //set the Direction angle for the hatch in radians.
-  void set_offset(float a) {fOffsetValue = a;}  //set the offset value for this hatch.
+  void set_spacing(G4float a) {fShift = a;}       //set the spacing for this hatch.
+  void set_angle(G4float a) {fDirAngle = a;}      //set the Direction angle for the hatch in radians.
+  void set_offset(G4float a) {fOffsetValue = a;}  //set the offset value for this hatch.
   void set_offset_point(vec3f a) {fOffset = a;}  //set the offset Point for this hatch.
-  void set_precision_factor(float a) {fPrecisionFactor = a;} //set the precision factor for computing (0.0001 is default).
+  void set_precision_factor(G4float a) {fPrecisionFactor = a;} //set the precision factor for computing (0.0001 is default).
 
-  bool set_strip_width(float a) {
+  bool set_strip_width(G4float a) {
     // set the strip width value(0 is default and means no strip).
     if (a<0 || a>1) {
       fStripWidth = 0;
@@ -149,12 +149,12 @@ public:
     return true;
   }
 
-  float get_spacing()const {return fShift;}
-  float get_angle()const {return fDirAngle;}
-  float get_offset()const {return fOffsetValue;}
+  G4float get_spacing()const {return fShift;}
+  G4float get_angle()const {return fDirAngle;}
+  G4float get_offset()const {return fOffsetValue;}
   const vec3f& get_offset_point() {return fOffset;}
-  float get_precision_factor()const {return fPrecisionFactor;}
-  float get_strip_width()const {return fStripWidth;}
+  G4float get_precision_factor()const {return fPrecisionFactor;}
+  G4float get_strip_width()const {return fStripWidth;}
   const vec3f& get_normal() {return fNormal;}
 
   //size_t number_of_points() const {return fPoints.size();} //get the number of points compute for this hatch.
@@ -198,7 +198,7 @@ protected:
   vec3f fNormal;
 
   /** Spacing vector between two hatch */
-  float fShift; // Absloute distance between two hatch in the polyline plan  */
+  G4float fShift; // Absloute distance between two hatch in the polyline plan  */
 
   /** The angle (given in radians) is the one between the first
    * line (point 1-point0) and the hatch lines, in the polyline plan.
@@ -207,14 +207,14 @@ protected:
    * Changes on angle value for others polyline will not take effect.This is to
    * perform correct hatching between the polylines
    */
-  float fDirAngle;
+  G4float fDirAngle;
 
   /** between 0-1. This value set the offset of the hatch.0 meen
   * that the hatch will touch the first point of the polyline,
   * and 1 meen that first hatch will be draw
   * at a 'spacing' distance to first point
   */
-  float fOffsetValue;
+  G4float fOffsetValue;
 
   /** first point of the hatch.
    * offset = firstPolylinePoint+ShiftVec*offsetValue
@@ -225,7 +225,7 @@ protected:
   vec3f fShiftVec;
 
   /** factor for compute error between two points */
-  float fPrecisionFactor;
+  G4float fPrecisionFactor;
 
   /** hatch direction Vector */
   vec3f  fDirVec;
@@ -234,7 +234,7 @@ protected:
    * between 0 and 1.0 means no strip, 0.5 means strip size is
    * half of distance between two hatches
    */
-  float fStripWidth;
+  G4float fStripWidth;
 
   /** vector list of points */
   std::vector<vec3f> fPoints;
@@ -246,7 +246,7 @@ protected:
   std::vector< std::vector<int> > fConflictNumHatchLineTab;
 
   /** hatchShiftToMatchPointVec tab*/
-  std::vector<float> fHatchShiftToMatchPointVec;
+  std::vector<G4float> fHatchShiftToMatchPointVec;
 
   /** first hatch number to draw */
   int fFirstNumHatch;

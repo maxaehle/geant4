@@ -50,34 +50,34 @@ public: //plottable
       } else if((*it)=="mean") {
         if(a_sinfos.size()) a_sinfos += f_lf;
         a_sinfos += "MeanX\n";
-        if(!numas<double>(m_data.mean_x(),a_sinfos)){}
+        if(!numas<G4double>(m_data.mean_x(),a_sinfos)){}
         a_sinfos += f_lf;
         a_sinfos += "MeanY\n";
-        if(!numas<double>(m_data.mean_y(),a_sinfos)){}
+        if(!numas<G4double>(m_data.mean_y(),a_sinfos)){}
 
       } else if((*it)=="rms") {
         if(a_sinfos.size()) a_sinfos += f_lf;
         a_sinfos += "RMS X\n";
-        if(!numas<double>(m_data.rms_x(),a_sinfos)){}
+        if(!numas<G4double>(m_data.rms_x(),a_sinfos)){}
         a_sinfos += f_lf;
         a_sinfos += "RMS Y\n";
-        if(!numas<double>(m_data.rms_y(),a_sinfos)){}
+        if(!numas<G4double>(m_data.rms_y(),a_sinfos)){}
 
       }
     }
   }
 public: //points2D
-  virtual float x_axis_min() const {return (float)m_data.lower_edge_x();}
-  virtual float x_axis_max() const {return (float)m_data.upper_edge_x();}
-  virtual float y_axis_min() const {return (float)m_data.lower_edge_y();}
-  virtual float y_axis_max() const {return (float)m_data.upper_edge_y();}
+  virtual G4float x_axis_min() const {return (G4float)m_data.lower_edge_x();}
+  virtual G4float x_axis_max() const {return (G4float)m_data.upper_edge_x();}
+  virtual G4float y_axis_min() const {return (G4float)m_data.lower_edge_y();}
+  virtual G4float y_axis_max() const {return (G4float)m_data.upper_edge_y();}
 
   virtual unsigned int points() const {return m_data.entries();}
-  virtual bool ith_point(unsigned int a_index,float& a_x,float& a_y) const {
+  virtual bool ith_point(unsigned int a_index,G4float& a_x,G4float& a_y) const {
     if(a_index>=m_data.entries()) {a_x = 0;a_y = 0;return false;}
     if(a_index>=m_data.entries()) {a_x = 0;a_y = 0;return false;}
-    a_x = (float)m_data.value_x(a_index);
-    a_y = (float)m_data.value_y(a_index);
+    a_x = (G4float)m_data.value_x(a_index);
+    a_y = (G4float)m_data.value_y(a_index);
     return true;
   }
 public:
@@ -155,43 +155,43 @@ public: //plottable
       } else if((*it)=="mean") {
         if(a_sinfos.size()) a_sinfos += f_lf;
         a_sinfos += "MeanX\n";
-        if(!numas<double>(m_data.mean_x(),a_sinfos)){}
+        if(!numas<G4double>(m_data.mean_x(),a_sinfos)){}
         a_sinfos += f_lf;
         a_sinfos += "MeanY\n";
-        if(!numas<double>(m_data.mean_y(),a_sinfos)){}
+        if(!numas<G4double>(m_data.mean_y(),a_sinfos)){}
         a_sinfos += f_lf;
         a_sinfos += "MeanZ\n";
-        if(!numas<double>(m_data.mean_z(),a_sinfos)){}
+        if(!numas<G4double>(m_data.mean_z(),a_sinfos)){}
 
       } else if((*it)=="rms") {
         if(a_sinfos.size()) a_sinfos += f_lf;
         a_sinfos += "RMS X\n";
-        if(!numas<double>(m_data.rms_x(),a_sinfos)){}
+        if(!numas<G4double>(m_data.rms_x(),a_sinfos)){}
         a_sinfos += f_lf;
         a_sinfos += "RMS Y\n";
-        if(!numas<double>(m_data.rms_y(),a_sinfos)){}
+        if(!numas<G4double>(m_data.rms_y(),a_sinfos)){}
         a_sinfos += f_lf;
         a_sinfos += "RMS Z\n";
-        if(!numas<double>(m_data.rms_z(),a_sinfos)){}
+        if(!numas<G4double>(m_data.rms_z(),a_sinfos)){}
 
       }
     }
   }
 public: //points2D
-  virtual float x_axis_min() const {return (float)m_data.lower_edge_x();}
-  virtual float x_axis_max() const {return (float)m_data.upper_edge_x();}
-  virtual float y_axis_min() const {return (float)m_data.lower_edge_y();}
-  virtual float y_axis_max() const {return (float)m_data.upper_edge_y();}
-  virtual float z_axis_min() const {return (float)m_data.lower_edge_z();}
-  virtual float z_axis_max() const {return (float)m_data.upper_edge_z();}
+  virtual G4float x_axis_min() const {return (G4float)m_data.lower_edge_x();}
+  virtual G4float x_axis_max() const {return (G4float)m_data.upper_edge_x();}
+  virtual G4float y_axis_min() const {return (G4float)m_data.lower_edge_y();}
+  virtual G4float y_axis_max() const {return (G4float)m_data.upper_edge_y();}
+  virtual G4float z_axis_min() const {return (G4float)m_data.lower_edge_z();}
+  virtual G4float z_axis_max() const {return (G4float)m_data.upper_edge_z();}
 
   virtual unsigned int points() const {return m_data.entries();}
-  virtual bool ith_point(unsigned int a_index,float& a_x,float& a_y,float& a_z) const {
+  virtual bool ith_point(unsigned int a_index,G4float& a_x,G4float& a_y,G4float& a_z) const {
     if(a_index>=m_data.entries()) {a_x = 0;a_y = 0;a_z = 0;return false;}
     if(a_index>=m_data.entries()) {a_x = 0;a_y = 0;a_z = 0;return false;}
-    a_x = (float)m_data.value_x(a_index);
-    a_y = (float)m_data.value_y(a_index);
-    a_z = (float)m_data.value_z(a_index);
+    a_x = (G4float)m_data.value_x(a_index);
+    a_y = (G4float)m_data.value_y(a_index);
+    a_z = (G4float)m_data.value_z(a_index);
     return true;
   }
 public:

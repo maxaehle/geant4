@@ -17,7 +17,7 @@
 
 #define Dot(u,v)	(u[0]*v[0] + u[1]*v[1] + u[2]*v[2])
 
-inline/*static*/ int static_LongAxis( GLUdouble v[3] )
+inline/*static*/ int static_LongAxis( GLUG4double v[3] )
 {
   int i = 0;
 
@@ -26,11 +26,11 @@ inline/*static*/ int static_LongAxis( GLUdouble v[3] )
   return i;
 }
 
-inline/*static*/ void static_ComputeNormal( GLUtesselator *tess, GLUdouble norm[3] )
+inline/*static*/ void static_ComputeNormal( GLUtesselator *tess, GLUG4double norm[3] )
 {
   GLUvertex *v, *v1, *v2;
-  GLUdouble c, tLen2, maxLen2;
-  GLUdouble maxVal[3], minVal[3], d1[3], d2[3], tNorm[3];
+  GLUG4double c, tLen2, maxLen2;
+  GLUG4double maxVal[3], minVal[3], d1[3], d2[3], tNorm[3];
   GLUvertex *maxVert[3], *minVert[3];
   GLUvertex *vHead = &tess->mesh->vHead;
   int i;
@@ -97,7 +97,7 @@ inline/*static*/ void static_ComputeNormal( GLUtesselator *tess, GLUdouble norm[
 
 inline/*static*/ void static_CheckOrientation( GLUtesselator *tess )
 {
-  GLUdouble area;
+  GLUG4double area;
   GLUface *f, *fHead = &tess->mesh->fHead;
   GLUvertex *v, *vHead = &tess->mesh->vHead;
   GLUhalfEdge *e;
@@ -148,8 +148,8 @@ inline/*static*/ void static_CheckOrientation( GLUtesselator *tess )
 inline void __gl_projectPolygon( GLUtesselator *tess )
 {
   GLUvertex *v, *vHead = &tess->mesh->vHead;
-  GLUdouble norm[3];
-  GLUdouble *sUnit, *tUnit;
+  GLUG4double norm[3];
+  GLUG4double *sUnit, *tUnit;
   int i, computedNormal = TOOLS_GLU_FALSE;
 
   norm[0] = tess->normal[0];

@@ -84,8 +84,8 @@ public:
            TOOLS_WROOT_PNTUPLE_CREATE_COL(char)
       else TOOLS_WROOT_PNTUPLE_CREATE_COL(short)
       else TOOLS_WROOT_PNTUPLE_CREATE_COL(int)
-      else TOOLS_WROOT_PNTUPLE_CREATE_COL(float)
-      else TOOLS_WROOT_PNTUPLE_CREATE_COL(double)
+      else TOOLS_WROOT_PNTUPLE_CREATE_COL(G4float)
+      else TOOLS_WROOT_PNTUPLE_CREATE_COL(G4double)
 
       else if((*it).cls_id()==_cid(std::string())) {
         std::string* user = (std::string*)(*it).user_obj();
@@ -107,8 +107,8 @@ public:
       else TOOLS_WROOT_PNTUPLE_CREATE_VEC_COL(char)
       else TOOLS_WROOT_PNTUPLE_CREATE_VEC_COL(short)
       else TOOLS_WROOT_PNTUPLE_CREATE_VEC_COL(int)
-      else TOOLS_WROOT_PNTUPLE_CREATE_VEC_COL(float)
-      else TOOLS_WROOT_PNTUPLE_CREATE_VEC_COL(double)
+      else TOOLS_WROOT_PNTUPLE_CREATE_VEC_COL(G4float)
+      else TOOLS_WROOT_PNTUPLE_CREATE_VEC_COL(G4double)
 
       else if((*it).cls_id()==_cid_std_vector<std::string>()) {\
         std::vector<std::string>* user = (std::vector<std::string>*)(*it).user_obj();

@@ -36,9 +36,9 @@ inline bool is_line(mode_t a_mode) {
   return false;
 }
 
-inline void cvt_2to3(size_t a_npt,const float* a_xys,float*& a_xyzs) {
-  const float* vpos = a_xys;
-  float x,y;
+inline void cvt_2to3(size_t a_npt,const G4float* a_xys,G4float*& a_xyzs) {
+  const G4float* vpos = a_xys;
+  G4float x,y;
   for(size_t i=0;i<a_npt;i++) {
     x = *vpos;vpos++;
     y = *vpos;vpos++;
@@ -49,20 +49,20 @@ inline void cvt_2to3(size_t a_npt,const float* a_xys,float*& a_xyzs) {
 }
 
 
-inline void triangle_fan_to_triangles(size_t a_npt,const float* a_xyzs,float*& a_pxyzs) {
+inline void triangle_fan_to_triangles(size_t a_npt,const G4float* a_xyzs,G4float*& a_pxyzs) {
   // a_pxyzs = (a_npt-2)*3*3
 
-  const float* vpos = a_xyzs;
+  const G4float* vpos = a_xyzs;
 
-  float x1 = *vpos;vpos++;
-  float y1 = *vpos;vpos++;
-  float z1 = *vpos;vpos++;
+  G4float x1 = *vpos;vpos++;
+  G4float y1 = *vpos;vpos++;
+  G4float z1 = *vpos;vpos++;
 
-  float x2 = *vpos;vpos++;
-  float y2 = *vpos;vpos++;
-  float z2 = *vpos;vpos++;
+  G4float x2 = *vpos;vpos++;
+  G4float y2 = *vpos;vpos++;
+  G4float z2 = *vpos;vpos++;
 
-  float x3,y3,z3;
+  G4float x3,y3,z3;
   for(size_t i=2;i<a_npt;i++) {
     x3 = *vpos;vpos++;
     y3 = *vpos;vpos++;
@@ -86,29 +86,29 @@ inline void triangle_fan_to_triangles(size_t a_npt,const float* a_xyzs,float*& a
 
 }
 
-inline void triangle_fan_to_triangles_texture(size_t a_npt,const float* a_xyzs,const float* a_tcs,float*& a_pxyzs,float*& a_ptcs) {
+inline void triangle_fan_to_triangles_texture(size_t a_npt,const G4float* a_xyzs,const G4float* a_tcs,G4float*& a_pxyzs,G4float*& a_ptcs) {
   // a_pxyzs = (a_npt-2)*3*3
 
   // a_ptcs = (a_npt-2)*3*2
 
-  const float* vpos = a_xyzs;
-  const float* tpos = a_tcs;
+  const G4float* vpos = a_xyzs;
+  const G4float* tpos = a_tcs;
 
-  float x1 = *vpos;vpos++;
-  float y1 = *vpos;vpos++;
-  float z1 = *vpos;vpos++;
+  G4float x1 = *vpos;vpos++;
+  G4float y1 = *vpos;vpos++;
+  G4float z1 = *vpos;vpos++;
 
-  float tx1 = *tpos;tpos++;
-  float ty1 = *tpos;tpos++;
+  G4float tx1 = *tpos;tpos++;
+  G4float ty1 = *tpos;tpos++;
 
-  float x2 = *vpos;vpos++;
-  float y2 = *vpos;vpos++;
-  float z2 = *vpos;vpos++;
+  G4float x2 = *vpos;vpos++;
+  G4float y2 = *vpos;vpos++;
+  G4float z2 = *vpos;vpos++;
 
-  float tx2 = *tpos;tpos++;
-  float ty2 = *tpos;tpos++;
+  G4float tx2 = *tpos;tpos++;
+  G4float ty2 = *tpos;tpos++;
   
-  float x3,y3,z3,tx3,ty3;
+  G4float x3,y3,z3,tx3,ty3;
   for(size_t i=2;i<a_npt;i++) {
     x3 = *vpos;vpos++;
     y3 = *vpos;vpos++;
@@ -148,20 +148,20 @@ inline void triangle_fan_to_triangles_texture(size_t a_npt,const float* a_xyzs,c
 
 }
 
-inline void triangle_strip_to_triangles(size_t a_npt,const float* a_xyzs,float*& a_pxyzs) {
+inline void triangle_strip_to_triangles(size_t a_npt,const G4float* a_xyzs,G4float*& a_pxyzs) {
   // a_pxyzs = (a_npt-2)*3*3
 
-  const float* vpos = a_xyzs;
+  const G4float* vpos = a_xyzs;
 
-  float x1 = *vpos;vpos++;
-  float y1 = *vpos;vpos++;
-  float z1 = *vpos;vpos++;
+  G4float x1 = *vpos;vpos++;
+  G4float y1 = *vpos;vpos++;
+  G4float z1 = *vpos;vpos++;
 
-  float x2 = *vpos;vpos++;
-  float y2 = *vpos;vpos++;
-  float z2 = *vpos;vpos++;
+  G4float x2 = *vpos;vpos++;
+  G4float y2 = *vpos;vpos++;
+  G4float z2 = *vpos;vpos++;
 
-  float x3,y3,z3;
+  G4float x3,y3,z3;
   bool flip = false;
   for(size_t i=2;i<a_npt;i++) {
     x3 = *vpos;vpos++;
@@ -206,28 +206,28 @@ inline void triangle_strip_to_triangles(size_t a_npt,const float* a_xyzs,float*&
   }
 }
 
-inline void triangle_strip_to_triangles_texture(size_t a_npt,const float* a_xyzs,const float* a_tcs,float*& a_pxyzs,float*& a_ptcs) {
+inline void triangle_strip_to_triangles_texture(size_t a_npt,const G4float* a_xyzs,const G4float* a_tcs,G4float*& a_pxyzs,G4float*& a_ptcs) {
   // a_pxyzs = (a_npt-2)*3*3
   // a_ptcs = (a_npt-2)*3*2
 
-  const float* vpos = a_xyzs;
-  const float* tpos = a_tcs;
+  const G4float* vpos = a_xyzs;
+  const G4float* tpos = a_tcs;
 
-  float x1 = *vpos;vpos++;
-  float y1 = *vpos;vpos++;
-  float z1 = *vpos;vpos++;
+  G4float x1 = *vpos;vpos++;
+  G4float y1 = *vpos;vpos++;
+  G4float z1 = *vpos;vpos++;
 
-  float tx1 = *tpos;tpos++;
-  float ty1 = *tpos;tpos++;
+  G4float tx1 = *tpos;tpos++;
+  G4float ty1 = *tpos;tpos++;
   
-  float x2 = *vpos;vpos++;
-  float y2 = *vpos;vpos++;
-  float z2 = *vpos;vpos++;
+  G4float x2 = *vpos;vpos++;
+  G4float y2 = *vpos;vpos++;
+  G4float z2 = *vpos;vpos++;
 
-  float tx2 = *tpos;tpos++;
-  float ty2 = *tpos;tpos++;
+  G4float tx2 = *tpos;tpos++;
+  G4float ty2 = *tpos;tpos++;
   
-  float x3,y3,z3,tx3,ty3;
+  G4float x3,y3,z3,tx3,ty3;
   bool flip = false;
   for(size_t i=2;i<a_npt;i++) {
     x3 = *vpos;vpos++;
@@ -299,28 +299,28 @@ inline void triangle_strip_to_triangles_texture(size_t a_npt,const float* a_xyzs
   }
 }
 
-inline void triangle_fan_to_triangles_nms(size_t a_npt,const float* a_xyzs,const float* a_nms,float*& a_pxyzs,float*& a_pnms) {
+inline void triangle_fan_to_triangles_nms(size_t a_npt,const G4float* a_xyzs,const G4float* a_nms,G4float*& a_pxyzs,G4float*& a_pnms) {
   triangle_fan_to_triangles(a_npt,a_xyzs,a_pxyzs);
   triangle_fan_to_triangles(a_npt,a_nms,a_pnms);
 }
 
-inline void triangle_strip_to_triangles_nms(size_t a_npt,const float* a_xyzs,const float* a_nms,float*& a_pxyzs,float*& a_pnms) {
+inline void triangle_strip_to_triangles_nms(size_t a_npt,const G4float* a_xyzs,const G4float* a_nms,G4float*& a_pxyzs,G4float*& a_pnms) {
   // a_pxyzs, a_pnms = (a_npt-2)*3*3
   triangle_strip_to_triangles(a_npt,a_xyzs,a_pxyzs);
   triangle_strip_to_triangles(a_npt,a_nms,a_pnms);
 }
 
-inline void triangle_fan_to_triangles_2to3(size_t a_npt,const float* a_xyzs,float*& a_pxyzs) {
+inline void triangle_fan_to_triangles_2to3(size_t a_npt,const G4float* a_xyzs,G4float*& a_pxyzs) {
 
-  const float* vpos = a_xyzs;
+  const G4float* vpos = a_xyzs;
 
-  float x1 = *vpos;vpos++;
-  float y1 = *vpos;vpos++;
+  G4float x1 = *vpos;vpos++;
+  G4float y1 = *vpos;vpos++;
 
-  float x2 = *vpos;vpos++;
-  float y2 = *vpos;vpos++;
+  G4float x2 = *vpos;vpos++;
+  G4float y2 = *vpos;vpos++;
 
-  float x3,y3;
+  G4float x3,y3;
   for(size_t i=2;i<a_npt;i++) {
     x3 = *vpos;vpos++;
     y3 = *vpos;vpos++;
@@ -343,17 +343,17 @@ inline void triangle_fan_to_triangles_2to3(size_t a_npt,const float* a_xyzs,floa
 
 }
 
-inline void triangle_strip_to_triangles_2to3(size_t a_npt,const float* a_xyzs,float*& a_pxyzs) {
+inline void triangle_strip_to_triangles_2to3(size_t a_npt,const G4float* a_xyzs,G4float*& a_pxyzs) {
 
-  const float* vpos = a_xyzs;
+  const G4float* vpos = a_xyzs;
 
-  float x1 = *vpos;vpos++;
-  float y1 = *vpos;vpos++;
+  G4float x1 = *vpos;vpos++;
+  G4float y1 = *vpos;vpos++;
 
-  float x2 = *vpos;vpos++;
-  float y2 = *vpos;vpos++;
+  G4float x2 = *vpos;vpos++;
+  G4float y2 = *vpos;vpos++;
 
-  float x3,y3;
+  G4float x3,y3;
   bool flip = false;
   for(size_t i=2;i<a_npt;i++) {
     x3 = *vpos;vpos++;
@@ -396,14 +396,14 @@ inline void triangle_strip_to_triangles_2to3(size_t a_npt,const float* a_xyzs,fl
 
 }
 
-inline void line_strip_to_lines_2to3(size_t a_npt,const float* a_xyzs,float*& a_pxyzs) {
+inline void line_strip_to_lines_2to3(size_t a_npt,const G4float* a_xyzs,G4float*& a_pxyzs) {
 
-  const float* vpos = a_xyzs;
+  const G4float* vpos = a_xyzs;
 
-  float x1 = *vpos;vpos++;
-  float y1 = *vpos;vpos++;
+  G4float x1 = *vpos;vpos++;
+  G4float y1 = *vpos;vpos++;
 
-  float x2,y2;
+  G4float x2,y2;
   for(size_t i=1;i<a_npt;i++) {
     x2 = *vpos;vpos++;
     y2 = *vpos;vpos++;
@@ -422,16 +422,16 @@ inline void line_strip_to_lines_2to3(size_t a_npt,const float* a_xyzs,float*& a_
 
 }
 
-inline void line_strip_to_lines(size_t a_npt,const float* a_xyzs,float*& a_pxyzs) {
+inline void line_strip_to_lines(size_t a_npt,const G4float* a_xyzs,G4float*& a_pxyzs) {
   // a_pxyzs = (a_npt-1)*2*3
 
-  const float* vpos = a_xyzs;
+  const G4float* vpos = a_xyzs;
 
-  float x1 = *vpos;vpos++;
-  float y1 = *vpos;vpos++;
-  float z1 = *vpos;vpos++;
+  G4float x1 = *vpos;vpos++;
+  G4float y1 = *vpos;vpos++;
+  G4float z1 = *vpos;vpos++;
 
-  float x2,y2,z2;
+  G4float x2,y2,z2;
   for(size_t i=1;i<a_npt;i++) {
     x2 = *vpos;vpos++;
     y2 = *vpos;vpos++;
@@ -452,20 +452,20 @@ inline void line_strip_to_lines(size_t a_npt,const float* a_xyzs,float*& a_pxyzs
 
 }
 
-inline void line_loop_to_lines(size_t a_npt,const float* a_xyzs,float*& a_pxyzs) {
+inline void line_loop_to_lines(size_t a_npt,const G4float* a_xyzs,G4float*& a_pxyzs) {
   // a_pxyzs = a_npt*2*3
 
-  const float* vpos = a_xyzs;
+  const G4float* vpos = a_xyzs;
 
-  float x1 = *vpos;vpos++;
-  float y1 = *vpos;vpos++;
-  float z1 = *vpos;vpos++;
+  G4float x1 = *vpos;vpos++;
+  G4float y1 = *vpos;vpos++;
+  G4float z1 = *vpos;vpos++;
 
-  float x0 = x1;
-  float y0 = y1;
-  float z0 = z1;
+  G4float x0 = x1;
+  G4float y0 = y1;
+  G4float z0 = z1;
 
-  float x2,y2,z2;
+  G4float x2,y2,z2;
   for(size_t i=1;i<a_npt;i++) {
     x2 = *vpos;vpos++;
     y2 = *vpos;vpos++;
@@ -494,14 +494,14 @@ inline void line_loop_to_lines(size_t a_npt,const float* a_xyzs,float*& a_pxyzs)
 
 }
 
-inline void line_loop_to_line_strip(size_t a_npt,const float* a_xyzs,float*& a_pxyzs) {
+inline void line_loop_to_line_strip(size_t a_npt,const G4float* a_xyzs,G4float*& a_pxyzs) {
   // a_pxyzs = (a_npt+1)*3
 
-  const float* vpos = a_xyzs;
+  const G4float* vpos = a_xyzs;
 
-  float x1 = *vpos;vpos++;
-  float y1 = *vpos;vpos++;
-  float z1 = *vpos;vpos++;
+  G4float x1 = *vpos;vpos++;
+  G4float y1 = *vpos;vpos++;
+  G4float z1 = *vpos;vpos++;
 
   for(size_t i=0;i<a_npt;i++) {
     *a_pxyzs = *vpos;vpos++;a_pxyzs++;
@@ -515,19 +515,19 @@ inline void line_loop_to_line_strip(size_t a_npt,const float* a_xyzs,float*& a_p
 }
 
 /// for DirectX_action :
-inline void triangle_fan_to_triangles_2to3(size_t a_npt,const float* a_xyzs,
-                                           float a_r,float a_g,float a_b,float a_a,
-					   float*& a_pxyz_rgbas) {
+inline void triangle_fan_to_triangles_2to3(size_t a_npt,const G4float* a_xyzs,
+                                           G4float a_r,G4float a_g,G4float a_b,G4float a_a,
+					   G4float*& a_pxyz_rgbas) {
 
-  const float* vpos = a_xyzs;
+  const G4float* vpos = a_xyzs;
 
-  float x1 = *vpos;vpos++;
-  float y1 = *vpos;vpos++;
+  G4float x1 = *vpos;vpos++;
+  G4float y1 = *vpos;vpos++;
 
-  float x2 = *vpos;vpos++;
-  float y2 = *vpos;vpos++;
+  G4float x2 = *vpos;vpos++;
+  G4float y2 = *vpos;vpos++;
 
-  float x3,y3;
+  G4float x3,y3;
   for(size_t i=2;i<a_npt;i++) {
     x3 = *vpos;vpos++;
     y3 = *vpos;vpos++;
@@ -564,21 +564,21 @@ inline void triangle_fan_to_triangles_2to3(size_t a_npt,const float* a_xyzs,
   }
 }
 
-inline void triangle_fan_to_triangles(size_t a_npt,const float* a_xyzs,
-                                      float a_r,float a_g,float a_b,float a_a,
-				      float*& a_pxyz_rgbas) {
+inline void triangle_fan_to_triangles(size_t a_npt,const G4float* a_xyzs,
+                                      G4float a_r,G4float a_g,G4float a_b,G4float a_a,
+				      G4float*& a_pxyz_rgbas) {
 
-  const float* vpos = a_xyzs;
+  const G4float* vpos = a_xyzs;
 
-  float x1 = *vpos;vpos++;
-  float y1 = *vpos;vpos++;
-  float z1 = *vpos;vpos++;
+  G4float x1 = *vpos;vpos++;
+  G4float y1 = *vpos;vpos++;
+  G4float z1 = *vpos;vpos++;
 
-  float x2 = *vpos;vpos++;
-  float y2 = *vpos;vpos++;
-  float z2 = *vpos;vpos++;
+  G4float x2 = *vpos;vpos++;
+  G4float y2 = *vpos;vpos++;
+  G4float z2 = *vpos;vpos++;
 
-  float x3,y3,z3;
+  G4float x3,y3,z3;
   for(size_t i=2;i<a_npt;i++) {
     x3 = *vpos;vpos++;
     y3 = *vpos;vpos++;

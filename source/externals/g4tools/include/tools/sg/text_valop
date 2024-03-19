@@ -104,9 +104,9 @@ public:
     return *this;
   }
 public: //sg::base_text :
-  virtual void get_bounds(float /*a_height*/,
-                          float& a_mn_x,float& a_mn_y,float& a_mn_z,
-                          float& a_mx_x,float& a_mx_y,float& a_mx_z) const {
+  virtual void get_bounds(G4float /*a_height*/,
+                          G4float& a_mn_x,G4float& a_mn_y,G4float& a_mn_z,
+                          G4float& a_mx_x,G4float& a_mx_y,G4float& a_mx_z) const {
     text_valop& self = const_cast<text_valop&>(*this);
     if(self.touched()) {
       self.update_sg(self.m_out);
@@ -118,10 +118,10 @@ public: //sg::base_text :
     a_mx_x = mx[0];a_mx_y = mx[1];a_mx_z = mx[2];
     //::printf("debug : get_bounds : %g %g %g : %g %g %g\n",a_mn_x,a_mn_y,a_mn_z,a_mx_x,a_mx_y,a_mx_z);
   }
-  virtual float ascent(float) const {return 1;}
-  virtual float y_advance(float) const {return 1;}
-  virtual float descent(float) const {return 0;}
-  virtual bool truncate(const std::string&,float,float,std::string&) const {return false;}
+  virtual G4float ascent(G4float) const {return 1;}
+  virtual G4float y_advance(G4float) const {return 1;}
+  virtual G4float descent(G4float) const {return 0;}
+  virtual bool truncate(const std::string&,G4float,G4float,std::string&) const {return false;}
 protected:
   void update_sg(std::ostream& a_out) {
     m_sep.clear();
@@ -140,13 +140,13 @@ protected:
     }
     vec3f mn,mx;
     mnmx(a_out,m_sep,mn,mx);
-    float h = mx[1]-mn[1];
+    G4float h = mx[1]-mn[1];
     if(!h) {
       a_out << "tools::sg::text_valop::upate_sg : valop has null height." << std::endl;
       m_sep.clear();
       return;
     }
-    float scale = height.value()/h;
+    G4float scale = height.value()/h;
     tsf->set_scale(scale,scale,1);
   }
 protected:

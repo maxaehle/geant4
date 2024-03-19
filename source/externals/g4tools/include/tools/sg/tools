@@ -23,10 +23,10 @@ inline void add_string(
 ,const std::string& a_encoding
 ,bool //a_smoothing
 ,const std::string& a_string
-,float a_x,float a_y,float a_z
+,G4float a_x,G4float a_y,G4float a_z
 ,const vec3f& a_X
 ,const vec3f& a_Y
-,float a_size
+,G4float a_size
 ,hjust a_hjust
 ,vjust a_vjust
 ,const base_freetype& a_ttf
@@ -86,7 +86,7 @@ inline matrix* add_string_opt(
 ,const std::string& a_encoding
 ,bool //a_smoothing
 ,const std::string& a_string
-,float a_x,float a_y,float a_z
+,G4float a_x,G4float a_y,G4float a_z
 ,mat4f& a_scale_rot
 ,hjust a_hjust
 ,vjust a_vjust

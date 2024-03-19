@@ -505,7 +505,7 @@ protected:
   }
   ntuple& operator=(const ntuple&){return *this;}
 public:
-  bool initialize(std::ostream& a_out,const ntuple_binding& a_bd = ntuple_binding(),bool a_enforce_double = false) {
+  bool initialize(std::ostream& a_out,const ntuple_binding& a_bd = ntuple_binding(),bool a_enforce_G4double = false) {
     safe_clear<read::icol>(m_cols);
 
     std::vector<base_leaf*> leaves;
@@ -540,8 +540,8 @@ public:
         a_bd.find_user_obj(bl->name(),user_cid,user_obj);\
         typedef leaf<a__type> leaf_t;\
         if(!user_obj) {\
-          if(a_enforce_double) {\
-            column<double,leaf_t>* col = new column<double,leaf_t>(m_tree.file(),*_branch,*lf_##a__type,m_index);\
+          if(a_enforce_G4double) {\
+            column<G4double,leaf_t>* col = new column<G4double,leaf_t>(m_tree.file(),*_branch,*lf_##a__type,m_index);\
             m_cols.push_back(col);\
           } else {\
             column<a__type,leaf_t>* col = new column<a__type,leaf_t>(m_tree.file(),*_branch,*lf_##a__type,m_index);\
@@ -586,8 +586,8 @@ public:
            TOOLS_RROOT_NTUPLE_CREATE_COL(char)
       else TOOLS_RROOT_NTUPLE_CREATE_COL(short)
       else TOOLS_RROOT_NTUPLE_CREATE_COL(int)
-      else TOOLS_RROOT_NTUPLE_CREATE_COL(float)
-      else TOOLS_RROOT_NTUPLE_CREATE_COL(double)
+      else TOOLS_RROOT_NTUPLE_CREATE_COL(G4float)
+      else TOOLS_RROOT_NTUPLE_CREATE_COL(G4double)
 
       else if(leaf_string* ls = safe_cast<base_leaf, leaf_string >(*bl) ){
         char sep = '\n';
@@ -653,8 +653,8 @@ public:
       //else TOOLS_RROOT_NTUPLE_CREATE_VEC_COL("vector<unsigned short>",unsigned short)
       //else TOOLS_RROOT_NTUPLE_CREATE_VEC_COL("vector<unsigned int>",unsigned int)
         else TOOLS_RROOT_NTUPLE_CREATE_VEC_COL("vector<int>",int)
-        else TOOLS_RROOT_NTUPLE_CREATE_VEC_COL("vector<float>",float)
-        else TOOLS_RROOT_NTUPLE_CREATE_VEC_COL("vector<double>",double)
+        else TOOLS_RROOT_NTUPLE_CREATE_VEC_COL("vector<G4float>",G4float)
+        else TOOLS_RROOT_NTUPLE_CREATE_VEC_COL("vector<G4double>",G4double)
 
       //else TOOLS_RROOT_NTUPLE_CREATE_VEC_COL("vector<string>",std::string)
       //else TOOLS_RROOT_NTUPLE_CREATE_VEC_COL("vector<unsigned long>",uint64) //beurk
@@ -665,8 +665,8 @@ public:
         else TOOLS_RROOT_NTUPLE_CREATE_VEC_COL("vector<vector<short> >",std::vector<short>)
         else TOOLS_RROOT_NTUPLE_CREATE_VEC_COL("vector<vector<unsigned int> >",std::vector<unsigned int>)
         else TOOLS_RROOT_NTUPLE_CREATE_VEC_COL("vector<vector<int> >",std::vector<short>)
-        else TOOLS_RROOT_NTUPLE_CREATE_VEC_COL("vector<vector<float> >",std::vector<float>)
-        else TOOLS_RROOT_NTUPLE_CREATE_VEC_COL("vector<vector<double> >",std::vector<double>)
+        else TOOLS_RROOT_NTUPLE_CREATE_VEC_COL("vector<vector<G4float> >",std::vector<G4float>)
+        else TOOLS_RROOT_NTUPLE_CREATE_VEC_COL("vector<vector<G4double> >",std::vector<G4double>)
         */
 
         else {

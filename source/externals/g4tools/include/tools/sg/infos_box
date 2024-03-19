@@ -26,16 +26,16 @@ public:
   mf_string rstrings;
   sf<unsigned int> num_spaces; //in "number of one line height" unit.
 
-  sf_vec<colorf,float> color;
+  sf_vec<colorf,G4float> color;
   sf_string font;
   sf_enum<sg::font_modeling> font_modeling;
   sf_string encoding;
-  sf<float> line_width; // for text_hershey.
+  sf<G4float> line_width; // for text_hershey.
   sf_enum<winding_type> front_face; //no more used.
 
   sf<bool> back_visible;
-  sf<float> wmargin_factor;
-  sf<float> hmargin_factor;
+  sf<G4float> wmargin_factor;
+  sf<G4float> hmargin_factor;
   sf_enum<hjust> lhjust;
   sf_enum<hjust> rhjust;
   sf<bool> confine;
@@ -339,21 +339,21 @@ public:
       text->modeling = font_modeling;
     }}
 
-    //sf<float> zfront ?
-    float zz = back_visible.value()?0.01f:0;
+    //sf<G4float> zfront ?
+    G4float zz = back_visible.value()?0.01f:0;
 
-    float fw = width * wmargin_factor;
+    G4float fw = width * wmargin_factor;
 
     if(confine) {
       // left right texts may overlap.
 
       // adjust height :
-      float fh = height * hmargin_factor;
-      float th = fh;
-     {float mn_x,mn_y,mn_z;
-      float mx_x,mx_y,mx_z;
+      G4float fh = height * hmargin_factor;
+      G4float th = fh;
+     {G4float mn_x,mn_y,mn_z;
+      G4float mx_x,mx_y,mx_z;
       ltext->get_bounds(th,mn_x,mn_y,mn_z,mx_x,mx_y,mx_z);
-      float bxh = mx_y-mn_y;
+      G4float bxh = mx_y-mn_y;
       // adjust box height :
       // fh -> bxh then to have fh :
       if(!bxh) {
@@ -367,21 +367,21 @@ public:
       ltext->height = th;
       rtext->height = th;
 
-     {float mn_x,mn_y,mn_z;
-      float mx_x,mx_y,mx_z;
+     {G4float mn_x,mn_y,mn_z;
+      G4float mx_x,mx_y,mx_z;
       ltext->get_bounds(th,mn_x,mn_y,mn_z,mx_x,mx_y,mx_z);
-      float lw = mx_x-mn_x;
-      float xtrans = (fw-lw)*0.5f; //left justified
-      float xx = -(mn_x+mx_x)*0.5F-xtrans;
-      float yy = -(mn_y+mx_y)*0.5F;
+      G4float lw = mx_x-mn_x;
+      G4float xtrans = (fw-lw)*0.5f; //left justified
+      G4float xx = -(mn_x+mx_x)*0.5F-xtrans;
+      G4float yy = -(mn_y+mx_y)*0.5F;
       ltsf->set_translate(xx,yy,zz);}
 
-     {float mn_x,mn_y,mn_z;
-      float mx_x,mx_y,mx_z;
+     {G4float mn_x,mn_y,mn_z;
+      G4float mx_x,mx_y,mx_z;
       rtext->get_bounds(th,mn_x,mn_y,mn_z,mx_x,mx_y,mx_z);
       rtext->hjust = right;
-      float xx = fw*0.5f;
-      float yy = -(mn_y+mx_y)*0.5F;
+      G4float xx = fw*0.5f;
+      G4float yy = -(mn_y+mx_y)*0.5F;
       rtsf->set_translate(xx,yy,zz);}
 
       parent::update_sg();
@@ -395,24 +395,24 @@ public:
       // from a text height of th=1, and a left/right sep
       // of num_spaces*th, get width of the box :
 
-      float th = 1;
+      G4float th = 1;
 
-      float lmn_x,lmn_y,lmn_z;
-      float lmx_x,lmx_y,lmx_z;
+      G4float lmn_x,lmn_y,lmn_z;
+      G4float lmx_x,lmx_y,lmx_z;
       ltext->get_bounds(th,lmn_x,lmn_y,lmn_z,lmx_x,lmx_y,lmx_z);
-      float lw = (lmx_x<lmn_x)?0:lmx_x-lmn_x;
+      G4float lw = (lmx_x<lmn_x)?0:lmx_x-lmn_x;
 
-      float rmn_x,rmn_y,rmn_z;
-      float rmx_x,rmx_y,rmx_z;
+      G4float rmn_x,rmn_y,rmn_z;
+      G4float rmx_x,rmx_y,rmx_z;
       rtext->get_bounds(th,rmn_x,rmn_y,rmn_z,rmx_x,rmx_y,rmx_z);
-      float rw = (rmx_x<rmn_x)?0:rmx_x-rmn_x;
+      G4float rw = (rmx_x<rmn_x)?0:rmx_x-rmn_x;
 
-      float mmn_x,mmn_y,mmn_z;
-      float mmx_x,mmx_y,mmx_z;
+      G4float mmn_x,mmn_y,mmn_z;
+      G4float mmx_x,mmx_y,mmx_z;
       mtext->get_bounds(th,mmn_x,mmn_y,mmn_z,mmx_x,mmx_y,mmx_z);
-      float mw = (mmx_x<mmn_x)?0:mmx_x-mmn_x;
+      G4float mw = (mmx_x<mmn_x)?0:mmx_x-mmn_x;
 
-      float winfos = lw+mw+rw;
+      G4float winfos = lw+mw+rw;
       if(!winfos) {
         m_sep.clear();
         height = 1;
@@ -430,10 +430,10 @@ public:
       // the new th :
       ltext->height = th;
       ltext->get_bounds(th,lmn_x,lmn_y,lmn_z,lmx_x,lmx_y,lmx_z);
-      float hinfos = (lmx_x<lmn_x)?0:lmx_y-lmn_y;
+      G4float hinfos = (lmx_x<lmn_x)?0:lmx_y-lmn_y;
 
-      float xx = -fw*0.5F; //left justified.
-      float ty = -ltext->ascent(th)+hinfos*0.5f;
+      G4float xx = -fw*0.5F; //left justified.
+      G4float ty = -ltext->ascent(th)+hinfos*0.5f;
       ltsf->set_translate(xx,ty,zz);
 
       rtext->height = th;

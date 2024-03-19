@@ -466,7 +466,7 @@ public:
                     pr::m_vec[2],pr::m_vec[6],pr::m_vec[10]);  //3 row
   }
   
-private:static void check_instantiation() {mat4<float> dummy;}
+private:static void check_instantiation() {mat4<G4float> dummy;}
 };
 
 ////////////////////////////////////////////////

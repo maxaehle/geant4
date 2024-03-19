@@ -31,9 +31,9 @@ class axis : public node {
 public:
   TOOLS_NODE(axis,tools::sg::axis,node)
 public:
-  sf<float> width;
-  sf<float> minimum_value;
-  sf<float> maximum_value;
+  sf<G4float> width;
+  sf<G4float> minimum_value;
+  sf<G4float> maximum_value;
   sf<unsigned int> divisions;
   sf_string modeling; //hippo, hplot
   sf<bool> is_log;
@@ -41,33 +41,33 @@ public:
   // labels_enforced true let labels be an input field.
   sf<bool> labels_enforced;
   sf<bool> tick_up;
-  sf<float> tick_length;
+  sf<G4float> tick_length;
 
   // NOTE : if modeling is none,the below are input fields.
   //        If modeling is hippo or hplot, the below are output field
   //        (filled by compute_ticks).
   sf<unsigned int> tick_number; //output
   mf_string labels;       //output
-  mf<float> values;       //output //in [minimumValue,maximumValue]
-  mf<float> coords;       //output //in [0,width]
-  mf<float> sub_coords;   //output
+  mf<G4float> values;       //output //in [minimumValue,maximumValue]
+  mf<G4float> coords;       //output //in [0,width]
+  mf<G4float> sub_coords;   //output
   sf<int> magnitude;      //output
 
   sf_string title;
-  sf<float> title_to_axis;
-  sf<float> title_height;
+  sf<G4float> title_to_axis;
+  sf<G4float> title_height;
   sf_enum<hjust> title_hjust;
 
-  sf<float> label_to_axis;
-  sf<float> label_height;
+  sf<G4float> label_to_axis;
+  sf<G4float> label_height;
 
   sf<bool>  labels_no_overlap_automated;
-  sf<float> labels_gap; //in percent of width.
+  sf<G4float> labels_gap; //in percent of width.
 
   // time labels only in hplot modeling for the moment.
   sf<bool> time_labels;
   sf_string time_format;
-  sf<double> time_offset;
+  sf<G4double> time_offset;
   sf<bool> time_offset_is_GMT;
 public:
   virtual const desc_fields& node_desc_fields() const {
@@ -394,10 +394,10 @@ public:
         size_t num = m_sub_ticks.size()/4;
         size_t pos = 0;
         for(size_t index=0;index<num;index++) {
-          float bx = m_sub_ticks[pos];pos++;
-          float by = m_sub_ticks[pos];pos++;
-          float ex = m_sub_ticks[pos];pos++;
-          float ey = m_sub_ticks[pos];pos++;
+          G4float bx = m_sub_ticks[pos];pos++;
+          G4float by = m_sub_ticks[pos];pos++;
+          G4float ex = m_sub_ticks[pos];pos++;
+          G4float ey = m_sub_ticks[pos];pos++;
           if(tick_up) {
             vtxs->add(bx,by,0);
             vtxs->add(ex,ey,0);
@@ -409,9 +409,9 @@ public:
 
       } else {
 
-        float yy = tick_up ? tick_length.value():-tick_length.value();
+        G4float yy = tick_up ? tick_length.value():-tick_length.value();
         for(unsigned int index=0;index<tick_number;index++) {
-          float xx = coords.values()[index];
+          G4float xx = coords.values()[index];
           vtxs->add(xx,0,0);
           vtxs->add(xx,yy,0);
         }
@@ -447,7 +447,7 @@ public:
       mat->color = m_labels_style.color;
       m_labels_sep.add(mat);
 
-      float text_size = label_height*m_labels_style.scale;
+      G4float text_size = label_height*m_labels_style.scale;
       std::string font = m_labels_style.font.value();
 
       if(font==font_hershey()) {
@@ -474,7 +474,7 @@ public:
 
       bool bin_center = (m_labels_style.options.value()=="center"?true:false); //gopaw.
 
-      vec3f vec;float xx;
+      vec3f vec;G4float xx;
      {unsigned int number = tick_number;
       for(unsigned int index=0;index<number;index++) {
 
@@ -531,7 +531,7 @@ public:
       vec3f vec(width*1.03f,0,0);
       vec += m_mag_style.translation.value();
 
-      float text_size = label_height*0.8f * m_mag_style.scale;
+      G4float text_size = label_height*0.8f * m_mag_style.scale;
       std::string font = m_mag_style.font.value();
 
       if(font==font_hershey()) {
@@ -564,7 +564,7 @@ public:
       mat->color = m_title_style.color;
       m_title_sep.add(mat);
 
-      float text_size = title_height*m_title_style.scale;
+      G4float text_size = title_height*m_title_style.scale;
       std::string font = m_title_style.font.value();
 
       if(font==font_hershey()) {
@@ -577,7 +577,7 @@ public:
         m_title_sep.add(new normal);
       }
 
-      float xx = 0; //left
+      G4float xx = 0; //left
       if(title_hjust==center) {
          xx = width/2;
       } else if(title_hjust==right) {
@@ -643,25 +643,25 @@ public: //style
     if(a_geom) {
     ////////////////////////////////////////////
     // Take PAW default :
-    float YSIZ = 20; //page height
-    float YMGL = 2;  //low y margin (to data frame).
-    float YMGU = 2;  //up y margin (to data frame).
-    float VSIZ = 0.28F; //tick label character size.
-    float YVAL = 0.4F;  //y distance of x tick label to data frame.
-    float XTIC = 0.3F;  //y length of X axis ticks.
-    float YLAB = 0.8F; //y distance of x title to data frame.
-    float ASIZ = 0.28F; // axis title (label) character size.
+    G4float YSIZ = 20; //page height
+    G4float YMGL = 2;  //low y margin (to data frame).
+    G4float YMGU = 2;  //up y margin (to data frame).
+    G4float VSIZ = 0.28F; //tick label character size.
+    G4float YVAL = 0.4F;  //y distance of x tick label to data frame.
+    G4float XTIC = 0.3F;  //y length of X axis ticks.
+    G4float YLAB = 0.8F; //y distance of x title to data frame.
+    G4float ASIZ = 0.28F; // axis title (label) character size.
 
-    float hData = YSIZ-YMGL-YMGU;
+    G4float hData = YSIZ-YMGL-YMGU;
 
     // To map data space to width :
-    float to1 = width/hData;
+    G4float to1 = width/hData;
 
-    float vsiz = VSIZ * to1; //0.0175F
-    float yval = YVAL * to1; //0.025F
-    float xtic = XTIC * to1; //0.01875F
-    float ylab = YLAB * to1; //0.05F
-    float asiz = ASIZ * to1; //0.0175F
+    G4float vsiz = VSIZ * to1; //0.0175F
+    G4float yval = YVAL * to1; //0.025F
+    G4float xtic = XTIC * to1; //0.01875F
+    G4float ylab = YLAB * to1; //0.05F
+    G4float asiz = ASIZ * to1; //0.0175F
 
     //sf
     tick_length = xtic;
@@ -744,18 +744,18 @@ public: //style
         if(!to(sv,v)) {style_failed(a_out,key,sv);return false;}
         tick_up = v;
       } else if(key=="tick_length") {
-        float v;
+        G4float v;
         if(!to(sv,v)) {style_failed(a_out,key,sv);return false;}
         tick_length = v;
 
       } else if(key=="title") {
         title = sv;
       } else if(key=="title_to_axis") {
-        float v;
+        G4float v;
         if(!to(sv,v)) {style_failed(a_out,key,sv);return false;}
         title_to_axis = v;
       } else if(key=="title_height") {
-        float v;
+        G4float v;
         if(!to(sv,v)) {style_failed(a_out,key,sv);return false;}
         title_height = v;
       } else if(key=="title_hjust") {
@@ -765,11 +765,11 @@ public: //style
         title_hjust = v;
 
       } else if(key=="label_to_axis") {
-        float v;
+        G4float v;
         if(!to(sv,v)) {style_failed(a_out,key,sv);return false;}
         label_to_axis = v;
       } else if(key=="label_height") {
-        float v;
+        G4float v;
         if(!to(sv,v)) {style_failed(a_out,key,sv);return false;}
         label_height = v;
 
@@ -778,7 +778,7 @@ public: //style
         if(!to(sv,v)) {style_failed(a_out,key,sv);return false;}
         labels_no_overlap_automated = v;
       } else if(key=="labels_gap") {
-        float v;
+        G4float v;
         if(!to(sv,v)) {style_failed(a_out,key,sv);return false;}
         labels_gap = v;
 
@@ -797,17 +797,17 @@ public: //style
     title_style().encoding = a_value;
   }
 protected:
-  float get_overlap(std::ostream& a_out,bool& a_overlap) {
+  G4float get_overlap(std::ostream& a_out,bool& a_overlap) {
     a_overlap = false;
-    std::vector<float> x_mins;
-    std::vector<float> x_maxs;
+    std::vector<G4float> x_mins;
+    std::vector<G4float> x_maxs;
    {size_t index = 0;
     bbox_action _action(a_out);
     tools_vforcit(separator*,m_labels_seps,it) {
       _action.reset();
       (*it)->bbox(_action);
       if(_action.end()) {
-        float dx,dy,dz;
+        G4float dx,dy,dz;
         if(_action.box().get_size(dx,dy,dz)) {
           if(dx>0) {
             x_mins.push_back(m_labels_xs[index]-dx*0.5f);
@@ -817,10 +817,10 @@ protected:
       }
       index++;
     }}
-    float dx_overlap = 0;
+    G4float dx_overlap = 0;
    {size_t number = x_mins.size();
     for(size_t index=1;index<number;index++) {
-      float dx = x_mins[index]-x_maxs[index-1];
+      G4float dx = x_mins[index]-x_maxs[index-1];
       if(dx<0) {
         a_overlap = true;
 	dx_overlap = mx(dx_overlap,-dx);
@@ -830,22 +830,22 @@ protected:
   }
   void avoid_labels_overlap(std::ostream& a_out) {
     bool overlap;
-    float first_scale = 1;
-    float first_overlap = get_overlap(a_out,overlap);
+    G4float first_scale = 1;
+    G4float first_overlap = get_overlap(a_out,overlap);
     if(overlap) {
-      float second_scale = 1.1f; // greater than one to be sure to overlap again.
+      G4float second_scale = 1.1f; // greater than one to be sure to overlap again.
      {tools_vforcit(matrix*,m_labels_mtxs,it) {
         (*it)->mul_scale(second_scale,second_scale,1);
       }}
-      float second_overlap = get_overlap(a_out,overlap);
+      G4float second_overlap = get_overlap(a_out,overlap);
       if(overlap) {
         // first_overlap  = a*first_scale+b
         // second_overlap = a*second_scale+b
-	float a = (second_overlap-first_overlap)/(second_scale-first_scale);
-	float b = first_overlap-a*first_scale;
-      //float wanted_scale = -b/a; //zero overlap.
-        float wanted_gap = width.value()*labels_gap.value();
-        float wanted_scale = (-wanted_gap-b)/a;
+	G4float a = (second_overlap-first_overlap)/(second_scale-first_scale);
+	G4float b = first_overlap-a*first_scale;
+      //G4float wanted_scale = -b/a; //zero overlap.
+        G4float wanted_gap = width.value()*labels_gap.value();
+        G4float wanted_scale = (-wanted_gap-b)/a;
         if(wanted_scale<=0) wanted_scale = 1; // this if() should not happen.
         wanted_scale /= second_scale;
        {tools_vforcit(matrix*,m_labels_mtxs,it) {
@@ -884,26 +884,26 @@ protected:
     //    tick_number
 
 
-    float mn = minimum_value;
-    float mx = maximum_value;
+    G4float mn = minimum_value;
+    G4float mx = maximum_value;
 
     bool a_is_log = is_log;
     if(a_is_log) {
       if((mn<=0) || (mx<=0) ) a_is_log = false;
     }
 
-    float magxxx,y,yr,startTick,tickSize;
-    float pmag;
+    G4float magxxx,y,yr,startTick,tickSize;
+    G4float pmag;
     char pstr[10] = "";
     char tmp[10];
 
     unsigned int tick_num = 0;
-    std::vector<float> tick_values;
+    std::vector<G4float> tick_values;
     std::vector<std::string> tick_labels;
 
-    // need include <float.h> which does not exist on some system
+    // need include <G4float.h> which does not exist on some system
     //NUM_FUZZ DBL_EPSILON*4
-    float NUM_FUZZ = 0.01f;
+    G4float NUM_FUZZ = 0.01f;
 
     if (mn >= mx) {
       if(tick_number) {
@@ -928,7 +928,7 @@ protected:
       else
         pmag = startTick != 0.0 ? ffloor(flog10(ffabs(startTick))) : magxxx;
 
-      snpf(pstr,sizeof(pstr),"%%1.%df",(int)max_of<float>((pmag-magxxx),0.0));
+      snpf(pstr,sizeof(pstr),"%%1.%df",(int)max_of<G4float>((pmag-magxxx),0.0));
 
       y = startTick;
       while (y <= mx*(1.0+NUM_FUZZ)) {
@@ -937,7 +937,7 @@ protected:
 
         snpf(tmp,sizeof(tmp),pstr,yr*fpow(10,magxxx-pmag));
 
-       {float val = yr * fpow(10.0,magxxx);
+       {G4float val = yr * fpow(10.0,magxxx);
         if((val>=mn)&&(val<=mx)) { //G.Barrand : add this test.
           tick_values.push_back(val);
           tick_labels.push_back(tmp);
@@ -964,12 +964,12 @@ protected:
       }
 
       int nLogTicks;
-      float logTicks[5];
-      float magStep;
+      G4float logTicks[5];
+      G4float magStep;
 
-      float maghigh = fceil(flog10(mx));
-      float maglow  = ffloor(flog10(mn));
-      float magrng  = maghigh - maglow;
+      G4float maghigh = fceil(flog10(mx));
+      G4float maglow  = ffloor(flog10(mn));
+      G4float magrng  = maghigh - maglow;
 
       if (magrng <=3) {
         nLogTicks   = 3;
@@ -1001,7 +1001,7 @@ protected:
           }
           snpf(tmp,sizeof(tmp),pstr,y*fpow(10.0,-pmag));
 
-         {float val = flog10(y);
+         {G4float val = flog10(y);
           if((val>=flog10(mn))&&(val<=flog10(mx))) { //G.Barrand : add this if
             tick_values.push_back(val);
             tick_labels.push_back(tmp);
@@ -1021,15 +1021,15 @@ protected:
       mx = flog10(mx);
     }
 
-    float range = mx - mn;
+    G4float range = mx - mn;
 
     // it is assumes that tick_values are ordered min to max.
     tick_number.value(tick_num);
     values.clear();
     coords.clear();
     for(unsigned int index=0;index<tick_num;index++) {
-      float val = tick_values[index];
-      float coord = width * (val-mn)/range;
+      G4float val = tick_values[index];
+      G4float coord = width * (val-mn)/range;
       values.add(val);
       coords.add(coord);
     }
@@ -1049,7 +1049,7 @@ protected:
     m_sub_ticks.clear();
   }
 
-  static float calculate_ticks_hippo(float aSize,float& a_mag) {
+  static G4float calculate_ticks_hippo(G4float aSize,G4float& a_mag) {
     unsigned int MIN_TICKS = 4;
 
     if (aSize <= 0.0) {
@@ -1063,9 +1063,9 @@ protected:
 
     // now fit the max number of ticks into this range
 
-    float  tickSize;
+    G4float  tickSize;
     int tickIndex;
-    static const float goodTicks[] = {10.0, 5.0, 4.0, 2.0, 1.0};
+    static const G4float goodTicks[] = {10.0, 5.0, 4.0, 2.0, 1.0};
     for(tickIndex = 0;
        aSize/(tickSize=goodTicks[tickIndex]*fpow(10.0,a_mag))<MIN_TICKS;
         tickIndex++){}
@@ -1091,8 +1091,8 @@ protected:
     //    labels (if labels_enforced is false)
     //    tick_number
 
-    float mn = minimum_value;
-    float mx = maximum_value;
+    G4float mn = minimum_value;
+    G4float mx = maximum_value;
 
     bool a_is_log = is_log;
     if(a_is_log) {
@@ -1102,16 +1102,16 @@ protected:
     // Use hplot::axis to get the ticks and subticks positions
     // and the labels text.
 
-    double xmin = 0;
-    double ymin = 0;
-    double xmax = width;
-    double ymax = 0;
+    G4double xmin = 0;
+    G4double ymin = 0;
+    G4double xmax = width;
+    G4double ymax = 0;
 
-    double gridlength = 0;
+    G4double gridlength = 0;
     std::string chopt;
     if(a_is_log) chopt += "G";
 
-    std::vector<float> linesGrid;
+    std::vector<G4float> linesGrid;
     std::vector<hplot::_text> texts;
 
     hplot::axis sbAxisHPLOT(a_out);
@@ -1127,8 +1127,8 @@ protected:
     }
 
     // Get ticks :
-   {double wmin = mn;
-    double wmax = mx;
+   {G4double wmin = mn;
+    G4double wmax = mx;
     int ndiv = divisions;
     sbAxisHPLOT.set_title("");
     sbAxisHPLOT.paint(xmin,ymin,xmax,ymax,
@@ -1141,7 +1141,7 @@ protected:
       mx = flog10(mx);
     }
 
-    float range = mx - mn;
+    G4float range = mx - mn;
 
     size_t tick_num = texts.size();
 
@@ -1159,9 +1159,9 @@ protected:
     values.clear();
     coords.clear();
     for(size_t index=0;index<tick_num;index++) {
-      float coord = (float)texts[index].fX;
+      G4float coord = (G4float)texts[index].fX;
       //NOTE : are we sure that val is in [mn,mx]
-      float val = (coord/width.value()) * range + mn;
+      G4float val = (coord/width.value()) * range + mn;
       coords.add(coord);
       values.add(val);
     }
@@ -1182,11 +1182,11 @@ protected:
     size_t num = m_sub_ticks.size()/4;
     size_t pos = 0;
     for(size_t index=0;index<num;index++) {
-      float coord = m_sub_ticks[pos];
+      G4float coord = m_sub_ticks[pos];
       pos += 4;
       bool found = false;
       for(size_t i=0;i<tick_num;i++) {
-        if((float)texts[i].fX==coord) {
+        if((G4float)texts[i].fX==coord) {
           found = true;
           break;
         }
@@ -1214,10 +1214,10 @@ protected:
   text_style m_mag_style;
   text_style m_title_style;
 
-  std::vector<float> m_sub_ticks; //n*(2+2)
+  std::vector<G4float> m_sub_ticks; //n*(2+2)
 
   std::vector<separator*> m_labels_seps;
-  std::vector<float> m_labels_xs;
+  std::vector<G4float> m_labels_xs;
   std::vector<matrix*> m_labels_mtxs;
 };
 

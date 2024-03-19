@@ -191,7 +191,7 @@ inline bool write_bytes(const std::string& a_file,const char* a_buffer,size_t a_
   return (nitem!=1?false:true);
 }
 
-inline bool num_csv_doubles(const std::string& a_string,char& a_sep,unsigned int& a_number){
+inline bool num_csv_G4doubles(const std::string& a_string,char& a_sep,unsigned int& a_number){
   if(a_string.empty()) {a_sep=0;a_number=0;return true;} //it is ok.
 
   //guess sep :
@@ -201,7 +201,7 @@ inline bool num_csv_doubles(const std::string& a_string,char& a_sep,unsigned int
   const char* pos = buffer;
   const char* mx = buffer+a_string.size();
   char* end;
- {double d = ::strtod(pos,&end);(void)d;}
+ {G4double d = ::strtod(pos,&end);(void)d;}
   //::printf("debug : d first %g\n",d);
   if(end==pos) {a_sep=0;a_number=0;return false;} //not starting with a number.
   if(end==mx) {a_sep=0;a_number=1;return true;} //is ok, one number only.
@@ -217,7 +217,7 @@ inline bool num_csv_doubles(const std::string& a_string,char& a_sep,unsigned int
   const char* mx = buffer+a_string.size();
   while(true) {
     char* end;
-   {double d = ::strtod(pos,&end);(void)d;}
+   {G4double d = ::strtod(pos,&end);(void)d;}
     if(end==pos) {
       if(end>=mx) break;
       a_sep = sep;
@@ -257,18 +257,18 @@ inline bool is_hippo(const std::string& a_file,bool& a_is){
   if(txt.size()<3) {a_is=false;return true;}
   char csep;
   unsigned int number;
-  if(!num_csv_doubles(txt[2],csep,number)) {a_is=false;return true;}
+  if(!num_csv_G4doubles(txt[2],csep,number)) {a_is=false;return true;}
   std::vector<std::string> ws;
   words(txt[1],"\t",false,ws);
   if(ws.size()!=number) {a_is=false;return true;}
-  bool all_doubles = true;
+  bool all_G4doubles = true;
   tools_vforcit(std::string,ws,it) {
     const char* pos = (*it).c_str();
     char* end;
-    double d = ::strtod(pos,&end);(void)d;
-    if(end==pos) {all_doubles=false;break;}
+    G4double d = ::strtod(pos,&end);(void)d;
+    if(end==pos) {all_G4doubles=false;break;}
   }
-  a_is = all_doubles?false:true; //all_double=false then we assume the second line is labels of columns.
+  a_is = all_G4doubles?false:true; //all_G4double=false then we assume the second line is labels of columns.
   return true;
 }
 
@@ -285,7 +285,7 @@ inline bool is_csv(const std::vector<std::string>& a_txt,bool& a_is){
   //::printf("debug : |%s|\n",buffer);
   const char* pos = buffer;
   char* end;
- {double d = ::strtod(pos,&end);(void)d;}
+ {G4double d = ::strtod(pos,&end);(void)d;}
   //::printf("debug : d first %g\n",d);
   if(end==pos) return true; //not starting with a number.
   //end==mx is ok, one column only.
@@ -303,7 +303,7 @@ inline bool is_csv(const std::vector<std::string>& a_txt,bool& a_is){
     unsigned int coln = 0;
     while(true) {
       char* end;
-     {double d = ::strtod(pos,&end);(void)d;}
+     {G4double d = ::strtod(pos,&end);(void)d;}
       if(end==pos) break;
       //::printf("debug : d %g\n",d);
       if(*end!=sep) return true;

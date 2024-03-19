@@ -78,11 +78,11 @@ public:
     return *this;
   }
 public:
-  double x() const {return m_x;}
-  double y() const {return m_y;}
-  double z() const {return m_z;}
+  G4double x() const {return m_x;}
+  G4double y() const {return m_y;}
+  G4double z() const {return m_z;}
 private:
-  double m_x,m_y,m_z;
+  G4double m_x,m_y,m_z;
 };
 
 }}

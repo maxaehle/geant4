@@ -11,7 +11,7 @@
 namespace tools {
 namespace sg {
 
-template <class T,class TT>  //exa sf_vec<colorf,float>
+template <class T,class TT>  //exa sf_vec<colorf,G4float>
 class sf_vec : public bsf<T> {
   typedef bsf<T> parent;
 public:

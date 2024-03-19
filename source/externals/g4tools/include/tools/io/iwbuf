@@ -24,8 +24,8 @@ public:
   virtual bool write(int32) = 0;
   virtual bool write(uint64) = 0;
   virtual bool write(int64) = 0;
-  virtual bool write(float) = 0;
-  virtual bool write(double) = 0;
+  virtual bool write(G4float) = 0;
+  virtual bool write(G4double) = 0;
   virtual bool write(bool) = 0;
 
   virtual bool write_vec(uint32,const uchar*) = 0;
@@ -36,8 +36,8 @@ public:
   virtual bool write_vec(uint32,const int32*) = 0;
   virtual bool write_vec(uint32,const uint64*) = 0;
   virtual bool write_vec(uint32,const int64*) = 0;
-  virtual bool write_vec(uint32,const float*) = 0;
-  virtual bool write_vec(uint32,const double*) = 0;
+  virtual bool write_vec(uint32,const G4float*) = 0;
+  virtual bool write_vec(uint32,const G4double*) = 0;
   virtual bool write_vec(uint32,const bool*) = 0;
 
   virtual bool write_vec(const std::vector<std::string>&) = 0;
@@ -49,11 +49,11 @@ public:
   typedef std::vector< std::vector<unsigned int> > std_vec_vec_uint_t;
   virtual bool write_std_vec_vec(const std_vec_vec_uint_t&) = 0;
 
-  typedef std::vector< std::vector<float> > std_vec_vec_float_t;
-  virtual bool write_std_vec_vec(const std_vec_vec_float_t&) = 0;
+  typedef std::vector< std::vector<G4float> > std_vec_vec_G4float_t;
+  virtual bool write_std_vec_vec(const std_vec_vec_G4float_t&) = 0;
 
-  typedef std::vector< std::vector<double> > std_vec_vec_double_t;
-  virtual bool write_std_vec_vec(const std_vec_vec_double_t&) = 0;
+  typedef std::vector< std::vector<G4double> > std_vec_vec_G4double_t;
+  virtual bool write_std_vec_vec(const std_vec_vec_G4double_t&) = 0;
 
   typedef std::vector< std::vector<std::string> > std_vec_vec_string_t;
   virtual bool write_std_vec_vec(const std_vec_vec_string_t&) = 0;

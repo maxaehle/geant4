@@ -9,8 +9,8 @@
 namespace tools {
 namespace histo {
 
-class h3d : public h3<double,unsigned int,unsigned int,double,double> {
-  typedef h3<double,unsigned int,unsigned int,double,double> parent;
+class h3d : public h3<G4double,unsigned int,unsigned int,G4double,G4double> {
+  typedef h3<G4double,unsigned int,unsigned int,G4double,G4double> parent;
 public:
   static const std::string& s_class() {
     static const std::string s_v("tools::histo::h3d");
@@ -21,18 +21,18 @@ public:
   h3d():parent("",10,0,1,10,0,1,10,0,1){} //for I/O when reading.
 
   h3d(const std::string& a_title,
-      unsigned int aXnumber,double aXmin,double aXmax,
-      unsigned int aYnumber,double aYmin,double aYmax,
-      unsigned int aZnumber,double aZmin,double aZmax)
+      unsigned int aXnumber,G4double aXmin,G4double aXmax,
+      unsigned int aYnumber,G4double aYmin,G4double aYmax,
+      unsigned int aZnumber,G4double aZmin,G4double aZmax)
   :parent(a_title,aXnumber,aXmin,aXmax,
                   aYnumber,aYmin,aYmax,
                   aZnumber,aZmin,aZmax)
   {}
 
   h3d(const std::string& a_title,
-      const std::vector<double>& a_edges_x,
-      const std::vector<double>& a_edges_y,
-      const std::vector<double>& a_edges_z)
+      const std::vector<G4double>& a_edges_x,
+      const std::vector<G4double>& a_edges_y,
+      const std::vector<G4double>& a_edges_z)
   :parent(a_title,a_edges_x,a_edges_y,a_edges_z)
   {}
 

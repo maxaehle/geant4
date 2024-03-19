@@ -26,15 +26,15 @@
 #include <cstring>
 #include <ctime>
 #include <cmath>
-#include <cfloat>
+#include <cG4float>
 
 namespace tools {
 namespace hplot {
 
 class _text {
 public:
-  _text(double aX,double aY,
-                   double aAngle,double aSize,
+  _text(G4double aX,G4double aY,
+                   G4double aAngle,G4double aSize,
                    const std::string& aString,
                    short aAlign)
   :fX(aX),fY(aY)
@@ -59,10 +59,10 @@ public:
     return *this;
   }
 public:
-  double fX;
-  double fY;
-  double fAngle; //Degree
-  double fSize;
+  G4double fX;
+  G4double fY;
+  G4double fAngle; //Degree
+  G4double fSize;
   std::string fString;
   short fAlign;
 };
@@ -99,7 +99,7 @@ class axis {
 
   static int GetTextFont() { return 132;}
 
-  static double TMath_ATan2(double y, double x) {
+  static G4double TMath_ATan2(G4double y, G4double x) {
     if (x != 0) return  ::atan2(y, x);
     if (y == 0) return  0;
     if (y >  0) return  half_pi();
@@ -109,12 +109,12 @@ class axis {
   //static short TMath_Abs(short d)  { return (d >= 0) ? d : -d; }
   static int TMath_Abs(int d) { return (d >= 0) ? d : -d; }
   //static long TMath_Abs(long d) { return (d >= 0) ? d : -d; }
-  //static float TMath_Abs(float d) { return (d >= 0) ? d : -d; }
-  static double TMath_Abs(double d) { return (d >= 0) ? d : -d; }
+  //static G4float TMath_Abs(G4float d) { return (d >= 0) ? d : -d; }
+  static G4double TMath_Abs(G4double d) { return (d >= 0) ? d : -d; }
 
   static void TGaxis_Rotate(
-   double X,  double Y,  double CFI, double SFI
-  ,double XT, double YT, double &U,   double &V)
+   G4double X,  G4double Y,  G4double CFI, G4double SFI
+  ,G4double XT, G4double YT, G4double &U,   G4double &V)
   {
     U = CFI*X-SFI*Y+XT;
     V = SFI*X+CFI*Y+YT;
@@ -159,13 +159,13 @@ private:
   }
 
 public:
-  void paint(double xmin, double ymin,
-                    double xmax, double ymax,
-                    double& wmin,double& wmax,
+  void paint(G4double xmin, G4double ymin,
+                    G4double xmax, G4double ymax,
+                    G4double& wmin,G4double& wmax,
                     int& ndiv,const std::string& aCHOPT,
-                    double gridlength,bool drawGridOnly,
-                    std::vector<float>& aLinesAxis, //n*(2+2)
-                    std::vector<float>& aLinesGrid, //n*(2+2)
+                    G4double gridlength,bool drawGridOnly,
+                    std::vector<G4float>& aLinesAxis, //n*(2+2)
+                    std::vector<G4float>& aLinesGrid, //n*(2+2)
                     std::vector<_text>& aTexts){
     // Control function to draw an axis
     // ================================
@@ -306,31 +306,31 @@ public:
      aLinesGrid.clear();
      aTexts.clear();
 
-     double alfa, beta, ratio1, ratio2, grid_side;
-     double axis_lengthN = 0;
-     double axis_length0 = 0;
-     double axis_length1 = 0;
-     double charheight;
-     double phil, phi, sinphi, cosphi, asinphi, acosphi;
-     double BinLow,  BinLow2,  BinLow3;
-     double BinHigh, BinHigh2, BinHigh3;
-     double BinWidth, BinWidth2, BinWidth3;
-     double xpl1, xpl2, ypl1, ypl2;
-     double Xtick = 0;
-     double Xtick0, Xtick1, DXtick=0;
-     double Ytick, Ytick0, Ytick1;
-     double Wlabel, DWlabel;
-     double Xlabel, Ylabel;
-     double DXlabel;
-     double X0, X1, Y0, Y1, XX0, XX1, YY0, YY1;
+     G4double alfa, beta, ratio1, ratio2, grid_side;
+     G4double axis_lengthN = 0;
+     G4double axis_length0 = 0;
+     G4double axis_length1 = 0;
+     G4double charheight;
+     G4double phil, phi, sinphi, cosphi, asinphi, acosphi;
+     G4double BinLow,  BinLow2,  BinLow3;
+     G4double BinHigh, BinHigh2, BinHigh3;
+     G4double BinWidth, BinWidth2, BinWidth3;
+     G4double xpl1, xpl2, ypl1, ypl2;
+     G4double Xtick = 0;
+     G4double Xtick0, Xtick1, DXtick=0;
+     G4double Ytick, Ytick0, Ytick1;
+     G4double Wlabel, DWlabel;
+     G4double Xlabel, Ylabel;
+     G4double DXlabel;
+     G4double X0, X1, Y0, Y1, XX0, XX1, YY0, YY1;
      XX0 = XX1 = YY0 = YY1 = 0;
-     double Xxmin, Xxmax, Yymin, Yymax;
+     G4double Xxmin, Xxmax, Yymin, Yymax;
      Xxmin = Xxmax = Yymin = Yymax = 0;
-     double XLside,XMside;
-     double WW, AF, RNE;
-     double XX, YY;
-     double Y;
-     double Xtwo;
+     G4double XLside,XMside;
+     G4double WW, AF, RNE;
+     G4double XX, YY;
+     G4double Y;
+     G4double Xtwo;
      int i, j, k, l, decade, ltick;
      int Mside, Lside;
      int IF1, IF2, NA, NF, NCH;
@@ -349,11 +349,11 @@ public:
      int ndyn;
      char LABEL[256];
      char CHTEMP[256];
-     double rangeOffset = 0;
+     G4double rangeOffset = 0;
 
-     double epsilon   = 1e-5;
-     const double kPI = pi(); //GB
-     double textSize = 0.05; //GB
+     G4double epsilon   = 1e-5;
+     const G4double kPI = pi(); //GB
+     G4double textSize = 0.05; //GB
      short textAlign = 11; //GB
      BinWidth = 0; //GB
      BinWidth2 = 0; //GB
@@ -368,8 +368,8 @@ public:
      first = 0; //GB
      last = 0; //GB
 
-     double rwmi = wmin;
-     double rwma = wmax;
+     G4double rwmi = wmin;
+     G4double rwma = wmax;
 
      //out_error(m_out,"android_debug","start");
 
@@ -381,11 +381,11 @@ public:
      // the following parameters correspond to the pad range in NDC
      // and the WC coordinates in the pad
 
-     double padh   = 1;//FIXME gPad->GetWh()*gPad->GetAbsHNDC();
-     double RWxmin = 0;
-     double RWxmax = 1;
-     double RWymin = 0;
-     double RWymax = 1;
+     G4double padh   = 1;//FIXME gPad->GetWh()*gPad->GetAbsHNDC();
+     G4double RWxmin = 0;
+     G4double RWxmax = 1;
+     G4double RWymin = 0;
+     G4double RWymax = 1;
 
      SETOPT(aCHOPT,'G',OptionLog);
      SETOPT(aCHOPT,'B',OptionBlank);
@@ -454,7 +454,7 @@ public:
 
      //out_error(m_out,"android_debug","0001");
      // determine the time offset and correct for time offset not being integer
-     double timeoffset = 0;
+     G4double timeoffset = 0;
      if (OptionTime) {
         if (IdF!=std::string::npos) {
            int LnF = int(fTimeFormat.size());
@@ -472,7 +472,7 @@ public:
               tp.tm_min   = mi;
               tp.tm_sec   = ss;
               tp.tm_isdst = 0; // daylight saving time is not in effect (see mktime man pages)
-              timeoffset  = double(mktime(&tp));
+              timeoffset  = G4double(mktime(&tp));
               // have to correct this time to go back to UTC
               timeoffsettest = (time_t)((long)timeoffset);
               tptest = gmtime(&timeoffsettest);
@@ -480,7 +480,7 @@ public:
               // Add the time offset's decimal part if it is there
               std::string::size_type Ids   = stringtimeoffset.find("s");
               if (Ids != std::string::npos) {
-                 float dp;
+                 G4float dp;
                  size_t Lns   = stringtimeoffset.size();
                  std::string sdp = stringtimeoffset.substr(Ids+1,Lns-(Ids+1));
                  ::sscanf(sdp.c_str(),"%g",&dp);
@@ -502,13 +502,13 @@ public:
           // day, month, year)
           struct tm* tp0;
           time_t timetp = (time_t)((long)(timeoffset));
-          double range = wmax - wmin;
+          G4double range = wmax - wmin;
           long rangeBase = 60;
           if (range>60)       rangeBase = 60*20;       // minutes
           if (range>3600)     rangeBase = 3600*20;     // hours
           if (range>86400)    rangeBase = 86400*20;    // days
           if (range>2419200)  rangeBase = 31556736;    // months (average # days)
-          rangeOffset = (double) ((long)(timeoffset)%rangeBase);
+          rangeOffset = (G4double) ((long)(timeoffset)%rangeBase);
           if (range>31536000) {
             tp0 = gmtime(&timetp);
             tp0->tm_mon   = 0;
@@ -518,7 +518,7 @@ public:
             tp0->tm_sec   = 0;
             tp0->tm_isdst = 0; // daylight saving time is not in effect (see mktime man pages)
             rangeBase = long(timetp-mktime(tp0)); // years
-            rangeOffset = (double) (rangeBase);
+            rangeOffset = (G4double) (rangeBase);
           }
         wmax += rangeOffset;
         wmin += rangeOffset;
@@ -561,21 +561,21 @@ public:
                        BinLow,BinHigh,nbins,BinWidth,
                        aCHOPT);
         if (OptionInt) {
-           if (BinLow != double(int(BinLow)) ||
-               BinWidth != double(int(BinWidth))) {
+           if (BinLow != G4double(int(BinLow)) ||
+               BinWidth != G4double(int(BinWidth))) {
               adjustBinSize(wmin,wmax,N1A,BinLow,BinHigh,nbins,BinWidth);
            }
         }
         if ((wmin-BinLow)  > epsilon) { BinLow  += BinWidth; nbins--; }
         if ((BinHigh-wmax) > epsilon) { BinHigh -= BinWidth; nbins--; }
         if (xmax == xmin) {
-           double rtyw  = (ymax-ymin)/(wmax-wmin);
+           G4double rtyw  = (ymax-ymin)/(wmax-wmin);
            Xxmin = xmin;
            Xxmax = xmax;
            Yymin = rtyw*(BinLow-wmin)  + ymin;
            Yymax = rtyw*(BinHigh-wmin) + ymin;
         } else {
-           double rtxw  = (xmax-xmin)/(wmax-wmin);
+           G4double rtxw  = (xmax-xmin)/(wmax-wmin);
            Xxmin = rtxw*(BinLow-wmin)  + xmin;
            Xxmax = rtxw*(BinHigh-wmin) + xmin;
            if (ymax == ymin) {
@@ -662,14 +662,14 @@ public:
      textaxis->SetTextFont(GetTextFont());
 
      if (!gPad->IsBatch()) {
-        float chupxvsav, chupyvsav;
+        G4float chupxvsav, chupyvsav;
         gVirtualX->GetCharacterUp(chupxvsav, chupyvsav);
         gVirtualX->SetClipOFF(gPad->GetCanvasID());
      }
   */
 
      // Compute length of axis
-     double axis_length = ::sqrt((X1-X0)*(X1-X0)+(Y1-Y0)*(Y1-Y0));
+     G4double axis_length = ::sqrt((X1-X0)*(X1-X0)+(Y1-Y0)*(Y1-Y0));
      if (axis_length == 0) {
         out_error(m_out,"PaintAxis", "length of axis is 0");
         return; //goto L210;
@@ -705,8 +705,8 @@ public:
         int py0 = 0;//FIXME gPad->VtoPixel(Y0);
         int px1 = 0;//FIXME gPad->UtoPixel(X1);
         int py1 = 0;//FIXME gPad->VtoPixel(Y1);
-        if (X0 < X1) phil = TMath_ATan2(double(py0-py1), double(px1-px0));
-        else         phil = TMath_ATan2(double(py1-py0), double(px0-px1));
+        if (X0 < X1) phil = TMath_ATan2(G4double(py0-py1), G4double(px1-px0));
+        else         phil = TMath_ATan2(G4double(py1-py0), G4double(px0-px1));
      }
      cosphi  = ::cos(phi);
      sinphi  = ::sin(phi);
@@ -736,11 +736,11 @@ public:
      XLside = Lside;
 
      // Tick marks size
-     double tick_side;
+     G4double tick_side;
      if(XMside >= 0) tick_side = 1;
      else            tick_side = -1;
 
-     double atick[3];
+     G4double atick[3];
      if (OptionSize) atick[0] = tick_side*axis_length*fTickSize;
      else            atick[0] = tick_side*axis_length*0.03;
 
@@ -758,7 +758,7 @@ public:
         rwmi = fFunction->Eval(wmin);
         rwma = fFunction->Eval(wmax);
         if(rwmi > rwma) {
-           double t = rwma;
+           G4double t = rwma;
            rwma = rwmi;
            rwmi = t;
         }
@@ -770,10 +770,10 @@ public:
         xpl2 = X1;
         ypl1 = Y0;
         ypl2 = Y1;
-        aLinesAxis.push_back((float)xpl1);
-        aLinesAxis.push_back((float)ypl1);
-        aLinesAxis.push_back((float)xpl2);
-        aLinesAxis.push_back((float)ypl2);
+        aLinesAxis.push_back((G4float)xpl1);
+        aLinesAxis.push_back((G4float)ypl1);
+        aLinesAxis.push_back((G4float)xpl2);
+        aLinesAxis.push_back((G4float)ypl2);
      }
 
      //out_error(m_out,"android_debug","0009");
@@ -792,12 +792,12 @@ public:
         if ((GetTextFont() % 10) > 2) {
            //FIXME charheight = charheight/gPad->GetWh();
         }
-        double toffset = fTitleOffset;
+        G4double toffset = fTitleOffset;
         if (toffset < 0.1) toffset = 1;
         if (X1 == X0) Ylabel = XLside*1.6*charheight*toffset;
         else          Ylabel = XLside*1.3*charheight*toffset;
         if (Y1 == Y0) Ylabel = XLside*1.6*charheight*toffset;
-        double axispos;
+        G4double axispos;
         if (testBit(TAxis_kCenterTitle)) axispos = 0.5*axis_length;
         else                       axispos = axis_length;
         if (testBit(TAxis_kRotateTitle)) {
@@ -851,7 +851,7 @@ public:
            textAlign = 32;
            OptionText = 2;
            //int nl = 0;//FIXME fAxis->GetLast()-fAxis->GetFirst()+1;
-           //double angle     = 0;
+           //G4double angle     = 0;
            out_error(m_out,"PaintAxis","debug : FIXME : 000\n");
            /*FIXME
            for (i=fAxis->GetFirst(); i<=fAxis->GetLast(); i++) {
@@ -961,24 +961,24 @@ public:
         if (ndiv) {
            /*GB if (fFunction) {
               if (OptionNoopt && !OptionInt) {
-                 DXtick=(BinHigh-BinLow)/double(Nticks-1);
+                 DXtick=(BinHigh-BinLow)/G4double(Nticks-1);
               } else {
-                 DXtick=(BinHigh-BinLow)/double(Nticks-1);
+                 DXtick=(BinHigh-BinLow)/G4double(Nticks-1);
               }
            } else */ {
-              if (OptionNoopt && !OptionInt) DXtick=axis_length/double(Nticks-1);
-              else                           DXtick=axis_lengthN/double(Nticks-1);
+              if (OptionNoopt && !OptionInt) DXtick=axis_length/G4double(Nticks-1);
+              else                           DXtick=axis_lengthN/G4double(Nticks-1);
            }
            for (k=0;k<Nticks; k++) {
               ltick = 2;
               if (k%NN3 == 0) ltick = 1;
               if (k%NN2 == 0) ltick = 0;
               /*GB if (fFunction) {
-                 double xx = BinLow+double(k)*DXtick;
-                 double zz = fFunction->Eval(xx)-rwmi;
+                 G4double xx = BinLow+G4double(k)*DXtick;
+                 G4double zz = fFunction->Eval(xx)-rwmi;
                  Xtick = zz* axis_length / TMath_Abs(rwma-rwmi);
               } else */ {
-                 Xtick = double(k)*DXtick;
+                 Xtick = G4double(k)*DXtick;
               }
               Ytick = 0;
               if (!Mside) Ytick -= atick[ltick];
@@ -1006,10 +1006,10 @@ public:
                  }
               }
               if (!drawGridOnly) {
-                aLinesAxis.push_back((float)xpl1);
-                aLinesAxis.push_back((float)ypl1);
-                aLinesAxis.push_back((float)xpl2);
-                aLinesAxis.push_back((float)ypl2);
+                aLinesAxis.push_back((G4float)xpl1);
+                aLinesAxis.push_back((G4float)ypl1);
+                aLinesAxis.push_back((G4float)xpl2);
+                aLinesAxis.push_back((G4float)ypl2);
               }
 
               if (OptionGrid) {
@@ -1025,10 +1025,10 @@ public:
                         (Xtick,grid_side*gridlength ,cosphi,sinphi,XX0,YY0,
                          xpl1,ypl1);
                     }
-                    aLinesGrid.push_back((float)xpl1);
-                    aLinesGrid.push_back((float)ypl1);
-                    aLinesGrid.push_back((float)xpl2);
-                    aLinesGrid.push_back((float)ypl2);
+                    aLinesGrid.push_back((G4float)xpl1);
+                    aLinesGrid.push_back((G4float)ypl1);
+                    aLinesGrid.push_back((G4float)xpl2);
+                    aLinesGrid.push_back((G4float)ypl2);
                  }
               }
            }
@@ -1047,7 +1047,7 @@ public:
                  Ytick0 = 0;
                  if (!Mside) Ytick0 -= atick[ltick];
                  /*GB if (fFunction) {
-                    Xtick0 = (fFunction->Eval(BinLow - double(k)*DXtick)-rwmi)
+                    Xtick0 = (fFunction->Eval(BinLow - G4double(k)*DXtick)-rwmi)
                              * axis_length / TMath_Abs(rwma-rwmi);
                  }*/
                  TGaxis_Rotate(Xtick0,Ytick0,cosphi,sinphi,XX0,YY0 ,xpl2,ypl2);
@@ -1068,10 +1068,10 @@ public:
                     }
                  }
                  if(!drawGridOnly) {
-                   aLinesAxis.push_back((float)xpl1);
-                   aLinesAxis.push_back((float)ypl1);
-                   aLinesAxis.push_back((float)xpl2);
-                   aLinesAxis.push_back((float)ypl2);
+                   aLinesAxis.push_back((G4float)xpl1);
+                   aLinesAxis.push_back((G4float)ypl1);
+                   aLinesAxis.push_back((G4float)xpl2);
+                   aLinesAxis.push_back((G4float)ypl2);
                  }
 
                  if (OptionGrid) {
@@ -1080,10 +1080,10 @@ public:
                       TGaxis_Rotate
                         (Xtick0,grid_side*gridlength,cosphi,sinphi,XX0,YY0,
                          xpl1,ypl1);
-                      aLinesGrid.push_back((float)xpl1);
-                      aLinesGrid.push_back((float)ypl1);
-                      aLinesGrid.push_back((float)xpl2);
-                      aLinesGrid.push_back((float)ypl2);
+                      aLinesGrid.push_back((G4float)xpl1);
+                      aLinesGrid.push_back((G4float)ypl1);
+                      aLinesGrid.push_back((G4float)xpl2);
+                      aLinesGrid.push_back((G4float)ypl2);
                     }
                  }
                  Xtick0 -= DXtick;
@@ -1102,7 +1102,7 @@ public:
                  Ytick1 = 0;
                  if (!Mside) Ytick1 -= atick[ltick];
                  /*GB if (fFunction) {
-                    Xtick1 = (fFunction->Eval(BinHigh + double(k)*DXtick)-rwmi)
+                    Xtick1 = (fFunction->Eval(BinHigh + G4double(k)*DXtick)-rwmi)
                              * axis_length / TMath_Abs(rwma-rwmi);
                  }*/
                  TGaxis_Rotate(Xtick1,Ytick1,cosphi,sinphi,XX0,YY0 ,xpl2,ypl2);
@@ -1123,10 +1123,10 @@ public:
                     }
                  }
                  if(!drawGridOnly) {
-                   aLinesAxis.push_back((float)xpl1);
-                   aLinesAxis.push_back((float)ypl1);
-                   aLinesAxis.push_back((float)xpl2);
-                   aLinesAxis.push_back((float)ypl2);
+                   aLinesAxis.push_back((G4float)xpl1);
+                   aLinesAxis.push_back((G4float)ypl1);
+                   aLinesAxis.push_back((G4float)xpl2);
+                   aLinesAxis.push_back((G4float)ypl2);
                  }
 
                  if (OptionGrid) {
@@ -1135,10 +1135,10 @@ public:
                       TGaxis_Rotate
                         (Xtick1,grid_side*gridlength,cosphi,sinphi,XX0,YY0,
                          xpl1,ypl1);
-                      aLinesGrid.push_back((float)xpl1);
-                      aLinesGrid.push_back((float)ypl1);
-                      aLinesGrid.push_back((float)xpl2);
-                      aLinesGrid.push_back((float)ypl2);
+                      aLinesGrid.push_back((G4float)xpl1);
+                      aLinesGrid.push_back((G4float)ypl1);
+                      aLinesGrid.push_back((G4float)xpl2);
+                      aLinesGrid.push_back((G4float)ypl2);
                     }
                  }
                  Xtick1 += DXtick;
@@ -1158,9 +1158,9 @@ public:
                  return; //goto L210;
               }
               Wlabel  = wmin;
-              DWlabel = (wmax-wmin)/double(N1A);
-              if (OptionNoopt && !OptionInt) DXlabel = axis_length/double(N1A);
-              else                           DXlabel = axis_lengthN/double(N1A);
+              DWlabel = (wmax-wmin)/G4double(N1A);
+              if (OptionNoopt && !OptionInt) DXlabel = axis_length/G4double(N1A);
+              else                           DXlabel = axis_lengthN/G4double(N1A);
 
               char CHCODED[8];
               int NEXE  = 0;
@@ -1174,15 +1174,15 @@ public:
                  NEXE   = 0;
                  bool FLEXPO = false;
                  bool FLEXNE = false;
-                 WW  = mx<double>(TMath_Abs(wmin),TMath_Abs(wmax));
+                 WW  = mx<G4double>(TMath_Abs(wmin),TMath_Abs(wmax));
 
                  // First case : (wmax-wmin)/N1A less than 0.001
                  // 0.001 fMaxDigits of 5 (fMaxDigits) characters).
                  //  Then we use x 10 n
                  // format. If AF >=0 x10 n cannot be used
-                 double xmicros = 0.00099;
+                 G4double xmicros = 0.00099;
                  if (maxDigits) xmicros = ::pow(10.,-maxDigits);
-                 if (!noExponent && (TMath_Abs(wmax-wmin)/double(N1A)) < xmicros) {
+                 if (!noExponent && (TMath_Abs(wmax-wmin)/G4double(N1A)) < xmicros) {
                     AF    = ::log10(WW) + epsilon;
                     if (AF < 0) {
                        FLEXE   = true;
@@ -1237,7 +1237,7 @@ public:
                  }
                  ndyn = N1A;
                  while (ndyn) {
-                    double wdyn = TMath_Abs((wmax-wmin)/ndyn);
+                    G4double wdyn = TMath_Abs((wmax-wmin)/ndyn);
                     if (wdyn <= 0.999 && NA < maxDigits-2) {
                        NA++;
                        ndyn /= 10;
@@ -1248,7 +1248,7 @@ public:
                  IF2 = NA;
                  IF1 = mx<int>(NF+NA,maxDigits)+1;
   L110:
-                 if (mn<double>(wmin,wmax) < 0)IF1 = IF1+1;
+                 if (mn<G4double>(wmin,wmax) < 0)IF1 = IF1+1;
                  IF1 = mn<int>(IF1,32);
 
                  // In some cases, IF1 and IF2 are too small....
@@ -1275,11 +1275,11 @@ public:
               int Nlabels;
               if (OptionM) Nlabels = N1A-1;
               else         Nlabels = N1A;
-              double wTimeIni = Wlabel;
+              G4double wTimeIni = Wlabel;
               for ( k=0; k<=Nlabels; k++) {
                  /*FIXME if (fFunction) {
-                    double xx = BinLow+double(k*NN2)*DXtick;
-                    double zz = fFunction->Eval(xx)-rwmi;
+                    G4double xx = BinLow+G4double(k*NN2)*DXtick;
+                    G4double zz = fFunction->Eval(xx)-rwmi;
                     Wlabel = xx;
                     Xlabel = zz* axis_length / TMath_Abs(rwma-rwmi);
                  } else */{
@@ -1323,7 +1323,7 @@ public:
                  // Generate the time labels
 
                  if (OptionTime) {
-                    double timed = Wlabel + (int)(timeoffset) - rangeOffset;
+                    G4double timed = Wlabel + (int)(timeoffset) - rangeOffset;
                     time_t timelabel = (time_t)((long)(timed));
                     struct tm* utctis;
                     if (OptionTime == 1) {
@@ -1337,7 +1337,7 @@ public:
 
                     // Appends fractionnal part if seconds displayed
                     if (DWlabel<0.9) {
-                       double tmpdb;
+                       G4double tmpdb;
                        size_t tmplast;
                        snpf(LABEL,sizeof(LABEL),"%%S%7.5f",modf(timed,&tmpdb));
                        tmplast = ::strlen(LABEL)-1;
@@ -1425,7 +1425,7 @@ public:
                  //G.Barrand ::sprintf(LABEL,"#times10^{%d}", NEXE);
                  snpf(LABEL,sizeof(LABEL),
                       "x10^%d!", NEXE); //G.Barrand : PAW encoding.
-                 double Xfactor, Yfactor;
+                 G4double Xfactor, Yfactor;
                  if (X0 != X1) { Xfactor = X1-X0+0.1*charheight; Yfactor = 0; }
                  else          { Xfactor = Y1-Y0+0.1*charheight; Yfactor = 0; }
                  TGaxis_Rotate (Xfactor,Yfactor,cosphi,sinphi,X0,Y0,XX,YY);
@@ -1456,24 +1456,24 @@ public:
            out_error(m_out,"PaintAxis", "negative logarithmic axis");
            return; //goto L210;
         }
-        double XMNLOG = ::log10(wmin);
+        G4double XMNLOG = ::log10(wmin);
         if (XMNLOG > 0) XMNLOG += 1.E-6;
         else            XMNLOG -= 1.E-6;
-        double X00    = 0;
-        double X11    = axis_length;
-        double H2     = ::log10(wmax);
-        double H2SAV  = H2;
+        G4double X00    = 0;
+        G4double X11    = axis_length;
+        G4double H2     = ::log10(wmax);
+        G4double H2SAV  = H2;
         if (H2 > 0) H2 += 1.E-6;
         else        H2 -= 1.E-6;
         int IH1    = int(XMNLOG);
         int IH2    = 1+int(H2);
         int NBININ = IH2-IH1+1;
-        double AXMUL  = (X11-X00)/(H2SAV-XMNLOG);
+        G4double AXMUL  = (X11-X00)/(H2SAV-XMNLOG);
 
         // Plot decade and intermediate tick marks
         decade      = IH1-2;
         int labelnumber = IH1;
-        if ( XMNLOG > 0 && (XMNLOG-double(IH1) > 0) ) labelnumber++;
+        if ( XMNLOG > 0 && (XMNLOG-G4double(IH1) > 0) ) labelnumber++;
         for (j=1; j<=NBININ; j++) {
 
            // Plot decade
@@ -1481,7 +1481,7 @@ public:
            decade++;
            if (X0 == X1 && j == 1) Ylabel += charheight*0.33;
            if (Y0 == Y1 && j == 1) Ylabel -= charheight*0.65;
-           double Xone = X00+AXMUL*(double(decade)-XMNLOG);
+           G4double Xone = X00+AXMUL*(G4double(decade)-XMNLOG);
            //the following statement is a trick to circumvent a gcc bug
            //GB if (j < 0) ::printf("j=%d\n",j); //G.Barrand : ???
            if (X00 > Xone) goto L160;
@@ -1507,27 +1507,27 @@ public:
               }
            }
            if (!drawGridOnly) {
-             aLinesAxis.push_back((float)xpl1);
-             aLinesAxis.push_back((float)ypl1);
-             aLinesAxis.push_back((float)xpl2);
-             aLinesAxis.push_back((float)ypl2);
+             aLinesAxis.push_back((G4float)xpl1);
+             aLinesAxis.push_back((G4float)ypl1);
+             aLinesAxis.push_back((G4float)xpl2);
+             aLinesAxis.push_back((G4float)ypl2);
            }
 
            if (OptionGrid) {
              TGaxis_Rotate(Xone,0,cosphi,sinphi,X0,Y0,xpl2,ypl2);
              TGaxis_Rotate(Xone,grid_side*gridlength,cosphi,sinphi,X0,Y0,
                            xpl1,ypl1);
-             aLinesGrid.push_back((float)xpl1);
-             aLinesGrid.push_back((float)ypl1);
-             aLinesGrid.push_back((float)xpl2);
-             aLinesGrid.push_back((float)ypl2);
+             aLinesGrid.push_back((G4float)xpl1);
+             aLinesGrid.push_back((G4float)ypl1);
+             aLinesGrid.push_back((G4float)xpl2);
+             aLinesGrid.push_back((G4float)ypl2);
            }
 
            if (!drawGridOnly && !OptionUnlab)    {
 
               // We generate labels (numeric only).
               if (noExponent) {
-                 double rlab = ::pow(10.,labelnumber);
+                 G4double rlab = ::pow(10.,labelnumber);
                  snpf(LABEL,sizeof(LABEL), "%f", rlab);
                  TGaxis_LabelsLimits(m_out,LABEL,first,last);
                  while (last > first) {
@@ -1591,8 +1591,8 @@ public:
            for (k=2;k<10;k++) {
 
               // Plot intermediate tick marks
-              //double Xone; //rm shadow warning.
-              Xone = X00+AXMUL*(::log10(double(k))+double(decade)-XMNLOG);
+              //G4double Xone; //rm shadow warning.
+              Xone = X00+AXMUL*(::log10(G4double(k))+G4double(decade)-XMNLOG);
               if (X00 > Xone) continue;
               if (Xone > X11) goto L200;
               Y = 0;
@@ -1618,10 +1618,10 @@ public:
               int IDN = N1A*2;
               if ((NBININ <= IDN) || ((NBININ > IDN) && (k == 5))) {
                  if(!drawGridOnly) {
-                   aLinesAxis.push_back((float)xpl1);
-                   aLinesAxis.push_back((float)ypl1);
-                   aLinesAxis.push_back((float)xpl2);
-                   aLinesAxis.push_back((float)ypl2);
+                   aLinesAxis.push_back((G4float)xpl1);
+                   aLinesAxis.push_back((G4float)ypl1);
+                   aLinesAxis.push_back((G4float)xpl2);
+                   aLinesAxis.push_back((G4float)ypl2);
                  }
 
                  // Draw the intermediate LOG labels if requested
@@ -1629,7 +1629,7 @@ public:
                  if (MoreLogLabels && !OptionUnlab &&
                      !drawGridOnly && !overlap) {
                     if (noExponent) {
-                       double rlab = double(k)*::pow(10.,labelnumber-1);
+                       G4double rlab = G4double(k)*::pow(10.,labelnumber-1);
                        snpf(CHTEMP,sizeof(CHTEMP), "%g", rlab);
                     } else {
                        if (labelnumber-1 == 0) {
@@ -1656,8 +1656,8 @@ public:
                        }
                     }
                     //FIXME textaxis->SetTitle(CHTEMP);
-                    double u = XX;
-                    double v = YY;
+                    G4double u = XX;
+                    G4double v = YY;
                     if (firstintlab) {
                        //FIXME textaxis->GetBoundingBox(wi, hi); wi=(Uint)(wi*1.3); hi*=(Uint)(hi*1.3);
                        xi1 = 0;//FIXME gPad->XtoAbsPixel(u);
@@ -1690,10 +1690,10 @@ public:
                    TGaxis_Rotate(Xone,0,cosphi,sinphi,X0,Y0,xpl2, ypl2);
                    TGaxis_Rotate
                      (Xone,grid_side*gridlength,cosphi,sinphi,X0,Y0,xpl1,ypl1);
-                   aLinesGrid.push_back((float)xpl1);
-                   aLinesGrid.push_back((float)ypl1);
-                   aLinesGrid.push_back((float)xpl2);
-                   aLinesGrid.push_back((float)ypl2);
+                   aLinesGrid.push_back((G4float)xpl1);
+                   aLinesGrid.push_back((G4float)ypl1);
+                   aLinesGrid.push_back((G4float)xpl2);
+                   aLinesGrid.push_back((G4float)ypl2);
                  }
               }  //endif ((NBININ <= IDN) ||
            }  //endfor (k=2;k<10;k++)
@@ -1803,11 +1803,11 @@ public:
         // In CERN-ROOT :
         //SetTimeOffset(gStyle->GetTimeOffset());
         //TAxis::fTimeOffset = 788918400; // UTC time at 01/01/95
-        //double UTC_time_1995_01_01__00_00_00 = 788918400; //CERN-ROOT
+        //G4double UTC_time_1995_01_01__00_00_00 = 788918400; //CERN-ROOT
         //setTimeOffset(UTC_time_1995_01_01__00_00_00);
 
         //Be consistent with SoAxis::timeOffset being 0.
-        double UTC_time_1970_01_01__00_00_00 = 0; //UNIX
+        G4double UTC_time_1970_01_01__00_00_00 = 0; //UNIX
         set_time_offset(UTC_time_1970_01_01__00_00_00);
 
         //::printf("debug : SbAxisHPLOT::setTimeFormat : 002 : \"%s\"\n",
@@ -1815,7 +1815,7 @@ public:
      }
   }
 
-  void set_time_offset(double toffset,bool a_is_gmt = false) {
+  void set_time_offset(G4double toffset,bool a_is_gmt = false) {
      // Change the time offse  t
 
      std::string::size_type IdF = fTimeFormat.find("%F");
@@ -1832,7 +1832,7 @@ public:
      fTimeFormat += tmp;
 
      // append the decimal part of the time offset
-     double ds = toffset-(int)toffset;
+     G4double ds = toffset-(int)toffset;
      if(ds!= 0) {
         snpf(tmp,sizeof(tmp),"s%g",ds);
         fTimeFormat += tmp;
@@ -1852,9 +1852,9 @@ public:
   ////////////////////////////////////////////////////////////////////////////
 private:
   static void optimizeLimits(
-   double A1,double A2,int nold
-  ,double &BinLow, double &BinHigh
-  ,int &nbins, double &BinWidth
+   G4double A1,G4double A2,int nold
+  ,G4double &BinLow, G4double &BinHigh
+  ,int &nbins, G4double &BinWidth
   ,const std::string& aCHOPT
   ){
   // static function to compute reasonable axis limits
@@ -1869,26 +1869,26 @@ private:
      int lwid, kwid;
      int ntemp = 0;
      int jlog  = 0;
-     double siground = 0;
-     double alb, awidth, sigfig;
-     double timemulti = 1;
+     G4double siground = 0;
+     G4double alb, awidth, sigfig;
+     G4double timemulti = 1;
      int roundmode =0;
 
      int OptionTime;
      SETOPT(aCHOPT,'t',OptionTime);
 
-     double AL = mn<double>(A1,A2);
-     double AH = mx<double>(A1,A2);
+     G4double AL = mn<G4double>(A1,A2);
+     G4double AH = mx<G4double>(A1,A2);
      if (AL == AH) AH = AL+1;
      // if nold  ==  -1 , program uses binwidth input from calling routine
      if (nold == -1 && BinWidth > 0 ) goto L90;
-     ntemp = (int)mx<double>(nold,2);
+     ntemp = (int)mx<G4double>(nold,2);
      if (ntemp < 1) ntemp = 1;
 
   L20:
-     awidth = (AH-AL)/double(ntemp);
+     awidth = (AH-AL)/G4double(ntemp);
      timemulti = 1;
-     if (awidth >= FLT_MAX) goto LOK;  //in float.h
+     if (awidth >= FLT_MAX) goto LOK;  //in G4float.h
      if (awidth <= 0)       goto LOK;
 
   //      If time representation, bin width should be rounded to seconds
@@ -1994,11 +1994,11 @@ private:
      }
      lwid   = int(alb);
      if (alb < 0) lwid--;
-     BinLow     = BinWidth*double(lwid);
+     BinLow     = BinWidth*G4double(lwid);
      alb        = AH/BinWidth + 1.00001;
      kwid = int(alb);
      if (alb < 0) kwid--;
-     BinHigh = BinWidth*double(kwid);
+     BinHigh = BinWidth*G4double(kwid);
      nbins = kwid - lwid;
      if (nold == -1) goto LOK;
      if (nold <= 5) {          //    Request for one bin is difficult case
@@ -2010,11 +2010,11 @@ private:
      if (2*nbins == nold && !OptionTime) {ntemp++; goto L20; }
 
   LOK:
-     double oldBinLow = BinLow;
-     double oldBinHigh = BinHigh;
+     G4double oldBinLow = BinLow;
+     G4double oldBinHigh = BinHigh;
      int oldnbins = nbins;
 
-     double atest = BinWidth*0.0001;
+     G4double atest = BinWidth*0.0001;
      //if (TMath_Abs(BinLow-A1)  >= atest) { BinLow  += BinWidth;  nbins--; } //replaced by Damir in 3.10/02
      //if (TMath_Abs(BinHigh-A2) >= atest) { BinHigh -= BinWidth;  nbins--; } //by the next two lines
      if (AL-BinLow  >= atest) { BinLow  += BinWidth;  nbins--; }
@@ -2037,8 +2037,8 @@ private:
   }
 
   static void adjustBinSize(
-   double A1,double A2,int nold
-  ,double &BinLow, double &BinHigh, int &nbins, double &BinWidth
+   G4double A1,G4double A2,int nold
+  ,G4double &BinLow, G4double &BinHigh, int &nbins, G4double &BinWidth
   ){
   // Axis labels optimisation
   // ========================
@@ -2053,7 +2053,7 @@ private:
   //  nold     : Old NDIV (primary divisions)
   //  nbins    : New NDIV .
   //
-     BinWidth = TMath_Abs(A2-A1)/double(nold);
+     BinWidth = TMath_Abs(A2-A1)/G4double(nold);
      if (BinWidth <= 1) { BinWidth = 1; BinLow = int(A1); }
      else {
         int width = int(BinWidth/5) + 1;
@@ -2065,7 +2065,7 @@ private:
 
         if (A1 < 0) {
            for (int ic=0; ic<1000; ic++) {
-              double rbl = BinLow/BinWidth;
+              G4double rbl = BinLow/BinWidth;
               int   ibl = int(BinLow/BinWidth);
               if ( (rbl-ibl) == 0 || ic > width) { BinLow -= 5; break;}
            }
@@ -2073,19 +2073,19 @@ private:
      }
      BinHigh     = int(A2);
      nbins       = 0;
-     double XB  = BinLow;
+     G4double XB  = BinLow;
      while (XB <= BinHigh) {
         XB += BinWidth;
         nbins++;
      }
      BinHigh = XB - BinWidth;
   }
-  void setLabelOffset(float aValue) { fLabelOffset = aValue;}
-  void setLabelSize(float aValue) { fLabelSize = aValue;}
-  void setTitleOffset(float aValue) { fTitleOffset = aValue;}
-  void setTitleSize(float aValue) { fTitleSize = aValue;  }
+  void setLabelOffset(G4float aValue) { fLabelOffset = aValue;}
+  void setLabelSize(G4float aValue) { fLabelSize = aValue;}
+  void setTitleOffset(G4float aValue) { fTitleOffset = aValue;}
+  void setTitleSize(G4float aValue) { fTitleSize = aValue;  }
 public:
-  void set_tick_size(float aValue) { fTickSize = aValue;}
+  void set_tick_size(G4float aValue) { fTickSize = aValue;}
 
 private:
   std::ostream& m_out;
@@ -2093,11 +2093,11 @@ private:
 private:
   //TObject :
   unsigned int fBits;       //bit field status word
-  float    fTickSize;            //Size of primary tick mark in NDC
-  float    fLabelOffset;         //Offset of label wrt axis
-  float    fLabelSize;           //Size of labels in NDC
-  float    fTitleOffset;         //Offset of title wrt axis
-  float    fTitleSize;           //Size of title in NDC
+  G4float    fTickSize;            //Size of primary tick mark in NDC
+  G4float    fLabelOffset;         //Offset of label wrt axis
+  G4float    fLabelSize;           //Size of labels in NDC
+  G4float    fTitleOffset;         //Offset of title wrt axis
+  G4float    fTitleSize;           //Size of title in NDC
   int      fLabelFont;           //Font for labels
   std::string fTitle;               //axis title
   std::string fTimeFormat;          //Time format, ex: 09/12/99 12:34:00

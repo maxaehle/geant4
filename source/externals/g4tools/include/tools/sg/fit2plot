@@ -68,14 +68,14 @@ public: //plottable
           if(a_sinfos.size()) a_sinfos += f_lf;
           a_sinfos += "[h]^2! / ndf";
           a_sinfos += f_lf;
-          if(!numas<double>(m_output[0],a_sinfos)){}
+          if(!numas<G4double>(m_output[0],a_sinfos)){}
           a_sinfos += " / ";
-          if(!numas<double>(m_output[1],a_sinfos)){}
+          if(!numas<G4double>(m_output[1],a_sinfos)){}
         } else { //show chi2 only.
           if(a_sinfos.size()) a_sinfos += f_lf;
           a_sinfos += "[h]^2!";
           a_sinfos += f_lf;
-          if(!numas<double>(m_output[0],a_sinfos)){}
+          if(!numas<G4double>(m_output[0],a_sinfos)){}
         }
 
       } else if((*it)=="fit_parameters") {
@@ -85,14 +85,14 @@ public: //plottable
             if(a_sinfos.size()) a_sinfos += f_lf;
             a_sinfos += m_names[iparam];
             a_sinfos += f_lf;
-            if(!numas<double>(m_output[2+4*iparam+0],a_sinfos)){} //value
+            if(!numas<G4double>(m_output[2+4*iparam+0],a_sinfos)){} //value
             a_sinfos += " +&_ ";
-            if(!numas<double>(m_output[2+4*iparam+1],a_sinfos)){} //error
+            if(!numas<G4double>(m_output[2+4*iparam+1],a_sinfos)){} //error
           } else {
             if(a_sinfos.size()) a_sinfos += f_lf;
             a_sinfos += m_names[iparam];
             a_sinfos += f_lf;
-            if(!numas<double>(m_output[2+4*iparam+0],a_sinfos)){}
+            if(!numas<G4double>(m_output[2+4*iparam+0],a_sinfos)){}
           }
         }
       }
@@ -100,7 +100,7 @@ public: //plottable
   }
 public:
   fit2plot(const std::vector<std::string>& a_names,
-           const std::vector<double>& a_output)
+           const std::vector<G4double>& a_output)
   :m_names(a_names)
   ,m_output(a_output)
   {
@@ -140,7 +140,7 @@ public:
   }
 protected:
   std::vector<std::string> m_names;
-  std::vector<double> m_output;
+  std::vector<G4double> m_output;
   std::string m_name;
   std::string m_legend;
 };

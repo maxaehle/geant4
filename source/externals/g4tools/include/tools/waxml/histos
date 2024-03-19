@@ -19,7 +19,7 @@
 namespace tools {
 namespace waxml {
 
-  inline std::string soutd(std::ostringstream& a_oss,double a_value) {
+  inline std::string soutd(std::ostringstream& a_oss,G4double a_value) {
     a_oss.str("");
     a_oss << a_value;
     std::string s("\"");
@@ -65,13 +65,13 @@ namespace waxml {
   }
 
   inline void write_axis(
-   const histo::axis<double,unsigned int>& aAxis
+   const histo::axis<G4double,unsigned int>& aAxis
   ,const std::string& aDirection
   ,std::ostream& a_writer
   ,std::ostringstream& a_oss
   ,int aShift
   ){
-    typedef histo::axis<double,unsigned int>::bn_t bn_t;
+    typedef histo::axis<G4double,unsigned int>::bn_t bn_t;
 
     std::string spaces;
     for(int i=0;i<aShift;i++) spaces += " ";
@@ -115,12 +115,12 @@ namespace waxml {
            << " height=" << soutd(a_oss,aObject.bin_height(aIndex))
            << " error=" << soutd(a_oss,aObject.bin_error(aIndex));
 
-      double mean = aObject.bin_mean(aIndex);
+      G4double mean = aObject.bin_mean(aIndex);
       if(mean!=0) {
         a_writer << " weightedMean=" << soutd(a_oss,mean);
       }
 
-      double stddev = aObject.bin_rms(aIndex);
+      G4double stddev = aObject.bin_rms(aIndex);
       if(stddev!=0) {
         a_writer << " weightedRms=" << soutd(a_oss,stddev);
       }
@@ -146,20 +146,20 @@ namespace waxml {
            << " height=" << soutd(a_oss,aObject.bin_height(aIndexX,aIndexY))
            << " error=" << soutd(a_oss,aObject.bin_error(aIndexX,aIndexY));
 
-      double mean_x = aObject.bin_mean_x(aIndexX,aIndexY);
+      G4double mean_x = aObject.bin_mean_x(aIndexX,aIndexY);
       if(mean_x!=0) {
         a_writer << " weightedMeanX=" << soutd(a_oss,mean_x);
       }
-      double mean_y = aObject.bin_mean_y(aIndexX,aIndexY);
+      G4double mean_y = aObject.bin_mean_y(aIndexX,aIndexY);
       if(mean_y!=0) {
         a_writer << " weightedMeanY=" << soutd(a_oss,mean_y);
       }
 
-      double stddevX = aObject.bin_rms_x(aIndexX,aIndexY);
+      G4double stddevX = aObject.bin_rms_x(aIndexX,aIndexY);
       if(stddevX!=0) {
         a_writer << " weightedRmsX=" << soutd(a_oss,stddevX);
       }
-      double stddevY = aObject.bin_rms_y(aIndexX,aIndexY);
+      G4double stddevY = aObject.bin_rms_y(aIndexX,aIndexY);
       if(stddevY!=0) {
         a_writer << " weightedRmsY=" << soutd(a_oss,stddevY);
       }
@@ -188,28 +188,28 @@ namespace waxml {
            << " error=" << soutd(a_oss,aObject.bin_error(aIndexX,aIndexY,aIndexZ));
 
 
-      double mean_x = aObject.bin_mean_x(aIndexX,aIndexY,aIndexZ);
+      G4double mean_x = aObject.bin_mean_x(aIndexX,aIndexY,aIndexZ);
       if(mean_x!=0) {
         a_writer << " weightedMeanX=" << soutd(a_oss,mean_x);
       }
-      double mean_y = aObject.bin_mean_y(aIndexX,aIndexY,aIndexZ);
+      G4double mean_y = aObject.bin_mean_y(aIndexX,aIndexY,aIndexZ);
       if(mean_y!=0) {
         a_writer << " weightedMeanY=" << soutd(a_oss,mean_y);
       }
-      double mean_z = aObject.bin_mean_z(aIndexX,aIndexY,aIndexZ);
+      G4double mean_z = aObject.bin_mean_z(aIndexX,aIndexY,aIndexZ);
       if(mean_y!=0) {
         a_writer << " weightedMeanZ=" << soutd(a_oss,mean_z);
       }
 
-      double stddevX = aObject.bin_rms_x(aIndexX,aIndexY,aIndexZ);
+      G4double stddevX = aObject.bin_rms_x(aIndexX,aIndexY,aIndexZ);
       if(stddevX!=0) {
         a_writer << " weightedRmsX=" << soutd(a_oss,stddevX);
       }
-      double stddevY = aObject.bin_rms_y(aIndexX,aIndexY,aIndexZ);
+      G4double stddevY = aObject.bin_rms_y(aIndexX,aIndexY,aIndexZ);
       if(stddevY!=0) {
         a_writer << " weightedRmsY=" << soutd(a_oss,stddevY);
       }
-      double stddevZ = aObject.bin_rms_z(aIndexX,aIndexY,aIndexZ);
+      G4double stddevZ = aObject.bin_rms_z(aIndexX,aIndexY,aIndexZ);
       if(stddevZ!=0) {
         a_writer << " weightedRmsZ=" << soutd(a_oss,stddevZ);
       }
@@ -233,7 +233,7 @@ namespace waxml {
            << " error=" << soutd(a_oss,aObject.bin_error(aIndex))
            << " weightedMean=" << soutd(a_oss,aObject.bin_mean(aIndex));
 
-      double stddev = aObject.bin_rms(aIndex);
+      G4double stddev = aObject.bin_rms(aIndex);
       if(stddev!=0) {
         a_writer << " weightedRms=" << soutd(a_oss,stddev);
       }
@@ -261,11 +261,11 @@ namespace waxml {
            << " weightedMeanX=" << soutd(a_oss,aObject.bin_mean_x(aIndexX,aIndexY))
            << " weightedMeanY=" << soutd(a_oss,aObject.bin_mean_y(aIndexX,aIndexY));
 
-      double stddevX = aObject.bin_rms_x(aIndexX,aIndexY);
+      G4double stddevX = aObject.bin_rms_x(aIndexX,aIndexY);
       if(stddevX!=0) {
         a_writer << " weightedRmsX=" << soutd(a_oss,stddevX);
       }
-      double stddevY = aObject.bin_rms_y(aIndexX,aIndexY);
+      G4double stddevY = aObject.bin_rms_y(aIndexX,aIndexY);
       if(stddevY!=0) {
         a_writer << " weightedRmsY=" << soutd(a_oss,stddevY);
       }
@@ -285,7 +285,7 @@ namespace waxml {
     std::ostringstream ossd;
     ossd.precision(25);
 
-    typedef histo::axis<double,unsigned int>::bn_t bn_t;
+    typedef histo::axis<G4double,unsigned int>::bn_t bn_t;
 
     std::ostream& writer = a_writer;
 
@@ -342,7 +342,7 @@ namespace waxml {
     std::ostringstream ossd;
     ossd.precision(25);
 
-    typedef histo::axis<double,unsigned int>::bn_t bn_t;
+    typedef histo::axis<G4double,unsigned int>::bn_t bn_t;
 
     std::ostream& writer = a_writer;
 
@@ -422,7 +422,7 @@ namespace waxml {
     std::ostringstream ossd;
     ossd.precision(25);
 
-    typedef histo::axis<double,unsigned int>::bn_t bn_t;
+    typedef histo::axis<G4double,unsigned int>::bn_t bn_t;
     std::ostream& writer = a_writer;
 
     std::string spaces;
@@ -615,7 +615,7 @@ namespace waxml {
     std::ostringstream ossd;
     ossd.precision(25);
 
-    typedef histo::axis<double,unsigned int>::bn_t bn_t;
+    typedef histo::axis<G4double,unsigned int>::bn_t bn_t;
     std::ostream& writer = a_writer;
 
     std::string spaces;
@@ -671,7 +671,7 @@ namespace waxml {
     std::ostringstream ossd;
     ossd.precision(25);
 
-    typedef histo::axis<double,unsigned int>::bn_t bn_t;
+    typedef histo::axis<G4double,unsigned int>::bn_t bn_t;
     std::ostream& writer = a_writer;
 
     std::string spaces;

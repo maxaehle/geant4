@@ -4,7 +4,7 @@
 #ifndef tools_zb_buffer
 #define tools_zb_buffer
 
-#include <cfloat> //DBL_MAX
+#include <cG4float> //DBL_MAX
 
 #include "polygon"
 
@@ -15,7 +15,7 @@ namespace zb {
 
 class buffer {
 
-  typedef double ZReal;
+  typedef G4double ZReal;
   static ZReal ZREAL_HUGE() {return DBL_MAX;}
 
 public:

@@ -12,8 +12,8 @@
 namespace tools {
 namespace sg {
 
-class sf_vec4f : public sf_vec<vec4f,float> {
-  typedef sf_vec<vec4f,float> _parent;
+class sf_vec4f : public sf_vec<vec4f,G4float> {
+  typedef sf_vec<vec4f,G4float> _parent;
   TOOLS_HEADER(sf_vec4f,tools::sg::sf_vec4f,_parent)
 public:
   sf_vec4f():parent(){}
@@ -28,7 +28,7 @@ public:
 public:
   sf_vec4f& operator+=(const vec4f& a_value) {parent::operator+=(a_value);return *this;}
 public:
-  void set_value(float a_0,float a_1,float a_2,float a_3) {
+  void set_value(G4float a_0,G4float a_1,G4float a_2,G4float a_3) {
     value(vec4f(a_0,a_1,a_2,a_3));
   }
 };

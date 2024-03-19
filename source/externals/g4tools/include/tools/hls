@@ -6,7 +6,7 @@
 
 namespace tools {
 
-//T is float or double.
+//T is G4float or G4double.
 
 template <class T>
 inline T hls_to_rgb2(T rn1,T rn2,T huei) {

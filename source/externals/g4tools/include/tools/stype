@@ -42,13 +42,13 @@ inline const std::string& stype(unsigned int) {
   return s_v;
 }
 
-inline const std::string& stype(float) {
-  static const std::string s_v("float");
+inline const std::string& stype(G4float) {
+  static const std::string s_v("G4float");
   return s_v;
 }
 
-inline const std::string& stype(double) {
-  static const std::string s_v("double");
+inline const std::string& stype(G4double) {
+  static const std::string s_v("G4double");
   return s_v;
 }
 

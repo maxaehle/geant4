@@ -45,8 +45,8 @@ public:
   virtual bool visit(const std::string&,int64) = 0;
   virtual bool visit(const std::string&,uint64) = 0;
 
-  virtual bool visit(const std::string&,float) = 0;
-  virtual bool visit(const std::string&,double) = 0;
+  virtual bool visit(const std::string&,G4float) = 0;
+  virtual bool visit(const std::string&,G4double) = 0;
 
   virtual bool visit(const std::string&,const std::string&) = 0;
 //virtual bool visit(const std::string&,const char*) = 0;
@@ -55,13 +55,13 @@ public:
   virtual bool visit(const std::string&,const std::vector<short>&) = 0;
   virtual bool visit(const std::string&,const std::vector<int>&) = 0;
   virtual bool visit(const std::string&,const std::vector<int64>&) = 0;
-  virtual bool visit(const std::string&,const std::vector<float>&) = 0;
-  virtual bool visit(const std::string&,const std::vector<double>&) = 0;
+  virtual bool visit(const std::string&,const std::vector<G4float>&) = 0;
+  virtual bool visit(const std::string&,const std::vector<G4double>&) = 0;
 //virtual bool visit(const std::string&,const std::vector<unsigned char>&) = 0;
   virtual bool visit(const std::string&,const std::vector<std::string>&) = 0;
-  virtual bool visit(const std::string&,const std::vector< std::vector<double> >&) = 0;
+  virtual bool visit(const std::string&,const std::vector< std::vector<G4double> >&) = 0;
 
-//virtual bool visit_double(const std::string&,const IArray&) = 0;
+//virtual bool visit_G4double(const std::string&,const IArray&) = 0;
   virtual bool visit(const std::string&,const istorable&) = 0;
 };
 

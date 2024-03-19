@@ -12,8 +12,8 @@ namespace sg {
 class ortho : public base_camera {
   TOOLS_NODE(ortho,tools::sg::ortho,base_camera)
 public:
-  virtual float near_height() const {return height.value();}
-  virtual void zoom(float a_fac) {
+  virtual G4float near_height() const {return height.value();}
+  virtual void zoom(G4float a_fac) {
     //for exa :
     //  a_fac = 0.99f is a zoom in
     //  a_fac = 1.01f is a zoom out
@@ -21,7 +21,7 @@ public:
   }
   virtual camera_type type() const {return camera_ortho;}
 public:
-  sf<float> height;
+  sf<G4float> height;
 public:
   virtual const desc_fields& node_desc_fields() const {
     TOOLS_FIELD_DESC_NODE_CLASS(tools::sg::ortho)
@@ -80,10 +80,10 @@ public:
   }
 protected:
   virtual void get_lrbt(unsigned int a_ww,unsigned int a_wh,
-                        float& a_l,float& a_r,float& a_b,float& a_t) {
-    float aspect = float(a_ww)/float(a_wh);
-    //landscape : float aspect = float(a_action.wh())/float(a_action.ww());
-    float hh = height.value()*0.5f;
+                        G4float& a_l,G4float& a_r,G4float& a_b,G4float& a_t) {
+    G4float aspect = G4float(a_ww)/G4float(a_wh);
+    //landscape : G4float aspect = G4float(a_action.wh())/G4float(a_action.ww());
+    G4float hh = height.value()*0.5f;
     a_l = -aspect*hh;
     a_r = aspect*hh;
     a_b = -hh;

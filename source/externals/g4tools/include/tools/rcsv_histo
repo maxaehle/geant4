@@ -74,18 +74,18 @@ public:
     }
     if(a_verbose) a_out << "file size is " << file_sz << std::endl;
 
-    tools::histo::histo_data<double,unsigned int,unsigned int,double> hdata; //to be filled correctly.
+    tools::histo::histo_data<G4double,unsigned int,unsigned int,G4double> hdata; //to be filled correctly.
     hdata.m_dimension = 0;
     hdata.m_bin_number = 0;
 
     bool is_profile = false;
     bool _cut_v = false;
-    double _min_v = 0;
-    double _max_v = 0;
+    G4double _min_v = 0;
+    G4double _max_v = 0;
 
     // read commented header :
     std::string _class;
-    typedef tools::histo::axis<double,unsigned int> axis_t;
+    typedef tools::histo::axis<G4double,unsigned int> axis_t;
    {std::string line;
     while(read_header_line(m_reader,file_sz,line)) {
 //      a_out << "line : " << sout(s) << std::endl;
@@ -146,12 +146,12 @@ public:
             a_out << "tools::rcsv::histo::read : syntax error in " << sout(line) << std::endl;
             return false;
           }
-          double minimum_value;
+          G4double minimum_value;
           if(!to(_words[3],minimum_value)) {
             a_out << "tools::rcsv::histo::read : syntax error in " << sout(line) << std::endl;
             return false;
           }
-          double maximum_value;
+          G4double maximum_value;
           if(!to(_words[4],maximum_value)) {
             a_out << "tools::rcsv::histo::read : syntax error in " << sout(line) << std::endl;
             return false;
@@ -163,8 +163,8 @@ public:
           }
           hdata.m_axes.push_back(axis);
         } else if(_words[1]=="edges") {
-          std::vector<double> edges;
-          double value;
+          std::vector<G4double> edges;
+          G4double value;
           for(unsigned int index=2;index<_words.size();index++) {
             if(!to(_words[index],value)) {
               a_out << "tools::rcsv::histo::read : syntax error in " << sout(line) << std::endl;
@@ -184,8 +184,8 @@ public:
         }
 
       } else if(_words[0]=="#planes_Sxyw") {
-        std::vector<double> planes;
-        double value;
+        std::vector<G4double> planes;
+        G4double value;
         for(unsigned int index=1;index<_words.size();index++) {
           if(!to(_words[index],value)) {
             a_out << "tools::rcsv::histo::read : syntax error in " << sout(line) << std::endl;
@@ -264,8 +264,8 @@ public:
     unsigned int valn = 3+2*hdata.m_dimension;
 
     if(is_profile) valn += 2;
-    std::vector<double> _bin_Svw;
-    std::vector<double> _bin_Sv2w;
+    std::vector<G4double> _bin_Svw;
+    std::vector<G4double> _bin_Sv2w;
 
     if(labels.size()!=valn) {
       a_out << "tools::rcsv::histo::read :"
@@ -275,10 +275,10 @@ public:
     }
 
     // csv data (bins) :
-   {std::vector<double> vals;
+   {std::vector<G4double> vals;
     unsigned int nline = 0;
-    std::vector<double> bin_Sxw(hdata.m_dimension);
-    std::vector<double> bin_Sx2w(hdata.m_dimension);
+    std::vector<G4double> bin_Sxw(hdata.m_dimension);
+    std::vector<G4double> bin_Sx2w(hdata.m_dimension);
     while(read_data_line(m_reader,file_sz,labels.size(),vals)) {
 /*
       for(unsigned int index=0;index<vals.size();index++) {
@@ -326,7 +326,7 @@ public:
 
     hdata.update_fast_getters(); //important.
 
-    tools::histo::profile_data<double,unsigned int,unsigned int,double,double> pdata(hdata); //to be filled correctly.
+    tools::histo::profile_data<G4double,unsigned int,unsigned int,G4double,G4double> pdata(hdata); //to be filled correctly.
     if(is_profile) {
       pdata.m_is_profile = true;
       pdata.m_bin_Svw = _bin_Svw;
@@ -486,17 +486,17 @@ protected:
     return read_line(a_reader,a_sz,a_s);
   }
 
-  static bool _read(std::istream& a_reader,double& a_v) {
+  static bool _read(std::istream& a_reader,G4double& a_v) {
     a_reader >> a_v;
     if(a_reader.tellg()==std::streampos(-1)) {a_v = 0;return false;}
-    //std::cout << "debug : _read(double) " << a_v << std::endl;
+    //std::cout << "debug : _read(G4double) " << a_v << std::endl;
     return true;
   }
 
-  static bool read_data_line(std::istream& a_reader,std::streampos a_sz,size_t a_number,std::vector<double>& a_vals) {
+  static bool read_data_line(std::istream& a_reader,std::streampos a_sz,size_t a_number,std::vector<G4double>& a_vals) {
     a_vals.clear();
     for(size_t index=0;index<a_number;index++) {
-      double v;
+      G4double v;
       if(!_read(a_reader,v)) return false;
       a_vals.push_back(v);
       if(index==(a_number-1)) { //read up to LF()

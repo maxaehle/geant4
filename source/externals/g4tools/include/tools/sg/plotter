@@ -49,26 +49,26 @@ private:
     static const std::string s_v("name entries mean rms fit_quality fit_ndf fit_parameters fit_errors");
     return s_v;
   }
-  static float default_infos_margin() {return 0.005f;}
-  static float default_title_box_width()    {return 0.3f;}
-  static float default_title_box_height()   {return 0.05f;}
-  static float default_title_box_x_margin() {return 0.01f;}
-  static float default_title_box_y_margin() {return 0.005f;}
+  static G4float default_infos_margin() {return 0.005f;}
+  static G4float default_title_box_width()    {return 0.3f;}
+  static G4float default_title_box_height()   {return 0.05f;}
+  static G4float default_title_box_x_margin() {return 0.01f;}
+  static G4float default_title_box_y_margin() {return 0.005f;}
 public:
-  sf<float> width;          //PAW XSIZ
-  sf<float> height;         //PAW YSIZ
-  sf<float> left_margin;    //PAW XMGL
-  sf<float> right_margin;   //PAW XMGR
-  sf<float> bottom_margin;  //PAW YMGL
-  sf<float> top_margin;     //PAW YMGU
+  sf<G4float> width;          //PAW XSIZ
+  sf<G4float> height;         //PAW YSIZ
+  sf<G4float> left_margin;    //PAW XMGL
+  sf<G4float> right_margin;   //PAW XMGR
+  sf<G4float> bottom_margin;  //PAW YMGL
+  sf<G4float> top_margin;     //PAW YMGU
 
-  sf<float> depth;
-  sf<float> down_margin;
-  sf<float> up_margin;
+  sf<G4float> depth;
+  sf<G4float> down_margin;
+  sf<G4float> up_margin;
 
   sf<bool> title_up;
-  sf<float> title_to_axis;
-  sf<float> title_height;
+  sf<G4float> title_to_axis;
+  sf<G4float> title_height;
   sf<bool> title_automated;
   sf_enum<hjust> title_hjust;
   sf_string title; //output if title_automated.
@@ -86,42 +86,42 @@ public:
   // They are not necessary realized on the sg::axis nodes.
   sf<bool> x_axis_enforced;
   sf<bool> x_axis_automated;
-  sf<float> x_axis_min;
-  sf<float> x_axis_max;
+  sf<G4float> x_axis_min;
+  sf<G4float> x_axis_max;
   sf<bool> x_axis_is_log;
 
   sf<bool> y_axis_enforced;
   sf<bool> y_axis_automated;
-  sf<float> y_axis_min;
-  sf<float> y_axis_max;
+  sf<G4float> y_axis_min;
+  sf<G4float> y_axis_max;
   sf<bool> y_axis_is_log;
 
   sf<bool> z_axis_enforced;
   sf<bool> z_axis_automated;
-  sf<float> z_axis_min;
-  sf<float> z_axis_max;
+  sf<G4float> z_axis_min;
+  sf<G4float> z_axis_max;
   sf<bool> z_axis_is_log;
 
-  sf<float> value_top_margin;
-  sf<float> value_bottom_margin;
+  sf<G4float> value_top_margin;
+  sf<G4float> value_bottom_margin;
   sf<bool> value_bins_with_entries;
 
-  sf<float> infos_width; //in percent of width.
-  sf<float> infos_x_margin; //in percent of width. From right.
-  sf<float> infos_y_margin; //in percent of height. From top.
+  sf<G4float> infos_width; //in percent of width.
+  sf<G4float> infos_x_margin; //in percent of width. From right.
+  sf<G4float> infos_y_margin; //in percent of height. From top.
   sf_string infos_what;
 
-  sf<float> title_box_width;    //in percent of width.
-  sf<float> title_box_height;   //in percent of height.
-  sf<float> title_box_x_margin; //in percent of width. From left.
-  sf<float> title_box_y_margin; //in percent of height. From top.
+  sf<G4float> title_box_width;    //in percent of width.
+  sf<G4float> title_box_height;   //in percent of height.
+  sf<G4float> title_box_x_margin; //in percent of width. From left.
+  sf<G4float> title_box_y_margin; //in percent of height. From top.
 
   sf<bool> func2D_borders_visible;
 
   // used with shape xyz
-  sf<float> theta;  //in degrees.
-  sf<float> phi;    //in degrees.
-  sf<float> tau;    //in degrees.
+  sf<G4float> theta;  //in degrees.
+  sf<G4float> phi;    //in degrees.
+  sf<G4float> tau;    //in degrees.
 
   ////////////////////////////////////////////////////////////////
   /// legend related :////////////////////////////////////////////
@@ -131,13 +131,13 @@ public:
   //if legends_attached_to_infos is false :
   //  legends_origin is used to place the legends. It is then
   //  the lower left corner of the box containing all legends.
-  mf_vec<vec2f,float> legends_origin; //common origin of legend boxes.
+  mf_vec<vec2f,G4float> legends_origin; //common origin of legend boxes.
   enum unit_type {
     unit_percent,
     unit_axis
   };
   mf_enum<unit_type> legends_origin_unit;
-  mf_vec<vec2f,float> legends_size; //overall legend boxes size.
+  mf_vec<vec2f,G4float> legends_size; //overall legend boxes size.
   mf_string legends_string;
 
   ////////////////////////////////////////////////////////////////
@@ -153,7 +153,7 @@ public:
   sf_enum<shape_type> shape;
 
   // used with xy shape :
-  sf<float> xy_depth; //all is in z [0,xy_depth]
+  sf<G4float> xy_depth; //all is in z [0,xy_depth]
 
   sf<unsigned int> curve_number_of_points;
 
@@ -169,9 +169,9 @@ public:
   //sf<bool> grid_visible;
   // For contours :
   sf<unsigned int> number_of_levels;
-  mf<float> levels;
+  mf<G4float> levels;
   //sf<bool> frozen;
-  //sf<float> ttfScale;
+  //sf<G4float> ttfScale;
   //sf<bool> wallEnforced;
   //sf<bool> gridEnforced;
   //SoMFString infos; //Output
@@ -519,38 +519,38 @@ public: //style
     ////////////////////////////////////////////
 
     if(a_geom) {
-    float xfac = 1.0F/20.0F; //0.05
-    float yfac = 1.0F/20.0F; //0.05
+    G4float xfac = 1.0F/20.0F; //0.05
+    G4float yfac = 1.0F/20.0F; //0.05
 
     // Take PAW defaults :
-    float XSIZ = 20 * xfac;    //1     //page width
-    float YSIZ = 20 * yfac;    //1     //page height
-    float XMGL = 2 * xfac;     //0.1   //left x margin (to data frame).
-    float XMGR = 2 * xfac;     //0.1   //right y margin (to data frame).
-    float YMGL = 2 * yfac;     //0.1   //low y margin (to data frame).
-    float YMGU = 2 * yfac;     //0.1   //up y margin (to data frame).
+    G4float XSIZ = 20 * xfac;    //1     //page width
+    G4float YSIZ = 20 * yfac;    //1     //page height
+    G4float XMGL = 2 * xfac;     //0.1   //left x margin (to data frame).
+    G4float XMGR = 2 * xfac;     //0.1   //right y margin (to data frame).
+    G4float YMGL = 2 * yfac;     //0.1   //low y margin (to data frame).
+    G4float YMGU = 2 * yfac;     //0.1   //up y margin (to data frame).
     // Axes :
-    float VSIZ = 0.28F * yfac; //0.014 //tick label character size.
-    float XVAL = 0.4F * xfac;  //0.02 //x distance of y tick label to data frame.
-    float YVAL = 0.4F * yfac;  //0.02 //y distance of x tick label to data frame.
-    float XTIC = 0.3F * yfac;  //0.015 //y length of X axis ticks.
-    float YTIC = 0.3F * xfac;  //0.015 //x length of Y axis ticks.
-    float XLAB = 1.4F * xfac;  //0.07  //x distance of y title to data frame.
-    float YLAB = 0.8F * yfac;  //0.04  //y distance of x title to data frame.
-    float ASIZ = 0.28F * yfac; //0.014 // axis title (label) character size.
+    G4float VSIZ = 0.28F * yfac; //0.014 //tick label character size.
+    G4float XVAL = 0.4F * xfac;  //0.02 //x distance of y tick label to data frame.
+    G4float YVAL = 0.4F * yfac;  //0.02 //y distance of x tick label to data frame.
+    G4float XTIC = 0.3F * yfac;  //0.015 //y length of X axis ticks.
+    G4float YTIC = 0.3F * xfac;  //0.015 //x length of Y axis ticks.
+    G4float XLAB = 1.4F * xfac;  //0.07  //x distance of y title to data frame.
+    G4float YLAB = 0.8F * yfac;  //0.04  //y distance of x title to data frame.
+    G4float ASIZ = 0.28F * yfac; //0.014 // axis title (label) character size.
 
-    float YHTI = 1.2F * yfac;  //0.06  //y distance of title to x axis.
-    float TSIZ = 0.28F * yfac; //0.014 //title character size
+    G4float YHTI = 1.2F * yfac;  //0.06  //y distance of title to x axis.
+    G4float TSIZ = 0.28F * yfac; //0.014 //title character size
 
-    float zfac = 1.0F/20.0F; //0.05
-    float ZSIZ = 20 * zfac;    //1     //page depth
-    float ZMGD = 2 * zfac;     //0.1   //low y margin (to data frame).
-    float ZMGU = 2 * zfac;     //0.1   //up y margin (to data frame).
+    G4float zfac = 1.0F/20.0F; //0.05
+    G4float ZSIZ = 20 * zfac;    //1     //page depth
+    G4float ZMGD = 2 * zfac;     //0.1   //low y margin (to data frame).
+    G4float ZMGU = 2 * zfac;     //0.1   //up y margin (to data frame).
 
     // Data area :
-    //float wData = XSIZ-XMGL-XMGR;
-    //float hData = YSIZ-YMGL-YMGU;
-    //float dData = ZSIZ-ZMGD-ZMGU;
+    //G4float wData = XSIZ-XMGL-XMGR;
+    //G4float hData = YSIZ-YMGL-YMGU;
+    //G4float dData = ZSIZ-ZMGD-ZMGU;
 
     width = XSIZ;
     height = YSIZ;
@@ -752,41 +752,41 @@ public: //style
 
       //width,height,depth : could set from style (for exa for lego).
       } else if(key=="width") {
-        float v;
-        if(!to<float>(sv,v)) {style_failed(a_out,key,sv);return false;}
+        G4float v;
+        if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
         width = v;
       } else if(key=="height") {
-        float v;
-        if(!to<float>(sv,v)) {style_failed(a_out,key,sv);return false;}
+        G4float v;
+        if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
         height = v;
       } else if(key=="depth") {
-        float v;
-        if(!to<float>(sv,v)) {style_failed(a_out,key,sv);return false;}
+        G4float v;
+        if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
         depth = v;
 
       } else if(key=="left_margin") {
-        float v;
-        if(!to<float>(sv,v)) {style_failed(a_out,key,sv);return false;}
+        G4float v;
+        if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
         left_margin = v;
       } else if(key=="right_margin") {
-        float v;
-        if(!to<float>(sv,v)) {style_failed(a_out,key,sv);return false;}
+        G4float v;
+        if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
         right_margin = v;
       } else if(key=="bottom_margin") {
-        float v;
-        if(!to<float>(sv,v)) {style_failed(a_out,key,sv);return false;}
+        G4float v;
+        if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
         bottom_margin = v;
       } else if(key=="top_margin") {
-        float v;
-        if(!to<float>(sv,v)) {style_failed(a_out,key,sv);return false;}
+        G4float v;
+        if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
         top_margin = v;
       } else if(key=="down_margin") {
-        float v;
-        if(!to<float>(sv,v)) {style_failed(a_out,key,sv);return false;}
+        G4float v;
+        if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
         down_margin = v;
       } else if(key=="up_margin") {
-        float v;
-        if(!to<float>(sv,v)) {style_failed(a_out,key,sv);return false;}
+        G4float v;
+        if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
         up_margin = v;
 
       } else if(key=="title") {
@@ -796,12 +796,12 @@ public: //style
         if(!to(sv,v)) {style_failed(a_out,key,sv);return false;}
         title_up = v;
       } else if(key=="title_to_axis") {
-        float v;
-        if(!to<float>(sv,v)) {style_failed(a_out,key,sv);return false;}
+        G4float v;
+        if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
         title_to_axis = v;
       } else if(key=="title_height") {
-        float v;
-        if(!to<float>(sv,v)) {style_failed(a_out,key,sv);return false;}
+        G4float v;
+        if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
         title_height = v;
       } else if(key=="title_automated") {
         bool v;
@@ -822,12 +822,12 @@ public: //style
         if(!to(sv,v)) {style_failed(a_out,key,sv);return false;}
         x_axis_automated = v;
       } else if(key=="x_axis_min") {
-        float v;
-        if(!to<float>(sv,v)) {style_failed(a_out,key,sv);return false;}
+        G4float v;
+        if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
         x_axis_min = v;
       } else if(key=="x_axis_max") {
-        float v;
-        if(!to<float>(sv,v)) {style_failed(a_out,key,sv);return false;}
+        G4float v;
+        if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
         x_axis_max = v;
       } else if(key=="x_axis_is_log") {
         bool v;
@@ -843,12 +843,12 @@ public: //style
         if(!to(sv,v)) {style_failed(a_out,key,sv);return false;}
         y_axis_automated = v;
       } else if(key=="y_axis_min") {
-        float v;
-        if(!to<float>(sv,v)) {style_failed(a_out,key,sv);return false;}
+        G4float v;
+        if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
         y_axis_min = v;
       } else if(key=="y_axis_max") {
-        float v;
-        if(!to<float>(sv,v)) {style_failed(a_out,key,sv);return false;}
+        G4float v;
+        if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
         y_axis_max = v;
       } else if(key=="y_axis_is_log") {
         bool v;
@@ -864,12 +864,12 @@ public: //style
         if(!to(sv,v)) {style_failed(a_out,key,sv);return false;}
         z_axis_automated = v;
       } else if(key=="z_axis_min") {
-        float v;
-        if(!to<float>(sv,v)) {style_failed(a_out,key,sv);return false;}
+        G4float v;
+        if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
         z_axis_min = v;
       } else if(key=="z_axis_max") {
-        float v;
-        if(!to<float>(sv,v)) {style_failed(a_out,key,sv);return false;}
+        G4float v;
+        if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
         z_axis_max = v;
       } else if(key=="z_axis_is_log") {
         bool v;
@@ -877,45 +877,45 @@ public: //style
         z_axis_is_log = v;
 
       } else if(key=="value_top_margin") {
-        float v;
-        if(!to<float>(sv,v)) {style_failed(a_out,key,sv);return false;}
+        G4float v;
+        if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
         value_top_margin = v;
       } else if(key=="value_bottom_margin") {
-        float v;
-        if(!to<float>(sv,v)) {style_failed(a_out,key,sv);return false;}
+        G4float v;
+        if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
         value_bottom_margin = v;
       } else if(key=="value_bins_with_entries") {
-        float v;
-        if(!to<float>(sv,v)) {style_failed(a_out,key,sv);return false;}
+        G4float v;
+        if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
         value_bins_with_entries = v;
       } else if(key=="infos_width") {
-        float v;
-        if(!to<float>(sv,v)) {style_failed(a_out,key,sv);return false;}
+        G4float v;
+        if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
         infos_width = v;
       } else if(key=="infos_x_margin") {
-        float v;
-        if(!to<float>(sv,v)) {style_failed(a_out,key,sv);return false;}
+        G4float v;
+        if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
         infos_x_margin = v;
       } else if(key=="infos_y_margin") {
-        float v;
-        if(!to<float>(sv,v)) {style_failed(a_out,key,sv);return false;}
+        G4float v;
+        if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
         infos_y_margin = v;
 
       } else if(key=="title_box_width") {
-        float v;
-        if(!to<float>(sv,v)) {style_failed(a_out,key,sv);return false;}
+        G4float v;
+        if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
         title_box_width = v;
       } else if(key=="title_box_height") {
-        float v;
-        if(!to<float>(sv,v)) {style_failed(a_out,key,sv);return false;}
+        G4float v;
+        if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
         title_box_height = v;
       } else if(key=="title_box_x_margin") {
-        float v;
-        if(!to<float>(sv,v)) {style_failed(a_out,key,sv);return false;}
+        G4float v;
+        if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
         title_box_x_margin = v;
       } else if(key=="title_box_y_margin") {
-        float v;
-        if(!to<float>(sv,v)) {style_failed(a_out,key,sv);return false;}
+        G4float v;
+        if(!to<G4float>(sv,v)) {style_failed(a_out,key,sv);return false;}
         title_box_y_margin = v;
 
       } else if(key=="infos_what") {
@@ -963,7 +963,7 @@ public: //style
       //legends_string
       //legends_color
       //legends_string mf_string
-      //legends_color mf_vec<colorf,float>
+      //legends_color mf_vec<colorf,G4float>
 
       } else {
         a_out << "tools::sg::plotter::set_from_style : unknown key " << key << "." << std::endl;
@@ -1837,22 +1837,22 @@ public: //public
 
   bool xx_2_yy(const vec3f& a_pos,vec3f& a_out) const {
     // a_pos is in data frame NDC coordinates.
-   {float XSIZ = width;
-    float XMGL = left_margin;
-    float XMGR = right_margin;
-    float wData = XSIZ-XMGL-XMGR;
+   {G4float XSIZ = width;
+    G4float XMGL = left_margin;
+    G4float XMGR = right_margin;
+    G4float wData = XSIZ-XMGL-XMGR;
     a_out[0] = wData*a_pos[0];}
 
-   {float YSIZ = height;
-    float YMGL = bottom_margin;
-    float YMGU = top_margin;
-    float hData = YSIZ-YMGL-YMGU;
+   {G4float YSIZ = height;
+    G4float YMGL = bottom_margin;
+    G4float YMGU = top_margin;
+    G4float hData = YSIZ-YMGL-YMGU;
     a_out[1] = hData*a_pos[1];}
 
-   {float ZSIZ = depth;
-    float ZMGD = down_margin;
-    float ZMGU = up_margin;
-    float dData = ZSIZ-ZMGD-ZMGU;
+   {G4float ZSIZ = depth;
+    G4float ZMGD = down_margin;
+    G4float ZMGU = up_margin;
+    G4float dData = ZSIZ-ZMGD-ZMGU;
     a_out[2] = dData*a_pos[2];}
 
     return true;
@@ -1861,30 +1861,30 @@ public: //public
   bool data_frame_2_vp(const vec3f& a_pos,vec3f& a_vp) const {
     // a_pos is in data frame NDC coordinates.
     // a_vp is in viewport/screen coordinates (in [0,1]).
-   {float XSIZ = width;
-    float XMGL = left_margin;
-    float XMGR = right_margin;
-    float wData = XSIZ-XMGL-XMGR;
+   {G4float XSIZ = width;
+    G4float XMGL = left_margin;
+    G4float XMGR = right_margin;
+    G4float wData = XSIZ-XMGL-XMGR;
     if(XSIZ==0.0F) {
       //SoDebugError::postInfo("inlib::sg;:plotter::data_frame_2_vp","XSIZ is 0");
       return false;
     }
     a_vp[0] = (wData*a_pos[0] + XMGL)/XSIZ;}
 
-   {float YSIZ = height;
-    float YMGL = bottom_margin;
-    float YMGU = top_margin;
-    float hData = YSIZ-YMGL-YMGU;
+   {G4float YSIZ = height;
+    G4float YMGL = bottom_margin;
+    G4float YMGU = top_margin;
+    G4float hData = YSIZ-YMGL-YMGU;
     if(YSIZ==0.0F) {
       //SoDebugError::postInfo("inlib::sg;:plotter::data_frame_2_vp","YSIZ is 0");
       return false;
     }
     a_vp[1] = (hData*a_pos[1] + YMGL)/YSIZ;}
 
-   {float ZSIZ = depth;
-    float ZMGD = down_margin;
-    float ZMGU = up_margin;
-    float dData = ZSIZ-ZMGD-ZMGU;
+   {G4float ZSIZ = depth;
+    G4float ZMGD = down_margin;
+    G4float ZMGU = up_margin;
+    G4float dData = ZSIZ-ZMGD-ZMGU;
     if(ZSIZ==0.0F) {
       //SoDebugError::postInfo("inlib::sg;:plotter::data_frame_2_vp","ZSIZ is 0");
       return false;
@@ -1898,30 +1898,30 @@ public: //public
     // a_vp is in viewport/screen coordinates (in [0,1]).
     // a_pos is in data frame NDC coordinates.
 
-   {float XSIZ = width;
-    float XMGL = left_margin;
-    float XMGR = right_margin;
-    float wData = XSIZ-XMGL-XMGR;
+   {G4float XSIZ = width;
+    G4float XMGL = left_margin;
+    G4float XMGR = right_margin;
+    G4float wData = XSIZ-XMGL-XMGR;
     if(wData==0.0F) {
       //SoDebugError::postInfo("inlib::sg;:plotter::vp_2_data_frame","wData is 0");
       return false;
     }
     a_pos[0] = (a_vp[0]*XSIZ - XMGL)/wData;}
 
-   {float YSIZ = height;
-    float YMGL = bottom_margin;
-    float YMGU = top_margin;
-    float hData = YSIZ-YMGL-YMGU;
+   {G4float YSIZ = height;
+    G4float YMGL = bottom_margin;
+    G4float YMGU = top_margin;
+    G4float hData = YSIZ-YMGL-YMGU;
     if(hData==0.0F) {
       //SoDebugError::postInfo("inlib::sg;:plotter::vp_2_data_frame","hData is 0");
       return false;
     }
     a_pos[1] = (a_vp[1]*YSIZ - YMGL)/hData;}
 
-   {float ZSIZ = depth;
-    float ZMGD = down_margin;
-    float ZMGU = up_margin;
-    float dData = ZSIZ-ZMGD-ZMGU;
+   {G4float ZSIZ = depth;
+    G4float ZMGD = down_margin;
+    G4float ZMGU = up_margin;
+    G4float dData = ZSIZ-ZMGD-ZMGU;
     if(dData==0.0F) {
       //SoDebugError::postInfo("inlib::sg;:plotter::vp_2_data_frame","dData is 0");
       return false;
@@ -1937,8 +1937,8 @@ public: //public
 
     // Assume that axes min,max,is_log are up to date.
 
-   {float mn = m_x_axis.minimum_value;
-    float mx = m_x_axis.maximum_value;
+   {G4float mn = m_x_axis.minimum_value;
+    G4float mx = m_x_axis.maximum_value;
     bool lg = m_x_axis.is_log;
     if(lg) {
       mn = fpow(10,mn);
@@ -1946,8 +1946,8 @@ public: //public
     }
     a_pos[0] = verify_log_inv(aDF[0],mn,mx-mn,lg);}
 
-   {float mn = m_y_axis.minimum_value;
-    float mx = m_y_axis.maximum_value;
+   {G4float mn = m_y_axis.minimum_value;
+    G4float mx = m_y_axis.maximum_value;
     bool lg = m_y_axis.is_log;
     if(lg) {
       mn = fpow(10,mn);
@@ -1955,8 +1955,8 @@ public: //public
     }
     a_pos[1] = verify_log_inv(aDF[1],mn,mx-mn,lg);}
 
-   {float mn = m_z_axis.minimum_value;
-    float mx = m_z_axis.maximum_value;
+   {G4float mn = m_z_axis.minimum_value;
+    G4float mx = m_z_axis.maximum_value;
     bool lg = m_z_axis.is_log;
     if(lg) {
       mn = fpow(10,mn);
@@ -1973,8 +1973,8 @@ public: //public
 
     // Assume that axes min,max,logScale are up to date.
 
-   {float mn = m_x_axis.minimum_value;
-    float mx = m_x_axis.maximum_value;
+   {G4float mn = m_x_axis.minimum_value;
+    G4float mx = m_x_axis.maximum_value;
     if(mx==mn) {
       //SoDebugError::postInfo
       //  ("inlib::sg;:plotter::axis_2_data_frame","x : mn (%g) == mx (%g)",mn,mx);
@@ -1997,8 +1997,8 @@ public: //public
     }
     aDF[0] = verify_log(a_pos[0],mn,mx-mn,lg);}
 
-   {float mn = m_y_axis.minimum_value;
-    float mx = m_y_axis.maximum_value;
+   {G4float mn = m_y_axis.minimum_value;
+    G4float mx = m_y_axis.maximum_value;
     if(mx==mn) {
       //SoDebugError::postInfo
       //  ("inlib::sg;:plotter::axis_2_data_frame","y : mn (%g) == mx (%g)",mn,mx);
@@ -2021,8 +2021,8 @@ public: //public
     }
     aDF[1] = verify_log(a_pos[1],mn,mx-mn,lg);}
 
-   {float mn = m_z_axis.minimum_value;
-    float mx = m_z_axis.maximum_value;
+   {G4float mn = m_z_axis.minimum_value;
+    G4float mx = m_z_axis.maximum_value;
     if(mx==mn) {
       //SoDebugError::postInfo
       //  ("inlib::sg;:plotter::axis_2_data_frame","z : mn (%g) == mx (%g)",mn,mx);
@@ -2098,7 +2098,7 @@ public:
     m_cmap_axis.mag_style().color = a_color;
   }
 
-  void set_axes_text_scale(float a_v){
+  void set_axes_text_scale(G4float a_v){
     m_x_axis.labels_style().scale = a_v;
     m_x_axis.title_style().scale = a_v;
     m_x_axis.mag_style().scale = a_v;
@@ -2124,32 +2124,32 @@ public:
   }
 
   void set_axes_line_width(int a_v){
-    m_x_axis.line_style().width = float(a_v);
-    m_y_axis.line_style().width = float(a_v);
-    m_z_axis.line_style().width = float(a_v);
-    m_cmap_axis.line_style().width = float(a_v);
+    m_x_axis.line_style().width = G4float(a_v);
+    m_y_axis.line_style().width = G4float(a_v);
+    m_z_axis.line_style().width = G4float(a_v);
+    m_cmap_axis.line_style().width = G4float(a_v);
 
-    m_x_axis.ticks_style().width = float(a_v);
-    m_y_axis.ticks_style().width = float(a_v);
-    m_z_axis.ticks_style().width = float(a_v);
-    m_cmap_axis.ticks_style().width = float(a_v);
+    m_x_axis.ticks_style().width = G4float(a_v);
+    m_y_axis.ticks_style().width = G4float(a_v);
+    m_z_axis.ticks_style().width = G4float(a_v);
+    m_cmap_axis.ticks_style().width = G4float(a_v);
   }
 
-  void set_axes_tick_length(float a_v){
+  void set_axes_tick_length(G4float a_v){
     m_x_axis.tick_length = a_v;
     m_y_axis.tick_length = a_v;
     m_z_axis.tick_length = a_v;
     m_cmap_axis.tick_length = a_v;
   }
 
-  void set_axes_title_height(float a_v){
+  void set_axes_title_height(G4float a_v){
     m_x_axis.title_height = a_v;
     m_y_axis.title_height = a_v;
     m_z_axis.title_height = a_v;
     m_cmap_axis.title_height = a_v;
   }
 
-  void set_axes_label_height(float a_v){
+  void set_axes_label_height(G4float a_v){
     m_x_axis.label_height = a_v;
     m_y_axis.label_height = a_v;
     m_z_axis.label_height = a_v;
@@ -2225,20 +2225,20 @@ protected:
   }
 
   void update_layout(){
-    float XSIZ = width;
-    float XMGL = left_margin;
-    float XMGR = right_margin;
-    float wData = XSIZ-XMGL-XMGR;
+    G4float XSIZ = width;
+    G4float XMGL = left_margin;
+    G4float XMGR = right_margin;
+    G4float wData = XSIZ-XMGL-XMGR;
 
-    float YSIZ = height;
-    float YMGL = bottom_margin;
-    float YMGU = top_margin;
-    float hData = YSIZ-YMGL-YMGU;
+    G4float YSIZ = height;
+    G4float YMGL = bottom_margin;
+    G4float YMGU = top_margin;
+    G4float hData = YSIZ-YMGL-YMGU;
 
-    float ZSIZ = depth;
-    float ZMGD = down_margin;
-    float ZMGU = up_margin;
-    float dData = ZSIZ-ZMGD-ZMGU;
+    G4float ZSIZ = depth;
+    G4float ZMGD = down_margin;
+    G4float ZMGU = up_margin;
+    G4float dData = ZSIZ-ZMGD-ZMGU;
 
    {mat4f& mtx = m_layout.mtx.value();
     mtx.set_identity();
@@ -2280,15 +2280,15 @@ protected:
       mat4f m;
       r.value(m);
 
-      float xmn = -0.5F*wData;
-      float ymn = -0.5F*hData;
-      float zmn = -0.5F*dData;
-      float xmx =  0.5F*wData;
-      float ymx =  0.5F*hData;
-      float zmx =  0.5F*dData;
+      G4float xmn = -0.5F*wData;
+      G4float ymn = -0.5F*hData;
+      G4float zmn = -0.5F*dData;
+      G4float xmx =  0.5F*wData;
+      G4float ymx =  0.5F*hData;
+      G4float zmx =  0.5F*dData;
 
       box3f _box;
-      float x,y,z;
+      G4float x,y,z;
       // zmn face :
      {x = xmn;y = ymn;z = zmn;
       m.mul_3f(x,y,z);
@@ -2317,9 +2317,9 @@ protected:
       m.mul_3f(x,y,z);
       _box.extend_by(x,y,z);}
 
-      float xfac = _box.mx()[0]-_box.mn()[0];
-      float yfac = _box.mx()[1]-_box.mn()[1];
-      float zfac = _box.mx()[2]-_box.mn()[2];
+      G4float xfac = _box.mx()[0]-_box.mn()[0];
+      G4float yfac = _box.mx()[1]-_box.mn()[1];
+      G4float zfac = _box.mx()[2]-_box.mn()[2];
 
       //cube setup (driven by hData) :
       mtx.mul_scale(hData/xfac,hData/yfac,hData/zfac);
@@ -2328,7 +2328,7 @@ protected:
 
       if(data_light_on_automated.value()) m_data_light.on = true;
      {vec3f dir(1,-1,-10);
-      float dx,dy,dz;dir.value(dx,dy,dz);
+      G4float dx,dy,dz;dir.value(dx,dy,dz);
       mat4f inv;
       if(mtx.invert(inv)) {
         inv.mul_dir_3f(dx,dy,dz);
@@ -2412,8 +2412,8 @@ public:
       } else {
         SbPlottableBins1D* bins = f_bins1DList[0];
         int xnbin = bins->getAxisNumberOfBins();
-        float xmn = bins->get_axis_min();
-        float xmx = bins->get_axis_max();
+        G4float xmn = bins->get_axis_min();
+        G4float xmx = bins->get_axis_max();
         superpose = true;
         for(int ibins=1;ibins<nbins1D;ibins++) {
           SbPlottableBins1D* binsloop = f_bins1DList[ibins];
@@ -2428,11 +2428,11 @@ public:
           if(y_axis_automated) {
             // Correct Y axis if XY shape and superposing bins.
             // Get min/max
-            float bmin,bmax;
+            G4float bmin,bmax;
             getHeight(nbins1D-1,f_bins1DList,bins1DListSwMnMx,0,bmin,bmax);
             bmin = bmax;
             for(int ibin=1;ibin<xnbin;ibin++) {
-              float mini,maxi;
+              G4float mini,maxi;
               getHeight
                 (nbins1D-1,f_bins1DList,bins1DListSwMnMx,ibin,mini,maxi);
               bmin = SbMinimum(bmin,maxi);
@@ -2446,8 +2446,8 @@ public:
       }
     }*/
 
-    float xmin =  m_x_axis_data.min_value();
-    float xmax =  m_x_axis_data.max_value();
+    G4float xmin =  m_x_axis_data.min_value();
+    G4float xmax =  m_x_axis_data.max_value();
     bool xlog = m_x_axis_data.is_log();
     if(xlog) {
       if((xmin<=0) || (xmax<=0) ) {
@@ -2464,8 +2464,8 @@ public:
       }
     }
 
-    float ymin =  m_y_axis_data.min_value();
-    float ymax =  m_y_axis_data.max_value();
+    G4float ymin =  m_y_axis_data.min_value();
+    G4float ymax =  m_y_axis_data.max_value();
     bool ylog = m_y_axis_data.is_log();
     if(ylog) {
       if((ymin<=0) || (ymax<=0) ) {
@@ -2482,8 +2482,8 @@ public:
       }
     }
 
-    float zmin =  m_z_axis_data.min_value();
-    float zmax =  m_z_axis_data.max_value();
+    G4float zmin =  m_z_axis_data.min_value();
+    G4float zmax =  m_z_axis_data.max_value();
     bool zlog = m_z_axis_data.is_log();
     if(zlog) {
       if((zmin<=0) || (zmax<=0) ) {
@@ -2519,15 +2519,15 @@ public:
       }
     }
 
-   {float XSIZ = width;
-    float XMGL = left_margin;
-    float XMGR = right_margin;
-    float wData = XSIZ-XMGL-XMGR;
+   {G4float XSIZ = width;
+    G4float XMGL = left_margin;
+    G4float XMGR = right_margin;
+    G4float wData = XSIZ-XMGL-XMGR;
 
-    float YSIZ = height;
-    float YMGL = bottom_margin;
-    float YMGU = top_margin;
-    float hData = YSIZ-YMGL-YMGU;
+    G4float YSIZ = height;
+    G4float YMGL = bottom_margin;
+    G4float YMGU = top_margin;
+    G4float hData = YSIZ-YMGL-YMGU;
     if(m_shape==xy) {
       if(wData<=0) {
         DUMP_UPDATE_WHAT(a_out,"null w data area");
@@ -2536,10 +2536,10 @@ public:
         DUMP_UPDATE_WHAT(a_out,"null h data area");
       }
     } else if(m_shape==xyz) {
-      float ZSIZ = depth;
-      float ZMGD = down_margin;
-      float ZMGU = up_margin;
-      float dData = ZSIZ-ZMGD-ZMGU;
+      G4float ZSIZ = depth;
+      G4float ZMGD = down_margin;
+      G4float ZMGU = up_margin;
+      G4float dData = ZSIZ-ZMGD-ZMGU;
       if(wData<=0) {
         DUMP_UPDATE_WHAT(a_out,"null w data area");
       }
@@ -2551,9 +2551,9 @@ public:
       }
     }}
 
-    float dx   = xmax - xmin;
-    float dy   = ymax - ymin;
-    float dz   = zmax - zmin;
+    G4float dx   = xmax - xmin;
+    G4float dy   = ymax - ymin;
+    G4float dz   = zmax - zmin;
 
     rep_box boxX(xmin,dx,xlog);
     rep_box boxY(ymin,dy,ylog);
@@ -2567,7 +2567,7 @@ public:
 
       // first data plane is at zz = _zoffset().
 
-      float zz = 0;
+      G4float zz = 0;
 
       ////////////////////////////////////
       /// binss //////////////////////////
@@ -2933,7 +2933,7 @@ public:
     update_primitives(a_out);
   }
 
-  void get_value_axis_min_max(float a_Sw_mn,float a_Sw_mx,bool a_is_log,float& a_min,float& a_max,bool a_min_visible) {
+  void get_value_axis_min_max(G4float a_Sw_mn,G4float a_Sw_mx,bool a_is_log,G4float& a_min,G4float& a_max,bool a_min_visible) {
     if(a_Sw_mn>a_Sw_mx) {
       a_min = 0;
       a_max = 0;
@@ -2945,17 +2945,17 @@ public:
       a_max = a_Sw_mx;
       return;
     }
-    float mn;
+    G4float mn;
     if(a_is_log) {
       if(value_bottom_margin.value()!=0) {
-        float log_Sw_mn = flog10(a_Sw_mn);
-        float log_Sw_mx = flog10(a_Sw_mx);
-        float log_mn = log_Sw_mn - (log_Sw_mx-log_Sw_mn)*value_bottom_margin;
+        G4float log_Sw_mn = flog10(a_Sw_mn);
+        G4float log_Sw_mx = flog10(a_Sw_mx);
+        G4float log_mn = log_Sw_mn - (log_Sw_mx-log_Sw_mn)*value_bottom_margin;
         mn = fpow(10,log_mn);
       } else {
         mn = a_Sw_mn;
         if(a_min_visible) { // arrang so that the bin with a_Sw_mn be visible.
-          float log_Sw_mn = flog10(a_Sw_mn);
+          G4float log_Sw_mn = flog10(a_Sw_mn);
           mn = fpow(10,log_Sw_mn)*(1.0f-0.4f);
         }
       }
@@ -2979,12 +2979,12 @@ public:
     }
     a_min = mn;
 
-    float mx;
+    G4float mx;
     if(a_is_log) {
       if(value_top_margin.value()!=0) {
-        float log_Sw_mn = flog10(a_Sw_mn);
-        float log_Sw_mx = flog10(a_Sw_mx);
-        float log_mx = log_Sw_mx + (log_Sw_mx-log_Sw_mn)*value_top_margin;
+        G4float log_Sw_mn = flog10(a_Sw_mn);
+        G4float log_Sw_mx = flog10(a_Sw_mx);
+        G4float log_mx = log_Sw_mx + (log_Sw_mx-log_Sw_mn)*value_top_margin;
         mx = fpow(10,log_mx);
       } else {
         mx = a_Sw_mx; //max bin will be on top of frame (then not visible if same color).
@@ -3046,10 +3046,10 @@ public:
         //::printf("debug : value %g %g %d : is log %d\n",
         //    value_bottom_margin.value(),value_top_margin.value(),value_bins_with_entries.value(),
         //    m_y_axis_data.is_log());
-          float Sw_mn,Sw_mx;
+          G4float Sw_mn,Sw_mx;
           b1->bins_Sw_range(Sw_mn,Sw_mx,value_bins_with_entries.value());
         //::printf("debug : Sw %g %g\n",Sw_mn,Sw_mx);
-          float mn,mx;
+          G4float mn,mx;
           get_value_axis_min_max(Sw_mn,Sw_mx,m_y_axis_data.is_log(),mn,mx,true);
         //::printf("debug : mn mx %g %g\n",mn,mx);
           m_y_axis_data.set_min_value(mn);
@@ -3071,9 +3071,9 @@ public:
         }
 
         if(z_axis_automated) {
-          float Sw_mn,Sw_mx;
+          G4float Sw_mn,Sw_mx;
           b2->bins_Sw_range(Sw_mn,Sw_mx,value_bins_with_entries.value());
-          float mn,mx;
+          G4float mn,mx;
           get_value_axis_min_max(Sw_mn,Sw_mx,m_z_axis_data.is_log(),mn,mx,false);
           m_z_axis_data.set_min_value(mn);
           m_z_axis_data.set_max_value(mx);
@@ -3093,8 +3093,8 @@ public:
           m_x_axis_data.set_max_value(p2->x_axis_max());
         }
         if(y_axis_automated) {
-          float ymn = p2->y_axis_min();
-          float ymx = p2->y_axis_max();
+          G4float ymn = p2->y_axis_min();
+          G4float ymx = p2->y_axis_max();
           // For pawex22 ?
           //m_y_axis_data.set_min_value(ymn*1.1F);
           //m_y_axis_data.set_max_value(ymx*1.1F);
@@ -3124,8 +3124,8 @@ public:
       if(f1) {
 
         if(x_axis_automated) {
-          float xmn = f1->x_min();
-          float xmx = f1->x_max();
+          G4float xmn = f1->x_min();
+          G4float xmx = f1->x_max();
           if(xmx<=xmn) {
             xmn = -1;
             xmx = 1;
@@ -3135,22 +3135,22 @@ public:
         }
 
         if(y_axis_automated) {
-          float xmn = m_x_axis_data.min_value();
-          float xmx = m_x_axis_data.max_value();
+          G4float xmn = m_x_axis_data.min_value();
+          G4float xmx = m_x_axis_data.max_value();
           unsigned int nstp = f1->x_steps();
           nstp = nstp <=0 ? curve_number_of_points.value(): nstp;
 
-          float df = (xmx - xmn)/nstp;
+          G4float df = (xmx - xmn)/nstp;
           bool problem = false;
-          float vmin;
+          G4float vmin;
           if(!f1->value(xmn,vmin)) problem = true;
-          float vmax = vmin;
+          G4float vmax = vmin;
           for(unsigned int ibin=0;ibin<=nstp;ibin++) {
-            float xx = xmn + ibin * df;
-            float val;
+            G4float xx = xmn + ibin * df;
+            G4float val;
             if(!f1->value(xx,val)) problem = true;
-            vmax = mx<float>(vmax,val);
-            vmin = mn<float>(vmin,val);
+            vmax = mx<G4float>(vmax,val);
+            vmin = mn<G4float>(vmin,val);
           }
           if(problem) {
             a_out << "tools::sg::plotter :"
@@ -3164,8 +3164,8 @@ public:
 
       } else if(f2) {
         if(x_axis_automated) {
-          float xmn = f2->x_min();
-          float xmx = f2->x_max();
+          G4float xmn = f2->x_min();
+          G4float xmx = f2->x_max();
           if(xmx<=xmn) {
             xmn = -1;
             xmx = 1;
@@ -3175,8 +3175,8 @@ public:
         }
 
         if(y_axis_automated) {
-          float ymn =  f2->y_min();
-          float ymx =  f2->y_max();
+          G4float ymn =  f2->y_min();
+          G4float ymx =  f2->y_max();
           if(ymx<=ymn) {
             ymn = -1;
             ymx = 1;
@@ -3187,31 +3187,31 @@ public:
 
         if(z_axis_automated) {
 
-          float xmn = m_x_axis_data.min_value();
-          float xmx = m_x_axis_data.max_value();
+          G4float xmn = m_x_axis_data.min_value();
+          G4float xmx = m_x_axis_data.max_value();
           int nx = f2->x_steps();
           nx = nx <=0 ? curve_number_of_points.value() : nx;
 
-          float ymn = m_y_axis_data.min_value();
-          float ymx = m_y_axis_data.max_value();
+          G4float ymn = m_y_axis_data.min_value();
+          G4float ymx = m_y_axis_data.max_value();
           int ny = f2->y_steps();
           ny = ny <=0 ? curve_number_of_points.value() : ny;
 
-          float dfx = (xmx - xmn)/nx;
-          float dfy = (ymx - ymn)/ny;
+          G4float dfx = (xmx - xmn)/nx;
+          G4float dfy = (ymx - ymn)/ny;
 
           bool problem = false;
-          float vmin;
+          G4float vmin;
           if(!f2->value(xmn,ymn,vmin)) problem = true;
-          float vmax = vmin;
+          G4float vmax = vmin;
           for(int jbin=ny-1;jbin>=0;jbin--) {
             for(int ibin=nx-1;ibin>=0;ibin--) {
-              float xx = xmn + ibin * dfx;
-              float yy = ymn + jbin * dfy;
-              float val;
+              G4float xx = xmn + ibin * dfx;
+              G4float yy = ymn + jbin * dfy;
+              G4float val;
               if(!f2->value(xx,yy,val)) problem = true;
-              vmin = mn<float>(vmin,val);
-              vmax = mx<float>(vmax,val);
+              vmin = mn<G4float>(vmin,val);
+              vmax = mx<G4float>(vmax,val);
             }
           }
           if(problem) {
@@ -3242,10 +3242,10 @@ public:
   }
 
   void update_x_axis_2D(){
-    float XSIZ = width;
-    float XMGL = left_margin;
-    float XMGR = right_margin;
-    float wData = XSIZ-XMGL-XMGR;
+    G4float XSIZ = width;
+    G4float XMGL = left_margin;
+    G4float XMGR = right_margin;
+    G4float wData = XSIZ-XMGL-XMGR;
 
     //m_x_axis.verbose.setValue(verbose);
     m_x_axis.tick_up = true;
@@ -3273,10 +3273,10 @@ public:
   }
 
   void update_y_axis_2D(){
-    float YSIZ = height;
-    float YMGL = bottom_margin;
-    float YMGU = top_margin;
-    float hData = YSIZ-YMGL-YMGU;
+    G4float YSIZ = height;
+    G4float YMGL = bottom_margin;
+    G4float YMGU = top_margin;
+    G4float hData = YSIZ-YMGL-YMGU;
 
     //m_x_axis.verbose.setValue(verbose);
     m_y_axis.tick_up.value(true);
@@ -3314,10 +3314,10 @@ public:
   }
 
   void update_x_axis_3D(){
-    float XSIZ = width;
-    float XMGL = left_margin;
-    float XMGR = right_margin;
-    float wData = XSIZ-XMGL-XMGR;
+    G4float XSIZ = width;
+    G4float XMGL = left_margin;
+    G4float XMGR = right_margin;
+    G4float wData = XSIZ-XMGL-XMGR;
 
     //m_x_axis.verbose.setValue(verbose);
     m_x_axis.tick_up = false;
@@ -3347,10 +3347,10 @@ public:
   }
 
   void update_y_axis_3D(){
-    float YSIZ = height;
-    float YMGL = bottom_margin;
-    float YMGU = top_margin;
-    float hData = YSIZ-YMGL-YMGU;
+    G4float YSIZ = height;
+    G4float YMGL = bottom_margin;
+    G4float YMGU = top_margin;
+    G4float hData = YSIZ-YMGL-YMGU;
 
     //m_x_axis.verbose.setValue(verbose);
     m_y_axis.tick_up = false;
@@ -3383,10 +3383,10 @@ public:
   }
 
   void update_z_axis_3D(){
-    float ZSIZ = depth;
-    float ZMGD = down_margin;
-    float ZMGU = up_margin;
-    float dData = ZSIZ-ZMGD-ZMGU;
+    G4float ZSIZ = depth;
+    G4float ZMGD = down_margin;
+    G4float ZMGU = up_margin;
+    G4float dData = ZSIZ-ZMGD-ZMGU;
 
     m_z_axis.tick_up = false;
     m_z_axis.width = dData;
@@ -3425,43 +3425,43 @@ public:
     size_t coln = a_cmap.colorn();
     if(!coln) return;
 
-    float XSIZ = width;
-    float XMGL = left_margin;
-    float XMGR = right_margin;
-    float wData = XSIZ-XMGL-XMGR;
+    G4float XSIZ = width;
+    G4float XMGL = left_margin;
+    G4float XMGR = right_margin;
+    G4float wData = XSIZ-XMGL-XMGR;
 
-    float YSIZ = height;
-    float YMGL = bottom_margin;
-    float YMGU = top_margin;
-    float hData = YSIZ-YMGL-YMGU;
+    G4float YSIZ = height;
+    G4float YMGL = bottom_margin;
+    G4float YMGU = top_margin;
+    G4float hData = YSIZ-YMGL-YMGU;
 
-    float hcmap = hData;
+    G4float hcmap = hData;
 
    {mat4f& mtx = m_cmap_matrix.mtx.value();
     if(m_shape==xy) {
       mtx = m_layout.mtx.value();
       mtx.mul_translate(0,0,_zgrid());
     } else {
-      float ZSIZ = depth;
-      float ZMGD = down_margin;
-      float ZMGU = up_margin;
-      float dData = ZSIZ-ZMGD-ZMGU;
+      G4float ZSIZ = depth;
+      G4float ZMGD = down_margin;
+      G4float ZMGU = up_margin;
+      G4float dData = ZSIZ-ZMGD-ZMGU;
       hcmap = dData;
       if(colormap_attached.value()) {
         mtx = m_layout.mtx.value();
         mtx.mul_rotate(1,0,0,90.0F*fdeg2rad());
       } else { //OpenPAW
-        float zz = -depth*0.5f;
+        G4float zz = -depth*0.5f;
         mtx.set_translate(-XSIZ/2+XMGL,-YSIZ/2+YMGL,zz); //applied first
       }
     }}
 
-    float w  = XMGR*0.3F;
-    float xx = wData+XMGR*0.1F;
-    float zz = 0;
+    G4float w  = XMGR*0.3F;
+    G4float xx = wData+XMGR*0.1F;
+    G4float zz = 0;
 
-    float yy = 0;
-    float h = hcmap/float(coln);
+    G4float yy = 0;
+    G4float h = hcmap/G4float(coln);
 
     // colored cells :
    {m_cmap_cells_sep.clear();
@@ -3627,7 +3627,7 @@ protected: //vis bins
                         bool /*aSuperpose*/,
                         const rep_box& a_box_x,
                         const rep_box& a_box_y,
-                        float a_zz){
+                        G4float a_zz){
 
     //char sid[128];
     //::sprintf(sid,"tools::sg::bins1D/0x%lx",
@@ -3635,25 +3635,25 @@ protected: //vis bins
 
   //bool hbe = a_bins.has_entries_per_bin();
 
-    float bmin = 0;
-    float bmax = 0;
+    G4float bmin = 0;
+    G4float bmax = 0;
 
     size_t xnbin = a_bins.bins();
     std::vector<rep_bin1D> bins(xnbin);
    {bool first = true;
     for(size_t ibin=0;ibin<xnbin;ibin++) {
     //if(hbe && (a_bins.bin_entries(size_t(ibin))<=0)) continue;
-      float val = a_bins.bin_Sw(int(ibin));
-      float xx = float(a_bins.bin_lower_edge(int(ibin)));
-      float xe = float(a_bins.bin_upper_edge(int(ibin)));
+      G4float val = a_bins.bin_Sw(int(ibin));
+      G4float xx = G4float(a_bins.bin_lower_edge(int(ibin)));
+      G4float xe = G4float(a_bins.bin_upper_edge(int(ibin)));
       bins[ibin] = rep_bin1D(xx,xe,0,val);
       if(first) {
         first = false;
         bmin = val;
         bmax = val;
       } else {
-        bmin = mn<float>(bmin,val);
-        bmax = mx<float>(bmax,val);
+        bmin = mn<G4float>(bmin,val);
+        bmax = mx<G4float>(bmax,val);
       }
     }}
 
@@ -3670,7 +3670,7 @@ protected: //vis bins
       } else if( (painting==painting_grey_scale) ||
                  (painting==painting_grey_scale_inverse) ||
                  (painting==painting_violet_to_red) ){
-       {float dbins = bmax-bmin;
+       {G4float dbins = bmax-bmin;
         if(dbins!=0.0F) {
           for(size_t index=0;index<xnbin;index++) bins[index].m_ratio = (a_bins.bin_Sw(int(index))-bmin)/dbins;
         }}
@@ -3697,7 +3697,7 @@ protected: //vis bins
         data_style.modeling = modeling_markers();
         rep_bins1D_xy_points(a_out,data_style,*(m_bins_cmaps[a_index]),bins,a_box_x,a_box_y,a_zz);
 
-        std::vector<float> bars(xnbin);
+        std::vector<G4float> bars(xnbin);
         for(size_t ibin=0;ibin<xnbin;ibin++) bars[ibin] = a_bins.bin_error(int(ibin));
 
         rep_errors_plus_xy(a_out,a_data_style,bins,a_box_x,a_box_y,bars,a_zz+_zerrors());
@@ -3795,7 +3795,7 @@ protected: //vis bins
 
     // Errors :
     if(errors_visible) {
-      std::vector<float> bars(xnbin);
+      std::vector<G4float> bars(xnbin);
       for(size_t ibin=0;ibin<xnbin;ibin++) bars[ibin] = a_bins.bin_error(int(ibin));
       const std::string& modeling = a_errors_style.modeling;
       if(modeling==modeling_plus()) {
@@ -3807,36 +3807,36 @@ protected: //vis bins
 
   }
 
-  static bool bins2D_to_func(const bins2D& a_bins,float a_X,float a_Y,float& a_value){
+  static bool bins2D_to_func(const bins2D& a_bins,G4float a_X,G4float a_Y,G4float& a_value){
     unsigned int xn = a_bins.x_bins();
-    float xmn = a_bins.x_axis_min();
-    float xmx = a_bins.x_axis_max();
+    G4float xmn = a_bins.x_axis_min();
+    G4float xmx = a_bins.x_axis_max();
     unsigned int yn = a_bins.y_bins();
-    float ymn = a_bins.y_axis_min();
-    float ymx = a_bins.y_axis_max();
+    G4float ymn = a_bins.y_axis_min();
+    G4float ymx = a_bins.y_axis_max();
 
-    float dx = (xmx-xmn)/xn;
-    float dy = (ymx-ymn)/yn;
+    G4float dx = (xmx-xmn)/xn;
+    G4float dy = (ymx-ymn)/yn;
     int ibin = (int)((a_X-xmn)/dx);
     int jbin = (int)((a_Y-ymn)/dy);
 
     if((ibin<0)||(ibin>=int(xn))) {a_value=0;return false;}
     if((jbin<0)||(jbin>=int(yn))) {a_value=0;return false;}
 
-    float xx_0 = a_bins.bin_lower_edge_x(ibin);
-    //float xe_0 = a_bins.bin_upper_edge_x(ibin);
-    float xx_1 = a_bins.bin_lower_edge_x(ibin+1);
-    //float xe_1 = a_bins.bin_upper_edge_x(ibin+1);
+    G4float xx_0 = a_bins.bin_lower_edge_x(ibin);
+    //G4float xe_0 = a_bins.bin_upper_edge_x(ibin);
+    G4float xx_1 = a_bins.bin_lower_edge_x(ibin+1);
+    //G4float xe_1 = a_bins.bin_upper_edge_x(ibin+1);
 
-    float yy_0 = a_bins.bin_lower_edge_y(jbin);
-    //float ye_0 = a_bins.bin_upper_edge_y(jbin);
-    float yy_1 = a_bins.bin_lower_edge_y(jbin+1);
-    //float ye_1 = a_bins.bin_upper_edge_y(jbin+1);
+    G4float yy_0 = a_bins.bin_lower_edge_y(jbin);
+    //G4float ye_0 = a_bins.bin_upper_edge_y(jbin);
+    G4float yy_1 = a_bins.bin_lower_edge_y(jbin+1);
+    //G4float ye_1 = a_bins.bin_upper_edge_y(jbin+1);
 
-    float val1 = a_bins.bin_Sw(ibin,jbin);
-    float val2 = a_bins.bin_Sw(ibin+1,jbin);
-    //float val3 = a_bins.getBinSumOfWeights(ibin+1,jbin+1);
-    float val4 = a_bins.bin_Sw(ibin,jbin+1);
+    G4float val1 = a_bins.bin_Sw(ibin,jbin);
+    G4float val2 = a_bins.bin_Sw(ibin+1,jbin);
+    //G4float val3 = a_bins.getBinSumOfWeights(ibin+1,jbin+1);
+    G4float val4 = a_bins.bin_Sw(ibin,jbin+1);
 
     // Interpolate :
     vec3f p1(xx_0,yy_0,val1);
@@ -3858,32 +3858,32 @@ protected: //vis bins
   typedef struct {
     const func2D* m_func2D;
     const bins2D* m_bins2D;
-    double m_limits[4];
-    double m_limits_in[4];
+    G4double m_limits[4];
+    G4double m_limits_in[4];
     bool m_problem;
   } SbFunc;
 
-  static double bins2D_to_contour(double a_X,double a_Y,void* aData) {
+  static G4double bins2D_to_contour(G4double a_X,G4double a_Y,void* aData) {
     SbFunc* func =(SbFunc*)aData;
     if( (a_X<func->m_limits_in[0])||
         (a_X>func->m_limits_in[1])||
         (a_Y<func->m_limits_in[2])||
         (a_Y>func->m_limits_in[3])
       ) return -FLT_MAX;
-    float value;
-    if(!bins2D_to_func(*(func->m_bins2D),(float)a_X,(float)a_Y,value)) func->m_problem = true;
+    G4float value;
+    if(!bins2D_to_func(*(func->m_bins2D),(G4float)a_X,(G4float)a_Y,value)) func->m_problem = true;
     return value;
   }
 
-  static double log_bins2D_to_contour(double a_X,double a_Y,void* aData) {
+  static G4double log_bins2D_to_contour(G4double a_X,G4double a_Y,void* aData) {
     SbFunc* func =(SbFunc*)aData;
     if( (a_X<func->m_limits_in[0])||
         (a_X>func->m_limits_in[1])||
         (a_Y<func->m_limits_in[2])||
         (a_Y>func->m_limits_in[3])
       ) return -FLT_MAX;
-    float value;
-    if(!bins2D_to_func(*(func->m_bins2D),(float)a_X,(float)a_Y,value)) func->m_problem = true;
+    G4float value;
+    if(!bins2D_to_func(*(func->m_bins2D),(G4float)a_X,(G4float)a_Y,value)) func->m_problem = true;
     return take_log(value);
   }
 
@@ -3894,7 +3894,7 @@ protected: //vis bins
                         const rep_box& a_box_x,
                         const rep_box& a_box_y,
                         const rep_box& a_box_z,
-                        float a_zz){
+                        G4float a_zz){
 
     //a_out << "tools::sg::update_bins2D_xy : begin :" << std::endl;
 
@@ -3913,14 +3913,14 @@ protected: //vis bins
 
       painting_policy painting = a_data_style.painting;
 
-      float zmin = a_box_z.m_pos;
-      float dz = a_box_z.m_width;
+      G4float zmin = a_box_z.m_pos;
+      G4float dz = a_box_z.m_width;
       bool zlog = a_box_z.m_log;
 
-      float xmn =  m_x_axis_data.min_value();
-      float xmx =  m_x_axis_data.max_value();
-      float ymn =  m_y_axis_data.min_value();
-      float ymx =  m_y_axis_data.max_value();
+      G4float xmn =  m_x_axis_data.min_value();
+      G4float xmx =  m_x_axis_data.max_value();
+      G4float ymn =  m_y_axis_data.min_value();
+      G4float ymx =  m_y_axis_data.max_value();
 
       clist_contour list_contour;
       //int nFir = 32;
@@ -3930,7 +3930,7 @@ protected: //vis bins
       int nSec = 512; //slower than 256
       list_contour.set_secondary_grid(nSec,nSec); //Default : 256,256.
 
-      double limits[4];
+      G4double limits[4];
       // User limits :
       limits[0] = xmn;
       limits[1] = xmx;
@@ -3948,8 +3948,8 @@ protected: //vis bins
 
       // Extend the grid to have some borders in order to close contours :
       int n = nSec - 2 * 10;
-      double dx = (limits[1]-limits[0]) /n;
-      double dy = (limits[3]-limits[2]) /n;
+      G4double dx = (limits[1]-limits[0]) /n;
+      G4double dy = (limits[3]-limits[2]) /n;
       limits[0] = limits[0] - 10 * dx;
       limits[1] = limits[1] + 10 * dx;
       limits[2] = limits[2] - 10 * dy;
@@ -3964,15 +3964,15 @@ protected: //vis bins
 
       if(levels.size()) {
         size_t zn = levels.size();
-        std::vector<double> zs(zn);
+        std::vector<G4double> zs(zn);
         for(size_t zi=0;zi<zn;zi++) zs[zi] = levels[zi];
         list_contour.set_planes(zs);
       } else {
         unsigned int zn = number_of_levels.value();
         if(zn<=0) zn = 1;
-        std::vector<double> zs(zn+1);
-        float zmax = zmin + dz;
-        double zd = (zmax-zmin)/zn;
+        std::vector<G4double> zs(zn+1);
+        G4float zmax = zmin + dz;
+        G4double zd = (zmax-zmin)/zn;
         for(unsigned int zi=0;zi<=zn;zi++) zs[zi] = zmin + zi * zd;
         list_contour.set_planes(zs);
       }
@@ -4026,8 +4026,8 @@ protected: //vis bins
 
       bool hbe = a_bins.has_entries_per_bin();
 
-      float bmin = 0;
-      float bmax = 0;
+      G4float bmin = 0;
+      G4float bmax = 0;
 
       std::vector<rep_bin2D> bins;
      {bool first = true;
@@ -4035,12 +4035,12 @@ protected: //vis bins
         for(int ibin=xnbin-1;ibin>=0;ibin--) {
           if(hbe && (a_bins.bin_entries(ibin,jbin)<=0)) continue;
 
-          float val = a_bins.bin_Sw(ibin,jbin);
+          G4float val = a_bins.bin_Sw(ibin,jbin);
 
-          float xx = a_bins.bin_lower_edge_x(ibin);
-          float xe = a_bins.bin_upper_edge_x(ibin);
-          float yy = a_bins.bin_lower_edge_y(jbin);
-          float ye = a_bins.bin_upper_edge_y(jbin);
+          G4float xx = a_bins.bin_lower_edge_x(ibin);
+          G4float xe = a_bins.bin_upper_edge_x(ibin);
+          G4float yy = a_bins.bin_lower_edge_y(jbin);
+          G4float ye = a_bins.bin_upper_edge_y(jbin);
 
           bins.push_back(rep_bin2D(xx,xe,yy,ye,val,ibin,jbin));
 
@@ -4049,8 +4049,8 @@ protected: //vis bins
             bmin = val;
             bmax = val;
           } else {
-            bmin = mn<float>(bmin,val);
-            bmax = mx<float>(bmax,val);
+            bmin = mn<G4float>(bmin,val);
+            bmax = mx<G4float>(bmax,val);
           }
         }
       }}
@@ -4064,7 +4064,7 @@ protected: //vis bins
       } else if( (painting==painting_grey_scale) ||
                  (painting==painting_grey_scale_inverse) ||
                  (painting==painting_violet_to_red) ){
-       {float dbins = bmax-bmin;
+       {G4float dbins = bmax-bmin;
         if(dbins!=0.0F) {
           for(size_t index=0;index<number;index++) {
             bins[index].m_ratio = (bins[index].m_val-bmin)/dbins;
@@ -4137,25 +4137,25 @@ protected: //vis bins
   }
 
   void update_func1D_xy(std::ostream& a_out,const func1D& a_func,
-                        const style& a_style,const rep_box& a_box_x,const rep_box& a_box_y,float a_zz){
+                        const style& a_style,const rep_box& a_box_x,const rep_box& a_box_y,G4float a_zz){
 
     //a_out << "debug : tools::sg::plotter::update_func1D_xy : modeling " << a_style.modeling.value() << " :" << std::endl;
 
     if(!a_style.visible) return;
 
-    float xmn = m_x_axis_data.min_value();
-    float xmx = m_x_axis_data.max_value();
+    G4float xmn = m_x_axis_data.min_value();
+    G4float xmx = m_x_axis_data.max_value();
 
     unsigned int nstp = a_func.x_steps();
     nstp = nstp <=0 ? curve_number_of_points.value() : nstp;
 
-    float df = (xmx - xmn)/nstp;
+    G4float df = (xmx - xmn)/nstp;
 
     bool problem = false;
     std::vector<vec3f> points(nstp+1);
     for(unsigned int ibin=0;ibin<=nstp;ibin++) {
-      float xx = xmn + ibin * df;
-      float val;
+      G4float xx = xmn + ibin * df;
+      G4float val;
       if(!a_func.value(xx,val)) problem = true;
       points[ibin].set_value(xx,val,a_zz);
     }
@@ -4169,7 +4169,7 @@ protected: //vis bins
 
     if(modeling==modeling_points()){
       vertices* vtxs = new vertices;
-      std::vector<float>& pts = vtxs->xyzs.values(); //npt*3
+      std::vector<G4float>& pts = vtxs->xyzs.values(); //npt*3
       clip_points_2D(points,a_box_x,a_box_y,pts);
       if(pts.size()) {
         //a_out << "debug : tools::sg::plotter::update_func1D_xy :"
@@ -4196,7 +4196,7 @@ protected: //vis bins
 
     } else if(modeling==modeling_markers()){
       markers* _marks = new markers;
-      std::vector<float>& pts = _marks->xyzs.values(); //npt*3
+      std::vector<G4float>& pts = _marks->xyzs.values(); //npt*3
       clip_points_2D(points,a_box_x,a_box_y,pts);
       if(pts.size()) {
         //a_out << "debug : tools::sg::plotter::update_func1D_xy :"
@@ -4220,7 +4220,7 @@ protected: //vis bins
     } else {
 
       vertices* vtxs = new vertices;
-      std::vector<float>& pts = vtxs->xyzs.values(); //npt*3
+      std::vector<G4float>& pts = vtxs->xyzs.values(); //npt*3
 
       clip_polyline_2D(points,a_box_x,a_box_y,pts);
       if(pts.size()) {
@@ -4247,31 +4247,31 @@ protected: //vis bins
     }
   }
 
-  static double function_to_contour(double a_X,double a_Y,void* aData) {
+  static G4double function_to_contour(G4double a_X,G4double a_Y,void* aData) {
     SbFunc* func = (SbFunc*)aData;
     if( (a_X<func->m_limits_in[0])||
         (a_X>func->m_limits_in[1])||
         (a_Y<func->m_limits_in[2])||
         (a_Y>func->m_limits_in[3])
       ) return -FLT_MAX;
-    float value;
-    if(!func->m_func2D->value((float)a_X,(float)a_Y,value)) func->m_problem = true;
-    return double(value);
+    G4float value;
+    if(!func->m_func2D->value((G4float)a_X,(G4float)a_Y,value)) func->m_problem = true;
+    return G4double(value);
   }
-  static double log_function_to_contour(double a_X,double a_Y,void* aData) {
+  static G4double log_function_to_contour(G4double a_X,G4double a_Y,void* aData) {
     SbFunc* func =(SbFunc*)aData;
     if( (a_X<func->m_limits_in[0])||
         (a_X>func->m_limits_in[1])||
         (a_Y<func->m_limits_in[2])||
         (a_Y>func->m_limits_in[3])
       ) return -FLT_MAX;
-    float value;
-    if(!func->m_func2D->value((float)a_X,(float)a_Y,value)) func->m_problem = true;
+    G4float value;
+    if(!func->m_func2D->value((G4float)a_X,(G4float)a_Y,value)) func->m_problem = true;
     return take_log(value);
   }
 
   void update_func2D_xy(std::ostream& a_out,const func2D& a_func,int a_index,style& a_data_style,
-                        const rep_box& a_box_x,const rep_box& a_box_y,const rep_box& a_box_z,float a_zz){
+                        const rep_box& a_box_x,const rep_box& a_box_y,const rep_box& a_box_z,G4float a_zz){
     //a_out << "debug : tools::sg::plotter::update_func2D_xy(Function2D) : begin :" << std::endl;
     if(!a_data_style.visible.value()) return;
 
@@ -4287,14 +4287,14 @@ protected: //vis bins
 
       //a_out << "debug : tools::sg::plotter::update_func2D_xy(Function2D) : curve." << std::endl;
 
-      float zmin = a_box_z.m_pos;
-      float dz = a_box_z.m_width;
+      G4float zmin = a_box_z.m_pos;
+      G4float dz = a_box_z.m_width;
       bool zlog = a_box_z.m_log;
 
-      float xmn = m_x_axis_data.min_value();
-      float xmx = m_x_axis_data.max_value();
-      float ymn = m_y_axis_data.min_value();
-      float ymx = m_y_axis_data.max_value();
+      G4float xmn = m_x_axis_data.min_value();
+      G4float xmx = m_x_axis_data.max_value();
+      G4float ymn = m_y_axis_data.min_value();
+      G4float ymx = m_y_axis_data.max_value();
 
       clist_contour list_contour;
       //int nFir = 32;
@@ -4304,7 +4304,7 @@ protected: //vis bins
       int nSec = 512; //slower than 256
       list_contour.set_secondary_grid(nSec,nSec); //Default : 256,256.
 
-      double limits[4];
+      G4double limits[4];
       // User limits :
       limits[0] = xmn;
       limits[1] = xmx;
@@ -4322,8 +4322,8 @@ protected: //vis bins
 
       // Extend the grid to have some borders in order to close contours :
       int n = nSec - 2 * 10;
-      double dx = (limits[1]-limits[0]) /n;
-      double dy = (limits[3]-limits[2]) /n;
+      G4double dx = (limits[1]-limits[0]) /n;
+      G4double dy = (limits[3]-limits[2]) /n;
       limits[0] = limits[0] - 10 * dx;
       limits[1] = limits[1] + 10 * dx;
       limits[2] = limits[2] - 10 * dy;
@@ -4338,15 +4338,15 @@ protected: //vis bins
 
       if(levels.getNum()) {
         size_t zn = levels.size();
-        std::vector<double> zs(zn);
+        std::vector<G4double> zs(zn);
         for(size_t zi=0;zi<zn;zi++) zs[zi] = levels[zi];
         list_contour.set_planes(zs);
       } else {
         unsigned int zn = number_of_levels;
         if(zn<=0) zn = 1;
-        std::vector<double> zs(zn+1);
-        float zmax = zmin + dz;
-        double zd = (zmax-zmin)/zn;
+        std::vector<G4double> zs(zn+1);
+        G4float zmax = zmin + dz;
+        G4double zd = (zmax-zmin)/zn;
         for(unsigned int zi=0;zi<=zn;zi++) zs[zi] = zmin + zi * zd;
         list_contour.set_planes(zs);
       }
@@ -4405,7 +4405,7 @@ protected: //vis bins
       std::vector<vec3f> points(npoint);
       std::vector<int> controls;
       for(int count=0;count<npoint;count++) {
-        float xx,yy;
+        G4float xx,yy;
         bool isControl;
         a_func.getIthPoint(count,xx,yy,isControl);
         points[count] = vec3f(xx,yy,a_zz);
@@ -4420,7 +4420,7 @@ protected: //vis bins
 
       bool editable = a_data_style.editable.getValue();
       if(!editable) {
-        clip<float> clipper;
+        clip<G4float> clipper;
        {size_t ptn = points.size();
         for(size_t index=0;index<ptn;index++) clipper.add(points[index]);}
 
@@ -4480,7 +4480,7 @@ protected: //vis bins
         SoSeparator* sep = new SoSeparator;
         separator->addChild(sep);
 
-        float scale = 0.05F;
+        G4float scale = 0.05F;
 
         for(int index=0;index<controls.size();index++) {
           int icontrol = controls[index];
@@ -4515,7 +4515,7 @@ protected: //vis bins
   }
 
   void update_points2D_xy(std::ostream& a_out,const points2D& a_points,const style& a_style,
-                          const rep_box& a_box_x,const rep_box& a_box_y,float a_zz) {
+                          const rep_box& a_box_x,const rep_box& a_box_y,G4float a_zz) {
 
     //a_out << "debug : tools::sg::plotter::update_points2D_xy : modeling " << a_style.modeling.value() << std::endl;
 
@@ -4595,8 +4595,8 @@ protected: //vis bins
 
       bool hbe = a_bins.has_entries_per_bin();
 
-      float bmin = 0;
-      float bmax = 0;
+      G4float bmin = 0;
+      G4float bmax = 0;
 
       std::vector<rep_bin2D> bins;
      {bool first = true;
@@ -4604,12 +4604,12 @@ protected: //vis bins
         for(int ibin=xnbin-1;ibin>=0;ibin--) {
           if(hbe && (a_bins.bin_entries(ibin,jbin)<=0)) continue;
 
-          float val = a_bins.bin_Sw(ibin,jbin);
+          G4float val = a_bins.bin_Sw(ibin,jbin);
 
-          float xx = a_bins.bin_lower_edge_x(ibin);
-          float xe = a_bins.bin_upper_edge_x(ibin);
-          float yy = a_bins.bin_lower_edge_y(jbin);
-          float ye = a_bins.bin_upper_edge_y(jbin);
+          G4float xx = a_bins.bin_lower_edge_x(ibin);
+          G4float xe = a_bins.bin_upper_edge_x(ibin);
+          G4float yy = a_bins.bin_lower_edge_y(jbin);
+          G4float ye = a_bins.bin_upper_edge_y(jbin);
 
           bins.push_back(rep_bin2D(xx,xe,yy,ye,val,ibin,jbin));
 
@@ -4618,8 +4618,8 @@ protected: //vis bins
             bmin = val;
             bmax = val;
           } else {
-            bmin = mn<float>(bmin,val);
-            bmax = mx<float>(bmax,val);
+            bmin = mn<G4float>(bmin,val);
+            bmax = mx<G4float>(bmax,val);
           }
         }
       }}
@@ -4633,7 +4633,7 @@ protected: //vis bins
       } else if( (painting==painting_grey_scale) ||
                  (painting==painting_grey_scale_inverse) ||
                  (painting==painting_violet_to_red) ){
-       {float dbins = bmax-bmin;
+       {G4float dbins = bmax-bmin;
         if(dbins!=0.0F) {
           for(size_t index=0;index<number;index++) {
             bins[index].m_ratio = (bins[index].m_val-bmin)/dbins;
@@ -4654,8 +4654,8 @@ protected: //vis bins
 
     } else if(modeling==modeling_curve()){ //gopaw
 
-      float bmin = 0;
-      float bmax = 0;
+      G4float bmin = 0;
+      G4float bmax = 0;
 
       std::vector<rep_top_face2D> faces((xnbin-1)*(ynbin-1));
      {bool first = true;
@@ -4665,25 +4665,25 @@ protected: //vis bins
       for(unsigned int jbin=0;jbin<ynbin_1;jbin++) {
         for(unsigned int ibin=0;ibin<xnbin_1;ibin++) {
 
-          float xx_0 = a_bins.bin_lower_edge_x(ibin);
-          float xe_0 = a_bins.bin_upper_edge_x(ibin);
-          float xx_1 = a_bins.bin_lower_edge_x(ibin+1);
-          float xe_1 = a_bins.bin_upper_edge_x(ibin+1);
+          G4float xx_0 = a_bins.bin_lower_edge_x(ibin);
+          G4float xe_0 = a_bins.bin_upper_edge_x(ibin);
+          G4float xx_1 = a_bins.bin_lower_edge_x(ibin+1);
+          G4float xe_1 = a_bins.bin_upper_edge_x(ibin+1);
 
-          float yy_0 = a_bins.bin_lower_edge_y(jbin);
-          float ye_0 = a_bins.bin_upper_edge_y(jbin);
-          float yy_1 = a_bins.bin_lower_edge_y(jbin+1);
-          float ye_1 = a_bins.bin_upper_edge_y(jbin+1);
+          G4float yy_0 = a_bins.bin_lower_edge_y(jbin);
+          G4float ye_0 = a_bins.bin_upper_edge_y(jbin);
+          G4float yy_1 = a_bins.bin_lower_edge_y(jbin+1);
+          G4float ye_1 = a_bins.bin_upper_edge_y(jbin+1);
 
-          float xx = (xx_0+xe_0)/2;
-          float xe = (xx_1+xe_1)/2;
-          float yy = (yy_0+ye_0)/2;
-          float ye = (yy_1+ye_1)/2;
+          G4float xx = (xx_0+xe_0)/2;
+          G4float xe = (xx_1+xe_1)/2;
+          G4float yy = (yy_0+ye_0)/2;
+          G4float ye = (yy_1+ye_1)/2;
 
-          float val1 = a_bins.bin_Sw(ibin,jbin);
-          float val2 = a_bins.bin_Sw(ibin+1,jbin);
-          float val3 = a_bins.bin_Sw(ibin+1,jbin+1);
-          float val4 = a_bins.bin_Sw(ibin,jbin+1);
+          G4float val1 = a_bins.bin_Sw(ibin,jbin);
+          G4float val2 = a_bins.bin_Sw(ibin+1,jbin);
+          G4float val3 = a_bins.bin_Sw(ibin+1,jbin+1);
+          G4float val4 = a_bins.bin_Sw(ibin,jbin+1);
 
           faces[facei] = rep_top_face2D(xx,xe,yy,ye,val1,val2,val3,val4);
 
@@ -4692,8 +4692,8 @@ protected: //vis bins
             bmin = val1;
             bmax = val1;
           } else {
-            bmin = mn<float>(bmin,val1);
-            bmax = mx<float>(bmax,val1);
+            bmin = mn<G4float>(bmin,val1);
+            bmax = mx<G4float>(bmax,val1);
           }
 
           facei++;
@@ -4751,14 +4751,14 @@ protected: //vis bins
           } else {
             //updateBins2D_XY(a_bins,aIndex,*gs,a_box_x,a_box_y,boxZ,1.1F);
 
-            float zmin = a_box_z.m_pos;
-            float dz = a_box_z.m_width;
+            G4float zmin = a_box_z.m_pos;
+            G4float dz = a_box_z.m_width;
             //bool zlog = a_box_z.m_log;
 
-            float xmn =  m_x_axis_data.min_value();
-            float xmx =  m_x_axis_data.max_value();
-            float ymn =  m_y_axis_data.min_value();
-            float ymx =  m_y_axis_data.max_value();
+            G4float xmn =  m_x_axis_data.min_value();
+            G4float xmx =  m_x_axis_data.max_value();
+            G4float ymn =  m_y_axis_data.min_value();
+            G4float ymx =  m_y_axis_data.max_value();
 
             clist_contour list_contour;
             //int nFir = 32;
@@ -4768,7 +4768,7 @@ protected: //vis bins
             int nSec = 512;
             list_contour.set_secondary_grid(nSec,nSec); //Default : 256,256.
 
-            double limits[4];
+            G4double limits[4];
             // User limits :
             limits[0] = xmn;
             limits[1] = xmx;
@@ -4786,8 +4786,8 @@ protected: //vis bins
 
             // Extend the grid to have some borders in order to close contours :
             int n = nSec - 2 * 10;
-            double dx = (limits[1]-limits[0]) /n;
-            double dy = (limits[3]-limits[2]) /n;
+            G4double dx = (limits[1]-limits[0]) /n;
+            G4double dy = (limits[3]-limits[2]) /n;
             limits[0] = limits[0] - 10 * dx;
             limits[1] = limits[1] + 10 * dx;
             limits[2] = limits[2] - 10 * dy;
@@ -4804,9 +4804,9 @@ protected: //vis bins
             size_t zn = cmap->colorn();
             if(zn<=0) zn = 1;
 
-            std::vector<double> zs(zn+1);
-            float zmax = zmin + dz;
-            double zd = (zmax-zmin)/zn;
+            std::vector<G4double> zs(zn+1);
+            G4float zmax = zmin + dz;
+            G4double zd = (zmax-zmin)/zn;
             for(size_t zi=0;zi<=zn;zi++) zs[zi] = zmin + zi * zd;
             list_contour.set_planes(zs);
 
@@ -4831,7 +4831,7 @@ protected: //vis bins
               gs.light_model = light_model_base_color();
               //FIXME gs.transparency = 0.3F;
 
-              float ZZ = 0.0F;
+              G4float ZZ = 0.0F;
 
               rep_contour_xy_filled(a_out,gs,painting_by_level,*cmap,list_contour,
                                     a_box_x,a_box_y,a_box_z,ZZ/*,SbString(sid.c_str())*/);
@@ -4858,47 +4858,47 @@ protected: //vis bins
 
     //a_out << "tools::sg::plotter::update_func2D_xyz : visible :" << std::endl;
 
-    float xmn = m_x_axis_data.min_value();
-    float xmx = m_x_axis_data.max_value();
+    G4float xmn = m_x_axis_data.min_value();
+    G4float xmx = m_x_axis_data.max_value();
 
     unsigned int nx = a_func.x_steps();
     nx = !nx?20:nx;
 
-    float ymn = m_y_axis_data.min_value();
-    float ymx = m_y_axis_data.max_value();
+    G4float ymn = m_y_axis_data.min_value();
+    G4float ymx = m_y_axis_data.max_value();
 
     unsigned int ny = a_func.y_steps();
     ny = !ny?20:ny;
 
-    float dfx = (xmx - xmn)/nx;
-    float dfy = (ymx - ymn)/ny;
+    G4float dfx = (xmx - xmn)/nx;
+    G4float dfy = (ymx - ymn)/ny;
 
     //printf("debug : nx %d ny %d\n",nx,ny);
 
     std::vector<rep_top_face2D> faces(nx*ny);
    {bool problem = false;
     unsigned int facei = 0;
-    float* vprev = new float[2*nx];
+    G4float* vprev = new G4float[2*nx];
     for(int jbin=ny-1;jbin>=0;jbin--) {
-      float o1 = 0;
-      float o4 = 0;
+      G4float o1 = 0;
+      G4float o4 = 0;
       for(int ibin=nx-1;ibin>=0;ibin--) {
 
-        float xx = xmn + ibin * dfx;
-        float yy = ymn + jbin * dfy;
-        float xe = xx + dfx;
-        float ye = yy + dfy;
+        G4float xx = xmn + ibin * dfx;
+        G4float yy = ymn + jbin * dfy;
+        G4float xe = xx + dfx;
+        G4float ye = yy + dfy;
 
         // Values at the corner :
-        float val1;
+        G4float val1;
         if(!a_func.value(xx,yy,val1)) problem = true;
-        float val2;
+        G4float val2;
         if(ibin==int(nx-1)) {
           if(!a_func.value(xe,yy,val2)) problem = true;
         } else {
           val2 = o1;
         }
-        float val3,val4;
+        G4float val3,val4;
         if(jbin==int(ny-1)) {
           if(ibin==int(nx-1)) {
             if(!a_func.value(xe,ye,val3)) problem = true;
@@ -4937,23 +4937,23 @@ protected: //vis bins
     } else if( (painting==painting_grey_scale) ||
                (painting==painting_grey_scale_inverse) ||
                (painting==painting_violet_to_red) ){
-      float vmin = faces[0].m_v1;
-      float vmax = faces[0].m_v1;
+      G4float vmin = faces[0].m_v1;
+      G4float vmax = faces[0].m_v1;
       size_t number = faces.size();
       for(size_t index=0;index<number;index++) {
-        float vmean  = faces[index].m_v1;
+        G4float vmean  = faces[index].m_v1;
         vmean += faces[index].m_v2;
         vmean += faces[index].m_v3;
         vmean += faces[index].m_v4;
         vmean /= 4.0f;
 
-        vmin = mn<float>(vmin,vmean);
-        vmax = mx<float>(vmax,vmean);
+        vmin = mn<G4float>(vmin,vmean);
+        vmax = mx<G4float>(vmax,vmean);
 
         faces[index].m_ratio = vmean;
       }
 
-     {float dbins = vmax-vmin;
+     {G4float dbins = vmax-vmin;
       if(dbins!=0.0F) {
         for(size_t index=0;index<number;index++) {
           faces[index].m_ratio = (faces[index].m_ratio-vmin)/dbins;
@@ -4991,16 +4991,16 @@ protected: //vis bins
       rep_top_face2D_xyz(m_func_sep,a_style,*(m_func_cmaps[a_index]),faces,a_box_x,a_box_y,a_box_z);
     }
 
-    float xmin = a_box_x.m_pos;
-    float dx = a_box_x.m_width;
+    G4float xmin = a_box_x.m_pos;
+    G4float dx = a_box_x.m_width;
     bool xlog = a_box_x.m_log;
 
-    float ymin = a_box_y.m_pos;
-    float dy = a_box_y.m_width;
+    G4float ymin = a_box_y.m_pos;
+    G4float dy = a_box_y.m_width;
     bool ylog = a_box_y.m_log;
 
-    float zmin = a_box_z.m_pos;
-    float dz = a_box_z.m_width;
+    G4float zmin = a_box_z.m_pos;
+    G4float dz = a_box_z.m_width;
     bool zlog = a_box_z.m_log;
 
    if(func2D_borders_visible.value()) {
@@ -5021,36 +5021,36 @@ protected: //vis bins
     bool empty = true;
     bool problem = false;
 
-   {float xx = xmn;
-    float yy = ymn;
+   {G4float xx = xmn;
+    G4float yy = ymn;
     xx = verify_log(xx,xmin,dx,xlog);
     yy = verify_log(yy,ymin,dy,ylog);
     vtxs->add(xx,yy,0);}
 
-   {float xx = xmx;
-    float yy = ymn;
+   {G4float xx = xmx;
+    G4float yy = ymn;
     xx = verify_log(xx,xmin,dx,xlog);
     yy = verify_log(yy,ymin,dy,ylog);
     vtxs->add(xx,yy,0);}
 
-   {float val;
+   {G4float val;
    {if(!a_func.value(xmx,ymn,val)) problem = true;
     val = verify_log(val,zmin,dz,zlog);
     if(val<0) val = 0;
     if(val>1) val = 1;}
-   {float xx = xmx;
-    float yy = ymn;
+   {G4float xx = xmx;
+    G4float yy = ymn;
     xx = verify_log(xx,xmin,dx,xlog);
     yy = verify_log(yy,ymin,dy,ylog);
     vtxs->add(xx,yy,val);}}
 
     for(int ibin=nx-1;ibin>=0;ibin--) {
 
-      float xx = xmn + ibin * dfx;
-      //float xe = xx + dfx;
-      float yy = ymn;
+      G4float xx = xmn + ibin * dfx;
+      //G4float xe = xx + dfx;
+      G4float yy = ymn;
 
-      float val;
+      G4float val;
      {if(!a_func.value(xx,yy,val)) problem = true;
       val = verify_log(val,zmin,dz,zlog);
       if(val<0) val = 0;
@@ -5090,14 +5090,14 @@ protected: //vis bins
     vtxs->mode = gl::triangle_fan();
     sep->add(vtxs);
 
-   {float xx = xmn;
-    float yy = ymx;
+   {G4float xx = xmn;
+    G4float yy = ymx;
     xx = verify_log(xx,xmin,dx,xlog);
     yy = verify_log(yy,ymin,dy,ylog);
     vtxs->add(xx,yy,0);}
 
-   {float xx = xmn;
-    float yy = ymn;
+   {G4float xx = xmn;
+    G4float yy = ymn;
     xx = verify_log(xx,xmin,dx,xlog);
     yy = verify_log(yy,ymin,dy,ylog);
     vtxs->add(xx,yy,0);}
@@ -5107,10 +5107,10 @@ protected: //vis bins
 
     for(unsigned int jbin=0;jbin<ny;jbin++) {
 
-      float xx = xmn;
-      float yy = ymn + jbin * dfy;
+      G4float xx = xmn;
+      G4float yy = ymn + jbin * dfy;
 
-      float val;
+      G4float val;
      {if(!a_func.value(xx,yy,val)) problem = true;
       val = verify_log(val,zmin,dz,zlog);
       if(val<0) val = 0;
@@ -5129,13 +5129,13 @@ protected: //vis bins
       }
     }
 
-   {float val;
+   {G4float val;
    {if(!a_func.value(xmn,ymx,val)) problem = true;
     val = verify_log(val,zmin,dz,zlog);
     if(val<0) val = 0;
     if(val>1) val = 1;}
-   {float xx = xmn;
-    float yy = ymx;
+   {G4float xx = xmn;
+    G4float yy = ymx;
     xx = verify_log(xx,xmin,dx,xlog);
     yy = verify_log(yy,ymin,dy,ylog);
     vtxs->add(xx,yy,val);}}
@@ -5172,7 +5172,7 @@ protected: //vis bins
     mat->color = m_title_style.color;
     m_title_sep.add(mat);
 
-    float text_size = title_height * m_title_style.scale;
+    G4float text_size = title_height * m_title_style.scale;
 
     std::string font = m_title_style.font.value();
 
@@ -5186,20 +5186,20 @@ protected: //vis bins
       m_title_sep.add(new normal);
     }
 
-    float XSIZ = width;
-    float XMGL = left_margin;
-    float XMGR = right_margin;
-    float wData = XSIZ-XMGL-XMGR;
+    G4float XSIZ = width;
+    G4float XMGL = left_margin;
+    G4float XMGR = right_margin;
+    G4float wData = XSIZ-XMGL-XMGR;
 
-    float YSIZ = height;
-    float YMGL = bottom_margin;
-    float YMGU = top_margin;
-    float hData = YSIZ-YMGL-YMGU;
+    G4float YSIZ = height;
+    G4float YMGL = bottom_margin;
+    G4float YMGU = top_margin;
+    G4float hData = YSIZ-YMGL-YMGU;
 
-    float xx = wData/2;
-    float yy = hData + title_to_axis;
+    G4float xx = wData/2;
+    G4float yy = hData + title_to_axis;
 
-    float zz = _zinfos();
+    G4float zz = _zinfos();
 
     vjust vjust = bottom;
     if(!title_up) {
@@ -5230,18 +5230,18 @@ protected: //vis bins
     if(title.value().empty()) return;
 
     // same plane than infos, then in front of data and grid.
-    float zz = _zinfos();
+    G4float zz = _zinfos();
     if(m_shape==xyz) zz = depth*0.5f;
 
-    float wbox = width*title_box_width;
-    float hbox = height*title_box_height;
+    G4float wbox = width*title_box_width;
+    G4float hbox = height*title_box_height;
 
-    float xmargin = width*title_box_x_margin;  //from left border
-    float ymargin = height*title_box_y_margin; //from top border
+    G4float xmargin = width*title_box_x_margin;  //from left border
+    G4float ymargin = height*title_box_y_margin; //from top border
 
     matrix* _tsf = new matrix;
-   {float xx = -width*0.5f+wbox*0.5f+xmargin; //at left.
-    float yy = height*0.5f-hbox*0.5F-ymargin; //at top.
+   {G4float xx = -width*0.5f+wbox*0.5f+xmargin; //at left.
+    G4float yy = height*0.5f-hbox*0.5F-ymargin; //at top.
     _tsf->set_translate(xx,yy,zz);
     _tsf->mul_scale(1,1,_zscale_text());}
     m_title_box_sep.add(_tsf);
@@ -5324,13 +5324,13 @@ protected: //vis bins
     words(sinfos,"\n",false,ws);
     size_t linen = ws.size()/2;
 
-    float zz = _zinfos(); //xy
+    G4float zz = _zinfos(); //xy
     if(m_shape==xyz) zz = depth*0.5f;
 
-    float _height = height;
+    G4float _height = height;
     if(m_shape==xyz) _height = depth;
 
-    float wbox = width*infos_width;
+    G4float wbox = width*infos_width;
 
     matrix* infos_title_tsf = 0;
     sg::text* infos_title_text = 0;
@@ -5353,11 +5353,11 @@ protected: //vis bins
     }
 
     if(infos_title.size()) {
-      float hbox = _height*0.05f;
+      G4float hbox = _height*0.05f;
 
       matrix* _tsf = new matrix;
-     {float xx = width*0.5f  - wbox*0.5f -  width*infos_x_margin;
-      float yy = _height*0.5f - hbox*0.5F - _height*infos_y_margin;
+     {G4float xx = width*0.5f  - wbox*0.5f -  width*infos_x_margin;
+      G4float yy = _height*0.5f - hbox*0.5F - _height*infos_y_margin;
       _tsf->mul_translate(xx,yy,zz);
       _tsf->mul_scale(1,1,_zscale_text());}
       //in case of having infos, the tsf is refined below.
@@ -5420,11 +5420,11 @@ protected: //vis bins
     infos->update_sg();
 
     // if any, set infos_title height :
-    float title_hbox = 0;
+    G4float title_hbox = 0;
     if(infos_title_tsf && infos_title_text) {
       title_hbox = infos->height/linen;
-      float xx = width*0.5f  - wbox*0.5f       - width*infos_x_margin;
-      float yy = _height*0.5f - title_hbox*0.5F - _height*infos_y_margin;
+      G4float xx = width*0.5f  - wbox*0.5f       - width*infos_x_margin;
+      G4float yy = _height*0.5f - title_hbox*0.5F - _height*infos_y_margin;
       infos_title_tsf->set_identity();
       infos_title_tsf->mul_translate(xx,yy,zz);
       infos_title_tsf->mul_scale(1,1,_zscale_text());
@@ -5432,9 +5432,9 @@ protected: //vis bins
       infos_title_text->height = title_hbox;
     }
 
-    float hbox = infos->height;
-   {float xx = width*0.5f  -wbox*0.5f -width*infos_x_margin;
-    float yy = _height*0.5f -hbox*0.5F - _height*infos_y_margin;
+    G4float hbox = infos->height;
+   {G4float xx = width*0.5f  -wbox*0.5f -width*infos_x_margin;
+    G4float yy = _height*0.5f -hbox*0.5F - _height*infos_y_margin;
     yy -= title_hbox;
     _tsf->set_translate(xx,yy,zz);
     _tsf->mul_scale(1,1,_zscale_text());}
@@ -5456,7 +5456,7 @@ protected: //vis bins
    {matrix* _tsf = new matrix;
     m_legend_sep.add(_tsf);
 
-    float zz = _zinfos();
+    G4float zz = _zinfos();
 
     //set legends layout :
     if(legends_attached_to_infos) {
@@ -5465,8 +5465,8 @@ protected: //vis bins
       if(legends_origin_unit==unit_axis) {
 
         // legends_origin is in axes coordinates.
-        float x = legends_origin.value()[0];
-        float y = legends_origin.value()[1];
+        G4float x = legends_origin.value()[0];
+        G4float y = legends_origin.value()[1];
 
         vec3f pos;
         if(!axis_2_vp(vec3f(x,y,0),pos)) {
@@ -5475,8 +5475,8 @@ protected: //vis bins
         } else {
           //pos is in NDC of [0,width][0,height].
 
-          float xx = width  * (-0.5f+pos[0]);
-          float yy = height * (-0.5f+pos[1]);
+          G4float xx = width  * (-0.5f+pos[0]);
+          G4float yy = height * (-0.5f+pos[1]);
 
           _tsf->set_translate(xx,yy,zz);
 
@@ -5486,19 +5486,19 @@ protected: //vis bins
         // legends_origin is
         // the UR corner of legend region relative
         // to UR of plotter region.
-        float xur = legends_origin.value()[0];
-        float yur = legends_origin.value()[1];
+        G4float xur = legends_origin.value()[0];
+        G4float yur = legends_origin.value()[1];
 
         vec2f ur(1-xur,1-yur);
 
-        float w = legends_size.value()[0];
-        float h = legends_size.value()[1];
+        G4float w = legends_size.value()[0];
+        G4float h = legends_size.value()[1];
 
-        float x = ur[0]-w;
-        float y = ur[1]-h;
+        G4float x = ur[0]-w;
+        G4float y = ur[1]-h;
 
-        float xx = width  * (x-0.5f);
-        float yy = height * (y-0.5f);
+        G4float xx = width  * (x-0.5f);
+        G4float yy = height * (y-0.5f);
 
         _tsf->set_translate(xx,yy,zz);
 
@@ -5532,29 +5532,29 @@ protected: //vis bins
           matrix* imtx = get_infos_matrix();
           if(!imtx) {delete sep;return;}
 
-          float wbox = inode->width;
-          float hbox = inode->height/number;
+          G4float wbox = inode->width;
+          G4float hbox = inode->height/number;
 
           text->width = wbox;
           text->height = hbox;
 
           _tsf->mtx = imtx->mtx;
 
-          float xx = width*0.5f-wbox*0.5f;
+          G4float xx = width*0.5f-wbox*0.5f;
 
-          float yy = height*0.5f-inode->height-hbox*0.5f-hbox*index;
+          G4float yy = height*0.5f-inode->height-hbox*0.5f-hbox*index;
 
           _tsf->set_translate(xx,yy,0);
 
         } else {
-          float wbox = width  * legends_size.value()[0];
-          float hbox = (height * legends_size.value()[1])/number;
+          G4float wbox = width  * legends_size.value()[0];
+          G4float hbox = (height * legends_size.value()[1])/number;
 
           text->width = wbox;
           text->height = hbox;
 
-          float xx = width*0.5f-wbox*0.5f - width*infos_x_margin;
-          float yy = height*0.5f-hbox*0.5F - height*infos_y_margin;
+          G4float xx = width*0.5f-wbox*0.5f - width*infos_x_margin;
+          G4float yy = height*0.5f-hbox*0.5F - height*infos_y_margin;
 
           yy -= hbox*index;
 
@@ -5564,14 +5564,14 @@ protected: //vis bins
       } else {
 
         //legends_size is in NDC of [0,width][0,height].
-        float w = width  * legends_size.value()[0];
-        float h = height * legends_size.value()[1];
+        G4float w = width  * legends_size.value()[0];
+        G4float h = height * legends_size.value()[1];
 
         text->width = w;
         text->height = h/number;
 
-        float xx = w * 0.5f;
-        float yy = text->height * 0.5f;
+        G4float xx = w * 0.5f;
+        G4float yy = text->height * 0.5f;
         yy += text->height*(number-index-1);
 
         _tsf->set_translate(xx,yy,0);
@@ -5590,7 +5590,7 @@ protected: //vis bins
     if(legends_size.size()!=legends_origin.size()) return;
     if(legends_origin_unit.size()!=legends_origin.size()) return;
 
-    float zz = _zinfos();
+    G4float zz = _zinfos();
 
    {matrix* _tsf = new matrix;
     _tsf->mul_scale(1,1,_zscale_text());
@@ -5622,27 +5622,27 @@ protected: //vis bins
       sep->add(text);
 
       //legends_size is in NDC of [0,width][0,height].
-      float w = width  * legends_size[index][0];
-      float h = height * legends_size[index][1];
+      G4float w = width  * legends_size[index][0];
+      G4float h = height * legends_size[index][1];
       text->width = w;
       text->height = h;
 
-      float xxx = w * 0.5f;
-      float yyy = h * 0.5f;
+      G4float xxx = w * 0.5f;
+      G4float yyy = h * 0.5f;
 
       if(legends_origin_unit[index]==unit_axis) {
 
         // legends_origin is in axes coordinates.
-        float x = legends_origin[index][0];
-        float y = legends_origin[index][1];
+        G4float x = legends_origin[index][0];
+        G4float y = legends_origin[index][1];
 
         vec3f pos;
         if(!axis_2_vp(vec3f(x,y,0),pos)) {
           a_out << "tools::sg::plotter::update_legends : axis_2_vp() failed for x=" << x << ", y=" << y << "." << std::endl;
         } else {
           //pos is in NDC of [0,width][0,height].
-          float xx = width  * (-0.5f+pos[0]);
-          float yy = height * (-0.5f+pos[1]);
+          G4float xx = width  * (-0.5f+pos[0]);
+          G4float yy = height * (-0.5f+pos[1]);
           _tsf->set_translate(xx,yy,zz);
         }
 
@@ -5650,16 +5650,16 @@ protected: //vis bins
         // legends_origin is
         // the UR corner of legend region relative
         // to UR of plotter region.
-        float xur = legends_origin[index][0];
-        float yur = legends_origin[index][1];
+        G4float xur = legends_origin[index][0];
+        G4float yur = legends_origin[index][1];
 
         vec2f ur(1-xur,1-yur);
 
-        float x =  width*ur[0] - w;
-        float y = height*ur[1] - h;
+        G4float x =  width*ur[0] - w;
+        G4float y = height*ur[1] - h;
 
-        float xx =  -width*0.5f + x;
-        float yy = -height*0.5f + y;
+        G4float xx =  -width*0.5f + x;
+        G4float yy = -height*0.5f + y;
 
         _tsf->set_translate(xx,yy,zz);
       }
@@ -5676,10 +5676,10 @@ protected: //vis bins
     matrix* _tsf = new matrix;
     m_background_sep.add(_tsf);
 
-    float w2 = width*0.5F;
-    float h2 = height*0.5F;
+    G4float w2 = width*0.5F;
+    G4float h2 = height*0.5F;
 
-    float zz = 0; //in xy, then before first data plane at _zoffset()
+    G4float zz = 0; //in xy, then before first data plane at _zoffset()
     if(m_shape==xyz) zz = -depth*0.5f;
 
    {rgba* mat = new rgba();
@@ -5714,8 +5714,8 @@ protected: //vis bins
       vtxs->mode = gl::triangle_fan();
       m_background_sep.add(vtxs);
 
-      //float d = width*0.005;
-      float d = width*m_background_style.line_width;
+      //G4float d = width*0.005;
+      G4float d = width*m_background_style.line_width;
 
       zz += _zoffset()*0.5f;
 
@@ -5744,7 +5744,7 @@ protected: //vis bins
     vtxs->mode = gl::line_strip();
     m_inner_frame_sep.add(vtxs);
 
-    float zz = _zgrid();
+    G4float zz = _zgrid();
 
     vtxs->add(0,0,zz);
     vtxs->add(1,0,zz);
@@ -5810,19 +5810,19 @@ protected: //vis bins
     ds->line_width = m_grid_style.line_width;
     m_grid_sep.add(ds);
 
-    float zz = _zgrid();
+    G4float zz = _zgrid();
 
     vertices* vtxs = new vertices;
     vtxs->mode = gl::lines();
     m_grid_sep.add(vtxs);
 
-    std::vector<float>& pts = vtxs->xyzs.values();
+    std::vector<G4float>& pts = vtxs->xyzs.values();
 
     bool is_solid = m_grid_style.line_pattern.value()==line_solid;
 
     if(draw_vertical) {
-      float _width = m_y_axis.width;
-      float xx;
+      G4float _width = m_y_axis.width;
+      G4float xx;
      {size_t _number = m_x_axis.coords.size();
       if(is_solid) {
         pts.reserve(_number*6);
@@ -5858,8 +5858,8 @@ protected: //vis bins
     }
 
     if(draw_horizontal) {
-      float _width = m_x_axis.width;
-      float yy;
+      G4float _width = m_x_axis.width;
+      G4float yy;
      {size_t _number = m_y_axis.coords.size();
       if(is_solid) {
         pts.reserve(_number*6);
@@ -5914,7 +5914,7 @@ protected: //vis bins
     vtxs->mode = gl::line_strip();
     m_grid_sep.add(vtxs);
 
-    float z = 0.5F;
+    G4float z = 0.5F;
 
     vtxs->add(0,0,z);
     vtxs->add(1,0,z);
@@ -5937,9 +5937,9 @@ protected: //vis bins
   vec3f* points = new vec3f[4 * ntick];
   int pos = 0;
   for(int count=0;count<ntick;count++) {
-    float xe = m_x_axis.width.value();
-    float ye = m_y_axis.width.value();
-    float zz = m_z_axis.coords[count];
+    G4float xe = m_x_axis.width.value();
+    G4float ye = m_y_axis.width.value();
+    G4float zz = m_z_axis.coords[count];
     LIST_SET(points,pos,0 ,ye,zz);pos++;
     LIST_SET(points,pos,xe,ye,zz);pos++;
     LIST_SET(points,pos,xe,ye,zz);pos++;
@@ -5973,19 +5973,19 @@ protected: //rep
                                const std::vector<rep_bin1D>& a_bins,
                                const rep_box& a_box_x,
                                const rep_box& a_box_y,
-                               float a_zz/*,
+                               G4float a_zz/*,
                                const std::string& aID*/){
     painting_policy painting = a_style.painting;
 
-    float xmin = a_box_x.m_pos;
-    float dx = a_box_x.m_width;
+    G4float xmin = a_box_x.m_pos;
+    G4float dx = a_box_x.m_width;
     bool xlog = a_box_x.m_log;
 
-    float ymin = a_box_y.m_pos;
-    float dy = a_box_y.m_width;
+    G4float ymin = a_box_y.m_pos;
+    G4float dy = a_box_y.m_width;
     bool ylog = a_box_y.m_log;
 
-    float y0 = 0;
+    G4float y0 = 0;
     y0 = verify_log(y0,ymin,dy,ylog);
     if(y0<0) y0 = 0;
     if(y0>1) y0 = 1;
@@ -6001,14 +6001,14 @@ protected: //rep
     bool empty = true;
     colorf clr;
 
-    float yp = 0;
+    G4float yp = 0;
     size_t xnbin = a_bins.size();
     for(size_t index=0;index<xnbin;index++) {
-      float xx = a_bins[index].m_x_min;
-      float xe = a_bins[index].m_x_max;
-      float y = a_bins[index].m_val;
+      G4float xx = a_bins[index].m_x_min;
+      G4float xe = a_bins[index].m_x_max;
+      G4float y = a_bins[index].m_val;
 
-      float val = a_bins[index].m_val;
+      G4float val = a_bins[index].m_val;
 
       xx = verify_log(xx,xmin,dx,xlog);
       xe = verify_log(xe,xmin,dx,xlog);
@@ -6078,15 +6078,15 @@ protected: //rep
                             const std::vector<rep_bin1D>& a_bins,
                             const rep_box& a_box_x,
                             const rep_box& a_box_y,
-                            float a_zz/*,
+                            G4float a_zz/*,
                             const std::string& aID*/){
     //::printf("debug : tools::sg::plotter::rep_bins1D_xy_points : begin\n");
-    float xmin = a_box_x.m_pos;
-    float dx = a_box_x.m_width;
+    G4float xmin = a_box_x.m_pos;
+    G4float dx = a_box_x.m_width;
     bool xlog = a_box_x.m_log;
 
-    float ymin = a_box_y.m_pos;
-    float dy = a_box_y.m_width;
+    G4float ymin = a_box_y.m_pos;
+    G4float dy = a_box_y.m_width;
     bool ylog = a_box_y.m_log;
 
     painting_policy painting = a_style.painting;
@@ -6104,9 +6104,9 @@ protected: //rep
     colorf clr;
     size_t xnbin = a_bins.size();
     for(size_t index=0;index<xnbin;index++) {
-      float x = (a_bins[index].m_x_min + a_bins[index].m_x_max)/2;
-      float y = a_bins[index].m_val;
-      float val = a_bins[index].m_val;
+      G4float x = (a_bins[index].m_x_min + a_bins[index].m_x_max)/2;
+      G4float y = a_bins[index].m_val;
+      G4float val = a_bins[index].m_val;
 
       x = verify_log(x,xmin,dx,xlog);
       y = verify_log(y,ymin,dy,ylog);
@@ -6175,16 +6175,16 @@ protected: //rep
                            const std::vector<rep_bin1D>& a_bins,
                            const rep_box& a_box_x,
                            const rep_box& a_box_y,
-                           float a_zz //,const std::string& aID
+                           G4float a_zz //,const std::string& aID
                                ){
     painting_policy painting = a_style.painting;
 
-    float xmin = a_box_x.m_pos;
-    float dx = a_box_x.m_width;
+    G4float xmin = a_box_x.m_pos;
+    G4float dx = a_box_x.m_width;
     bool xlog = a_box_x.m_log;
 
-    float ymin = a_box_y.m_pos;
-    float dy = a_box_y.m_width;
+    G4float ymin = a_box_y.m_pos;
+    G4float dy = a_box_y.m_width;
     bool ylog = a_box_y.m_log;
 
     separator* _sep = new separator();
@@ -6197,16 +6197,16 @@ protected: //rep
     tools_vforcit(rep_bin1D,a_bins,it) {
       const rep_bin1D& rbin = *it;
 
-      float xx = rbin.m_x_min;
-      float xe = rbin.m_x_max;
-      float yy = rbin.m_v_min;
-      float ye = rbin.m_val;
+      G4float xx = rbin.m_x_min;
+      G4float xe = rbin.m_x_max;
+      G4float yy = rbin.m_v_min;
+      G4float ye = rbin.m_val;
       if(ye<yy) {
         yy = rbin.m_val;
         ye = rbin.m_v_min;
       }
 
-      float val = rbin.m_val;
+      G4float val = rbin.m_val;
 
       xx = verify_log(xx,xmin,dx,xlog);
       xe = verify_log(xe,xmin,dx,xlog);
@@ -6274,18 +6274,18 @@ protected: //rep
                                 const base_colormap& a_cmap,
                                 const std::vector<rep_bin1D>& a_bins,
                                 const rep_box& a_box_x,const rep_box& a_box_y,
-                                float a_zz,
+                                G4float a_zz,
                                 bool a_bar_chart/*,
                                 const std::string& aID*/){
 
     painting_policy painting = a_style.painting;
 
-    float xmin = a_box_x.m_pos;
-    float dx = a_box_x.m_width;
+    G4float xmin = a_box_x.m_pos;
+    G4float dx = a_box_x.m_width;
     bool xlog = a_box_x.m_log;
 
-    float ymin = a_box_y.m_pos;
-    float dy = a_box_y.m_width;
+    G4float ymin = a_box_y.m_pos;
+    G4float dy = a_box_y.m_width;
     bool ylog = a_box_y.m_log;
 
     separator* _sep = new separator();
@@ -6296,16 +6296,16 @@ protected: //rep
     tools_vforcit(rep_bin1D,a_bins,it) {
       const rep_bin1D& rbin = *it;
 
-      float xx = rbin.m_x_min;
-      float xe = rbin.m_x_max;
-      float yy = rbin.m_v_min;
-      float ye = rbin.m_val;
+      G4float xx = rbin.m_x_min;
+      G4float xe = rbin.m_x_max;
+      G4float yy = rbin.m_v_min;
+      G4float ye = rbin.m_val;
       if(ye<yy) {
         yy = rbin.m_val;
         ye = rbin.m_v_min;
       }
 
-      float val = rbin.m_val;
+      G4float val = rbin.m_val;
 
       if(a_bar_chart) {
         bar_chart(a_style.bar_offset.value(),
@@ -6373,7 +6373,7 @@ protected: //rep
   }
 
   void rep_bins1D_xy_lines_one(const style& a_style,const std::vector<rep_bin1D>& a_bins,
-                               const rep_box& a_box_x,const rep_box& a_box_y,float a_zz/*,const SbString& aID*/) {
+                               const rep_box& a_box_x,const rep_box& a_box_y,G4float a_zz/*,const SbString& aID*/) {
     // Draw lines connecting top middle of bins.
 
     //::printf("debug : rep_bins2D_lines_one\n");
@@ -6381,13 +6381,13 @@ protected: //rep
     size_t xnbin = a_bins.size();
     std::vector<vec3f> points(xnbin);
     for(size_t index=0;index<xnbin;index++) {
-      float x = (a_bins[index].m_x_min + a_bins[index].m_x_max)/2;
-      float y = a_bins[index].m_val;
+      G4float x = (a_bins[index].m_x_min + a_bins[index].m_x_max)/2;
+      G4float y = a_bins[index].m_val;
       points[index] = vec3f(x,y,a_zz);
     }
 
     vertices* vtxs = new vertices;
-    std::vector<float>& pts = vtxs->xyzs.values(); //npt*3
+    std::vector<G4float>& pts = vtxs->xyzs.values(); //npt*3
 
     clip_polyline_2D(points,a_box_x,a_box_y,pts);
     if(pts.size()) {
@@ -6414,15 +6414,15 @@ protected: //rep
   }
 
   void rep_bins1D_xy_curve_one(std::ostream& a_out,const style& a_style,const std::vector<rep_bin1D>& a_bins,
-                               const rep_box& a_box_x,const rep_box& a_box_y,float a_zz/*,const SbString& aID*/){
+                               const rep_box& a_box_x,const rep_box& a_box_y,G4float a_zz/*,const SbString& aID*/){
     //::printf("debug : rep_bins1D_curve_one\n");
 
     size_t number = a_bins.size();
     if(!number) return;
 
-    double* xs = new double[number];
-    double* ys = new double[number];
-    float x,y;
+    G4double* xs = new G4double[number];
+    G4double* ys = new G4double[number];
+    G4float x,y;
     for(size_t index=0;index<number;index++) {
       x = (a_bins[index].m_x_min + a_bins[index].m_x_max)/2;
       y = a_bins[index].m_val;
@@ -6432,19 +6432,19 @@ protected: //rep
   //spline::quintic _spline(a_out,number,xs,ys);
     delete [] xs;delete [] ys;
 
-    float xmn = m_x_axis_data.min_value();
-    float xmx = m_x_axis_data.max_value();
+    G4float xmn = m_x_axis_data.min_value();
+    G4float xmx = m_x_axis_data.max_value();
     unsigned int nstp = curve_number_of_points;
-    float step = (xmx - xmn)/nstp;
+    G4float step = (xmx - xmn)/nstp;
     std::vector<vec3f> points(nstp+1);
     for(unsigned int ibin=0;ibin<=nstp;ibin++) {
-      float xx = xmn + ibin * step;
-      double val = _spline.eval(xx);
-      points[ibin].set_value(xx,float(val),a_zz);
+      G4float xx = xmn + ibin * step;
+      G4double val = _spline.eval(xx);
+      points[ibin].set_value(xx,G4float(val),a_zz);
     }
 
     vertices* vtxs = new vertices;
-    std::vector<float>& pts = vtxs->xyzs.values(); //npt*3
+    std::vector<G4float>& pts = vtxs->xyzs.values(); //npt*3
 
     clip_polyline_2D(points,a_box_x,a_box_y,pts);
     if(pts.size()) {
@@ -6473,7 +6473,7 @@ protected: //rep
 
 
   void rep_bins2D_xy_box(const style& a_style,const std::vector<rep_bin2D>& a_bins,
-                         const rep_box& a_box_x,const rep_box& a_box_y,float a_bmin,float a_bmax,float a_zz) {
+                         const rep_box& a_box_x,const rep_box& a_box_y,G4float a_bmin,G4float a_bmax,G4float a_zz) {
     // Draw box of size proportionnal to bin value.
 
     //std::cout << "debug : tools::sg::plotter::rep_bins2D_xy_box" << std::endl;
@@ -6486,27 +6486,27 @@ protected: //rep
     mat->color = a_style.color;
     _sep->add(mat);
 
-    float xmin = a_box_x.m_pos;
-    float dx = a_box_x.m_width;
+    G4float xmin = a_box_x.m_pos;
+    G4float dx = a_box_x.m_width;
     bool xlog = a_box_x.m_log;
 
-    float ymin = a_box_y.m_pos;
-    float dy = a_box_y.m_width;
+    G4float ymin = a_box_y.m_pos;
+    G4float dy = a_box_y.m_width;
     bool ylog = a_box_y.m_log;
 
     bool empty = true;
-    float range = a_bmax - a_bmin;
+    G4float range = a_bmax - a_bmin;
 
     tools_vforcit(rep_bin2D,a_bins,it) {
       const rep_bin2D& rbin = *it;
 
-      float xx = rbin.m_x_min;
-      float xe = rbin.m_x_max;
-      float yy = rbin.m_y_min;
-      float ye = rbin.m_y_max;
-      float val = rbin.m_val;
+      G4float xx = rbin.m_x_min;
+      G4float xe = rbin.m_x_max;
+      G4float yy = rbin.m_y_min;
+      G4float ye = rbin.m_y_max;
+      G4float val = rbin.m_val;
 
-      float xsize,ysize;
+      G4float xsize,ysize;
       if(range>0) {
         // If val = bmax, the box maps the cell.
         xsize = (val - a_bmin) * (xe - xx) / range;
@@ -6572,7 +6572,7 @@ protected: //rep
   void rep_bins2D_xy_wire_box(const style& a_style,
                               const std::vector<rep_bin2D>& a_bins,
 			      const rep_box& a_box_x,const rep_box& a_box_y,
-			      float a_bmin,float a_bmax,float a_zz
+			      G4float a_bmin,G4float a_bmax,G4float a_zz
                               /*,const SbString& aID*/){
     // Draw box of size proportionnal to bin value.
 
@@ -6594,25 +6594,25 @@ protected: //rep
 
     bool empty = true;
 
-    float xmin = a_box_x.m_pos;
-    float dx = a_box_x.m_width;
+    G4float xmin = a_box_x.m_pos;
+    G4float dx = a_box_x.m_width;
     bool xlog = a_box_x.m_log;
 
-    float ymin = a_box_y.m_pos;
-    float dy = a_box_y.m_width;
+    G4float ymin = a_box_y.m_pos;
+    G4float dy = a_box_y.m_width;
     bool ylog = a_box_y.m_log;
 
-    float range = a_bmax - a_bmin;
+    G4float range = a_bmax - a_bmin;
     size_t number = a_bins.size();
     for(size_t index=0;index<number;index++) {
 
-      float xx = a_bins[index].m_x_min;
-      float xe = a_bins[index].m_x_max;
-      float yy = a_bins[index].m_y_min;
-      float ye = a_bins[index].m_y_max;
-      float val = a_bins[index].m_val;
+      G4float xx = a_bins[index].m_x_min;
+      G4float xe = a_bins[index].m_x_max;
+      G4float yy = a_bins[index].m_y_min;
+      G4float ye = a_bins[index].m_y_max;
+      G4float val = a_bins[index].m_val;
 
-      float xsize,ysize;
+      G4float xsize,ysize;
       if(range>0) {
         // If val = bmax, the box maps the cell.
         xsize = (val - a_bmin) * (xe - xx) / range;
@@ -6687,19 +6687,19 @@ protected: //rep
   }
 
   void rep_bins2D_xy_solid(const style& a_style,const base_colormap& a_cmap,const std::vector<rep_bin2D>& a_bins,
-                           const rep_box& a_box_x,const rep_box& a_box_y,float a_zz) {
+                           const rep_box& a_box_x,const rep_box& a_box_y,G4float a_zz) {
     painting_policy painting = a_style.painting;
 
     separator* _sep = new separator();
 
     _sep->add(new normal);
 
-    float xmin = a_box_x.m_pos;
-    float dx = a_box_x.m_width;
+    G4float xmin = a_box_x.m_pos;
+    G4float dx = a_box_x.m_width;
     bool xlog = a_box_x.m_log;
 
-    float ymin = a_box_y.m_pos;
-    float dy = a_box_y.m_width;
+    G4float ymin = a_box_y.m_pos;
+    G4float dy = a_box_y.m_width;
     bool ylog = a_box_y.m_log;
 
     bool empty = true;
@@ -6708,11 +6708,11 @@ protected: //rep
     tools_vforcit(rep_bin2D,a_bins,it) {
       const rep_bin2D& rbin = *it;
 
-      float xx = rbin.m_x_min;
-      float xe = rbin.m_x_max;
-      float yy = rbin.m_y_min;
-      float ye = rbin.m_y_max;
-      float val = rbin.m_val;
+      G4float xx = rbin.m_x_min;
+      G4float xe = rbin.m_x_max;
+      G4float yy = rbin.m_y_min;
+      G4float ye = rbin.m_y_max;
+      G4float val = rbin.m_val;
 
       xx = verify_log(xx ,xmin,dx  ,xlog);
       xe = verify_log(xe ,xmin,dx  ,xlog);
@@ -6764,7 +6764,7 @@ protected: //rep
   }
 
   void rep_bins2D_xy_random_one(const style& a_style,const std::vector<rep_bin2D>& a_bins,
-                                const rep_box& a_box_x,const rep_box& a_box_y,float a_bmin,float a_bmax,float a_zz
+                                const rep_box& a_box_x,const rep_box& a_box_y,G4float a_bmin,G4float a_bmax,G4float a_zz
                                 /*,const SbString& aID*/){
     //::printf("debug : rep_bins2D_xy_random_one\n");
 
@@ -6779,29 +6779,29 @@ protected: //rep
     ds->point_size = a_style.point_size;
     separator->add(ds);
 
-    float xmin = a_box_x.m_pos;
-    float dx = a_box_x.m_width;
+    G4float xmin = a_box_x.m_pos;
+    G4float dx = a_box_x.m_width;
     bool xlog = a_box_x.m_log;
 
-    float ymin = a_box_y.m_pos;
-    float dy = a_box_y.m_width;
+    G4float ymin = a_box_y.m_pos;
+    G4float dy = a_box_y.m_width;
     bool ylog = a_box_y.m_log;
 
     //  Draw for each bins a number of random
     // points proportiannal to bins range.
 
-    float range = a_bmax - a_bmin;
+    G4float range = a_bmax - a_bmin;
 
     bool empty = true;
 
     size_t number = a_bins.size();
     for(size_t index=0;index<number;index++) {
 
-      float xx = a_bins[index].m_x_min;
-      float xe = a_bins[index].m_x_max;
-      float yy = a_bins[index].m_y_min;
-      float ye = a_bins[index].m_y_max;
-      float val = a_bins[index].m_val;
+      G4float xx = a_bins[index].m_x_min;
+      G4float xe = a_bins[index].m_x_max;
+      G4float yy = a_bins[index].m_y_min;
+      G4float ye = a_bins[index].m_y_max;
+      G4float val = a_bins[index].m_val;
 
       // If range is 0. ; then all bins that have entries
       // have same values. Draw one point.
@@ -6815,11 +6815,11 @@ protected: //rep
         separator->add(vtxs);
 
         int ipt = 0;
-        float xdbin = xe - xx;
-        float ydbin = ye - yy;
+        G4float xdbin = xe - xx;
+        G4float ydbin = ye - yy;
         for(int count=0;count<npt;count++) {
-          float xxx = xx + xdbin * m_rtausmef.shoot();
-          float yyy = yy + ydbin * m_rtausmef.shoot();
+          G4float xxx = xx + xdbin * m_rtausmef.shoot();
+          G4float yyy = yy + ydbin * m_rtausmef.shoot();
           xxx = verify_log(xxx ,xmin,dx  ,xlog);
           yyy = verify_log(yyy ,ymin,dy  ,ylog);
           if((xxx>=0)&&(xxx<=1)  &&
@@ -6857,23 +6857,23 @@ protected: //rep
 
     bool empty = true;
 
-    float xmin = a_box_x.m_pos;
-    float dx = a_box_x.m_width;
+    G4float xmin = a_box_x.m_pos;
+    G4float dx = a_box_x.m_width;
     bool xlog = a_box_x.m_log;
 
-    float ymin = a_box_y.m_pos;
-    float dy = a_box_y.m_width;
+    G4float ymin = a_box_y.m_pos;
+    G4float dy = a_box_y.m_width;
     bool ylog = a_box_y.m_log;
 
     vec3f points[5];
 
     for(unsigned int index=0;index<a_bins.size();index++) {
 
-      float xx = a_bins[index].m_x_min;
-      float xe = a_bins[index].m_x_max;
-      float yy = a_bins[index].m_y_min;
-      float ye = a_bins[index].m_y_max;
-      float val = a_bins[index].m_val;
+      G4float xx = a_bins[index].m_x_min;
+      G4float xe = a_bins[index].m_x_max;
+      G4float yy = a_bins[index].m_y_min;
+      G4float ye = a_bins[index].m_y_max;
+      G4float val = a_bins[index].m_val;
 
       int ival = (int)val;
       if(ival==0) continue;
@@ -6918,8 +6918,8 @@ protected: //rep
 
       sep->addChild(getLineStyle(a_style));
 
-      float dx = xe-xx;
-      float dy = ye-yy;
+      G4float dx = xe-xx;
+      G4float dy = ye-yy;
 
       if(drawWireBoxe) {
         LIST_SET(points,0,xx,yy,0);
@@ -6942,11 +6942,11 @@ protected: //rep
         sep->addChild(lineSet);
       }
 
-      float x = xx + 0.1F * dx;
-      float y = yy + 0.1F * dy;
-      float z = 0;
-      float w = dx * 0.5F;
-      float h = dy * 0.5F;
+      G4float x = xx + 0.1F * dx;
+      G4float y = yy + 0.1F * dy;
+      G4float z = 0;
+      G4float w = dx * 0.5F;
+      G4float h = dy * 0.5F;
 
       SoTransform* transform = new SoTransform;
       transform->scaleFactor.setValue(vec3f(w/charn,h,1));
@@ -6970,20 +6970,20 @@ protected: //rep
 
   void rep_contour_xy(std::ostream& a_out,const style& a_style,painting_policy a_painting,
                       const base_colormap& a_cmap,clist_contour& a_contour,
-		      const rep_box& a_box_x,const rep_box& a_box_y,const rep_box& a_box_z,float a_zz
+		      const rep_box& a_box_x,const rep_box& a_box_y,const rep_box& a_box_z,G4float a_zz
                       /*,const std::string& aID*/){
     //a_out << "debug : rep_contour_xy :" << std::endl;
 
-    float xmin = a_box_x.m_pos;
-    float dx = a_box_x.m_width;
+    G4float xmin = a_box_x.m_pos;
+    G4float dx = a_box_x.m_width;
     bool xlog = a_box_x.m_log;
 
-    float ymin = a_box_y.m_pos;
-    float dy = a_box_y.m_width;
+    G4float ymin = a_box_y.m_pos;
+    G4float dy = a_box_y.m_width;
     bool ylog = a_box_y.m_log;
 
-    float zmin = a_box_z.m_pos;
-    float dz = a_box_z.m_width;
+    G4float zmin = a_box_z.m_pos;
+    G4float dz = a_box_z.m_width;
     //bool zlog = a_box_z.m_log;
 
     sg::separator* separator = new sg::separator;
@@ -7010,8 +7010,8 @@ protected: //rep
       }
 
       //If zlog true, zz is already in log.
-      float val = (float)a_contour.get_plane(i);
-      float zz = val;
+      G4float val = (G4float)a_contour.get_plane(i);
+      G4float zz = val;
 
       zz = verify_log(zz,zmin,dz,false);
       if(zz>1) continue;
@@ -7039,22 +7039,22 @@ protected: //rep
         //// putting point at start and end of strip
         //// retreiving index
         //unsigned int index=pStrip->front();
-        //double xb=a_contour.get_xi(index);
-        //double yb=a_contour.get_yi(index);
+        //G4double xb=a_contour.get_xi(index);
+        //G4double yb=a_contour.get_yi(index);
         //// retreiving index
         ////glColor4f(0,0,1,.8f);
         //index=pStrip->back();
-        //double xe=a_contour.get_xi(index);
-        //double ye=a_contour.get_yi(index);
+        //G4double xe=a_contour.get_xi(index);
+        //G4double ye=a_contour.get_yi(index);
 
         bool first = true;
-        float xprev = 0;
-        float yprev = 0;
-        float xx,yy;
+        G4float xprev = 0;
+        G4float yprev = 0;
+        G4float xx,yy;
 
         tools_lforcit(unsigned int,*pStrip,pos2) {
-          xx = (float)a_contour.get_xi(*pos2);
-          yy = (float)a_contour.get_yi(*pos2);
+          xx = (G4float)a_contour.get_xi(*pos2);
+          yy = (G4float)a_contour.get_yi(*pos2);
           xx = verify_log(xx,xmin,dx,xlog);
           yy = verify_log(yy,ymin,dy,ylog);
           if(
@@ -7089,20 +7089,20 @@ protected: //rep
 
   void rep_contour_xy_filled(std::ostream& a_out,const style& a_style,painting_policy a_painting,
                              const base_colormap& a_cmap,clist_contour& a_contour,
-			     const rep_box& a_box_x,const rep_box& a_box_y,const rep_box& a_box_z,float a_zz
+			     const rep_box& a_box_x,const rep_box& a_box_y,const rep_box& a_box_z,G4float a_zz
                              /*,const std::string& aID*/){
     //a_out << "debug : rep_contour_xy_filled :" << std::endl;
 
-    float xmin = a_box_x.m_pos;
-    float dx = a_box_x.m_width;
+    G4float xmin = a_box_x.m_pos;
+    G4float dx = a_box_x.m_width;
     bool xlog = a_box_x.m_log;
 
-    float ymin = a_box_y.m_pos;
-    float dy = a_box_y.m_width;
+    G4float ymin = a_box_y.m_pos;
+    G4float dy = a_box_y.m_width;
     bool ylog = a_box_y.m_log;
 
-    float zmin = a_box_z.m_pos;
-    float dz = a_box_z.m_width;
+    G4float zmin = a_box_z.m_pos;
+    G4float dz = a_box_z.m_width;
     //bool zlog = a_box_z.m_log;
 
     sg::separator* separator = new sg::separator;
@@ -7114,7 +7114,7 @@ protected: //rep
       sg::separator* sep = new sg::separator;
       separator->add(sep);
 
-      float zz = a_zz - 0.01F;
+      G4float zz = a_zz - 0.01F;
 
       colorf _color;
       if(a_cmap.colorn()) {
@@ -7127,10 +7127,10 @@ protected: //rep
       mat->color = _color;
       sep->add(mat);
 
-      float xx = xmin;
-      float xe = xmin+dx;
-      float yy = ymin;
-      float ye = ymin+dy;
+      G4float xx = xmin;
+      G4float xe = xmin+dx;
+      G4float yy = ymin;
+      G4float ye = ymin+dy;
 
       xx = verify_log(xx,xmin,dx,xlog);
       xe = verify_log(xe,xmin,dx,xlog);
@@ -7162,8 +7162,8 @@ protected: //rep
       separator->add(sep);
 
       //If zlog true, zz is already in log.
-      float val = (float)a_contour.get_plane(i);
-      float zz = val;
+      G4float val = (G4float)a_contour.get_plane(i);
+      G4float zz = val;
 
       zz = verify_log(zz,zmin,dz,false);
       if(zz>1) continue;
@@ -7177,8 +7177,8 @@ protected: //rep
           std::vector<vec3f> v;
           for (cline_strip::iterator pos2=pStrip->begin();pos2 != pStrip->end();pos2++) {
             unsigned int index=(*pos2);
-            float xx = (float)a_contour.get_xi(index);
-            float yy = (float)a_contour.get_yi(index);
+            G4float xx = (G4float)a_contour.get_xi(index);
+            G4float yy = (G4float)a_contour.get_yi(index);
             xx = verify_log(xx,xmin,dx,xlog);
             yy = verify_log(yy,ymin,dy,ylog);
             v.push_back(vec3f(xx,yy,a_zz+zz));
@@ -7208,21 +7208,21 @@ protected: //rep
 
       for(size_t itri=0;itri<tris.size();itri++) {
         tess_triangle& tri = tris[itri];
-	AB.set_value((float)(tri.pointB[0]-tri.pointA[0]),
-                     (float)(tri.pointB[1]-tri.pointA[1]),
-                     (float)(tri.pointB[2]-tri.pointA[2]));
-        BC.set_value((float)(tri.pointC[0]-tri.pointB[0]),
-                     (float)(tri.pointC[1]-tri.pointB[1]),
-                     (float)(tri.pointC[2]-tri.pointB[2]));
+	AB.set_value((G4float)(tri.pointB[0]-tri.pointA[0]),
+                     (G4float)(tri.pointB[1]-tri.pointA[1]),
+                     (G4float)(tri.pointB[2]-tri.pointA[2]));
+        BC.set_value((G4float)(tri.pointC[0]-tri.pointB[0]),
+                     (G4float)(tri.pointC[1]-tri.pointB[1]),
+                     (G4float)(tri.pointC[2]-tri.pointB[2]));
         AB.cross(BC,vcross);
 	if(vcross.z()>=0) {
-          vtxs->add((float)tri.pointA[0],(float)tri.pointA[1],(float)tri.pointA[2]);
-          vtxs->add((float)tri.pointB[0],(float)tri.pointB[1],(float)tri.pointB[2]);
-          vtxs->add((float)tri.pointC[0],(float)tri.pointC[1],(float)tri.pointC[2]);
+          vtxs->add((G4float)tri.pointA[0],(G4float)tri.pointA[1],(G4float)tri.pointA[2]);
+          vtxs->add((G4float)tri.pointB[0],(G4float)tri.pointB[1],(G4float)tri.pointB[2]);
+          vtxs->add((G4float)tri.pointC[0],(G4float)tri.pointC[1],(G4float)tri.pointC[2]);
 	} else {
-          vtxs->add((float)tri.pointA[0],(float)tri.pointA[1],(float)tri.pointA[2]);
-          vtxs->add((float)tri.pointC[0],(float)tri.pointC[1],(float)tri.pointC[2]);
-          vtxs->add((float)tri.pointB[0],(float)tri.pointB[1],(float)tri.pointB[2]);
+          vtxs->add((G4float)tri.pointA[0],(G4float)tri.pointA[1],(G4float)tri.pointA[2]);
+          vtxs->add((G4float)tri.pointC[0],(G4float)tri.pointC[1],(G4float)tri.pointC[2]);
+          vtxs->add((G4float)tri.pointB[0],(G4float)tri.pointB[1],(G4float)tri.pointB[2]);
 	}
         vtxs->add_color(_color);
         vtxs->add_color(_color);
@@ -7241,7 +7241,7 @@ protected: //rep
   }
 
   void rep_errors_plus_xy(std::ostream& /*a_out*/,const style& a_style,const std::vector<rep_bin1D>& a_bins,
-                          const rep_box& a_box_x,const rep_box& a_box_y,const std::vector<float>& a_bars,float aZ) {
+                          const rep_box& a_box_x,const rep_box& a_box_y,const std::vector<G4float>& a_bars,G4float aZ) {
     //a_out << "debug : rep_erros_plus_xy : begin :" << std::endl;
     separator* _sep = new separator();
     //_sep->setString(aID);
@@ -7260,12 +7260,12 @@ protected: //rep
     vtxs->mode = gl::lines();
     _sep->add(vtxs);
 
-    float xmin = a_box_x.m_pos;
-    float dx = a_box_x.m_width;
+    G4float xmin = a_box_x.m_pos;
+    G4float dx = a_box_x.m_width;
     bool xlog = a_box_x.m_log;
 
-    float ymin = a_box_y.m_pos;
-    float dy = a_box_y.m_width;
+    G4float ymin = a_box_y.m_pos;
+    G4float dy = a_box_y.m_width;
     bool ylog = a_box_y.m_log;
 
     size_t xnbin = a_bins.size();
@@ -7274,14 +7274,14 @@ protected: //rep
 
       //Need all bins modeled for fitting.
 
-      float val = a_bins[index].m_val;
-      float bar_height = a_bars[index];
+      G4float val = a_bins[index].m_val;
+      G4float bar_height = a_bars[index];
 
-      float bar_min = val - bar_height/2;
-      float bar_max = val + bar_height/2;
+      G4float bar_min = val - bar_height/2;
+      G4float bar_max = val + bar_height/2;
 
-      float xx = a_bins[index].m_x_min;
-      float xe = a_bins[index].m_x_max;
+      G4float xx = a_bins[index].m_x_min;
+      G4float xe = a_bins[index].m_x_max;
 
       xx = verify_log(xx,xmin,dx,xlog);
       xe = verify_log(xe,xmin,dx,xlog);
@@ -7297,10 +7297,10 @@ protected: //rep
       //if(val<0) val = 0;
       //if(val>1) val = 1;
 
-      float ex = (xe+xx)/2;
+      G4float ex = (xe+xx)/2;
       //if( (ex >=0)&&(ex <=1) ) { //FIXME : have to clip
 
-      float edx = 0.3F * (xe-xx);
+      G4float edx = 0.3F * (xe-xx);
 
       if((val>=0)&&(val<=1)) {
         vtxs->add(ex-edx,val,aZ);
@@ -7337,7 +7337,7 @@ protected: //rep
   }
 
   void rep_errors_I_xy(std::ostream& /*a_out*/,const style& a_style,const std::vector<rep_bin1D>& a_bins,
-                       const rep_box& a_box_x,const rep_box& a_box_y,const std::vector<float>& a_bars,float aZ){
+                       const rep_box& a_box_x,const rep_box& a_box_y,const std::vector<G4float>& a_bars,G4float aZ){
     //a_out << "debug : rep_erros_I_xy : begin :" << std::endl;
     separator* _sep = new separator();
     //_sep->setString(aID);
@@ -7356,12 +7356,12 @@ protected: //rep
     vtxs->mode = gl::lines();
     _sep->add(vtxs);
 
-    float xmin = a_box_x.m_pos;
-    float dx = a_box_x.m_width;
+    G4float xmin = a_box_x.m_pos;
+    G4float dx = a_box_x.m_width;
     bool xlog = a_box_x.m_log;
 
-    float ymin = a_box_y.m_pos;
-    float dy = a_box_y.m_width;
+    G4float ymin = a_box_y.m_pos;
+    G4float dy = a_box_y.m_width;
     bool ylog = a_box_y.m_log;
 
     size_t xnbin = a_bins.size();
@@ -7370,14 +7370,14 @@ protected: //rep
 
       //Need all bins modeled for fitting.
 
-      float val = a_bins[index].m_val;
-      float bar_height = a_bars[index];
+      G4float val = a_bins[index].m_val;
+      G4float bar_height = a_bars[index];
 
-      float bar_min = val - bar_height/2;
-      float bar_max = val + bar_height/2;
+      G4float bar_min = val - bar_height/2;
+      G4float bar_max = val + bar_height/2;
 
-      float xx = a_bins[index].m_x_min;
-      float xe = a_bins[index].m_x_max;
+      G4float xx = a_bins[index].m_x_min;
+      G4float xe = a_bins[index].m_x_max;
 
       xx = verify_log(xx,xmin,dx,xlog);
       xe = verify_log(xe,xmin,dx,xlog);
@@ -7393,10 +7393,10 @@ protected: //rep
       if(val<0) val = 0;
       if(val>1) val = 1;
 
-      float ex = (xe+xx)/2;
+      G4float ex = (xe+xx)/2;
       //if( (ex >=0)&&(ex <=1) ) { //FIXME : have to clip
 
-      float edx = 0.3F * (xe-xx);
+      G4float edx = 0.3F * (xe-xx);
 
       if(bar_min >1)  {
         // do nothing
@@ -7437,7 +7437,7 @@ protected: //rep
 
   void rep_hatch1D_xy(const style& a_style,
                       const std::vector<rep_bin1D>& a_bins,
-		      const rep_box& a_box_x,const rep_box& a_box_y,float a_zz,
+		      const rep_box& a_box_x,const rep_box& a_box_y,G4float a_zz,
 		      bool a_bar_chart){
     //printf("debug : inlib::sg;:plotter::repHatch1D_xy : zz %g barchart %d sw %g\n",a_zz,aBarChart,a_style.stripWidth.getValue());
 
@@ -7458,12 +7458,12 @@ protected: //rep
     }
     _sep->add(ds);
 
-    float xmin = a_box_x.m_pos;
-    float dx = a_box_x.m_width;
+    G4float xmin = a_box_x.m_pos;
+    G4float dx = a_box_x.m_width;
     bool xlog = a_box_x.m_log;
 
-    float ymin = a_box_y.m_pos;
-    float dy = a_box_y.m_width;
+    G4float ymin = a_box_y.m_pos;
+    G4float dy = a_box_y.m_width;
     bool ylog = a_box_y.m_log;
 
     bool empty = true;
@@ -7471,10 +7471,10 @@ protected: //rep
     vec3f points[5];
     size_t xnbin = a_bins.size();
     for(size_t index=0;index<xnbin;index++) {
-      float xx = a_bins[index].m_x_min;
-      float xe = a_bins[index].m_x_max;
-      float yy = a_bins[index].m_v_min;
-      float ye = a_bins[index].m_val;
+      G4float xx = a_bins[index].m_x_min;
+      G4float xe = a_bins[index].m_x_max;
+      G4float yy = a_bins[index].m_v_min;
+      G4float ye = a_bins[index].m_val;
       if(ye<yy) {
         yy = a_bins[index].m_val;
         ye = a_bins[index].m_v_min;
@@ -7558,14 +7558,14 @@ protected: //rep
   }
 
   void rep_points2D_xy_lines(const style& a_style,const points2D& a_points,
-                             const rep_box& a_box_x,const rep_box& a_box_y,float a_zz){
+                             const rep_box& a_box_x,const rep_box& a_box_y,G4float a_zz){
     //::printf("debug : rep_points2D_xy_lines\n");
-    float xmin = a_box_x.m_pos;
-    float dx = a_box_x.m_width;
+    G4float xmin = a_box_x.m_pos;
+    G4float dx = a_box_x.m_width;
     bool xlog = a_box_x.m_log;
 
-    float ymin = a_box_y.m_pos;
-    float dy = a_box_y.m_width;
+    G4float ymin = a_box_y.m_pos;
+    G4float dy = a_box_y.m_width;
     bool ylog = a_box_y.m_log;
 
     separator* _sep = new separator();
@@ -7586,7 +7586,7 @@ protected: //rep
 
     bool empty = true;
 
-    float x,y;
+    G4float x,y;
     unsigned int number = a_points.points();
     for(unsigned int index=0;index<number;index++) {
       a_points.ith_point(index,x,y);
@@ -7605,14 +7605,14 @@ protected: //rep
   }
 
   void rep_points2D_xy_curve(std::ostream& a_out,const style& a_style,const points2D& a_points,
-                             const rep_box& a_box_x,const rep_box& a_box_y,float a_zz){
+                             const rep_box& a_box_x,const rep_box& a_box_y,G4float a_zz){
     //::printf("debug : rep_points2D_xy_curve\n");
     unsigned int number = a_points.points();
     if(!number) return;
 
-    double* xs = new double[number];
-    double* ys = new double[number];
-    float x,y;
+    G4double* xs = new G4double[number];
+    G4double* ys = new G4double[number];
+    G4float x,y;
    {for(unsigned int index=0;index<number;index++) {
       a_points.ith_point(index,x,y);
       xs[index] = x;ys[index] = y;
@@ -7621,19 +7621,19 @@ protected: //rep
   //spline::quintic _spline(a_out,number,xs,ys);
     delete [] xs;delete [] ys;
 
-    float xmn = m_x_axis_data.min_value();
-    float xmx = m_x_axis_data.max_value();
+    G4float xmn = m_x_axis_data.min_value();
+    G4float xmx = m_x_axis_data.max_value();
     unsigned int nstp = curve_number_of_points;
-    float step = (xmx - xmn)/nstp;
+    G4float step = (xmx - xmn)/nstp;
     std::vector<vec3f> points(nstp+1);
     for(unsigned int ibin=0;ibin<=nstp;ibin++) {
-      float xx = xmn + ibin * step;
-      double val = _spline.eval(xx);
-      points[ibin].set_value(xx,float(val),a_zz);
+      G4float xx = xmn + ibin * step;
+      G4double val = _spline.eval(xx);
+      points[ibin].set_value(xx,G4float(val),a_zz);
     }
 
     vertices* vtxs = new vertices;
-    std::vector<float>& pts = vtxs->xyzs.values(); //npt*3
+    std::vector<G4float>& pts = vtxs->xyzs.values(); //npt*3
 
     clip_polyline_2D(points,a_box_x,a_box_y,pts);
     if(pts.size()) {
@@ -7662,13 +7662,13 @@ protected: //rep
 
   void rep_points2D_xy_points(std::ostream& a_out,
                               const style& a_style,const points2D& a_points,
-                              const rep_box& a_box_x,const rep_box& a_box_y,float a_zz) {
-    float xmin = a_box_x.m_pos;
-    float dx = a_box_x.m_width;
+                              const rep_box& a_box_x,const rep_box& a_box_y,G4float a_zz) {
+    G4float xmin = a_box_x.m_pos;
+    G4float dx = a_box_x.m_width;
     bool xlog = a_box_x.m_log;
 
-    float ymin = a_box_y.m_pos;
-    float dy = a_box_y.m_width;
+    G4float ymin = a_box_y.m_pos;
+    G4float dy = a_box_y.m_width;
     bool ylog = a_box_y.m_log;
 
     separator* _sep = new separator();
@@ -7677,7 +7677,7 @@ protected: //rep
     mat->color = a_style.color;
     _sep->add(mat);
 
-    mf<float>* _xyzs = 0;
+    mf<G4float>* _xyzs = 0;
 
     if(a_style.modeling==modeling_markers()) {
       markers* _marks = new markers;
@@ -7703,14 +7703,14 @@ protected: //rep
       return;
     }
 
-    float x,y;
+    G4float x,y;
 
-    // first round trip to get number of floats :
+    // first round trip to get number of G4floats :
     size_t npts = 0;
    {unsigned int number = a_points.points();
     for(unsigned int index=0;index<number;index++) {
       a_points.ith_point(index,x,y);
-      //float val = a_bins[index].m_val;
+      //G4float val = a_bins[index].m_val;
       x = verify_log(x,xmin,dx,xlog);
       y = verify_log(y,ymin,dy,ylog);
       if((x<0)||(x>1)||(y<0)||(y>1)) continue;
@@ -7725,7 +7725,7 @@ protected: //rep
    {unsigned int number = a_points.points();
     for(unsigned int index=0;index<number;index++) {
       a_points.ith_point(index,x,y);
-      //float val = a_bins[index].m_val;
+      //G4float val = a_bins[index].m_val;
       x = verify_log(x,xmin,dx,xlog);
       y = verify_log(y,ymin,dy,ylog);
       if((x<0)||(x>1)||(y<0)||(y>1)) continue;
@@ -7743,16 +7743,16 @@ protected: //rep
   void rep_points3D_xyz_points(std::ostream& a_out,
                                const style& a_style,const points3D& a_points,
                                const rep_box& a_box_x,const rep_box& a_box_y,const rep_box& a_box_z) {
-    float xmin = a_box_x.m_pos;
-    float dx = a_box_x.m_width;
+    G4float xmin = a_box_x.m_pos;
+    G4float dx = a_box_x.m_width;
     bool xlog = a_box_x.m_log;
 
-    float ymin = a_box_y.m_pos;
-    float dy = a_box_y.m_width;
+    G4float ymin = a_box_y.m_pos;
+    G4float dy = a_box_y.m_width;
     bool ylog = a_box_y.m_log;
 
-    float zmin = a_box_z.m_pos;
-    float dz = a_box_z.m_width;
+    G4float zmin = a_box_z.m_pos;
+    G4float dz = a_box_z.m_width;
     bool zlog = a_box_z.m_log;
 
     separator* _sep = new separator();
@@ -7761,7 +7761,7 @@ protected: //rep
     mat->color = a_style.color;
     _sep->add(mat);
 
-    mf<float>* _xyzs = 0;
+    mf<G4float>* _xyzs = 0;
 
     if(a_style.modeling==modeling_markers()) {
       markers* _marks = new markers;
@@ -7787,14 +7787,14 @@ protected: //rep
       return;
     }
 
-    float x,y,z;
+    G4float x,y,z;
 
-    // first round trip to get number of floats :
+    // first round trip to get number of G4floats :
     size_t npts = 0;
    {unsigned int number = a_points.points();
     for(unsigned int index=0;index<number;index++) {
       a_points.ith_point(index,x,y,z);
-      //float val = a_bins[index].m_val;
+      //G4float val = a_bins[index].m_val;
       x = verify_log(x,xmin,dx,xlog);
       y = verify_log(y,ymin,dy,ylog);
       z = verify_log(z,zmin,dz,zlog);
@@ -7810,7 +7810,7 @@ protected: //rep
    {unsigned int number = a_points.points();
     for(unsigned int index=0;index<number;index++) {
       a_points.ith_point(index,x,y,z);
-      //float val = a_bins[index].m_val;
+      //G4float val = a_bins[index].m_val;
       x = verify_log(x,xmin,dx,xlog);
       y = verify_log(y,ymin,dy,ylog);
       z = verify_log(z,zmin,dz,zlog);
@@ -7827,17 +7827,17 @@ protected: //rep
   }
 
   void rep_bins2D_xyz_box(const style& a_style,const base_colormap& a_cmap,const std::vector<rep_bin2D>& a_bins,
-                          const rep_box& a_box_x,const rep_box& a_box_y,const rep_box& a_box_z,float a_bmin,float /*a_bmax*/){
-    float xmin = a_box_x.m_pos;
-    float dx = a_box_x.m_width;
+                          const rep_box& a_box_x,const rep_box& a_box_y,const rep_box& a_box_z,G4float a_bmin,G4float /*a_bmax*/){
+    G4float xmin = a_box_x.m_pos;
+    G4float dx = a_box_x.m_width;
     bool xlog = a_box_x.m_log;
 
-    float ymin = a_box_y.m_pos;
-    float dy = a_box_y.m_width;
+    G4float ymin = a_box_y.m_pos;
+    G4float dy = a_box_y.m_width;
     bool ylog = a_box_y.m_log;
 
-    float zmin = a_box_z.m_pos;
-    float dz = a_box_z.m_width;
+    G4float zmin = a_box_z.m_pos;
+    G4float dz = a_box_z.m_width;
     bool zlog = a_box_z.m_log;
 
     painting_policy painting = a_style.painting;
@@ -7845,19 +7845,19 @@ protected: //rep
     separator* _sep = new separator();
 
     bool empty = true;
-    //float range = a_bmax - a_bmin;
+    //G4float range = a_bmax - a_bmin;
     colorf clr;
 
     tools_vforcit(rep_bin2D,a_bins,it) {
       const rep_bin2D& rbin = *it;
 
-      float xx = rbin.m_x_min;
-      float xe = rbin.m_x_max;
-      float yy = rbin.m_y_min;
-      float ye = rbin.m_y_max;
-      float val = rbin.m_val;
-      float zz = a_bmin;
-      float ze = val;
+      G4float xx = rbin.m_x_min;
+      G4float xe = rbin.m_x_max;
+      G4float yy = rbin.m_y_min;
+      G4float ye = rbin.m_y_max;
+      G4float val = rbin.m_val;
+      G4float zz = a_bmin;
+      G4float ze = val;
 
       xx = verify_log(xx ,xmin,dx  ,xlog);
       xe = verify_log(xe ,xmin,dx  ,xlog);
@@ -7911,9 +7911,9 @@ protected: //rep
       sid += std::string(s);
       sep->setString(sid);}*/
 
-      float sx = xe-xx;
-      float sy = ye-yy;
-      float sz = ze-zz;
+      G4float sx = xe-xx;
+      G4float sy = ye-yy;
+      G4float sz = ze-zz;
 
       matrix* _tsf = new matrix;
       _tsf->set_translate(xx+sx/2,yy+sy/2,sz/2);
@@ -7938,16 +7938,16 @@ protected: //rep
   void rep_top_face2D_xyz(separator& a_sep,const style& a_style,const base_colormap& a_cmap,
                           const std::vector<rep_top_face2D>& a_faces,
 			  const rep_box& a_box_x,const rep_box& a_box_y,const rep_box& a_box_z) {
-    float xmin = a_box_x.m_pos;
-    float dx = a_box_x.m_width;
+    G4float xmin = a_box_x.m_pos;
+    G4float dx = a_box_x.m_width;
     bool xlog = a_box_x.m_log;
 
-    float ymin = a_box_y.m_pos;
-    float dy = a_box_y.m_width;
+    G4float ymin = a_box_y.m_pos;
+    G4float dy = a_box_y.m_width;
     bool ylog = a_box_y.m_log;
 
-    float zmin = a_box_z.m_pos;
-    float dz = a_box_z.m_width;
+    G4float zmin = a_box_z.m_pos;
+    G4float dz = a_box_z.m_width;
     bool zlog = a_box_z.m_log;
 
     bool empty = true;
@@ -7972,16 +7972,16 @@ protected: //rep
 
     size_t number = a_faces.size();
     for(size_t index=0;index<number;index++) {
-      float xx = a_faces[index].m_x_min;
-      float xe = a_faces[index].m_x_max;
-      float yy = a_faces[index].m_y_min;
-      float ye = a_faces[index].m_y_max;
-      float val1 = a_faces[index].m_v1;
-      float val2 = a_faces[index].m_v2;
-      float val3 = a_faces[index].m_v3;
-      float val4 = a_faces[index].m_v4;
+      G4float xx = a_faces[index].m_x_min;
+      G4float xe = a_faces[index].m_x_max;
+      G4float yy = a_faces[index].m_y_min;
+      G4float ye = a_faces[index].m_y_max;
+      G4float val1 = a_faces[index].m_v1;
+      G4float val2 = a_faces[index].m_v2;
+      G4float val3 = a_faces[index].m_v3;
+      G4float val4 = a_faces[index].m_v4;
 
-      float val = val1;
+      G4float val = val1;
 
       val1 = verify_log(val1,zmin,dz,zlog);
       val2 = verify_log(val2,zmin,dz,zlog);
@@ -8010,7 +8010,7 @@ protected: //rep
          (ye>=0)&&(ye<=1)  ) {
 
         if(painting==painting_by_value) {
-          float v = (zlog?take_log(val):val);
+          G4float v = (zlog?take_log(val):val);
           a_cmap.get_color(v,clr);
         } else if( (painting==painting_grey_scale) ||
                    (painting==painting_grey_scale_inverse) ||
@@ -8073,16 +8073,16 @@ protected: //rep
                                const rep_box& a_box_x,const rep_box& a_box_y,const rep_box& a_box_z/*,const SbString& aID*/){
     //::printf("debug : rep_top_face2D_xyz_line\n");
 
-    float xmin = a_box_x.m_pos;
-    float dx = a_box_x.m_width;
+    G4float xmin = a_box_x.m_pos;
+    G4float dx = a_box_x.m_width;
     bool xlog = a_box_x.m_log;
 
-    float ymin = a_box_y.m_pos;
-    float dy = a_box_y.m_width;
+    G4float ymin = a_box_y.m_pos;
+    G4float dy = a_box_y.m_width;
     bool ylog = a_box_y.m_log;
 
-    float zmin = a_box_z.m_pos;
-    float dz = a_box_z.m_width;
+    G4float zmin = a_box_z.m_pos;
+    G4float dz = a_box_z.m_width;
     bool zlog = a_box_z.m_log;
 
     sg::separator* separator = new sg::separator;
@@ -8102,20 +8102,20 @@ protected: //rep
     vtxs->mode = gl::lines();
     separator->add(vtxs);
 
-    float zepsilon = 0.02f; //for pawex9.kumac top-left and bottom-right.
+    G4float zepsilon = 0.02f; //for pawex9.kumac top-left and bottom-right.
 
     size_t number = a_top_faces.size();
     for(size_t index=0;index<number;index++) {
-      float xx = a_top_faces[index].m_x_min;
-      float xe = a_top_faces[index].m_x_max;
-      float yy = a_top_faces[index].m_y_min;
-      float ye = a_top_faces[index].m_y_max;
-      float val1 = a_top_faces[index].m_v1;
-      float val2 = a_top_faces[index].m_v2;
-      float val3 = a_top_faces[index].m_v3;
-      float val4 = a_top_faces[index].m_v4;
+      G4float xx = a_top_faces[index].m_x_min;
+      G4float xe = a_top_faces[index].m_x_max;
+      G4float yy = a_top_faces[index].m_y_min;
+      G4float ye = a_top_faces[index].m_y_max;
+      G4float val1 = a_top_faces[index].m_v1;
+      G4float val2 = a_top_faces[index].m_v2;
+      G4float val3 = a_top_faces[index].m_v3;
+      G4float val4 = a_top_faces[index].m_v4;
 
-      //float val = val1;
+      //G4float val = val1;
 
       val1 = verify_log(val1,zmin,dz,zlog);
       val2 = verify_log(val2,zmin,dz,zlog);
@@ -8169,27 +8169,27 @@ protected: //rep
   void rep_top_face2D_xyz_by_level(const style& /*a_style*/,painting_policy /*a_painting*/,const base_colormap& a_cmap,
                                    const std::vector<rep_top_face2D>& a_top_faces,
                                    const rep_box& a_box_x,const rep_box& a_box_y,const rep_box& a_box_z,
-                                   float a_bmin,float a_bmax/*,const SbString& aID*/){
+                                   G4float a_bmin,G4float a_bmax/*,const SbString& aID*/){
     //::printf("debug : rep_top_face2D_xyz_by_level\n");
 
     size_t ncol = a_cmap.colorn();
     if(!ncol) return;
 
-    float xmin = a_box_x.m_pos;
-    float dx = a_box_x.m_width;
+    G4float xmin = a_box_x.m_pos;
+    G4float dx = a_box_x.m_width;
     bool xlog = a_box_x.m_log;
 
-    float ymin = a_box_y.m_pos;
-    float dy = a_box_y.m_width;
+    G4float ymin = a_box_y.m_pos;
+    G4float dy = a_box_y.m_width;
     bool ylog = a_box_y.m_log;
 
-    float zmin = a_box_z.m_pos;
-    float dz = a_box_z.m_width;
+    G4float zmin = a_box_z.m_pos;
+    G4float dz = a_box_z.m_width;
     bool zlog = a_box_z.m_log;
 
-    float zz = a_bmin;
+    G4float zz = a_bmin;
     zz = verify_log(zz,zmin,dz,zlog);
-    float zmx = a_bmax;
+    G4float zmx = a_bmax;
     zmx = verify_log(zmx,zmin,dz,zlog);
 
     bool empty = true;
@@ -8206,7 +8206,7 @@ protected: //rep
     colorf _color;
     vec3f _point;
 
-    float d_z = (zmx-zz)/ncol;
+    G4float d_z = (zmx-zz)/ncol;
 
     size_t number = a_top_faces.size();
 
@@ -8218,16 +8218,16 @@ protected: //rep
       _color = a_cmap.color(icol);
 
       for(size_t index=0;index<number;index++) {
-        float xx = a_top_faces[index].m_x_min;
-        float xe = a_top_faces[index].m_x_max;
-        float yy = a_top_faces[index].m_y_min;
-        float ye = a_top_faces[index].m_y_max;
-        float val1 = a_top_faces[index].m_v1;
-        float val2 = a_top_faces[index].m_v2;
-        float val3 = a_top_faces[index].m_v3;
-        float val4 = a_top_faces[index].m_v4;
+        G4float xx = a_top_faces[index].m_x_min;
+        G4float xe = a_top_faces[index].m_x_max;
+        G4float yy = a_top_faces[index].m_y_min;
+        G4float ye = a_top_faces[index].m_y_max;
+        G4float val1 = a_top_faces[index].m_v1;
+        G4float val2 = a_top_faces[index].m_v2;
+        G4float val3 = a_top_faces[index].m_v3;
+        G4float val4 = a_top_faces[index].m_v4;
 
-        //float val = val1;
+        //G4float val = val1;
 
         val1 = verify_log(val1,zmin,dz,zlog);
         val2 = verify_log(val2,zmin,dz,zlog);
@@ -8262,8 +8262,8 @@ protected: //rep
           clipper.add(vec3f(xx,yy,val1));
           clipper.add(vec3f(xe,yy,val2));
           //val[n] had been z normalized.
-          float z1 = zz+d_z*icol;
-          float z2 = z1+d_z;
+          G4float z1 = zz+d_z*icol;
+          G4float z2 = z1+d_z;
           plane<vec3f> plane_z_bot(vec3f(0,0,1),vec3f(0,0,z1));
           plane<vec3f> plane_z_top(vec3f(0,0,-1),vec3f(0,0,z2));
           clipper.execute(plane_z_bot);
@@ -8301,8 +8301,8 @@ protected: //rep
           clipper.add(vec3f(xe,ye,val3));
           clipper.add(vec3f(xx,ye,val4));
           //val[n] had been z normalized.
-          float z1 = zz+d_z*icol;
-          float z2 = z1+d_z;
+          G4float z1 = zz+d_z*icol;
+          G4float z2 = z1+d_z;
           plane<vec3f> plane_z_bot(vec3f(0,0,1),vec3f(0,0,z1));
           plane<vec3f> plane_z_top(vec3f(0,0,-1),vec3f(0,0,z2));
           clipper.execute(plane_z_bot);
@@ -8356,7 +8356,7 @@ protected: //rep
   void update_primitive_text(const plottable_text& a_obj){
     if(a_obj.m_TEXT.empty()) return;
 
-    float z = xy_depth.value()*1.1F;
+    G4float z = xy_depth.value()*1.1F;
 
     vec3f pos;
     axis_2_data_frame(vec3f(a_obj.m_X,a_obj.m_Y,z),pos); //FIXME return FALSE
@@ -8375,7 +8375,7 @@ protected: //rep
     sep->add(_tsf);
 
     //SIZE is in page coordinate YSIZ.
-    //float YSIZ = height.value();
+    //G4float YSIZ = height.value();
     //if(YSIZ<=0) YSIZ = 1;
 
     //::printf("debug : tools::sg::plotter::update_primitive_text : %s : X %g Y %g : SCALE %g SIZE %g : pos %g %g %g\n",
@@ -8388,7 +8388,7 @@ protected: //rep
       axis_2_data_frame(vec3f(a_obj.m_X+a_obj.m_SIZE,a_obj.m_Y,z),pos2);  //m_SIZE is taken as text width in this text_mode.
       xx_2_yy(pos2,pos2);
 
-      float _width = pos2.x()-pos.x();
+      G4float _width = pos2.x()-pos.x();
 
       text* _text = new text(m_ttf);
       _text->enforce_front_width = true;  //it will set _text->width, height.
@@ -8424,7 +8424,7 @@ protected: //rep
       axis_2_data_frame(vec3f(a_obj.m_X,a_obj.m_Y+a_obj.m_SIZE,z),pos2);  //m_SIZE is taken as text height in this text_mode.
       xx_2_yy(pos2,pos2);
 
-      float _height = pos2.y()-pos.y();
+      G4float _height = pos2.y()-pos.y();
 
       text* _text = new text(m_ttf);
       _text->enforce_front_height = true;  //it will set _text->width, height.
@@ -8524,7 +8524,7 @@ protected: //rep
   }
 
   // for OpenPAW /GRAPHICS/PRIMITIVES/BOX
-  void PAW_hatch(int aHTYP,hatching_policy& a_policy,float& a_spacing,float& a_angle_right,float& a_angle_left) {
+  void PAW_hatch(int aHTYP,hatching_policy& a_policy,G4float& a_spacing,G4float& a_angle_right,G4float& a_angle_left) {
     // PAW hatching encoding (paw.pdf 1.14(1992) p 174) :
 
     a_policy = hatching_none;
@@ -8595,10 +8595,10 @@ protected: //rep
 
     unsigned int NY = 1;
 
-    a_spacing = float(NY) * float(i) * 0.07F; //cooking
+    a_spacing = G4float(NY) * G4float(i) * 0.07F; //cooking
 
     if(j!=5) {
-      float angle = float(j==4?45:j*10);
+      G4float angle = G4float(j==4?45:j*10);
       angle = 180.0F - angle;
       angle *= fpi() / 180.0F;
 
@@ -8606,15 +8606,15 @@ protected: //rep
     }
 
     if(k!=5) {
-      float angle = float(k==4?45:k*10);
+      G4float angle = G4float(k==4?45:k*10);
       angle *= fpi() / 180.0F;
       a_angle_left = angle;
     }
 
   }
 
-  void rep_box_hatch(separator& a_parent,float a_spacing,float a_angle,float a_strip_width,
-                     float xx,float yy,float xe,float ye,float a_zz){
+  void rep_box_hatch(separator& a_parent,G4float a_spacing,G4float a_angle,G4float a_strip_width,
+                     G4float xx,G4float yy,G4float xe,G4float ye,G4float a_zz){
 
     //printf("debug : SoPlotter::repHatch1D_xy : zz %g\n",a_zz);
     sg::separator* separator = new sg::separator;
@@ -8684,7 +8684,7 @@ protected: //rep
 
   void update_primitive_box(std::ostream& a_out,const plottable_box& a_obj){
 
-    float z = xy_depth.value()*1.1F;
+    G4float z = xy_depth.value()*1.1F;
 
     vec3f pos1;
     axis_2_data_frame(vec3f(a_obj.m_X1,a_obj.m_Y1,z),pos1);
@@ -8756,11 +8756,11 @@ protected: //rep
       sep->add(mat);
 
       hatching_policy hatching;
-      float spacing;
-      float angle_right;
-      float angle_left;
+      G4float spacing;
+      G4float angle_right;
+      G4float angle_left;
       PAW_hatch(a_obj.m_FASI,hatching,spacing,angle_right,angle_left);
-      float stripWidth = 0;
+      G4float stripWidth = 0;
 
       if((hatching==hatching_right)||((hatching==hatching_left_and_right))) {
         rep_box_hatch(*sep,spacing,angle_right,stripWidth,pos1[0],pos1[1],pos2[0],pos2[1],z);
@@ -8818,7 +8818,7 @@ protected: //rep
 
   void update_primitive_ellipse(std::ostream& a_out,const plottable_ellipse& a_obj){
 
-    float z = xy_depth.value()*1.1F;
+    G4float z = xy_depth.value()*1.1F;
 
     vec3f pos;
     axis_2_data_frame(vec3f(a_obj.m_X,a_obj.m_Y,z),pos);
@@ -8828,8 +8828,8 @@ protected: //rep
     axis_2_data_frame(vec3f(a_obj.m_X+a_obj.m_R1,a_obj.m_Y+a_obj.m_R2,z),pos2);
     xx_2_yy(pos2,pos2);
 
-    float rx = pos2[0]-pos[0];
-    float ry = pos2[1]-pos[1];
+    G4float rx = pos2[0]-pos[0];
+    G4float ry = pos2[1]-pos[1];
 
     z = pos[2];
 
@@ -8893,11 +8893,11 @@ protected: //rep
       sep->add(mat);
 
       hatching_policy hatching;
-      float spacing;
-      float angle_right;
-      float angle_left;
+      G4float spacing;
+      G4float angle_right;
+      G4float angle_left;
       PAW_hatch(a_obj.m_FASI,hatching,spacing,angle_right,angle_left);
-      float stripWidth = 0;
+      G4float stripWidth = 0;
 
       if((hatching==hatching_right)||((hatching==hatching_left_and_right))) {
         rep_box_hatch(*sep,spacing,angle_right,stripWidth,pos1[0],pos1[1],pos2[0],pos2[1],z);
@@ -8958,7 +8958,7 @@ protected: //rep
 
   void update_primitive_img(std::ostream& /*a_out*/,const plottable_img& a_obj){
 
-    float z = xy_depth.value()*1.1F;
+    G4float z = xy_depth.value()*1.1F;
 
     vec3f pos;
     axis_2_data_frame(vec3f(a_obj.m_X,a_obj.m_Y,z),pos);
@@ -8968,8 +8968,8 @@ protected: //rep
     vec3f top;
     axis_2_data_frame(vec3f(0,a_obj.m_Y+a_obj.m_HEIGHT*0.5f,0),top);
     xx_2_yy(top,top);  //top = (o,y-top)  of image in axes coordinates.
-    float scale = 2.0f*(top[1]-pos[1]);
-    //float scale = a_obj.m_HEIGHT; //m_HEIGHT is then in page coordinate YSIZ.
+    G4float scale = 2.0f*(top[1]-pos[1]);
+    //G4float scale = a_obj.m_HEIGHT; //m_HEIGHT is then in page coordinate YSIZ.
 
     const img<byte>& img = a_obj.m_img;
 
@@ -9005,22 +9005,22 @@ protected: //etc
   // background is at z = 0.
   // last z items are text in infos, legend boxes that should be at xy_depth().
 
-  float _zoffset() const {
+  G4float _zoffset() const {
     // first data plane is at _zoffset.
     // last one at m_plottables.size()*_zoffset = xy_depth.value()-_zoffset().
-    return xy_depth.value()/(float(m_plottables.size())+1.0f);
+    return xy_depth.value()/(G4float(m_plottables.size())+1.0f);
   }
-  float _zaxis() const {return _zoffset();}
-  float _zgrid() const {return xy_depth.value()-_zoffset()*0.5f;}
-  float _ztext() const {return 0.01f;} //if text back is visible else 0. (sf<float> zfront ?)
-  float _zscale_text() const {return _zoffset()*0.4f/_ztext();} //title and infos boxes thickness.
-  float _zinfos() const {return xy_depth.value()-_zoffset()*0.4f;} //in front _zgrid
-  float _zhatch() const {return _zoffset()*0.25f;}
-  float _zerrors() const {return _zoffset()*0.5f;}
+  G4float _zaxis() const {return _zoffset();}
+  G4float _zgrid() const {return xy_depth.value()-_zoffset()*0.5f;}
+  G4float _ztext() const {return 0.01f;} //if text back is visible else 0. (sf<G4float> zfront ?)
+  G4float _zscale_text() const {return _zoffset()*0.4f/_ztext();} //title and infos boxes thickness.
+  G4float _zinfos() const {return xy_depth.value()-_zoffset()*0.4f;} //in front _zgrid
+  G4float _zhatch() const {return _zoffset()*0.25f;}
+  G4float _zerrors() const {return _zoffset()*0.5f;}
 
-  //static void LIST_SET(vec3f a_list[],unsigned int a_index,float x,float y,float z) {a_list[a_index].set_value(x,y,z);}
+  //static void LIST_SET(vec3f a_list[],unsigned int a_index,G4float x,G4float y,G4float z) {a_list[a_index].set_value(x,y,z);}
 
-  static float take_log(float a_x){
+  static G4float take_log(G4float a_x){
     if(a_x<=0) {
       return -FLT_MAX;
     } else {
@@ -9028,7 +9028,7 @@ protected: //etc
     }
   }
 
-  static float verify_log(float a_val,float a_min,float a_dx,bool a_log){
+  static G4float verify_log(G4float a_val,G4float a_min,G4float a_dx,bool a_log){
     if(a_log) {
       if(a_val>0.0F) {
         return (flog10(a_val) - a_min)/a_dx;
@@ -9037,7 +9037,7 @@ protected: //etc
         return -100;
       }
     } else {
-      // Simple protection against value that could exceed a float :
+      // Simple protection against value that could exceed a G4float :
       if(a_val>(a_min+100.0F * a_dx)) return 100;
       if(a_val<(a_min-100.0F * a_dx)) return -100;
       // Rescale :
@@ -9045,7 +9045,7 @@ protected: //etc
     }
   }
 
-  static float verify_log_inv(float a_val,float a_min,float a_dx,bool a_log){
+  static G4float verify_log_inv(G4float a_val,G4float a_min,G4float a_dx,bool a_log){
    if(a_log) {
       return fpow(10,a_val*a_dx+a_min);
     } else {
@@ -9237,25 +9237,25 @@ protected: //etc
   }
 */
 
-  static void add_pt(std::vector<float>& a_pts,float a_x,float a_y,float a_z){
+  static void add_pt(std::vector<G4float>& a_pts,G4float a_x,G4float a_y,G4float a_z){
     a_pts.push_back(a_x);
     a_pts.push_back(a_y);
     a_pts.push_back(a_z);
   }
 
   static void clip_points_2D(const std::vector<vec3f>& a_points,
-                             const rep_box& a_box_x,const rep_box& a_box_y,std::vector<float>& a_pts) {
-    float xmin = a_box_x.m_pos;
-    float dx = a_box_x.m_width;
+                             const rep_box& a_box_x,const rep_box& a_box_y,std::vector<G4float>& a_pts) {
+    G4float xmin = a_box_x.m_pos;
+    G4float dx = a_box_x.m_width;
     bool xlog = a_box_x.m_log;
 
-    float ymin = a_box_y.m_pos;
-    float dy = a_box_y.m_width;
+    G4float ymin = a_box_y.m_pos;
+    G4float dy = a_box_y.m_width;
     bool ylog = a_box_y.m_log;
 
     a_pts.clear();
 
-    float xx,yy,zz;
+    G4float xx,yy,zz;
     tools_vforcit(vec3f,a_points,it) {
       const vec3f& _point = *it;
       xx = _point[0];
@@ -9268,34 +9268,34 @@ protected: //etc
   }
 
   static void clip_polyline_2D(const std::vector<vec3f>& a_points,
-                               const rep_box& a_box_x,const rep_box& a_box_y,std::vector<float>& a_pts) {
+                               const rep_box& a_box_x,const rep_box& a_box_y,std::vector<G4float>& a_pts) {
     //  Clip line in a_box_x, a_box_y.
 
     //NOTE : it is not a general algorithm.
     //       It is assumed that a_points are ordered with increasing x.
     //       And the algorithm clips against up and bottom BoxY lines.
-    //       (Use clip<float> for a more general algorithm ?)
+    //       (Use clip<G4float> for a more general algorithm ?)
 
-    float xmin = a_box_x.m_pos;
-    float dx = a_box_x.m_width;
+    G4float xmin = a_box_x.m_pos;
+    G4float dx = a_box_x.m_width;
     bool xlog = a_box_x.m_log;
 
-    float ymin = a_box_y.m_pos;
-    float dy = a_box_y.m_width;
+    G4float ymin = a_box_y.m_pos;
+    G4float dy = a_box_y.m_width;
     bool ylog = a_box_y.m_log;
 
     a_pts.clear();
 
-    float xprev = 0;
-    float yprev = 0;
+    G4float xprev = 0;
+    G4float yprev = 0;
 
    {unsigned int index = 0;
     std::vector<vec3f>::const_iterator it;
     for(it=a_points.begin();it!=a_points.end();++it,index++) {
       const vec3f& _point = *it;
-      float xx = _point[0];
-      float yy = _point[1];
-      float zz = _point[2];
+      G4float xx = _point[0];
+      G4float yy = _point[1];
+      G4float zz = _point[2];
       //add_pt(a_pts,xx,yy,zz);continue; //debug
       xx = verify_log(xx,xmin,dx,xlog);
       yy = verify_log(yy,ymin,dy,ylog);
@@ -9307,14 +9307,14 @@ protected: //etc
             if(yprev>1) {
               add_pt(a_pts,xx,1,zz);
             } else if(yprev<0) {
-              float a = (yy - yprev)/(xx - xprev);
-              float b = yy - a * xx;
+              G4float a = (yy - yprev)/(xx - xprev);
+              G4float b = yy - a * xx;
               add_pt(a_pts,-b/a,0,zz);
               add_pt(a_pts,(1 - b)/a,1,zz);
               add_pt(a_pts,xx,1,zz);
             } else {
-              float a = (yy - yprev)/(xx - xprev);
-              float b = yy - a * xx;
+              G4float a = (yy - yprev)/(xx - xprev);
+              G4float b = yy - a * xx;
               add_pt(a_pts,(1 - b)/a,1,zz);
               add_pt(a_pts,xx,1,zz);
             }
@@ -9326,14 +9326,14 @@ protected: //etc
             if(yprev<0) {
               add_pt(a_pts,xx,0,zz);
             } else if(yprev>1) {
-              float a = (yy - yprev)/(xx - xprev);
-              float b = yy - a * xx;
+              G4float a = (yy - yprev)/(xx - xprev);
+              G4float b = yy - a * xx;
               add_pt(a_pts,(1 - b)/a,1,zz);
               add_pt(a_pts,-b/a,0,zz);
               add_pt(a_pts,xx,0,zz);
             } else {
-              float a = (yy - yprev)/(xx - xprev);
-              float b = yy - a * xx;
+              G4float a = (yy - yprev)/(xx - xprev);
+              G4float b = yy - a * xx;
               add_pt(a_pts,-b/a,0,zz);
               add_pt(a_pts,xx,0,zz);
              }
@@ -9343,8 +9343,8 @@ protected: //etc
             add_pt(a_pts,xx,yy,zz);
           } else if( (yprev>1) || (yprev<0) ) {
             // interpolate :
-            float a = (yy - yprev)/(xx - xprev);
-            float b = yy - a * xx;
+            G4float a = (yy - yprev)/(xx - xprev);
+            G4float b = yy - a * xx;
             if(yprev>1) {
               add_pt(a_pts,(1 - b)/a,1,zz);
             } else {
@@ -9365,10 +9365,10 @@ protected: //etc
     std::vector<std::string> ws;
     words(a_s," ",false,ws);
     if(ws.size()!=2) return false;
-    float x = 0;
-    if(!to<float>(ws[0],x)) return false;
-    float y = 0;
-    if(!to<float>(ws[1],x)) return false;
+    G4float x = 0;
+    if(!to<G4float>(ws[0],x)) return false;
+    G4float y = 0;
+    if(!to<G4float>(ws[1],x)) return false;
     a_v.set_value(x,y);
     return true;
   }
@@ -9393,10 +9393,10 @@ protected: //etc
     m_func_cmaps.clear();}
   }
 
-  void bar_chart(float a_bar_offset,float a_bar_width,
-                 float& a_beg,float& a_end){
-    float xe = (a_end - a_beg)*a_bar_offset;
-    float xw = (a_end - a_beg)*a_bar_width;
+  void bar_chart(G4float a_bar_offset,G4float a_bar_width,
+                 G4float& a_beg,G4float& a_end){
+    G4float xe = (a_end - a_beg)*a_bar_offset;
+    G4float xw = (a_end - a_beg)*a_bar_width;
     a_end = a_beg + xe + xw;
     a_beg = a_beg + xe;
   }

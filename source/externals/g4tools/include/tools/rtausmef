@@ -22,12 +22,12 @@ public:
   rtausmef(const rtausmef& a_from):parent(a_from){}
   rtausmef& operator=(const rtausmef& a_from) {parent::operator=(a_from);return *this;}
 protected:
-  static float two_to_minus_32()  {
-    static const float s_v = ::ldexpf(1,-32);
+  static G4float two_to_minus_32()  {
+    static const G4float s_v = ::ldexpf(1,-32);
     return s_v;
   }
 public:
-  float shoot() {return float(parent::shoot()) * two_to_minus_32();}
+  G4float shoot() {return G4float(parent::shoot()) * two_to_minus_32();}
 };
 
 }

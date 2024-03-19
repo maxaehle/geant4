@@ -54,7 +54,7 @@
 #include <sys/types.h>
 #include <stdarg.h>
 #include <time.h>
-#include <float.h>
+#include <G4float.h>
 
 #if defined(TOOLS_GL2PS_HAVE_ZLIB)
 #include <zlib.h>
@@ -121,7 +121,7 @@ typedef enum {
   T_VAR_ALPHA    = 1<<4
 } TOOLS_GL2PS_TRIANGLE_PROPERTY;
 
-typedef tools_GLfloat tools_GL2PSplane[4];
+typedef tools_GLG4float tools_GL2PSplane[4];
 
 typedef struct _tools_GL2PSbsptree2d tools_GL2PSbsptree2d;
 
@@ -154,7 +154,7 @@ typedef struct {
   /* Note: for a 'special' string, 'alignment' holds the format
      (PostScript, PDF, etc.) of the special string */
   tools_GLint alignment;
-  tools_GLfloat angle;
+  tools_GLG4float angle;
 } tools_GL2PSstring;
 
 typedef struct {
@@ -163,8 +163,8 @@ typedef struct {
      written to the file or not, and 'format' indicates if it is
      visible or not */
   tools_GLenum format, type;
-  tools_GLfloat zoom_x, zoom_y;
-  tools_GLfloat *pixels;
+  tools_GLG4float zoom_x, zoom_y;
+  tools_GLG4float *pixels;
 } tools_GL2PSimage;
 
 typedef struct _tools_GL2PSimagemap tools_GL2PSimagemap;
@@ -179,7 +179,7 @@ typedef struct {
   tools_GLushort pattern;
   char boundary, offset, culled;
   tools_GLint factor, linecap, linejoin;
-  tools_GLfloat width, ofactor, ounits;
+  tools_GLG4float width, ofactor, ounits;
   tools_GL2PSvertex *verts;
   union {
     tools_GL2PSstring *text;
@@ -208,7 +208,7 @@ typedef struct {
   tools_GLint lastlinecap, lastlinejoin;
   char *title, *producer, *filename;
   tools_GLboolean boundary, blending;
-  tools_GLfloat *feedback, lastlinewidth;
+  tools_GLG4float *feedback, lastlinewidth;
   tools_GLint viewport[4], blendfunc[2], lastfactor;
   tools_GL2PSrgba *colormap, lastrgba, threshold, bgcolor;
   tools_GLushort lastpattern;
@@ -734,14 +734,14 @@ static void tools_gl2psSetLastColor(tools_GL2PSrgba rgba)
   }
 }
 
-static tools_GLfloat tools_gl2psGetRGB(tools_GL2PSimage *im, tools_GLuint x, tools_GLuint y,
-                           tools_GLfloat *red, tools_GLfloat *green, tools_GLfloat *blue)
+static tools_GLG4float tools_gl2psGetRGB(tools_GL2PSimage *im, tools_GLuint x, tools_GLuint y,
+                           tools_GLG4float *red, tools_GLG4float *green, tools_GLG4float *blue)
 {
 
   tools_GLsizei width = im->width;
   tools_GLsizei height = im->height;
-  tools_GLfloat *pixels = im->pixels;
-  tools_GLfloat *pimag;
+  tools_GLG4float *pixels = im->pixels;
+  tools_GLG4float *pimag;
 
   /* OpenGL image is from down to up, PS image is up to down */
   switch(im->format){
@@ -776,15 +776,15 @@ static tools_GL2PSimage *tools_gl2psCopyPixmap(tools_GL2PSimage *im)
 
   switch(image->format){
   case TOOLS_GL_RGBA:
-    size = image->height * image->width * 4 * sizeof(tools_GLfloat);
+    size = image->height * image->width * 4 * sizeof(tools_GLG4float);
     break;
   case TOOLS_GL_RGB:
   default:
-    size = image->height * image->width * 3 * sizeof(tools_GLfloat);
+    size = image->height * image->width * 3 * sizeof(tools_GLG4float);
     break;
   }
 
-  image->pixels = (tools_GLfloat*)tools_gl2psMalloc(size);
+  image->pixels = (tools_GLG4float*)tools_gl2psMalloc(size);
   memcpy(image->pixels, im->pixels, size);
 
   return image;
@@ -822,7 +822,7 @@ static void tools_gl2psConvertPixmapToPNG(tools_GL2PSimage *pixmap, tools_GL2PSl
   png_structp png_ptr;
   png_infop info_ptr;
   unsigned char *row_data;
-  tools_GLfloat dr, dg, db;
+  tools_GLG4float dr, dg, db;
   int row, col;
 
   if(!(png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL)))
@@ -866,10 +866,10 @@ static void tools_gl2psConvertPixmapToPNG(tools_GL2PSimage *pixmap, tools_GL2PSl
 /* Helper routines for text strings */
 
 static tools_GLint tools_gl2psAddText(tools_GLint type, const char *str, const char *fontname,
-                          tools_GLshort fontsize, tools_GLint alignment, tools_GLfloat angle,
+                          tools_GLshort fontsize, tools_GLint alignment, tools_GLG4float angle,
                           tools_GL2PSrgba color)
 {
-  tools_GLfloat pos[4];
+  tools_GLG4float pos[4];
   tools_GL2PSprimitive *prim;
   tools_GLboolean valid;
 
@@ -908,7 +908,7 @@ static tools_GLint tools_gl2psAddText(tools_GLint type, const char *str, const c
   prim->linejoin = 0;
 
   if (color) {
-    memcpy(prim->verts[0].rgba, color, 4 * sizeof(float));
+    memcpy(prim->verts[0].rgba, color, 4 * sizeof(G4float));
   }
   else {
     if (tools_gl2ps_context->forcerasterpos) {
@@ -1120,7 +1120,7 @@ static tools_GLboolean tools_gl2psSamePosition(tools_GL2PSxyz p1, tools_GL2PSxyz
  *
  *********************************************************************/
 
-static tools_GLfloat tools_gl2psComparePointPlane(tools_GL2PSxyz point, tools_GL2PSplane plane)
+static tools_GLG4float tools_gl2psComparePointPlane(tools_GL2PSxyz point, tools_GL2PSplane plane)
 {
   return (plane[0] * point[0] +
           plane[1] * point[1] +
@@ -1128,26 +1128,26 @@ static tools_GLfloat tools_gl2psComparePointPlane(tools_GL2PSxyz point, tools_GL
           plane[3]);
 }
 
-static tools_GLfloat tools_gl2psPsca(tools_GLfloat *a, tools_GLfloat *b)
+static tools_GLG4float tools_gl2psPsca(tools_GLG4float *a, tools_GLG4float *b)
 {
   return (a[0]*b[0] + a[1]*b[1] + a[2]*b[2]);
 }
 
-static void tools_gl2psPvec(tools_GLfloat *a, tools_GLfloat *b, tools_GLfloat *c)
+static void tools_gl2psPvec(tools_GLG4float *a, tools_GLG4float *b, tools_GLG4float *c)
 {
   c[0] = a[1]*b[2] - a[2]*b[1];
   c[1] = a[2]*b[0] - a[0]*b[2];
   c[2] = a[0]*b[1] - a[1]*b[0];
 }
 
-static tools_GLfloat tools_gl2psNorm(tools_GLfloat *a)
+static tools_GLG4float tools_gl2psNorm(tools_GLG4float *a)
 {
-  return (tools_GLfloat)sqrt(a[0]*a[0] + a[1]*a[1] + a[2]*a[2]);
+  return (tools_GLG4float)sqrt(a[0]*a[0] + a[1]*a[1] + a[2]*a[2]);
 }
 
-static void tools_gl2psGetNormal(tools_GLfloat *a, tools_GLfloat *b, tools_GLfloat *c)
+static void tools_gl2psGetNormal(tools_GLG4float *a, tools_GLG4float *b, tools_GLG4float *c)
 {
-  tools_GLfloat norm;
+  tools_GLG4float norm;
 
   tools_gl2psPvec(a, b, c);
   if(!TOOLS_GL2PS_ZERO(norm = tools_gl2psNorm(c))){
@@ -1232,7 +1232,7 @@ static void tools_gl2psCutEdge(tools_GL2PSvertex *a, tools_GL2PSvertex *b, tools
                          tools_GL2PSvertex *c)
 {
   tools_GL2PSxyz v;
-  tools_GLfloat sect, psca;
+  tools_GLG4float sect, psca;
 
   v[0] = b->xyz[0] - a->xyz[0];
   v[1] = b->xyz[1] - a->xyz[1];
@@ -1324,7 +1324,7 @@ static tools_GLint tools_gl2psTestSplitPrimitive(tools_GL2PSprimitive *prim, too
 {
   tools_GLint type = TOOLS_GL2PS_COINCIDENT;
   tools_GLshort i, j;
-  tools_GLfloat d[5];
+  tools_GLG4float d[5];
 
   for(i = 0; i < prim->numverts; i++){
     d[i] = tools_gl2psComparePointPlane(prim->verts[i].xyz, plane);
@@ -1356,7 +1356,7 @@ static tools_GLint tools_gl2psSplitPrimitive(tools_GL2PSprimitive *prim, tools_G
 {
   tools_GLshort i, j, in = 0, out = 0, in0[5], in1[5], out0[5], out1[5];
   tools_GLint type;
-  tools_GLfloat d[5];
+  tools_GLG4float d[5];
 
   type = TOOLS_GL2PS_COINCIDENT;
 
@@ -1442,7 +1442,7 @@ static void tools_gl2psDivideQuad(tools_GL2PSprimitive *quad,
 static int tools_gl2psCompareDepth(const void *a, const void *b)
 {
   const tools_GL2PSprimitive *q, *w;
-  tools_GLfloat dq = 0.0F, dw = 0.0F, diff;
+  tools_GLG4float dq = 0.0F, dw = 0.0F, diff;
   int i;
 
   q = *(const tools_GL2PSprimitive* const*)a;
@@ -1451,12 +1451,12 @@ static int tools_gl2psCompareDepth(const void *a, const void *b)
   for(i = 0; i < q->numverts; i++){
     dq += q->verts[i].xyz[2];
   }
-  dq /= (tools_GLfloat)q->numverts;
+  dq /= (tools_GLG4float)q->numverts;
 
   for(i = 0; i < w->numverts; i++){
     dw += w->verts[i].xyz[2];
   }
-  dw /= (tools_GLfloat)w->numverts;
+  dw /= (tools_GLG4float)w->numverts;
 
   diff = dq - dw;
   if(diff > 0.){
@@ -1581,13 +1581,13 @@ static void tools_tools_gl2psFreeBspTree(tools_GL2PSbsptree **tree)
   }
 }
 
-static tools_GLboolean tools_gl2psGreater(tools_GLfloat f1, tools_GLfloat f2)
+static tools_GLboolean tools_gl2psGreater(tools_GLG4float f1, tools_GLG4float f2)
 {
   if(f1 > f2) return TOOLS_GL_TRUE;
   else return TOOLS_GL_FALSE;
 }
 
-static tools_GLboolean tools_gl2psLess(tools_GLfloat f1, tools_GLfloat f2)
+static tools_GLboolean tools_gl2psLess(tools_GLG4float f1, tools_GLG4float f2)
 {
   if(f1 < f2) return TOOLS_GL_TRUE;
   else return TOOLS_GL_FALSE;
@@ -1656,11 +1656,11 @@ static void tools_gl2psBuildBspTree(tools_GL2PSbsptree *tree, tools_GL2PSlist *p
   tools_gl2psListDelete(primitives);
 }
 
-static void tools_gl2psTraverseBspTree(tools_GL2PSbsptree *tree, tools_GL2PSxyz eye, tools_GLfloat epsilon,
-                                 tools_GLboolean (*compare)(tools_GLfloat f1, tools_GLfloat f2),
+static void tools_gl2psTraverseBspTree(tools_GL2PSbsptree *tree, tools_GL2PSxyz eye, tools_GLG4float epsilon,
+                                 tools_GLboolean (*compare)(tools_GLG4float f1, tools_GLG4float f2),
                                  void (*action)(void *data), int inverse)
 {
-  tools_GLfloat result;
+  tools_GLG4float result;
 
   if(!tree) return;
 
@@ -1695,8 +1695,8 @@ static void tools_gl2psTraverseBspTree(tools_GL2PSbsptree *tree, tools_GL2PSxyz 
 static void tools_gl2psRescaleAndOffset(void)
 {
   tools_GL2PSprimitive *prim;
-  tools_GLfloat minZ, maxZ, rangeZ, scaleZ;
-  tools_GLfloat factor, units, area, dZ, dZdX, dZdY, maxdZ;
+  tools_GLG4float minZ, maxZ, rangeZ, scaleZ;
+  tools_GLG4float factor, units, area, dZ, dZdX, dZdY, maxdZ;
   int i, j;
 
   if(!tools_gl2psListNbr(tools_gl2ps_context->primitives))
@@ -1721,7 +1721,7 @@ static void tools_gl2psRescaleAndOffset(void)
   /* rescale z-buffer coordinate in [0,TOOLS_GL2PS_ZSCALE], to make it of
      the same order of magnitude as the x and y coordinates */
   scaleZ = TOOLS_GL2PS_ZERO(rangeZ) ? TOOLS_GL2PS_ZSCALE : (TOOLS_GL2PS_ZSCALE / rangeZ);
-  /* avoid precision loss (we use floats!) */
+  /* avoid precision loss (we use G4floats!) */
   if(scaleZ > 100000.F) scaleZ = 100000.F;
 
   /* apply offsets */
@@ -1760,7 +1760,7 @@ static void tools_gl2psRescaleAndOffset(void)
            (prim->verts[2].xyz[2] - prim->verts[1].xyz[2]) -
            (prim->verts[2].xyz[0] - prim->verts[1].xyz[0]) *
            (prim->verts[1].xyz[2] - prim->verts[0].xyz[2])) / area;
-        maxdZ = (tools_GLfloat)sqrt(dZdX * dZdX + dZdY * dZdY);
+        maxdZ = (tools_GLG4float)sqrt(dZdX * dZdX + dZdY * dZdY);
       }
       else{
         maxdZ = 0.0F;
@@ -1781,11 +1781,11 @@ static void tools_gl2psRescaleAndOffset(void)
 
 static tools_GLint tools_tools_gl2psGetPlaneFromPoints(tools_GL2PSxyz a, tools_GL2PSxyz b, tools_GL2PSplane plane)
 {
-  tools_GLfloat n;
+  tools_GLG4float n;
 
   plane[0] = b[1] - a[1];
   plane[1] = a[0] - b[0];
-  n = (tools_GLfloat)sqrt(plane[0]*plane[0] + plane[1]*plane[1]);
+  n = (tools_GLG4float)sqrt(plane[0]*plane[0] + plane[1]*plane[1]);
   plane[2] = 0.0F;
   if(!TOOLS_GL2PS_ZERO(n)){
     plane[0] /= n;
@@ -1813,7 +1813,7 @@ static void tools_tools_gl2psFreeBspImageTree(tools_GL2PSbsptree2d **tree)
 
 static tools_GLint tools_gl2psCheckPoint(tools_GL2PSxyz point, tools_GL2PSplane plane)
 {
-  tools_GLfloat pt_dis;
+  tools_GLG4float pt_dis;
 
   pt_dis = tools_gl2psComparePointPlane(point, plane);
   if(pt_dis > TOOLS_GL2PS_EPSILON)        return TOOLS_GL2PS_POINT_INFRONT;
@@ -2230,9 +2230,9 @@ static void tools_gl2psBuildPolygonBoundary(tools_GL2PSbsptree *tree)
 
 TOOLS_GL2PSDLL_API void tools_gl2psAddPolyPrimitive(tools_GLshort type, tools_GLshort numverts,
                                         tools_GL2PSvertex *verts, tools_GLint offset,
-                                        tools_GLfloat ofactor, tools_GLfloat ounits,
+                                        tools_GLG4float ofactor, tools_GLG4float ounits,
                                         tools_GLushort pattern, tools_GLint factor,
-                                        tools_GLfloat width, tools_GLint linecap,
+                                        tools_GLG4float width, tools_GLint linecap,
                                         tools_GLint linejoin,char boundary)
 {
   tools_GL2PSprimitive *prim;
@@ -2259,7 +2259,7 @@ TOOLS_GL2PSDLL_API void tools_gl2psAddPolyPrimitive(tools_GLshort type, tools_GL
   tools_gl2psListAdd(tools_gl2ps_context->primitives, &prim);
 }
 
-static tools_GLint tools_gl2psGetVertex(tools_GL2PSvertex *v, tools_GLfloat *p)
+static tools_GLint tools_gl2psGetVertex(tools_GL2PSvertex *v, tools_GLG4float *p)
 {
   tools_GLint i;
 
@@ -2289,10 +2289,10 @@ static void tools_gl2psParseFeedbackBuffer(tools_GLint used)
   char flag;
   tools_GLushort pattern = 0;
   tools_GLboolean boundary;
-  tools_GLint i, sizeoffloat, count, v, vtot, offset = 0, factor = 0, auxindex = 0;
+  tools_GLint i, sizeofG4float, count, v, vtot, offset = 0, factor = 0, auxindex = 0;
   tools_GLint lcap = 0, ljoin = 0;
-  tools_GLfloat lwidth = 1.0F, psize = 1.0F, ofactor = 0.0F, ounits = 0.0F; /*G.Barrand : init ofactor, ounits to 0.0F.*/
-  tools_GLfloat *current;
+  tools_GLG4float lwidth = 1.0F, psize = 1.0F, ofactor = 0.0F, ounits = 0.0F; /*G.Barrand : init ofactor, ounits to 0.0F.*/
+  tools_GLG4float *current;
   tools_GL2PSvertex vertices[3];
   tools_GL2PSprimitive *prim;
   tools_GL2PSimagemap *node;
@@ -2475,18 +2475,18 @@ static void tools_gl2psParseFeedbackBuffer(tools_GLint used)
         prim->verts[2].xyz[1] = prim->verts[2].xyz[1] + node->image->height;
         prim->verts[3].xyz[1] = prim->verts[2].xyz[1];
 
-        sizeoffloat = sizeof(tools_GLfloat);
-        v = 2 * sizeoffloat;
+        sizeofG4float = sizeof(tools_GLG4float);
+        v = 2 * sizeofG4float;
         vtot = node->image->height + node->image->height *
           ((node->image->width - 1) / 8);
-        node->image->pixels = (tools_GLfloat*)tools_gl2psMalloc(v + vtot);
+        node->image->pixels = (tools_GLG4float*)tools_gl2psMalloc(v + vtot);
         node->image->pixels[0] = prim->verts[0].xyz[0];
         node->image->pixels[1] = prim->verts[0].xyz[1];
 
-        for(i = 0; i < vtot; i += sizeoffloat){
+        for(i = 0; i < vtot; i += sizeofG4float){
           current += 2; used -= 2;
           if((vtot - i) >= 4)
-            memcpy(&(((char*)(node->image->pixels))[i + v]), &(current[2]), sizeoffloat);
+            memcpy(&(((char*)(node->image->pixels))[i + v]), &(current[2]), sizeofG4float);
           else
             memcpy(&(((char*)(node->image->pixels))[i + v]), &(current[2]), vtot - i);
         }
@@ -2529,12 +2529,12 @@ static void tools_gl2psWriteByte(unsigned char byte)
   tools_gl2psPrintf("%x%x", h, l);
 }
 
-static void tools_gl2psPrintPostScriptPixmap(tools_GLfloat x, tools_GLfloat y, tools_GL2PSimage *im,
+static void tools_gl2psPrintPostScriptPixmap(tools_GLG4float x, tools_GLG4float y, tools_GL2PSimage *im,
                                              int greyscale,int nbit) /*G.Barrand : to quiet coverity : add last greyscale,nbit.*/
 {
   tools_GLuint nbhex, nbyte, nrgb, nbits;
   tools_GLuint row, col, ibyte, icase;
-  tools_GLfloat dr = 0., dg = 0., db = 0., fgrey;
+  tools_GLG4float dr = 0., dg = 0., db = 0., fgrey;
   unsigned char red = 0, green = 0, blue = 0, b, grey;
   tools_GLuint width = (tools_GLuint)im->width;
   tools_GLuint height = (tools_GLuint)im->height;
@@ -2731,7 +2731,7 @@ static void tools_gl2psPrintPostScriptPixmap(tools_GLfloat x, tools_GLfloat y, t
   tools_gl2psPrintf("grestore\n");
 }
 
-static void tools_gl2psPrintPostScriptImagemap(tools_GLfloat x, tools_GLfloat y,
+static void tools_gl2psPrintPostScriptImagemap(tools_GLG4float x, tools_GLG4float y,
                                          tools_GLsizei width, tools_GLsizei height,
                                          const unsigned char *imagemap){
   int i, size;
@@ -3241,7 +3241,7 @@ static void tools_gl2psPrintPostScriptFooter(void)
 static void tools_gl2psPrintPostScriptBeginViewport(tools_GLint viewport[4])
 {
   tools_GLint idx;
-  tools_GLfloat rgba[4];
+  tools_GLG4float rgba[4];
   int x = viewport[0], y = viewport[1], w = viewport[2], h = viewport[3];
 
   tools_glRenderMode(TOOLS_GL_FEEDBACK);
@@ -3520,7 +3520,7 @@ static int tools_gl2psPrintPDFFillColor(tools_GL2PSrgba rgba)
   return offs;
 }
 
-static int tools_gl2psPrintPDFLineWidth(tools_GLfloat lw)
+static int tools_gl2psPrintPDFLineWidth(tools_GLG4float lw)
 {
   if(TOOLS_GL2PS_ZERO(lw))
     return tools_gl2psPrintf("%.0f w\n", 0.);
@@ -3546,9 +3546,9 @@ static int tools_gl2psPrintPDFLineJoin(tools_GLint lj)
     return tools_gl2psPrintf("%d j\n", lj);
 }
 
-static void tools_gl2psPutPDFText(tools_GL2PSstring *text, int cnt, tools_GLfloat x, tools_GLfloat y)
+static void tools_gl2psPutPDFText(tools_GL2PSstring *text, int cnt, tools_GLG4float x, tools_GLG4float y)
 {
-  tools_GLfloat rad, crad, srad;
+  tools_GLG4float rad, crad, srad;
 
   if(text->angle == 0.0F){
     tools_gl2ps_context->streamlength += tools_gl2psPrintf
@@ -3560,9 +3560,9 @@ static void tools_gl2psPutPDFText(tools_GL2PSstring *text, int cnt, tools_GLfloa
        cnt, text->fontsize, x, y, text->str);
   }
   else{
-    rad = (tools_GLfloat)(3.141593F * text->angle / 180.0F);
-    srad = (tools_GLfloat)sin(rad);
-    crad = (tools_GLfloat)cos(rad);
+    rad = (tools_GLG4float)(3.141593F * text->angle / 180.0F);
+    srad = (tools_GLG4float)sin(rad);
+    crad = (tools_GLG4float)cos(rad);
     tools_gl2ps_context->streamlength += tools_gl2psPrintf
       ("BT\n"
        "/F%d %d Tf\n"
@@ -3579,7 +3579,7 @@ static void tools_gl2psPutPDFSpecial(int prim, int sec, tools_GL2PSstring *text)
   tools_gl2ps_context->streamlength += tools_gl2psPrintf("%s\n", text->str);
 }
 
-static void tools_gl2psPutPDFImage(tools_GL2PSimage *image, int cnt, tools_GLfloat x, tools_GLfloat y)
+static void tools_gl2psPutPDFImage(tools_GL2PSimage *image, int cnt, tools_GLG4float x, tools_GLG4float y)
 {
   tools_gl2ps_context->streamlength += tools_gl2psPrintf
     ("q\n"
@@ -3623,7 +3623,7 @@ static void tools_tools_gl2psPDFgroupListInit(void)
   tools_GL2PSrgba lastrgba = {-1.0F, -1.0F, -1.0F, -1.0F};
   tools_GLushort lastpattern = 0;
   tools_GLint lastfactor = 0;
-  tools_GLfloat lastwidth = 1;
+  tools_GLG4float lastwidth = 1;
   tools_GLint lastlinecap = 0;
   tools_GLint lastlinejoin = 0;
   tools_GL2PStriangle lastt, tmpt;
@@ -4353,14 +4353,14 @@ static int tools_gl2psPrintPDFGSObject(void)
 
 static int tools_tools_tools_gl2psPrintPDFShaderStreamDataCoord(tools_GL2PSvertex *vertex,
                                               int (*action)(unsigned long data, int size),
-                                              tools_GLfloat dx, tools_GLfloat dy,
-                                              tools_GLfloat xmin, tools_GLfloat ymin)
+                                              tools_GLG4float dx, tools_GLG4float dy,
+                                              tools_GLG4float xmin, tools_GLG4float ymin)
 {
   int offs = 0;
   unsigned long imap;
-  tools_GLfloat diff;
-//double dmax = ~1UL;
-  double dmax = (double)~1UL; //G.Barrand : clang10 : cast.
+  tools_GLG4float diff;
+//G4double dmax = ~1UL;
+  G4double dmax = (G4double)~1UL; //G.Barrand : clang10 : cast.
   char edgeflag = 0;
 
   /* FIXME: temp bux fix for 64 bit archs: */
@@ -4403,8 +4403,8 @@ static int tools_tools_tools_gl2psPrintPDFShaderStreamDataRGB(tools_GL2PSvertex 
 {
   int offs = 0;
   unsigned long imap;
-//double dmax = ~1UL;
-  double dmax = (double)~1UL; //G.Barrand : clang10 : cast.
+//G4double dmax = ~1UL;
+  G4double dmax = (G4double)~1UL; //G.Barrand : clang10 : cast.
 
   /* FIXME: temp bux fix for 64 bit archs: */
   if(sizeof(unsigned long) == 8) dmax = dmax - 2048.;
@@ -4429,8 +4429,8 @@ static int tools_tools_tools_gl2psPrintPDFShaderStreamDataAlpha(tools_GL2PSverte
 {
   int offs = 0;
   unsigned long imap;
-//double dmax = ~1UL;
-  double dmax = (double)~1UL; //G.Barrand : clang10 : cast.
+//G4double dmax = ~1UL;
+  G4double dmax = (G4double)~1UL; //G.Barrand : clang10 : cast.
 
   /* FIXME: temp bux fix for 64 bit archs: */
   if(sizeof(unsigned long) == 8) dmax = dmax - 2048.;
@@ -4450,8 +4450,8 @@ static int tools_tools_tools_gl2psPrintPDFShaderStreamDataAlpha(tools_GL2PSverte
 /* Put a triangles raw data in shader stream */
 
 static int tools_tools_gl2psPrintPDFShaderStreamData(tools_GL2PStriangle *triangle,
-                                         tools_GLfloat dx, tools_GLfloat dy,
-                                         tools_GLfloat xmin, tools_GLfloat ymin,
+                                         tools_GLG4float dx, tools_GLG4float dy,
+                                         tools_GLG4float xmin, tools_GLG4float ymin,
                                          int (*action)(unsigned long data, int size),
                                          int gray)
 {
@@ -4476,8 +4476,8 @@ static int tools_tools_gl2psPrintPDFShaderStreamData(tools_GL2PStriangle *triang
   return offs;
 }
 
-static void tools_tools_gl2psPDFRectHull(tools_GLfloat *xmin, tools_GLfloat *xmax,
-                             tools_GLfloat *ymin, tools_GLfloat *ymax,
+static void tools_tools_gl2psPDFRectHull(tools_GLG4float *xmin, tools_GLG4float *xmax,
+                             tools_GLG4float *ymin, tools_GLG4float *ymax,
                              tools_GL2PStriangle *triangles, int cnt)
 {
   int i, j;
@@ -4510,7 +4510,7 @@ static int tools_gl2psPrintPDFShader(int obj, tools_GL2PStriangle *triangles,
                                int size, int gray)
 {
   int i, offs = 0, vertexbytes, done = 0;
-  tools_GLfloat xmin, xmax, ymin, ymax;
+  tools_GLG4float xmin, xmax, ymin, ymax;
 
   switch(gray){
   case 0:
@@ -4610,7 +4610,7 @@ static int tools_tools_gl2psPrintPDFShaderMask(int obj, int childobj)
                   (int)tools_gl2ps_context->viewport[2], (int)tools_gl2ps_context->viewport[3]);
 
   len = (childobj>0)
-    ? (int)strlen("/TrSh sh\n") + (int)log10((double)childobj)+1
+    ? (int)strlen("/TrSh sh\n") + (int)log10((G4double)childobj)+1
     : (int)strlen("/TrSh0 sh\n");
 
   offs += fprintf(tools_gl2ps_context->stream,
@@ -4653,7 +4653,7 @@ static int tools_tools_gl2psPrintPDFShaderExtGS(int obj, int childobj)
 
 /* a simple graphics state */
 
-static int tools_tools_gl2psPrintPDFShaderSimpleExtGS(int obj, tools_GLfloat alpha)
+static int tools_tools_gl2psPrintPDFShaderSimpleExtGS(int obj, tools_GLG4float alpha)
 {
   int offs = 0;
 
@@ -4674,7 +4674,7 @@ static int tools_tools_gl2psPrintPDFPixmapStreamData(tools_GL2PSimage *im,
                                          int gray)
 {
   int x, y, shift;
-  tools_GLfloat r, g, b, a;
+  tools_GLG4float r, g, b, a;
 
   if(im->format != TOOLS_GL_RGBA && gray)
     return 0;
@@ -4940,7 +4940,7 @@ static void tools_gl2psPrintPDFBeginViewport(tools_GLint viewport[4])
 {
   int offs = 0;
   tools_GLint idx;
-  tools_GLfloat rgba[4];
+  tools_GLG4float rgba[4];
   int x = viewport[0], y = viewport[1], w = viewport[2], h = viewport[3];
 
   tools_glRenderMode(TOOLS_GL_FEEDBACK);
@@ -5187,7 +5187,7 @@ static void tools_gl2psEndSVGLine(void)
   }
 }
 
-static void tools_gl2psPrintSVGPixmap(tools_GLfloat x, tools_GLfloat y, tools_GL2PSimage *pixmap)
+static void tools_gl2psPrintSVGPixmap(tools_GLG4float x, tools_GLG4float y, tools_GL2PSimage *pixmap)
 {
 #if defined(TOOLS_GL2PS_HAVE_LIBPNG)
   tools_GL2PSlist *png;
@@ -5207,7 +5207,7 @@ static void tools_gl2psPrintSVGPixmap(tools_GLfloat x, tools_GLfloat y, tools_GL
 
   /* Use "transform" attribute to scale and translate the image from
      the coordinates origin (0,0) */
-  y -= pixmap->zoom_y * (tools_GLfloat)pixmap->height;
+  y -= pixmap->zoom_y * (tools_GLG4float)pixmap->height;
   tools_gl2psPrintf("<image x=\"%g\" y=\"%g\" width=\"%d\" height=\"%d\"\n",
               0., 0., pixmap->width, pixmap->height);
   tools_gl2psPrintf("transform=\"matrix(%g,0,0,%g,%g,%g)\"\n",
@@ -5420,7 +5420,7 @@ static void tools_gl2psPrintSVGBeginViewport(tools_GLint viewport[4])
 {
   tools_GLint idx;
   char col[32];
-  tools_GLfloat rgba[4];
+  tools_GLG4float rgba[4];
   int x = viewport[0], y = viewport[1], w = viewport[2], h = viewport[3];
 
   tools_glRenderMode(TOOLS_GL_FEEDBACK);
@@ -5713,7 +5713,7 @@ static void tools_gl2psPrintPGFFooter(void)
 static void tools_gl2psPrintPGFBeginViewport(tools_GLint viewport[4])
 {
   tools_GLint idx;
-  tools_GLfloat rgba[4];
+  tools_GLG4float rgba[4];
   int x = viewport[0], y = viewport[1], w = viewport[2], h = viewport[3];
 
   tools_glRenderMode(TOOLS_GL_FEEDBACK);
@@ -6007,9 +6007,9 @@ TOOLS_GL2PSDLL_API tools_GLint tools_gl2psBeginPage(const char *title, const cha
     return TOOLS_GL2PS_ERROR;
   }
 
-  tools_gl2ps_context->threshold[0] = nr ? 1.0F / (tools_GLfloat)nr : 0.064F;
-  tools_gl2ps_context->threshold[1] = ng ? 1.0F / (tools_GLfloat)ng : 0.034F;
-  tools_gl2ps_context->threshold[2] = nb ? 1.0F / (tools_GLfloat)nb : 0.100F;
+  tools_gl2ps_context->threshold[0] = nr ? 1.0F / (tools_GLG4float)nr : 0.064F;
+  tools_gl2ps_context->threshold[1] = ng ? 1.0F / (tools_GLG4float)ng : 0.034F;
+  tools_gl2ps_context->threshold[2] = nb ? 1.0F / (tools_GLG4float)nb : 0.100F;
   tools_gl2ps_context->colormode = colormode;
   tools_gl2ps_context->buffersize = buffersize > 0 ? buffersize : 2048 * 2048;
   for(i = 0; i < 3; i++){
@@ -6104,7 +6104,7 @@ TOOLS_GL2PSDLL_API tools_GLint tools_gl2psBeginPage(const char *title, const cha
   tools_gl2ps_context->auxprimitives = tools_gl2psListCreate(100, 100, sizeof(tools_GL2PSprimitive*));
 
   if ((tools_gl2ps_context->options & TOOLS_GL2PS_NO_OPENGL_CONTEXT) == TOOLS_GL2PS_NONE) {
-    tools_gl2ps_context->feedback = (tools_GLfloat*)tools_gl2psMalloc(tools_gl2ps_context->buffersize * sizeof(tools_GLfloat));
+    tools_gl2ps_context->feedback = (tools_GLG4float*)tools_gl2psMalloc(tools_gl2ps_context->buffersize * sizeof(tools_GLG4float));
     tools_glFeedbackBuffer(tools_gl2ps_context->buffersize, TOOLS_GL_3D_COLOR, tools_gl2ps_context->feedback);
     tools_glRenderMode(TOOLS_GL_FEEDBACK);
   }
@@ -6167,7 +6167,7 @@ TOOLS_GL2PSDLL_API tools_GLint tools_gl2psEndViewport(void)
 }
 
 TOOLS_GL2PSDLL_API tools_GLint tools_tools_gl2psTextOptColor(const char *str, const char *fontname,
-                                     tools_GLshort fontsize, tools_GLint alignment, tools_GLfloat angle,
+                                     tools_GLshort fontsize, tools_GLint alignment, tools_GLG4float angle,
                                      tools_GL2PSrgba color)
 {
   return tools_gl2psAddText(TOOLS_GL2PS_TEXT, str, fontname, fontsize, alignment, angle,
@@ -6175,7 +6175,7 @@ TOOLS_GL2PSDLL_API tools_GLint tools_tools_gl2psTextOptColor(const char *str, co
 }
 
 TOOLS_GL2PSDLL_API tools_GLint tools_tools_gl2psTextOpt(const char *str, const char *fontname,
-                                tools_GLshort fontsize, tools_GLint alignment, tools_GLfloat angle)
+                                tools_GLshort fontsize, tools_GLint alignment, tools_GLG4float angle)
 {
   return tools_gl2psAddText(TOOLS_GL2PS_TEXT, str, fontname, fontsize, alignment, angle, NULL);
 }
@@ -6202,8 +6202,8 @@ TOOLS_GL2PSDLL_API tools_GLint tools_gl2psDrawPixels(tools_GLsizei width, tools_
                                    const void *pixels)
 {
   int size, i;
-  const tools_GLfloat *piv;
-  tools_GLfloat pos[4], zoom_x, zoom_y;
+  const tools_GLG4float *piv;
+  tools_GLG4float pos[4], zoom_x, zoom_y;
   tools_GL2PSprimitive *prim;
   tools_GLboolean valid;
 
@@ -6276,8 +6276,8 @@ TOOLS_GL2PSDLL_API tools_GLint tools_gl2psDrawPixels(tools_GLsizei width, tools_
       /* special case: blending turned off */
       prim->data.image->format = TOOLS_GL_RGB;
       size = height * width * 3;
-      prim->data.image->pixels = (tools_GLfloat*)tools_gl2psMalloc(size * sizeof(tools_GLfloat));
-      piv = (const tools_GLfloat*)pixels;
+      prim->data.image->pixels = (tools_GLG4float*)tools_gl2psMalloc(size * sizeof(tools_GLG4float));
+      piv = (const tools_GLG4float*)pixels;
       for(i = 0; i < size; ++i, ++piv){
         prim->data.image->pixels[i] = *piv;
         if(!((i + 1) % 3))
@@ -6286,15 +6286,15 @@ TOOLS_GL2PSDLL_API tools_GLint tools_gl2psDrawPixels(tools_GLsizei width, tools_
     }
     else{
       size = height * width * 4;
-      prim->data.image->pixels = (tools_GLfloat*)tools_gl2psMalloc(size * sizeof(tools_GLfloat));
-      memcpy(prim->data.image->pixels, pixels, size * sizeof(tools_GLfloat));
+      prim->data.image->pixels = (tools_GLG4float*)tools_gl2psMalloc(size * sizeof(tools_GLG4float));
+      memcpy(prim->data.image->pixels, pixels, size * sizeof(tools_GLG4float));
     }
     break;
   case TOOLS_GL_RGB:
   default:
     size = height * width * 3;
-    prim->data.image->pixels = (tools_GLfloat*)tools_gl2psMalloc(size * sizeof(tools_GLfloat));
-    memcpy(prim->data.image->pixels, pixels, size * sizeof(tools_GLfloat));
+    prim->data.image->pixels = (tools_GLG4float*)tools_gl2psMalloc(size * sizeof(tools_GLG4float));
+    memcpy(prim->data.image->pixels, pixels, size * sizeof(tools_GLG4float));
     break;
   }
 
@@ -6311,10 +6311,10 @@ TOOLS_GL2PSDLL_API tools_GLint tools_gl2psDrawPixels(tools_GLsizei width, tools_
 }
 
 TOOLS_GL2PSDLL_API tools_GLint tools_gl2psDrawImageMap(tools_GLsizei width, tools_GLsizei height,
-                                     const tools_GLfloat position[3],
+                                     const tools_GLG4float position[3],
                                      const unsigned char *imagemap){
   int size, i;
-  int sizeoffloat = sizeof(tools_GLfloat);
+  int sizeofG4float = sizeof(tools_GLG4float);
 
   if(!tools_gl2ps_context || !imagemap) return TOOLS_GL2PS_UNINITIALIZED;
 
@@ -6325,12 +6325,12 @@ TOOLS_GL2PSDLL_API tools_GLint tools_gl2psDrawImageMap(tools_GLsizei width, tool
   tools_glBegin(TOOLS_GL_POINTS);
   tools_glVertex3f(position[0], position[1],position[2]);
   tools_glEnd();
-  tools_glPassThrough((tools_GLfloat)width);
-  tools_glPassThrough((tools_GLfloat)height);
-  for(i = 0; i < size; i += sizeoffloat){
-    const float *value = (const float*)imagemap;
+  tools_glPassThrough((tools_GLG4float)width);
+  tools_glPassThrough((tools_GLG4float)height);
+  for(i = 0; i < size; i += sizeofG4float){
+    const G4float *value = (const G4float*)imagemap;
     tools_glPassThrough(*value);
-    imagemap += sizeoffloat;
+    imagemap += sizeofG4float;
   }
   return TOOLS_GL2PS_SUCCESS;
 }
@@ -6338,7 +6338,7 @@ TOOLS_GL2PSDLL_API tools_GLint tools_gl2psDrawImageMap(tools_GLsizei width, tool
 TOOLS_GL2PSDLL_API tools_GLint tools_gl2psEnable(tools_GLint mode)
 {
   tools_GLint tmp;
-  tools_GLfloat tmp2;
+  tools_GLG4float tmp2;
 
   if(!tools_gl2ps_context) return TOOLS_GL2PS_UNINITIALIZED;
 
@@ -6356,9 +6356,9 @@ TOOLS_GL2PSDLL_API tools_GLint tools_gl2psEnable(tools_GLint mode)
   case TOOLS_GL2PS_LINE_STIPPLE :
     tools_glPassThrough(TOOLS_GL2PS_BEGIN_STIPPLE_TOKEN);
     tools_glGetIntegerv(TOOLS_GL_LINE_STIPPLE_PATTERN, &tmp);
-    tools_glPassThrough((tools_GLfloat)tmp);
+    tools_glPassThrough((tools_GLG4float)tmp);
     tools_glGetIntegerv(TOOLS_GL_LINE_STIPPLE_REPEAT, &tmp);
-    tools_glPassThrough((tools_GLfloat)tmp);
+    tools_glPassThrough((tools_GLG4float)tmp);
     break;
   case TOOLS_GL2PS_BLEND :
     tools_glPassThrough(TOOLS_GL2PS_BEGIN_BLEND_TOKEN);
@@ -6396,7 +6396,7 @@ TOOLS_GL2PSDLL_API tools_GLint tools_gl2psDisable(tools_GLint mode)
   return TOOLS_GL2PS_SUCCESS;
 }
 
-TOOLS_GL2PSDLL_API tools_GLint tools_gl2psPointSize(tools_GLfloat value)
+TOOLS_GL2PSDLL_API tools_GLint tools_gl2psPointSize(tools_GLG4float value)
 {
   if(!tools_gl2ps_context) return TOOLS_GL2PS_UNINITIALIZED;
 
@@ -6421,17 +6421,17 @@ TOOLS_GL2PSDLL_API tools_GLint tools_gl2psLineJoin(tools_GLint value)
   if(!tools_gl2ps_context) return TOOLS_GL2PS_UNINITIALIZED;
 
   tools_glPassThrough(TOOLS_GL2PS_LINE_JOIN_TOKEN);
-  tools_glPassThrough((tools_GLfloat)value);  //G.Barrand : _MSC_VER : cast.
+  tools_glPassThrough((tools_GLG4float)value);  //G.Barrand : _MSC_VER : cast.
 
   return TOOLS_GL2PS_SUCCESS;
 }
 
-TOOLS_GL2PSDLL_API tools_GLint tools_gl2psLineWidth(tools_GLfloat value)
+TOOLS_GL2PSDLL_API tools_GLint tools_gl2psLineWidth(tools_GLG4float value)
 {
   if(!tools_gl2ps_context) return TOOLS_GL2PS_UNINITIALIZED;
 
   tools_glPassThrough(TOOLS_GL2PS_LINE_WIDTH_TOKEN);
-  tools_glPassThrough((tools_GLfloat)value);  //G.Barrand : _MSC_VER : cast.
+  tools_glPassThrough((tools_GLG4float)value);  //G.Barrand : _MSC_VER : cast.
 
   return TOOLS_GL2PS_SUCCESS;
 }
@@ -6444,9 +6444,9 @@ TOOLS_GL2PSDLL_API tools_GLint tools_gl2psBlendFunc(tools_GLenum sfactor, tools_
     return TOOLS_GL2PS_WARNING;
 
   tools_glPassThrough(TOOLS_GL2PS_SRC_BLEND_TOKEN);
-  tools_glPassThrough((tools_GLfloat)sfactor);
+  tools_glPassThrough((tools_GLG4float)sfactor);
   tools_glPassThrough(TOOLS_GL2PS_DST_BLEND_TOKEN);
-  tools_glPassThrough((tools_GLfloat)dfactor);
+  tools_glPassThrough((tools_GLG4float)dfactor);
 
   return TOOLS_GL2PS_SUCCESS;
 }

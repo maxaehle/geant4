@@ -16,10 +16,10 @@ namespace tools {
 class rotf : public qrot<vec3f,vec4f> {
   typedef qrot<vec3f,vec4f> parent;
 private:
-  rotf(float a_q0,float a_q1,float a_q2,float a_q3):parent(a_q0,a_q1,a_q2,a_q3) {}
+  rotf(G4float a_q0,G4float a_q1,G4float a_q2,G4float a_q3):parent(a_q0,a_q1,a_q2,a_q3) {}
 public:
   rotf():parent() {} //zero rotation around the positive Z axis.
-  rotf(const vec3f& a_axis,float a_radians):parent(a_axis,a_radians,::sinf,::cosf) {}
+  rotf(const vec3f& a_axis,G4float a_radians):parent(a_axis,a_radians,::sinf,::cosf) {}
   rotf(const vec3f& a_from,const vec3f& a_to):parent(a_from,a_to,::sqrtf,::fabsf) {}
   virtual ~rotf(){}
 public:
@@ -42,10 +42,10 @@ public:
   bool set_value(const vec3f& a_from,const vec3f& a_to){
     return parent::set_value(a_from,a_to,::sqrtf,::fabsf);
   }
-  bool set_value(const vec3f& a_from,float a_a){
+  bool set_value(const vec3f& a_from,G4float a_a){
     return parent::set_value(a_from,a_a,::sinf,::cosf);
   }
-  bool value(vec3f& a_from,float& a_a) const {
+  bool value(vec3f& a_from,G4float& a_a) const {
     return parent::value(a_from,a_a,::sinf,::acosf); //WARNING acos and not cos
   }
 
@@ -67,7 +67,7 @@ namespace tools {
 
 inline bool tos(const rotf& a_v,std::string& a_s) {
   vec3f axis;
-  float angle = 0;
+  G4float angle = 0;
   if(!a_v.value(axis,angle)) {a_s.clear();return false;}
   std::ostringstream strm;
   strm << axis[0] << " "

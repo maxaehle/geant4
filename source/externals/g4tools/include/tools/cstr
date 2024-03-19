@@ -231,7 +231,7 @@ inline void end_LC_NUMERIC(char*& a_s) {
   }
 }
 
-inline bool str_2d(const char* a_s,double& a_v) {
+inline bool str_2d(const char* a_s,G4double& a_v) {
   char* olcn = beg_LC_NUMERIC();
 
   char* end;
@@ -247,7 +247,7 @@ inline bool str_2d(const char* a_s,double& a_v) {
 }
 
 /*
-inline bool str_2d(const char* a_s,double& a_v) {
+inline bool str_2d(const char* a_s,G4double& a_v) {
   char* _sl = ::setlocale(LC_NUMERIC,0);
   char* old = _sl?str_dup(_sl):0;
   ::setlocale(LC_NUMERIC,"C");
@@ -339,7 +339,7 @@ template <class VECTOR>
 inline bool str_2ds(char* a_s,const char* a_sep,VECTOR& a_v) {
   a_v.clear();
   const char* tok;
-  double d;
+  G4double d;
   for (tok = ::strtok(a_s,a_sep);tok && *tok;tok = ::strtok(NULL,a_sep)) {
     if(!str_2d(tok,d)) {a_v.clear();return false;}
     a_v.push_back(d);

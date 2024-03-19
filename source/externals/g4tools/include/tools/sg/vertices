@@ -24,7 +24,7 @@ class vertices : public node, public gstos {
   typedef gstos parent_gstos;
 public:
   sf<gl::mode_t> mode;
-  mf<float> xyzs;
+  mf<G4float> xyzs;
 public:
   virtual const desc_fields& node_desc_fields() const {
     TOOLS_FIELD_DESC_NODE_CLASS(tools::sg::vertices)
@@ -157,22 +157,22 @@ public:
     xyzs.add(a_v.y());
     xyzs.add(a_v.z());
   }
-  void add(float a_x,float a_y,float a_z) {
+  void add(G4float a_x,G4float a_y,G4float a_z) {
     xyzs.add(a_x);
     xyzs.add(a_y);
     xyzs.add(a_z);
   }
-  void add_allocated(size_t& a_pos,float a_x,float a_y,float a_z) {
-    std::vector<float>& v = xyzs.values();
+  void add_allocated(size_t& a_pos,G4float a_x,G4float a_y,G4float a_z) {
+    std::vector<G4float>& v = xyzs.values();
     v[a_pos] = a_x;a_pos++;
     v[a_pos] = a_y;a_pos++;
     v[a_pos] = a_z;a_pos++;
     xyzs.touch();
   }
-  bool add(const std::vector<float>& a_v) {
-    std::vector<float>::size_type _number = a_v.size()/3;
+  bool add(const std::vector<G4float>& a_v) {
+    std::vector<G4float>::size_type _number = a_v.size()/3;
     if(3*_number!=a_v.size()) return false;
-    std::vector<float>::const_iterator it;
+    std::vector<G4float>::const_iterator it;
     for(it=a_v.begin();it!=a_v.end();it+=3) {
       xyzs.add(*(it+0));
       xyzs.add(*(it+1));
@@ -184,25 +184,25 @@ public:
   size_t number() const {return xyzs.size()/3;}
   void clear() {xyzs.clear();}
 
-  bool add_dashed_line(float a_bx,float a_by,float a_bz,
-                       float a_ex,float a_ey,float a_ez,
+  bool add_dashed_line(G4float a_bx,G4float a_by,G4float a_bz,
+                       G4float a_ex,G4float a_ey,G4float a_ez,
                        unsigned int a_num_dash) {
     //optimized version.
     if(!a_num_dash) return false;
     // there is a dash at beg and end of line.
 
-    float fac = 1.0f/float(2*a_num_dash-1);
-    float sx = (a_ex-a_bx)*fac;
-    float sy = (a_ey-a_by)*fac;
-    float sz = (a_ez-a_bz)*fac;
+    G4float fac = 1.0f/G4float(2*a_num_dash-1);
+    G4float sx = (a_ex-a_bx)*fac;
+    G4float sy = (a_ey-a_by)*fac;
+    G4float sz = (a_ez-a_bz)*fac;
 
-    float two_sx = sx*2.0f;
-    float two_sy = sy*2.0f;
-    float two_sz = sz*2.0f;
+    G4float two_sx = sx*2.0f;
+    G4float two_sy = sy*2.0f;
+    G4float two_sz = sz*2.0f;
 
-    float px = a_bx;
-    float py = a_by;
-    float pz = a_bz;
+    G4float px = a_bx;
+    G4float py = a_by;
+    G4float pz = a_bz;
 
     for(unsigned int idash=0;idash<a_num_dash;idash++) {
       add(px,py,pz);
@@ -214,22 +214,22 @@ public:
     return true;
   }
   bool center() {
-    std::vector<float>& v = xyzs.values();
-    std::vector<float>::size_type _number = v.size()/3;
+    std::vector<G4float>& v = xyzs.values();
+    std::vector<G4float>::size_type _number = v.size()/3;
     if(!_number) return true;
     if(3*_number!=v.size()) return false;
-    float x_mean = 0;
-    float y_mean = 0;
-    float z_mean = 0;
-   {for(std::vector<float>::const_iterator it=v.begin();it!=v.end();it+=3) {
+    G4float x_mean = 0;
+    G4float y_mean = 0;
+    G4float z_mean = 0;
+   {for(std::vector<G4float>::const_iterator it=v.begin();it!=v.end();it+=3) {
       x_mean += *(it+0);
       y_mean += *(it+1);
       z_mean += *(it+2);
     }}
-    x_mean /= float(_number);
-    y_mean /= float(_number);
-    z_mean /= float(_number);
-   {for(std::vector<float>::iterator it=v.begin();it!=v.end();it+=3) {
+    x_mean /= G4float(_number);
+    y_mean /= G4float(_number);
+    z_mean /= G4float(_number);
+   {for(std::vector<G4float>::iterator it=v.begin();it!=v.end();it+=3) {
       *(it+0) -= x_mean;
       *(it+1) -= y_mean;
       *(it+2) -= z_mean;
@@ -240,9 +240,9 @@ protected:
   bool _is_visible(const matrix_action& a_action) {
     if(xyzs.empty()) return false;
     const state& _state = a_action.state();
-    pick_action action(a_action.out(),_state.m_ww,_state.m_wh,0,float(_state.m_ww),0,float(_state.m_wh));
+    pick_action action(a_action.out(),_state.m_ww,_state.m_wh,0,G4float(_state.m_ww),0,G4float(_state.m_wh));
     action.set_win_size(_state.m_ww,_state.m_wh);
-    action.set_area(0,float(_state.m_ww),0,float(_state.m_wh));
+    action.set_area(0,G4float(_state.m_ww),0,G4float(_state.m_wh));
     action.set_stop_at_first(true);
     action.matrix_action::operator=(a_action); //IMPORTANT.
     int old_cur = action.cur(); //not 0.

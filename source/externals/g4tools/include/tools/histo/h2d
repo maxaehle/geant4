@@ -9,8 +9,8 @@
 namespace tools {
 namespace histo {
 
-class h2d : public h2<double,unsigned int,unsigned int,double,double> {
-  typedef h2<double,unsigned int,unsigned int,double,double> parent;
+class h2d : public h2<G4double,unsigned int,unsigned int,G4double,G4double> {
+  typedef h2<G4double,unsigned int,unsigned int,G4double,G4double> parent;
 public:
   static const std::string& s_class() {
     static const std::string s_v("tools::histo::h2d");
@@ -21,13 +21,13 @@ public:
   h2d():parent("",10,0,1,10,0,1){} //for I/O when reading.
 
   h2d(const std::string& a_title,
-      unsigned int aXnumber,double aXmin,double aXmax,
-      unsigned int aYnumber,double aYmin,double aYmax)
+      unsigned int aXnumber,G4double aXmin,G4double aXmax,
+      unsigned int aYnumber,G4double aYmin,G4double aYmax)
   :parent(a_title,aXnumber,aXmin,aXmax,aYnumber,aYmin,aYmax)
   {}
   h2d(const std::string& a_title,
-      const std::vector<double>& a_edges_x,
-      const std::vector<double>& a_edges_y)
+      const std::vector<G4double>& a_edges_x,
+      const std::vector<G4double>& a_edges_y)
   :parent(a_title,a_edges_x,a_edges_y)
   {}
 

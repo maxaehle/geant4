@@ -54,15 +54,15 @@ public: //plottable
     }
   }
 public: //points2D
-  virtual float x_axis_min() const {return float(m_x_min);}
-  virtual float x_axis_max() const {return float(m_x_max);}
-  virtual float y_axis_min() const {return float(m_y_min);}
-  virtual float y_axis_max() const {return float(m_y_max);}
+  virtual G4float x_axis_min() const {return G4float(m_x_min);}
+  virtual G4float x_axis_max() const {return G4float(m_x_max);}
+  virtual G4float y_axis_min() const {return G4float(m_y_min);}
+  virtual G4float y_axis_max() const {return G4float(m_y_max);}
 
   virtual unsigned int points() const {
     return mn<unsigned int>(m_x.size(),m_y.size());
   }
-  virtual bool ith_point(unsigned int a_index,float& a_x,float& a_y) const {
+  virtual bool ith_point(unsigned int a_index,G4float& a_x,G4float& a_y) const {
     if(a_index>=m_x.size()) {a_x = T();a_y = T();return false;}
     if(a_index>=m_y.size()) {a_x = T();a_y = T();return false;}
     a_x = m_x[a_index];
@@ -126,8 +126,8 @@ protected:
   T m_y_max;
 
 private: static void check_instantiation() {
-    std::vector<float> data;
-    xy2plot<float> dummy(data,data);
+    std::vector<G4float> data;
+    xy2plot<G4float> dummy(data,data);
   }
 };
 

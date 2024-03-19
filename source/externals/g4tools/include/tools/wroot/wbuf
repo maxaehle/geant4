@@ -158,17 +158,17 @@ public:
     return true;
   }
 
-  bool write(float a_x) {
-    if(!check_eob<float>()) return false;
+  bool write(G4float a_x) {
+    if(!check_eob<G4float>()) return false;
     m_w_4_func(m_pos,(char*)&a_x);
-    m_pos += sizeof(float);
+    m_pos += sizeof(G4float);
     return true;
   }
 
-  bool write(double a_x) {
-    if(!check_eob<double>()) return false;
+  bool write(G4double a_x) {
+    if(!check_eob<G4double>()) return false;
     m_w_8_func(m_pos,(char*)&a_x);
-    m_pos += sizeof(double);
+    m_pos += sizeof(G4double);
     return true;
   }
 

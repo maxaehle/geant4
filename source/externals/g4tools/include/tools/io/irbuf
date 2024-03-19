@@ -28,8 +28,8 @@ public:
   virtual bool read(int32&) = 0;
   virtual bool read(uint64&) = 0;
   virtual bool read(int64&) = 0;
-  virtual bool read(float&) = 0;
-  virtual bool read(double&) = 0;
+  virtual bool read(G4float&) = 0;
+  virtual bool read(G4double&) = 0;
   virtual bool read(bool&) = 0;
 
   virtual bool read_vec(uint32&,uchar*&) = 0;
@@ -40,8 +40,8 @@ public:
   virtual bool read_vec(uint32&,int32*&) = 0;
   virtual bool read_vec(uint32&,uint64*&) = 0;
   virtual bool read_vec(uint32&,int64*&) = 0;
-  virtual bool read_vec(uint32&,float*&) = 0;
-  virtual bool read_vec(uint32&,double*&) = 0;
+  virtual bool read_vec(uint32&,G4float*&) = 0;
+  virtual bool read_vec(uint32&,G4double*&) = 0;
   virtual bool read_vec(uint32&,bool*&) = 0;
 
   virtual bool read_vec(std::vector<std::string>&) = 0;
@@ -52,11 +52,11 @@ public:
   typedef std::vector< std::vector<unsigned int> > std_vec_vec_uint_t;
   virtual bool read_std_vec_vec(std_vec_vec_uint_t&) = 0;
 
-  typedef std::vector< std::vector<float> > std_vec_vec_float_t;
-  virtual bool read_std_vec_vec(std_vec_vec_float_t&) = 0;
+  typedef std::vector< std::vector<G4float> > std_vec_vec_G4float_t;
+  virtual bool read_std_vec_vec(std_vec_vec_G4float_t&) = 0;
 
-  typedef std::vector< std::vector<double> > std_vec_vec_double_t;
-  virtual bool read_std_vec_vec(std_vec_vec_double_t&) = 0;
+  typedef std::vector< std::vector<G4double> > std_vec_vec_G4double_t;
+  virtual bool read_std_vec_vec(std_vec_vec_G4double_t&) = 0;
 
   typedef std::vector< std::vector<std::string> > std_vec_vec_string_t;
   virtual bool read_std_vec_vec(std_vec_vec_string_t&) = 0;

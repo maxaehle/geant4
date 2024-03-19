@@ -62,12 +62,12 @@ protected:
     static const std::string s_v("int");
     return s_v;
   }
-  static const std::string& s_aida_type(float) {
-    static const std::string s_v("float");
+  static const std::string& s_aida_type(G4float) {
+    static const std::string s_v("G4float");
     return s_v;
   }
-  static const std::string& s_aida_type(double) {
-    static const std::string s_v("double");
+  static const std::string& s_aida_type(G4double) {
+    static const std::string s_v("G4double");
     return s_v;
   }
   static const std::string& s_aida_type(const std::string&) {
@@ -281,10 +281,10 @@ public:
 
       if((*it).cls_id()==_cid(int(0))) {
         create_column<int>((*it).name());
-      } else if((*it).cls_id()==_cid(float(0))) {
-        create_column<float>((*it).name());
-      } else if((*it).cls_id()==_cid(double(0))) {
-        create_column<double>((*it).name());
+      } else if((*it).cls_id()==_cid(G4float(0))) {
+        create_column<G4float>((*it).name());
+      } else if((*it).cls_id()==_cid(G4double(0))) {
+        create_column<G4double>((*it).name());
       } else if((*it).cls_id()==_cid(std::string())) {
         create_column<std::string>((*it).name());
 
@@ -300,10 +300,10 @@ public:
           safe_clear<iobj>(m_cols);
           return;
         }
-      } else if((*it).cls_id()==_cid_std_vector<float>()) {
-        std::vector<float>* vec = (std::vector<float>*)(*it).user_obj();
+      } else if((*it).cls_id()==_cid_std_vector<G4float>()) {
+        std::vector<G4float>* vec = (std::vector<G4float>*)(*it).user_obj();
         if(vec) {
-          create_column<float>((*it).name(),*vec);
+          create_column<G4float>((*it).name(),*vec);
         } else {
           a_out << "tools::waxml::ntuple :"
                 << " for std::vector column " << sout((*it).name())
@@ -312,10 +312,10 @@ public:
           safe_clear<iobj>(m_cols);
           return;
         }
-      } else if((*it).cls_id()==_cid_std_vector<double>()) {
-        std::vector<double>* vec = (std::vector<double>*)(*it).user_obj();
+      } else if((*it).cls_id()==_cid_std_vector<G4double>()) {
+        std::vector<G4double>* vec = (std::vector<G4double>*)(*it).user_obj();
         if(vec) {
-          create_column<double>((*it).name(),*vec);
+          create_column<G4double>((*it).name(),*vec);
         } else {
           a_out << "tools::waxml::ntuple :"
                 << " for std::vector column " << sout((*it).name())

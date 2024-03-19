@@ -10,17 +10,17 @@
 
 namespace tools {
 
-class vec4f : public vec4<float> {
-  typedef vec4<float> parent;
+class vec4f : public vec4<G4float> {
+  typedef vec4<G4float> parent;
 public:
   TOOLS_SCLASS(tools::vec4f) //for stype()
 public:
   vec4f():parent() {}
-  vec4f(const float a_vec[4]):parent(a_vec) {}
+  vec4f(const G4float a_vec[4]):parent(a_vec) {}
 #ifdef TOOLS_MEM
-  vec4f(const float& a0,const float& a1,const float& a2,const float& a3,bool a_inc = true):parent(a0,a1,a2,a3,a_inc){}
+  vec4f(const G4float& a0,const G4float& a1,const G4float& a2,const G4float& a3,bool a_inc = true):parent(a0,a1,a2,a3,a_inc){}
 #else
-  vec4f(const float& a0,const float& a1,const float& a2,const float& a3):parent(a0,a1,a2,a3){}
+  vec4f(const G4float& a0,const G4float& a1,const G4float& a2,const G4float& a3):parent(a0,a1,a2,a3){}
 #endif
   virtual ~vec4f() {}
 public:
@@ -30,7 +30,7 @@ public:
     return *this;
   }
 public: //operators
-  vec4f operator*(float a_v) const {
+  vec4f operator*(G4float a_v) const {
     return vec4f(m_data[0]*a_v,
                  m_data[1]*a_v,
                  m_data[2]*a_v,
@@ -55,7 +55,7 @@ public: //operators
     m_data[3] += a_v.m_data[3];
     return *this;
   }
-  vec4f& operator*=(float a_v) {
+  vec4f& operator*=(G4float a_v) {
     m_data[0] *= a_v;
     m_data[1] *= a_v;
     m_data[2] *= a_v;
@@ -68,18 +68,18 @@ public: //operators
 public:
 #define TOOLS_VEC4F_MORE_PREC
 #ifdef TOOLS_VEC4F_MORE_PREC
-  float length() const {
-    return float(::sqrt(m_data[0]*m_data[0]+m_data[1]*m_data[1]+m_data[2]*m_data[2]+m_data[3]*m_data[3]));
+  G4float length() const {
+    return G4float(::sqrt(m_data[0]*m_data[0]+m_data[1]*m_data[1]+m_data[2]*m_data[2]+m_data[3]*m_data[3]));
   }
-  float normalize() {
-    float norme = length();
+  G4float normalize() {
+    G4float norme = length();
     if(!norme) return 0;
     divide(norme);
     return norme;
   }
 #else
-  float length() const {return parent::length(::sqrtf);}
-  float normalize() {return parent::normalize(::sqrtf);}
+  G4float length() const {return parent::length(::sqrtf);}
+  G4float normalize() {return parent::normalize(::sqrtf);}
 #endif
 };
 
@@ -91,7 +91,7 @@ namespace tools {
 
 #ifndef SWIG
 //for sf, mf :
-inline bool set_from_vec(vec4f& a_v,const std::vector<float>& a_sv) {
+inline bool set_from_vec(vec4f& a_v,const std::vector<G4float>& a_sv) {
   if(a_sv.size()!=4) return false;
   a_v[0] = a_sv[0];
   a_v[1] = a_sv[1];

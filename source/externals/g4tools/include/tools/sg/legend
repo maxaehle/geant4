@@ -25,23 +25,23 @@ class legend : public back_area {
 public:
   mf_string strings;
 
-  sf_vec<colorf,float> color; //color of the "rep"
+  sf_vec<colorf,G4float> color; //color of the "rep"
   // text atbs :
-  //sf<float> transparency;
+  //sf<G4float> transparency;
   sf_string font;
   sf_enum<sg::font_modeling> font_modeling;
   sf_string encoding;
-  //sf<float> line_width;          // for text_hershey.
+  //sf<G4float> line_width;          // for text_hershey.
 
   sf<bool> back_visible;
-  sf<float> wmargin_factor;
-  sf<float> hmargin_factor;
+  sf<G4float> wmargin_factor;
+  sf<G4float> hmargin_factor;
   sf_enum<hjust> lhjust;
   sf_enum<hjust> rhjust;
   //sf<bool> confine;
 
   sf_enum<sg::marker_style> marker_style;
-  sf<float> marker_size;
+  sf<G4float> marker_size;
 public:
   virtual const desc_fields& node_desc_fields() const {
     TOOLS_FIELD_DESC_NODE_CLASS(tools::sg::legend)
@@ -226,16 +226,16 @@ public:
     }
     if(empty) return;}
 
-    //sf<float> zfront ?
-    float zz = back_visible.value()?0.01f:0;
+    //sf<G4float> zfront ?
+    G4float zz = back_visible.value()?0.01f:0;
 
   //bool rep_line = false;
 
     /*
-    float fw = 0;
-    float fh = 0;
-    float lw = 0;
-    float rw = 0;
+    G4float fw = 0;
+    G4float fh = 0;
+    G4float lw = 0;
+    G4float rw = 0;
     if(rep_line) {
       fw = width * wmargin_factor;
       fh = height * hmargin_factor;
@@ -256,7 +256,7 @@ public:
 
 /*  if(rep_line) {
       matrix* ltsf = new matrix;
-      float xx = -fw*0.5F; //left justified.
+      G4float xx = -fw*0.5F; //left justified.
       ltsf->set_translate(xx,0,zz);
       _sep->add(ltsf);
 
@@ -344,11 +344,11 @@ public:
 /*  if(rep_line) {
 
       // adjust width :
-      float th = fh;
-     {float mn_x,mn_y,mn_z;
-      float mx_x,mx_y,mx_z;
+      G4float th = fh;
+     {G4float mn_x,mn_y,mn_z;
+      G4float mx_x,mx_y,mx_z;
       rtext->get_bounds(th,mn_x,mn_y,mn_z,mx_x,mx_y,mx_z);
-      float bxw = mx_x-mn_x;
+      G4float bxw = mx_x-mn_x;
       if(!bxw) {
         m_sep.clear();
         parent::update_sg();
@@ -356,27 +356,27 @@ public:
       }
       // adjust box width :
       // fh -> bxw then to have rw :
-      float max_width = rw;
+      G4float max_width = rw;
       if(bxw>max_width) th = max_width*fh/bxw;}
 
       rtext->height = th;
 
-     {float mn_x,mn_y,mn_z;
-      float mx_x,mx_y,mx_z;
+     {G4float mn_x,mn_y,mn_z;
+      G4float mx_x,mx_y,mx_z;
       rtext->get_bounds(th,mn_x,mn_y,mn_z,mx_x,mx_y,mx_z);
       rtext->hjust = right;
-      float xx = fw*0.5f;
-      float yy = -(mn_y+mx_y)*0.5F;
+      G4float xx = fw*0.5f;
+      G4float yy = -(mn_y+mx_y)*0.5F;
       rtsf->set_translate(xx,yy,zz);}
 
     } else*/ { //rep mark :
 
       // adjust width :
-      float th = height;
-     {float mn_x,mn_y,mn_z;
-      float mx_x,mx_y,mx_z;
+      G4float th = height;
+     {G4float mn_x,mn_y,mn_z;
+      G4float mx_x,mx_y,mx_z;
       rtext->get_bounds(th,mn_x,mn_y,mn_z,mx_x,mx_y,mx_z);
-      float bxw = mx_x-mn_x;
+      G4float bxw = mx_x-mn_x;
       if(!bxw) {
         m_sep.clear();
         parent::update_sg();
@@ -384,7 +384,7 @@ public:
       }
       // adjust box width :
       // height -> bxw then to have a wanted width :
-      float max_width = (width-height)*wmargin_factor;
+      G4float max_width = (width-height)*wmargin_factor;
       if(bxw>max_width) th = max_width*height/bxw;
       if(th<0) {
         m_sep.clear();
@@ -393,11 +393,11 @@ public:
       }}
 
       rtext->height = th;
-     {float mn_x,mn_y,mn_z;
-      float mx_x,mx_y,mx_z;
+     {G4float mn_x,mn_y,mn_z;
+      G4float mx_x,mx_y,mx_z;
       rtext->get_bounds(th,mn_x,mn_y,mn_z,mx_x,mx_y,mx_z);
       rtext->hjust = left;
-      float yy = -(mn_y+mx_y)*0.5F;
+      G4float yy = -(mn_y+mx_y)*0.5F;
       rtsf->set_translate(-width*0.5f+height,yy,zz);}
 
     }

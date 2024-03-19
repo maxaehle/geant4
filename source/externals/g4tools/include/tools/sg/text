@@ -28,23 +28,23 @@ public:
   mf_string strings;
   sf<bool> confine;
 
-  sf_vec<colorf,float> color;
+  sf_vec<colorf,G4float> color;
   sf_string font;
   sf_enum<sg::font_modeling> font_modeling;
 
   sf_string encoding;
-  sf<float> line_width; // for text_hershey.
+  sf<G4float> line_width; // for text_hershey.
   sf_enum<winding_type> front_face; //no more used.
 
   sf<bool> back_visible;
 
   sf<bool> enforce_front_height;
-  sf<float> front_height;
+  sf<G4float> front_height;
   sf<bool> enforce_front_width;
-  sf<float> front_width;
+  sf<G4float> front_width;
 
-  sf<float> wmargin_factor;
-  sf<float> hmargin_factor;
+  sf<G4float> wmargin_factor;
+  sf<G4float> hmargin_factor;
   sf_enum<sg::hjust> hjust;
   sf_enum<sg::vjust> vjust;
 public:
@@ -271,13 +271,13 @@ public:
     return *this;
   }
 public:
-  float text_height() const {
+  G4float text_height() const {
     if(!m_base_text) return 0;
     return m_base_text->height;
   }
-/*bool get_bounds(float a_height,
-                  float& a_mn_x,float& a_mn_y,float& a_mn_z,
-                  float& a_mx_x,float& a_mx_y,float& a_mx_z) const {
+/*bool get_bounds(G4float a_height,
+                  G4float& a_mn_x,G4float& a_mn_y,G4float& a_mn_z,
+                  G4float& a_mx_x,G4float& a_mx_y,G4float& a_mx_z) const {
     if(!m_base_text) {
       a_mn_x = 0;
       a_mn_y = 0;
@@ -317,11 +317,11 @@ public:
     matrix* tsf = new matrix;
     m_sep.add(tsf);
 
-    float fw = width * wmargin_factor;
-    float fh = height * hmargin_factor;
+    G4float fw = width * wmargin_factor;
+    G4float fh = height * hmargin_factor;
 
-    //sf<float> zfront ?
-    float zz = back_visible.value()?0.01f:0;
+    //sf<G4float> zfront ?
+    G4float zz = back_visible.value()?0.01f:0;
 
     if(font==font_hershey()) {
 
@@ -355,12 +355,12 @@ public:
 
       m_base_text->height = front_height;
 
-      float mn_x,mn_y,mn_z;
-      float mx_x,mx_y,mx_z;
+      G4float mn_x,mn_y,mn_z;
+      G4float mx_x,mx_y,mx_z;
       m_base_text->get_bounds(front_height,mn_x,mn_y,mn_z,mx_x,mx_y,mx_z);
 
-      float bxw = mx_x-mn_x;
-      float xtrans = 0;
+      G4float bxw = mx_x-mn_x;
+      G4float xtrans = 0;
       if(hjust==center) {
         xtrans = 0;
       } else if(hjust==left) {
@@ -369,8 +369,8 @@ public:
         xtrans = fw*0.5f-bxw*0.5f;
       }
 
-      float bxh = mx_y-mn_y;
-      float ytrans = 0;
+      G4float bxh = mx_y-mn_y;
+      G4float ytrans = 0;
       if(vjust==middle) {
         ytrans = 0;
       } else if(vjust==bottom) {
@@ -379,8 +379,8 @@ public:
         ytrans = fh*0.5f-bxh*0.5f;
       }
 
-      float xx = -(mn_x+mx_x)*0.5F+xtrans;
-      float yy = -(mn_y+mx_y)*0.5F+ytrans;
+      G4float xx = -(mn_x+mx_x)*0.5F+xtrans;
+      G4float yy = -(mn_y+mx_y)*0.5F+ytrans;
       tsf->set_translate(xx,yy,zz);
 
       return;
@@ -388,11 +388,11 @@ public:
 
     if(enforce_front_width) {
 
-      float th = fh;
-      float mn_x,mn_y,mn_z;
-      float mx_x,mx_y,mx_z;
+      G4float th = fh;
+      G4float mn_x,mn_y,mn_z;
+      G4float mx_x,mx_y,mx_z;
       m_base_text->get_bounds(th,mn_x,mn_y,mn_z,mx_x,mx_y,mx_z);
-      float bxw = mx_x-mn_x;
+      G4float bxw = mx_x-mn_x;
 
       // adjust box width :
       // th -> bxw then to have front_width:
@@ -402,7 +402,7 @@ public:
       }
 
       bxw = mx_x-mn_x;
-      float xtrans = 0;
+      G4float xtrans = 0;
       if(hjust==center) {
         xtrans = 0;
       } else if(hjust==left) {
@@ -411,8 +411,8 @@ public:
         xtrans = fw*0.5f-bxw*0.5f;
       }
 
-      float bxh = mx_y-mn_y;
-      float ytrans = 0;
+      G4float bxh = mx_y-mn_y;
+      G4float ytrans = 0;
       if(vjust==middle) {
         ytrans = 0;
       } else if(vjust==bottom) {
@@ -421,8 +421,8 @@ public:
         ytrans = fh*0.5f-bxw*0.5f;
       }
 
-      float xx = -(mn_x+mx_x)*0.5F+xtrans;
-      float yy = -(mn_y+mx_y)*0.5F+ytrans;
+      G4float xx = -(mn_x+mx_x)*0.5F+xtrans;
+      G4float yy = -(mn_y+mx_y)*0.5F+ytrans;
       tsf->set_translate(xx,yy,zz);
 
       m_base_text->height = bxh; //=th?
@@ -438,12 +438,12 @@ public:
       // try to adjust text within fw x fh (by attempting to be smart !).
       // the below assumes that text bounds are linear according
       // "text height".
-     {float mn_x,mn_y,mn_z;
-      float mx_x,mx_y,mx_z;
+     {G4float mn_x,mn_y,mn_z;
+      G4float mx_x,mx_y,mx_z;
 
-      float th = fh;
+      G4float th = fh;
       m_base_text->get_bounds(th,mn_x,mn_y,mn_z,mx_x,mx_y,mx_z);
-      float bxh = mx_y-mn_y;
+      G4float bxh = mx_y-mn_y;
       // adjust box height :
       // fh -> bxh then to have fh :
       if(bxh>0) {
@@ -451,12 +451,12 @@ public:
         m_base_text->get_bounds(th,mn_x,mn_y,mn_z,mx_x,mx_y,mx_z);
       }
 
-      //float bxw = box.mx()[0]-box.mn()[0];
-      float bxw = mx_x-mn_x;
+      //G4float bxw = box.mx()[0]-box.mn()[0];
+      G4float bxw = mx_x-mn_x;
       bxh = mx_y-mn_y;
       if((fh>0)&&(bxh>0)){
-        float fasp = fw/fh;
-        float basp = bxw/bxh;
+        G4float fasp = fw/fh;
+        G4float basp = bxw/bxh;
         if(fasp>=basp) {
         } else {
           // adjust box width :
@@ -472,7 +472,7 @@ public:
 
       //bxw = box.mx()[0]-box.mn()[0];
       bxw = mx_x-mn_x;
-      float xtrans = 0;
+      G4float xtrans = 0;
       if(hjust==center) {
         xtrans = 0;
       } else if(hjust==left) {
@@ -482,7 +482,7 @@ public:
       }
 
       bxh = mx_y-mn_y;
-      float ytrans = 0;
+      G4float ytrans = 0;
       if(vjust==middle) {
         ytrans = 0;
       } else if(vjust==bottom) {
@@ -491,8 +491,8 @@ public:
         ytrans = fh*0.5f-bxw*0.5f;
       }
 
-      float xx = -(mn_x+mx_x)*0.5F+xtrans;
-      float yy = -(mn_y+mx_y)*0.5F+ytrans;
+      G4float xx = -(mn_x+mx_x)*0.5F+xtrans;
+      G4float yy = -(mn_y+mx_y)*0.5F+ytrans;
 
       tsf->set_translate(xx,yy,zz);
 
@@ -503,15 +503,15 @@ public:
       // we arrange yy so that two aside texts
       // with same height will have their text base lines aligned.
       // The max height is given by ascent+descent (with descent>0).
-      float th = fh;
+      G4float th = fh;
 
-      float mxh = m_base_text->ascent(th)+
+      G4float mxh = m_base_text->ascent(th)+
                   m_base_text->y_advance(th)*(strings.size()-1)+
                   m_base_text->descent(th);
 
    //{box3f box;
    // m_base_text->get_bounds(th,box);
-   // float bxh = box.mx()[1]-box.mn()[1]; //should be idem mxh.
+   // G4float bxh = box.mx()[1]-box.mn()[1]; //should be idem mxh.
    // mxh = bxh;}
 
       if(mxh) th = fh*fh/mxh; //end/final height.
@@ -522,17 +522,17 @@ public:
             m_base_text->y_advance(th)*(strings.size()-1)+
             m_base_text->descent(th);
 
-      float yy = -fh*0.5f+m_base_text->descent(th)+
+      G4float yy = -fh*0.5f+m_base_text->descent(th)+
                  m_base_text->y_advance(th)*(strings.size()-1);
 
-    //float xx = -fw*0.5F; //left justified.
+    //G4float xx = -fw*0.5F; //left justified.
     //tsf->set_translate(xx,yy,zz);
-     {float mn_x,mn_y,mn_z;
-      float mx_x,mx_y,mx_z;
+     {G4float mn_x,mn_y,mn_z;
+      G4float mx_x,mx_y,mx_z;
       m_base_text->get_bounds(th,mn_x,mn_y,mn_z,mx_x,mx_y,mx_z);
 
-      float bxw = mx_x-mn_x;
-      float xtrans = 0;
+      G4float bxw = mx_x-mn_x;
+      G4float xtrans = 0;
       if(hjust==center) {
         xtrans = 0;
       } else if(hjust==left) {
@@ -541,8 +541,8 @@ public:
         xtrans = fw*0.5f-bxw*0.5f;
       }
 /*
-      float bxh = mx_y-mn_y;
-      float ytrans = 0;
+      G4float bxh = mx_y-mn_y;
+      G4float ytrans = 0;
       if(vjust==middle) {
         ytrans = 0;
       } else if(vjust==bottom) {
@@ -551,7 +551,7 @@ public:
         ytrans = fh*0.5f-bxw*0.5f;
       }
 */
-      float xx = -(mn_x+mx_x)*0.5F+xtrans;
+      G4float xx = -(mn_x+mx_x)*0.5F+xtrans;
       tsf->set_translate(xx,yy,zz);}
 
       // truncate text at right if out of border :

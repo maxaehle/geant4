@@ -17,17 +17,17 @@ namespace sg {
 class base_text : public node {
   typedef node parent;
 public:
-  virtual float ascent(float) const = 0;
-  virtual float descent(float) const = 0;
-  virtual float y_advance(float) const = 0;
-  virtual void get_bounds(float,
-                          float&,float&,float&,
-                          float&,float&,float&) const = 0;
+  virtual G4float ascent(G4float) const = 0;
+  virtual G4float descent(G4float) const = 0;
+  virtual G4float y_advance(G4float) const = 0;
+  virtual void get_bounds(G4float,
+                          G4float&,G4float&,G4float&,
+                          G4float&,G4float&,G4float&) const = 0;
 
-  virtual bool truncate(const std::string&,float,float,std::string&) const = 0;
+  virtual bool truncate(const std::string&,G4float,G4float,std::string&) const = 0;
 public:
   mf_string strings;
-  sf<float> height;
+  sf<G4float> height;
   sf_enum<sg::hjust> hjust;
   sf_enum<sg::vjust> vjust;
 public:
@@ -78,10 +78,10 @@ protected:
   }
 public:
 
-//  void get_bounds(float a_height,box3f& a_box) {
+//  void get_bounds(G4float a_height,box3f& a_box) {
 //    //for backward compatibility.
-//    float mn_x,mn_y,mn_z;
-//    float mx_x,mx_y,mx_z;
+//    G4float mn_x,mn_y,mn_z;
+//    G4float mx_x,mx_y,mx_z;
 //    get_bounds(a_height,mn_x,mn_y,mn_z,mx_x,mx_y,mx_z);
 //    a_box.set_bounds(mn_x,mn_y,mn_z,mx_x,mx_y,mx_z);
 //  }

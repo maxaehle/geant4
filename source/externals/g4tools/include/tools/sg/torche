@@ -18,7 +18,7 @@ namespace sg {
 class torche : public node {
   TOOLS_NODE(torche,tools::sg::torche,node)
 public:
-  sf_vec<colorf,float> color;
+  sf_vec<colorf,G4float> color;
   sf_vec3f direction;
   sf<bool> on;
 public:

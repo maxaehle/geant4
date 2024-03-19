@@ -17,7 +17,7 @@
 #include "../hls"
 #include "../colorfs"
 #include "../lina/vec2f"
-#include "../lina/vec3d" //ZZ=double
+#include "../lina/vec3d" //ZZ=G4double
 #include "../lina/geom2"
 
 namespace tools {
@@ -28,42 +28,42 @@ class zb_action : public render_action {
 private:  
   zb_action& get_me() {return *this;}
 public:
-  virtual void draw_vertex_array(gl::mode_t a_mode,size_t a_floatn,const float* a_xyzs){
-    m_pv.add_primitive(a_mode,a_floatn,a_xyzs);
+  virtual void draw_vertex_array(gl::mode_t a_mode,size_t a_G4floatn,const G4float* a_xyzs){
+    m_pv.add_primitive(a_mode,a_G4floatn,a_xyzs);
   }
 
-  virtual void draw_vertex_array_xy(gl::mode_t a_mode,size_t a_floatn,const float* a_xys){
-    m_pv.add_primitive_xy(a_mode,a_floatn,a_xys);
+  virtual void draw_vertex_array_xy(gl::mode_t a_mode,size_t a_G4floatn,const G4float* a_xys){
+    m_pv.add_primitive_xy(a_mode,a_G4floatn,a_xys);
   }
 
-  virtual void draw_vertex_color_array(gl::mode_t a_mode,size_t a_floatn,
-                                       const float* a_xyzs,const float* a_rgbas){
-    m_pv.add_primitive_rgba(a_mode,a_floatn,a_xyzs,a_rgbas);
+  virtual void draw_vertex_color_array(gl::mode_t a_mode,size_t a_G4floatn,
+                                       const G4float* a_xyzs,const G4float* a_rgbas){
+    m_pv.add_primitive_rgba(a_mode,a_G4floatn,a_xyzs,a_rgbas);
   }
 
-  virtual void draw_vertex_normal_array(gl::mode_t a_mode,size_t a_floatn,
-                                        const float* a_xyzs,const float* a_nms){
-    m_pv.add_primitive_normal(a_mode,a_floatn,a_xyzs,a_nms);
+  virtual void draw_vertex_normal_array(gl::mode_t a_mode,size_t a_G4floatn,
+                                        const G4float* a_xyzs,const G4float* a_nms){
+    m_pv.add_primitive_normal(a_mode,a_G4floatn,a_xyzs,a_nms);
   }
 
-  virtual void draw_vertex_color_normal_array(gl::mode_t a_mode,size_t a_floatn,
-                                              const float* a_xyzs,const float* a_rgbas,const float* a_nms){
-    // We expect a_nms of size : 3*(a_floatn/3)
+  virtual void draw_vertex_color_normal_array(gl::mode_t a_mode,size_t a_G4floatn,
+                                              const G4float* a_xyzs,const G4float* a_rgbas,const G4float* a_nms){
+    // We expect a_nms of size : 3*(a_G4floatn/3)
     // (then one normal per 3D point).
-    m_pv.add_primitive_normal_rgba(a_mode,a_floatn,a_xyzs,a_nms,a_rgbas);
+    m_pv.add_primitive_normal_rgba(a_mode,a_G4floatn,a_xyzs,a_nms,a_rgbas);
   }
 
-  virtual void clear_color(float a_r,float a_g,float a_b,float a_a){
+  virtual void clear_color(G4float a_r,G4float a_g,G4float a_b,G4float a_a){
     zb::buffer::ZPixel px = get_pix(colorf(a_r,a_g,a_b,a_a));
     m_zb.clear_color_buffer(px);
   }
-  virtual void color4f(float a_r,float a_g,float a_b,float a_a){
+  virtual void color4f(G4float a_r,G4float a_g,G4float a_b,G4float a_a){
     m_rgba.set_value(a_r,a_g,a_b,a_a);
   }
-  virtual void line_width(float a_v){m_line_width = a_v;}
-  virtual void point_size(float a_v) {m_point_size = a_v;}
+  virtual void line_width(G4float a_v){m_line_width = a_v;}
+  virtual void point_size(G4float a_v) {m_point_size = a_v;}
   virtual void set_polygon_offset(bool a_v) {m_POLYGON_OFFSET_FILL = a_v;}
-  virtual void normal(float a_x,float a_y,float a_z) {
+  virtual void normal(G4float a_x,G4float a_y,G4float a_z) {
     m_normal.set_value(a_x,a_y,a_z);
   }
 
@@ -88,8 +88,8 @@ public:
   virtual unsigned int max_lights() {return 1000;}
 
   virtual void enable_light(unsigned int,
-                            float a_dx,float a_dy,float a_dz,
-                            float a_r,float a_g,float a_b,float a_a){
+                            G4float a_dx,G4float a_dy,G4float a_dz,
+                            G4float a_r,G4float a_g,G4float a_b,G4float a_a){
     m_light_color.set_value(a_r,a_g,a_b,a_a);
     m_light_direction.set_value(a_dx,a_dy,a_dz);
     m_light_on = true;
@@ -133,8 +133,8 @@ public:
   /////////////////////////////////////////////////////////////////
   /// texture /////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
-  virtual void draw_vertex_array_texture(gl::mode_t,size_t a_xyzn,const float* a_xyzs,
-                                         gstoid a_id,const float* a_tcs) {
+  virtual void draw_vertex_array_texture(gl::mode_t,size_t a_xyzn,const G4float* a_xyzs,
+                                         gstoid a_id,const G4float* a_tcs) {
     //::printf("debug : zb_action : 000 : %d\n",a_id);
     img_byte img;
     if(!m_mgr.find(a_id,img)) return;
@@ -142,8 +142,8 @@ public:
   }
 
   virtual void draw_vertex_normal_array_texture(gl::mode_t a_mode,
-                                                size_t a_xyzn,const float* a_xyzs,const float* /*a_nms*/,
-                                                gstoid a_id,const float* a_tcs) {
+                                                size_t a_xyzn,const G4float* a_xyzs,const G4float* /*a_nms*/,
+                                                gstoid a_id,const G4float* a_tcs) {
     draw_vertex_array_texture(a_mode,a_xyzn,a_xyzs,a_id,a_tcs);
   }
 
@@ -180,8 +180,8 @@ public:
   ,m_DEPTH_TEST(true)
   {
     m_vp_mtx.set_identity();
-    m_vp_mtx.mul_translate(float(m_ww)/2,float(m_wh)/2,0);
-    m_vp_mtx.mul_scale(float(m_ww)/2,float(m_wh)/2,1);
+    m_vp_mtx.mul_translate(G4float(m_ww)/2,G4float(m_wh)/2,0);
+    m_vp_mtx.mul_scale(G4float(m_ww)/2,G4float(m_wh)/2,1);
 
     m_zb.change_size(a_ww,a_wh);
 //    m_zb.clear_color_buffer(0);
@@ -250,10 +250,10 @@ protected:
 public:
   //const cmap_t& colormap() const {return m_cmap;}
   //cmap_t& colormap() {return m_cmap;}
-  zb::buffer::ZPixel add_color(float a_r,float a_g,float a_b,float a_a){
+  zb::buffer::ZPixel add_color(G4float a_r,G4float a_g,G4float a_b,G4float a_a){
     return add_color(colorf(a_r,a_g,a_b,a_a));
   }
-  zb::buffer::ZPixel add_color(float a_r,float a_g,float a_b){
+  zb::buffer::ZPixel add_color(G4float a_r,G4float a_g,G4float a_b){
     return add_color(a_r,a_g,a_b,1);
   }
   zb::buffer::ZPixel add_color(const colorf& a_col){
@@ -291,7 +291,7 @@ protected:
   }
 public:
   //typedef wps::VCol VCol;
-  typedef float VCol;
+  typedef G4float VCol;
 
   static bool get_rgb(void* a_tag,unsigned int a_col,unsigned int a_row,VCol& a_r,VCol& a_g,VCol& a_b){
     //used with wps.
@@ -377,7 +377,7 @@ public:
   }
 
 protected:
-  bool project_point(float& a_x,float& a_y,float& a_z,float& a_w) {
+  bool project_point(G4float& a_x,G4float& a_y,G4float& a_z,G4float& a_w) {
     a_w = 1;
     m_model.mul_4f(a_x,a_y,a_z,a_w);
     m_proj.mul_4f(a_x,a_y,a_z,a_w);
@@ -387,7 +387,7 @@ protected:
     a_z /= a_w;
     return true;
   }
-//  bool project_normal(float& a_x,float& a_y,float& a_z) {
+//  bool project_normal(G4float& a_x,G4float& a_y,G4float& a_z) {
 //    m_model.mul_dir_3f(a_x,a_y,a_z);
 //    m_proj.mul_dir_3f(a_x,a_y,a_z);
 //    return true;
@@ -395,21 +395,21 @@ protected:
 
   class primvis : public primitive_visitor {
   protected:
-    virtual bool project(float& a_x,float& a_y,float& a_z,float& a_w) {
+    virtual bool project(G4float& a_x,G4float& a_y,G4float& a_z,G4float& a_w) {
       return m_zb_action.project_point(a_x,a_y,a_z,a_w);
     }
-    virtual bool add_point(float a_x,float a_y,float a_z,float) {
+    virtual bool add_point(G4float a_x,G4float a_y,G4float a_z,G4float) {
       return _add_point(a_x,a_y,a_z,m_zb_action.m_rgba);
     }
 
-    virtual bool add_point(float a_x,float a_y,float a_z,float,
-                           float a_r,float a_g,float a_b,float a_a) {
+    virtual bool add_point(G4float a_x,G4float a_y,G4float a_z,G4float,
+                           G4float a_r,G4float a_g,G4float a_b,G4float a_a) {
       colorf c(a_r,a_g,a_b,a_a);
       return _add_point(a_x,a_y,a_z,c);
     }
 
-    virtual bool add_line(float a_bx,float a_by,float a_bz,float,
-                          float a_ex,float a_ey,float a_ez,float) {
+    virtual bool add_line(G4float a_bx,G4float a_by,G4float a_bz,G4float,
+                          G4float a_ex,G4float a_ey,G4float a_ez,G4float) {
       m_zb_action.m_vp_mtx.mul_3f(a_bx,a_by,a_bz);
       m_zb_action.m_vp_mtx.mul_3f(a_ex,a_ey,a_ez);
       a_bz *= -1;
@@ -427,10 +427,10 @@ protected:
       return true;
     }
 
-    virtual bool add_line(float a_bx,float a_by,float a_bz,float,
-                          float a_br,float a_bg,float a_bb,float a_ba,
-                          float a_ex,float a_ey,float a_ez,float,
-                          float,float,float,float) {
+    virtual bool add_line(G4float a_bx,G4float a_by,G4float a_bz,G4float,
+                          G4float a_br,G4float a_bg,G4float a_bb,G4float a_ba,
+                          G4float a_ex,G4float a_ey,G4float a_ez,G4float,
+                          G4float,G4float,G4float,G4float) {
       m_zb_action.m_vp_mtx.mul_3f(a_bx,a_by,a_bz);
       m_zb_action.m_vp_mtx.mul_3f(a_ex,a_ey,a_ez);
       a_bz *= -1;
@@ -450,9 +450,9 @@ protected:
       return true;
     }
 
-    virtual bool add_triangle(float a_p1x,float a_p1y,float a_p1z,float a_p1w,
-                              float a_p2x,float a_p2y,float a_p2z,float a_p2w,
-                              float a_p3x,float a_p3y,float a_p3z,float a_p3w){
+    virtual bool add_triangle(G4float a_p1x,G4float a_p1y,G4float a_p1z,G4float a_p1w,
+                              G4float a_p2x,G4float a_p2y,G4float a_p2z,G4float a_p2w,
+                              G4float a_p3x,G4float a_p3y,G4float a_p3z,G4float a_p3w){
       return _add_triangle(a_p1x,a_p1y,a_p1z,a_p1w,
                            a_p2x,a_p2y,a_p2z,a_p2w,
                            a_p3x,a_p3y,a_p3z,a_p3w,
@@ -460,17 +460,17 @@ protected:
     }
 
     virtual bool add_triangle(
-      float a_p1x,float a_p1y,float a_p1z,float a_p1w,
-      float a_r1,float a_g1,float a_b1,float a_a1,
-      float a_p2x,float a_p2y,float a_p2z,float a_p2w,
-      float a_r2,float a_g2,float a_b2,float a_a2,
-      float a_p3x,float a_p3y,float a_p3z,float a_p3w,
-      float a_r3,float a_g3,float a_b3,float a_a3){
+      G4float a_p1x,G4float a_p1y,G4float a_p1z,G4float a_p1w,
+      G4float a_r1,G4float a_g1,G4float a_b1,G4float a_a1,
+      G4float a_p2x,G4float a_p2y,G4float a_p2z,G4float a_p2w,
+      G4float a_r2,G4float a_g2,G4float a_b2,G4float a_a2,
+      G4float a_p3x,G4float a_p3y,G4float a_p3z,G4float a_p3w,
+      G4float a_r3,G4float a_g3,G4float a_b3,G4float a_a3){
 
-      float r = (a_r1+a_r2+a_r3)/3.0f;
-      float g = (a_g1+a_g2+a_g3)/3.0f;
-      float b = (a_b1+a_b2+a_b3)/3.0f;
-      float a = (a_a1+a_a2+a_a3)/3.0f;
+      G4float r = (a_r1+a_r2+a_r3)/3.0f;
+      G4float g = (a_g1+a_g2+a_g3)/3.0f;
+      G4float b = (a_b1+a_b2+a_b3)/3.0f;
+      G4float a = (a_a1+a_a2+a_a3)/3.0f;
       colorf col(r,g,b,a);
 
       return _add_triangle(a_p1x,a_p1y,a_p1z,a_p1w,
@@ -479,50 +479,50 @@ protected:
                            col);
     }
 
-    virtual bool project_normal(float&,float&,float&) {
+    virtual bool project_normal(G4float&,G4float&,G4float&) {
       //return m_zb_action.project_normal(a_x,a_y,a_z);
       return true;
     }
-    virtual bool add_point_normal(float a_x,float a_y,float a_z,float a_w,
-                                  float /*a_nx*/,float /*a_ny*/,float /*a_nz*/) {
+    virtual bool add_point_normal(G4float a_x,G4float a_y,G4float a_z,G4float a_w,
+                                  G4float /*a_nx*/,G4float /*a_ny*/,G4float /*a_nz*/) {
       add_point(a_x,a_y,a_z,a_w);
     //m_this.m_points.add_normal(a_nx,a_ny,a_nz);
       return true;
     }
-    virtual bool add_point_normal(float a_x,float a_y,float a_z,float a_w,
-                                  float /*a_nx*/,float /*a_ny*/,float /*a_nz*/,
-                                  float a_r,float a_g,float a_b,float a_a) {
+    virtual bool add_point_normal(G4float a_x,G4float a_y,G4float a_z,G4float a_w,
+                                  G4float /*a_nx*/,G4float /*a_ny*/,G4float /*a_nz*/,
+                                  G4float a_r,G4float a_g,G4float a_b,G4float a_a) {
       add_point(a_x,a_y,a_z,a_w,a_r,a_g,a_b,a_a);
     //m_this.m_points.add_normal(a_nx,a_ny,a_nz);
       return true;
     }
-    virtual bool add_line_normal(float a_bx,float a_by,float a_bz,float a_bw,
-                                 float /*a_bnx*/,float /*a_bny*/,float /*a_bnz*/,
-                                 float a_ex,float a_ey,float a_ez,float a_ew,
-                                 float /*a_enx*/,float /*a_eny*/,float /*a_enz*/) {
+    virtual bool add_line_normal(G4float a_bx,G4float a_by,G4float a_bz,G4float a_bw,
+                                 G4float /*a_bnx*/,G4float /*a_bny*/,G4float /*a_bnz*/,
+                                 G4float a_ex,G4float a_ey,G4float a_ez,G4float a_ew,
+                                 G4float /*a_enx*/,G4float /*a_eny*/,G4float /*a_enz*/) {
       add_line(a_bx,a_by,a_bz,a_bw, a_ex,a_ey,a_ez,a_ew);
     //m_this.m_lines.add_normal(a_bnx,a_bny,a_bnz);
     //m_this.m_lines.add_normal(a_enx,a_eny,a_enz);
       return true;
     }
-    virtual bool add_line_normal(float a_bx,float a_by,float a_bz,float a_bw,
-                                 float /*a_bnx*/,float /*a_bny*/,float /*a_bnz*/,
-                                 float a_br,float a_bg,float a_bb,float a_ba,
-                                 float a_ex,float a_ey,float a_ez,float a_ew,
-                                 float /*a_enx*/,float /*a_eny*/,float /*a_enz*/,
-                                 float a_er,float a_eg,float a_eb,float a_ea){
+    virtual bool add_line_normal(G4float a_bx,G4float a_by,G4float a_bz,G4float a_bw,
+                                 G4float /*a_bnx*/,G4float /*a_bny*/,G4float /*a_bnz*/,
+                                 G4float a_br,G4float a_bg,G4float a_bb,G4float a_ba,
+                                 G4float a_ex,G4float a_ey,G4float a_ez,G4float a_ew,
+                                 G4float /*a_enx*/,G4float /*a_eny*/,G4float /*a_enz*/,
+                                 G4float a_er,G4float a_eg,G4float a_eb,G4float a_ea){
       add_line(a_bx,a_by,a_bz,a_bw, a_br,a_bg,a_bb,a_ba, a_ex,a_ey,a_ez,a_ew, a_er,a_eg,a_eb,a_ea);
     //m_this.m_lines.add_normal(a_bnx,a_bny,a_bnz);
     //m_this.m_lines.add_normal(a_enx,a_eny,a_enz);
       return true;
     }
     virtual bool add_triangle_normal(
-      float a_p1x,float a_p1y,float a_p1z,float a_p1w,
-      float /*a_n1x*/,float /*a_n1y*/,float /*a_n1z*/,
-      float a_p2x,float a_p2y,float a_p2z,float a_p2w,
-      float /*a_n2x*/,float /*a_n2y*/,float /*a_n2z*/,
-      float a_p3x,float a_p3y,float a_p3z,float a_p3w,
-      float /*a_n3x*/,float /*a_n3y*/,float /*a_n3z*/) {
+      G4float a_p1x,G4float a_p1y,G4float a_p1z,G4float a_p1w,
+      G4float /*a_n1x*/,G4float /*a_n1y*/,G4float /*a_n1z*/,
+      G4float a_p2x,G4float a_p2y,G4float a_p2z,G4float a_p2w,
+      G4float /*a_n2x*/,G4float /*a_n2y*/,G4float /*a_n2z*/,
+      G4float a_p3x,G4float a_p3y,G4float a_p3z,G4float a_p3w,
+      G4float /*a_n3x*/,G4float /*a_n3y*/,G4float /*a_n3z*/) {
       add_triangle(a_p1x,a_p1y,a_p1z,a_p1w,
                    a_p2x,a_p2y,a_p2z,a_p2w,
                    a_p3x,a_p3y,a_p3z,a_p3w);
@@ -532,15 +532,15 @@ protected:
       return true;
     }
     virtual bool add_triangle_normal(
-      float a_p1x,float a_p1y,float a_p1z,float a_p1w,
-      float /*a_n1x*/,float /*a_n1y*/,float /*a_n1z*/,
-      float a_r1,float a_g1,float a_b1,float a_a1,
-      float a_p2x,float a_p2y,float a_p2z,float a_p2w,
-      float /*a_n2x*/,float /*a_n2y*/,float /*a_n2z*/,
-      float a_r2,float a_g2,float a_b2,float a_a2,
-      float a_p3x,float a_p3y,float a_p3z,float a_p3w,
-      float /*a_n3x*/,float /*a_n3y*/,float /*a_n3z*/,
-      float a_r3,float a_g3,float a_b3,float a_a3){
+      G4float a_p1x,G4float a_p1y,G4float a_p1z,G4float a_p1w,
+      G4float /*a_n1x*/,G4float /*a_n1y*/,G4float /*a_n1z*/,
+      G4float a_r1,G4float a_g1,G4float a_b1,G4float a_a1,
+      G4float a_p2x,G4float a_p2y,G4float a_p2z,G4float a_p2w,
+      G4float /*a_n2x*/,G4float /*a_n2y*/,G4float /*a_n2z*/,
+      G4float a_r2,G4float a_g2,G4float a_b2,G4float a_a2,
+      G4float a_p3x,G4float a_p3y,G4float a_p3z,G4float a_p3w,
+      G4float /*a_n3x*/,G4float /*a_n3y*/,G4float /*a_n3z*/,
+      G4float a_r3,G4float a_g3,G4float a_b3,G4float a_a3){
       add_triangle(a_p1x,a_p1y,a_p1z,a_p1w,
                    a_r1,a_g1,a_b1,a_a1,
                    a_p2x,a_p2y,a_p2z,a_p2w,
@@ -565,13 +565,13 @@ protected:
       return *this;
     }
   protected:
-    static void zinit(zb::point& a_p,float a_x,float a_y,float a_z) {
-      a_p.x = fround(a_x); //float -> int
-      a_p.y = fround(a_y); //float -> int
-      a_p.z = (zb::ZZ)a_z; //float -> double
+    static void zinit(zb::point& a_p,G4float a_x,G4float a_y,G4float a_z) {
+      a_p.x = fround(a_x); //G4float -> int
+      a_p.y = fround(a_y); //G4float -> int
+      a_p.z = (zb::ZZ)a_z; //G4float -> G4double
     }
 
-    unsigned int npix(float a_size) {
+    unsigned int npix(G4float a_size) {
       // 0 -> 0
       // 1 -> 0
       // 2 -> 1    3x3
@@ -585,7 +585,7 @@ protected:
       return num_2;
     }
 
-    bool _add_point(float a_x,float a_y,float a_z,const colorf& a_color){
+    bool _add_point(G4float a_x,G4float a_y,G4float a_z,const colorf& a_color){
       m_zb_action.m_zb.set_depth_test(m_zb_action.m_DEPTH_TEST);
 
       m_zb_action.m_vp_mtx.mul_3f(a_x,a_y,a_z);
@@ -594,14 +594,14 @@ protected:
       zb::point p;
       zinit(p,a_x,a_y,a_z);
 
-      float alpha = a_color.a();
+      G4float alpha = a_color.a();
       zb::buffer::ZPixel px;
       if(alpha<1.0f) {
         zb::buffer::ZPixel old_px = 0;
         if(!m_zb_action.m_zb.get_pixel(p,old_px)) return false;
         colorf old_color;
         if(!m_zb_action.find_color(old_px,old_color)) return false;
-        float one_alpha = 1.0f-alpha;
+        G4float one_alpha = 1.0f-alpha;
         colorf _color;
         _color.set_r(a_color.r()*alpha+old_color.r()*one_alpha);
         _color.set_g(a_color.g()*alpha+old_color.g()*one_alpha);
@@ -615,14 +615,14 @@ protected:
       return true;
     }
 
-    bool _add_triangle(float a_p1x,float a_p1y,float a_p1z,float a_p1w,
-                       float a_p2x,float a_p2y,float a_p2z,float a_p2w,
-                       float a_p3x,float a_p3y,float a_p3z,float a_p3w,
+    bool _add_triangle(G4float a_p1x,G4float a_p1y,G4float a_p1z,G4float a_p1w,
+                       G4float a_p2x,G4float a_p2y,G4float a_p2z,G4float a_p2w,
+                       G4float a_p3x,G4float a_p3y,G4float a_p3z,G4float a_p3w,
                        const colorf& a_color){
 
-      float p1x = a_p1x;float p1y = a_p1y;float p1z = a_p1z;//float p1w = a_p1w;
-      float p2x = a_p2x;float p2y = a_p2y;float p2z = a_p2z;//float p2w = a_p2w;
-      float p3x = a_p3x;float p3y = a_p3y;float p3z = a_p3z;//float p3w = a_p3w;
+      G4float p1x = a_p1x;G4float p1y = a_p1y;G4float p1z = a_p1z;//G4float p1w = a_p1w;
+      G4float p2x = a_p2x;G4float p2y = a_p2y;G4float p2z = a_p2z;//G4float p2w = a_p2w;
+      G4float p3x = a_p3x;G4float p3y = a_p3y;G4float p3z = a_p3z;//G4float p3w = a_p3w;
 
       m_zb_action.m_vp_mtx.mul_3f(p1x,p1y,p1z);
       m_zb_action.m_vp_mtx.mul_3f(p2x,p2y,p2z);
@@ -633,14 +633,14 @@ protected:
 
       if(m_zb_action.m_POLYGON_OFFSET_FILL){
         // zs are in [-1,1]
-        float epsil = 1e-5f;
-        //float epsil = 1e-4f;
+        G4float epsil = 1e-5f;
+        //G4float epsil = 1e-4f;
         p1z -= epsil;
         p2z -= epsil;
         p3z -= epsil;
       }
 
-      typedef zb::ZZ ZZ; //double
+      typedef zb::ZZ ZZ; //G4double
 
       plane<vec3d> pn(
         vec3<ZZ>(p1x,p1y,p1z),
@@ -678,9 +678,9 @@ protected:
 
       if(m_zb_action.m_light_on) {
 
-        float _p1x = a_p1x;float _p1y = a_p1y;float _p1z = a_p1z;float _p1w = a_p1w;
-        float _p2x = a_p2x;float _p2y = a_p2y;float _p2z = a_p2z;float _p2w = a_p2w;
-        float _p3x = a_p3x;float _p3y = a_p3y;float _p3z = a_p3z;float _p3w = a_p3w;
+        G4float _p1x = a_p1x;G4float _p1y = a_p1y;G4float _p1z = a_p1z;G4float _p1w = a_p1w;
+        G4float _p2x = a_p2x;G4float _p2y = a_p2y;G4float _p2z = a_p2z;G4float _p2w = a_p2w;
+        G4float _p3x = a_p3x;G4float _p3y = a_p3y;G4float _p3z = a_p3z;G4float _p3w = a_p3w;
 
         _p1x *= _p1w;_p1y *= _p1w;_p1z *= _p1w;
         _p2x *= _p2w;_p2y *= _p2w;_p2z *= _p2w;
@@ -696,27 +696,27 @@ protected:
           vec3<ZZ>(_p3x,_p3y,_p3z)
         );
         if(_pn.is_valid()) {
-          vec3f npn(float(_pn.normal().x()),
-                    float(_pn.normal().y()),
-                    float(_pn.normal().z()));
+          vec3f npn(G4float(_pn.normal().x()),
+                    G4float(_pn.normal().y()),
+                    G4float(_pn.normal().z()));
           vec3f d = m_zb_action.m_light_direction;
-          float dx =  m_zb_action.m_light_direction.x();
-          float dy =  m_zb_action.m_light_direction.y();
-          float dz =  m_zb_action.m_light_direction.z();
+          G4float dx =  m_zb_action.m_light_direction.x();
+          G4float dy =  m_zb_action.m_light_direction.y();
+          G4float dz =  m_zb_action.m_light_direction.z();
           m_zb_action.m_model.mul_3f(dx,dy,dz);
           d.set_value(dx,dy,dz);
           if(d.normalize()) {
-            float dot = npn.dot(d);
+            G4float dot = npn.dot(d);
             if((-1<=dot)&&(dot<=0)) {
               dot *= -1;
 
 //            colorf c
 //              (a_color.r()*dot,a_color.g()*dot,a_color.b()*dot,a_color.a());
 
-              float h,l,s;
+              G4float h,l,s;
               rgb_to_hls(a_color.r(),a_color.g(),a_color.b(),h,l,s);
               l *= dot;
-              float r,g,b;
+              G4float r,g,b;
               hls_to_rgb(h,l,s,r,g,b);
 
               colorf c(r,g,b,a_color.a());
@@ -758,8 +758,8 @@ protected:
   bool m_CULL_FACE;
   bool m_POINT_SMOOTH;
   bool m_LINE_SMOOTH;
-  float m_line_width;
-  float m_point_size;
+  G4float m_line_width;
+  G4float m_point_size;
   bool m_light_on;
   bool m_DEPTH_TEST;
 };

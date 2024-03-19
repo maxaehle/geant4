@@ -97,25 +97,25 @@ public:
   unsigned int width() const {return m_ww;}
   unsigned int height() const {return m_wh;}
 
-  bool screen2aspect(int a_x,int a_y,float& a_wx,float& a_wy) const {
+  bool screen2aspect(int a_x,int a_y,G4float& a_wx,G4float& a_wy) const {
     // convert screen point in [aspect,1] coordinates.
     //if(!m_ww) {a_wx = a_wy = 0;return false;}
     //if(!m_wh) {a_wx = a_wy = 0;return false;}
-    float aspect = float(m_ww)/float(m_wh);
-    float wch = 1;
-    float wcw = wch*aspect;
-    a_wx = float(a_x) * wcw/float(m_ww);
-    a_wy = float(a_y) * wch/float(m_wh);
+    G4float aspect = G4float(m_ww)/G4float(m_wh);
+    G4float wch = 1;
+    G4float wcw = wch*aspect;
+    a_wx = G4float(a_x) * wcw/G4float(m_ww);
+    a_wy = G4float(a_y) * wch/G4float(m_wh);
     return true;
   }
 
-  void set_clear_color(float a_r,float a_g,float a_b,float a_a = 1) {
+  void set_clear_color(G4float a_r,G4float a_g,G4float a_b,G4float a_a = 1) {
     m_clear_color = colorf(a_r,a_g,a_b,a_a);
   }
   void set_clear_color(const colorf& a_color) {
     m_clear_color = a_color;
   }
-  void get_clear_color(float& a_r,float& a_g,float& a_b,float& a_a) {
+  void get_clear_color(G4float& a_r,G4float& a_g,G4float& a_b,G4float& a_a) {
     a_r = m_clear_color.r();
     a_g = m_clear_color.g();
     a_b = m_clear_color.b();

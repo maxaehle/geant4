@@ -255,7 +255,7 @@ protected:
   }
 
 protected:
-  typedef histo::axis<double,unsigned int>::bn_t bn_t;
+  typedef histo::axis<G4double,unsigned int>::bn_t bn_t;
 public: //used in BatchLab::XML_DataReader.
   static raxml_out read_histo(tree& a_tree,
                                std::ostream& a_out,bool a_verbose,
@@ -278,9 +278,9 @@ public: //used in BatchLab::XML_DataReader.
 
     // Booking parameters :
     std::vector<bn_t> bins(a_dim);
-    std::vector<double> mns(a_dim);
-    std::vector<double> mxs(a_dim);
-    std::vector< std::vector<double> > edges(a_dim);
+    std::vector<G4double> mns(a_dim);
+    std::vector<G4double> mxs(a_dim);
+    std::vector< std::vector<G4double> > edges(a_dim);
 
     // Jump in subitems to find axes items :
     int not_found = -1;
@@ -292,8 +292,8 @@ public: //used in BatchLab::XML_DataReader.
 
       int iaxis;
       bn_t num;
-      double mn,mx;
-      std::vector<double> borders;
+      G4double mn,mx;
+      std::vector<G4double> borders;
       bool variableBins;
       if(!read_axis(*_tree,a_dim,iaxis,num,mn,mx,borders,variableBins,a_out)) return raxml_out();
       if(iaxis!=not_found) {
@@ -567,7 +567,7 @@ public: //used in BatchLab::XML_DataReader.
   }
 
 protected:
-  typedef histo::profile_data<double,unsigned int,unsigned int,double,double> pd_data;
+  typedef histo::profile_data<G4double,unsigned int,unsigned int,G4double,G4double> pd_data;
   ///////////////////////////////////////////////////////////////
   /// read histo ////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////
@@ -576,9 +576,9 @@ protected:
   ,unsigned int a_dim
   ,int& aAxis
   ,bn_t& aNumberOfBins
-  ,double& aMin
-  ,double& aMax
-  ,std::vector<double>& aEdges
+  ,G4double& aMin
+  ,G4double& aMax
+  ,std::vector<G4double>& aEdges
   ,bool& aVariableBins
   ,std::ostream& //a_out
   ){
@@ -602,10 +602,10 @@ protected:
       aNumberOfBins = ival;}
 
       if(!a_tree.attribute_value(s_min(),svalue)) return false;
-      if(!to<double>(svalue,aMin)) return false;
+      if(!to<G4double>(svalue,aMin)) return false;
 
       if(!a_tree.attribute_value(s_max(),svalue)) return false;
-      if(!to<double>(svalue,aMax)) return false;
+      if(!to<G4double>(svalue,aMax)) return false;
 
       if(!a_tree.attribute_value(s_direction(),svalue)) return false;
       if(!axis_index(a_dim,svalue,aAxis)) return false;
@@ -616,8 +616,8 @@ protected:
       while(element* _elem = _for.next_element()) {
         if(_elem->name()==s_binBorder()) {
           if(!_elem->attribute_value(s_value(),svalue)) return false;
-          double value;
-          if(!to<double>(svalue,value)) return false;
+          G4double value;
+          if(!to<G4double>(svalue,value)) return false;
           aEdges.push_back(value);
           aVariableBins = true;
         }
@@ -632,11 +632,11 @@ protected:
 
     return true;
   }
-  static bool to_double(const std::string& a_s,double& a_v,std::ostream& a_out,const std::string& a_what) {
-    if(!to<double>(a_s,a_v)) {
+  static bool to_G4double(const std::string& a_s,G4double& a_v,std::ostream& a_out,const std::string& a_what) {
+    if(!to<G4double>(a_s,a_v)) {
       a_out << "tools::xml::aidas::read_bins :"
             << " problem converting a " << a_what
-            << " attribute to a double."
+            << " attribute to a G4double."
             << " Value was " << sout(a_s) << "."
             << std::endl;
       return false;
@@ -666,12 +666,12 @@ protected:
       while(element* _elem = _for.next_element()) {
 
         if(_elem->name()==s_statistic()) {
-          double mean,rms;
+          G4double mean,rms;
           if(!_elem->attribute_value(s_mean(),svalue)) return false;
-          if(!to<double>(svalue,mean)) return false;
+          if(!to<G4double>(svalue,mean)) return false;
 
           if(!_elem->attribute_value(s_rms(),svalue)) return false;
-          if(!to<double>(svalue,rms)) return false;
+          if(!to<G4double>(svalue,rms)) return false;
 
           if(!_elem->attribute_value(s_direction(),svalue)) return false;
           int iaxis;
@@ -718,17 +718,17 @@ protected:
           std::vector<int> is(dimension);
 
           unsigned int entries = 0;
-          double height = 0;
-          double error = 0;
-          double weightedMean = 0;
-          double weightedMeanX = 0;
-          double weightedMeanY = 0;
-          double weightedMeanZ = 0;
-          double weightedRms = 0;
-          double weightedRmsX = 0;
-          double weightedRmsY = 0;
-          double weightedRmsZ = 0;
-          double rms = 0;
+          G4double height = 0;
+          G4double error = 0;
+          G4double weightedMean = 0;
+          G4double weightedMeanX = 0;
+          G4double weightedMeanY = 0;
+          G4double weightedMeanZ = 0;
+          G4double weightedRms = 0;
+          G4double weightedRmsX = 0;
+          G4double weightedRmsY = 0;
+          G4double weightedRmsZ = 0;
+          G4double rms = 0;
 
           // Required :
           if(!_elem->attribute_value(s_entries(),svalue)) {
@@ -749,19 +749,19 @@ protected:
           // Optional :
           bool height_given;
           if(_elem->attribute_value(s_height(),svalue)) { //FIXME : optional ?
-            if(!to_double(svalue,height,a_out,s_height())) return false;
+            if(!to_G4double(svalue,height,a_out,s_height())) return false;
             height_given = true;
           } else { // no "height".
             // It is assumed that at fill time the weight
             // argument "w" had always been 1.
             //   w = 1
             //   sw = entries*1 = entries
-            height = double(entries);
+            height = G4double(entries);
             height_given = false;
           }
 
           if(_elem->attribute_value(s_error(),svalue)) { //FIXME : optional ?
-            if(!to_double(svalue,error,a_out,s_error())) return false;
+            if(!to_G4double(svalue,error,a_out,s_error())) return false;
           } else { // no "error"
             if(height_given) {
               // then we are going to have :
@@ -782,52 +782,52 @@ protected:
               //   w = 1
               //   sw2 = entries*(w*w) = entries;
               //   error = sqrt(sw2) = sqrt(entries);
-              error = ::sqrt(::fabs(double(entries)));
+              error = ::sqrt(::fabs(G4double(entries)));
             }
           }
 
           if(_elem->attribute_value(s_rms(),svalue)) {
-            if(!to_double(svalue,rms,a_out,s_rms())) return false;
+            if(!to_G4double(svalue,rms,a_out,s_rms())) return false;
           }
 
           if(dimension==1) {
             if(_elem->attribute_value(s_weightedMean(),svalue)) {
-              if(!to_double(svalue,weightedMean,a_out,s_weightedMean())) return false;
+              if(!to_G4double(svalue,weightedMean,a_out,s_weightedMean())) return false;
             }
             if(_elem->attribute_value(s_weightedRms(),svalue)) {
-              if(!to_double(svalue,weightedRms,a_out,s_weightedRms())) return false;
+              if(!to_G4double(svalue,weightedRms,a_out,s_weightedRms())) return false;
             }
           } else if(dimension==2) {
             if(_elem->attribute_value(s_weightedMeanX(),svalue)) {
-              if(!to_double(svalue,weightedMeanX,a_out,s_weightedMeanX())) return false;
+              if(!to_G4double(svalue,weightedMeanX,a_out,s_weightedMeanX())) return false;
             }
             if(_elem->attribute_value(s_weightedMeanY(),svalue)) {
-              if(!to_double(svalue,weightedMeanY,a_out,s_weightedMeanY())) return false;
+              if(!to_G4double(svalue,weightedMeanY,a_out,s_weightedMeanY())) return false;
             }
             if(_elem->attribute_value(s_weightedRmsX(),svalue)) {
-              if(!to_double(svalue,weightedRmsX,a_out,s_weightedRmsX())) return false;
+              if(!to_G4double(svalue,weightedRmsX,a_out,s_weightedRmsX())) return false;
             }
             if(_elem->attribute_value(s_weightedRmsY(),svalue)) {
-              if(!to_double(svalue,weightedRmsY,a_out,s_weightedRmsY())) return false;
+              if(!to_G4double(svalue,weightedRmsY,a_out,s_weightedRmsY())) return false;
             }
           } else if(dimension==3) {
             if(_elem->attribute_value(s_weightedMeanX(),svalue)) {
-              if(!to_double(svalue,weightedMeanX,a_out,s_weightedMeanX())) return false;
+              if(!to_G4double(svalue,weightedMeanX,a_out,s_weightedMeanX())) return false;
             }
             if(_elem->attribute_value(s_weightedMeanY(),svalue)) {
-              if(!to_double(svalue,weightedMeanY,a_out,s_weightedMeanY())) return false;
+              if(!to_G4double(svalue,weightedMeanY,a_out,s_weightedMeanY())) return false;
             }
             if(_elem->attribute_value(s_weightedMeanZ(),svalue)) {
-              if(!to_double(svalue,weightedMeanZ,a_out,s_weightedMeanZ())) return false;
+              if(!to_G4double(svalue,weightedMeanZ,a_out,s_weightedMeanZ())) return false;
             }
             if(_elem->attribute_value(s_weightedRmsX(),svalue)) {
-              if(!to_double(svalue,weightedRmsX,a_out,s_weightedRmsX())) return false;
+              if(!to_G4double(svalue,weightedRmsX,a_out,s_weightedRmsX())) return false;
             }
             if(_elem->attribute_value(s_weightedRmsY(),svalue)) {
-              if(!to_double(svalue,weightedRmsY,a_out,s_weightedRmsY())) return false;
+              if(!to_G4double(svalue,weightedRmsY,a_out,s_weightedRmsY())) return false;
             }
             if(_elem->attribute_value(s_weightedRmsZ(),svalue)) {
-              if(!to_double(svalue,weightedRmsZ,a_out,s_weightedRmsZ())) return false;
+              if(!to_G4double(svalue,weightedRmsZ,a_out,s_weightedRmsZ())) return false;
             }
           }
 
@@ -880,7 +880,7 @@ protected:
             //  weightedMean = sxw/sw
             //  weightedRms = sqrt(fabs(sx2w/sw - (sxw/sw)**2))
 
-            double sw = height;
+            G4double sw = height;
             aData.m_bin_Sw[offset] = sw;
             aData.m_bin_Sw2[offset] = error * error;
             if(dimension==1) {
@@ -934,16 +934,16 @@ protected:
             //  sxw = weightedMean * sw
             //  sx2w = (weightedRms*weightedRms+weightedMean*weightedMean) * sw;
 
-            double sw = 0;
+            G4double sw = 0;
             if(error==0) {
               // sv2w/sw = (svw/sw)**2
               // h = svw/sw
               //FIXME : we lack an info to get sw.
               // We assume that at fill time weight==1 then :
               //   sw == n
-              sw = (double)entries;
+              sw = (G4double)entries;
             } else {
-              double r_e = rms/error;
+              G4double r_e = rms/error;
               sw = r_e * r_e;
             }
             aData.m_bin_Sw[offset] = sw;
@@ -1331,11 +1331,11 @@ protected:
      {looper _for(a_tree);
       while(element* _elem = _for.next_element()) {
         if(_elem->name()==s_entry1d()) {
-          double x;
+          G4double x;
           if(!_elem->attribute_value(s_valueX(),x)) return false;
-          double w = 1;
+          G4double w = 1;
           if(_elem->attribute_value(s_weight(),svalue)) {
-            if(!to<double>(svalue,w)) return false;
+            if(!to<G4double>(svalue,w)) return false;
           }
           if(!aCloud.fill(x,w)) return false;
         }
@@ -1376,13 +1376,13 @@ protected:
      {looper _for(a_tree);
       while(element* _elem = _for.next_element()) {
         if(_elem->name()==s_entry2d()) {
-          double x;
+          G4double x;
           if(!_elem->attribute_value(s_valueX(),x)) return false;
-          double y;
+          G4double y;
           if(!_elem->attribute_value(s_valueY(),y)) return false;
-          double w = 1;
+          G4double w = 1;
           if(_elem->attribute_value(s_weight(),svalue)) {
-            if(!to<double>(svalue,w)) return false;
+            if(!to<G4double>(svalue,w)) return false;
           }
           if(!aCloud.fill(x,y,w)) return false;
         }
@@ -1423,15 +1423,15 @@ protected:
      {looper _for(a_tree);
       while(element* _elem = _for.next_element()) {
         if(_elem->name()==s_entry3d()) {
-          double x;
+          G4double x;
           if(!_elem->attribute_value(s_valueX(),x)) return false;
-          double y;
+          G4double y;
           if(!_elem->attribute_value(s_valueY(),y)) return false;
-          double z;
+          G4double z;
           if(!_elem->attribute_value(s_valueZ(),z)) return false;
-          double w = 1;
+          G4double w = 1;
           if(_elem->attribute_value(s_weight(),svalue)) {
-            if(!to<double>(svalue,w)) return false;
+            if(!to<G4double>(svalue,w)) return false;
           }
           if(!aCloud.fill(x,y,z,w)) return false;
         }
@@ -1474,15 +1474,15 @@ protected:
       while(element* _elem = _for.next_element()) {
         if(_elem->name()==s_measurement()) {
           if(coord>=a_dps.dimension()) return false;
-          double value;
+          G4double value;
           if(!_elem->attribute_value(s_value(),value)) return false;
-          double errorPlus = 0;
+          G4double errorPlus = 0;
           if(_elem->attribute_value(s_errorPlus(),svalue)) {
-            if(!to<double>(svalue,errorPlus)) return false;
+            if(!to<G4double>(svalue,errorPlus)) return false;
           }
-          double errorMinus = 0;
+          G4double errorMinus = 0;
           if(_elem->attribute_value(s_errorMinus(),svalue)) {
-            if(!to<double>(svalue,errorMinus)) return false;
+            if(!to<G4double>(svalue,errorMinus)) return false;
           }
 
           histo::measurement& m = point.coordinate(coord);

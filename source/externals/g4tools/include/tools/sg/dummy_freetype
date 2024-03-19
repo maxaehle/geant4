@@ -56,13 +56,13 @@ public:
   }
 
 public: //base_text :
-  virtual float ascent(float) const {return 0;}
-  virtual float descent(float) const {return 0;}
-  virtual float y_advance(float) const {return 0;}
+  virtual G4float ascent(G4float) const {return 0;}
+  virtual G4float descent(G4float) const {return 0;}
+  virtual G4float y_advance(G4float) const {return 0;}
 
-  virtual void get_bounds(float a_height,
-                          float& a_mn_x,float& a_mn_y,float& a_mn_z,
-                          float& a_mx_x,float& a_mx_y,float& a_mx_z) const {
+  virtual void get_bounds(G4float a_height,
+                          G4float& a_mn_x,G4float& a_mn_y,G4float& a_mn_z,
+                          G4float& a_mx_x,G4float& a_mx_y,G4float& a_mx_z) const {
     (void)a_height;
     a_mn_x = 0;
     a_mn_y = 0;
@@ -73,7 +73,7 @@ public: //base_text :
   }
 
   virtual bool truncate(const std::string&,
-                        float,float,
+                        G4float,G4float,
                         std::string& a_out) const {
     a_out.clear();
     return false;

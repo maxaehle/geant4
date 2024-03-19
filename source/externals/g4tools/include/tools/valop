@@ -198,7 +198,7 @@ public:
     m_variable.set(a_number);
   }
 
-  valop(e_type a_type,double a_number)
+  valop(e_type a_type,G4double a_number)
   :m_type(a_type),m_function(0),m_index(not_found())
   ,m_A(0),m_B(0),m_C(0),m_D(0),m_E(0),m_F(0),m_tag(0){
 #ifdef TOOLS_MEM

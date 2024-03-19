@@ -19,9 +19,9 @@ class draw_style : public node {
   TOOLS_NODE(draw_style,tools::sg::draw_style,node)
 public:
   sf_enum<draw_type> style;
-  sf<float> line_width;
+  sf<G4float> line_width;
   sf<lpat> line_pattern;
-  sf<float> point_size;
+  sf<G4float> point_size;
   sf<bool> cull_face;
   sf<bool> winding_ccw;
 public:

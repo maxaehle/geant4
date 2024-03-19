@@ -14,14 +14,14 @@
 namespace tools {
 namespace rroot {
 
-//typedef histo::histo_data<double,unsigned int,double> hd_data;
-typedef histo::profile_data<double,unsigned int,unsigned int,double,double> pd_data_t;
-typedef histo::axis<double,unsigned int> axis_t;
+//typedef histo::histo_data<G4double,unsigned int,G4double> hd_data;
+typedef histo::profile_data<G4double,unsigned int,unsigned int,G4double,G4double> pd_data_t;
+typedef histo::axis<G4double,unsigned int> axis_t;
 typedef std::map<std::string,std::string> annotations_t;
 
 inline bool Axis_read_v0_v3(buffer& a_buffer,axis_t& a_axis) {
   int idummy;
-  double ddummy;
+  G4double ddummy;
   if(!a_buffer.read(a_axis.m_minimum_value)) return false;
   if(!a_buffer.read(a_axis.m_maximum_value)) return false;
   if(!a_buffer.read(a_axis.m_offset)) return false;
@@ -38,7 +38,7 @@ inline bool Axis_read_v0_v3(buffer& a_buffer,axis_t& a_axis) {
 
 inline bool Axis_read_v4_v6(buffer& a_buffer,axis_t& a_axis) {
   int idummy;
-  double ddummy;
+  G4double ddummy;
   if(!a_buffer.read(a_axis.m_offset)) return false;
   if(!a_buffer.read(idummy)) return false; //fOverFlow
   if(!a_buffer.read(idummy)) return false; //fUnderFlow
@@ -52,7 +52,7 @@ inline bool Axis_read_v4_v6(buffer& a_buffer,axis_t& a_axis) {
   int edgen;
   if(!a_buffer.read(edgen)) return false;
   for(int count=0;count<edgen;count++) {
-    double value;
+    G4double value;
     if(!a_buffer.read(value)) return false;
     a_axis.m_edges.push_back(value);
   }
@@ -69,7 +69,7 @@ inline bool Axis_read_v7(buffer& a_buffer,axis_t& a_axis) {
   int edgen;
   if(!a_buffer.read(edgen)) return false;
   for(int count=0;count<edgen;count++) {
-    double value;
+    G4double value;
     if(!a_buffer.read(value)) return false;
     a_axis.m_edges.push_back(value);
   }
@@ -127,7 +127,7 @@ inline void add_outflow(std::vector< axis_t >& aAxes) {
 
 inline bool read_v0(buffer& a_buffer,pd_data_t& a_data) {
   int idummy;
-  double ddummy;
+  G4double ddummy;
   std::string sdummy;
   if(!a_buffer.read(sdummy)) return false;
   if(!a_buffer.read(a_data.m_title)) return false;
@@ -149,9 +149,9 @@ inline bool read_v0(buffer& a_buffer,pd_data_t& a_data) {
   convert<int,unsigned int>(vec,a_data.m_bin_entries);
 
   if(a_data.m_bin_entries.size()!=a_data.m_bin_number) return false;
-  if(!a_buffer.read_array<double>(a_data.m_bin_Sw)) return false;
+  if(!a_buffer.read_array<G4double>(a_data.m_bin_Sw)) return false;
   if(a_data.m_bin_Sw.size()!=a_data.m_bin_number) return false;
-  if(!a_buffer.read_array<double>(a_data.m_bin_Sw2)) return false;
+  if(!a_buffer.read_array<G4double>(a_data.m_bin_Sw2)) return false;
   if(a_data.m_bin_Sw2.size()!=a_data.m_bin_number) return false;
   if(a_data.m_dimension>0) {
     a_data.m_axes.resize(a_data.m_dimension);
@@ -167,12 +167,12 @@ inline bool read_v0(buffer& a_buffer,pd_data_t& a_data) {
   // Add outflow :
   a_data.m_bin_number = new_bin_number(a_data.m_axes);
   add_outflow<unsigned int>(a_data.m_axes,a_data.m_bin_entries);
-  add_outflow<double>(a_data.m_axes,a_data.m_bin_Sw);
-  add_outflow<double>(a_data.m_axes,a_data.m_bin_Sw2);
+  add_outflow<G4double>(a_data.m_axes,a_data.m_bin_Sw);
+  add_outflow<G4double>(a_data.m_axes,a_data.m_bin_Sw2);
   add_outflow(a_data.m_axes);
 
   // Not here in v0 :
-  std::vector<double> empty;
+  std::vector<G4double> empty;
   empty.resize(a_data.m_dimension,0);
   a_data.m_bin_Sxw.resize(a_data.m_bin_number,empty);
   a_data.m_bin_Sx2w.resize(a_data.m_bin_number,empty);
@@ -185,7 +185,7 @@ inline bool read_v0(buffer& a_buffer,pd_data_t& a_data) {
 
 inline bool read_v1(buffer& a_buffer,pd_data_t& a_data) {
   int idummy;
-  double ddummy;
+  G4double ddummy;
   if(!a_buffer.read(a_data.m_title)) return false;
 
  {int dim;
@@ -205,9 +205,9 @@ inline bool read_v1(buffer& a_buffer,pd_data_t& a_data) {
   convert<int,unsigned int>(vec,a_data.m_bin_entries);
 
   if(a_data.m_bin_entries.size()!=a_data.m_bin_number) return false;
-  if(!a_buffer.read_array<double>(a_data.m_bin_Sw)) return false;
+  if(!a_buffer.read_array<G4double>(a_data.m_bin_Sw)) return false;
   if(a_data.m_bin_Sw.size()!=a_data.m_bin_number) return false;
-  if(!a_buffer.read_array<double>(a_data.m_bin_Sw2)) return false;
+  if(!a_buffer.read_array<G4double>(a_data.m_bin_Sw2)) return false;
   if(a_data.m_bin_Sw2.size()!=a_data.m_bin_number) return false;
   if(a_data.m_dimension>0) {
     a_data.m_axes.resize(a_data.m_dimension);
@@ -223,12 +223,12 @@ inline bool read_v1(buffer& a_buffer,pd_data_t& a_data) {
   // Add outflow :
   a_data.m_bin_number = new_bin_number(a_data.m_axes);
   add_outflow<unsigned int>(a_data.m_axes,a_data.m_bin_entries);
-  add_outflow<double>(a_data.m_axes,a_data.m_bin_Sw);
-  add_outflow<double>(a_data.m_axes,a_data.m_bin_Sw2);
+  add_outflow<G4double>(a_data.m_axes,a_data.m_bin_Sw);
+  add_outflow<G4double>(a_data.m_axes,a_data.m_bin_Sw2);
   add_outflow(a_data.m_axes);
 
   // Not here in v1 :
-  std::vector<double> empty;
+  std::vector<G4double> empty;
   empty.resize(a_data.m_dimension,0);
   a_data.m_bin_Sxw.resize(a_data.m_bin_number,empty);
   a_data.m_bin_Sx2w.resize(a_data.m_bin_number,empty);
@@ -241,7 +241,7 @@ inline bool read_v1(buffer& a_buffer,pd_data_t& a_data) {
 
 inline bool read_v2(buffer& a_buffer,pd_data_t& a_data) {
   int idummy;
-  double ddummy;
+  G4double ddummy;
   std::string sdummy;
   if(!a_buffer.read(a_data.m_title)) return false;
   if(!a_buffer.read(sdummy)) return false;
@@ -263,9 +263,9 @@ inline bool read_v2(buffer& a_buffer,pd_data_t& a_data) {
   convert<int,unsigned int>(vec,a_data.m_bin_entries);
 
   if(a_data.m_bin_entries.size()!=a_data.m_bin_number) return false;
-  if(!a_buffer.read_array<double>(a_data.m_bin_Sw)) return false;
+  if(!a_buffer.read_array<G4double>(a_data.m_bin_Sw)) return false;
   if(a_data.m_bin_Sw.size()!=a_data.m_bin_number) return false;
-  if(!a_buffer.read_array<double>(a_data.m_bin_Sw2)) return false;
+  if(!a_buffer.read_array<G4double>(a_data.m_bin_Sw2)) return false;
   if(a_data.m_bin_Sw2.size()!=a_data.m_bin_number) return false;
   if(a_data.m_dimension>0) {
     a_data.m_axes.resize(a_data.m_dimension);
@@ -281,12 +281,12 @@ inline bool read_v2(buffer& a_buffer,pd_data_t& a_data) {
   // Add outflow :
   a_data.m_bin_number = new_bin_number(a_data.m_axes);
   add_outflow<unsigned int>(a_data.m_axes,a_data.m_bin_entries);
-  add_outflow<double>(a_data.m_axes,a_data.m_bin_Sw);
-  add_outflow<double>(a_data.m_axes,a_data.m_bin_Sw2);
+  add_outflow<G4double>(a_data.m_axes,a_data.m_bin_Sw);
+  add_outflow<G4double>(a_data.m_axes,a_data.m_bin_Sw2);
   add_outflow(a_data.m_axes);
 
   // Not here in v2 :
-  std::vector<double> empty;
+  std::vector<G4double> empty;
   empty.resize(a_data.m_dimension,0);
   a_data.m_bin_Sxw.resize(a_data.m_bin_number,empty);
   a_data.m_bin_Sx2w.resize(a_data.m_bin_number,empty);
@@ -299,7 +299,7 @@ inline bool read_v2(buffer& a_buffer,pd_data_t& a_data) {
 
 inline bool read_v3(buffer& a_buffer,pd_data_t& a_data) {
   int idummy;
-  double ddummy;
+  G4double ddummy;
 
   int l;
   if(!a_buffer.read(l)) return false;
@@ -328,9 +328,9 @@ inline bool read_v3(buffer& a_buffer,pd_data_t& a_data) {
   convert<int,unsigned int>(vec,a_data.m_bin_entries);
 
   if(a_data.m_bin_entries.size()!=a_data.m_bin_number) return false;
-  if(!a_buffer.read_array<double>(a_data.m_bin_Sw)) return false;
+  if(!a_buffer.read_array<G4double>(a_data.m_bin_Sw)) return false;
   if(a_data.m_bin_Sw.size()!=a_data.m_bin_number) return false;
-  if(!a_buffer.read_array<double>(a_data.m_bin_Sw2)) return false;
+  if(!a_buffer.read_array<G4double>(a_data.m_bin_Sw2)) return false;
   if(a_data.m_bin_Sw2.size()!=a_data.m_bin_number) return false;
   if(a_data.m_dimension>0) {
     a_data.m_axes.resize(a_data.m_dimension);
@@ -346,12 +346,12 @@ inline bool read_v3(buffer& a_buffer,pd_data_t& a_data) {
   // Add outflow :
   a_data.m_bin_number = new_bin_number(a_data.m_axes);
   add_outflow<unsigned int>(a_data.m_axes,a_data.m_bin_entries);
-  add_outflow<double>(a_data.m_axes,a_data.m_bin_Sw);
-  add_outflow<double>(a_data.m_axes,a_data.m_bin_Sw2);
+  add_outflow<G4double>(a_data.m_axes,a_data.m_bin_Sw);
+  add_outflow<G4double>(a_data.m_axes,a_data.m_bin_Sw2);
   add_outflow(a_data.m_axes);
 
   // Not here in v3 :
-  std::vector<double> empty;
+  std::vector<G4double> empty;
   empty.resize(a_data.m_dimension,0);
   a_data.m_bin_Sxw.resize(a_data.m_bin_number,empty);
   a_data.m_bin_Sx2w.resize(a_data.m_bin_number,empty);
@@ -364,7 +364,7 @@ inline bool read_v3(buffer& a_buffer,pd_data_t& a_data) {
 
 inline bool read_v4(buffer& a_buffer,pd_data_t& a_data) {
   int idummy;
-  double ddummy;
+  G4double ddummy;
 
   int l;
   if(!a_buffer.read(l)) return false;
@@ -393,9 +393,9 @@ inline bool read_v4(buffer& a_buffer,pd_data_t& a_data) {
   convert<int,unsigned int>(vec,a_data.m_bin_entries);
 
   if(a_data.m_bin_entries.size()!=a_data.m_bin_number) return false;
-  if(!a_buffer.read_array<double>(a_data.m_bin_Sw)) return false;
+  if(!a_buffer.read_array<G4double>(a_data.m_bin_Sw)) return false;
   if(a_data.m_bin_Sw.size()!=a_data.m_bin_number) return false;
-  if(!a_buffer.read_array<double>(a_data.m_bin_Sw2)) return false;
+  if(!a_buffer.read_array<G4double>(a_data.m_bin_Sw2)) return false;
   if(a_data.m_bin_Sw2.size()!=a_data.m_bin_number) return false;
   if(a_data.m_dimension>0) {
     a_data.m_axes.resize(a_data.m_dimension);
@@ -409,12 +409,12 @@ inline bool read_v4(buffer& a_buffer,pd_data_t& a_data) {
   // Add outflow :
   a_data.m_bin_number = new_bin_number(a_data.m_axes);
   add_outflow<unsigned int>(a_data.m_axes,a_data.m_bin_entries);
-  add_outflow<double>(a_data.m_axes,a_data.m_bin_Sw);
-  add_outflow<double>(a_data.m_axes,a_data.m_bin_Sw2);
+  add_outflow<G4double>(a_data.m_axes,a_data.m_bin_Sw);
+  add_outflow<G4double>(a_data.m_axes,a_data.m_bin_Sw2);
   add_outflow(a_data.m_axes);
 
   // Not here in v4 :
-  std::vector<double> empty;
+  std::vector<G4double> empty;
   empty.resize(a_data.m_dimension,0);
   a_data.m_bin_Sxw.resize(a_data.m_bin_number,empty);
   a_data.m_bin_Sx2w.resize(a_data.m_bin_number,empty);
@@ -427,7 +427,7 @@ inline bool read_v4(buffer& a_buffer,pd_data_t& a_data) {
 
 inline bool read_v5(buffer& a_buffer,pd_data_t& a_data) {
   int idummy;
-  double ddummy;
+  G4double ddummy;
   if(!a_buffer.read(a_data.m_title)) return false;
 
  {int dim;
@@ -447,9 +447,9 @@ inline bool read_v5(buffer& a_buffer,pd_data_t& a_data) {
   convert<int,unsigned int>(vec,a_data.m_bin_entries);
 
   if(a_data.m_bin_entries.size()!=a_data.m_bin_number) return false;
-  if(!a_buffer.read_array<double>(a_data.m_bin_Sw)) return false;
+  if(!a_buffer.read_array<G4double>(a_data.m_bin_Sw)) return false;
   if(a_data.m_bin_Sw.size()!=a_data.m_bin_number) return false;
-  if(!a_buffer.read_array<double>(a_data.m_bin_Sw2)) return false;
+  if(!a_buffer.read_array<G4double>(a_data.m_bin_Sw2)) return false;
   if(a_data.m_bin_Sw2.size()!=a_data.m_bin_number) return false;
   if(a_data.m_dimension>0) {
     a_data.m_axes.resize(a_data.m_dimension);
@@ -463,12 +463,12 @@ inline bool read_v5(buffer& a_buffer,pd_data_t& a_data) {
   // Add outflow :
   a_data.m_bin_number = new_bin_number(a_data.m_axes);
   add_outflow<unsigned int>(a_data.m_axes,a_data.m_bin_entries);
-  add_outflow<double>(a_data.m_axes,a_data.m_bin_Sw);
-  add_outflow<double>(a_data.m_axes,a_data.m_bin_Sw2);
+  add_outflow<G4double>(a_data.m_axes,a_data.m_bin_Sw);
+  add_outflow<G4double>(a_data.m_axes,a_data.m_bin_Sw2);
   add_outflow(a_data.m_axes);
 
   // Not here in v5 :
-  std::vector<double> empty;
+  std::vector<G4double> empty;
   empty.resize(a_data.m_dimension,0);
   a_data.m_bin_Sxw.resize(a_data.m_bin_number,empty);
   a_data.m_bin_Sx2w.resize(a_data.m_bin_number,empty);
@@ -481,7 +481,7 @@ inline bool read_v5(buffer& a_buffer,pd_data_t& a_data) {
 
 inline bool read_v6(buffer& a_buffer,pd_data_t& a_data) {
   int idummy;
-  double ddummy;
+  G4double ddummy;
   if(!a_buffer.read(a_data.m_title)) return false;
 
  {int dim;
@@ -501,9 +501,9 @@ inline bool read_v6(buffer& a_buffer,pd_data_t& a_data) {
   convert<int,unsigned int>(vec,a_data.m_bin_entries);
 
   if(a_data.m_bin_entries.size()!=a_data.m_bin_number) return false;
-  if(!a_buffer.read_array<double>(a_data.m_bin_Sw)) return false;
+  if(!a_buffer.read_array<G4double>(a_data.m_bin_Sw)) return false;
   if(a_data.m_bin_Sw.size()!=a_data.m_bin_number) return false;
-  if(!a_buffer.read_array<double>(a_data.m_bin_Sw2)) return false;
+  if(!a_buffer.read_array<G4double>(a_data.m_bin_Sw2)) return false;
   if(a_data.m_bin_Sw2.size()!=a_data.m_bin_number) return false;
   if(a_data.m_dimension>0) {
     a_data.m_axes.resize(a_data.m_dimension);
@@ -517,7 +517,7 @@ inline bool read_v6(buffer& a_buffer,pd_data_t& a_data) {
   // Profile :
   if(!a_buffer.read(a_data.m_is_profile)) return false;
   if(a_data.m_is_profile) {
-    if(!a_buffer.read_array<double>(a_data.m_bin_Svw)) return false;
+    if(!a_buffer.read_array<G4double>(a_data.m_bin_Svw)) return false;
     if(a_data.m_bin_Svw.size()!=a_data.m_bin_number) return false;
     if(!a_buffer.read(a_data.m_cut_v)) return false;
     if(!a_buffer.read(a_data.m_min_v)) return false;
@@ -527,13 +527,13 @@ inline bool read_v6(buffer& a_buffer,pd_data_t& a_data) {
   // Add outflow :
   a_data.m_bin_number = new_bin_number(a_data.m_axes);
   add_outflow<unsigned int>(a_data.m_axes,a_data.m_bin_entries);
-  add_outflow<double>(a_data.m_axes,a_data.m_bin_Sw);
-  add_outflow<double>(a_data.m_axes,a_data.m_bin_Sw2);
-  add_outflow<double>(a_data.m_axes,a_data.m_bin_Svw);
+  add_outflow<G4double>(a_data.m_axes,a_data.m_bin_Sw);
+  add_outflow<G4double>(a_data.m_axes,a_data.m_bin_Sw2);
+  add_outflow<G4double>(a_data.m_axes,a_data.m_bin_Svw);
   add_outflow(a_data.m_axes);
 
   // Not here in v6 :
-  std::vector<double> empty;
+  std::vector<G4double> empty;
   empty.resize(a_data.m_dimension,0);
   a_data.m_bin_Sxw.resize(a_data.m_bin_number,empty); //Forget to write in v6 !
   a_data.m_bin_Sx2w.resize(a_data.m_bin_number,empty);
@@ -560,13 +560,13 @@ inline bool read_v7(buffer& a_buffer,pd_data_t& a_data) {
   convert<int,unsigned int>(vec,a_data.m_bin_entries);
 
   if(a_data.m_bin_entries.size()!=a_data.m_bin_number) return false;
-  if(!a_buffer.read_array<double>(a_data.m_bin_Sw)) return false;
+  if(!a_buffer.read_array<G4double>(a_data.m_bin_Sw)) return false;
   if(a_data.m_bin_Sw.size()!=a_data.m_bin_number) return false;
-  if(!a_buffer.read_array<double>(a_data.m_bin_Sw2)) return false;
+  if(!a_buffer.read_array<G4double>(a_data.m_bin_Sw2)) return false;
   if(a_data.m_bin_Sw2.size()!=a_data.m_bin_number) return false;
-  if(!a_buffer.read_array2<double>(a_data.m_bin_Sxw)) return false;
+  if(!a_buffer.read_array2<G4double>(a_data.m_bin_Sxw)) return false;
   if(a_data.m_bin_Sxw.size()!=a_data.m_bin_number) return false;
-  if(!a_buffer.read_array2<double>(a_data.m_bin_Sx2w)) return false;
+  if(!a_buffer.read_array2<G4double>(a_data.m_bin_Sx2w)) return false;
   if(a_data.m_bin_Sx2w.size()!=a_data.m_bin_number) return false;
   if(a_data.m_dimension>0) {
     a_data.m_axes.resize(a_data.m_dimension);
@@ -579,9 +579,9 @@ inline bool read_v7(buffer& a_buffer,pd_data_t& a_data) {
   // Profile :
   if(!a_buffer.read(a_data.m_is_profile)) return false;
   if(a_data.m_is_profile) {
-    if(!a_buffer.read_array<double>(a_data.m_bin_Svw)) return false;
+    if(!a_buffer.read_array<G4double>(a_data.m_bin_Svw)) return false;
     if(a_data.m_bin_Svw.size()!=a_data.m_bin_number) return false;
-    if(!a_buffer.read_array<double>(a_data.m_bin_Sv2w)) return false;
+    if(!a_buffer.read_array<G4double>(a_data.m_bin_Sv2w)) return false;
     if(a_data.m_bin_Sv2w.size()!=a_data.m_bin_number) return false;
     if(!a_buffer.read(a_data.m_cut_v)) return false;
     if(!a_buffer.read(a_data.m_min_v)) return false;

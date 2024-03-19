@@ -24,11 +24,11 @@ inline const std::string& leaf_store_class(int) {
   static const std::string s_v("TLeafI");
   return s_v;
 }
-inline const std::string& leaf_store_class(float) {
+inline const std::string& leaf_store_class(G4float) {
   static const std::string s_v("TLeafF");
   return s_v;
 }
-inline const std::string& leaf_store_class(double) {
+inline const std::string& leaf_store_class(G4double) {
   static const std::string s_v("TLeafD");
   return s_v;
 }

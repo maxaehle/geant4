@@ -21,20 +21,20 @@ public:
 public:
   virtual ~bins1D(){}
 public:
-  virtual void bins_Sw_range(float&,float&,bool) const = 0;
+  virtual void bins_Sw_range(G4float&,G4float&,bool) const = 0;
 public:
   // axis :
   virtual unsigned int bins() const = 0;
-  virtual float axis_min() const = 0;
-  virtual float axis_max() const = 0;
+  virtual G4float axis_min() const = 0;
+  virtual G4float axis_max() const = 0;
   // bins on axis :
-  virtual float bin_lower_edge(int) const = 0;
-  virtual float bin_upper_edge(int) const = 0;
+  virtual G4float bin_lower_edge(int) const = 0;
+  virtual G4float bin_upper_edge(int) const = 0;
   // bins :
   virtual bool has_entries_per_bin() const = 0;
   virtual unsigned int bin_entries(int) const = 0;
-  virtual float bin_Sw(int) const = 0;
-  virtual float bin_error(int) const = 0;
+  virtual G4float bin_Sw(int) const = 0;
+  virtual G4float bin_error(int) const = 0;
 public:
   virtual bool is_profile() const = 0;
 };
@@ -50,27 +50,27 @@ public:
 public:
   virtual ~bins2D(){}
 public:
-  virtual void bins_Sw_range(float&,float&,bool) const = 0;
+  virtual void bins_Sw_range(G4float&,G4float&,bool) const = 0;
 public:
   // x axis :
   virtual unsigned int x_bins() const = 0;
-  virtual float x_axis_min() const = 0;
-  virtual float x_axis_max() const = 0;
+  virtual G4float x_axis_min() const = 0;
+  virtual G4float x_axis_max() const = 0;
   // y axis :
   virtual unsigned int y_bins() const = 0;
-  virtual float y_axis_min() const = 0;
-  virtual float y_axis_max() const = 0;
+  virtual G4float y_axis_min() const = 0;
+  virtual G4float y_axis_max() const = 0;
   // bins on x axis :
-  virtual float bin_lower_edge_x(int) const = 0;
-  virtual float bin_upper_edge_x(int) const = 0;
+  virtual G4float bin_lower_edge_x(int) const = 0;
+  virtual G4float bin_upper_edge_x(int) const = 0;
   // bins on y axis :
-  virtual float bin_lower_edge_y(int) const = 0;
-  virtual float bin_upper_edge_y(int) const = 0;
+  virtual G4float bin_lower_edge_y(int) const = 0;
+  virtual G4float bin_upper_edge_y(int) const = 0;
   // bins :
   virtual bool has_entries_per_bin() const = 0;
   virtual unsigned int bin_entries(int,int) const = 0;
-  virtual float bin_Sw(int,int) const = 0;
-  virtual float bin_error(int,int) const = 0;
+  virtual G4float bin_Sw(int,int) const = 0;
+  virtual G4float bin_error(int,int) const = 0;
 };
 
 class func1D : public virtual plottable {
@@ -84,10 +84,10 @@ public:
 public:
   virtual ~func1D(){}
 public:
-  virtual bool value(float,float&) const = 0;
+  virtual bool value(G4float,G4float&) const = 0;
   virtual unsigned int x_steps() const = 0;
-  virtual float x_min() const = 0;
-  virtual float x_max() const = 0;
+  virtual G4float x_min() const = 0;
+  virtual G4float x_max() const = 0;
 };
 
 class func2D : public virtual plottable {
@@ -101,18 +101,18 @@ public:
 public:
   virtual ~func2D(){}
 public:
-  virtual bool value(float,float,float&) const = 0;
+  virtual bool value(G4float,G4float,G4float&) const = 0;
   virtual unsigned int x_steps() const = 0;
-  virtual float x_min() const = 0;
-  virtual float x_max() const = 0;
+  virtual G4float x_min() const = 0;
+  virtual G4float x_max() const = 0;
   virtual unsigned int y_steps() const = 0;
-  virtual float y_min() const = 0;
-  virtual float y_max() const = 0;
+  virtual G4float y_min() const = 0;
+  virtual G4float y_max() const = 0;
 /*
   //For "inside" functions :
   virtual unsigned int number_of_points() const = 0;
-  virtual bool ith_point(int,float&,float&,bool&) const = 0;
-  virtual bool set_ith_point(int,float,float) = 0;
+  virtual bool ith_point(int,G4float&,G4float&,bool&) const = 0;
+  virtual bool set_ith_point(int,G4float,G4float) = 0;
   virtual bool dragger_update_points() const = 0;
 */
 };
@@ -128,13 +128,13 @@ public:
 public:
   virtual ~points2D(){}
 public:
-  virtual float x_axis_min() const = 0;
-  virtual float x_axis_max() const = 0;
-  virtual float y_axis_min() const = 0;
-  virtual float y_axis_max() const = 0;
+  virtual G4float x_axis_min() const = 0;
+  virtual G4float x_axis_max() const = 0;
+  virtual G4float y_axis_min() const = 0;
+  virtual G4float y_axis_max() const = 0;
 
   virtual unsigned int points() const = 0;
-  virtual bool ith_point(unsigned int,float&,float&) const = 0;
+  virtual bool ith_point(unsigned int,G4float&,G4float&) const = 0;
 };
 
 class points3D : public virtual plottable {
@@ -148,15 +148,15 @@ public:
 public:
   virtual ~points3D(){}
 public:
-  virtual float x_axis_min() const = 0;
-  virtual float x_axis_max() const = 0;
-  virtual float y_axis_min() const = 0;
-  virtual float y_axis_max() const = 0;
-  virtual float z_axis_min() const = 0;
-  virtual float z_axis_max() const = 0;
+  virtual G4float x_axis_min() const = 0;
+  virtual G4float x_axis_max() const = 0;
+  virtual G4float y_axis_min() const = 0;
+  virtual G4float y_axis_max() const = 0;
+  virtual G4float z_axis_min() const = 0;
+  virtual G4float z_axis_max() const = 0;
 
   virtual unsigned int points() const = 0;
-  virtual bool ith_point(unsigned int,float&,float&,float&) const = 0;
+  virtual bool ith_point(unsigned int,G4float&,G4float&,G4float&) const = 0;
 };
 
 inline const std::string& s_tools_sg_fit2plot() {
@@ -191,19 +191,19 @@ public:
     text_enforce_height
   };
 public:
-  plottable_text(const std::string& a_TEXT,float a_X,float a_Y,
-                 float a_SIZE,text_mode a_text_mode,
+  plottable_text(const std::string& a_TEXT,G4float a_X,G4float a_Y,
+                 G4float a_SIZE,text_mode a_text_mode,
   /*
-                 float a_ANGLE = 0,
+                 G4float a_ANGLE = 0,
                  char a_HJUST = 'L',char a_VJUST = 'B',
                  const std::string& a_FONT = "Hershey",const colorf& a_TXCI = colorf(0,0,0,1),
-                 float a_SCALE = 1,bool a_SMOOTHING = false,bool a_HINTING = false,float a_line_width = 1,
+                 G4float a_SCALE = 1,bool a_SMOOTHING = false,bool a_HINTING = false,G4float a_line_width = 1,
                  font_modeling a_font_modeling = font_filled
 		 */
-                 float a_ANGLE,
+                 G4float a_ANGLE,
                  char a_HJUST,char a_VJUST,
                  const std::string& a_FONT,const colorf& a_TXCI,
-                 float a_SCALE,bool a_SMOOTHING,bool a_HINTING,float a_line_width,
+                 G4float a_SCALE,bool a_SMOOTHING,bool a_HINTING,G4float a_line_width,
                  font_modeling a_font_modeling
 		 )
   :m_TEXT(a_TEXT),m_X(a_X),m_Y(a_Y)
@@ -248,19 +248,19 @@ public:
   }
 public:
   std::string m_TEXT;
-  float m_X;
-  float m_Y;
-  float m_SIZE;
+  G4float m_X;
+  G4float m_Y;
+  G4float m_SIZE;
   text_mode m_text_mode;
-  float m_ANGLE;
+  G4float m_ANGLE;
   char m_HJUST;
   char m_VJUST;
   std::string m_FONT;
   colorf m_TXCI;
-  float m_SCALE;
+  G4float m_SCALE;
   bool m_SMOOTHING;
   bool m_HINTING;
-  float m_line_width; //used if font is hershey.
+  G4float m_line_width; //used if font is hershey.
   font_modeling m_font_modeling;
 };
 
@@ -282,10 +282,10 @@ public:
     HATCHED = 3
   };
 public:
-  plottable_box(float a_X1,float a_Y1,float a_X2,float a_Y2,
+  plottable_box(G4float a_X1,G4float a_Y1,G4float a_X2,G4float a_Y2,
                 fill_area_style a_FAIS,const colorf& a_FACI,
                 int a_FASI,
-                bool a_BORD,const colorf& a_PLCI,float a_LWID)
+                bool a_BORD,const colorf& a_PLCI,G4float a_LWID)
   :m_X1(a_X1),m_Y1(a_Y1),m_X2(a_X2),m_Y2(a_Y2)
   ,m_FAIS(a_FAIS),m_FACI(a_FACI),m_FASI(a_FASI),m_BORD(a_BORD),m_PLCI(a_PLCI),m_LWID(a_LWID)
   {}
@@ -311,16 +311,16 @@ public:
     return *this;
   }
 public:
-  float m_X1;
-  float m_Y1;
-  float m_X2;
-  float m_Y2;
+  G4float m_X1;
+  G4float m_Y1;
+  G4float m_X2;
+  G4float m_Y2;
   fill_area_style m_FAIS;
   colorf m_FACI;
   int m_FASI;
   bool m_BORD;
   colorf m_PLCI;
-  float m_LWID;
+  G4float m_LWID;
 };
 
 class plottable_ellipse : public virtual plotprim {
@@ -341,10 +341,10 @@ public:
     HATCHED = 3
   };
 public:
-  plottable_ellipse(float a_X,float a_Y,float a_R1,float a_R2,
+  plottable_ellipse(G4float a_X,G4float a_Y,G4float a_R1,G4float a_R2,
                 fill_area_style a_FAIS,const colorf& a_FACI,
                 int a_FASI,
-                bool a_BORD,const colorf& a_PLCI,float a_LWID)
+                bool a_BORD,const colorf& a_PLCI,G4float a_LWID)
   :m_X(a_X),m_Y(a_Y),m_R1(a_R1),m_R2(a_R2)
   ,m_FAIS(a_FAIS),m_FACI(a_FACI),m_FASI(a_FASI),m_BORD(a_BORD),m_PLCI(a_PLCI),m_LWID(a_LWID)
   {}
@@ -370,16 +370,16 @@ public:
     return *this;
   }
 public:
-  float m_X;
-  float m_Y;
-  float m_R1;
-  float m_R2;
+  G4float m_X;
+  G4float m_Y;
+  G4float m_R1;
+  G4float m_R2;
   fill_area_style m_FAIS;
   colorf m_FACI;
   int m_FASI;
   bool m_BORD;
   colorf m_PLCI;
-  float m_LWID;
+  G4float m_LWID;
 };
 
 }}
@@ -401,7 +401,7 @@ public: //tools::sg::plotprim
   }
   virtual plotprim* copy() const {return new plottable_img(*this);}
 public:
-  plottable_img(const img<byte>& a_img,float a_X,float a_Y,float a_WIDTH,float a_HEIGHT,float a_THETA,float a_PHI)
+  plottable_img(const img<byte>& a_img,G4float a_X,G4float a_Y,G4float a_WIDTH,G4float a_HEIGHT,G4float a_THETA,G4float a_PHI)
   :m_img(a_img)
   ,m_X(a_X),m_Y(a_Y)
   ,m_WIDTH(a_WIDTH),m_HEIGHT(a_HEIGHT),m_THETA(a_THETA),m_PHI(a_PHI)
@@ -425,12 +425,12 @@ public:
   }
 public:
   img<byte> m_img;
-  float m_X;
-  float m_Y;
-  float m_WIDTH;
-  float m_HEIGHT;
-  float m_THETA;
-  float m_PHI;
+  G4float m_X;
+  G4float m_Y;
+  G4float m_WIDTH;
+  G4float m_HEIGHT;
+  G4float m_THETA;
+  G4float m_PHI;
 };
 
 }}

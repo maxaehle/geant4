@@ -13,11 +13,11 @@
 
 typedef unsigned int	GLUenum;
 typedef void		GLUvoid;
-typedef double		GLUdouble;
+typedef G4double		GLUG4double;
 
 typedef unsigned char	GLUboolean;
-typedef float		GLUfloat;	/* single precision float */
-typedef double		GLUclampd;	/* double precision float in [0,1] */
+typedef G4float		GLUG4float;	/* single precision G4float */
+typedef G4double		GLUclampd;	/* G4double precision G4float in [0,1] */
 
 /* //////////////////////////////////////////////////////////////// */
 /* //////////////////////////////////////////////////////////////// */
@@ -64,9 +64,9 @@ GLUAPI void GLUAPIENTRY gluTessBeginPolygon (GLUtesselator* tess, GLUvoid* data)
 GLUAPI void GLUAPIENTRY gluTessCallback (GLUtesselator* tess, GLUenum which, _GLUfuncptr CallBackFunc);
 GLUAPI void GLUAPIENTRY gluTessEndContour (GLUtesselator* tess);
 GLUAPI void GLUAPIENTRY gluTessEndPolygon (GLUtesselator* tess);
-GLUAPI void GLUAPIENTRY gluTessNormal (GLUtesselator* tess, GLUdouble valueX, GLUdouble valueY, GLUdouble valueZ);
-GLUAPI void GLUAPIENTRY gluTessProperty (GLUtesselator* tess, GLUenum which, GLUdouble data);
-GLUAPI void GLUAPIENTRY gluTessVertex (GLUtesselator* tess, GLUdouble *location, GLUvoid* data);
+GLUAPI void GLUAPIENTRY gluTessNormal (GLUtesselator* tess, GLUG4double valueX, GLUG4double valueY, GLUG4double valueZ);
+GLUAPI void GLUAPIENTRY gluTessProperty (GLUtesselator* tess, GLUenum which, GLUG4double data);
+GLUAPI void GLUAPIENTRY gluTessVertex (GLUtesselator* tess, GLUG4double *location, GLUvoid* data);
   */
 
 #define GLU_MIN(x,y)	((x) <= (y) ? (x) : (y))

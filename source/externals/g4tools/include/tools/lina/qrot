@@ -376,12 +376,12 @@ protected:
 
 public:
   //NOTE : don't handle a static object because of mem balance.
-  //static const qrot<double>& identity() {
-  //  static const qrot<double> s_v(0,0,0,1);
+  //static const qrot<G4double>& identity() {
+  //  static const qrot<G4double> s_v(0,0,0,1);
   //  return s_v;
   //}
 
-//private:static void check_instantiation() {qrot<float> v;}
+//private:static void check_instantiation() {qrot<G4float> v;}
 };
 
 }
