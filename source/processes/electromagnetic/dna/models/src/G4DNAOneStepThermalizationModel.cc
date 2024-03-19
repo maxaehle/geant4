@@ -206,7 +206,7 @@ G4double Terrisol1990::Get3DStdDeviation(G4double energy){
   size_t lowBin, upBin;
 
   if(k_eV >= 1.){
-    lowBin=std::floor(k_eV)+1;
+    lowBin=(size_t)(std::floor(k_eV))+1;
     upBin=std::min(lowBin+1, size_t(10));
   }
   else{

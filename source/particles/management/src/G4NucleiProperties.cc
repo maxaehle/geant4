@@ -227,8 +227,8 @@ G4double G4NucleiProperties::GetAtomicMass(const G4double A, const G4double Z)
   {
     G4int iA = G4int(A);
     G4int iZ = G4int(Z);
-    if ( G4NucleiPropertiesTableAME12::IsInTable((passivedouble)Z,A) ) {
-      return G4NucleiPropertiesTableAME12::GetAtomicMass((passivedouble)Z,A);
+    if ( G4NucleiPropertiesTableAME12::IsInTable((passivedouble)Z,(passivedouble)A) ) {
+      return G4NucleiPropertiesTableAME12::GetAtomicMass((passivedouble)Z,(passivedouble)A);
     } else if (G4NucleiPropertiesTheoreticalTable::IsInTable(iZ,iA)){
       return G4NucleiPropertiesTheoreticalTable::GetAtomicMass(iZ,iA);
     } else {

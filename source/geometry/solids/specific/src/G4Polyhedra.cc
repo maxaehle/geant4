@@ -992,7 +992,7 @@ G4ThreeVector G4Polyhedra::GetPointOnSurface() const
     // find selected side and rotate point
     G4double scurr = (*it).area;
     G4double sprev = (it == fElements->begin()) ? 0. : (*(--it)).area;
-    G4int iside = nside*(select - sprev)/(scurr - sprev);
+    G4int iside = (G4int)(nside*(select - sprev)/(scurr - sprev));
     if (iside == 0 && GetStartPhi() == 0.)
     {
       x = p0.x();

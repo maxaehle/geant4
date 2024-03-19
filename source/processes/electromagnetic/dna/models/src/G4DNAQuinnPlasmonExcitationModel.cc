@@ -213,7 +213,7 @@ void G4DNAQuinnPlasmonExcitationModel::SampleSecondaries
   if(particle == G4Electron::ElectronDefinition())
   {
     G4double  e      = 1.;
-    G4int     z      = material->GetZ();
+    G4int     z      = (G4int)material->GetZ();
     G4int     Nve    = 0;
 
     //TODO: have to be change to realistic!!
@@ -263,7 +263,7 @@ G4double G4DNAQuinnPlasmonExcitationModel::GetCrossSection
   if(particle == G4Electron::ElectronDefinition())
   {
      G4double  e      = 1.;
-     G4int     z      = material->GetZ();
+     G4int     z      = (G4int)material->GetZ();
      G4int     Nve    = 0;
      if(z<100) Nve    = nValenceElectron[z];
      G4double  A      = material->GetA()/g/mole;

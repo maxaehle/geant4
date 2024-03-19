@@ -139,7 +139,7 @@ void G4DNARelativisticIonisationModel::Initialise(const G4ParticleDefinition* pa
         // Protection: only for single element
         if(material->GetNumberOfElements()>1) continue; 
 
-        G4int Z = material->GetZ();
+        G4int Z = (G4int)material->GetZ();
         // Protection: only for GOLD
         if(Z!=79) continue;
 
@@ -307,7 +307,7 @@ void G4DNARelativisticIonisationModel::SampleSecondaries(
     G4double      totalMomentum     = std::sqrt(pSquare);
 
     const G4Material *material = couple->GetMaterial();
-    G4int             z        = material->GetZ();
+    G4int             z        = (G4int)material->GetZ();
     G4int             level    = RandomSelect(material,particleDef,k);
 
     if(k<Ebinding[z].at(level)) return;
@@ -468,7 +468,7 @@ G4double G4DNARelativisticIonisationModel::GetTotalCrossSection(
                 G4double kineticEnergy)
 {
   G4double value=0;
-  G4int  z = material->GetZ();
+  G4int  z = (G4int)material->GetZ();
   if(z!=79){ return 0.;}
   else {
     size_t N=iState[z].size();
@@ -491,7 +491,7 @@ G4double G4DNARelativisticIonisationModel::GetPartialCrossSection(
   G4double constRy =13.6057E-6;//MeV
 
   G4ParticleDefinition *electronDef = G4Electron::ElectronDefinition();
-  G4int z = material->GetZ();
+  G4int z = (G4int)material->GetZ();
   if(particle==electronDef){
 
     G4double t       = kineticEnergy        /Ebinding[z].at(level);
@@ -532,7 +532,7 @@ G4double G4DNARelativisticIonisationModel::GetDifferentialCrossSection(
   G4double value=0.; 
   G4double constRy =13.6057E-6;//MeV
 
-  G4int z = material->GetZ();
+  G4int z = (G4int)material->GetZ();
 
   G4ParticleDefinition *electronDef = G4Electron::ElectronDefinition();
   if(particle==electronDef){
@@ -572,7 +572,7 @@ G4int G4DNARelativisticIonisationModel::RandomSelect(
                 G4double kineticEnergy)
 {
   G4double value = 0.;
-  G4int z = material->GetZ();
+  G4int z = (G4int)material->GetZ();
   G4double* valuesBuffer = new G4double[iShell[z].size()];
   const size_t n(iShell[z].size());
   size_t i(n);
@@ -618,7 +618,7 @@ G4double  G4DNARelativisticIonisationModel::GetEjectedElectronEnergy(
   G4double secondaryEnergy=0;
 
   G4ParticleDefinition *electronDef = G4Electron::ElectronDefinition();
-  G4int z = material->GetZ();
+  G4int z = (G4int)material->GetZ();
   if(!fasterCode){ // for 2D rejection method
     if(particle==electronDef){
       G4double maximumsecondaryEnergy = (energy-Ebinding[z].at(ishell))/2.;

@@ -262,7 +262,7 @@ void G4DNAIRT::Sampling(G4Track* track){
 #ifdef DEBUG
     G4cout<<"scavenged: "<<minTime<<'\t'<<molConfA->GetName()<<it_begin->GetTrackID()<<'\n';
 #endif
-    G4Molecule* fakeMol = new G4Molecule((*fReactionDatas)[index]->GetReactant2());
+    G4Molecule* fakeMol = new G4Molecule((*fReactionDatas)[(G4int)index]->GetReactant2());
     G4Track* fakeTrack = fakeMol->BuildTrack(globalTime,track->GetPosition());
     fTrackHolder->Push(fakeTrack);
     fReactionSet->AddReaction(minTime, track, fakeTrack);

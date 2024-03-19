@@ -985,8 +985,8 @@ G4ProxyVector* G4SmartVoxelHeader::BuildNodes(G4LogicalVolume* pVolume,
   for (nVol=0; nVol<nCandidates; ++nVol)
   {
     G4long nodeNo, minContainingNode, maxContainingNode;
-    minContainingNode = (minExtents[nVol]-motherMinExtent)/nodeWidth;
-    maxContainingNode = (maxExtents[nVol]-motherMinExtent)/nodeWidth;
+    minContainingNode = (G4long)((minExtents[nVol]-motherMinExtent)/nodeWidth);
+    maxContainingNode = (G4long)((maxExtents[nVol]-motherMinExtent)/nodeWidth);
 
     // Only add nodes that are inside the limits of the axis
     //

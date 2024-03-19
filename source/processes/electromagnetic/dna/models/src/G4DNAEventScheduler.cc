@@ -245,7 +245,7 @@ void G4DNAEventScheduler::Initialize()
 {
   if(!fInitialized)
   {
-    fPixel = fInitialPixels;
+    fPixel = (G4int)fInitialPixels;
     fpMesh = std::make_unique<G4DNAMesh>(fpMesh->GetBoundingBox(), fPixel);
 
     // Scavenger();

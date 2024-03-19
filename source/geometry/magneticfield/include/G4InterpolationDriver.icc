@@ -168,7 +168,7 @@ void G4InterpolationDriver<T>::InterpolateImpl(G4double curveLength,
                                                field_utils::State& y) const
 {
     const G4double tau = (curveLength - it->begin) * it->inverseLength;
-    return it->stepper->Interpolate(field_utils::clamp(tau, 0., 1.), y);  
+    return it->stepper->Interpolate(field_utils::clamp(tau, (G4double)0., (G4double)1.), y);
 }
 
 template <class T>
