@@ -100,3 +100,5 @@ void G4PlotParameters::SetStyle(const G4String& style)
     fScale = 1.f;
   }
 }
+
+const G4float G4PlotParameters::fkDefaultScale { 0.9f };

@@ -92,12 +92,12 @@ void G4H1Messenger::CreateH1Cmd()
   auto h1ValMin0 = new G4UIparameter("valMin0", 'd', true);
   h1ValMin0->SetGuidance("Minimum value, expressed in unit (default = 0.)");
   h1ValMin0->SetGuidance("Can be reset with /analysis/h1/set command");
-  h1ValMin0->SetDefaultValue(0.);
+  h1ValMin0->SetDefaultValue((G4double)0.);
 
   auto h1ValMax0 = new G4UIparameter("valMax0", 'd', true);
   h1ValMax0->SetGuidance("Maximum value, expressed in unit (default = 1.)");
   h1ValMax0->SetGuidance("Can be reset with /analysis/h1/set command");
-  h1ValMax0->SetDefaultValue(1.);
+  h1ValMax0->SetDefaultValue((G4double)1.);
 
   auto h1ValUnit0 = new G4UIparameter("valUnit0", 's', true);
   h1ValUnit0->SetGuidance("The unit applied to filled values and valMin0, valMax0");

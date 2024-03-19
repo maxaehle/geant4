@@ -70,7 +70,7 @@ class G4PlotParameters
     static constexpr G4int fkLRDefaultWidth { 700 };
     static constexpr G4int fkDefaultColumns { 1 };
     static constexpr G4int fkDefaultRows    { 2 };
-    static constexpr G4float fkDefaultScale { 0.9f };
+    static const G4float fkDefaultScale;
 #if defined(TOOLS_USE_FREETYPE)
    //Have vertical A4 :
     static constexpr G4int fkDefaultWidth   { fkHRDefaultWidth };

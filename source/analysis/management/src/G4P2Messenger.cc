@@ -86,12 +86,12 @@ void G4P2Messenger::CreateP2Cmd()
   auto p2xValMin0 = new G4UIparameter("xvalMin0", 'd', true);
   p2xValMin0->SetGuidance("Minimum x-value, expressed in unit (default = 0.)");
   p2xValMin0->SetGuidance("Can be reset with /analysis/p2/set command");
-  p2xValMin0->SetDefaultValue(0.);
+  p2xValMin0->SetDefaultValue((G4double)0.);
 
   auto p2xValMax0 = new G4UIparameter("xvalMax0", 'd', true);
   p2xValMax0->SetGuidance("Maximum x-value, expressed in unit (default = 1.)");
   p2xValMax0->SetGuidance("Can be reset with /analysis/p2/set command");
-  p2xValMax0->SetDefaultValue(1.);
+  p2xValMax0->SetDefaultValue((G4double)1.);
 
   auto p2xValUnit0 = new G4UIparameter("xvalUnit0", 's', true);
   p2xValUnit0->SetGuidance("The unit applied to filled x-values and xvalMin0, xvalMax0");
@@ -117,7 +117,7 @@ void G4P2Messenger::CreateP2Cmd()
   auto p2yValMin0 = new G4UIparameter("yvalMin0", 'd', true);
   p2yValMin0->SetGuidance("Minimum y-value, expressed in unit (default = 0.)");
   p2yValMin0->SetGuidance("Can be reset with /analysis/p2/set command");
-  p2yValMin0->SetDefaultValue(0.);
+  p2yValMin0->SetDefaultValue((G4double)0.);
 
   auto p2yValMax0 = new G4UIparameter("yvalMax0", 'd', true);
   p2yValMax0->SetGuidance("Maximum y-value, expressed in unit (default = 1.)");
@@ -142,12 +142,12 @@ void G4P2Messenger::CreateP2Cmd()
   auto p2zValMin0 = new G4UIparameter("zvalMin0", 'd', true);
   p2zValMin0->SetGuidance("Minimum z-value, expressed in unit (default = 0.)");
   p2zValMin0->SetGuidance("Can be reset with /analysis/p2/set command");
-  p2zValMin0->SetDefaultValue(0.);
+  p2zValMin0->SetDefaultValue((G4double)0.);
 
   auto p2zValMax0 = new G4UIparameter("zvalMax0", 'd', true);
   p2zValMax0->SetGuidance("Maximum z-value, expressed in unit (default = 1.)");
   p2zValMax0->SetGuidance("Can be reset with /analysis/p2/set command");
-  p2zValMax0->SetDefaultValue(1.);
+  p2zValMax0->SetDefaultValue((G4double)1.);
 
   auto p2zValUnit0 = new G4UIparameter("zvalUnit0", 's', true);
   p2zValUnit0->SetGuidance("The unit applied to filled z-values and zvalMin0, zvalMax0");

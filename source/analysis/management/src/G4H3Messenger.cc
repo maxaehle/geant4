@@ -85,12 +85,12 @@ void G4H3Messenger::CreateH3Cmd()
   auto h3xValMin0 = new G4UIparameter("xvalMin0", 'd', true);
   h3xValMin0->SetGuidance("Minimum x-value, expressed in unit (default = 0.)");
   h3xValMin0->SetGuidance("Can be reset with /analysis/h3/set command");
-  h3xValMin0->SetDefaultValue(0.);
+  h3xValMin0->SetDefaultValue((G4double)0.);
 
   auto h3xValMax0 = new G4UIparameter("xvalMax0", 'd', true);
   h3xValMax0->SetGuidance("Maximum x-value, expressed in unit (default = 1.)");
   h3xValMax0->SetGuidance("Can be reset with /analysis/h3/set command");
-  h3xValMax0->SetDefaultValue(1.);
+  h3xValMax0->SetDefaultValue((G4double)1.);
 
   auto h3xValUnit0 = new G4UIparameter("xvalUnit0", 's', true);
   h3xValUnit0->SetGuidance("The unit applied to filled x-values and xvalMin0, xvalMax0");
@@ -116,12 +116,12 @@ void G4H3Messenger::CreateH3Cmd()
   auto h3yValMin0 = new G4UIparameter("yvalMin0", 'd', true);
   h3yValMin0->SetGuidance("Minimum y-value, expressed in unit (default = 0.)");
   h3yValMin0->SetGuidance("Can be reset with /analysis/h3/set command");
-  h3yValMin0->SetDefaultValue(0.);
+  h3yValMin0->SetDefaultValue((G4double)0.);
 
   auto h3yValMax0 = new G4UIparameter("yvalMax0", 'd', true);
   h3yValMax0->SetGuidance("Maximum y-value, expressed in unit (default = 1.)");
   h3yValMax0->SetGuidance("Can be reset with /analysis/h3/set command");
-  h3yValMax0->SetDefaultValue(1.);
+  h3yValMax0->SetDefaultValue((G4double)1.);
 
   auto h3yValUnit0 = new G4UIparameter("yvalUnit0", 's', true);
   h3yValUnit0->SetGuidance("The unit applied to filled y-values and yvalMin0, yvalMax0");
@@ -147,12 +147,12 @@ void G4H3Messenger::CreateH3Cmd()
   auto h3zValMin0 = new G4UIparameter("zvalMin0", 'd', true);
   h3zValMin0->SetGuidance("Minimum z-value, expressed in unit (default = 0.)");
   h3zValMin0->SetGuidance("Can be reset with /analysis/h3/set command");
-  h3zValMin0->SetDefaultValue(0.);
+  h3zValMin0->SetDefaultValue((G4double)0.);
 
   auto h3zValMax0 = new G4UIparameter("zvalMax0", 'd', true);
   h3zValMax0->SetGuidance("Maximum z-value, expressed in unit (default = 1.)");
   h3zValMax0->SetGuidance("Can be reset with /analysis/h3/set command");
-  h3zValMax0->SetDefaultValue(1.);
+  h3zValMax0->SetDefaultValue((G4double)1.);
 
   auto h3zValUnit0 = new G4UIparameter("zvalUnit0", 's', true);
   h3zValUnit0->SetGuidance("The unit applied to filled z-values and zvalMin0, zvalMax0");

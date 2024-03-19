@@ -151,7 +151,7 @@ void G4MicroElecMaterialStructure::ReadMaterialFile()
 	    
 	    if (nameParameter == "EnergyPeak") energyConstant.push_back(data);
 	    if (nameParameter == "EnergyLimit") LimitEnergy.push_back(data);
-	    if (nameParameter == "EADL") EADL_Enumerator.push_back(data);
+	    if (nameParameter == "EADL") EADL_Enumerator.push_back((passivedouble)data);
 	    
 	    if (nameParameter == "WeaklyBoundShell")
 	      {if (data == 0) { isShellWeaklyBoundVector.push_back(false); }
