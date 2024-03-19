@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 #ifndef HEP_DEFS_H
 #define HEP_DEFS_H
 

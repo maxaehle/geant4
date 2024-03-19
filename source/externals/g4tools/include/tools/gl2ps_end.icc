@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 
 TOOLS_GL2PSDLL_API tools_GLint tools_gl2psSetBackgroundColor(G4float a_r,G4float a_g,G4float a_b)
 {

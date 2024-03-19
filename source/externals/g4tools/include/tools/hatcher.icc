@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 //  Created by Laurent Garnier on Fri Jan 30 2004.
 
 //#define TOOLS_HATCHER_DEBUG

@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 // This file was generated automatically by marshalgen.
 
 #ifndef MarshaledExN02TrackerHit_H

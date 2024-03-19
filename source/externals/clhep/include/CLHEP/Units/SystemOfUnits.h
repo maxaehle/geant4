@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 // -*- C++ -*-
 // ----------------------------------------------------------------------
 // HEP coherent system of Units

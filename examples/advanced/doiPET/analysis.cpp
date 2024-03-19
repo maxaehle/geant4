@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 //The following code is for anylizing axial sensitivity from coincidence list-mode data
 //It takes source position of the event (of those which are detected by the scanner) and analises axial sensitivty.
 //by Abdella M. Ahmed, 2020

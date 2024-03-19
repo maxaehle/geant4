@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 /* file scrollmouse.c
  *
  * Event handler for wheel mouse

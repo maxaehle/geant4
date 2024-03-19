@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 
 #define TOOLS_WROOT_MT_NTUPLE_SET_MAX(a__type) \
      {leaf_ref<a__type>* _mleaf_ = _mleaf?id_cast<base_leaf, leaf_ref<a__type> >(*_mleaf):0;\

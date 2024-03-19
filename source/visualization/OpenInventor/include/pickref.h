@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 #ifndef COIN_PIXMAP_PICKREF_XPM
 #define COIN_PIXMAP_PICKREF_XPM
 

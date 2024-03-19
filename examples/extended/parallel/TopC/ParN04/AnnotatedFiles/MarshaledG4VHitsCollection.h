@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 /// \file MarshaledG4VHitsCollection.h
 /// \brief Definition of the MaraledG4VHitsCollection class
 //

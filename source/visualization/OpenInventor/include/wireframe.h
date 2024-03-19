@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 #ifndef COIN_PIXMAP_WIREFRAME_XPM
 #define COIN_PIXMAP_WIREFRAME_XPM
 

@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 // MIT License
 //
 // Copyright (c) 2020 Jonathan R. Madsen

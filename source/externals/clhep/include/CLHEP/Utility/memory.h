@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 #ifndef CLHEP_MEMORY_H
 #define CLHEP_MEMORY_H
 

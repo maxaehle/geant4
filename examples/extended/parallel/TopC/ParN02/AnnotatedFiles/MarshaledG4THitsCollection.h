@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 // This file was generated automatically by marshalgen.
 //
 /// \file MarshaledG4THitsCollection.h

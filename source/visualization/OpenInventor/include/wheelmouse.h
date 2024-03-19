@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 /* file whellmouse.h
  *
  * Event handler for wheelmouse

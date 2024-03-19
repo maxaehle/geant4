@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 /*********************************************************************
    Returns the exponential integral function
 

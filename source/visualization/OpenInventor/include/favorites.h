@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 #ifndef COIN_PIXMAP_FAVORITES_XPM
 #define COIN_PIXMAP_FAVORITES_XPM
 

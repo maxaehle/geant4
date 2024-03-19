@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 #ifndef statusMessageReporting_h_included
 #define statusMessageReporting_h_included
 

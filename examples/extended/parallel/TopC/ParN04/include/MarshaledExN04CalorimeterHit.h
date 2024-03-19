@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 // This file was generated automatically by marshalgen.
 
 #ifndef MarshaledExN04CalorimeterHit_H

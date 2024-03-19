@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 #include "CLHEP/Random/RandGaussZiggurat.h"
 #include "CLHEP/Units/PhysicalConstants.h"
 #include <iostream>

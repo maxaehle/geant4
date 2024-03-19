@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 /*                            igam.c
  *
  *    Incomplete gamma integral

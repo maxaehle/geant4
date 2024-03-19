@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 #ifdef PoPs_MPI
 #include <stdio.h>
 #include <stdlib.h>

@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 
 /*
 Given a "libname.map" file on standard input and a list or directory

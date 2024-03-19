@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 /// \file MarshaledG4String.h
 /// \brief Definition of the MaraledG4String class
 //

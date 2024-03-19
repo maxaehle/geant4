@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 /*
 Code adapted from:
 http://www.jstatsoft.org/v05/i08/

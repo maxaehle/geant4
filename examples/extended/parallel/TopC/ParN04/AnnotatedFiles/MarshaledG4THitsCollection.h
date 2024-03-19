@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 //
 /// \file MarshaledG4THitsCollection.h
 /// \brief Definition of the MaraledG4THitsCollection class

@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 #ifndef CLHEP_NONCOPYABLE_H
 #define CLHEP_NONCOPYABLE_H
 

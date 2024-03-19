@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 //
 // Guy Barrand 8 October 2021.
 //

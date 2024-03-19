@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 #ifndef CLHEP_KEYWORDS_H
 #define CLHEP_KEYWORDS_H
 

@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 /*
 # <<BEGIN-copyright>>
 # <<END-copyright>>

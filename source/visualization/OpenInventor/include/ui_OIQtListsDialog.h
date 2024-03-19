@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 /********************************************************************************
 ** Form generated from reading UI file 'OIQtListsDialogwS1786.ui'
 **

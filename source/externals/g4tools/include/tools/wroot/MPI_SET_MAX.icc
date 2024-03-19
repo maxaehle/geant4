@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 
 #define TOOLS_WROOT_MPI_NTUPLE_LEAF_SET_LENGTH_MAX(a__type) \
      {leaf_ref<a__type>* _pleaf_ = _pleaf?id_cast<base_leaf, leaf_ref<a__type> >(*_pleaf):0;\

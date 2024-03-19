@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 /// \file MarshaledG4HCofThisEvent.h
 /// \brief Definition of the MaraledG4HCofisEvent class
 //

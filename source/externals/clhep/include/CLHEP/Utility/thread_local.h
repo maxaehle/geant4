@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 #ifndef CLHEP_THREAD_LOCAL_H
 #define CLHEP_THREAD_LOCAL_H
 

@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 #ifndef AMIGACONFIG_H
 #define AMIGACONFIG_H
 

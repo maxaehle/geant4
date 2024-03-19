@@ -1,3 +1,5 @@
+#include "CommonHeader.h"
+
 /**************************************************************************\
  *
  *  This file is part of the Coin 3D visualization library.
