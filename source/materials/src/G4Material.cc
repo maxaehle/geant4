@@ -307,7 +307,7 @@ void G4Material::ComputeDerivedQuantities()
     fTotNbOfElectPerVolume += fVecNbOfAtomsPerVolume[i]*Zi;
     if(fState != kStateGas) {
       fFreeElecDensity += fVecNbOfAtomsPerVolume[i]*
-	G4AtomicShells::GetNumberOfFreeElectrons(Zi, elecTh);
+        G4AtomicShells::GetNumberOfFreeElectrons((passivedouble)Zi, elecTh);
     }
   }
         

@@ -778,7 +778,7 @@ HepPolyhedron::RotateContourAroundZ(G4int nstep,
   G4bool ifWholeCircle = (std::abs(dphi - twopi) < perMillion) ? true : false;
   G4double delPhi = (ifWholeCircle) ? twopi : dphi;
   G4int nSphi = nstep;
-  if (nSphi <= 0) nSphi = GetNumberOfRotationSteps()*delPhi/twopi + 0.5;
+  if (nSphi <= 0) nSphi = (double)( GetNumberOfRotationSteps()*delPhi/twopi + 0.5 );
   if (nSphi == 0) nSphi = 1;
   G4int nVphi = (ifWholeCircle) ? nSphi : nSphi + 1;
 
