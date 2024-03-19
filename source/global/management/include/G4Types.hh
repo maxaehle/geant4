@@ -86,6 +86,17 @@
 //template<typename T>
 //T ForwardIfPossible(T x){ return x; }
 using G4double  = Forward;
+using CF = std::complex<Forward>;
+inline CF operator+(double a, CF b){ return G4double(a)+b; }
+inline CF operator-(double a, CF b){ return G4double(a)-b; }
+inline CF operator*(double a, CF b){ return G4double(a)*b; }
+inline CF operator/(double a, CF b){ return G4double(a)/b; }
+inline CF operator+(CF a, double b){ return a+G4double(b); }
+inline CF operator-(CF a, double b){ return a-G4double(b); }
+inline CF operator*(CF a, double b){ return a*G4double(b); }
+inline CF operator/(CF a, double b){ return a/G4double(b); }
+
+
 //using G4float   = Forward;
 struct G4float : public Forward {
   template<typename...Args>
