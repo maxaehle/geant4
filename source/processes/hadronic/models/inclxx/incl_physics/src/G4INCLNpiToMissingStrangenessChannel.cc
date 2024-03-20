@@ -184,7 +184,7 @@ namespace G4INCL {
 			else if(std::abs(iso-iso_system) == 1){ // equi-repartition
 				rdm = G4int(Random::shoot()*3.)-1;
 				nucleon_initial->setType(ParticleTable::getNucleonType((G4int(rdm+0.5)*2-1)*(iso_system-iso)));
-				pion_initial->setType(ParticleTable::getKaonType((std::abs(rdm*2)-1)*(iso-iso_system)));
+				pion_initial->setType(ParticleTable::getKaonType((G4int)((std::abs(rdm*2)-1)*(iso-iso_system))));
 				antikaon->setType(ParticleTable::getAntiKaonType((G4int(rdm-0.5)*2+1)*(iso-iso_system)));
 			}
 			else INCL_ERROR("Isospin non-conservation in NNToMissingStrangenessChannel" << '\n');

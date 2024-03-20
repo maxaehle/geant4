@@ -555,10 +555,10 @@ G4double G4QMDMeanField::GetTotalPotential()
       rho3[i] = G4Pow::GetInstance()->powA ( rhoa[i] , gamm );
    }
 
-   G4double potential = c0 * std::accumulate( rhoa.begin() , rhoa.end() , 0.0 ) 
-                      + c3 * std::accumulate( rho3.begin() , rho3.end() , 0.0 ) 
-                      + cs * std::accumulate( rhos.begin() , rhos.end() , 0.0 ) 
-                      + cl * std::accumulate( rhoc.begin() , rhoc.end() , 0.0 );
+   G4double potential = c0 * std::accumulate( rhoa.begin() , rhoa.end() , (G4double)0.0 )
+                      + c3 * std::accumulate( rho3.begin() , rho3.end() , (G4double)0.0 )
+                      + cs * std::accumulate( rhos.begin() , rhos.end() , (G4double)0.0 )
+                      + cl * std::accumulate( rhoc.begin() , rhoc.end() , (G4double)0.0 );
 
    return potential;
 

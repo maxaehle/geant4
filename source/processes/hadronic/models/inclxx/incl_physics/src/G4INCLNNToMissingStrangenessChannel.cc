@@ -180,8 +180,8 @@ namespace G4INCL {
 			else if(std::abs(iso-iso_system) == 0){ // particle1 3/4 proton, 1/4 neutron; particle2 1/4 proton, 3/4 neutron
 				rdm = G4int(Random::shoot()*2.)*2-1;
 				G4double rdm2 = G4int(Random::shoot()*2.)*2-1;
-				particle1->setType(ParticleTable::getNucleonType(std::max(rdm,rdm2)));
-				particle2->setType(ParticleTable::getNucleonType(std::min(rdm,rdm2)));
+				particle1->setType(ParticleTable::getNucleonType((G4int)std::max(rdm,rdm2)));
+				particle2->setType(ParticleTable::getNucleonType((G4int)std::min(rdm,rdm2)));
 				kaon->setType(ParticleTable::getKaonType(-G4int(rdm)));
 				antikaon->setType(ParticleTable::getAntiKaonType(-G4int(rdm2)));
 			}

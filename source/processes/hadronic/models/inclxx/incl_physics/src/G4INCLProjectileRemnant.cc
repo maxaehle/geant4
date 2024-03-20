@@ -351,7 +351,7 @@ namespace G4INCL {
     const G4double excitedState = std::accumulate(
         levels.begin(),
         levels.end(),
-        0.);
+        (G4double)0.);
 
     return excitedState-groundState;
   }

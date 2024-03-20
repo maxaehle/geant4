@@ -53,7 +53,7 @@ GenerateMultiBody(G4double initialMass,
   size_t N = masses.size();
   finalState.resize(N);
 
-  G4double mtot = std::accumulate(masses.begin(), masses.end(), 0.0);
+  G4double mtot = std::accumulate(masses.begin(), masses.end(), (G4double)0.0);
   G4double mu = mtot;
   G4double PFragMagCM = 0.0;
   G4double Mass = initialMass;

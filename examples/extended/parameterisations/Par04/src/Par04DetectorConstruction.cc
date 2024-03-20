@@ -82,7 +82,7 @@ G4VPhysicalVolume* Par04DetectorConstruction::Construct()
   //--------- Derived dimensions ---------
   G4double full2Pi = 2. * CLHEP::pi * rad;
   G4double layerThickness =
-    std::accumulate(fAbsorberThickness.begin(), fAbsorberThickness.end(), 0.);
+    std::accumulate(fAbsorberThickness.begin(), fAbsorberThickness.end(), (G4double)0.);
   G4double detectorOuterRadius = fDetectorInnerRadius + fNbOfLayers * layerThickness;
   G4double worldSizeXY         = detectorOuterRadius * 4.;
   G4double worldSizeZ          = fDetectorLength * 2;

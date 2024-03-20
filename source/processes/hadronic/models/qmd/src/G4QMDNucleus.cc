@@ -221,13 +221,13 @@ void G4QMDNucleus::CalEnergyAndAngularMomentumInCM()
       totalMass += GetParticipant( i )->GetMass();
    }
 
-   //G4double kineticEnergyPerNucleon = ( std::accumulate ( es.begin() , es.end() , 0.0 ) - totalMass )/n;
+   //G4double kineticEnergyPerNucleon = ( std::accumulate ( es.begin() , es.end() , (G4double)0.0 ) - totalMass )/n;
 
 // Total (not per nucleion ) Binding Energy 
-   G4double bindingEnergy =  ( std::accumulate ( es.begin() , es.end() , 0.0 ) -totalMass ) + potentialEnergy;
+   G4double bindingEnergy =  ( std::accumulate ( es.begin() , es.end() , (G4double)0.0 ) -totalMass ) + potentialEnergy;
 
    //G4cout << "KineticEnergyPerNucleon in GeV " << kineticEnergyPerNucleon << G4endl;
-   //G4cout << "KineticEnergySum in GeV " << std::accumulate ( es.begin() , es.end() , 0.0 ) - totalMass << G4endl;
+   //G4cout << "KineticEnergySum in GeV " << std::accumulate ( es.begin() , es.end() , (G4double)0.0 ) - totalMass << G4endl;
    //G4cout << "PotentialEnergy in GeV " << potentialEnergy << G4endl;
    //G4cout << "BindingEnergy in GeV " << bindingEnergy << G4endl;
    //G4cout << "G4BindingEnergy in GeV " << G4NucleiProperties::GetBindingEnergy( GetAtomicNumber() , GetMassNumber() )/GeV << G4endl;

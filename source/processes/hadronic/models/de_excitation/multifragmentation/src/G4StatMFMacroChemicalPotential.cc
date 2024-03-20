@@ -63,7 +63,7 @@ G4double G4StatMFMacroChemicalPotential::CalcChemicalPotentialNu(void)
 
   // Initial value for _ChemPotentialNu	
   _ChemPotentialNu = (theZ/theA)*(8.0*G4StatMFParameters::GetGamma0()
-				  +2.0*CP*g4calc->Z23(theA))
+                                  +2.0*CP*g4calc->Z23((G4int)theA))
     - 4.0*G4StatMFParameters::GetGamma0();
 		
   G4double ChemPa = _ChemPotentialNu;

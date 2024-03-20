@@ -60,7 +60,7 @@ GenerateMultiBody(G4double initialMass,
   //daughters' mass
   G4int numberOfDaughters = masses.size();
   G4double sumofmasses =
-    std::accumulate(masses.begin(), masses.end(), 0.);
+    std::accumulate(masses.begin(), masses.end(), (G4double)0.);
   
   //Calculate daughter momentum
   std::vector<G4double> daughtermomentum(numberOfDaughters);

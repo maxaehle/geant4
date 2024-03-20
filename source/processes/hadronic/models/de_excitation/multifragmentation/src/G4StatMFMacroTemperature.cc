@@ -154,7 +154,7 @@ G4double G4StatMFMacroTemperature::FragsExcitEnergy(const G4double T)
 {
   // Model Parameters
   G4Pow* g4calc = G4Pow::GetInstance();
-  G4double R0 = G4StatMFParameters::Getr0()*g4calc->Z13(theA);
+  G4double R0 = G4StatMFParameters::Getr0()*g4calc->Z13((G4int)theA);
   G4double R = R0*g4calc->A13(1.0+G4StatMFParameters::GetKappaCoulomb());
   G4double FreeVol = _Kappa*(4.*pi/3.)*R0*R0*R0; 
  

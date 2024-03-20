@@ -91,7 +91,7 @@ G4double G4StatMFChannel::GetFragmentsCoulombEnergy(void)
 {
   G4double Coulomb =
     std::accumulate(_theFragments.begin(),_theFragments.end(),
-                    0.0,
+                    (G4double)0.0,
                     [](const G4double& running_total,
                        G4StatMFFragment*& fragment)
                     {

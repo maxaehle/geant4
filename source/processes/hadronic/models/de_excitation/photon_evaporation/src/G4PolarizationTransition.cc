@@ -290,7 +290,7 @@ void G4PolarizationTransition::SampleGammaTransition(
 
   for(size_t k2=0; k2<newlength; ++k2) {
     std::vector<G4complex> npolar;
-    npolar.resize(k2+1, 0);
+    npolar.resize(k2+1, (G4double)0.);
     //(newPol[k2]).assign(k2+1, 0);
     for(size_t k1=0; k1<pol.size(); ++k1) {
       for(size_t k=0; k<=k1+k2; k+=2) {
@@ -325,7 +325,7 @@ void G4PolarizationTransition::SampleGammaTransition(
             if(kappa != 0) {
               tmpAmp *= G4Exp(0.5*(LnFactorial(((G4int)k)-kappa) 
 				   - LnFactorial(((G4int)k)+kappa)));
-              tmpAmp *= polar(1., phi*kappa);
+	      tmpAmp *= polar((G4double)1., phi*kappa);
             }
             //(newPol[k2])[kappa2] += tmpAmp;
             npolar[kappa2] += tmpAmp;
@@ -338,7 +338,7 @@ void G4PolarizationTransition::SampleGammaTransition(
   }
 
   // sanity checks
-  if(fVerbose > 2 && 0.0 == newPol[0][0]) {
+  if(fVerbose > 2 && (G4double)0.0 == newPol[0][0]) {
     G4cout << "G4PolarizationTransition::SampleGammaTransition WARNING:"
 	   << " P[0][0] is zero!" << G4endl;
     G4cout << "Old pol is: " << *nucpol << G4endl;
