@@ -40,6 +40,8 @@
 #ifndef GMOCRENIO_HH
 #define GMOCRENIO_HH
 
+#include "G4Types.hh"
+
 #include <vector>
 #include <string>
 #include <fstream>

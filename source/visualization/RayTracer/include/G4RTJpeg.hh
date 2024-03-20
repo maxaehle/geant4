@@ -38,6 +38,8 @@
 #ifndef G4RTJpeg_H
 #define G4RTJpeg_H 1
 
+#include "G4Types.hh"
+
 typedef	unsigned char	u_char;
 typedef unsigned int	u_int;
 
