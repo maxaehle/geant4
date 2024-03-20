@@ -253,8 +253,8 @@ void G4ParticleHPInelasticBaseFS::BaseApply(const G4HadProjectile & theTrack,
     //----------------------------------------------------------------------------
     if(Qvalue<1.*CLHEP::keV && Qvalue>-1.*CLHEP::keV){ //Not in the G4NDL lib or not calculated yet:
       //Calculate residual:
-      G4int ResidualA=theBaseA;
-      G4int ResidualZ=theBaseZ;
+      G4int ResidualA=(G4int)theBaseA;
+      G4int ResidualZ=(G4int)theBaseZ;
       for (ii = 0; ii < nDef; ii++) {
         ResidualZ -= theDefs[ii]->GetAtomicNumber();
         ResidualA -= theDefs[ii]->GetBaryonNumber();

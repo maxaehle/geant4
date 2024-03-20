@@ -7,6 +7,8 @@
 #ifndef PoPs_mass_h_included
 #define PoPs_mass_h_included
 
+#include "G4Types.hh"
+
 #include <statusMessageReporting.h>
 
 #if defined __cplusplus

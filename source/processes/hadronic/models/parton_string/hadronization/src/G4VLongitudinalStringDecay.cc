@@ -746,11 +746,11 @@ void G4VLongitudinalStringDecay::SetMinMasses()
     //bb3     -> (1-ProbEta_b)/pspin_meson 553  (441) Probability of Upsilon
 
     if ( pspin_meson != 0. ) {
-       Meson[3][3][0] *= (    ProbEta_c)/(   pspin_meson);   // Eta_c
-       Meson[3][3][1] *= (1.0-ProbEta_c)/(1.-pspin_meson);   // J/Psi
+       Meson[3][3][0] *= (G4int)((    ProbEta_c)/(   pspin_meson));   // Eta_c
+       Meson[3][3][1] *= (G4int)((1.0-ProbEta_c)/(1.-pspin_meson));   // J/Psi
 
-       Meson[4][4][0] *= (    ProbEta_b)/(   pspin_meson);   // Eta_b
-       Meson[4][4][1] *= (1.0-ProbEta_b)/(1.-pspin_meson);   // Upsilon
+       Meson[4][4][0] *= (G4int)((    ProbEta_b)/(   pspin_meson));   // Eta_b
+       Meson[4][4][1] *= (G4int)((1.0-ProbEta_b)/(1.-pspin_meson));   // Upsilon
     }
 
     //--------------------------

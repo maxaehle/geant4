@@ -1160,7 +1160,7 @@ G4FFG_DATA_FUNCTIONENTER__
 
     G4int ProductCount = ENDFData_->G4GetNumberOfFissionProducts();
     BranchCount_ = 0;
-    G4ArrayOps::Set(YieldEnergyGroups_, DataTotal_, 0.0);
+    G4ArrayOps::Set(YieldEnergyGroups_, DataTotal_, (G4double)0.0);
 
     // Loop through all the products
     for(G4int i = 0; i < ProductCount; i++)
@@ -1172,8 +1172,8 @@ G4FFG_DATA_FUNCTIONENTER__
     // Generate the true normalization factor, since round-off errors may result
     // in non-singular normalization of the data files. Also, reset DataTotal_
     // since it is used by Renormalize() to set the probability segments.
-    G4ArrayOps::Divide(YieldEnergyGroups_, MaintainNormalizedData_, 1.0, DataTotal_);
-    G4ArrayOps::Set(YieldEnergyGroups_, DataTotal_, 0.0);
+    G4ArrayOps::Divide(YieldEnergyGroups_, MaintainNormalizedData_, (G4double)1.0, DataTotal_);
+    G4ArrayOps::Set(YieldEnergyGroups_, DataTotal_, (G4double)0.0);
 
     // Go through all the trees one at a time
     for(G4int i = 0; i < TreeCount_; i++)

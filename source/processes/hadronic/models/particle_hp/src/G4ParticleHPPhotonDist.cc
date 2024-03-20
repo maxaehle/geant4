@@ -339,8 +339,8 @@ G4ReactionProductVector * G4ParticleHPPhotonDist::GetPhotons(G4double anEnergy)
               *it = temp->Sample();
             }
 
-            if (std::accumulate(photons_e.begin(), photons_e.end(), 0.0) > maximumE) {
-              if (std::accumulate(photons_e.begin(), photons_e.end(), 0.0) < best)
+            if (std::accumulate(photons_e.begin(), photons_e.end(), (G4double)0.0) > maximumE) {
+              if (std::accumulate(photons_e.begin(), photons_e.end(), (G4double)0.0) < best)
                 photons_e_best = photons_e;
               continue;
 

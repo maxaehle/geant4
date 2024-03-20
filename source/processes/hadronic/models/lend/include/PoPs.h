@@ -8,6 +8,8 @@
 #ifndef PoPs_h_included
 #define PoPs_h_included
 
+#include "G4Types.hh"
+
 /* Disable Effective C++ warnings in PoP code. */
 #if __INTEL_COMPILER > 1399
 #pragma warning( disable:593 )

@@ -7,6 +7,8 @@
 #ifndef MCGIDI_mass_h_included
 #define MCGIDI_mass_h_included
 
+#include "G4Types.hh"
+
 #if defined __cplusplus
     extern "C" {
     namespace GIDI {

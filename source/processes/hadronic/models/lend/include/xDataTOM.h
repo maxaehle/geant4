@@ -9,6 +9,7 @@
 #define xDataTOM_h_included
 
 #include <statusMessageReporting.h>
+#include "G4Types.hh"
 
 #if defined __cplusplus
     extern "C" {

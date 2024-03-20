@@ -90,7 +90,7 @@ IntegrateEmissionProbability(G4double low, G4double up,
 {  
   static const G4double den = 1.0/CLHEP::MeV;
   G4double del = (up - low);
-  G4int nbins = del*den;
+  G4int nbins = (G4int)(del*den);
   nbins = std::max(nbins, 4);
   del /= static_cast<G4double>(nbins);
   G4double e = low + 0.5*del;

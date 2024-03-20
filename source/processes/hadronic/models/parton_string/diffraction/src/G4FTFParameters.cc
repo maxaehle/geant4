@@ -889,24 +889,24 @@ class G4FTFSettingDefaultHDP
     /* JVY, June 11, 2020: try to open up... */
     // Process=0 --> Qexchg w/o excitation
     //
-    HDP.SetDefault( "FTF_BARYON_PROC0_A1",  13.71 );
-    HDP.SetDefault( "FTF_BARYON_PROC0_B1",   1.75 );
-    HDP.SetDefault( "FTF_BARYON_PROC0_A2", -30.69 ); 
-    HDP.SetDefault( "FTF_BARYON_PROC0_B2",   3.0  ); 
-    HDP.SetDefault( "FTF_BARYON_PROC0_A3",   0.0  );
-    HDP.SetDefault( "FTF_BARYON_PROC0_ATOP", 1.0  ); 
-    HDP.SetDefault( "FTF_BARYON_PROC0_YMIN", 0.93 ); 
+    HDP.SetDefault( "FTF_BARYON_PROC0_A1",  (G4double)13.71 );
+    HDP.SetDefault( "FTF_BARYON_PROC0_B1",   (G4double)1.75 );
+    HDP.SetDefault( "FTF_BARYON_PROC0_A2", (G4double)-30.69 );
+    HDP.SetDefault( "FTF_BARYON_PROC0_B2",   (G4double)3.0  );
+    HDP.SetDefault( "FTF_BARYON_PROC0_A3",   (G4double)0.0  );
+    HDP.SetDefault( "FTF_BARYON_PROC0_ATOP", (G4double)1.0  );
+    HDP.SetDefault( "FTF_BARYON_PROC0_YMIN", (G4double)0.93 );
     /* */
     //
     // Process=1 --> Qexchg w/excitation
     //
-    HDP.SetDefault( "FTF_BARYON_PROC1_A1",  25.   );
-    HDP.SetDefault( "FTF_BARYON_PROC1_B1",   1.   );
-    HDP.SetDefault( "FTF_BARYON_PROC1_A2", -50.34 );
-    HDP.SetDefault( "FTF_BARYON_PROC1_B2",   1.5  );
-    HDP.SetDefault( "FTF_BARYON_PROC1_A3",   0.   );
-    HDP.SetDefault( "FTF_BARYON_PROC1_ATOP", 0.   );
-    HDP.SetDefault( "FTF_BARYON_PROC1_YMIN", 1.4  );
+    HDP.SetDefault( "FTF_BARYON_PROC1_A1",  (G4double)25.   );
+    HDP.SetDefault( "FTF_BARYON_PROC1_B1",   (G4double)1.   );
+    HDP.SetDefault( "FTF_BARYON_PROC1_A2", (G4double)-50.34 );
+    HDP.SetDefault( "FTF_BARYON_PROC1_B2",   (G4double)1.5  );
+    HDP.SetDefault( "FTF_BARYON_PROC1_A3",   (G4double)0.   );
+    HDP.SetDefault( "FTF_BARYON_PROC1_ATOP", (G4double)0.   );
+    HDP.SetDefault( "FTF_BARYON_PROC1_YMIN", (G4double)1.4  );
     /* */
     //
     // NOTE: Process #2 & 3 are projectile & target diffraction
@@ -925,19 +925,19 @@ class G4FTFSettingDefaultHDP
     /* JVY, June 11, 2020: try to open up... */
     // Process=4 --> Qexchg w/additional multiplier in excitation 
     //
-    HDP.SetDefault( "FTF_BARYON_PROC4_A1",  0.6 ); 
-    HDP.SetDefault( "FTF_BARYON_PROC4_B1",  0.  );
-    HDP.SetDefault( "FTF_BARYON_PROC4_A2", -1.2 ); 
-    HDP.SetDefault( "FTF_BARYON_PROC4_B2",  0.5 );
-    HDP.SetDefault( "FTF_BARYON_PROC4_A3",  0.  );
-    HDP.SetDefault( "FTF_BARYON_PROC4_ATOP",0.  );
-    HDP.SetDefault( "FTF_BARYON_PROC4_YMIN",1.4 );
+    HDP.SetDefault( "FTF_BARYON_PROC4_A1",  (G4double)0.6 );
+    HDP.SetDefault( "FTF_BARYON_PROC4_B1",  (G4double)0.  );
+    HDP.SetDefault( "FTF_BARYON_PROC4_A2", (G4double)-1.2 );
+    HDP.SetDefault( "FTF_BARYON_PROC4_B2",  (G4double)0.5 );
+    HDP.SetDefault( "FTF_BARYON_PROC4_A3",  (G4double)0.  );
+    HDP.SetDefault( "FTF_BARYON_PROC4_ATOP",(G4double)0.  );
+    HDP.SetDefault( "FTF_BARYON_PROC4_YMIN",(G4double)1.4 );
     /* */
     //
     // Parameters of participating hadron (baryon) excitation
     //
-    HDP.SetDefault( "FTF_BARYON_DELTA_PROB_QEXCHG", 0. );
-    HDP.SetDefault( "FTF_BARYON_PROB_SAME_QEXCHG", 0. );
+    HDP.SetDefault( "FTF_BARYON_DELTA_PROB_QEXCHG", (G4double)0. );
+    HDP.SetDefault( "FTF_BARYON_PROB_SAME_QEXCHG", (G4double)0. );
     HDP.SetDefault( "FTF_BARYON_DIFF_M_PROJ", 1.16, 1.16, 3. );     // it's supposed to be in GeV but do NOT do (*CLHEP::GeV) 
                                                                     // because it'll be done in the G4FTFParameters::SetProjMinDiffMass
     HDP.SetDefault( "FTF_BARYON_NONDIFF_M_PROJ", 1.16, 1.16, 3. );  // do NOT (*CLHEP::GeV) - same as above
@@ -959,23 +959,23 @@ class G4FTFSettingDefaultHDP
     /* JVY, June 25, 2019: For now, keep this group of parameters FIXED */
     // Process=0 --> Qexchg w/o excitation
     //
-    HDP.SetDefault( "FTF_PION_PROC0_A1", 150.0  );
-    HDP.SetDefault( "FTF_PION_PROC0_B1",   1.8  );
-    HDP.SetDefault( "FTF_PION_PROC0_A2",-247.3  ); 
-    HDP.SetDefault( "FTF_PION_PROC0_B2",   2.3 ); 
-    HDP.SetDefault( "FTF_PION_PROC0_A3",   0.0  );
-    HDP.SetDefault( "FTF_PION_PROC0_ATOP", 1.0  ); 
-    HDP.SetDefault( "FTF_PION_PROC0_YMIN", 2.3  ); 
+    HDP.SetDefault( "FTF_PION_PROC0_A1", (G4double)150.0  );
+    HDP.SetDefault( "FTF_PION_PROC0_B1",   (G4double)1.8  );
+    HDP.SetDefault( "FTF_PION_PROC0_A2",(G4double)-247.3  );
+    HDP.SetDefault( "FTF_PION_PROC0_B2",   (G4double)2.3 );
+    HDP.SetDefault( "FTF_PION_PROC0_A3",   (G4double)0.0  );
+    HDP.SetDefault( "FTF_PION_PROC0_ATOP", (G4double)1.0  );
+    HDP.SetDefault( "FTF_PION_PROC0_YMIN", (G4double)2.3  );
     //
     // Process=1 --> Qexchg w/excitation
     //
-    HDP.SetDefault( "FTF_PION_PROC1_A1",   5.77 );
-    HDP.SetDefault( "FTF_PION_PROC1_B1",   0.6  );
-    HDP.SetDefault( "FTF_PION_PROC1_A2",  -5.77 );
-    HDP.SetDefault( "FTF_PION_PROC1_B2",   0.8  );
-    HDP.SetDefault( "FTF_PION_PROC1_A3",   0.   );
-    HDP.SetDefault( "FTF_PION_PROC1_ATOP", 0.   );
-    HDP.SetDefault( "FTF_PION_PROC1_YMIN", 0.0  );
+    HDP.SetDefault( "FTF_PION_PROC1_A1",   (G4double)5.77 );
+    HDP.SetDefault( "FTF_PION_PROC1_B1",   (G4double)0.6  );
+    HDP.SetDefault( "FTF_PION_PROC1_A2",  (G4double)-5.77 );
+    HDP.SetDefault( "FTF_PION_PROC1_B2",   (G4double)0.8  );
+    HDP.SetDefault( "FTF_PION_PROC1_A3",   (G4double)0.   );
+    HDP.SetDefault( "FTF_PION_PROC1_ATOP", (G4double)0.   );
+    HDP.SetDefault( "FTF_PION_PROC1_YMIN", (G4double)0.0  );
     /*
     //
     // NOTE: Process #2 & 3 are projectile & target diffraction
@@ -988,24 +988,24 @@ class G4FTFSettingDefaultHDP
     //    ... which is "strange" because projectile is a pion !!!... so it's always OFF    
     //    (see also lines 1007-1016)
     //
-    HDP.SetDefault( "FTF_PION_PROC2_A1",    2.27 );
-    HDP.SetDefault( "FTF_PION_PROC2_B1",    0.5  );
-    HDP.SetDefault( "FTF_PION_PROC2_A2", -98052.0);
-    HDP.SetDefault( "FTF_PION_PROC2_B2",    4.0  );
-    HDP.SetDefault( "FTF_PION_PROC2_A3",    0.   );
-    HDP.SetDefault( "FTF_PION_PROC2_ATOP",  0.   );
-    HDP.SetDefault( "FTF_PION_PROC2_YMIN",  3.0  );
+    HDP.SetDefault( "FTF_PION_PROC2_A1",    (G4double)2.27 );
+    HDP.SetDefault( "FTF_PION_PROC2_B1",    (G4double)0.5  );
+    HDP.SetDefault( "FTF_PION_PROC2_A2", (G4double)-98052.0);
+    HDP.SetDefault( "FTF_PION_PROC2_B2",    (G4double)4.0  );
+    HDP.SetDefault( "FTF_PION_PROC2_A3",    (G4double)0.   );
+    HDP.SetDefault( "FTF_PION_PROC2_ATOP",  (G4double)0.   );
+    HDP.SetDefault( "FTF_PION_PROC2_YMIN",  (G4double)3.0  );
     */
     //
     // Process=3 --> Target diffraction
     //
-    HDP.SetDefault( "FTF_PION_PROC3_A1",    7.0 );
-    HDP.SetDefault( "FTF_PION_PROC3_B1",    0.9 );
-    HDP.SetDefault( "FTF_PION_PROC3_A2",  -85.28);
-    HDP.SetDefault( "FTF_PION_PROC3_B2",    1.9 );
-    HDP.SetDefault( "FTF_PION_PROC3_A3",    0.08);
-    HDP.SetDefault( "FTF_PION_PROC3_ATOP",  0.  );
-    HDP.SetDefault( "FTF_PION_PROC3_YMIN",  2.2 );
+    HDP.SetDefault( "FTF_PION_PROC3_A1",    (G4double)7.0 );
+    HDP.SetDefault( "FTF_PION_PROC3_B1",    (G4double)0.9 );
+    HDP.SetDefault( "FTF_PION_PROC3_A2",  (G4double)-85.28);
+    HDP.SetDefault( "FTF_PION_PROC3_B2",    (G4double)1.9 );
+    HDP.SetDefault( "FTF_PION_PROC3_A3",    (G4double)0.08);
+    HDP.SetDefault( "FTF_PION_PROC3_ATOP",  (G4double)0.  );
+    HDP.SetDefault( "FTF_PION_PROC3_YMIN",  (G4double)2.2 );
     //
     // projectile and/or target diffraction (dissociation) may be switched ON/OFF 
     //
@@ -1022,19 +1022,19 @@ class G4FTFSettingDefaultHDP
     /* JVY, June 11, 2020: try to open up... */
     // Process=4 --> Qexchg w/additional multiplier in excitation 
     //
-    HDP.SetDefault( "FTF_PION_PROC4_A1",  1.0 ); 
-    HDP.SetDefault( "FTF_PION_PROC4_B1",  0.  );
-    HDP.SetDefault( "FTF_PION_PROC4_A2",-11.02); 
-    HDP.SetDefault( "FTF_PION_PROC4_B2",  1.0 );
-    HDP.SetDefault( "FTF_PION_PROC4_A3",  0.  );
-    HDP.SetDefault( "FTF_PION_PROC4_ATOP",0.  );
-    HDP.SetDefault( "FTF_PION_PROC4_YMIN",2.4 );
+    HDP.SetDefault( "FTF_PION_PROC4_A1",  (G4double)1.0 );
+    HDP.SetDefault( "FTF_PION_PROC4_B1", (G4double) 0.  );
+    HDP.SetDefault( "FTF_PION_PROC4_A2",(G4double)-11.02);
+    HDP.SetDefault( "FTF_PION_PROC4_B2",  (G4double)1.0 );
+    HDP.SetDefault( "FTF_PION_PROC4_A3",  (G4double)0.  );
+    HDP.SetDefault( "FTF_PION_PROC4_ATOP",(G4double)0.  );
+    HDP.SetDefault( "FTF_PION_PROC4_YMIN",(G4double)2.4 );
     /* */
     //    
     // NOTE; As of geant4-10-05, all these settings beloe are correct 
     //       (and are the same as they were in 10.4.ref06) 
     
-    HDP.SetDefault( "FTF_PION_DELTA_PROB_QEXCHG", 0.56 );    // in the past used to be 0.35
+    HDP.SetDefault( "FTF_PION_DELTA_PROB_QEXCHG", (G4double)0.56 );    // in the past used to be 0.35
     HDP.SetDefault( "FTF_PION_DIFF_M_PROJ", 1.0, 0.5, 3. );  // in the past used to be 0.5...
     HDP.SetDefault( "FTF_PION_NONDIFF_M_PROJ", 1.0, 0.5, 3. ); // so why not set 0.5 as a low limit ?... 
                                                                // ... or perhaps even lower ?

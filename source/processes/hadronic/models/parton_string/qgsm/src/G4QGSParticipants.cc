@@ -375,7 +375,7 @@ void G4QGSParticipants::GetList( const G4ReactionProduct& thePrimary ) {
   std::for_each(theInteractions.begin(), theInteractions.end(), DeleteInteractionContent());
   theInteractions.clear();
 
-  G4int MaxPower=thePrimary.GetMomentum().mag()/(3.3*GeV); if(MaxPower < 1) MaxPower=1;
+  G4int MaxPower=(G4int)(thePrimary.GetMomentum().mag()/(3.3*GeV)); if(MaxPower < 1) MaxPower=1;
 
   const G4int maxNumberOfLoops = 1000;
 
@@ -1624,7 +1624,7 @@ G4bool G4QGSParticipants::DeterminePartonMomenta()
     if ( Mass2 < 0.0 ) {
       G4ExceptionDescription ed;
       ed << "Projectile " << theProjectile.GetDefinition()->GetParticleName()
-         << "  4-momentum " << Psum << G4endl;
+         << "  4-momentum " << Psum << G4endl;
       ed << "LorentzVector tmp " << tmp << "  with Mass2 " << Mass2 << G4endl;
       G4Exception( "G4QGSParticipants::DeterminePartonMomenta(): 4-momentum with negative mass!",
                    "HAD_QGSPARTICIPANTS_001", JustWarning, ed );

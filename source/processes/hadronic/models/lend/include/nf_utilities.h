@@ -12,6 +12,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdarg.h>
+#include "G4Types.hh"
 
 #define NUMERICALFUNCTIONS_SVN_VERSION 110+
 
