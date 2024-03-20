@@ -42,6 +42,7 @@
 #ifndef MYGAMMA_H
 #define MYGAMMA_H
 
+#include "G4Types.hh"
 #include <cmath>
 
 class MyGamma

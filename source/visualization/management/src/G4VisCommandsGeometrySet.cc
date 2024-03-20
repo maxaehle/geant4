@@ -137,13 +137,13 @@ G4VisCommandGeometrySetColour::G4VisCommandGeometrySetColour()
     ("Red component or a string, e.g., \"blue\", in which case succeeding colour components are ignored.");
   fpCommand->SetParameter(parameter);
   parameter = new G4UIparameter("green", 'd', omitable = true);
-  parameter->SetDefaultValue(1.);
+  parameter->SetDefaultValue((G4double)1.);
   fpCommand->SetParameter(parameter);
   parameter = new G4UIparameter("blue", 'd', omitable = true);
-  parameter->SetDefaultValue(1.);
+  parameter->SetDefaultValue((G4double)1.);
   fpCommand->SetParameter(parameter);
   parameter = new G4UIparameter("opacity", 'd', omitable = true);
-  parameter->SetDefaultValue(1.);
+  parameter->SetDefaultValue((G4double)1.);
   fpCommand->SetParameter(parameter);
 }
 
@@ -579,7 +579,7 @@ G4VisCommandGeometrySetLineWidth::G4VisCommandGeometrySetLineWidth()
     ("Depth of propagation (-1 means unlimited depth).");
   fpCommand->SetParameter(parameter);
   parameter = new G4UIparameter("lineWidth", 'd', omitable = true);
-  parameter->SetDefaultValue(1.);
+  parameter->SetDefaultValue((G4double)1.);
   fpCommand->SetParameter(parameter);
 }
 

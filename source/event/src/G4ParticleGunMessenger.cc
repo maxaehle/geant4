@@ -150,7 +150,7 @@ G4ParticleGunMessenger::G4ParticleGunMessenger(G4ParticleGun* fPtclGun)
   param->SetDefaultValue(-1);
   ionCmd->SetParameter(param);
   param = new G4UIparameter("E",'d',true);
-  param->SetDefaultValue(0.0);
+  param->SetDefaultValue((G4double)0.0);
   ionCmd->SetParameter(param);
   param = new G4UIparameter("flb",'c',true);
   param->SetDefaultValue("noFloat");

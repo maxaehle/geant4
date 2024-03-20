@@ -57,13 +57,13 @@ G4VisCommandsTouchableSet::G4VisCommandsTouchableSet()
   parameter->SetDefaultValue("1.");
   fpCommandSetColour->SetParameter(parameter);
   parameter = new G4UIparameter("green", 'd', omitable = true);
-  parameter->SetDefaultValue(1.);
+  parameter->SetDefaultValue((G4double)1.);
   fpCommandSetColour->SetParameter(parameter);
   parameter = new G4UIparameter("blue", 'd', omitable = true);
-  parameter->SetDefaultValue(1.);
+  parameter->SetDefaultValue((G4double)1.);
   fpCommandSetColour->SetParameter(parameter);
   parameter = new G4UIparameter("opacity", 'd', omitable = true);
-  parameter->SetDefaultValue(1.);
+  parameter->SetDefaultValue((G4double)1.);
   fpCommandSetColour->SetParameter(parameter);
 
   fpCommandSetDaughtersInvisible = new G4UIcmdWithABool

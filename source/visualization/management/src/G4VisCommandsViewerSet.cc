@@ -91,13 +91,13 @@ fViewpointVector (G4ThreeVector(0.,0.,1.))
   parameter -> SetDefaultValue ("0.");
   fpCommandBackground -> SetParameter (parameter);
   parameter = new G4UIparameter("green", 'd', omitable = true);
-  parameter -> SetDefaultValue (0.);
+  parameter -> SetDefaultValue ((G4double)0.);
   fpCommandBackground -> SetParameter (parameter);
   parameter = new G4UIparameter ("blue", 'd', omitable = true);
-  parameter -> SetDefaultValue (0.);
+  parameter -> SetDefaultValue ((G4double)0.);
   fpCommandBackground -> SetParameter (parameter);
   parameter = new G4UIparameter ("opacity", 'd', omitable = true);
-  parameter -> SetDefaultValue (1.);
+  parameter -> SetDefaultValue ((G4double)1.);
   fpCommandBackground -> SetParameter (parameter);
 
   fpCommandCulling = new G4UIcommand("/vis/viewer/set/culling",this);
@@ -151,13 +151,13 @@ fViewpointVector (G4ThreeVector(0.,0.,1.))
   parameter -> SetDefaultValue ("1.");
   fpCommandDefaultColour -> SetParameter (parameter);
   parameter = new G4UIparameter("green", 'd', omitable = true);
-  parameter -> SetDefaultValue (1.);
+  parameter -> SetDefaultValue ((G4double)1.);
   fpCommandDefaultColour -> SetParameter (parameter);
   parameter = new G4UIparameter ("blue", 'd', omitable = true);
-  parameter -> SetDefaultValue (1.);
+  parameter -> SetDefaultValue ((G4double)1.);
   fpCommandDefaultColour -> SetParameter (parameter);
   parameter = new G4UIparameter ("opacity", 'd', omitable = true);
-  parameter -> SetDefaultValue (1.);
+  parameter -> SetDefaultValue ((G4double)1.);
   fpCommandDefaultColour -> SetParameter (parameter);
 
   fpCommandDefaultTextColour = new G4UIcommand
@@ -169,13 +169,13 @@ fViewpointVector (G4ThreeVector(0.,0.,1.))
   parameter -> SetDefaultValue ("0.");
   fpCommandDefaultTextColour -> SetParameter (parameter);
   parameter = new G4UIparameter("green", 'd', omitable = true);
-  parameter -> SetDefaultValue (0.);
+  parameter -> SetDefaultValue ((G4double)0.);
   fpCommandDefaultTextColour -> SetParameter (parameter);
   parameter = new G4UIparameter ("blue", 'd', omitable = true);
-  parameter -> SetDefaultValue (1.);
+  parameter -> SetDefaultValue ((G4double)1.);
   fpCommandDefaultTextColour -> SetParameter (parameter);
   parameter = new G4UIparameter ("opacity", 'd', omitable = true);
-  parameter -> SetDefaultValue (1.);
+  parameter -> SetDefaultValue ((G4double)1.);
   fpCommandDefaultTextColour -> SetParameter (parameter);
 
   fpCommandEdge = new G4UIcmdWithABool("/vis/viewer/set/edge",this);
@@ -190,7 +190,7 @@ fViewpointVector (G4ThreeVector(0.,0.,1.))
   ("Moves top-level drawn volumes by this factor from this centre.");
   parameter = new G4UIparameter("explodeFactor", 'd', omitable=true);
   parameter->SetParameterRange("explodeFactor>=1.");
-  parameter->SetDefaultValue(1.);
+  parameter->SetDefaultValue((G4double)1.);
   fpCommandExplodeFactor->SetParameter(parameter);
   parameter = new G4UIparameter("x",'d',omitable = true);
   parameter->SetDefaultValue  (0);
@@ -252,10 +252,10 @@ fViewpointVector (G4ThreeVector(0.,0.,1.))
   fpCommandLightsThetaPhi->SetGuidance
   ("Set direction from target to lights.");
   parameter = new G4UIparameter("theta", 'd', omitable = true);
-  parameter -> SetDefaultValue(60.);
+  parameter -> SetDefaultValue((G4double)60.);
   fpCommandLightsThetaPhi -> SetParameter (parameter);
   parameter = new G4UIparameter("phi", 'd', omitable = true);
-  parameter -> SetDefaultValue(45.);
+  parameter -> SetDefaultValue((G4double)45.);
   fpCommandLightsThetaPhi -> SetParameter (parameter);
   parameter = new G4UIparameter ("unit", 's', omitable = true);
   parameter -> SetDefaultValue ("deg");
@@ -312,7 +312,7 @@ fViewpointVector (G4ThreeVector(0.,0.,1.))
   parameter->SetDefaultValue("orthogonal");
   fpCommandProjection->SetParameter(parameter);
   parameter = new G4UIparameter("field-half-angle",'d',omitable = true);
-  parameter->SetDefaultValue(30.);
+  parameter->SetDefaultValue((G4double)30.);
   //parameter->SetCurrentAsDefault(true);
   fpCommandProjection->SetParameter(parameter);
   parameter = new G4UIparameter("unit",'s',omitable = true);
@@ -417,10 +417,10 @@ fViewpointVector (G4ThreeVector(0.,0.,1.))
   fpCommandUpThetaPhi -> SetGuidance
   ("Viewer will attempt always to show this direction upwards.");
   parameter = new G4UIparameter("theta", 'd', omitable = true);
-  parameter -> SetDefaultValue (90.);
+  parameter -> SetDefaultValue ((G4double)90.);
   fpCommandUpThetaPhi -> SetParameter (parameter);
   parameter = new G4UIparameter("phi", 'd', omitable = true);
-  parameter -> SetDefaultValue (90.);
+  parameter -> SetDefaultValue ((G4double)90.);
   fpCommandUpThetaPhi -> SetParameter (parameter);
   parameter = new G4UIparameter ("unit", 's', omitable = true);
   parameter -> SetDefaultValue ("deg");
@@ -432,13 +432,13 @@ fViewpointVector (G4ThreeVector(0.,0.,1.))
   fpCommandUpVector -> SetGuidance
   ("Viewer will attempt always to show this direction upwards.");
   parameter = new G4UIparameter("x", 'd', omitable = true);
-  parameter -> SetDefaultValue (0.);
+  parameter -> SetDefaultValue ((G4double)0.);
   fpCommandUpVector -> SetParameter (parameter);
   parameter = new G4UIparameter("y", 'd', omitable = true);
-  parameter -> SetDefaultValue (1.);
+  parameter -> SetDefaultValue ((G4double)1.);
   fpCommandUpVector -> SetParameter (parameter);
   parameter = new G4UIparameter ("z", 'd', omitable = true);
-  parameter -> SetDefaultValue (0.);
+  parameter -> SetDefaultValue ((G4double)0.);
   fpCommandUpVector -> SetParameter (parameter);
 
   fpCommandViewpointThetaPhi = new G4UIcommand
@@ -448,10 +448,10 @@ fViewpointVector (G4ThreeVector(0.,0.,1.))
   fpCommandViewpointThetaPhi -> SetGuidance
   ("Also changes lightpoint direction if lights are set to move with camera.");
   parameter = new G4UIparameter("theta", 'd', omitable = true);
-  parameter -> SetDefaultValue (60.);
+  parameter -> SetDefaultValue ((G4double)60.);
   fpCommandViewpointThetaPhi -> SetParameter (parameter);
   parameter = new G4UIparameter("phi", 'd', omitable = true);
-  parameter -> SetDefaultValue (45.);
+  parameter -> SetDefaultValue ((G4double)45.);
   fpCommandViewpointThetaPhi -> SetParameter (parameter);
   parameter = new G4UIparameter ("unit", 's', omitable = true);
   parameter -> SetDefaultValue ("deg");
@@ -464,13 +464,13 @@ fViewpointVector (G4ThreeVector(0.,0.,1.))
   fpCommandViewpointVector -> SetGuidance
   ("Also changes lightpoint direction if lights are set to move with camera.");
   parameter = new G4UIparameter("x", 'd', omitable = true);
-  parameter -> SetDefaultValue (1.);
+  parameter -> SetDefaultValue ((G4double)1.);
   fpCommandViewpointVector -> SetParameter (parameter);
   parameter = new G4UIparameter("y", 'd', omitable = true);
-  parameter -> SetDefaultValue (1.);
+  parameter -> SetDefaultValue ((G4double)1.);
   fpCommandViewpointVector -> SetParameter (parameter);
   parameter = new G4UIparameter ("z", 'd', omitable = true);
-  parameter -> SetDefaultValue (1.);
+  parameter -> SetDefaultValue ((G4double)1.);
   fpCommandViewpointVector -> SetParameter (parameter);
 
   fpTimeWindowDirectory = new G4UIdirectory ("/vis/viewer/set/timeWindow/");
@@ -503,27 +503,27 @@ fViewpointVector (G4ThreeVector(0.,0.,1.))
   parameter = new G4UIparameter ("screenX", 'd', omitable = true);
   parameter->SetGuidance("-1 < screenX < 1");
   parameter->SetParameterRange("screenX >= -1. && screenX <= 1.");
-  parameter->SetDefaultValue(-0.9);
+  parameter->SetDefaultValue((G4double)-0.9);
   fpCommandTimeWindowDisplayHeadTime->SetParameter(parameter);
   parameter = new G4UIparameter ("screenY", 'd', omitable = true);
   parameter->SetGuidance("-1 < screenY < 1");
   parameter->SetParameterRange("screenY >= -1. && screenY <= 1.");
-  parameter->SetDefaultValue(-0.9);
+  parameter->SetDefaultValue((G4double)-0.9);
   fpCommandTimeWindowDisplayHeadTime->SetParameter(parameter);
   parameter = new G4UIparameter ("screenSize", 'd', omitable = true);
-  parameter->SetDefaultValue(24.);
+  parameter->SetDefaultValue((G4double)24.);
   fpCommandTimeWindowDisplayHeadTime->SetParameter(parameter);
   parameter = new G4UIparameter ("red", 'd', omitable = true);
   parameter->SetParameterRange("red >= 0. && red <= 1.");
-  parameter->SetDefaultValue(0.);
+  parameter->SetDefaultValue((G4double)0.);
   fpCommandTimeWindowDisplayHeadTime->SetParameter(parameter);
   parameter = new G4UIparameter ("green", 'd', omitable = true);
   parameter->SetParameterRange("green >= 0. && green <= 1.");
-  parameter->SetDefaultValue(1.);
+  parameter->SetDefaultValue((G4double)1.);
   fpCommandTimeWindowDisplayHeadTime->SetParameter(parameter);
   parameter = new G4UIparameter ("blue", 'd', omitable = true);
   parameter->SetParameterRange("blue >= 0. && blue <= 1.");
-  parameter->SetDefaultValue(1.);
+  parameter->SetDefaultValue((G4double)1.);
   fpCommandTimeWindowDisplayHeadTime->SetParameter(parameter);
 
   fpCommandTimeWindowDisplayLightFront =
@@ -544,34 +544,34 @@ fViewpointVector (G4ThreeVector(0.,0.,1.))
   parameter->SetDefaultValue(true);
   fpCommandTimeWindowDisplayLightFront->SetParameter(parameter);
   parameter = new G4UIparameter ("originX", 'd', omitable = true);
-  parameter->SetDefaultValue(0.);
+  parameter->SetDefaultValue((G4double)0.);
   fpCommandTimeWindowDisplayLightFront->SetParameter(parameter);
   parameter = new G4UIparameter ("originY", 'd', omitable = true);
-  parameter->SetDefaultValue(0.);
+  parameter->SetDefaultValue((G4double)0.);
   fpCommandTimeWindowDisplayLightFront->SetParameter(parameter);
   parameter = new G4UIparameter ("originZ", 'd', omitable = true);
-  parameter->SetDefaultValue(0.);
+  parameter->SetDefaultValue((G4double)0.);
   fpCommandTimeWindowDisplayLightFront->SetParameter(parameter);
   parameter = new G4UIparameter ("space_unit", 's', omitable = true);
   parameter->SetDefaultValue("m");
   fpCommandTimeWindowDisplayLightFront->SetParameter(parameter);
   parameter = new G4UIparameter ("originT", 'd', omitable = true);
-  parameter->SetDefaultValue(0.);
+  parameter->SetDefaultValue((G4double)0.);
   fpCommandTimeWindowDisplayLightFront->SetParameter(parameter);
   parameter = new G4UIparameter ("time_unit", 's', omitable = true);
   parameter->SetDefaultValue("s");
   fpCommandTimeWindowDisplayLightFront->SetParameter(parameter);
   parameter = new G4UIparameter ("red", 'd', omitable = true);
   parameter->SetParameterRange("red >= 0. && red <= 1.");
-  parameter->SetDefaultValue(0.);
+  parameter->SetDefaultValue((G4double)0.);
   fpCommandTimeWindowDisplayLightFront->SetParameter(parameter);
   parameter = new G4UIparameter ("green", 'd', omitable = true);
   parameter->SetParameterRange("green >= 0. && green <= 1.");
-  parameter->SetDefaultValue(1.);
+  parameter->SetDefaultValue((G4double)1.);
   fpCommandTimeWindowDisplayLightFront->SetParameter(parameter);
   parameter = new G4UIparameter ("blue", 'd', omitable = true);
   parameter->SetParameterRange("blue >= 0. && blue <= 1.");
-  parameter->SetDefaultValue(0.);
+  parameter->SetDefaultValue((G4double)0.);
   fpCommandTimeWindowDisplayLightFront->SetParameter(parameter);
 
   fpCommandTimeWindowEndTime =
@@ -585,7 +585,7 @@ fViewpointVector (G4ThreeVector(0.,0.,1.))
   parameter->SetDefaultValue("ns");
   fpCommandTimeWindowEndTime->SetParameter(parameter);
   parameter = new G4UIparameter ("time-range", 'd', omitable = true);
-  parameter->SetDefaultValue(-1.);
+  parameter->SetDefaultValue((G4double)-1.);
   fpCommandTimeWindowEndTime->SetParameter(parameter);
   parameter = new G4UIparameter ("time-range-unit", 's', omitable = true);
   parameter->SetDefaultValue("ns");
@@ -611,7 +611,7 @@ fViewpointVector (G4ThreeVector(0.,0.,1.))
   parameter->SetDefaultValue("ns");
   fpCommandTimeWindowStartTime->SetParameter(parameter);
   parameter = new G4UIparameter ("time-range", 'd', omitable = true);
-  parameter->SetDefaultValue(-1.);
+  parameter->SetDefaultValue((G4double)-1.);
   fpCommandTimeWindowStartTime->SetParameter(parameter);
   parameter = new G4UIparameter ("time-range-unit", 's', omitable = true);
   parameter->SetDefaultValue("ns");

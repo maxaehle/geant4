@@ -74,7 +74,7 @@ G4MatScanMessenger::G4MatScanMessenger(G4MaterialScanner* p1)
   thetaCmd->SetParameter(par);
   par = new G4UIparameter("thetaSpan", 'd', true);
   par->SetParameterRange("thetaSpan>=0.");
-  par->SetDefaultValue(0.);
+  par->SetDefaultValue((G4double)0.);
   thetaCmd->SetParameter(par);
   par = new G4UIparameter("unit", 'c', true);
   par->SetDefaultValue("deg");
@@ -96,7 +96,7 @@ G4MatScanMessenger::G4MatScanMessenger(G4MaterialScanner* p1)
   phiCmd->SetParameter(par);
   par = new G4UIparameter("phiSpan", 'd', true);
   par->SetParameterRange("phiSpan>=0.");
-  par->SetDefaultValue(0.);
+  par->SetDefaultValue((G4double)0.);
   phiCmd->SetParameter(par);
   par = new G4UIparameter("unit", 'c', true);
   par->SetDefaultValue("deg");

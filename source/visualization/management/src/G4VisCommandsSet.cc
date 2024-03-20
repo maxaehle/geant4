@@ -100,13 +100,13 @@ G4VisCommandSetColour::G4VisCommandSetColour ()
   parameter->SetDefaultValue ("1.");
   fpCommand->SetParameter (parameter);
   parameter = new G4UIparameter ("green", 'd', omitable = true);
-  parameter->SetDefaultValue (1.);
+  parameter->SetDefaultValue ((G4double)1.);
   fpCommand->SetParameter (parameter);
   parameter = new G4UIparameter ("blue", 'd', omitable = true);
-  parameter->SetDefaultValue (1.);
+  parameter->SetDefaultValue ((G4double)1.);
   fpCommand->SetParameter (parameter);
   parameter = new G4UIparameter ("alpha", 'd', omitable = true);
-  parameter->SetDefaultValue (1.);
+  parameter->SetDefaultValue ((G4double)1.);
   parameter->SetGuidance ("Opacity");
   fpCommand->SetParameter (parameter);
 }
@@ -258,13 +258,13 @@ G4VisCommandSetTextColour::G4VisCommandSetTextColour ()
   parameter->SetDefaultValue ("0.");
   fpCommand->SetParameter (parameter);
   parameter = new G4UIparameter ("green", 'd', omitable = true);
-  parameter->SetDefaultValue (0.);
+  parameter->SetDefaultValue ((G4double)0.);
   fpCommand->SetParameter (parameter);
   parameter = new G4UIparameter ("blue", 'd', omitable = true);
-  parameter->SetDefaultValue (1.);
+  parameter->SetDefaultValue ((G4double)1.);
   fpCommand->SetParameter (parameter);
   parameter = new G4UIparameter ("alpha", 'd', omitable = true);
-  parameter->SetDefaultValue (1.);
+  parameter->SetDefaultValue ((G4double)1.);
   parameter->SetGuidance ("Opacity");
   fpCommand->SetParameter (parameter);
 }

@@ -727,15 +727,15 @@ G4VisCommandViewerColourByDensity::G4VisCommandViewerColourByDensity () {
   fpCommand->SetParameter(parameter);
   parameter  =  new G4UIparameter("d0",'d',omitable = true);
   parameter  -> SetGuidance      ("Density parameter 0");
-  parameter  -> SetDefaultValue  (0.5);
+  parameter  -> SetDefaultValue  ((G4double)0.5);
   fpCommand->SetParameter(parameter);
   parameter  =  new G4UIparameter("d1",'d',omitable = true);
   parameter  -> SetGuidance      ("Density parameter 1");
-  parameter  -> SetDefaultValue  (3.0);
+  parameter  -> SetDefaultValue  ((G4double)3.0);
   fpCommand->SetParameter(parameter);
   parameter  =  new G4UIparameter("d2",'d',omitable = true);
   parameter  -> SetGuidance      ("Density parameter 2.");
-  parameter  -> SetDefaultValue  (10.0);
+  parameter  -> SetDefaultValue  ((G4double)10.0);
   fpCommand->SetParameter(parameter);
 }
 
@@ -1305,7 +1305,7 @@ void G4VisCommandViewerInterpolate::SetNewValue (G4UIcommand*, G4String newValue
   G4String waitTimePerPointDimString(waitTimePerPointString + ' ' + timeUnit);
   const G4double waitTimePerPoint =
   G4UIcommand::ConvertToDimensionedDouble(waitTimePerPointDimString.c_str());
-  G4int waitTimePerPointmilliseconds = waitTimePerPoint/millisecond;
+  G4int waitTimePerPointmilliseconds = (G4int)(waitTimePerPoint/millisecond);
   if (waitTimePerPointmilliseconds < 0) waitTimePerPointmilliseconds = 0;
 
   G4UImanager* uiManager = G4UImanager::GetUIpointer();
