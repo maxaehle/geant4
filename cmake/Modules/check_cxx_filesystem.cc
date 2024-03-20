@@ -1,5 +1,3 @@
-#include "CommonHeader.h"
-
 // Check that trivial use of <filesystem> works
 // - https://en.cppreference.com/w/cpp/filesystem
 #include <iostream>
