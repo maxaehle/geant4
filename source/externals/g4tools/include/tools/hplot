@@ -483,7 +483,9 @@ public:
                  G4float dp;
                  size_t Lns   = stringtimeoffset.size();
                  std::string sdp = stringtimeoffset.substr(Ids+1,Lns-(Ids+1));
-                 ::sscanf(sdp.c_str(),"%g",&dp);
+                 passivefloat dp_val;
+                 ::sscanf(sdp.c_str(),"%g",&dp_val);
+                 dp = dp_val;
                  timeoffset += dp;
               }
   	      // if OptionTime = 2 gmtime will be used instead of localtime

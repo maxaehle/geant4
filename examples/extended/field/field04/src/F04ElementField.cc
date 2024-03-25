@@ -129,7 +129,9 @@ G4VisAttributes* F04ElementField::GetVisAttribute(G4String color)
    if(color.size() > 0 &&
      (isdigit(color.c_str()[0]) || color.c_str()[0] == '.')) {
         G4double red=0.0, green=0.0, blue=0.0;
-        if (sscanf(color.c_str(),"%lf,%lf,%lf",&red,&green,&blue) == 3) {
+        passivedouble red_val=0.0, green_val=0.0, blue_val=0.0;
+        if (sscanf(color.c_str(),"%lf,%lf,%lf",&red_val,&green_val,&blue_val) == 3) {
+           red = red_val; green = green_val; blue = blue_val;
            p = new G4VisAttributes(true,G4Color(red,green,blue));
         } else {
            G4cout << " Invalid color " << color << G4endl;

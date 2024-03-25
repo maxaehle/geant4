@@ -113,7 +113,9 @@ G4RDPhotoElectricAngularGeneratorPolarized::G4RDPhotoElectricAngularGeneratorPol
     // Read parameters into tables. The parameters are function of incident electron energy and shell level
     G4float aRead,cRead, beta;
     for(G4int i=0 ; i<arrayDim ;i++){
-      fscanf(infile,"%f\t %e\t %e",&beta,&aRead,&cRead);
+      passivefloat aRead_val, cRead_val, beta_val;
+      fscanf(infile,"%f\t %e\t %e",&beta_val,&aRead_val,&cRead_val);
+      beta = beta_val; aRead = aRead_val; cRead = cRead_val;
       aMajorantSurfaceParameterTable[i][level] = aRead;    
       cMajorantSurfaceParameterTable[i][level] = cRead;
     }

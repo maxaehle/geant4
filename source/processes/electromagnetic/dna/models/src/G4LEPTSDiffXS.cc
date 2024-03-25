@@ -79,7 +79,9 @@ void G4LEPTSDiffXS::readDXS( ) {
   //       << "DXSType " << DXSTypeName << " " << DXSType << G4endl;
 
   for (G4int eBin=1; eBin<=NumEn; eBin++){
-    (void) fscanf(fp,"%f ",&data);
+    passivefloat data_val;
+    (void) fscanf(fp,"%f ",&data_val);
+    data = data_val;
     Eb[eBin] = (G4double)data;
   }
 
@@ -89,10 +91,15 @@ void G4LEPTSDiffXS::readDXS( ) {
   if(DXSType==1) {
     G4cout << "DXSTYpe 1" << G4endl;
     for (G4int aBin=0;aBin<NumAng;aBin++){
-      (void) fscanf(fp,"%f ",&data);
+      passivefloat data_val;
+      (void) fscanf(fp,"%f ",&data_val);
+      data = data_val;
       DXS[0][aBin]=(G4double)data;
       for (G4int eBin=1;eBin<=NumEn;eBin++){
-	(void) fscanf(fp,"%f %f ",&data2, &data);
+        passivefloat data2_val, data_val_2;
+	(void) fscanf(fp,"%f %f ",&data2_val, &data_val_2);
+  data2 = data2_val;
+  data = data_val_2;
 	DXS[eBin][aBin]=(G4double)data;
 	KT[eBin][aBin]=(G4double)data2;
       }
@@ -101,7 +108,9 @@ void G4LEPTSDiffXS::readDXS( ) {
   else {
     for(G4int aBin=0; aBin<NumAng; aBin++){
       for(G4int eBin=0; eBin<=NumEn; eBin++){
-	(void) fscanf(fp,"%f ",&data);
+        passivefloat data_val;
+	(void) fscanf(fp,"%f ",&data_val);
+        data = data_val;
 	DXS[eBin][aBin] = (G4double)data;
       }
     }

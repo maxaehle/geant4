@@ -85,7 +85,11 @@ CellParameterisation::CellParameterisation
       
       if (nlines == 1)
       { 
-        ncols = fscanf(fMap,"%lf %lf %lf",&fDimCellBoxX,&fDimCellBoxY,&fDimCellBoxZ);        
+        passivedouble fDimCellBoxX_val, fDimCellBoxY_val, fDimCellBoxZ_val;
+        ncols = fscanf(fMap,"%lf %lf %lf",&fDimCellBoxX_val,&fDimCellBoxY_val,&fDimCellBoxZ_val);        
+        fDimCellBoxX = fDimCellBoxX_val;
+        fDimCellBoxY = fDimCellBoxY_val;
+        fDimCellBoxZ = fDimCellBoxZ_val;
 	fDimCellBoxX=fDimCellBoxX*micrometer;
         fDimCellBoxY=fDimCellBoxY*micrometer;
         fDimCellBoxZ=fDimCellBoxZ*micrometer;
@@ -94,11 +98,24 @@ CellParameterisation::CellParameterisation
       // VOXEL SHIFT IN Z ASSUMED TO BE NEGATIVE
       if (nlines == 2) ncols = fscanf(fMap,"%i %i %i",&shiftX,&shiftY,&shiftZ);
       
-      if (nlines == 3) ncols = fscanf(fMap,"%lf %lf %lf",&denCyto1, &denCyto2, &denCyto3);
+      if (nlines == 3){
+        passivedouble denCyto1_val, denCyto2_val, denCyto3_val;
+        ncols = fscanf(fMap,"%lf %lf %lf",&denCyto1_val, &denCyto2_val, &denCyto3_val);
+        denCyto1 = denCyto1_val; denCyto2 = denCyto2_val; denCyto3 = denCyto3_val;
+      }
       
-      if (nlines == 4) ncols = fscanf(fMap,"%lf %lf %lf",&denNucl1, &denNucl2, &denNucl3);
+      if (nlines == 4){
+        passivedouble denNucl1_val, denNucl2_val, denNucl3_val;
+        ncols = fscanf(fMap,"%lf %lf %lf",&denNucl1_val, &denNucl2_val, &denNucl3_val);
+        denNucl1 = denNucl1_val; denNucl2 = denNucl2_val; denNucl3 = denNucl3_val;
+      }
       
-      if (nlines >  4) ncols = fscanf(fMap,"%lf %lf %lf %lf %lf %lf",&x,&y,&z,&mat,&den,&tmp);
+      if (nlines >  4){
+        passivedouble x_val, y_val, z_val, mat_val, den_val, tmp_val;
+        ncols = fscanf(fMap,"%lf %lf %lf %lf %lf %lf",&x,&y,&z,&mat,&den,&tmp);
+        x = x_val; y = y_val; z = z_val;
+        mat = mat_val; den = den_val; tmp = tmp_val;
+      }
       
       if (ncols  <  0) break;
 

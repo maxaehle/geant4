@@ -389,8 +389,11 @@ void Run::EndOfRun()
   G4int Ntrav = 0;
   FILE * fp = fopen("OutputPerEvent.out","r");
   while (1)  {
+    passivefloat tmp_val, En_val;
     ncols = fscanf(fp," %f %f %f %f %f %f %f %f",
-            &tmp, &tmp, &tmp, &tmp, &En, &tmp, &tmp, &tmp);
+            &tmp_val, &tmp_val, &tmp_val, &tmp_val, &En_val, &tmp_val, &tmp_val, &tmp_val);
+    tmp = tmp_val;
+    En = En_val;
     if (ncols < 0) break;
     if (En>0) Ntrav++;
     nlines++;}
