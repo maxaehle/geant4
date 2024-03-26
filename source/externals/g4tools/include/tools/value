@@ -131,14 +131,14 @@ public:
     mem::increment(s_class().c_str());
 #endif
     m_type = FLOAT;
-    u.m_G4float = a_value;
+    v.m_G4float = a_value;
   }
   value(G4double a_value):m_label(0),m_itag(0) {
 #ifdef TOOLS_MEM
     mem::increment(s_class().c_str());
 #endif
     m_type = DOUBLE;
-    u.m_G4double = a_value;
+    v.m_G4double = a_value;
   }
 
 //  value(unsigned char a_value):m_label(0),m_itag(0) {
@@ -451,8 +451,8 @@ public:
     case INT:       u.m_int = 0;break;
     case UNSIGNED_INT64:   u.m_unsigned_int64 =0;break;
     case INT64:     u.m_int64 = 0;break;
-    case FLOAT:     u.m_G4float = 0;break;
-    case DOUBLE:    u.m_G4double = 0;break;
+    case FLOAT:     v.m_G4float = 0;break;
+    case DOUBLE:    v.m_G4double = 0;break;
     case BOOL:      u.m_bool = false;break;
     case VOID_STAR:        u.m_void_star = 0;break;
     case DOUBLE_STAR:      u.m_G4double_star = 0;break;
@@ -529,12 +529,12 @@ public:
   void set(G4float a_value) {
     reset();
     m_type = FLOAT;
-    u.m_G4float = a_value;
+    v.m_G4float = a_value;
   }
   void set(G4double a_value) {
     reset();
     m_type = DOUBLE;
-    u.m_G4double = a_value;
+    v.m_G4double = a_value;
   }
   void set(bool a_value) {
     reset();
@@ -586,8 +586,8 @@ public:
 
   unsigned short get_unsigned_short() const{return u.m_unsigned_short;}
   short get_short() const {return u.m_short;}
-  G4float get_G4float() const {return u.m_G4float;}
-  G4double get_G4double() const {return u.m_G4double;}
+  G4float get_G4float() const {return v.m_G4float;}
+  G4double get_G4double() const {return v.m_G4double;}
   void* get_void_star() const {return u.m_void_star;}
   G4double* get_G4double_star() const {return u.m_G4double_star;}
   G4float* get_G4float_star() const {return u.m_G4float_star;}
@@ -739,10 +739,10 @@ public:
       sprintf(a_s,32,int64_format(),a_v.u.m_int64);
       return true;
     case FLOAT:
-      sprintf(a_s,32,"%g",a_v.u.m_G4float);
+      sprintf(a_s,32,"%g",a_v.v.m_G4float);
       return true;
     case DOUBLE:
-      sprintf(a_s,32,"%g",a_v.u.m_G4double);
+      sprintf(a_s,32,"%g",a_v.v.m_G4double);
       return true;
     case VOID_STAR:
       sprintf(a_s,32,upointer_format_x(),(upointer)a_v.u.m_void_star);
@@ -847,7 +847,7 @@ public:
       a_d = u.m_int;
       return true;
     case DOUBLE:
-      a_d = u.m_G4double;
+      a_d = v.m_G4double;
       return true;
     case UNSIGNED_SHORT:
       a_d = u.m_unsigned_short;
@@ -865,7 +865,7 @@ public:
       a_d = (G4double)u.m_unsigned_int64;
       return true;
     case FLOAT:
-      a_d = u.m_G4float;
+      a_d = v.m_G4float;
       return true;
     //case UNSIGNED_CHAR:
     //  a_d = u.m_unsigned_char;
@@ -1131,8 +1131,8 @@ protected:
     int m_int;
     short m_short;
     int64 m_int64;
-    G4float m_G4float;
-    G4double m_G4double;
+    // G4float m_G4float; // moved to struct v, as AD types should not appear in union
+    // G4double m_G4double;
     //unsigned char m_unsigned_char;
     unsigned short m_unsigned_short;
     unsigned int m_unsigned_int;
@@ -1156,6 +1156,10 @@ protected:
     array<bool>* m_array_bool;
     array<std::string>* m_array_string;
   } u;
+  struct {
+    G4float m_G4float;
+    G4double m_G4double;
+  } v;
 };
 
 }
