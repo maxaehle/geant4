@@ -4030,16 +4030,14 @@ void G4GMocrenIO::invertByteOrder(char * _val, T & _rval) {
 
   const int SIZE = sizeof(_rval);
   //char * cval = new char[SIZE];
-  union {
-    char cu[16];
-    T tu;
-  } uni;
+  char cu[16];
+  T* tu = (T*)cu;
   for(int i = 0; i < SIZE; i++) {
-    uni.cu[i] = _val[SIZE-1-i];
+    cu[i] = _val[SIZE-1-i];
     //cval[i] = _val[SIZE-i-1];
   }
   //_rval = *(T *)cval;
-  _rval = uni.tu;
+  _rval = *tu;
   //delete [] cval;
 }
 

@@ -706,7 +706,7 @@ void G4ErrorMatrix::invert(G4int& ierr)
   G4int ifail;
   switch(nrow)
   {
-    case 3:
+    case 3: {
       G4double c11, c12, c13, c21, c22, c23, c31, c32, c33;
       ifail = 0;
       c11   = (*(m.begin() + 4)) * (*(m.begin() + 8)) -
@@ -772,6 +772,7 @@ void G4ErrorMatrix::invert(G4int& ierr)
         *(mq)                = ss * c33;
       }
       break;
+    }
     case 2:
       ifail = 0;
       det   = (*m.begin()) * (*(m.begin() + 3)) -
