@@ -40,6 +40,7 @@
 #include "G4Run.hh"
 #include "globals.hh"
 #include <map>
+#include <vector>
 
 class DetectorConstruction;
 class G4ParticleDefinition;
@@ -69,6 +70,8 @@ class Run : public G4Run
                 
     virtual void Merge(const G4Run*);
     void EndOfRun();
+
+    void AddEDepInLayer(G4double edep, int layerindx)    { fEDepPerLayer[layerindx]     += edep;  }
      
   private:
     DetectorConstruction*  fDetector;
@@ -93,6 +96,8 @@ class Run : public G4Run
     G4double fRmstrue  [kMaxAbsor];
     G4double fLimittrue[kMaxAbsor];        
     G4bool fApplyLimit;  
+
+    std::vector<G4double> fEDepPerLayer;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

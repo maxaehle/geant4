@@ -75,6 +75,8 @@ Run::Run(DetectorConstruction* det)
   fEnergyFlow.resize(nbPlanes);
   fLateralEleak.resize(nbPlanes);
   for (G4int k=0; k<nbPlanes; k++) {fEnergyFlow[k] = fLateralEleak[k] = 0.; }  
+
+  fEDepPerLayer.resize(fDetector->GetNbOfLayers(), 0.0);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -178,6 +180,10 @@ void Run::Merge(const G4Run* run)
     fEdeptrue[k]  = localRun->fEdeptrue[k]; 
     fRmstrue[k]   = localRun->fRmstrue[k]; 
     fLimittrue[k] = localRun->fLimittrue[k]; 
+  }
+
+  for (G4int il=0; il<fDetector->GetNbOfLayers(); ++il) {
+    fEDepPerLayer[il]     += localRun->fEDepPerLayer[il];
   }
     
   G4Run::Merge(run); 
@@ -336,6 +342,15 @@ void Run::EndOfRun()
   //
   for (G4int ih = kMaxAbsor+1; ih < kMaxHisto; ih++) {
     analysis->ScaleH1(ih,norm/MeV);
+  }
+
+  for (G4int il = 0; il < fDetector->GetNbOfLayers(); ++il)  {
+      passivedouble edep_d = fEDepPerLayer[il].dot;
+      G4cout << "  "
+             << std::setw(5)  << il
+             << std::setw(20) << fEDepPerLayer[il]*norm/MeV
+             << std::setw(20) << edep_d*norm/MeV
+             << G4endl;
   }
   
   G4cout.setf(mode,std::ios::floatfield);
