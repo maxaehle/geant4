@@ -46,6 +46,9 @@
 #include "G4UIExecutive.hh"
 #include "G4VisExecutive.hh"
 
+#include "G4PhysListFactory.hh"
+
+
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo.....
 
 int main(int argc,char** argv) {
@@ -69,7 +72,11 @@ int main(int argc,char** argv) {
   //set mandatory initialization classes
   DetectorConstruction* detector = new DetectorConstruction;
   runManager->SetUserInitialization(detector);
-  runManager->SetUserInitialization(new PhysicsList);
+  //runManager->SetUserInitialization(new PhysicsList);
+    G4PhysListFactory physListFactory;
+  G4VModularPhysicsList* pList = physListFactory.GetReferencePhysList("FTFP_BERT");
+  runManager->SetUserInitialization(pList);
+
 
   //set user action classes
   runManager->SetUserInitialization(new ActionInitialization(detector));
