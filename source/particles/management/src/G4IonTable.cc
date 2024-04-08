@@ -534,7 +534,7 @@ G4ParticleDefinition* G4IonTable::GetIon(G4int Z, G4int A, G4int lvl)
 #endif
     return nullptr;
   }
-  if ( lvl == 0 ) return GetIon(Z,A,0.0);
+  if ( lvl == 0 ) return GetIon(Z,A,(G4double)0.0);
   
   // Search ions with A, Z, lvl 
   G4ParticleDefinition* ion = FindIon(Z,A,lvl);

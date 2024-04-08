@@ -66,6 +66,7 @@ class G4HadronicDeveloperParameters
       G4bool SetDefault( const std::string name , const G4bool value );
       G4bool SetDefault( const std::string name , const G4int value , G4int lower_limit = -INT_MAX , G4int upper_limit = INT_MAX );
       G4bool SetDefault( const std::string name , const G4double value , G4double lower_limit = -DBL_MAX , G4double upper_limit = DBL_MAX );
+      G4bool SetDefault( const std::string name , const passivedouble value , passivedouble lower_limit = -DBL_MAX , passivedouble upper_limit = DBL_MAX ) { return SetDefault(name, (G4double)value, (G4double)lower_limit, (G4double)upper_limit); }
 
    private:
       G4bool get( const std::string name , G4bool& value , G4bool check_change = false );

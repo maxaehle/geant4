@@ -938,12 +938,12 @@ class G4FTFSettingDefaultHDP
     //
     HDP.SetDefault( "FTF_BARYON_DELTA_PROB_QEXCHG", (G4double)0. );
     HDP.SetDefault( "FTF_BARYON_PROB_SAME_QEXCHG", (G4double)0. );
-    HDP.SetDefault( "FTF_BARYON_DIFF_M_PROJ", 1.16, 1.16, 3. );     // it's supposed to be in GeV but do NOT do (*CLHEP::GeV) 
+    HDP.SetDefault( "FTF_BARYON_DIFF_M_PROJ", (G4double)1.16, (G4double)1.16, (G4double)3. );     // it's supposed to be in GeV but do NOT do (*CLHEP::GeV) 
                                                                     // because it'll be done in the G4FTFParameters::SetProjMinDiffMass
-    HDP.SetDefault( "FTF_BARYON_NONDIFF_M_PROJ", 1.16, 1.16, 3. );  // do NOT (*CLHEP::GeV) - same as above
-    HDP.SetDefault( "FTF_BARYON_DIFF_M_TGT", 1.16, 1.16, 3. );      // do NOT (*CLHEP::GeV) - same as above
-    HDP.SetDefault( "FTF_BARYON_NONDIFF_M_TGT", 1.16, 1.16, 3. );   // do NOT (*CLHEP::GeV) - same as above
-    HDP.SetDefault( "FTF_BARYON_AVRG_PT2", 0.3, 0.08, 1. );         //  do NOT (*CLHEP::GeV*CLHEP::GeV) 
+    HDP.SetDefault( "FTF_BARYON_NONDIFF_M_PROJ", (G4double)1.16, (G4double)1.16, (G4double)3. );  // do NOT (*CLHEP::GeV) - same as above
+    HDP.SetDefault( "FTF_BARYON_DIFF_M_TGT", (G4double)1.16, (G4double)1.16, (G4double)3. );      // do NOT (*CLHEP::GeV) - same as above
+    HDP.SetDefault( "FTF_BARYON_NONDIFF_M_TGT", (G4double)1.16, (G4double)1.16, (G4double)3. );   // do NOT (*CLHEP::GeV) - same as above
+    HDP.SetDefault( "FTF_BARYON_AVRG_PT2", (G4double)0.3, (G4double)0.08, (G4double)1. );         //  do NOT (*CLHEP::GeV*CLHEP::GeV) 
     //
     // JVY, Oct. 6, 2017: Per Alberto R., keep these two settings fixed (for now)
     //

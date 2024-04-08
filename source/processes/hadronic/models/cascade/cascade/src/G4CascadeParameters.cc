@@ -57,10 +57,10 @@ namespace {
       public: 
          BERTParameters(){
             //HDP.SetDefault("NAME",VALUE,LOWER_LIMIT(default=-DBL_MAX),UPPER_LIMIT(default=DBL_MAX));
-            HDP.SetDefault( "BERT_FERMI_SCALE" , 1.932/OLD_RADIUS_UNITS , 1.932/OLD_RADIUS_UNITS/2 , 1.932/OLD_RADIUS_UNITS*2 );
-            HDP.SetDefault( "BERT_RADIUS_SCALE" , OLD_RADIUS_UNITS , OLD_RADIUS_UNITS/2 , OLD_RADIUS_UNITS*2 );
-            HDP.SetDefault( "BERT_RAD_TRAILING" , 0. , 0. , 2. );
-            HDP.SetDefault( "BERT_XSEC_SCALE" , 1.0 , 0.5 , 2. );
+            HDP.SetDefault( "BERT_FERMI_SCALE" , (G4double)(1.932/OLD_RADIUS_UNITS) , (G4double)(1.932/OLD_RADIUS_UNITS/2) , (G4double)(1.932/OLD_RADIUS_UNITS*2) );
+            HDP.SetDefault( "BERT_RADIUS_SCALE" , G4double(OLD_RADIUS_UNITS) , G4double(OLD_RADIUS_UNITS/2) , G4double(OLD_RADIUS_UNITS*2) );
+            HDP.SetDefault( "BERT_RAD_TRAILING" , G4double(0.) , G4double(0.) , G4double(2.) );
+            HDP.SetDefault( "BERT_XSEC_SCALE" , G4double(1.0) , G4double(0.5) , G4double(2.) );
          }
    };
    BERTParameters BP;
