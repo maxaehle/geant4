@@ -89,6 +89,9 @@ void PrimaryGeneratorAction::SetDefaultKinematic()
 
 void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
+  G4double energy = fParticleGun->GetParticleEnergy();
+  energy.dot = 1.0;
+  fParticleGun->SetParticleEnergy(energy);
   //this function is called at the begining of event
   //
   //randomize the beam, if requested.
