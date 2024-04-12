@@ -121,7 +121,7 @@ void G4EmStandardPhysics::ConstructProcess()
   G4EmParameters* param = G4EmParameters::Instance();
 
   // processes used by several particles
-  G4hMultipleScattering* hmsc = new G4hMultipleScattering("ionmsc");
+  //G4hMultipleScattering* hmsc = new G4hMultipleScattering("ionmsc");
 
   // nuclear stopping is enabled if th eenergy limit above zero
   G4double nielEnergyLimit = param->MaxNIELEnergy();
@@ -224,12 +224,12 @@ void G4EmStandardPhysics::ConstructProcess()
   // generic ion
   particle = G4GenericIon::GenericIon();
   G4ionIonisation* ionIoni = new G4ionIonisation();
-  ph->RegisterProcess(hmsc, particle);
+  //ph->RegisterProcess(hmsc, particle);
   ph->RegisterProcess(ionIoni, particle);
   if(nullptr != pnuc) { ph->RegisterProcess(pnuc, particle); }
 
   // muons, hadrons ions
-  G4EmBuilder::ConstructCharged(hmsc, pnuc);
+  //G4EmBuilder::ConstructCharged(hmsc, pnuc);
 
   // extra configuration
   G4EmModelActivator mact(GetPhysicsName());
