@@ -96,6 +96,8 @@ inline CF operator-(CF a, double b){ return a-G4double(b); }
 inline CF operator*(CF a, double b){ return a*G4double(b); }
 inline CF operator/(CF a, double b){ return a/G4double(b); }
 
+#define G4_SET_DOTVALUE(x,d) (x).dot = (d);
+
 
 //using G4float   = Forward;
 struct G4float : public Forward {

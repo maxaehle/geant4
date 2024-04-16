@@ -846,6 +846,7 @@ G4UrbanMscModel::SampleScattering(const G4ThreeVector& oldDirection,
      (tPathLength < tausmall*lambda0)) { return fDisplacement; }
 
   G4double cth = SampleCosineTheta(tPathLength,kinEnergy);
+  G4_SET_DOTVALUE(cth, 0.0);
 
   // protection against 'bad' cth values
   if(std::abs(cth) >= 1.0) { return fDisplacement; } 

@@ -121,7 +121,7 @@ void G4EmStandardPhysics::ConstructProcess()
   G4EmParameters* param = G4EmParameters::Instance();
 
   // processes used by several particles
-  //G4hMultipleScattering* hmsc = new G4hMultipleScattering("ionmsc");
+  G4hMultipleScattering* hmsc = new G4hMultipleScattering("ionmsc");
 
   // nuclear stopping is enabled if th eenergy limit above zero
   G4double nielEnergyLimit = param->MaxNIELEnergy();
@@ -140,10 +140,10 @@ void G4EmStandardPhysics::ConstructProcess()
 
   // Photoelectric
   G4PhotoElectricEffect* pe = new G4PhotoElectricEffect();
-  //G4VEmModel* peModel = new G4LivermorePhotoElectricModel();
-  //pe->SetEmModel(peModel);
+  G4VEmModel* peModel = new G4LivermorePhotoElectricModel();
+  pe->SetEmModel(peModel);
   if(polar) {
-    //peModel->SetAngularDistribution(new G4PhotoElectricAngularGeneratorPolarized());
+    peModel->SetAngularDistribution(new G4PhotoElectricAngularGeneratorPolarized());
   }
 
   // Compton scattering
@@ -163,7 +163,7 @@ void G4EmStandardPhysics::ConstructProcess()
     sp->AddEmProcess(pe);
     sp->AddEmProcess(cs);
     sp->AddEmProcess(new G4GammaConversion());
-    //sp->AddEmProcess(rl);
+    sp->AddEmProcess(rl);
     G4LossTableManager::Instance()->SetGammaGeneralProcess(sp);
     ph->RegisterProcess(sp, particle);
 
@@ -171,13 +171,13 @@ void G4EmStandardPhysics::ConstructProcess()
     ph->RegisterProcess(pe, particle);
     ph->RegisterProcess(cs, particle);
     ph->RegisterProcess(new G4GammaConversion(), particle);
-    //ph->RegisterProcess(rl, particle);
+    ph->RegisterProcess(rl, particle);
   }
 
   // e-
   particle = G4Electron::Electron();
 
-  /*G4eMultipleScattering* msc = new G4eMultipleScattering;
+  G4eMultipleScattering* msc = new G4eMultipleScattering;
   G4UrbanMscModel* msc1 = new G4UrbanMscModel();
   G4WentzelVIModel* msc2 = new G4WentzelVIModel();
   msc1->SetHighEnergyLimit(highEnergyLimit);
@@ -190,17 +190,17 @@ void G4EmStandardPhysics::ConstructProcess()
   ss->SetEmModel(ssm); 
   ss->SetMinKinEnergy(highEnergyLimit);
   ssm->SetLowEnergyLimit(highEnergyLimit);
-  ssm->SetActivationLowEnergyLimit(highEnergyLimit);*/
+  ssm->SetActivationLowEnergyLimit(highEnergyLimit);
 
-  //ph->RegisterProcess(msc, particle);
+  ph->RegisterProcess(msc, particle);
   ph->RegisterProcess(new G4eIonisation(), particle);
   ph->RegisterProcess(new G4eBremsstrahlung(), particle);
-  //ph->RegisterProcess(ss, particle);
+  ph->RegisterProcess(ss, particle);
 
   // e+
   particle = G4Positron::Positron();
 
-  /*msc = new G4eMultipleScattering;
+  msc = new G4eMultipleScattering;
   msc1 = new G4UrbanMscModel();
   msc2 = new G4WentzelVIModel();
   msc1->SetHighEnergyLimit(highEnergyLimit);
@@ -213,23 +213,23 @@ void G4EmStandardPhysics::ConstructProcess()
   ss->SetEmModel(ssm); 
   ss->SetMinKinEnergy(highEnergyLimit);
   ssm->SetLowEnergyLimit(highEnergyLimit);
-  ssm->SetActivationLowEnergyLimit(highEnergyLimit);*/
+  ssm->SetActivationLowEnergyLimit(highEnergyLimit);
 
-  //ph->RegisterProcess(msc, particle);
+  ph->RegisterProcess(msc, particle);
   ph->RegisterProcess(new G4eIonisation(), particle);
   ph->RegisterProcess(new G4eBremsstrahlung(), particle);
   ph->RegisterProcess(new G4eplusAnnihilation(), particle);
-  //ph->RegisterProcess(ss, particle);
+  ph->RegisterProcess(ss, particle);
 
   // generic ion
   particle = G4GenericIon::GenericIon();
   G4ionIonisation* ionIoni = new G4ionIonisation();
-  //ph->RegisterProcess(hmsc, particle);
+  ph->RegisterProcess(hmsc, particle);
   ph->RegisterProcess(ionIoni, particle);
   if(nullptr != pnuc) { ph->RegisterProcess(pnuc, particle); }
 
   // muons, hadrons ions
-  //G4EmBuilder::ConstructCharged(hmsc, pnuc);
+  G4EmBuilder::ConstructCharged(hmsc, pnuc);
 
   // extra configuration
   G4EmModelActivator mact(GetPhysicsName());
