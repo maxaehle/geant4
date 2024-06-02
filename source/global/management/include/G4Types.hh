@@ -83,55 +83,12 @@
 // Typedefs for numeric types
 //
 #include "easyAD.hpp"
+#include "easyAD_geant4extensions.hpp"
 //template<typename T>
 //T ForwardIfPossible(T x){ return x; }
 using G4double  = Forward;
-using CF = std::complex<Forward>;
-inline CF operator+(double a, CF b){ return G4double(a)+b; }
-inline CF operator-(double a, CF b){ return G4double(a)-b; }
-inline CF operator*(double a, CF b){ return G4double(a)*b; }
-inline CF operator/(double a, CF b){ return G4double(a)/b; }
-inline CF operator+(CF a, double b){ return a+G4double(b); }
-inline CF operator-(CF a, double b){ return a-G4double(b); }
-inline CF operator*(CF a, double b){ return a*G4double(b); }
-inline CF operator/(CF a, double b){ return a/G4double(b); }
-
+using G4float = ForwardFloat;
 #define G4_SET_DOTVALUE(x,d) (x).dot = (d);
-
-
-//using G4float   = Forward;
-struct G4float : public Forward {
-  template<typename...Args>
-  G4float(Args&&...args): Forward(std::forward<Args>(args)...) {}
-  G4float() = default;
-};
-// math functions to make mat4f etc. happy
-inline G4float cosf(G4float a){
-  return {cos(a.val), -sin(a.val) * a.dot};
-}
-inline G4float sinf(G4float a){
-  return {sin(a.val), cos(a.val) * a.dot};
-}
-inline G4float sqrtf(G4float a){
-  return {sqrt(a.val), 0.5/sqrt(a.val) * a.dot};
-}
-inline G4float atan2f(G4float a, G4float b){
-  return {atan2(a.val,b.val), -b.val/(a.val*a.val + b.val*b.val) * a.dot + a.val/(a.val*a.val + b.val*b.val) * b.dot};
-}
-inline G4float fabsf(G4float a){
-  return {fabs(a.val), (a.val>0?1.:-1.) * a.dot};
-}
-inline G4float acosf(G4float a){
-  return {acos(a.val), -1./sqrt(1-a.val*a.val) * a.dot};
-}
-inline G4float floorf(G4float a){
-  return {floor(a.val), 0.0};
-}
-inline G4float ceilf(G4float a){
-  return {ceil(a.val), 0.0};
-}
-
-
 using G4int     = int;
 using G4bool    = bool;
 using G4long    = long;
