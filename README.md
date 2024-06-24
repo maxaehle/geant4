@@ -1,6 +1,6 @@
 *This README is about a version of Geant4 enabled for operator-overloading
-algorithmic differentiation; see [README_ORIGINAL.rst](README_ORIGINAL.rst)
-for information about Geant4.*
+algorithmic differentiation; see [README.rst](README.rst) for information 
+about Geant4.*
 
 # Differentiated Geant4
 
