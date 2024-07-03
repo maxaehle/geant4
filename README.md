@@ -14,7 +14,7 @@ this **work-in-progress prototype of a version of Geant4 enabled for forward-mod
 ## Build instructions
 1. Make sure that your system is able to build the original Geant4. According to their [documentation of prerequisites](https://geant4-userdoc.web.cern.ch/UsersGuides/InstallationGuide/html/gettingstarted.html), this basically means that you need a recent C++ compiler and CMake. It might also be advisable to have expat installed.  
   Things are more robust if you do not already have Geant4 installed to system directories or into your present anaconda environment or anything, because this version might later conflict with our AD-differentiated version.
-2. You will need to download the [AD tool](https://gitlab.rhrk.uni-kl.de/aehle/easyAD), and to download, configure and build the differentiated versions of CLHEP, Geant4, and ideally also the G4HepEm toolkit and example application. To that end, you may cd into an empty directory, download [build.sh](setup/build.sh), [download.sh](setup/download.sh), [env-build.sh](setup/env-build.sh), [env-run.sh](setup/env-run.sh), and run the following commands:
+2. You will need to download the [AD tool](https://gitlab.rhrk.uni-kl.de/aehle/easyAD), and to download, configure and build the differentiated versions of CLHEP, Geant4, and ideally also the G4HepEm toolkit and example application. To that end, you may cd into an empty directory, download [build.sh](setup/build.sh) (set execute permission, and adapt the number of build threads and build type if you like), [download.sh](setup/download.sh) (set execute permission), [env-build.sh](setup/env-build.sh), [env-run.sh](setup/env-run.sh), and run the following commands:
 ```bash
 export ROOTDIR=$PWD
 ./download.sh

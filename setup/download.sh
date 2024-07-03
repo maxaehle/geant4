@@ -22,7 +22,7 @@ mkdir g4hepem g4hepem/build g4hepem/install
 cd g4hepem
 git clone https://github.com/SciCompKL/g4hepem.git src
 cd src
-git checkout with_easyAD
+git checkout with_easyad
 
 cd $ROOTDIR/g4hepem/src/apps/examples/TestEm3
 mkdir build
