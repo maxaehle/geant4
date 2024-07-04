@@ -9,7 +9,7 @@ of particles through matter is widely used in high energy physics and many other
 areas. Being able to compute derivatives of user-defined outputs of Geant4 applications 
 with respect to user-defined inputs would facilitate many interesting application, like
 gradient-based design optimization studies of particles detectors. To this end, we created
-this **work-in-progress prototype of a version of Geant4 enabled for forward-mode algorithmic differentiation (AD)**, based on Geant4 version 11.0.4.
+this **work-in-progress prototype of a version of Geant4 enabled for forward-mode algorithmic differentiation (AD)**, based on Geant4 version 11.0.4. Feel free to take a look on our [preprint](https://arxiv.org/abs/2407.02966) for more information.
 
 ## Build instructions
 1. Make sure that your system is able to build the original Geant4. According to their [documentation of prerequisites](https://geant4-userdoc.web.cern.ch/UsersGuides/InstallationGuide/html/gettingstarted.html), this basically means that you need a recent C++ compiler and CMake. It might also be advisable to have expat installed.  
